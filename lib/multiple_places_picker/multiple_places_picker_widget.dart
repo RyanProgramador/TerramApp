@@ -1,5 +1,4 @@
 import '/backend/api_requests/api_calls.dart';
-import '/backend/schema/structs/index.dart';
 import '/flutter_flow/flutter_flow_theme.dart';
 import '/flutter_flow/flutter_flow_timer.dart';
 import '/flutter_flow/flutter_flow_util.dart';
@@ -158,12 +157,6 @@ class _MultiplePlacesPickerWidgetState
                               await getCurrentUserLocation(
                                   defaultLocation: LatLng(0.0, 0.0));
                           FFAppState().update(() {
-                            FFAppState().updateLocaisStruct(
-                              (e) => e
-                                ..updateLocaisPercorridos(
-                                  (e) => e.add(currentUserLocationValue!),
-                                ),
-                            );
                             FFAppState().LocalAtual = currentUserLocationValue;
                           });
                           _model.timer1Controller.timer
@@ -278,62 +271,56 @@ class _MultiplePlacesPickerWidgetState
                                       ))!,
                                     ),
                                   ),
-                                  if (FFAppState()
-                                          .Locais
-                                          .locaisPercorridos
-                                          .length <=
-                                      5)
-                                    Align(
-                                      alignment:
-                                          AlignmentDirectional(0.00, 0.90),
-                                      child: Row(
-                                        mainAxisSize: MainAxisSize.max,
-                                        mainAxisAlignment:
-                                            MainAxisAlignment.center,
-                                        children: [
-                                          Padding(
-                                            padding:
-                                                EdgeInsetsDirectional.fromSTEB(
-                                                    10.0, 0.0, 0.0, 0.0),
-                                            child: Container(
-                                              width: MediaQuery.sizeOf(context)
-                                                      .width *
-                                                  0.8,
-                                              height: 50.0,
-                                              decoration: BoxDecoration(
+                                  Align(
+                                    alignment: AlignmentDirectional(0.00, 0.90),
+                                    child: Row(
+                                      mainAxisSize: MainAxisSize.max,
+                                      mainAxisAlignment:
+                                          MainAxisAlignment.center,
+                                      children: [
+                                        Padding(
+                                          padding:
+                                              EdgeInsetsDirectional.fromSTEB(
+                                                  10.0, 0.0, 0.0, 0.0),
+                                          child: Container(
+                                            width: MediaQuery.sizeOf(context)
+                                                    .width *
+                                                0.8,
+                                            height: 50.0,
+                                            decoration: BoxDecoration(
+                                              color:
+                                                  FlutterFlowTheme.of(context)
+                                                      .secondaryBackground,
+                                              borderRadius:
+                                                  BorderRadius.circular(20.0),
+                                              border: Border.all(
                                                 color:
                                                     FlutterFlowTheme.of(context)
-                                                        .secondaryBackground,
-                                                borderRadius:
-                                                    BorderRadius.circular(20.0),
-                                                border: Border.all(
-                                                  color: FlutterFlowTheme.of(
-                                                          context)
-                                                      .primary,
-                                                  width: 2.0,
-                                                ),
+                                                        .primary,
+                                                width: 2.0,
                                               ),
-                                              child: Padding(
-                                                padding: EdgeInsetsDirectional
-                                                    .fromSTEB(
-                                                        15.0, 15.0, 15.0, 15.0),
-                                                child: Text(
-                                                  'Atual: ${currentUserLocationValue?.toString()}',
-                                                  style: FlutterFlowTheme.of(
-                                                          context)
-                                                      .bodyMedium
-                                                      .override(
-                                                        fontFamily:
-                                                            'Readex Pro',
-                                                        fontSize: 10.0,
-                                                      ),
-                                                ),
+                                            ),
+                                            child: Padding(
+                                              padding: EdgeInsetsDirectional
+                                                  .fromSTEB(
+                                                      15.0, 15.0, 15.0, 15.0),
+                                              child: Text(
+                                                'Atual: ${currentUserLocationValue?.toString()}',
+                                                style:
+                                                    FlutterFlowTheme.of(context)
+                                                        .bodyMedium
+                                                        .override(
+                                                          fontFamily:
+                                                              'Readex Pro',
+                                                          fontSize: 10.0,
+                                                        ),
                                               ),
                                             ),
                                           ),
-                                        ],
-                                      ),
+                                        ),
+                                      ],
                                     ),
+                                  ),
                                 ],
                               ),
                             );
@@ -683,22 +670,14 @@ class _MultiplePlacesPickerWidgetState
                             currentUserLocationValue =
                                 await getCurrentUserLocation(
                                     defaultLocation: LatLng(0.0, 0.0));
-                            setState(() {
-                              FFAppState().Locais = LocaisPercorridosStruct
-                                  .fromSerializableMap(jsonDecode(
-                                      '{\"LocaisPercorridos\":\"[]\",\"id_tec\":\"[\\\"1\\\",\\\"1\\\",\\\"1\\\",\\\"1\\\",\\\"1\\\"]\",\"id_servic\":\"[\\\"1\\\",\\\"1\\\",\\\"1\\\",\\\"1\\\",\\\"1\\\"]\",\"localFinal\":\"[]\",\"localInicio\":\"[]\"}'));
-                            });
+                            setState(() {});
                             setState(() {
                               FFAppState().Erro = [];
                             });
                             setState(() {
                               FFAppState().addToErro(currentUserLocationValue!);
                             });
-                            setState(() {
-                              FFAppState().Locais = LocaisPercorridosStruct(
-                                locaisPercorridos: FFAppState().Erro,
-                              );
-                            });
+                            setState(() {});
                             setState(() {
                               FFAppState().locaisPercorridos2 = [];
                             });

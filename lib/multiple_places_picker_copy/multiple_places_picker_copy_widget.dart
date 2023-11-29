@@ -620,6 +620,37 @@ class _MultiplePlacesPickerCopyWidgetState
                                             );
                                           },
                                         ),
+                                        Builder(
+                                          builder: (context) {
+                                            final trDeslocGo = FFAppState()
+                                                .trDeslocamentoGeoDataType
+                                                .toList();
+                                            return SingleChildScrollView(
+                                              child: Column(
+                                                mainAxisSize: MainAxisSize.max,
+                                                children: List.generate(
+                                                    trDeslocGo.length,
+                                                    (trDeslocGoIndex) {
+                                                  final trDeslocGoItem =
+                                                      trDeslocGo[
+                                                          trDeslocGoIndex];
+                                                  return Text(
+                                                    (trDeslocGoItem.toMap())
+                                                        .toString(),
+                                                    style: FlutterFlowTheme.of(
+                                                            context)
+                                                        .bodyMedium
+                                                        .override(
+                                                          fontFamily:
+                                                              'Readex Pro',
+                                                          fontSize: 10.0,
+                                                        ),
+                                                  );
+                                                }),
+                                              ),
+                                            );
+                                          },
+                                        ),
                                       ],
                                     ),
                                   ),
