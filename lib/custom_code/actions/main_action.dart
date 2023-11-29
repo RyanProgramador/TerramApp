@@ -88,15 +88,9 @@ Future mainAction(
           };
 
           Map<String, dynamic> data2 = {
-            "osdes_id": "$osdesId",
+            "osdes_id": osdesId,
             "osdes_latitude": "$latitude",
             "osdes_longitude": "$longitude",
-          };
-
-          Map<String, dynamic> data3 = {
-            "osdes_id": osdesId,
-            "latitude": "$latitude",
-            "longitude": "$longitude",
           };
 
           // Add the Map to the list
