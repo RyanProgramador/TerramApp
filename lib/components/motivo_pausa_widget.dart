@@ -1,5 +1,6 @@
 import '/flutter_flow/flutter_flow_theme.dart';
 import '/flutter_flow/flutter_flow_util.dart';
+import '/custom_code/actions/index.dart' as actions;
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:google_fonts/google_fonts.dart';
@@ -190,10 +191,31 @@ class _MotivoPausaWidgetState extends State<MotivoPausaWidget> {
                           color: Colors.black,
                         ),
                       ),
-                      child: Icon(
-                        Icons.arrow_forward,
-                        color: Colors.black,
-                        size: 32.0,
+                      child: InkWell(
+                        splashColor: Colors.transparent,
+                        focusColor: Colors.transparent,
+                        hoverColor: Colors.transparent,
+                        highlightColor: Colors.transparent,
+                        onTap: () async {
+                          setState(() {
+                            FFAppState().DeslocamentoPausado = true;
+                            FFAppState().trDesloacamentoIniciado = true;
+                          });
+                          await Future.delayed(
+                              const Duration(milliseconds: 1000));
+                          await actions.stopMainAction(
+                            _model.servicid,
+                            _model.tecid,
+                            '1',
+                          );
+                          await Future.delayed(
+                              const Duration(milliseconds: 1000));
+                        },
+                        child: Icon(
+                          Icons.arrow_forward,
+                          color: Colors.black,
+                          size: 32.0,
+                        ),
                       ),
                     ),
                   ),

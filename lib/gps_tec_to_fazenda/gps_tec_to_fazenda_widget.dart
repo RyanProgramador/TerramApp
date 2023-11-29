@@ -317,11 +317,46 @@ class _GpsTecToFazendaWidgetState extends State<GpsTecToFazendaWidget> {
                                                 await getCurrentUserLocation(
                                                     defaultLocation:
                                                         LatLng(0.0, 0.0));
+                                            var confirmDialogResponse =
+                                                await showDialog<bool>(
+                                                      context: context,
+                                                      builder:
+                                                          (alertDialogContext) {
+                                                        return AlertDialog(
+                                                          title: Text(
+                                                              'Deseja finalizar o deslocamento?'),
+                                                          actions: [
+                                                            TextButton(
+                                                              onPressed: () =>
+                                                                  Navigator.pop(
+                                                                      alertDialogContext,
+                                                                      false),
+                                                              child:
+                                                                  Text('Não'),
+                                                            ),
+                                                            TextButton(
+                                                              onPressed: () =>
+                                                                  Navigator.pop(
+                                                                      alertDialogContext,
+                                                                      true),
+                                                              child:
+                                                                  Text('Sim'),
+                                                            ),
+                                                          ],
+                                                        );
+                                                      },
+                                                    ) ??
+                                                    false;
+                                            if (!confirmDialogResponse) {
+                                              return;
+                                            }
                                             await actions.stopMainAction(
                                               widget.servicoId,
                                               widget.tecnicoId,
                                               '1',
                                             );
+                                            await Future.delayed(const Duration(
+                                                milliseconds: 1000));
                                             FFAppState().update(() {
                                               FFAppState().DeslocamentoPausado =
                                                   false;
@@ -424,13 +459,39 @@ class _GpsTecToFazendaWidgetState extends State<GpsTecToFazendaWidget> {
                                           hoverColor: Colors.transparent,
                                           highlightColor: Colors.transparent,
                                           onTap: () async {
-                                            setState(() {
-                                              FFAppState().DeslocamentoPausado =
-                                                  true;
-                                              FFAppState()
-                                                      .trDesloacamentoIniciado =
-                                                  true;
-                                            });
+                                            var confirmDialogResponse =
+                                                await showDialog<bool>(
+                                                      context: context,
+                                                      builder:
+                                                          (alertDialogContext) {
+                                                        return AlertDialog(
+                                                          title: Text(
+                                                              'Deseja pausar o deslocamento?'),
+                                                          actions: [
+                                                            TextButton(
+                                                              onPressed: () =>
+                                                                  Navigator.pop(
+                                                                      alertDialogContext,
+                                                                      false),
+                                                              child:
+                                                                  Text('Não'),
+                                                            ),
+                                                            TextButton(
+                                                              onPressed: () =>
+                                                                  Navigator.pop(
+                                                                      alertDialogContext,
+                                                                      true),
+                                                              child:
+                                                                  Text('Sim'),
+                                                            ),
+                                                          ],
+                                                        );
+                                                      },
+                                                    ) ??
+                                                    false;
+                                            if (!confirmDialogResponse) {
+                                              return;
+                                            }
                                             await showModalBottomSheet(
                                               isScrollControlled: true,
                                               backgroundColor:
@@ -462,13 +523,15 @@ class _GpsTecToFazendaWidgetState extends State<GpsTecToFazendaWidget> {
                                             ).then(
                                                 (value) => safeSetState(() {}));
 
+                                            setState(() {
+                                              FFAppState().DeslocamentoPausado =
+                                                  true;
+                                              FFAppState()
+                                                      .trDesloacamentoIniciado =
+                                                  true;
+                                            });
                                             await Future.delayed(const Duration(
                                                 milliseconds: 1000));
-                                            await actions.stopMainAction(
-                                              widget.servicoId,
-                                              widget.tecnicoId,
-                                              '1',
-                                            );
                                           },
                                           child: Icon(
                                             Icons.pause,
