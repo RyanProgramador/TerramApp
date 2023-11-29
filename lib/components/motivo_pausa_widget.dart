@@ -200,6 +200,8 @@ class _MotivoPausaWidgetState extends State<MotivoPausaWidget> {
                           setState(() {
                             FFAppState().DeslocamentoPausado = true;
                             FFAppState().trDesloacamentoIniciado = true;
+                            FFAppState().addToMotivoPausaDeslocamento(
+                                _model.textController.text);
                           });
                           await Future.delayed(
                               const Duration(milliseconds: 1000));
@@ -210,6 +212,7 @@ class _MotivoPausaWidgetState extends State<MotivoPausaWidget> {
                           );
                           await Future.delayed(
                               const Duration(milliseconds: 1000));
+                          Navigator.pop(context);
                         },
                         child: Icon(
                           Icons.arrow_forward,
