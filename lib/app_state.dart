@@ -1059,14 +1059,14 @@ class FFAppState extends ChangeNotifier {
         'ff_servicosFinalizadosComSucesso', _servicosFinalizadosComSucesso);
   }
 
-  String _userLogin = '03866856067';
+  String _userLogin = '';
   String get userLogin => _userLogin;
   set userLogin(String _value) {
     _userLogin = _value;
     prefs.setString('ff_userLogin', _value);
   }
 
-  String _psdwLogin = '12345';
+  String _psdwLogin = '';
   String get psdwLogin => _psdwLogin;
   set psdwLogin(String _value) {
     _psdwLogin = _value;
