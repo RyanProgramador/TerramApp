@@ -465,19 +465,24 @@ class _IniciarDeslocamentoWidgetState extends State<IniciarDeslocamentoWidget> {
                         child: Container(
                           width: double.infinity,
                           height: double.infinity,
-                          child: custom_widgets.MapsRoutes(
+                          decoration: BoxDecoration(),
+                          child: Container(
                             width: double.infinity,
                             height: double.infinity,
-                            json2:
-                                functions.jsonToStr(ApiRotasDirectionsCall.tudo(
-                              cardActionsApiRotasDirectionsResponse.jsonBody,
-                            ))!,
-                            coordenadasIniciais: currentUserLocationValue,
-                            coordenadasFinais: widget.latlngFaz!,
-                            stringDoRotas:
-                                ApiRotasPolylinesCall.criptografadapolyline(
-                              (_model.chamadaPolylinesOnload?.jsonBody ?? ''),
-                            ).toString(),
+                            child: custom_widgets.MapsRoutes(
+                              width: double.infinity,
+                              height: double.infinity,
+                              json2: functions
+                                  .jsonToStr(ApiRotasDirectionsCall.tudo(
+                                cardActionsApiRotasDirectionsResponse.jsonBody,
+                              ))!,
+                              coordenadasIniciais: currentUserLocationValue,
+                              coordenadasFinais: widget.latlngFaz!,
+                              stringDoRotas:
+                                  ApiRotasPolylinesCall.criptografadapolyline(
+                                (_model.chamadaPolylinesOnload?.jsonBody ?? ''),
+                              ).toString(),
+                            ),
                           ),
                         ),
                       ),
