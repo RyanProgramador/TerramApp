@@ -9,7 +9,6 @@ import '/custom_code/widgets/index.dart' as custom_widgets;
 import '/flutter_flow/custom_functions.dart' as functions;
 import 'iniciar_deslocamento_widget.dart' show IniciarDeslocamentoWidget;
 import 'package:flutter/material.dart';
-import 'package:flutter/scheduler.dart';
 import 'package:flutter/services.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:google_fonts/google_fonts.dart';
@@ -20,7 +19,7 @@ class IniciarDeslocamentoModel
     extends FlutterFlowModel<IniciarDeslocamentoWidget> {
   ///  State fields for stateful widgets in this component.
 
-  // Stores action output result for [Backend Call - API (apiRotasPolylines)] action in IniciarDeslocamento widget.
+  // Stores action output result for [Backend Call - API (apiRotasPolylines)] action in card_Actions widget.
   ApiCallResponse? chamadaPolylinesOnload;
   // State field(s) for GoogleMap widget.
   LatLng? googleMapsCenter;
