@@ -592,14 +592,20 @@ class _IniciarDeslocamentoWidgetState extends State<IniciarDeslocamentoWidget> {
                                   setState(() {});
                                 },
                                 text: FFAppState().DeslocamentoPausado &&
-                                        FFAppState().trDesloacamentoIniciado
+                                        FFAppState().trDesloacamentoIniciado &&
+                                        (getJsonField(
+                                              widget.jsonServico,
+                                              r'''$.oserv_id''',
+                                            ) ==
+                                            FFAppState().trOsServicoEmAndamento)
                                     ? 'Continuar'
                                     : 'Deslocamento',
                                 icon: FaIcon(
                                   FontAwesomeIcons.route,
+                                  size: 18.0,
                                 ),
                                 options: FFButtonOptions(
-                                  width: 155.0,
+                                  width: 160.0,
                                   height: 52.0,
                                   padding: EdgeInsetsDirectional.fromSTEB(
                                       17.0, 0.0, 17.0, 0.0),

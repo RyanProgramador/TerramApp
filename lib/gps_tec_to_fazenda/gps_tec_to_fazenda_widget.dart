@@ -523,13 +523,6 @@ class _GpsTecToFazendaWidgetState extends State<GpsTecToFazendaWidget> {
                                             ).then(
                                                 (value) => safeSetState(() {}));
 
-                                            setState(() {
-                                              FFAppState().DeslocamentoPausado =
-                                                  true;
-                                              FFAppState()
-                                                      .trDesloacamentoIniciado =
-                                                  true;
-                                            });
                                             await Future.delayed(const Duration(
                                                 milliseconds: 1000));
                                           },

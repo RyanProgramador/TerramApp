@@ -406,8 +406,8 @@ class _ConfiguracoesWidgetState extends State<ConfiguracoesWidget> {
                         FFAppState().update(() {
                           FFAppState().tecID = '';
                           FFAppState().tecNome = '';
-                          FFAppState().userLogin = '03866856067';
-                          FFAppState().psdwLogin = '12345';
+                          FFAppState().userLogin = '';
+                          FFAppState().psdwLogin = '';
                         });
 
                         context.pushNamed('Login');

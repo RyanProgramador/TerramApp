@@ -1,5 +1,6 @@
 import '/backend/api_requests/api_calls.dart';
 import '/components/iniciar_deslocamento_widget.dart';
+import '/components/loading_comp_widget.dart';
 import '/flutter_flow/flutter_flow_animations.dart';
 import '/flutter_flow/flutter_flow_icon_button.dart';
 import '/flutter_flow/flutter_flow_theme.dart';
@@ -436,6 +437,15 @@ class _SelecionarOSWidgetState extends State<SelecionarOSWidget>
                                 builder: (context) {
                                   final trOsServicos =
                                       FFAppState().trOsServicos.toList();
+                                  if (trOsServicos.isEmpty) {
+                                    return Center(
+                                      child: Container(
+                                        width: double.infinity,
+                                        height: 150.0,
+                                        child: LoadingCompWidget(),
+                                      ),
+                                    );
+                                  }
                                   return Column(
                                     mainAxisSize: MainAxisSize.max,
                                     children: List.generate(trOsServicos.length,

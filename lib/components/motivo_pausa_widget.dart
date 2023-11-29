@@ -203,15 +203,11 @@ class _MotivoPausaWidgetState extends State<MotivoPausaWidget> {
                             FFAppState().addToMotivoPausaDeslocamento(
                                 _model.textController.text);
                           });
-                          await Future.delayed(
-                              const Duration(milliseconds: 1000));
                           await actions.stopMainAction(
                             _model.servicid,
                             _model.tecid,
                             '1',
                           );
-                          await Future.delayed(
-                              const Duration(milliseconds: 1000));
                           Navigator.pop(context);
                         },
                         child: Icon(
