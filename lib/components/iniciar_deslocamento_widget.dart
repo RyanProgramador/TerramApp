@@ -480,9 +480,7 @@ class _IniciarDeslocamentoWidgetState extends State<IniciarDeslocamentoWidget> {
                               coordenadasIniciais: currentUserLocationValue,
                               coordenadasFinais: widget.latlngFaz!,
                               stringDoRotas:
-                                  ApiRotasPolylinesCall.criptografadapolyline(
-                                (_model.chamadaPolylinesOnload?.jsonBody ?? ''),
-                              ).toString(),
+                                  widget.polylinhaQueVemDoMenuInicial!,
                             ),
                           ),
                         ),

@@ -490,7 +490,7 @@ class _SelecionarOSWidgetState extends State<SelecionarOSWidget>
                                                     await getCurrentUserLocation(
                                                         defaultLocation:
                                                             LatLng(0.0, 0.0));
-                                                _model.porfavorFuncione =
+                                                _model.polyline1 =
                                                     await ApiRotasPolylinesCall
                                                         .call(
                                                   latitudeOrigem: functions
@@ -775,7 +775,12 @@ class _SelecionarOSWidgetState extends State<SelecionarOSWidget>
                                                                       r'''$.oserv_id''',
                                                                     ).toString()),
                                                             polylinhaQueVemDoMenuInicial:
-                                                                '',
+                                                                ApiRotasPolylinesCall
+                                                                    .criptografadapolyline(
+                                                              (_model.polyline1
+                                                                      ?.jsonBody ??
+                                                                  ''),
+                                                            ).toString(),
                                                           ),
                                                         ),
                                                       ),
