@@ -620,37 +620,6 @@ class _MultiplePlacesPickerCopyWidgetState
                                             );
                                           },
                                         ),
-                                        Builder(
-                                          builder: (context) {
-                                            final trDeslocGo = FFAppState()
-                                                .trDeslocamentoGeoDataType
-                                                .toList();
-                                            return SingleChildScrollView(
-                                              child: Column(
-                                                mainAxisSize: MainAxisSize.max,
-                                                children: List.generate(
-                                                    trDeslocGo.length,
-                                                    (trDeslocGoIndex) {
-                                                  final trDeslocGoItem =
-                                                      trDeslocGo[
-                                                          trDeslocGoIndex];
-                                                  return Text(
-                                                    (trDeslocGoItem.toMap())
-                                                        .toString(),
-                                                    style: FlutterFlowTheme.of(
-                                                            context)
-                                                        .bodyMedium
-                                                        .override(
-                                                          fontFamily:
-                                                              'Readex Pro',
-                                                          fontSize: 10.0,
-                                                        ),
-                                                  );
-                                                }),
-                                              ),
-                                            );
-                                          },
-                                        ),
                                       ],
                                     ),
                                   ),
@@ -785,7 +754,7 @@ class _MultiplePlacesPickerCopyWidgetState
                         mainAxisAlignment: MainAxisAlignment.spaceBetween,
                         children: [
                           Text(
-                            'DESLOCAMENTO list Finalizados',
+                            'DESLOCAMENTO GEO data type',
                             style: FlutterFlowTheme.of(context).bodyMedium,
                           ),
                         ],
@@ -824,16 +793,37 @@ class _MultiplePlacesPickerCopyWidgetState
                                             final deslocamentosFinalizadosItem =
                                                 deslocamentosFinalizados[
                                                     deslocamentosFinalizadosIndex];
-                                            return Text(
-                                              deslocamentosFinalizadosItem,
-                                              style:
-                                                  FlutterFlowTheme.of(context)
-                                                      .bodyMedium
-                                                      .override(
-                                                        fontFamily:
-                                                            'Readex Pro',
-                                                        fontSize: 10.0,
-                                                      ),
+                                            return Builder(
+                                              builder: (context) {
+                                                final trDeslocGo = FFAppState()
+                                                    .trDeslocamentoGeoDataType
+                                                    .toList();
+                                                return SingleChildScrollView(
+                                                  child: Column(
+                                                    mainAxisSize:
+                                                        MainAxisSize.max,
+                                                    children: List.generate(
+                                                        trDeslocGo.length,
+                                                        (trDeslocGoIndex) {
+                                                      final trDeslocGoItem =
+                                                          trDeslocGo[
+                                                              trDeslocGoIndex];
+                                                      return Text(
+                                                        (trDeslocGoItem.toMap())
+                                                            .toString(),
+                                                        style: FlutterFlowTheme
+                                                                .of(context)
+                                                            .bodyMedium
+                                                            .override(
+                                                              fontFamily:
+                                                                  'Readex Pro',
+                                                              fontSize: 10.0,
+                                                            ),
+                                                      );
+                                                    }),
+                                                  ),
+                                                );
+                                              },
                                             );
                                           }),
                                         ),
