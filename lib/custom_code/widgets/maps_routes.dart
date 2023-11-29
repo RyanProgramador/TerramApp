@@ -14,6 +14,7 @@ import 'package:flutter_svg/flutter_svg.dart';
 import 'dart:convert';
 import 'dart:typed_data';
 
+import 'package:flutter_polyline_points/flutter_polyline_points.dart' as poly;
 import 'package:http/http.dart' as http;
 import 'package:google_maps_flutter/google_maps_flutter.dart' as google_maps;
 import 'package:custom_marker/marker_icon.dart' as cust;
@@ -27,6 +28,7 @@ class MapsRoutes extends StatefulWidget {
     required this.coordenadasIniciais,
     required this.coordenadasFinais,
     required this.json2,
+    required this.stringDoRotas,
   }) : super(key: key);
 
   final double? width;
@@ -34,6 +36,7 @@ class MapsRoutes extends StatefulWidget {
   final LatLng? coordenadasIniciais;
   final LatLng coordenadasFinais;
   final String json2;
+  final String stringDoRotas;
   final String customIconUrl =
       'https://lh3.googleusercontent.com/u/9/drive-viewer/AK7aPaD4V4OUOT1q2oukdiVXFD-_sP6u4FeZRmV9RxR7CRR8Oi9Ga237m_3yoSHbXNRqx4JvQW1PmOUtuHYdk-71UYL-DjQZEw=w1278-h913';
 
@@ -43,6 +46,10 @@ class MapsRoutes extends StatefulWidget {
 
 class _MapsRoutesState extends State<MapsRoutes> {
   Uint8List? customIconBytes;
+
+  //para polylines
+  List<google_maps.LatLng> routePoints = [];
+
   Set<google_maps.Marker> _createRouteFromSteps(List<dynamic> steps) {
     Set<google_maps.Marker> routeMarkers = Set();
     List<google_maps.LatLng> routeCoordinates = [];
@@ -113,6 +120,34 @@ class _MapsRoutesState extends State<MapsRoutes> {
     }
   }
 
+//desenha a rota no mapa
+  void addRoutePoints() {
+    var polylinesRed = widget.stringDoRotas;
+    if (polylinesRed != null) {
+      List<poly.PointLatLng> decodedPolylinePoints =
+          poly.PolylinePoints().decodePolyline(polylinesRed);
+
+      for (poly.PointLatLng point in decodedPolylinePoints) {
+        routePoints.add(google_maps.LatLng(point.latitude, point.longitude));
+      }
+      print(
+          "Route Points: $routePoints"); // Adicione este log para verificar a lista
+      setState(() {});
+    } else {
+      var polylinesRed =
+          'zwquDrcnwH`@qPFkBhNj@HiEL}DtB{FTk@bHgCjCeAnBi@hDi@|HkAn@}SrCc@jAUXKx@e@f@_@d@i@f@aA|AcGHs@Bm@I_Ai@wD?]m@}EAUBg@@aBiADkANoCLoJJgCHaHJsCD}BEgNi@v@aZ\\sKDgBN_HN_HZsG@]PKFUCUSUWEOFwCQGY?KDE~BLNADCDIAKGEs@@sGUg@PyG_@';
+      List<poly.PointLatLng> decodedPolylinePoints =
+          poly.PolylinePoints().decodePolyline(polylinesRed);
+
+      for (poly.PointLatLng point in decodedPolylinePoints) {
+        routePoints.add(google_maps.LatLng(point.latitude, point.longitude));
+      }
+      print(
+          "Route Points: $routePoints"); // Adicione este log para verificar a lista
+      setState(() {});
+    }
+  }
+
   Set<google_maps.Marker> _createCustomMarker() {
     Set<google_maps.Marker> customMarkers = Set();
 
@@ -140,6 +175,7 @@ class _MapsRoutesState extends State<MapsRoutes> {
   void initState() {
     super.initState();
     _loadCustomIcon();
+    addRoutePoints();
   }
 
   @override
@@ -212,12 +248,16 @@ class _MapsRoutesState extends State<MapsRoutes> {
         markers: allMarkers,
         polylines: {
           google_maps.Polyline(
-            polylineId: google_maps.PolylineId("PolylineID"),
+            //polylineId: google_maps.PolylineId("PolylineID"),
+            //color: Colors.blue,
+            //points: routeMarkers
+            //    .map((marker) => marker.position)
+            //    .toList(), // Utilizando as posições dos marcadores para criar a polilinha
+            polylineId: google_maps.PolylineId("RedPolyline"),
             color: Colors.blue,
-            points: routeMarkers
-                .map((marker) => marker.position)
-                .toList(), // Utilizando as posições dos marcadores para criar a polilinha
-          )
+            points: routePoints ??
+                routeMarkers.map((marker) => marker.position).toList(),
+          ),
         },
       ),
     );

@@ -8,6 +8,7 @@ import '/custom_code/actions/index.dart' as actions;
 import '/custom_code/widgets/index.dart' as custom_widgets;
 import '/flutter_flow/custom_functions.dart' as functions;
 import 'package:flutter/material.dart';
+import 'package:flutter/scheduler.dart';
 import 'package:flutter/services.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:google_fonts/google_fonts.dart';
@@ -66,6 +67,23 @@ class _IniciarDeslocamentoWidgetState extends State<IniciarDeslocamentoWidget> {
   void initState() {
     super.initState();
     _model = createModel(context, () => IniciarDeslocamentoModel());
+
+    // On component load action.
+    SchedulerBinding.instance.addPostFrameCallback((_) async {
+      currentUserLocationValue =
+          await getCurrentUserLocation(defaultLocation: LatLng(0.0, 0.0));
+      _model.chamadaPolylinesOnload = await ApiRotasPolylinesCall.call(
+        latitudeOrigem: functions.separadorLatDeLng(
+            true, functions.latLngToStr(currentUserLocationValue)),
+        longitudeOrigem: functions.separadorLatDeLng(
+            false, functions.latLngToStr(currentUserLocationValue)),
+        latitudeDestino: functions.separadorLatDeLng(
+            true, functions.latLngToStr(widget.latlngFaz)),
+        longitudeDestonp: functions.separadorLatDeLng(
+            false, functions.latLngToStr(widget.latlngFaz)),
+        key: 'AIzaSyDpk1wIZmA1OTS57D_cB13BD01zqrTiQNI',
+      );
+    });
 
     getCurrentUserLocation(defaultLocation: LatLng(0.0, 0.0), cached: true)
         .then((loc) => setState(() => currentUserLocationValue = loc));
@@ -443,6 +461,10 @@ class _IniciarDeslocamentoWidgetState extends State<IniciarDeslocamentoWidget> {
                           ))!,
                           coordenadasIniciais: currentUserLocationValue,
                           coordenadasFinais: widget.latlngFaz!,
+                          stringDoRotas:
+                              ApiRotasPolylinesCall.criptografadapolyline(
+                            (_model.chamadaPolylinesOnload?.jsonBody ?? ''),
+                          ).toString(),
                         ),
                       ),
                     ),
@@ -455,7 +477,7 @@ class _IniciarDeslocamentoWidgetState extends State<IniciarDeslocamentoWidget> {
                           scrollDirection: Axis.horizontal,
                           child: Row(
                             mainAxisSize: MainAxisSize.max,
-                            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                            mainAxisAlignment: MainAxisAlignment.center,
                             children: [
                               if ((widget.jsonServico ==
                                       FFAppState().trOsServicoEmAndamento) &&
