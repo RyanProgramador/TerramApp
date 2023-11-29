@@ -244,7 +244,7 @@ class _ConfiguracoesWidgetState extends State<ConfiguracoesWidget> {
                                 .trOsDeslocamentosJsonFinalizados
                                 .toList()),
                             listaGeo: functions.jsonListToStr(
-                                FFAppState().trDeslocamentoGeo.toList()),
+                                FFAppState().trDeslocGeo2.toList()),
                           );
                           _shouldSetState = true;
                           if (SincronizarGroup.trSincronizaCelularComBDCall
