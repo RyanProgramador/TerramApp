@@ -80,7 +80,7 @@ class _LoginWidgetState extends State<LoginWidget> {
                 fit: BoxFit.cover,
                 alignment: AlignmentDirectional(0.00, -1.00),
                 image: Image.asset(
-                  'assets/images/Group_49.png',
+                  'assets/images/unsplash_jin4W1HqgL4.png',
                 ).image,
               ),
             ),
