@@ -251,187 +251,188 @@ class _SelecionarOSWidgetState extends State<SelecionarOSWidget>
                 ),
                 Flexible(
                   flex: 10,
-                  child: ClipRRect(
-                    child: Container(
-                      width: double.infinity,
-                      height: double.infinity,
-                      decoration: BoxDecoration(
-                        color: FlutterFlowTheme.of(context).secondaryBackground,
-                      ),
-                      child: SingleChildScrollView(
-                        child: Column(
-                          mainAxisSize: MainAxisSize.max,
-                          children: [
-                            Row(
-                              mainAxisSize: MainAxisSize.max,
-                              children: [
-                                Padding(
-                                  padding: EdgeInsetsDirectional.fromSTEB(
-                                      16.0, 16.0, 0.0, 0.0),
-                                  child: Text(
-                                    'Ordens de serviço:',
-                                    style: FlutterFlowTheme.of(context)
-                                        .headlineSmall,
+                  child: Padding(
+                    padding:
+                        EdgeInsetsDirectional.fromSTEB(0.0, 0.0, 0.0, 40.0),
+                    child: ClipRRect(
+                      child: Container(
+                        width: double.infinity,
+                        height: double.infinity,
+                        decoration: BoxDecoration(
+                          color:
+                              FlutterFlowTheme.of(context).secondaryBackground,
+                        ),
+                        child: SingleChildScrollView(
+                          child: Column(
+                            mainAxisSize: MainAxisSize.max,
+                            children: [
+                              Row(
+                                mainAxisSize: MainAxisSize.max,
+                                children: [
+                                  Padding(
+                                    padding: EdgeInsetsDirectional.fromSTEB(
+                                        16.0, 16.0, 0.0, 0.0),
+                                    child: Text(
+                                      'Ordens de serviço:',
+                                      style: FlutterFlowTheme.of(context)
+                                          .headlineSmall,
+                                    ),
                                   ),
-                                ),
-                              ],
-                            ),
-                            Row(
-                              mainAxisSize: MainAxisSize.max,
-                              children: [
-                                Expanded(
-                                  child: Align(
-                                    alignment: AlignmentDirectional(0.00, 0.00),
-                                    child: Container(
-                                      decoration: BoxDecoration(),
+                                ],
+                              ),
+                              Row(
+                                mainAxisSize: MainAxisSize.max,
+                                children: [
+                                  Expanded(
+                                    child: Align(
                                       alignment:
                                           AlignmentDirectional(0.00, 0.00),
-                                      child: Align(
+                                      child: Container(
+                                        decoration: BoxDecoration(),
                                         alignment:
                                             AlignmentDirectional(0.00, 0.00),
-                                        child: Stack(
+                                        child: Align(
                                           alignment:
-                                              AlignmentDirectional(0.0, 0.0),
-                                          children: [
-                                            Align(
-                                              alignment: AlignmentDirectional(
-                                                  0.00, 0.00),
-                                              child: Padding(
-                                                padding: EdgeInsetsDirectional
-                                                    .fromSTEB(
-                                                        16.0, 12.0, 16.0, 0.0),
-                                                child: TextFormField(
-                                                  controller: _model
-                                                      .searchBarController,
-                                                  focusNode:
-                                                      _model.searchBarFocusNode,
-                                                  textCapitalization:
-                                                      TextCapitalization.words,
-                                                  obscureText: false,
-                                                  decoration: InputDecoration(
-                                                    labelText: 'Pesquisar',
-                                                    labelStyle:
-                                                        FlutterFlowTheme.of(
-                                                                context)
-                                                            .labelMedium,
-                                                    hintStyle:
-                                                        FlutterFlowTheme.of(
-                                                                context)
-                                                            .labelMedium,
-                                                    enabledBorder:
-                                                        OutlineInputBorder(
-                                                      borderSide: BorderSide(
-                                                        color:
-                                                            FlutterFlowTheme.of(
-                                                                    context)
-                                                                .alternate,
-                                                        width: 2.0,
+                                              AlignmentDirectional(0.00, 0.00),
+                                          child: Stack(
+                                            alignment:
+                                                AlignmentDirectional(0.0, 0.0),
+                                            children: [
+                                              Align(
+                                                alignment: AlignmentDirectional(
+                                                    0.00, 0.00),
+                                                child: Padding(
+                                                  padding: EdgeInsetsDirectional
+                                                      .fromSTEB(16.0, 12.0,
+                                                          16.0, 0.0),
+                                                  child: TextFormField(
+                                                    controller: _model
+                                                        .searchBarController,
+                                                    focusNode: _model
+                                                        .searchBarFocusNode,
+                                                    textCapitalization:
+                                                        TextCapitalization
+                                                            .words,
+                                                    obscureText: false,
+                                                    decoration: InputDecoration(
+                                                      labelText: 'Pesquisar',
+                                                      labelStyle:
+                                                          FlutterFlowTheme.of(
+                                                                  context)
+                                                              .labelMedium,
+                                                      hintStyle:
+                                                          FlutterFlowTheme.of(
+                                                                  context)
+                                                              .labelMedium,
+                                                      enabledBorder:
+                                                          OutlineInputBorder(
+                                                        borderSide: BorderSide(
+                                                          color: FlutterFlowTheme
+                                                                  .of(context)
+                                                              .alternate,
+                                                          width: 2.0,
+                                                        ),
+                                                        borderRadius:
+                                                            BorderRadius
+                                                                .circular(12.0),
                                                       ),
-                                                      borderRadius:
-                                                          BorderRadius.circular(
-                                                              12.0),
-                                                    ),
-                                                    focusedBorder:
-                                                        OutlineInputBorder(
-                                                      borderSide: BorderSide(
-                                                        color:
-                                                            FlutterFlowTheme.of(
-                                                                    context)
-                                                                .primary,
-                                                        width: 2.0,
+                                                      focusedBorder:
+                                                          OutlineInputBorder(
+                                                        borderSide: BorderSide(
+                                                          color: FlutterFlowTheme
+                                                                  .of(context)
+                                                              .primary,
+                                                          width: 2.0,
+                                                        ),
+                                                        borderRadius:
+                                                            BorderRadius
+                                                                .circular(12.0),
                                                       ),
-                                                      borderRadius:
-                                                          BorderRadius.circular(
-                                                              12.0),
-                                                    ),
-                                                    errorBorder:
-                                                        OutlineInputBorder(
-                                                      borderSide: BorderSide(
-                                                        color:
-                                                            FlutterFlowTheme.of(
-                                                                    context)
-                                                                .error,
-                                                        width: 2.0,
+                                                      errorBorder:
+                                                          OutlineInputBorder(
+                                                        borderSide: BorderSide(
+                                                          color: FlutterFlowTheme
+                                                                  .of(context)
+                                                              .error,
+                                                          width: 2.0,
+                                                        ),
+                                                        borderRadius:
+                                                            BorderRadius
+                                                                .circular(12.0),
                                                       ),
-                                                      borderRadius:
-                                                          BorderRadius.circular(
-                                                              12.0),
-                                                    ),
-                                                    focusedErrorBorder:
-                                                        OutlineInputBorder(
-                                                      borderSide: BorderSide(
-                                                        color:
-                                                            FlutterFlowTheme.of(
-                                                                    context)
-                                                                .error,
-                                                        width: 2.0,
+                                                      focusedErrorBorder:
+                                                          OutlineInputBorder(
+                                                        borderSide: BorderSide(
+                                                          color: FlutterFlowTheme
+                                                                  .of(context)
+                                                              .error,
+                                                          width: 2.0,
+                                                        ),
+                                                        borderRadius:
+                                                            BorderRadius
+                                                                .circular(12.0),
                                                       ),
-                                                      borderRadius:
-                                                          BorderRadius.circular(
-                                                              12.0),
+                                                      filled: true,
+                                                      fillColor:
+                                                          FlutterFlowTheme.of(
+                                                                  context)
+                                                              .primaryBackground,
+                                                      contentPadding:
+                                                          EdgeInsetsDirectional
+                                                              .fromSTEB(
+                                                                  24.0,
+                                                                  24.0,
+                                                                  20.0,
+                                                                  24.0),
                                                     ),
-                                                    filled: true,
-                                                    fillColor:
-                                                        FlutterFlowTheme.of(
-                                                                context)
-                                                            .primaryBackground,
-                                                    contentPadding:
-                                                        EdgeInsetsDirectional
-                                                            .fromSTEB(
-                                                                24.0,
-                                                                24.0,
-                                                                20.0,
-                                                                24.0),
-                                                  ),
-                                                  style: FlutterFlowTheme.of(
-                                                          context)
-                                                      .bodyMedium,
-                                                  validator: _model
-                                                      .searchBarControllerValidator
-                                                      .asValidator(context),
-                                                ),
-                                              ),
-                                            ),
-                                            Align(
-                                              alignment: AlignmentDirectional(
-                                                  0.95, 0.01),
-                                              child: Padding(
-                                                padding: EdgeInsetsDirectional
-                                                    .fromSTEB(
-                                                        0.0, 12.0, 12.0, 0.0),
-                                                child: FlutterFlowIconButton(
-                                                  borderColor:
-                                                      Color(0x0080B9B6),
-                                                  borderRadius: 30.0,
-                                                  borderWidth: 1.0,
-                                                  buttonSize: 50.0,
-                                                  fillColor: Color(0x0080B9B6),
-                                                  icon: Icon(
-                                                    Icons.search_sharp,
-                                                    color: FlutterFlowTheme.of(
+                                                    style: FlutterFlowTheme.of(
                                                             context)
-                                                        .lineColor,
-                                                    size: 30.0,
+                                                        .bodyMedium,
+                                                    validator: _model
+                                                        .searchBarControllerValidator
+                                                        .asValidator(context),
                                                   ),
-                                                  onPressed: () {
-                                                    print(
-                                                        'IconButton pressed ...');
-                                                  },
                                                 ),
                                               ),
-                                            ),
-                                          ],
+                                              Align(
+                                                alignment: AlignmentDirectional(
+                                                    0.95, 0.01),
+                                                child: Padding(
+                                                  padding: EdgeInsetsDirectional
+                                                      .fromSTEB(
+                                                          0.0, 12.0, 12.0, 0.0),
+                                                  child: FlutterFlowIconButton(
+                                                    borderColor:
+                                                        Color(0x0080B9B6),
+                                                    borderRadius: 30.0,
+                                                    borderWidth: 1.0,
+                                                    buttonSize: 50.0,
+                                                    fillColor:
+                                                        Color(0x0080B9B6),
+                                                    icon: Icon(
+                                                      Icons.search_sharp,
+                                                      color:
+                                                          FlutterFlowTheme.of(
+                                                                  context)
+                                                              .lineColor,
+                                                      size: 30.0,
+                                                    ),
+                                                    onPressed: () {
+                                                      print(
+                                                          'IconButton pressed ...');
+                                                    },
+                                                  ),
+                                                ),
+                                              ),
+                                            ],
+                                          ),
                                         ),
                                       ),
                                     ),
                                   ),
-                                ),
-                              ],
-                            ),
-                            Padding(
-                              padding: EdgeInsetsDirectional.fromSTEB(
-                                  0.0, 0.0, 0.0, 100.0),
-                              child: Builder(
+                                ],
+                              ),
+                              Builder(
                                 builder: (context) {
                                   final trOsServicos =
                                       FFAppState().trOsServicos.toList();
@@ -968,11 +969,11 @@ class _SelecionarOSWidgetState extends State<SelecionarOSWidget>
                                   );
                                 },
                               ),
-                            ),
-                          ],
-                        ),
-                      ).animateOnPageLoad(
-                          animationsMap['columnOnPageLoadAnimation']!),
+                            ],
+                          ),
+                        ).animateOnPageLoad(
+                            animationsMap['columnOnPageLoadAnimation']!),
+                      ),
                     ),
                   ),
                 ),

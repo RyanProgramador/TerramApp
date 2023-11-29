@@ -31,7 +31,7 @@ Future mainAction(
   await flutterLocalNotificationsPlugin.initialize(initializationSettings);
 
   await BackgroundLocation.setAndroidNotification(
-    title: 'Terram - by ryan',
+    title: 'Terram - by Conceitto',
     message: 'Sua localização está sendo compartilhada conosco',
     icon: '@mipmap/ic_launcher',
   );
