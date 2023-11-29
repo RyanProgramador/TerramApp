@@ -186,6 +186,7 @@ class _MapsRoutesState extends State<RotaFinal> {
     }
   }
 
+//atualiza a cada momento a posição atual do user
   void _getCurrentLocation() async {
     Geolocator.getPositionStream().listen((Position newLoc) async {
       if (_googleMapController != null) {
