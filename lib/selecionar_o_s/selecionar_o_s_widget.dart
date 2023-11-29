@@ -486,6 +486,100 @@ class _SelecionarOSWidgetState extends State<SelecionarOSWidget>
                                               highlightColor:
                                                   Colors.transparent,
                                               onTap: () async {
+                                                currentUserLocationValue =
+                                                    await getCurrentUserLocation(
+                                                        defaultLocation:
+                                                            LatLng(0.0, 0.0));
+                                                _model.porfavorFuncione =
+                                                    await ApiRotasPolylinesCall
+                                                        .call(
+                                                  latitudeOrigem: functions
+                                                      .separadorLatDeLng(
+                                                          true,
+                                                          functions.latLngToStr(
+                                                              currentUserLocationValue)),
+                                                  longitudeOrigem: functions
+                                                      .separadorLatDeLng(
+                                                          false,
+                                                          functions.latLngToStr(
+                                                              currentUserLocationValue)),
+                                                  latitudeDestino: functions.separadorLatDeLng(
+                                                      true,
+                                                      functions.latLngToStr(functions.strToLatLng(
+                                                          functions.ligaoDeNome(
+                                                              FFAppState().trFazendas.toList(),
+                                                              'faz_id',
+                                                              'faz_latitude',
+                                                              valueOrDefault<String>(
+                                                                functions.ligacaoEntreListas(
+                                                                    getJsonField(
+                                                                      trOsServicosItem,
+                                                                      r'''$''',
+                                                                      true,
+                                                                    ),
+                                                                    FFAppState().trOrdemServicos.toList(),
+                                                                    'oserv_id_os',
+                                                                    'os_id',
+                                                                    'os_id_faz'),
+                                                                '404',
+                                                              )),
+                                                          functions.ligaoDeNome(
+                                                              FFAppState().trFazendas.toList(),
+                                                              'faz_id',
+                                                              'faz_longitude',
+                                                              valueOrDefault<String>(
+                                                                functions.ligacaoEntreListas(
+                                                                    getJsonField(
+                                                                      trOsServicosItem,
+                                                                      r'''$''',
+                                                                      true,
+                                                                    ),
+                                                                    FFAppState().trOrdemServicos.toList(),
+                                                                    'oserv_id_os',
+                                                                    'os_id',
+                                                                    'os_id_faz'),
+                                                                '404',
+                                                              ))))),
+                                                  longitudeDestonp: functions.separadorLatDeLng(
+                                                      false,
+                                                      functions.latLngToStr(functions.strToLatLng(
+                                                          functions.ligaoDeNome(
+                                                              FFAppState().trFazendas.toList(),
+                                                              'faz_id',
+                                                              'faz_latitude',
+                                                              valueOrDefault<String>(
+                                                                functions.ligacaoEntreListas(
+                                                                    getJsonField(
+                                                                      trOsServicosItem,
+                                                                      r'''$''',
+                                                                      true,
+                                                                    ),
+                                                                    FFAppState().trOrdemServicos.toList(),
+                                                                    'oserv_id_os',
+                                                                    'os_id',
+                                                                    'os_id_faz'),
+                                                                '404',
+                                                              )),
+                                                          functions.ligaoDeNome(
+                                                              FFAppState().trFazendas.toList(),
+                                                              'faz_id',
+                                                              'faz_longitude',
+                                                              valueOrDefault<String>(
+                                                                functions.ligacaoEntreListas(
+                                                                    getJsonField(
+                                                                      trOsServicosItem,
+                                                                      r'''$''',
+                                                                      true,
+                                                                    ),
+                                                                    FFAppState().trOrdemServicos.toList(),
+                                                                    'oserv_id_os',
+                                                                    'os_id',
+                                                                    'os_id_faz'),
+                                                                '404',
+                                                              ))))),
+                                                  key:
+                                                      'AIzaSyDpk1wIZmA1OTS57D_cB13BD01zqrTiQNI',
+                                                );
                                                 await showModalBottomSheet(
                                                   isScrollControlled: true,
                                                   backgroundColor:
@@ -680,6 +774,8 @@ class _SelecionarOSWidgetState extends State<SelecionarOSWidget>
                                                                       trOsServicosItem,
                                                                       r'''$.oserv_id''',
                                                                     ).toString()),
+                                                            polylinhaQueVemDoMenuInicial:
+                                                                '',
                                                           ),
                                                         ),
                                                       ),
@@ -687,6 +783,8 @@ class _SelecionarOSWidgetState extends State<SelecionarOSWidget>
                                                   },
                                                 ).then((value) =>
                                                     safeSetState(() {}));
+
+                                                setState(() {});
                                               },
                                               child: Row(
                                                 mainAxisSize: MainAxisSize.max,

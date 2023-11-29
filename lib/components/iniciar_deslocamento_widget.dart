@@ -31,6 +31,7 @@ class IniciarDeslocamentoWidget extends StatefulWidget {
     required this.hora,
     required this.jsonServico,
     required this.deslocamentoAtualFinzalizado,
+    required this.polylinhaQueVemDoMenuInicial,
   }) : super(key: key);
 
   final String? etapade;
@@ -45,6 +46,7 @@ class IniciarDeslocamentoWidget extends StatefulWidget {
   final String? hora;
   final dynamic jsonServico;
   final bool? deslocamentoAtualFinzalizado;
+  final String? polylinhaQueVemDoMenuInicial;
 
   @override
   _IniciarDeslocamentoWidgetState createState() =>
@@ -464,14 +466,13 @@ class _IniciarDeslocamentoWidgetState extends State<IniciarDeslocamentoWidget> {
                         flex: 6,
                         child: Container(
                           width: double.infinity,
-                          height: double.infinity,
                           decoration: BoxDecoration(),
                           child: Container(
-                            width: 200.0,
-                            height: double.infinity,
+                            width: double.infinity,
+                            height: 275.0,
                             child: custom_widgets.MapsRoutes(
-                              width: 200.0,
-                              height: double.infinity,
+                              width: double.infinity,
+                              height: 275.0,
                               json2: functions
                                   .jsonToStr(ApiRotasDirectionsCall.tudo(
                                 cardActionsApiRotasDirectionsResponse.jsonBody,
