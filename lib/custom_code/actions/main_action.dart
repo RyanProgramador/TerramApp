@@ -99,6 +99,7 @@ Future mainAction(
             //FFAppState().trOsDeslocamentos.add(data);
             //FFAppState().trOsDeslocamentoLatLng.add(data2);
             FFAppState().trDeslocamentoGeo.add(data2);
+            FFAppState().trDeslocGeo2.add(data2);
           }
         });
       }

@@ -143,6 +143,17 @@ class FFAppState extends ChangeNotifier {
               _trDeslocamentoGeo;
     });
     _safeInit(() {
+      _trDeslocGeo2 = prefs.getStringList('ff_trDeslocGeo2')?.map((x) {
+            try {
+              return jsonDecode(x);
+            } catch (e) {
+              print("Can't decode persisted json. Error: $e.");
+              return {};
+            }
+          }).toList() ??
+          _trDeslocGeo2;
+    });
+    _safeInit(() {
       _trOsDeslocamentoLatLng =
           prefs.getStringList('ff_trOsDeslocamentoLatLng')?.map((x) {
                 try {
@@ -698,6 +709,47 @@ class FFAppState extends ChangeNotifier {
     _trDeslocamentoGeo.insert(_index, _value);
     prefs.setStringList('ff_trDeslocamentoGeo',
         _trDeslocamentoGeo.map((x) => jsonEncode(x)).toList());
+  }
+
+  List<dynamic> _trDeslocGeo2 = [];
+  List<dynamic> get trDeslocGeo2 => _trDeslocGeo2;
+  set trDeslocGeo2(List<dynamic> _value) {
+    _trDeslocGeo2 = _value;
+    prefs.setStringList(
+        'ff_trDeslocGeo2', _value.map((x) => jsonEncode(x)).toList());
+  }
+
+  void addToTrDeslocGeo2(dynamic _value) {
+    _trDeslocGeo2.add(_value);
+    prefs.setStringList(
+        'ff_trDeslocGeo2', _trDeslocGeo2.map((x) => jsonEncode(x)).toList());
+  }
+
+  void removeFromTrDeslocGeo2(dynamic _value) {
+    _trDeslocGeo2.remove(_value);
+    prefs.setStringList(
+        'ff_trDeslocGeo2', _trDeslocGeo2.map((x) => jsonEncode(x)).toList());
+  }
+
+  void removeAtIndexFromTrDeslocGeo2(int _index) {
+    _trDeslocGeo2.removeAt(_index);
+    prefs.setStringList(
+        'ff_trDeslocGeo2', _trDeslocGeo2.map((x) => jsonEncode(x)).toList());
+  }
+
+  void updateTrDeslocGeo2AtIndex(
+    int _index,
+    dynamic Function(dynamic) updateFn,
+  ) {
+    _trDeslocGeo2[_index] = updateFn(_trDeslocGeo2[_index]);
+    prefs.setStringList(
+        'ff_trDeslocGeo2', _trDeslocGeo2.map((x) => jsonEncode(x)).toList());
+  }
+
+  void insertAtIndexInTrDeslocGeo2(int _index, dynamic _value) {
+    _trDeslocGeo2.insert(_index, _value);
+    prefs.setStringList(
+        'ff_trDeslocGeo2', _trDeslocGeo2.map((x) => jsonEncode(x)).toList());
   }
 
   List<dynamic> _trOsDeslocamentoLatLng = [];
