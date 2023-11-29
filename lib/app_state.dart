@@ -143,6 +143,22 @@ class FFAppState extends ChangeNotifier {
           _trDeslocGeo2;
     });
     _safeInit(() {
+      _trDeslocamentoGeoDataType = prefs
+              .getStringList('ff_trDeslocamentoGeoDataType')
+              ?.map((x) {
+                try {
+                  return DeslocamentosGeoStruct.fromSerializableMap(
+                      jsonDecode(x));
+                } catch (e) {
+                  print("Can't decode persisted data type. Error: $e.");
+                  return null;
+                }
+              })
+              .withoutNulls
+              .toList() ??
+          _trDeslocamentoGeoDataType;
+    });
+    _safeInit(() {
       _trOsDeslocamentoLatLng =
           prefs.getStringList('ff_trOsDeslocamentoLatLng')?.map((x) {
                 try {
@@ -170,22 +186,6 @@ class FFAppState extends ChangeNotifier {
       _trOsDeslocamentoListaFinalizados =
           prefs.getStringList('ff_trOsDeslocamentoListaFinalizados') ??
               _trOsDeslocamentoListaFinalizados;
-    });
-    _safeInit(() {
-      _trDeslocamentoGeoDataType = prefs
-              .getStringList('ff_trDeslocamentoGeoDataType')
-              ?.map((x) {
-                try {
-                  return DeslocamentosGeoStruct.fromSerializableMap(
-                      jsonDecode(x));
-                } catch (e) {
-                  print("Can't decode persisted data type. Error: $e.");
-                  return null;
-                }
-              })
-              .withoutNulls
-              .toList() ??
-          _trDeslocamentoGeoDataType;
     });
     _safeInit(() {
       if (prefs.containsKey('ff_teste')) {
@@ -743,6 +743,50 @@ class FFAppState extends ChangeNotifier {
         'ff_trDeslocGeo2', _trDeslocGeo2.map((x) => jsonEncode(x)).toList());
   }
 
+  List<DeslocamentosGeoStruct> _trDeslocamentoGeoDataType = [];
+  List<DeslocamentosGeoStruct> get trDeslocamentoGeoDataType =>
+      _trDeslocamentoGeoDataType;
+  set trDeslocamentoGeoDataType(List<DeslocamentosGeoStruct> _value) {
+    _trDeslocamentoGeoDataType = _value;
+    prefs.setStringList('ff_trDeslocamentoGeoDataType',
+        _value.map((x) => x.serialize()).toList());
+  }
+
+  void addToTrDeslocamentoGeoDataType(DeslocamentosGeoStruct _value) {
+    _trDeslocamentoGeoDataType.add(_value);
+    prefs.setStringList('ff_trDeslocamentoGeoDataType',
+        _trDeslocamentoGeoDataType.map((x) => x.serialize()).toList());
+  }
+
+  void removeFromTrDeslocamentoGeoDataType(DeslocamentosGeoStruct _value) {
+    _trDeslocamentoGeoDataType.remove(_value);
+    prefs.setStringList('ff_trDeslocamentoGeoDataType',
+        _trDeslocamentoGeoDataType.map((x) => x.serialize()).toList());
+  }
+
+  void removeAtIndexFromTrDeslocamentoGeoDataType(int _index) {
+    _trDeslocamentoGeoDataType.removeAt(_index);
+    prefs.setStringList('ff_trDeslocamentoGeoDataType',
+        _trDeslocamentoGeoDataType.map((x) => x.serialize()).toList());
+  }
+
+  void updateTrDeslocamentoGeoDataTypeAtIndex(
+    int _index,
+    DeslocamentosGeoStruct Function(DeslocamentosGeoStruct) updateFn,
+  ) {
+    _trDeslocamentoGeoDataType[_index] =
+        updateFn(_trDeslocamentoGeoDataType[_index]);
+    prefs.setStringList('ff_trDeslocamentoGeoDataType',
+        _trDeslocamentoGeoDataType.map((x) => x.serialize()).toList());
+  }
+
+  void insertAtIndexInTrDeslocamentoGeoDataType(
+      int _index, DeslocamentosGeoStruct _value) {
+    _trDeslocamentoGeoDataType.insert(_index, _value);
+    prefs.setStringList('ff_trDeslocamentoGeoDataType',
+        _trDeslocamentoGeoDataType.map((x) => x.serialize()).toList());
+  }
+
   List<dynamic> _trOsDeslocamentoLatLng = [];
   List<dynamic> get trOsDeslocamentoLatLng => _trOsDeslocamentoLatLng;
   set trOsDeslocamentoLatLng(List<dynamic> _value) {
@@ -869,50 +913,6 @@ class FFAppState extends ChangeNotifier {
     _trOsDeslocamentoListaFinalizados.insert(_index, _value);
     prefs.setStringList('ff_trOsDeslocamentoListaFinalizados',
         _trOsDeslocamentoListaFinalizados);
-  }
-
-  List<DeslocamentosGeoStruct> _trDeslocamentoGeoDataType = [];
-  List<DeslocamentosGeoStruct> get trDeslocamentoGeoDataType =>
-      _trDeslocamentoGeoDataType;
-  set trDeslocamentoGeoDataType(List<DeslocamentosGeoStruct> _value) {
-    _trDeslocamentoGeoDataType = _value;
-    prefs.setStringList('ff_trDeslocamentoGeoDataType',
-        _value.map((x) => x.serialize()).toList());
-  }
-
-  void addToTrDeslocamentoGeoDataType(DeslocamentosGeoStruct _value) {
-    _trDeslocamentoGeoDataType.add(_value);
-    prefs.setStringList('ff_trDeslocamentoGeoDataType',
-        _trDeslocamentoGeoDataType.map((x) => x.serialize()).toList());
-  }
-
-  void removeFromTrDeslocamentoGeoDataType(DeslocamentosGeoStruct _value) {
-    _trDeslocamentoGeoDataType.remove(_value);
-    prefs.setStringList('ff_trDeslocamentoGeoDataType',
-        _trDeslocamentoGeoDataType.map((x) => x.serialize()).toList());
-  }
-
-  void removeAtIndexFromTrDeslocamentoGeoDataType(int _index) {
-    _trDeslocamentoGeoDataType.removeAt(_index);
-    prefs.setStringList('ff_trDeslocamentoGeoDataType',
-        _trDeslocamentoGeoDataType.map((x) => x.serialize()).toList());
-  }
-
-  void updateTrDeslocamentoGeoDataTypeAtIndex(
-    int _index,
-    DeslocamentosGeoStruct Function(DeslocamentosGeoStruct) updateFn,
-  ) {
-    _trDeslocamentoGeoDataType[_index] =
-        updateFn(_trDeslocamentoGeoDataType[_index]);
-    prefs.setStringList('ff_trDeslocamentoGeoDataType',
-        _trDeslocamentoGeoDataType.map((x) => x.serialize()).toList());
-  }
-
-  void insertAtIndexInTrDeslocamentoGeoDataType(
-      int _index, DeslocamentosGeoStruct _value) {
-    _trDeslocamentoGeoDataType.insert(_index, _value);
-    prefs.setStringList('ff_trDeslocamentoGeoDataType',
-        _trDeslocamentoGeoDataType.map((x) => x.serialize()).toList());
   }
 
   dynamic _teste = jsonDecode(
