@@ -365,6 +365,11 @@ class _GpsTecToFazendaWidgetState extends State<GpsTecToFazendaWidget> {
                                                   .addToTrOsDeslocamentosJsonFinalizados(
                                                       FFAppState()
                                                           .trOsDeslocamentoJsonAtual);
+                                              FFAppState().trDeslocGeo2 =
+                                                  FFAppState()
+                                                      .trDeslocGeo2
+                                                      .toList()
+                                                      .cast<dynamic>();
                                             });
                                             await Future.delayed(const Duration(
                                                 milliseconds: 1000));
