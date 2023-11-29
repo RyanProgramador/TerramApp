@@ -235,8 +235,8 @@ class _MapsRoutesState extends State<MapsRoutes> {
         routeMarkers.union(_createCustomMarker());
 
     return Container(
-      width: widget.width ?? 400.0,
-      height: widget.height ?? 400.0,
+      width: widget.width ?? 250.0,
+      height: widget.height ?? 250.0,
       child: google_maps.GoogleMap(
         initialCameraPosition: google_maps.CameraPosition(
           target: google_maps.LatLng(
