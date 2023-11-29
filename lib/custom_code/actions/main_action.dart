@@ -93,6 +93,12 @@ Future mainAction(
             "osdes_longitude": "$longitude",
           };
 
+          Map<String, dynamic> data3 = {
+            "osdes_id": osdesId,
+            "latitude": "$latitude",
+            "longitude": "$longitude",
+          };
+
           // Add the Map to the list
           if (data != null && data.isNotEmpty) {
             // Correção: Adicione a verificação de que o mapa não está vazio
@@ -100,6 +106,9 @@ Future mainAction(
             //FFAppState().trOsDeslocamentoLatLng.add(data2);
             FFAppState().trDeslocamentoGeo.add(data2);
             FFAppState().trDeslocGeo2.add(data2);
+            FFAppState()
+                .trDeslocamentoGeoDataType
+                .add(data3 as DeslocamentosGeoStruct);
           }
         });
       }
