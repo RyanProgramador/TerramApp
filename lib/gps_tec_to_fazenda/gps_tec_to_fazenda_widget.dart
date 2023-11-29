@@ -376,22 +376,10 @@ class _GpsTecToFazendaWidgetState extends State<GpsTecToFazendaWidget> {
                                                       .trDeslocamentoGeoDataType =
                                                   FFAppState()
                                                       .trDeslocamentoGeo
-                                                      .map((e) => getJsonField(
-                                                                    e,
-                                                                    r'''$''',
-                                                                  ) !=
-                                                                  null &&
-                                                              getJsonField(
-                                                                    e,
-                                                                    r'''$''',
-                                                                  ) !=
-                                                                  ''
+                                                      .map((e) => e != null &&
+                                                              e != ''
                                                           ? DeslocamentosGeoStruct
-                                                              .fromMap(
-                                                                  getJsonField(
-                                                              e,
-                                                              r'''$''',
-                                                            ))
+                                                              .fromMap(e)
                                                           : null)
                                                       .withoutNulls
                                                       .toList()

@@ -1,4 +1,5 @@
 import '/backend/api_requests/api_calls.dart';
+import '/backend/schema/structs/index.dart';
 import '/flutter_flow/flutter_flow_animations.dart';
 import '/flutter_flow/flutter_flow_theme.dart';
 import '/flutter_flow/flutter_flow_timer.dart';
@@ -753,9 +754,28 @@ class _MultiplePlacesPickerCopyWidgetState
                         mainAxisSize: MainAxisSize.max,
                         mainAxisAlignment: MainAxisAlignment.spaceBetween,
                         children: [
-                          Text(
-                            'DESLOCAMENTO GEO data type',
-                            style: FlutterFlowTheme.of(context).bodyMedium,
+                          InkWell(
+                            splashColor: Colors.transparent,
+                            focusColor: Colors.transparent,
+                            hoverColor: Colors.transparent,
+                            highlightColor: Colors.transparent,
+                            onTap: () async {
+                              setState(() {
+                                FFAppState().trDeslocamentoGeoDataType =
+                                    FFAppState()
+                                        .trDeslocamentoGeo
+                                        .map((e) => e != null && e != ''
+                                            ? DeslocamentosGeoStruct.fromMap(e)
+                                            : null)
+                                        .withoutNulls
+                                        .toList()
+                                        .cast<DeslocamentosGeoStruct>();
+                              });
+                            },
+                            child: Text(
+                              'DESLOCAMENTO GEO data type',
+                              style: FlutterFlowTheme.of(context).bodyMedium,
+                            ),
                           ),
                         ],
                       ),
