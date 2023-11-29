@@ -556,7 +556,7 @@ class _MultiplePlacesPickerCopyWidgetState
                                     child: Row(
                                       mainAxisSize: MainAxisSize.max,
                                       mainAxisAlignment:
-                                          MainAxisAlignment.spaceEvenly,
+                                          MainAxisAlignment.center,
                                       children: [
                                         Builder(
                                           builder: (context) {
@@ -809,7 +809,7 @@ class _MultiplePlacesPickerCopyWidgetState
                                                           trDeslocGo[
                                                               trDeslocGoIndex];
                                                       return Text(
-                                                        (trDeslocGoItem.toMap())
+                                                        trDeslocGoItem.osdesId
                                                             .toString(),
                                                         style: FlutterFlowTheme
                                                                 .of(context)
