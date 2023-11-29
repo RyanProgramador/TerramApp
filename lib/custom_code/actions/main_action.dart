@@ -106,9 +106,6 @@ Future mainAction(
             //FFAppState().trOsDeslocamentoLatLng.add(data2);
             FFAppState().trDeslocamentoGeo.add(data2);
             FFAppState().trDeslocGeo2.add(data2);
-            FFAppState()
-                .trDeslocamentoGeoDataType
-                .add(data3 as DeslocamentosGeoStruct);
           }
         });
       }
