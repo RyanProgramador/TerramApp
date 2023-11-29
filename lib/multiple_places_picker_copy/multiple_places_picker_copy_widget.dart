@@ -551,76 +551,77 @@ class _MultiplePlacesPickerCopyWidgetState
                                     color: FlutterFlowTheme.of(context)
                                         .secondaryBackground,
                                   ),
-                                  child: Row(
-                                    mainAxisSize: MainAxisSize.max,
-                                    mainAxisAlignment:
-                                        MainAxisAlignment.spaceEvenly,
-                                    children: [
-                                      Builder(
-                                        builder: (context) {
-                                          final trOsDeslocamentosGo =
-                                              FFAppState()
-                                                  .trDeslocamentoGeo
-                                                  .toList();
-                                          return SingleChildScrollView(
-                                            child: Column(
-                                              mainAxisSize: MainAxisSize.max,
-                                              children: List.generate(
-                                                  trOsDeslocamentosGo.length,
-                                                  (trOsDeslocamentosGoIndex) {
-                                                final trOsDeslocamentosGoItem =
-                                                    trOsDeslocamentosGo[
-                                                        trOsDeslocamentosGoIndex];
-                                                return Text(
-                                                  trOsDeslocamentosGoItem
-                                                      .toString(),
-                                                  style: FlutterFlowTheme.of(
-                                                          context)
-                                                      .bodyMedium
-                                                      .override(
-                                                        fontFamily:
-                                                            'Readex Pro',
-                                                        fontSize: 10.0,
-                                                      ),
-                                                );
-                                              }),
-                                            ),
-                                          );
-                                        },
-                                      ),
-                                      Builder(
-                                        builder: (context) {
-                                          final trOsDeslocamentosGo =
-                                              FFAppState()
-                                                  .trDeslocGeo2
-                                                  .toList();
-                                          return SingleChildScrollView(
-                                            child: Column(
-                                              mainAxisSize: MainAxisSize.max,
-                                              children: List.generate(
-                                                  trOsDeslocamentosGo.length,
-                                                  (trOsDeslocamentosGoIndex) {
-                                                final trOsDeslocamentosGoItem =
-                                                    trOsDeslocamentosGo[
-                                                        trOsDeslocamentosGoIndex];
-                                                return Text(
-                                                  trOsDeslocamentosGoItem
-                                                      .toString(),
-                                                  style: FlutterFlowTheme.of(
-                                                          context)
-                                                      .bodyMedium
-                                                      .override(
-                                                        fontFamily:
-                                                            'Readex Pro',
-                                                        fontSize: 10.0,
-                                                      ),
-                                                );
-                                              }),
-                                            ),
-                                          );
-                                        },
-                                      ),
-                                    ],
+                                  child: SingleChildScrollView(
+                                    scrollDirection: Axis.horizontal,
+                                    child: Row(
+                                      mainAxisSize: MainAxisSize.max,
+                                      mainAxisAlignment:
+                                          MainAxisAlignment.spaceEvenly,
+                                      children: [
+                                        Builder(
+                                          builder: (context) {
+                                            final trOsDeslocamentosGo =
+                                                FFAppState()
+                                                    .trDeslocamentoGeo
+                                                    .toList();
+                                            return SingleChildScrollView(
+                                              child: Column(
+                                                mainAxisSize: MainAxisSize.max,
+                                                children: List.generate(
+                                                    trOsDeslocamentosGo.length,
+                                                    (trOsDeslocamentosGoIndex) {
+                                                  final trOsDeslocamentosGoItem =
+                                                      trOsDeslocamentosGo[
+                                                          trOsDeslocamentosGoIndex];
+                                                  return Text(
+                                                    trOsDeslocamentosGoItem
+                                                        .toString(),
+                                                    style: FlutterFlowTheme.of(
+                                                            context)
+                                                        .bodyMedium
+                                                        .override(
+                                                          fontFamily:
+                                                              'Readex Pro',
+                                                          fontSize: 10.0,
+                                                        ),
+                                                  );
+                                                }),
+                                              ),
+                                            );
+                                          },
+                                        ),
+                                        Builder(
+                                          builder: (context) {
+                                            final trDeslocGo = FFAppState()
+                                                .trDeslocGeo2
+                                                .toList();
+                                            return SingleChildScrollView(
+                                              child: Column(
+                                                mainAxisSize: MainAxisSize.max,
+                                                children: List.generate(
+                                                    trDeslocGo.length,
+                                                    (trDeslocGoIndex) {
+                                                  final trDeslocGoItem =
+                                                      trDeslocGo[
+                                                          trDeslocGoIndex];
+                                                  return Text(
+                                                    trDeslocGoItem.toString(),
+                                                    style: FlutterFlowTheme.of(
+                                                            context)
+                                                        .bodyMedium
+                                                        .override(
+                                                          fontFamily:
+                                                              'Readex Pro',
+                                                          fontSize: 10.0,
+                                                        ),
+                                                  );
+                                                }),
+                                              ),
+                                            );
+                                          },
+                                        ),
+                                      ],
+                                    ),
                                   ),
                                 ),
                               ),
