@@ -1,4 +1,5 @@
 // Automatic FlutterFlow imports
+import '/backend/backend.dart';
 import '/backend/schema/structs/index.dart';
 import '/flutter_flow/flutter_flow_theme.dart';
 import '/flutter_flow/flutter_flow_util.dart';
@@ -200,7 +201,6 @@ class _MapsRoutesState extends State<RotaFinal> {
                 newLoc.longitude,
               ),
               zoom: currentZoomLevel ?? 14,
-              tilt: _googleMapController!.CameraPosition.tilt ?? 14,
             ),
           ),
         );
