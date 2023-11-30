@@ -32,8 +32,14 @@ class _LoginWidgetState extends State<LoginWidget> {
     // On page load action.
     SchedulerBinding.instance.addPostFrameCallback((_) async {
       _model.loginStatusquandoEntra = await ModuloSeguraGroup.loginsCall.call(
-        login: FFAppState().userLogin,
-        senha: FFAppState().psdwLogin,
+        login: valueOrDefault<String>(
+          FFAppState().userLogin,
+          '03866856067',
+        ),
+        senha: valueOrDefault<String>(
+          FFAppState().psdwLogin,
+          '12345',
+        ),
         urlapicall: FFAppState().urlapicall,
       );
       if (ModuloSeguraGroup.loginsCall.statusLogin(
