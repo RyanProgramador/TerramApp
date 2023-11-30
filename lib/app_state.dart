@@ -293,14 +293,14 @@ class FFAppState extends ChangeNotifier {
     prefs.setString('ff_urlapicall', _value);
   }
 
-  String _tecID = '7';
+  String _tecID = '';
   String get tecID => _tecID;
   set tecID(String _value) {
     _tecID = _value;
     prefs.setString('ff_tecID', _value);
   }
 
-  String _tecNome = 'ryan';
+  String _tecNome = '';
   String get tecNome => _tecNome;
   set tecNome(String _value) {
     _tecNome = _value;

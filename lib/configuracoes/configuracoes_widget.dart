@@ -294,8 +294,8 @@ class _ConfiguracoesWidgetState extends State<ConfiguracoesWidget> {
                       child: FFButtonWidget(
                         onPressed: () async {
                           FFAppState().update(() {
-                            FFAppState().tecID = '7';
-                            FFAppState().tecNome = 'ryan';
+                            FFAppState().tecID = '';
+                            FFAppState().tecNome = '';
                             FFAppState().userLogin = '03866856067';
                             FFAppState().psdwLogin = '12345';
                           });

@@ -36,6 +36,9 @@ class _LoginWidgetState extends State<LoginWidget> {
         senha: FFAppState().psdwLogin,
         urlapicall: FFAppState().urlapicall,
       );
+      if (!(FFAppState().psdwLogin != null && FFAppState().psdwLogin != '')) {
+        return;
+      }
       if (ModuloSeguraGroup.loginsCall.statusLogin(
         (_model.loginStatusquandoEntra?.jsonBody ?? ''),
       )) {
@@ -609,8 +612,9 @@ class _LoginWidgetState extends State<LoginWidget> {
                                                                   .text;
                                                           FFAppState()
                                                                   .psdwLogin =
-                                                              FFAppState()
-                                                                  .psdwLogin;
+                                                              _model
+                                                                  .passwordLoginController
+                                                                  .text;
                                                         });
                                                         await Future.delayed(
                                                             const Duration(
