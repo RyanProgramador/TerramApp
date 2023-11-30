@@ -52,7 +52,7 @@ GoRouter createRouter(AppStateNotifier appStateNotifier) => GoRouter(
                 ),
               ),
             )
-          : LoginWidget(),
+          : NavBarPage(),
       routes: [
         FFRoute(
           name: '_initialize',
@@ -71,7 +71,7 @@ GoRouter createRouter(AppStateNotifier appStateNotifier) => GoRouter(
                     ),
                   ),
                 )
-              : LoginWidget(),
+              : NavBarPage(),
         ),
         FFRoute(
           name: 'MultiplePlacesPicker',
