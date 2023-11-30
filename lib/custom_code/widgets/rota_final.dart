@@ -200,6 +200,7 @@ class _MapsRoutesState extends State<RotaFinal> {
                 newLoc.longitude,
               ),
               zoom: currentZoomLevel ?? 14,
+              tilt: _googleMapController!.CameraPosition.tilt ?? 14,
             ),
           ),
         );
