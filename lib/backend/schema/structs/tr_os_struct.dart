@@ -1,14 +1,11 @@
 // ignore_for_file: unnecessary_getters_setters
 
-import 'package:cloud_firestore/cloud_firestore.dart';
-
-import '/backend/schema/util/firestore_util.dart';
 import '/backend/schema/util/schema_util.dart';
 
 import 'index.dart';
 import '/flutter_flow/flutter_flow_util.dart';
 
-class TrOsStruct extends FFFirebaseStruct {
+class TrOsStruct extends BaseStruct {
   TrOsStruct({
     String? osId,
     String? osIdEmp,
@@ -21,7 +18,6 @@ class TrOsStruct extends FFFirebaseStruct {
     String? osUsuCad,
     String? osDthrAlt,
     String? osUsuAlt,
-    FirestoreUtilData firestoreUtilData = const FirestoreUtilData(),
   })  : _osId = osId,
         _osIdEmp = osIdEmp,
         _osIdFaz = osIdFaz,
@@ -32,8 +28,7 @@ class TrOsStruct extends FFFirebaseStruct {
         _osDthrCad = osDthrCad,
         _osUsuCad = osUsuCad,
         _osDthrAlt = osDthrAlt,
-        _osUsuAlt = osUsuAlt,
-        super(firestoreUtilData);
+        _osUsuAlt = osUsuAlt;
 
   // "os_id" field.
   String? _osId;
@@ -286,10 +281,6 @@ TrOsStruct createTrOsStruct({
   String? osUsuCad,
   String? osDthrAlt,
   String? osUsuAlt,
-  Map<String, dynamic> fieldValues = const {},
-  bool clearUnsetFields = true,
-  bool create = false,
-  bool delete = false,
 }) =>
     TrOsStruct(
       osId: osId,
@@ -303,67 +294,4 @@ TrOsStruct createTrOsStruct({
       osUsuCad: osUsuCad,
       osDthrAlt: osDthrAlt,
       osUsuAlt: osUsuAlt,
-      firestoreUtilData: FirestoreUtilData(
-        clearUnsetFields: clearUnsetFields,
-        create: create,
-        delete: delete,
-        fieldValues: fieldValues,
-      ),
     );
-
-TrOsStruct? updateTrOsStruct(
-  TrOsStruct? trOs, {
-  bool clearUnsetFields = true,
-  bool create = false,
-}) =>
-    trOs
-      ?..firestoreUtilData = FirestoreUtilData(
-        clearUnsetFields: clearUnsetFields,
-        create: create,
-      );
-
-void addTrOsStructData(
-  Map<String, dynamic> firestoreData,
-  TrOsStruct? trOs,
-  String fieldName, [
-  bool forFieldValue = false,
-]) {
-  firestoreData.remove(fieldName);
-  if (trOs == null) {
-    return;
-  }
-  if (trOs.firestoreUtilData.delete) {
-    firestoreData[fieldName] = FieldValue.delete();
-    return;
-  }
-  final clearFields = !forFieldValue && trOs.firestoreUtilData.clearUnsetFields;
-  if (clearFields) {
-    firestoreData[fieldName] = <String, dynamic>{};
-  }
-  final trOsData = getTrOsFirestoreData(trOs, forFieldValue);
-  final nestedData = trOsData.map((k, v) => MapEntry('$fieldName.$k', v));
-
-  final mergeFields = trOs.firestoreUtilData.create || clearFields;
-  firestoreData
-      .addAll(mergeFields ? mergeNestedFields(nestedData) : nestedData);
-}
-
-Map<String, dynamic> getTrOsFirestoreData(
-  TrOsStruct? trOs, [
-  bool forFieldValue = false,
-]) {
-  if (trOs == null) {
-    return {};
-  }
-  final firestoreData = mapToFirestore(trOs.toMap());
-
-  // Add any Firestore field values
-  trOs.firestoreUtilData.fieldValues.forEach((k, v) => firestoreData[k] = v);
-
-  return forFieldValue ? mergeNestedFields(firestoreData) : firestoreData;
-}
-
-List<Map<String, dynamic>> getTrOsListFirestoreData(
-  List<TrOsStruct>? trOss,
-) =>
-    trOss?.map((e) => getTrOsFirestoreData(e, true)).toList() ?? [];

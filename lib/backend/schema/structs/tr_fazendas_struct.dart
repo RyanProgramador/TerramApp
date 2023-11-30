@@ -1,14 +1,11 @@
 // ignore_for_file: unnecessary_getters_setters
 
-import 'package:cloud_firestore/cloud_firestore.dart';
-
-import '/backend/schema/util/firestore_util.dart';
 import '/backend/schema/util/schema_util.dart';
 
 import 'index.dart';
 import '/flutter_flow/flutter_flow_util.dart';
 
-class TrFazendasStruct extends FFFirebaseStruct {
+class TrFazendasStruct extends BaseStruct {
   TrFazendasStruct({
     String? fazId,
     String? fazIdEmp,
@@ -23,7 +20,6 @@ class TrFazendasStruct extends FFFirebaseStruct {
     String? fazUsuCad,
     String? fazDthrAlt,
     String? fazUsuAlt,
-    FirestoreUtilData firestoreUtilData = const FirestoreUtilData(),
   })  : _fazId = fazId,
         _fazIdEmp = fazIdEmp,
         _fazNome = fazNome,
@@ -36,8 +32,7 @@ class TrFazendasStruct extends FFFirebaseStruct {
         _fazDthrCad = fazDthrCad,
         _fazUsuCad = fazUsuCad,
         _fazDthrAlt = fazDthrAlt,
-        _fazUsuAlt = fazUsuAlt,
-        super(firestoreUtilData);
+        _fazUsuAlt = fazUsuAlt;
 
   // "faz_id" field.
   String? _fazId;
@@ -331,10 +326,6 @@ TrFazendasStruct createTrFazendasStruct({
   String? fazUsuCad,
   String? fazDthrAlt,
   String? fazUsuAlt,
-  Map<String, dynamic> fieldValues = const {},
-  bool clearUnsetFields = true,
-  bool create = false,
-  bool delete = false,
 }) =>
     TrFazendasStruct(
       fazId: fazId,
@@ -350,69 +341,4 @@ TrFazendasStruct createTrFazendasStruct({
       fazUsuCad: fazUsuCad,
       fazDthrAlt: fazDthrAlt,
       fazUsuAlt: fazUsuAlt,
-      firestoreUtilData: FirestoreUtilData(
-        clearUnsetFields: clearUnsetFields,
-        create: create,
-        delete: delete,
-        fieldValues: fieldValues,
-      ),
     );
-
-TrFazendasStruct? updateTrFazendasStruct(
-  TrFazendasStruct? trFazendas, {
-  bool clearUnsetFields = true,
-  bool create = false,
-}) =>
-    trFazendas
-      ?..firestoreUtilData = FirestoreUtilData(
-        clearUnsetFields: clearUnsetFields,
-        create: create,
-      );
-
-void addTrFazendasStructData(
-  Map<String, dynamic> firestoreData,
-  TrFazendasStruct? trFazendas,
-  String fieldName, [
-  bool forFieldValue = false,
-]) {
-  firestoreData.remove(fieldName);
-  if (trFazendas == null) {
-    return;
-  }
-  if (trFazendas.firestoreUtilData.delete) {
-    firestoreData[fieldName] = FieldValue.delete();
-    return;
-  }
-  final clearFields =
-      !forFieldValue && trFazendas.firestoreUtilData.clearUnsetFields;
-  if (clearFields) {
-    firestoreData[fieldName] = <String, dynamic>{};
-  }
-  final trFazendasData = getTrFazendasFirestoreData(trFazendas, forFieldValue);
-  final nestedData = trFazendasData.map((k, v) => MapEntry('$fieldName.$k', v));
-
-  final mergeFields = trFazendas.firestoreUtilData.create || clearFields;
-  firestoreData
-      .addAll(mergeFields ? mergeNestedFields(nestedData) : nestedData);
-}
-
-Map<String, dynamic> getTrFazendasFirestoreData(
-  TrFazendasStruct? trFazendas, [
-  bool forFieldValue = false,
-]) {
-  if (trFazendas == null) {
-    return {};
-  }
-  final firestoreData = mapToFirestore(trFazendas.toMap());
-
-  // Add any Firestore field values
-  trFazendas.firestoreUtilData.fieldValues
-      .forEach((k, v) => firestoreData[k] = v);
-
-  return forFieldValue ? mergeNestedFields(firestoreData) : firestoreData;
-}
-
-List<Map<String, dynamic>> getTrFazendasListFirestoreData(
-  List<TrFazendasStruct>? trFazendass,
-) =>
-    trFazendass?.map((e) => getTrFazendasFirestoreData(e, true)).toList() ?? [];

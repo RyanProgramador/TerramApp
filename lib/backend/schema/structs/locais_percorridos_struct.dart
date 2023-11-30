@@ -1,27 +1,22 @@
 // ignore_for_file: unnecessary_getters_setters
 
-import 'package:cloud_firestore/cloud_firestore.dart';
-
-import '/backend/schema/util/firestore_util.dart';
 import '/backend/schema/util/schema_util.dart';
 
 import 'index.dart';
 import '/flutter_flow/flutter_flow_util.dart';
 
-class LocaisPercorridosStruct extends FFFirebaseStruct {
+class LocaisPercorridosStruct extends BaseStruct {
   LocaisPercorridosStruct({
     List<LatLng>? locaisPercorridos,
     List<int>? idTec,
     List<int>? idServic,
     List<LatLng>? localFinal,
     List<LatLng>? localInicio,
-    FirestoreUtilData firestoreUtilData = const FirestoreUtilData(),
   })  : _locaisPercorridos = locaisPercorridos,
         _idTec = idTec,
         _idServic = idServic,
         _localFinal = localFinal,
-        _localInicio = localInicio,
-        super(firestoreUtilData);
+        _localInicio = localInicio;
 
   // "LocaisPercorridos" field.
   List<LatLng>? _locaisPercorridos;
@@ -162,82 +157,5 @@ class LocaisPercorridosStruct extends FFFirebaseStruct {
       .hash([locaisPercorridos, idTec, idServic, localFinal, localInicio]);
 }
 
-LocaisPercorridosStruct createLocaisPercorridosStruct({
-  Map<String, dynamic> fieldValues = const {},
-  bool clearUnsetFields = true,
-  bool create = false,
-  bool delete = false,
-}) =>
-    LocaisPercorridosStruct(
-      firestoreUtilData: FirestoreUtilData(
-        clearUnsetFields: clearUnsetFields,
-        create: create,
-        delete: delete,
-        fieldValues: fieldValues,
-      ),
-    );
-
-LocaisPercorridosStruct? updateLocaisPercorridosStruct(
-  LocaisPercorridosStruct? locaisPercorridosStruct, {
-  bool clearUnsetFields = true,
-  bool create = false,
-}) =>
-    locaisPercorridosStruct
-      ?..firestoreUtilData = FirestoreUtilData(
-        clearUnsetFields: clearUnsetFields,
-        create: create,
-      );
-
-void addLocaisPercorridosStructData(
-  Map<String, dynamic> firestoreData,
-  LocaisPercorridosStruct? locaisPercorridosStruct,
-  String fieldName, [
-  bool forFieldValue = false,
-]) {
-  firestoreData.remove(fieldName);
-  if (locaisPercorridosStruct == null) {
-    return;
-  }
-  if (locaisPercorridosStruct.firestoreUtilData.delete) {
-    firestoreData[fieldName] = FieldValue.delete();
-    return;
-  }
-  final clearFields = !forFieldValue &&
-      locaisPercorridosStruct.firestoreUtilData.clearUnsetFields;
-  if (clearFields) {
-    firestoreData[fieldName] = <String, dynamic>{};
-  }
-  final locaisPercorridosStructData =
-      getLocaisPercorridosFirestoreData(locaisPercorridosStruct, forFieldValue);
-  final nestedData =
-      locaisPercorridosStructData.map((k, v) => MapEntry('$fieldName.$k', v));
-
-  final mergeFields =
-      locaisPercorridosStruct.firestoreUtilData.create || clearFields;
-  firestoreData
-      .addAll(mergeFields ? mergeNestedFields(nestedData) : nestedData);
-}
-
-Map<String, dynamic> getLocaisPercorridosFirestoreData(
-  LocaisPercorridosStruct? locaisPercorridosStruct, [
-  bool forFieldValue = false,
-]) {
-  if (locaisPercorridosStruct == null) {
-    return {};
-  }
-  final firestoreData = mapToFirestore(locaisPercorridosStruct.toMap());
-
-  // Add any Firestore field values
-  locaisPercorridosStruct.firestoreUtilData.fieldValues
-      .forEach((k, v) => firestoreData[k] = v);
-
-  return forFieldValue ? mergeNestedFields(firestoreData) : firestoreData;
-}
-
-List<Map<String, dynamic>> getLocaisPercorridosListFirestoreData(
-  List<LocaisPercorridosStruct>? locaisPercorridosStructs,
-) =>
-    locaisPercorridosStructs
-        ?.map((e) => getLocaisPercorridosFirestoreData(e, true))
-        .toList() ??
-    [];
+LocaisPercorridosStruct createLocaisPercorridosStruct() =>
+    LocaisPercorridosStruct();

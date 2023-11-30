@@ -1,14 +1,11 @@
 // ignore_for_file: unnecessary_getters_setters
 
-import 'package:cloud_firestore/cloud_firestore.dart';
-
-import '/backend/schema/util/firestore_util.dart';
 import '/backend/schema/util/schema_util.dart';
 
 import 'index.dart';
 import '/flutter_flow/flutter_flow_util.dart';
 
-class TrOsTecnicosStruct extends FFFirebaseStruct {
+class TrOsTecnicosStruct extends BaseStruct {
   TrOsTecnicosStruct({
     String? ostecId,
     String? ostecIdServ,
@@ -17,15 +14,13 @@ class TrOsTecnicosStruct extends FFFirebaseStruct {
     String? ostecUsuCad,
     String? ostecDthrAlt,
     String? ostecUsuAlt,
-    FirestoreUtilData firestoreUtilData = const FirestoreUtilData(),
   })  : _ostecId = ostecId,
         _ostecIdServ = ostecIdServ,
         _ostecIdTec = ostecIdTec,
         _ostecDthrCad = ostecDthrCad,
         _ostecUsuCad = ostecUsuCad,
         _ostecDthrAlt = ostecDthrAlt,
-        _ostecUsuAlt = ostecUsuAlt,
-        super(firestoreUtilData);
+        _ostecUsuAlt = ostecUsuAlt;
 
   // "ostec_id" field.
   String? _ostecId;
@@ -199,10 +194,6 @@ TrOsTecnicosStruct createTrOsTecnicosStruct({
   String? ostecUsuCad,
   String? ostecDthrAlt,
   String? ostecUsuAlt,
-  Map<String, dynamic> fieldValues = const {},
-  bool clearUnsetFields = true,
-  bool create = false,
-  bool delete = false,
 }) =>
     TrOsTecnicosStruct(
       ostecId: ostecId,
@@ -212,72 +203,4 @@ TrOsTecnicosStruct createTrOsTecnicosStruct({
       ostecUsuCad: ostecUsuCad,
       ostecDthrAlt: ostecDthrAlt,
       ostecUsuAlt: ostecUsuAlt,
-      firestoreUtilData: FirestoreUtilData(
-        clearUnsetFields: clearUnsetFields,
-        create: create,
-        delete: delete,
-        fieldValues: fieldValues,
-      ),
     );
-
-TrOsTecnicosStruct? updateTrOsTecnicosStruct(
-  TrOsTecnicosStruct? trOsTecnicos, {
-  bool clearUnsetFields = true,
-  bool create = false,
-}) =>
-    trOsTecnicos
-      ?..firestoreUtilData = FirestoreUtilData(
-        clearUnsetFields: clearUnsetFields,
-        create: create,
-      );
-
-void addTrOsTecnicosStructData(
-  Map<String, dynamic> firestoreData,
-  TrOsTecnicosStruct? trOsTecnicos,
-  String fieldName, [
-  bool forFieldValue = false,
-]) {
-  firestoreData.remove(fieldName);
-  if (trOsTecnicos == null) {
-    return;
-  }
-  if (trOsTecnicos.firestoreUtilData.delete) {
-    firestoreData[fieldName] = FieldValue.delete();
-    return;
-  }
-  final clearFields =
-      !forFieldValue && trOsTecnicos.firestoreUtilData.clearUnsetFields;
-  if (clearFields) {
-    firestoreData[fieldName] = <String, dynamic>{};
-  }
-  final trOsTecnicosData =
-      getTrOsTecnicosFirestoreData(trOsTecnicos, forFieldValue);
-  final nestedData =
-      trOsTecnicosData.map((k, v) => MapEntry('$fieldName.$k', v));
-
-  final mergeFields = trOsTecnicos.firestoreUtilData.create || clearFields;
-  firestoreData
-      .addAll(mergeFields ? mergeNestedFields(nestedData) : nestedData);
-}
-
-Map<String, dynamic> getTrOsTecnicosFirestoreData(
-  TrOsTecnicosStruct? trOsTecnicos, [
-  bool forFieldValue = false,
-]) {
-  if (trOsTecnicos == null) {
-    return {};
-  }
-  final firestoreData = mapToFirestore(trOsTecnicos.toMap());
-
-  // Add any Firestore field values
-  trOsTecnicos.firestoreUtilData.fieldValues
-      .forEach((k, v) => firestoreData[k] = v);
-
-  return forFieldValue ? mergeNestedFields(firestoreData) : firestoreData;
-}
-
-List<Map<String, dynamic>> getTrOsTecnicosListFirestoreData(
-  List<TrOsTecnicosStruct>? trOsTecnicoss,
-) =>
-    trOsTecnicoss?.map((e) => getTrOsTecnicosFirestoreData(e, true)).toList() ??
-    [];
