@@ -13,6 +13,8 @@ import 'package:provider/provider.dart';
 class LoginModel extends FlutterFlowModel<LoginWidget> {
   ///  State fields for stateful widgets in this page.
 
+  // Stores action output result for [Backend Call - API (Logins)] action in backgroundImage widget.
+  ApiCallResponse? loginStatusquandoEntra;
   // State field(s) for emailAddress_Login widget.
   FocusNode? emailAddressLoginFocusNode;
   TextEditingController? emailAddressLoginController;
