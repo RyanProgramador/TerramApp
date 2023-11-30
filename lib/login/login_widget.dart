@@ -37,22 +37,30 @@ class _LoginWidgetState extends State<LoginWidget> {
         return;
       }
       if (!_model.temOuNao!) {
-        await showDialog(
-          context: context,
-          builder: (alertDialogContext) {
-            return AlertDialog(
-              title: Text('Vecê não tem conexão com internet.'),
-              content: Text(
-                  'Você poderá utilizar o aplicativo normalmente, quando a conexão for reestabelecida as informações serão sincronizadas automaticamente.'),
-              actions: [
-                TextButton(
-                  onPressed: () => Navigator.pop(alertDialogContext),
-                  child: Text('Ok'),
-                ),
-              ],
-            );
-          },
-        );
+        var confirmDialogResponse = await showDialog<bool>(
+              context: context,
+              builder: (alertDialogContext) {
+                return AlertDialog(
+                  title: Text('Vecê não tem conexão com internet.'),
+                  content: Text(
+                      'Você poderá utilizar o aplicativo normalmente, quando a conexão for reestabelecida as informações serão sincronizadas automaticamente.'),
+                  actions: [
+                    TextButton(
+                      onPressed: () => Navigator.pop(alertDialogContext, false),
+                      child: Text('Cancelar'),
+                    ),
+                    TextButton(
+                      onPressed: () => Navigator.pop(alertDialogContext, true),
+                      child: Text('Ok'),
+                    ),
+                  ],
+                );
+              },
+            ) ??
+            false;
+        if (!confirmDialogResponse) {
+          return;
+        }
       }
       setState(() {});
 
