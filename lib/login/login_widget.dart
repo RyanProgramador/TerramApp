@@ -3,7 +3,6 @@ import '/flutter_flow/flutter_flow_theme.dart';
 import '/flutter_flow/flutter_flow_util.dart';
 import '/flutter_flow/flutter_flow_widgets.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter/scheduler.dart';
 import 'package:flutter/services.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:google_fonts/google_fonts.dart';
@@ -28,52 +27,6 @@ class _LoginWidgetState extends State<LoginWidget> {
   void initState() {
     super.initState();
     _model = createModel(context, () => LoginModel());
-
-    // On page load action.
-    SchedulerBinding.instance.addPostFrameCallback((_) async {
-      if ((FFAppState().userLogin != null && FFAppState().userLogin != '') &&
-          (FFAppState().psdwLogin != null && FFAppState().psdwLogin != '')) {
-        _model.loginStatusquandoEntra = await ModuloSeguraGroup.loginsCall.call(
-          login: FFAppState().userLogin,
-          senha: FFAppState().psdwLogin,
-          urlapicall: FFAppState().urlapicall,
-        );
-        if (ModuloSeguraGroup.loginsCall.statusLogin(
-          (_model.loginStatusquandoEntra?.jsonBody ?? ''),
-        )) {
-          setState(() {
-            FFAppState().tecID = ModuloSeguraGroup.loginsCall
-                .idLogin(
-                  (_model.loginStatusquandoEntra?.jsonBody ?? ''),
-                )
-                .toString()
-                .toString();
-            FFAppState().tecNome = ModuloSeguraGroup.loginsCall
-                .nomeLogin(
-                  (_model.loginStatusquandoEntra?.jsonBody ?? ''),
-                )
-                .toString();
-          });
-          await Future.delayed(const Duration(milliseconds: 1000));
-
-          context.goNamed(
-            'SelecionarOS',
-            extra: <String, dynamic>{
-              kTransitionInfoKey: TransitionInfo(
-                hasTransition: true,
-                transitionType: PageTransitionType.fade,
-                duration: Duration(milliseconds: 600),
-              ),
-            },
-          );
-        } else {
-          return;
-        }
-      }
-      setState(() {
-        FFAppState().trOsServicos = [];
-      });
-    });
 
     _model.emailAddressLoginController ??= TextEditingController();
     _model.emailAddressLoginFocusNode ??= FocusNode();

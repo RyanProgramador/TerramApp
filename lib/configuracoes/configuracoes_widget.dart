@@ -60,403 +60,299 @@ class _ConfiguracoesWidgetState extends State<ConfiguracoesWidget> {
       ),
       body: SafeArea(
         top: true,
-        child: Padding(
-          padding: EdgeInsetsDirectional.fromSTEB(0.0, 0.0, 0.0, 50.0),
-          child: SingleChildScrollView(
-            child: Column(
-              mainAxisSize: MainAxisSize.max,
-              crossAxisAlignment: CrossAxisAlignment.start,
-              children: [
-                Padding(
-                  padding: EdgeInsetsDirectional.fromSTEB(16.0, 0.0, 0.0, 0.0),
-                  child: Text(
-                    'Configurações',
-                    style: FlutterFlowTheme.of(context).headlineSmall,
-                  ),
-                ),
-                Padding(
-                  padding: EdgeInsetsDirectional.fromSTEB(16.0, 4.0, 0.0, 0.0),
-                  child: Text(
-                    'configurações do aplicativo',
-                    style: FlutterFlowTheme.of(context).labelMedium,
-                  ),
-                ),
-                ListView(
-                  padding: EdgeInsets.zero,
-                  shrinkWrap: true,
-                  scrollDirection: Axis.vertical,
+        child: Container(
+          width: double.infinity,
+          height: double.infinity,
+          decoration: BoxDecoration(),
+          child: Column(
+            mainAxisSize: MainAxisSize.max,
+            children: [
+              Expanded(
+                child: Column(
+                  mainAxisSize: MainAxisSize.min,
+                  crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
                     Padding(
                       padding:
-                          EdgeInsetsDirectional.fromSTEB(0.0, 0.0, 0.0, 1.0),
-                      child: Container(
-                        width: double.infinity,
-                        decoration: BoxDecoration(),
-                        child: Padding(
-                          padding: EdgeInsetsDirectional.fromSTEB(
-                              16.0, 16.0, 16.0, 16.0),
-                          child: Row(
-                            mainAxisSize: MainAxisSize.max,
-                            mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                            children: [
-                              Text(
-                                'Meus serviços',
-                                style: FlutterFlowTheme.of(context).titleLarge,
-                              ),
-                              Icon(
-                                Icons.chevron_right_rounded,
-                                color:
-                                    FlutterFlowTheme.of(context).secondaryText,
-                                size: 24.0,
-                              ),
-                            ],
-                          ),
-                        ),
+                          EdgeInsetsDirectional.fromSTEB(16.0, 0.0, 0.0, 0.0),
+                      child: Text(
+                        'Configurações',
+                        style: FlutterFlowTheme.of(context).headlineSmall,
                       ),
                     ),
                     Padding(
                       padding:
-                          EdgeInsetsDirectional.fromSTEB(0.0, 0.0, 0.0, 1.0),
-                      child: Container(
-                        width: double.infinity,
-                        decoration: BoxDecoration(),
-                        child: Padding(
-                          padding: EdgeInsetsDirectional.fromSTEB(
-                              16.0, 16.0, 16.0, 16.0),
-                          child: Row(
-                            mainAxisSize: MainAxisSize.max,
-                            mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                            children: [
-                              Text(
-                                'Tutorial',
-                                style: FlutterFlowTheme.of(context).titleLarge,
-                              ),
-                              Icon(
-                                Icons.chevron_right_rounded,
-                                color:
-                                    FlutterFlowTheme.of(context).secondaryText,
-                                size: 24.0,
-                              ),
-                            ],
-                          ),
-                        ),
+                          EdgeInsetsDirectional.fromSTEB(16.0, 4.0, 0.0, 0.0),
+                      child: Text(
+                        'configurações do aplicativo',
+                        style: FlutterFlowTheme.of(context).labelMedium,
                       ),
                     ),
-                    Padding(
-                      padding:
-                          EdgeInsetsDirectional.fromSTEB(0.0, 0.0, 0.0, 1.0),
-                      child: Container(
-                        width: double.infinity,
-                        decoration: BoxDecoration(),
-                        child: Padding(
+                    ListView(
+                      padding: EdgeInsets.zero,
+                      shrinkWrap: true,
+                      scrollDirection: Axis.vertical,
+                      children: [
+                        Padding(
                           padding: EdgeInsetsDirectional.fromSTEB(
-                              16.0, 16.0, 16.0, 16.0),
-                          child: Row(
-                            mainAxisSize: MainAxisSize.max,
-                            mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                            children: [
-                              Text(
-                                'Sobre',
-                                style: FlutterFlowTheme.of(context).titleLarge,
-                              ),
-                              Icon(
-                                Icons.chevron_right_rounded,
-                                color:
-                                    FlutterFlowTheme.of(context).secondaryText,
-                                size: 24.0,
-                              ),
-                            ],
-                          ),
-                        ),
-                      ),
-                    ),
-                    Padding(
-                      padding:
-                          EdgeInsetsDirectional.fromSTEB(0.0, 0.0, 0.0, 1.0),
-                      child: Container(
-                        width: double.infinity,
-                        decoration: BoxDecoration(),
-                        child: Padding(
-                          padding: EdgeInsetsDirectional.fromSTEB(
-                              16.0, 16.0, 16.0, 16.0),
-                          child: Row(
-                            mainAxisSize: MainAxisSize.max,
-                            mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                            children: [
-                              Text(
-                                'Ajuda',
-                                style: FlutterFlowTheme.of(context).titleLarge,
-                              ),
-                              Icon(
-                                Icons.chevron_right_rounded,
-                                color:
-                                    FlutterFlowTheme.of(context).secondaryText,
-                                size: 24.0,
-                              ),
-                            ],
-                          ),
-                        ),
-                      ),
-                    ),
-                    Padding(
-                      padding:
-                          EdgeInsetsDirectional.fromSTEB(0.0, 0.0, 0.0, 1.0),
-                      child: Container(
-                        width: double.infinity,
-                        decoration: BoxDecoration(),
-                        child: Padding(
-                          padding: EdgeInsetsDirectional.fromSTEB(
-                              16.0, 16.0, 16.0, 16.0),
-                          child: Row(
-                            mainAxisSize: MainAxisSize.max,
-                            mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                            children: [
-                              Text(
-                                'Política de privacidade',
-                                style: FlutterFlowTheme.of(context).titleLarge,
-                              ),
-                              Icon(
-                                Icons.chevron_right_rounded,
-                                color:
-                                    FlutterFlowTheme.of(context).secondaryText,
-                                size: 24.0,
-                              ),
-                            ],
-                          ),
-                        ),
-                      ),
-                    ),
-                    Padding(
-                      padding:
-                          EdgeInsetsDirectional.fromSTEB(0.0, 0.0, 0.0, 1.0),
-                      child: InkWell(
-                        splashColor: Colors.transparent,
-                        focusColor: Colors.transparent,
-                        hoverColor: Colors.transparent,
-                        highlightColor: Colors.transparent,
-                        onTap: () async {
-                          var _shouldSetState = false;
-                          _model.apiResultxxd = await SincronizarGroup
-                              .trSincronizaCelularComBDCall
-                              .call(
-                            urlapicall: FFAppState().urlapicall,
-                            lista: functions.jsonListToStr(FFAppState()
-                                .trOsDeslocamentosJsonFinalizados
-                                .toList()),
-                            listaGeo: functions.jsonListToStr(
-                                FFAppState().trDeslocGeo2.toList()),
-                          );
-                          _shouldSetState = true;
-                          if (SincronizarGroup.trSincronizaCelularComBDCall
-                              .statusSincComCelular(
-                            (_model.apiResultxxd?.jsonBody ?? ''),
-                          )) {
-                            await showDialog(
-                              context: context,
-                              builder: (alertDialogContext) {
-                                return AlertDialog(
-                                  title: Text(SincronizarGroup
-                                      .trSincronizaCelularComBDCall
-                                      .retornoSincComCelular(
-                                        (_model.apiResultxxd?.jsonBody ?? ''),
-                                      )
-                                      .toString()),
-                                  actions: [
-                                    TextButton(
-                                      onPressed: () =>
-                                          Navigator.pop(alertDialogContext),
-                                      child: Text('Ok'),
-                                    ),
-                                  ],
-                                );
-                              },
-                            );
-                            FFAppState().update(() {
-                              FFAppState().trOsDeslocamentosJsonFinalizados =
-                                  [];
-                              FFAppState().trDeslocamentoGeo = [];
-                              FFAppState().trDeslocGeo2 = [];
-                            });
-                          } else {
-                            await showDialog(
-                              context: context,
-                              builder: (alertDialogContext) {
-                                return AlertDialog(
-                                  title: Text('Ops!'),
-                                  content:
-                                      Text('Um erro inesperado aconteceu!'),
-                                  actions: [
-                                    TextButton(
-                                      onPressed: () =>
-                                          Navigator.pop(alertDialogContext),
-                                      child: Text('Ok'),
-                                    ),
-                                  ],
-                                );
-                              },
-                            );
-                            if (_shouldSetState) setState(() {});
-                            return;
-                          }
-
-                          if (_shouldSetState) setState(() {});
-                        },
-                        child: Container(
-                          width: double.infinity,
-                          decoration: BoxDecoration(),
-                          child: Padding(
-                            padding: EdgeInsetsDirectional.fromSTEB(
-                                16.0, 16.0, 16.0, 16.0),
-                            child: Row(
-                              mainAxisSize: MainAxisSize.max,
-                              mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                              children: [
-                                Text(
-                                  'Sincronizar',
-                                  style:
-                                      FlutterFlowTheme.of(context).titleLarge,
-                                ),
-                                Icon(
-                                  Icons.chevron_right_rounded,
-                                  color: FlutterFlowTheme.of(context)
-                                      .secondaryText,
-                                  size: 24.0,
-                                ),
-                              ],
-                            ),
-                          ),
-                        ),
-                      ),
-                    ),
-                    Padding(
-                      padding:
-                          EdgeInsetsDirectional.fromSTEB(0.0, 0.0, 0.0, 1.0),
-                      child: Container(
-                        width: double.infinity,
-                        decoration: BoxDecoration(),
-                        child: Padding(
-                          padding: EdgeInsetsDirectional.fromSTEB(
-                              16.0, 16.0, 16.0, 16.0),
+                              0.0, 0.0, 0.0, 1.0),
                           child: InkWell(
                             splashColor: Colors.transparent,
                             focusColor: Colors.transparent,
                             hoverColor: Colors.transparent,
                             highlightColor: Colors.transparent,
                             onTap: () async {
-                              context.pushNamed('MultiplePlacesPickerCopy');
+                              var _shouldSetState = false;
+                              _model.apiResultxxd = await SincronizarGroup
+                                  .trSincronizaCelularComBDCall
+                                  .call(
+                                urlapicall: FFAppState().urlapicall,
+                                lista: functions.jsonListToStr(FFAppState()
+                                    .trOsDeslocamentosJsonFinalizados
+                                    .toList()),
+                                listaGeo: functions.jsonListToStr(
+                                    FFAppState().trDeslocGeo2.toList()),
+                              );
+                              _shouldSetState = true;
+                              if (SincronizarGroup.trSincronizaCelularComBDCall
+                                  .statusSincComCelular(
+                                (_model.apiResultxxd?.jsonBody ?? ''),
+                              )) {
+                                await showDialog(
+                                  context: context,
+                                  builder: (alertDialogContext) {
+                                    return AlertDialog(
+                                      title: Text(SincronizarGroup
+                                          .trSincronizaCelularComBDCall
+                                          .retornoSincComCelular(
+                                            (_model.apiResultxxd?.jsonBody ??
+                                                ''),
+                                          )
+                                          .toString()),
+                                      actions: [
+                                        TextButton(
+                                          onPressed: () =>
+                                              Navigator.pop(alertDialogContext),
+                                          child: Text('Ok'),
+                                        ),
+                                      ],
+                                    );
+                                  },
+                                );
+                                FFAppState().update(() {
+                                  FFAppState()
+                                      .trOsDeslocamentosJsonFinalizados = [];
+                                  FFAppState().trDeslocamentoGeo = [];
+                                  FFAppState().trDeslocGeo2 = [];
+                                });
+                              } else {
+                                await showDialog(
+                                  context: context,
+                                  builder: (alertDialogContext) {
+                                    return AlertDialog(
+                                      title: Text('Ops!'),
+                                      content:
+                                          Text('Um erro inesperado aconteceu!'),
+                                      actions: [
+                                        TextButton(
+                                          onPressed: () =>
+                                              Navigator.pop(alertDialogContext),
+                                          child: Text('Ok'),
+                                        ),
+                                      ],
+                                    );
+                                  },
+                                );
+                                if (_shouldSetState) setState(() {});
+                                return;
+                              }
+
+                              if (_shouldSetState) setState(() {});
                             },
-                            child: Row(
-                              mainAxisSize: MainAxisSize.max,
-                              mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                              children: [
-                                Text(
-                                  'Desenvolvedores',
-                                  style:
-                                      FlutterFlowTheme.of(context).titleLarge,
+                            child: Container(
+                              width: double.infinity,
+                              decoration: BoxDecoration(),
+                              child: Padding(
+                                padding: EdgeInsetsDirectional.fromSTEB(
+                                    16.0, 16.0, 16.0, 16.0),
+                                child: Row(
+                                  mainAxisSize: MainAxisSize.max,
+                                  mainAxisAlignment:
+                                      MainAxisAlignment.spaceBetween,
+                                  children: [
+                                    Text(
+                                      'Sincronizar',
+                                      style: FlutterFlowTheme.of(context)
+                                          .titleLarge,
+                                    ),
+                                    Icon(
+                                      Icons.chevron_right_rounded,
+                                      color: FlutterFlowTheme.of(context)
+                                          .secondaryText,
+                                      size: 24.0,
+                                    ),
+                                  ],
                                 ),
-                                Icon(
-                                  Icons.chevron_right_rounded,
-                                  color: FlutterFlowTheme.of(context)
-                                      .secondaryText,
-                                  size: 24.0,
-                                ),
-                              ],
+                              ),
                             ),
+                          ),
+                        ),
+                        if (FFAppState().Desenvolvimento)
+                          Padding(
+                            padding: EdgeInsetsDirectional.fromSTEB(
+                                0.0, 0.0, 0.0, 1.0),
+                            child: Container(
+                              width: double.infinity,
+                              decoration: BoxDecoration(),
+                              child: Padding(
+                                padding: EdgeInsetsDirectional.fromSTEB(
+                                    16.0, 16.0, 16.0, 16.0),
+                                child: InkWell(
+                                  splashColor: Colors.transparent,
+                                  focusColor: Colors.transparent,
+                                  hoverColor: Colors.transparent,
+                                  highlightColor: Colors.transparent,
+                                  onTap: () async {
+                                    context
+                                        .pushNamed('MultiplePlacesPickerCopy');
+                                  },
+                                  child: Row(
+                                    mainAxisSize: MainAxisSize.max,
+                                    mainAxisAlignment:
+                                        MainAxisAlignment.spaceBetween,
+                                    children: [
+                                      Text(
+                                        'Desenvolvedores',
+                                        style: FlutterFlowTheme.of(context)
+                                            .titleLarge,
+                                      ),
+                                      Icon(
+                                        Icons.chevron_right_rounded,
+                                        color: FlutterFlowTheme.of(context)
+                                            .secondaryText,
+                                        size: 24.0,
+                                      ),
+                                    ],
+                                  ),
+                                ),
+                              ),
+                            ),
+                          ),
+                      ],
+                    ),
+                    Align(
+                      alignment: AlignmentDirectional(-1.00, 1.00),
+                      child: Padding(
+                        padding:
+                            EdgeInsetsDirectional.fromSTEB(16.0, 0.0, 0.0, 0.0),
+                        child: Container(
+                          decoration: BoxDecoration(),
+                          alignment: AlignmentDirectional(-1.00, 1.00),
+                          child: Column(
+                            mainAxisSize: MainAxisSize.max,
+                            children: [
+                              Text(
+                                'Terram',
+                                style: FlutterFlowTheme.of(context)
+                                    .titleLarge
+                                    .override(
+                                      fontFamily: 'Outfit',
+                                      fontSize: 18.0,
+                                    ),
+                              ),
+                              Padding(
+                                padding: EdgeInsetsDirectional.fromSTEB(
+                                    0.0, 4.0, 0.0, 0.0),
+                                child: Text(
+                                  'v1.2.1',
+                                  style: FlutterFlowTheme.of(context)
+                                      .labelMedium
+                                      .override(
+                                        fontFamily: 'Readex Pro',
+                                        fontSize: 12.0,
+                                        fontWeight: FontWeight.w200,
+                                      ),
+                                ),
+                              ),
+                            ],
                           ),
                         ),
                       ),
                     ),
-                  ],
+                  ].addToEnd(SizedBox(height: 64.0)),
                 ),
-                Opacity(
-                  opacity: 0.0,
-                  child: Align(
-                    alignment: AlignmentDirectional(-1.00, 0.00),
+              ),
+              Expanded(
+                child: Align(
+                  alignment: AlignmentDirectional(0.00, 0.00),
+                  child: Container(
+                    decoration: BoxDecoration(),
+                    alignment: AlignmentDirectional(0.00, 0.00),
                     child: Padding(
                       padding:
-                          EdgeInsetsDirectional.fromSTEB(16.0, 4.0, 0.0, 8.0),
-                      child: Text(
-                        'Um produto Conceitto',
-                        style: FlutterFlowTheme.of(context).labelMedium,
-                      ),
-                    ),
-                  ),
-                ),
-                Padding(
-                  padding: EdgeInsetsDirectional.fromSTEB(16.0, 0.0, 0.0, 0.0),
-                  child: Text(
-                    'Terram',
-                    style: FlutterFlowTheme.of(context).titleLarge,
-                  ),
-                ),
-                Padding(
-                  padding: EdgeInsetsDirectional.fromSTEB(16.0, 4.0, 0.0, 0.0),
-                  child: Text(
-                    'v0.1.1',
-                    style: FlutterFlowTheme.of(context).labelMedium,
-                  ),
-                ),
-                Align(
-                  alignment: AlignmentDirectional(0.00, 0.00),
-                  child: Padding(
-                    padding:
-                        EdgeInsetsDirectional.fromSTEB(16.0, 12.0, 0.0, 0.0),
-                    child: FFButtonWidget(
-                      onPressed: () async {
-                        FFAppState().update(() {
-                          FFAppState().tecID = '';
-                          FFAppState().tecNome = '';
-                          FFAppState().userLogin = '03866856067';
-                          FFAppState().psdwLogin = '12345';
-                        });
+                          EdgeInsetsDirectional.fromSTEB(0.0, 12.0, 0.0, 0.0),
+                      child: FFButtonWidget(
+                        onPressed: () async {
+                          FFAppState().update(() {
+                            FFAppState().tecID = '';
+                            FFAppState().tecNome = '';
+                            FFAppState().userLogin = '03866856067';
+                            FFAppState().psdwLogin = '12345';
+                          });
 
-                        context.pushNamed('Login');
+                          context.pushNamed('Login');
 
-                        setState(() {
-                          FFAppState().trOrdemServicos = [];
-                          FFAppState().trFazendas = [];
-                          FFAppState().trOsTecnicos = [];
-                          FFAppState().trOsServicos = [];
-                          FFAppState().trServicos = [];
-                          FFAppState().trTecnicos = [];
-                          FFAppState().trOsDeslocamentos = [];
-                          FFAppState().trOsServicoEmAndamento = null;
-                          FFAppState().trDesloacamentoIniciado = false;
-                          FFAppState().DeslocamentoPausado = false;
-                          FFAppState().trDeslocamentoFinalizado = false;
-                          FFAppState().servicosFinalizadosComSucesso = [];
-                          FFAppState().MotivoPausaDeslocamento = [];
-                          FFAppState().strDeslocamentosJson = '';
-                          FFAppState().trOsDeslocamentoListaFinalizados = [];
-                        });
-                      },
-                      text: 'Deslogar',
-                      options: FFButtonOptions(
-                        height: 40.0,
-                        padding: EdgeInsetsDirectional.fromSTEB(
-                            24.0, 0.0, 24.0, 0.0),
-                        iconPadding:
-                            EdgeInsetsDirectional.fromSTEB(0.0, 0.0, 0.0, 0.0),
-                        color: FlutterFlowTheme.of(context).error,
-                        textStyle: FlutterFlowTheme.of(context)
-                            .labelMedium
-                            .override(
-                              fontFamily: 'Readex Pro',
-                              color:
-                                  FlutterFlowTheme.of(context).primaryBtnText,
-                            ),
-                        elevation: 0.0,
-                        borderSide: BorderSide(
-                          color: FlutterFlowTheme.of(context).alternate,
-                          width: 1.0,
+                          setState(() {
+                            FFAppState().trOrdemServicos = [];
+                            FFAppState().trFazendas = [];
+                            FFAppState().trOsTecnicos = [];
+                            FFAppState().trOsServicos = [];
+                            FFAppState().trServicos = [];
+                            FFAppState().trTecnicos = [];
+                            FFAppState().trOsDeslocamentos = [];
+                            FFAppState().trOsServicoEmAndamento = null;
+                            FFAppState().trDesloacamentoIniciado = false;
+                            FFAppState().DeslocamentoPausado = false;
+                            FFAppState().trDeslocamentoFinalizado = false;
+                            FFAppState().servicosFinalizadosComSucesso = [];
+                            FFAppState().MotivoPausaDeslocamento = [];
+                            FFAppState().strDeslocamentosJson = '';
+                            FFAppState().trOsDeslocamentoListaFinalizados = [];
+                          });
+                        },
+                        text: 'Deslogar',
+                        icon: Icon(
+                          Icons.logout,
+                          size: 15.0,
                         ),
-                        borderRadius: BorderRadius.circular(50.0),
+                        options: FFButtonOptions(
+                          width: 160.0,
+                          height: 52.0,
+                          padding: EdgeInsetsDirectional.fromSTEB(
+                              24.0, 0.0, 24.0, 0.0),
+                          iconPadding: EdgeInsetsDirectional.fromSTEB(
+                              0.0, 0.0, 0.0, 0.0),
+                          color: FlutterFlowTheme.of(context).error,
+                          textStyle: FlutterFlowTheme.of(context)
+                              .labelMedium
+                              .override(
+                                fontFamily: 'Readex Pro',
+                                color:
+                                    FlutterFlowTheme.of(context).primaryBtnText,
+                              ),
+                          elevation: 0.0,
+                          borderSide: BorderSide(
+                            color: FlutterFlowTheme.of(context).alternate,
+                            width: 1.0,
+                          ),
+                          borderRadius: BorderRadius.circular(50.0),
+                        ),
                       ),
                     ),
                   ),
                 ),
-              ].addToEnd(SizedBox(height: 64.0)),
-            ),
+              ),
+            ],
           ),
         ),
       ),

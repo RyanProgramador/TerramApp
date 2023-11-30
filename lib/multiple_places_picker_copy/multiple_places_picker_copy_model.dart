@@ -47,6 +47,11 @@ class MultiplePlacesPickerCopyModel
   FlutterFlowTimerController timer1Controller =
       FlutterFlowTimerController(StopWatchTimer(mode: StopWatchMode.countDown));
 
+  // State field(s) for TextField widget.
+  FocusNode? textFieldFocusNode;
+  TextEditingController? textController;
+  String? Function(BuildContext, String?)? textControllerValidator;
+
   /// Initialization and disposal methods.
 
   void initState(BuildContext context) {}
@@ -54,6 +59,8 @@ class MultiplePlacesPickerCopyModel
   void dispose() {
     unfocusNode.dispose();
     timer1Controller.dispose();
+    textFieldFocusNode?.dispose();
+    textController?.dispose();
   }
 
   /// Action blocks are added here.

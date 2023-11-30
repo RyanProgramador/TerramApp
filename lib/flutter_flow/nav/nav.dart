@@ -41,10 +41,14 @@ GoRouter createRouter(AppStateNotifier appStateNotifier) => GoRouter(
       errorBuilder: (context, state) => appStateNotifier.showSplashImage
           ? Builder(
               builder: (context) => Container(
-                color: Colors.transparent,
-                child: Image.asset(
-                  'assets/images/splash.png',
-                  fit: BoxFit.cover,
+                color: FlutterFlowTheme.of(context).primary,
+                child: Center(
+                  child: Image.asset(
+                    'assets/images/splash.png',
+                    width: double.infinity,
+                    height: double.infinity,
+                    fit: BoxFit.cover,
+                  ),
                 ),
               ),
             )
@@ -56,10 +60,14 @@ GoRouter createRouter(AppStateNotifier appStateNotifier) => GoRouter(
           builder: (context, _) => appStateNotifier.showSplashImage
               ? Builder(
                   builder: (context) => Container(
-                    color: Colors.transparent,
-                    child: Image.asset(
-                      'assets/images/splash.png',
-                      fit: BoxFit.cover,
+                    color: FlutterFlowTheme.of(context).primary,
+                    child: Center(
+                      child: Image.asset(
+                        'assets/images/splash.png',
+                        width: double.infinity,
+                        height: double.infinity,
+                        fit: BoxFit.cover,
+                      ),
                     ),
                   ),
                 )

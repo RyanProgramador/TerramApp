@@ -42,6 +42,17 @@ class FFAppState extends ChangeNotifier {
           _locaisPercorridos2;
     });
     _safeInit(() {
+      _trEmpresas = prefs.getStringList('ff_trEmpresas')?.map((x) {
+            try {
+              return jsonDecode(x);
+            } catch (e) {
+              print("Can't decode persisted json. Error: $e.");
+              return {};
+            }
+          }).toList() ??
+          _trEmpresas;
+    });
+    _safeInit(() {
       _trOrdemServicos = prefs.getStringList('ff_trOrdemServicos')?.map((x) {
             try {
               return jsonDecode(x);
@@ -261,6 +272,10 @@ class FFAppState extends ChangeNotifier {
         }
       }
     });
+    _safeInit(() {
+      _Desenvolvimento =
+          prefs.getBool('ff_Desenvolvimento') ?? _Desenvolvimento;
+    });
   }
 
   void update(VoidCallback callback) {
@@ -369,6 +384,47 @@ class FFAppState extends ChangeNotifier {
     _locaisPercorridos2.insert(_index, _value);
     prefs.setStringList('ff_locaisPercorridos2',
         _locaisPercorridos2.map((x) => x.serialize()).toList());
+  }
+
+  List<dynamic> _trEmpresas = [];
+  List<dynamic> get trEmpresas => _trEmpresas;
+  set trEmpresas(List<dynamic> _value) {
+    _trEmpresas = _value;
+    prefs.setStringList(
+        'ff_trEmpresas', _value.map((x) => jsonEncode(x)).toList());
+  }
+
+  void addToTrEmpresas(dynamic _value) {
+    _trEmpresas.add(_value);
+    prefs.setStringList(
+        'ff_trEmpresas', _trEmpresas.map((x) => jsonEncode(x)).toList());
+  }
+
+  void removeFromTrEmpresas(dynamic _value) {
+    _trEmpresas.remove(_value);
+    prefs.setStringList(
+        'ff_trEmpresas', _trEmpresas.map((x) => jsonEncode(x)).toList());
+  }
+
+  void removeAtIndexFromTrEmpresas(int _index) {
+    _trEmpresas.removeAt(_index);
+    prefs.setStringList(
+        'ff_trEmpresas', _trEmpresas.map((x) => jsonEncode(x)).toList());
+  }
+
+  void updateTrEmpresasAtIndex(
+    int _index,
+    dynamic Function(dynamic) updateFn,
+  ) {
+    _trEmpresas[_index] = updateFn(_trEmpresas[_index]);
+    prefs.setStringList(
+        'ff_trEmpresas', _trEmpresas.map((x) => jsonEncode(x)).toList());
+  }
+
+  void insertAtIndexInTrEmpresas(int _index, dynamic _value) {
+    _trEmpresas.insert(_index, _value);
+    prefs.setStringList(
+        'ff_trEmpresas', _trEmpresas.map((x) => jsonEncode(x)).toList());
   }
 
   List<dynamic> _trOrdemServicos = [];
@@ -1079,6 +1135,13 @@ class FFAppState extends ChangeNotifier {
   set trOsDeslocamentoJsonAtual(dynamic _value) {
     _trOsDeslocamentoJsonAtual = _value;
     prefs.setString('ff_trOsDeslocamentoJsonAtual', jsonEncode(_value));
+  }
+
+  bool _Desenvolvimento = true;
+  bool get Desenvolvimento => _Desenvolvimento;
+  set Desenvolvimento(bool _value) {
+    _Desenvolvimento = _value;
+    prefs.setBool('ff_Desenvolvimento', _value);
   }
 }
 

@@ -1,6 +1,7 @@
 import '/backend/api_requests/api_calls.dart';
 import '/components/iniciar_deslocamento_widget.dart';
 import '/components/loading_comp_widget.dart';
+import '/components/pesquisa_avanada_widget.dart';
 import '/flutter_flow/flutter_flow_animations.dart';
 import '/flutter_flow/flutter_flow_icon_button.dart';
 import '/flutter_flow/flutter_flow_theme.dart';
@@ -36,6 +37,8 @@ class SelecionarOSModel extends FlutterFlowModel<SelecionarOSWidget> {
   ApiCallResponse? trOsServicosSinc;
   // Stores action output result for [Backend Call - API (trTecnicos)] action in SelecionarOS widget.
   ApiCallResponse? trTecnicosSinc;
+  // Stores action output result for [Backend Call - API (trEmpresas)] action in SelecionarOS widget.
+  ApiCallResponse? trEmpresas;
   // State field(s) for searchBar widget.
   FocusNode? searchBarFocusNode;
   TextEditingController? searchBarController;

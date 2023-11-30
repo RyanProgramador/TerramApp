@@ -1,6 +1,7 @@
 import '/backend/api_requests/api_calls.dart';
 import '/components/iniciar_deslocamento_widget.dart';
 import '/components/loading_comp_widget.dart';
+import '/components/pesquisa_avanada_widget.dart';
 import '/flutter_flow/flutter_flow_animations.dart';
 import '/flutter_flow/flutter_flow_icon_button.dart';
 import '/flutter_flow/flutter_flow_theme.dart';
@@ -106,6 +107,9 @@ class _SelecionarOSWidgetState extends State<SelecionarOSWidget>
       _model.trTecnicosSinc = await SincronizarGroup.trTecnicosCall.call(
         urlapicall: FFAppState().urlapicall,
       );
+      _model.trEmpresas = await SincronizarGroup.trEmpresasCall.call(
+        urlapicall: FFAppState().urlapicall,
+      );
       if ((_model.trTecnicosSinc?.succeeded ?? true) &&
           (_model.trOsServicosSinc?.succeeded ?? true) &&
           (_model.trServicosSinc?.succeeded ?? true) &&
@@ -149,6 +153,12 @@ class _SelecionarOSWidgetState extends State<SelecionarOSWidget>
               )!
               .toList()
               .cast<dynamic>();
+          FFAppState().trEmpresas = SincronizarGroup.trEmpresasCall
+              .dadosTrEmpresas(
+                (_model.trEmpresas?.jsonBody ?? ''),
+              )!
+              .toList()
+              .cast<dynamic>();
         });
       } else {
         await showDialog(
@@ -171,6 +181,10 @@ class _SelecionarOSWidgetState extends State<SelecionarOSWidget>
 
     _model.searchBarController ??= TextEditingController();
     _model.searchBarFocusNode ??= FocusNode();
+
+    WidgetsBinding.instance.addPostFrameCallback((_) => setState(() {
+          _model.searchBarController?.text = '1';
+        }));
   }
 
   @override
@@ -304,8 +318,8 @@ class _SelecionarOSWidgetState extends State<SelecionarOSWidget>
                                                     0.00, 0.00),
                                                 child: Padding(
                                                   padding: EdgeInsetsDirectional
-                                                      .fromSTEB(16.0, 12.0,
-                                                          16.0, 0.0),
+                                                      .fromSTEB(
+                                                          16.0, 12.0, 8.0, 0.0),
                                                   child: TextFormField(
                                                     controller: _model
                                                         .searchBarController,
@@ -428,6 +442,67 @@ class _SelecionarOSWidgetState extends State<SelecionarOSWidget>
                                             ],
                                           ),
                                         ),
+                                      ),
+                                    ),
+                                  ),
+                                  Padding(
+                                    padding: EdgeInsetsDirectional.fromSTEB(
+                                        8.0, 12.0, 16.0, 0.0),
+                                    child: FFButtonWidget(
+                                      onPressed: () async {
+                                        await showModalBottomSheet(
+                                          isScrollControlled: true,
+                                          backgroundColor: Colors.transparent,
+                                          enableDrag: false,
+                                          context: context,
+                                          builder: (context) {
+                                            return GestureDetector(
+                                              onTap: () => _model.unfocusNode
+                                                      .canRequestFocus
+                                                  ? FocusScope.of(context)
+                                                      .requestFocus(
+                                                          _model.unfocusNode)
+                                                  : FocusScope.of(context)
+                                                      .unfocus(),
+                                              child: Padding(
+                                                padding:
+                                                    MediaQuery.viewInsetsOf(
+                                                        context),
+                                                child: PesquisaAvanadaWidget(),
+                                              ),
+                                            );
+                                          },
+                                        ).then((value) => safeSetState(() {}));
+                                      },
+                                      text: '',
+                                      icon: Icon(
+                                        Icons.filter_list,
+                                        size: 32.0,
+                                      ),
+                                      options: FFButtonOptions(
+                                        width: 80.0,
+                                        height: 58.0,
+                                        padding: EdgeInsetsDirectional.fromSTEB(
+                                            24.0, 0.0, 24.0, 0.0),
+                                        iconPadding:
+                                            EdgeInsetsDirectional.fromSTEB(
+                                                0.0, 0.0, 0.0, 0.0),
+                                        color: FlutterFlowTheme.of(context)
+                                            .primary,
+                                        textStyle: FlutterFlowTheme.of(context)
+                                            .titleSmall
+                                            .override(
+                                              fontFamily: 'Readex Pro',
+                                              color: Colors.white,
+                                            ),
+                                        elevation: 3.0,
+                                        borderSide: BorderSide(
+                                          color: FlutterFlowTheme.of(context)
+                                              .success,
+                                          width: 2.0,
+                                        ),
+                                        borderRadius:
+                                            BorderRadius.circular(8.0),
                                       ),
                                     ),
                                   ),
@@ -1067,7 +1142,7 @@ class _SelecionarOSWidgetState extends State<SelecionarOSWidget>
                                                         child: Icon(
                                                           Icons.task_alt,
                                                           color:
-                                                              Color(0xFF00AD75),
+                                                              Color(0xFF249677),
                                                           size: 34.0,
                                                         ),
                                                       ),
