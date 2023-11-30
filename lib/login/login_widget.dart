@@ -2,6 +2,7 @@ import '/backend/api_requests/api_calls.dart';
 import '/flutter_flow/flutter_flow_theme.dart';
 import '/flutter_flow/flutter_flow_util.dart';
 import '/flutter_flow/flutter_flow_widgets.dart';
+import '/custom_code/actions/index.dart' as actions;
 import 'package:flutter/material.dart';
 import 'package:flutter/scheduler.dart';
 import 'package:flutter/services.dart';
@@ -31,29 +32,40 @@ class _LoginWidgetState extends State<LoginWidget> {
 
     // On page load action.
     SchedulerBinding.instance.addPostFrameCallback((_) async {
-      if (FFAppState().psdwLogin != null && FFAppState().psdwLogin != '') {
-        setState(() {
-          FFAppState().userLogin = _model.emailAddressLoginController.text;
-          FFAppState().psdwLogin = _model.passwordLoginController.text;
-        });
-
-        context.goNamed(
-          'SelecionarOS',
-          extra: <String, dynamic>{
-            kTransitionInfoKey: TransitionInfo(
-              hasTransition: true,
-              transitionType: PageTransitionType.fade,
-              duration: Duration(milliseconds: 600),
-            ),
-          },
-        );
-      } else {
+      _model.temOuNao = await actions.temInternet();
+      if (!(FFAppState().psdwLogin != null && FFAppState().psdwLogin != '')) {
         return;
       }
+      if (!_model.temOuNao!) {
+        await showDialog(
+          context: context,
+          builder: (alertDialogContext) {
+            return AlertDialog(
+              title: Text('Vecê não tem conexão com internet.'),
+              content: Text(
+                  'Você poderá utilizar o aplicativo normalmente, quando a conexão for reestabelecida as informações serão sincronizadas automaticamente.'),
+              actions: [
+                TextButton(
+                  onPressed: () => Navigator.pop(alertDialogContext),
+                  child: Text('Ok'),
+                ),
+              ],
+            );
+          },
+        );
+      }
+      setState(() {});
 
-      setState(() {
-        FFAppState().trOsServicos = [];
-      });
+      context.goNamed(
+        'SelecionarOS',
+        extra: <String, dynamic>{
+          kTransitionInfoKey: TransitionInfo(
+            hasTransition: true,
+            transitionType: PageTransitionType.fade,
+            duration: Duration(milliseconds: 600),
+          ),
+        },
+      );
     });
 
     _model.emailAddressLoginController ??= TextEditingController();

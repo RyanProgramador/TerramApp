@@ -2,6 +2,7 @@ import '/backend/api_requests/api_calls.dart';
 import '/flutter_flow/flutter_flow_theme.dart';
 import '/flutter_flow/flutter_flow_util.dart';
 import '/flutter_flow/flutter_flow_widgets.dart';
+import '/custom_code/actions/index.dart' as actions;
 import 'login_widget.dart' show LoginWidget;
 import 'package:flutter/material.dart';
 import 'package:flutter/scheduler.dart';
@@ -14,6 +15,8 @@ import 'package:provider/provider.dart';
 class LoginModel extends FlutterFlowModel<LoginWidget> {
   ///  State fields for stateful widgets in this page.
 
+  // Stores action output result for [Custom Action - temInternet] action in Login widget.
+  bool? temOuNao;
   // State field(s) for emailAddress_Login widget.
   FocusNode? emailAddressLoginFocusNode;
   TextEditingController? emailAddressLoginController;
