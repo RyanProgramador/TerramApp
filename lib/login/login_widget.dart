@@ -31,7 +31,7 @@ class _LoginWidgetState extends State<LoginWidget> {
 
     // On page load action.
     SchedulerBinding.instance.addPostFrameCallback((_) async {
-      if ((FFAppState().userLogin != null && FFAppState().userLogin != '') &&
+      if ((FFAppState().userLogin != null && FFAppState().userLogin != '') ||
           (FFAppState().psdwLogin != null && FFAppState().psdwLogin != '')) {
         _model.loginStatusquandoEntra = await ModuloSeguraGroup.loginsCall.call(
           login: FFAppState().userLogin,
