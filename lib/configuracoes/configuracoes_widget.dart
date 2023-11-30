@@ -77,7 +77,11 @@ class _ConfiguracoesWidgetState extends State<ConfiguracoesWidget> {
                           EdgeInsetsDirectional.fromSTEB(16.0, 0.0, 0.0, 0.0),
                       child: Text(
                         'Configurações',
-                        style: FlutterFlowTheme.of(context).headlineSmall,
+                        style:
+                            FlutterFlowTheme.of(context).headlineSmall.override(
+                                  fontFamily: 'Outfit',
+                                  fontWeight: FontWeight.bold,
+                                ),
                       ),
                     ),
                     Padding(
@@ -85,144 +89,111 @@ class _ConfiguracoesWidgetState extends State<ConfiguracoesWidget> {
                           EdgeInsetsDirectional.fromSTEB(16.0, 4.0, 0.0, 0.0),
                       child: Text(
                         'configurações do aplicativo',
-                        style: FlutterFlowTheme.of(context).labelMedium,
+                        style:
+                            FlutterFlowTheme.of(context).labelMedium.override(
+                                  fontFamily: 'Readex Pro',
+                                  fontWeight: FontWeight.w200,
+                                ),
                       ),
                     ),
-                    ListView(
-                      padding: EdgeInsets.zero,
-                      shrinkWrap: true,
-                      scrollDirection: Axis.vertical,
-                      children: [
-                        Padding(
-                          padding: EdgeInsetsDirectional.fromSTEB(
-                              0.0, 0.0, 0.0, 1.0),
-                          child: InkWell(
-                            splashColor: Colors.transparent,
-                            focusColor: Colors.transparent,
-                            hoverColor: Colors.transparent,
-                            highlightColor: Colors.transparent,
-                            onTap: () async {
-                              var _shouldSetState = false;
-                              _model.apiResultxxd = await SincronizarGroup
-                                  .trSincronizaCelularComBDCall
-                                  .call(
-                                urlapicall: FFAppState().urlapicall,
-                                lista: functions.jsonListToStr(FFAppState()
-                                    .trOsDeslocamentosJsonFinalizados
-                                    .toList()),
-                                listaGeo: functions.jsonListToStr(
-                                    FFAppState().trDeslocGeo2.toList()),
-                              );
-                              _shouldSetState = true;
-                              if (SincronizarGroup.trSincronizaCelularComBDCall
-                                  .statusSincComCelular(
-                                (_model.apiResultxxd?.jsonBody ?? ''),
-                              )) {
-                                await showDialog(
-                                  context: context,
-                                  builder: (alertDialogContext) {
-                                    return AlertDialog(
-                                      title: Text(SincronizarGroup
-                                          .trSincronizaCelularComBDCall
-                                          .retornoSincComCelular(
-                                            (_model.apiResultxxd?.jsonBody ??
-                                                ''),
-                                          )
-                                          .toString()),
-                                      actions: [
-                                        TextButton(
-                                          onPressed: () =>
-                                              Navigator.pop(alertDialogContext),
-                                          child: Text('Ok'),
-                                        ),
-                                      ],
-                                    );
-                                  },
-                                );
-                                FFAppState().update(() {
-                                  FFAppState()
-                                      .trOsDeslocamentosJsonFinalizados = [];
-                                  FFAppState().trDeslocamentoGeo = [];
-                                  FFAppState().trDeslocGeo2 = [];
-                                });
-                              } else {
-                                await showDialog(
-                                  context: context,
-                                  builder: (alertDialogContext) {
-                                    return AlertDialog(
-                                      title: Text('Ops!'),
-                                      content:
-                                          Text('Um erro inesperado aconteceu!'),
-                                      actions: [
-                                        TextButton(
-                                          onPressed: () =>
-                                              Navigator.pop(alertDialogContext),
-                                          child: Text('Ok'),
-                                        ),
-                                      ],
-                                    );
-                                  },
-                                );
-                                if (_shouldSetState) setState(() {});
-                                return;
-                              }
-
-                              if (_shouldSetState) setState(() {});
-                            },
-                            child: Container(
-                              width: double.infinity,
-                              decoration: BoxDecoration(),
-                              child: Padding(
-                                padding: EdgeInsetsDirectional.fromSTEB(
-                                    16.0, 16.0, 16.0, 16.0),
-                                child: Row(
-                                  mainAxisSize: MainAxisSize.max,
-                                  mainAxisAlignment:
-                                      MainAxisAlignment.spaceBetween,
-                                  children: [
-                                    Text(
-                                      'Sincronizar',
-                                      style: FlutterFlowTheme.of(context)
-                                          .titleLarge,
-                                    ),
-                                    Icon(
-                                      Icons.chevron_right_rounded,
-                                      color: FlutterFlowTheme.of(context)
-                                          .secondaryText,
-                                      size: 24.0,
-                                    ),
-                                  ],
-                                ),
-                              ),
-                            ),
-                          ),
-                        ),
-                        if (FFAppState().Desenvolvimento)
+                    Padding(
+                      padding:
+                          EdgeInsetsDirectional.fromSTEB(8.0, 0.0, 0.0, 0.0),
+                      child: ListView(
+                        padding: EdgeInsets.zero,
+                        shrinkWrap: true,
+                        scrollDirection: Axis.vertical,
+                        children: [
                           Padding(
                             padding: EdgeInsetsDirectional.fromSTEB(
                                 0.0, 0.0, 0.0, 1.0),
-                            child: Container(
-                              width: double.infinity,
-                              decoration: BoxDecoration(),
-                              child: Padding(
-                                padding: EdgeInsetsDirectional.fromSTEB(
-                                    16.0, 16.0, 16.0, 16.0),
-                                child: InkWell(
-                                  splashColor: Colors.transparent,
-                                  focusColor: Colors.transparent,
-                                  hoverColor: Colors.transparent,
-                                  highlightColor: Colors.transparent,
-                                  onTap: () async {
-                                    context
-                                        .pushNamed('MultiplePlacesPickerCopy');
-                                  },
+                            child: InkWell(
+                              splashColor: Colors.transparent,
+                              focusColor: Colors.transparent,
+                              hoverColor: Colors.transparent,
+                              highlightColor: Colors.transparent,
+                              onTap: () async {
+                                var _shouldSetState = false;
+                                _model.apiResultxxd = await SincronizarGroup
+                                    .trSincronizaCelularComBDCall
+                                    .call(
+                                  urlapicall: FFAppState().urlapicall,
+                                  lista: functions.jsonListToStr(FFAppState()
+                                      .trOsDeslocamentosJsonFinalizados
+                                      .toList()),
+                                  listaGeo: functions.jsonListToStr(
+                                      FFAppState().trDeslocGeo2.toList()),
+                                );
+                                _shouldSetState = true;
+                                if (SincronizarGroup
+                                    .trSincronizaCelularComBDCall
+                                    .statusSincComCelular(
+                                  (_model.apiResultxxd?.jsonBody ?? ''),
+                                )) {
+                                  await showDialog(
+                                    context: context,
+                                    builder: (alertDialogContext) {
+                                      return AlertDialog(
+                                        title: Text(SincronizarGroup
+                                            .trSincronizaCelularComBDCall
+                                            .retornoSincComCelular(
+                                              (_model.apiResultxxd?.jsonBody ??
+                                                  ''),
+                                            )
+                                            .toString()),
+                                        actions: [
+                                          TextButton(
+                                            onPressed: () => Navigator.pop(
+                                                alertDialogContext),
+                                            child: Text('Ok'),
+                                          ),
+                                        ],
+                                      );
+                                    },
+                                  );
+                                  FFAppState().update(() {
+                                    FFAppState()
+                                        .trOsDeslocamentosJsonFinalizados = [];
+                                    FFAppState().trDeslocamentoGeo = [];
+                                    FFAppState().trDeslocGeo2 = [];
+                                  });
+                                } else {
+                                  await showDialog(
+                                    context: context,
+                                    builder: (alertDialogContext) {
+                                      return AlertDialog(
+                                        title: Text('Ops!'),
+                                        content: Text(
+                                            'Um erro inesperado aconteceu!'),
+                                        actions: [
+                                          TextButton(
+                                            onPressed: () => Navigator.pop(
+                                                alertDialogContext),
+                                            child: Text('Ok'),
+                                          ),
+                                        ],
+                                      );
+                                    },
+                                  );
+                                  if (_shouldSetState) setState(() {});
+                                  return;
+                                }
+
+                                if (_shouldSetState) setState(() {});
+                              },
+                              child: Container(
+                                width: double.infinity,
+                                decoration: BoxDecoration(),
+                                child: Padding(
+                                  padding: EdgeInsetsDirectional.fromSTEB(
+                                      16.0, 16.0, 16.0, 16.0),
                                   child: Row(
                                     mainAxisSize: MainAxisSize.max,
                                     mainAxisAlignment:
                                         MainAxisAlignment.spaceBetween,
                                     children: [
                                       Text(
-                                        'Desenvolvedores',
+                                        'Sincronizar',
                                         style: FlutterFlowTheme.of(context)
                                             .titleLarge,
                                       ),
@@ -238,13 +209,55 @@ class _ConfiguracoesWidgetState extends State<ConfiguracoesWidget> {
                               ),
                             ),
                           ),
-                      ],
+                          if (FFAppState().Desenvolvimento)
+                            Padding(
+                              padding: EdgeInsetsDirectional.fromSTEB(
+                                  0.0, 0.0, 0.0, 1.0),
+                              child: Container(
+                                width: double.infinity,
+                                decoration: BoxDecoration(),
+                                child: Padding(
+                                  padding: EdgeInsetsDirectional.fromSTEB(
+                                      16.0, 16.0, 16.0, 16.0),
+                                  child: InkWell(
+                                    splashColor: Colors.transparent,
+                                    focusColor: Colors.transparent,
+                                    hoverColor: Colors.transparent,
+                                    highlightColor: Colors.transparent,
+                                    onTap: () async {
+                                      context.pushNamed(
+                                          'MultiplePlacesPickerCopy');
+                                    },
+                                    child: Row(
+                                      mainAxisSize: MainAxisSize.max,
+                                      mainAxisAlignment:
+                                          MainAxisAlignment.spaceBetween,
+                                      children: [
+                                        Text(
+                                          'Desenvolvedores',
+                                          style: FlutterFlowTheme.of(context)
+                                              .titleLarge,
+                                        ),
+                                        Icon(
+                                          Icons.chevron_right_rounded,
+                                          color: FlutterFlowTheme.of(context)
+                                              .secondaryText,
+                                          size: 24.0,
+                                        ),
+                                      ],
+                                    ),
+                                  ),
+                                ),
+                              ),
+                            ),
+                        ],
+                      ),
                     ),
                     Align(
                       alignment: AlignmentDirectional(-1.00, 1.00),
                       child: Padding(
                         padding:
-                            EdgeInsetsDirectional.fromSTEB(16.0, 0.0, 0.0, 0.0),
+                            EdgeInsetsDirectional.fromSTEB(22.0, 0.0, 0.0, 0.0),
                         child: Container(
                           decoration: BoxDecoration(),
                           alignment: AlignmentDirectional(-1.00, 1.00),

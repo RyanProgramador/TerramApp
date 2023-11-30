@@ -25,6 +25,8 @@ class SelecionarOSModel extends FlutterFlowModel<SelecionarOSWidget> {
   final unfocusNode = FocusNode();
   // Stores action output result for [Custom Action - checkGps] action in SelecionarOS widget.
   bool? checkgps;
+  // Stores action output result for [Custom Action - temInternet] action in SelecionarOS widget.
+  bool? temInternetOsLoad;
   // Stores action output result for [Backend Call - API (trOsTecnico)] action in SelecionarOS widget.
   ApiCallResponse? trOsTecnicosSincroniza;
   // Stores action output result for [Backend Call - API (ordemDeServico)] action in SelecionarOS widget.
