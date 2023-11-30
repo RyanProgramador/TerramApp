@@ -72,62 +72,64 @@ GoRouter createRouter(AppStateNotifier appStateNotifier) => GoRouter(
                   ),
                 )
               : NavBarPage(),
+          routes: [
+            FFRoute(
+              name: 'MultiplePlacesPicker',
+              path: 'multiplePlacesPicker',
+              builder: (context, params) => MultiplePlacesPickerWidget(),
+            ),
+            FFRoute(
+              name: 'MultiplePlacesPickerCopy',
+              path: 'multiplePlacesPickerCopy',
+              builder: (context, params) => MultiplePlacesPickerCopyWidget(),
+            ),
+            FFRoute(
+              name: 'Login',
+              path: 'login',
+              builder: (context, params) => LoginWidget(),
+            ),
+            FFRoute(
+              name: 'SelecionarOS',
+              path: 'selecionarOS',
+              builder: (context, params) => params.isEmpty
+                  ? NavBarPage(initialPage: 'SelecionarOS')
+                  : SelecionarOSWidget(),
+            ),
+            FFRoute(
+              name: 'Alertas',
+              path: 'alertas',
+              builder: (context, params) => params.isEmpty
+                  ? NavBarPage(initialPage: 'Alertas')
+                  : AlertasWidget(),
+            ),
+            FFRoute(
+              name: 'EsqueceuSenha',
+              path: 'esqueceuSenha',
+              builder: (context, params) => EsqueceuSenhaWidget(),
+            ),
+            FFRoute(
+              name: 'Configuracoes',
+              path: 'configuracoes',
+              builder: (context, params) => params.isEmpty
+                  ? NavBarPage(initialPage: 'Configuracoes')
+                  : ConfiguracoesWidget(),
+            ),
+            FFRoute(
+              name: 'GpsTecToFazenda',
+              path: 'gpsTecToFazenda',
+              builder: (context, params) => GpsTecToFazendaWidget(
+                jsonServico: params.getParam('jsonServico', ParamType.JSON),
+                tecnicoId: params.getParam('tecnicoId', ParamType.String),
+                servicoId: params.getParam('servicoId', ParamType.String),
+                fazNome: params.getParam('fazNome', ParamType.String),
+                latlngFaz: params.getParam('latlngFaz', ParamType.LatLng),
+                retornoAPI: params.getParam('retornoAPI', ParamType.String),
+                retornopolylines:
+                    params.getParam('retornopolylines', ParamType.String),
+              ),
+            )
+          ].map((r) => r.toRoute(appStateNotifier)).toList(),
         ),
-        FFRoute(
-          name: 'MultiplePlacesPicker',
-          path: '/multiplePlacesPicker',
-          builder: (context, params) => MultiplePlacesPickerWidget(),
-        ),
-        FFRoute(
-          name: 'MultiplePlacesPickerCopy',
-          path: '/multiplePlacesPickerCopy',
-          builder: (context, params) => MultiplePlacesPickerCopyWidget(),
-        ),
-        FFRoute(
-          name: 'Login',
-          path: '/login',
-          builder: (context, params) => LoginWidget(),
-        ),
-        FFRoute(
-          name: 'SelecionarOS',
-          path: '/selecionarOS',
-          builder: (context, params) => params.isEmpty
-              ? NavBarPage(initialPage: 'SelecionarOS')
-              : SelecionarOSWidget(),
-        ),
-        FFRoute(
-          name: 'Alertas',
-          path: '/alertas',
-          builder: (context, params) => params.isEmpty
-              ? NavBarPage(initialPage: 'Alertas')
-              : AlertasWidget(),
-        ),
-        FFRoute(
-          name: 'EsqueceuSenha',
-          path: '/esqueceuSenha',
-          builder: (context, params) => EsqueceuSenhaWidget(),
-        ),
-        FFRoute(
-          name: 'Configuracoes',
-          path: '/configuracoes',
-          builder: (context, params) => params.isEmpty
-              ? NavBarPage(initialPage: 'Configuracoes')
-              : ConfiguracoesWidget(),
-        ),
-        FFRoute(
-          name: 'GpsTecToFazenda',
-          path: '/gpsTecToFazenda',
-          builder: (context, params) => GpsTecToFazendaWidget(
-            jsonServico: params.getParam('jsonServico', ParamType.JSON),
-            tecnicoId: params.getParam('tecnicoId', ParamType.String),
-            servicoId: params.getParam('servicoId', ParamType.String),
-            fazNome: params.getParam('fazNome', ParamType.String),
-            latlngFaz: params.getParam('latlngFaz', ParamType.LatLng),
-            retornoAPI: params.getParam('retornoAPI', ParamType.String),
-            retornopolylines:
-                params.getParam('retornopolylines', ParamType.String),
-          ),
-        )
       ].map((r) => r.toRoute(appStateNotifier)).toList(),
     );
 
