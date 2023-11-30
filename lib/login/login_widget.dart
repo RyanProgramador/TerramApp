@@ -31,29 +31,8 @@ class _LoginWidgetState extends State<LoginWidget> {
 
     // On page load action.
     SchedulerBinding.instance.addPostFrameCallback((_) async {
-      _model.loginStatusquandoEntra = await ModuloSeguraGroup.loginsCall.call(
-        login: FFAppState().userLogin,
-        senha: FFAppState().psdwLogin,
-        urlapicall: FFAppState().urlapicall,
-      );
-      if (!(FFAppState().psdwLogin != null && FFAppState().psdwLogin != '')) {
-        return;
-      }
-      if (ModuloSeguraGroup.loginsCall.statusLogin(
-        (_model.loginStatusquandoEntra?.jsonBody ?? ''),
-      )) {
+      if (FFAppState().psdwLogin != null && FFAppState().psdwLogin != '') {
         setState(() {
-          FFAppState().tecID = ModuloSeguraGroup.loginsCall
-              .idLogin(
-                (_model.loginStatusquandoEntra?.jsonBody ?? ''),
-              )
-              .toString()
-              .toString();
-          FFAppState().tecNome = ModuloSeguraGroup.loginsCall
-              .nomeLogin(
-                (_model.loginStatusquandoEntra?.jsonBody ?? ''),
-              )
-              .toString();
           FFAppState().userLogin = _model.emailAddressLoginController.text;
           FFAppState().psdwLogin = _model.passwordLoginController.text;
         });
