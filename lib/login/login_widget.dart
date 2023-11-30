@@ -31,46 +31,44 @@ class _LoginWidgetState extends State<LoginWidget> {
 
     // On page load action.
     SchedulerBinding.instance.addPostFrameCallback((_) async {
-      if ((FFAppState().userLogin != null && FFAppState().userLogin != '') ||
-          (FFAppState().psdwLogin != null && FFAppState().psdwLogin != '')) {
-        _model.loginStatusquandoEntra = await ModuloSeguraGroup.loginsCall.call(
-          login: FFAppState().userLogin,
-          senha: FFAppState().psdwLogin,
-          urlapicall: FFAppState().urlapicall,
-        );
-        if (ModuloSeguraGroup.loginsCall.statusLogin(
-          (_model.loginStatusquandoEntra?.jsonBody ?? ''),
-        )) {
-          setState(() {
-            FFAppState().tecID = ModuloSeguraGroup.loginsCall
-                .idLogin(
-                  (_model.loginStatusquandoEntra?.jsonBody ?? ''),
-                )
-                .toString()
-                .toString();
-            FFAppState().tecNome = ModuloSeguraGroup.loginsCall
-                .nomeLogin(
-                  (_model.loginStatusquandoEntra?.jsonBody ?? ''),
-                )
-                .toString();
-            FFAppState().userLogin = _model.emailAddressLoginController.text;
-            FFAppState().psdwLogin = _model.passwordLoginController.text;
-          });
+      _model.loginStatusquandoEntra = await ModuloSeguraGroup.loginsCall.call(
+        login: FFAppState().userLogin,
+        senha: FFAppState().psdwLogin,
+        urlapicall: FFAppState().urlapicall,
+      );
+      if (ModuloSeguraGroup.loginsCall.statusLogin(
+        (_model.loginStatusquandoEntra?.jsonBody ?? ''),
+      )) {
+        setState(() {
+          FFAppState().tecID = ModuloSeguraGroup.loginsCall
+              .idLogin(
+                (_model.loginStatusquandoEntra?.jsonBody ?? ''),
+              )
+              .toString()
+              .toString();
+          FFAppState().tecNome = ModuloSeguraGroup.loginsCall
+              .nomeLogin(
+                (_model.loginStatusquandoEntra?.jsonBody ?? ''),
+              )
+              .toString();
+          FFAppState().userLogin = _model.emailAddressLoginController.text;
+          FFAppState().psdwLogin = _model.passwordLoginController.text;
+        });
 
-          context.goNamed(
-            'SelecionarOS',
-            extra: <String, dynamic>{
-              kTransitionInfoKey: TransitionInfo(
-                hasTransition: true,
-                transitionType: PageTransitionType.fade,
-                duration: Duration(milliseconds: 600),
-              ),
-            },
-          );
-        } else {
-          return;
-        }
+        context.goNamed(
+          'SelecionarOS',
+          extra: <String, dynamic>{
+            kTransitionInfoKey: TransitionInfo(
+              hasTransition: true,
+              transitionType: PageTransitionType.fade,
+              duration: Duration(milliseconds: 600),
+            ),
+          },
+        );
+      } else {
+        return;
       }
+
       setState(() {
         FFAppState().trOsServicos = [];
       });
