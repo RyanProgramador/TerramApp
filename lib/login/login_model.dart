@@ -4,6 +4,7 @@ import '/flutter_flow/flutter_flow_util.dart';
 import '/flutter_flow/flutter_flow_widgets.dart';
 import 'login_widget.dart' show LoginWidget;
 import 'package:flutter/material.dart';
+import 'package:flutter/scheduler.dart';
 import 'package:flutter/services.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:google_fonts/google_fonts.dart';
@@ -13,7 +14,7 @@ import 'package:provider/provider.dart';
 class LoginModel extends FlutterFlowModel<LoginWidget> {
   ///  State fields for stateful widgets in this page.
 
-  // Stores action output result for [Backend Call - API (Logins)] action in backgroundImage widget.
+  // Stores action output result for [Backend Call - API (Logins)] action in Login widget.
   ApiCallResponse? loginStatusquandoEntra;
   // State field(s) for emailAddress_Login widget.
   FocusNode? emailAddressLoginFocusNode;
