@@ -36,7 +36,7 @@ Future mainAction(
     icon: '@mipmap/ic_launcher',
   );
 
-  await BackgroundLocation.startLocationService(distanceFilter: 2);
+  await BackgroundLocation.startLocationService(distanceFilter: 1);
 
   Timer? timer;
 
@@ -62,30 +62,14 @@ Future mainAction(
   }
 
   Future<void> captureLocation(bool? pausado) async {
-    // Reinicie o timer a cada 5 segundos
+    // Reinicia o timer a cada 5 segundos
     timer = Timer.periodic(Duration(seconds: 8), (Timer t) {
       if (!pausado!) {
-        // Correção: Adicione o ponto de exclamação para indicar que _pausado não pode ser nulo
         updateNotificationWithTimer(5);
 
         BackgroundLocation.getLocationUpdates((location) async {
           final latitude = location.latitude.toString();
           final longitude = location.longitude.toString();
-
-          // Create a Map to represent the data
-          //   Map<String, dynamic> data = {
-          //     "osdes_id": 0,
-          //     "osdes_id_oserv": servicoId,
-          //     "osdes_id_tec": tecnicoId,
-          //     "osdes_ponto_informacao": entradaOuSaida,
-          //     "osdes_latitude": "$latitude",
-          //     "osdes_longitude": "$longitude",
-          //     "osdes_dthr_cad": "",
-          //     "osdes_usu_cad": null,
-          //     "osdes_dthr_alt": null,
-          //     "osdes_usu_alt": null,
-          //     "osdes_tide_id": 1,
-          //   };
 
           Map<String, dynamic> data2 = {
             "osdes_id": osdesId,
@@ -95,10 +79,6 @@ Future mainAction(
 
           // Add the Map to the list
           if (data2 != null && data2.isNotEmpty) {
-            // Correção: Adicione a verificação de que o mapa não está vazio
-            //FFApSate().trOsDeslocamentos.add(data);
-            //FFAppSte().trOsDeslocamentoLatLng.add(data2);
-            //FFAppate().trDeslocamentoGeo.add(data2);
             FFAppState().trDeslocGeo2.add(data2);
           }
         });
