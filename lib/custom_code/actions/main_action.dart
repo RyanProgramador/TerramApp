@@ -73,19 +73,19 @@ Future mainAction(
           final longitude = location.longitude.toString();
 
           // Create a Map to represent the data
-          Map<String, dynamic> data = {
-            "osdes_id": 0,
-            "osdes_id_oserv": servicoId,
-            "osdes_id_tec": tecnicoId,
-            "osdes_ponto_informacao": entradaOuSaida,
-            "osdes_latitude": "$latitude",
-            "osdes_longitude": "$longitude",
-            "osdes_dthr_cad": "",
-            "osdes_usu_cad": null,
-            "osdes_dthr_alt": null,
-            "osdes_usu_alt": null,
-            "osdes_tide_id": 1,
-          };
+          //   Map<String, dynamic> data = {
+          //     "osdes_id": 0,
+          //     "osdes_id_oserv": servicoId,
+          //     "osdes_id_tec": tecnicoId,
+          //     "osdes_ponto_informacao": entradaOuSaida,
+          //     "osdes_latitude": "$latitude",
+          //     "osdes_longitude": "$longitude",
+          //     "osdes_dthr_cad": "",
+          //     "osdes_usu_cad": null,
+          //     "osdes_dthr_alt": null,
+          //     "osdes_usu_alt": null,
+          //     "osdes_tide_id": 1,
+          //   };
 
           Map<String, dynamic> data2 = {
             "osdes_id": osdesId,
@@ -94,7 +94,7 @@ Future mainAction(
           };
 
           // Add the Map to the list
-          if (data != null && data.isNotEmpty) {
+          if (data2 != null && data2.isNotEmpty) {
             // Correção: Adicione a verificação de que o mapa não está vazio
             //FFApSate().trOsDeslocamentos.add(data);
             //FFAppSte().trOsDeslocamentoLatLng.add(data2);

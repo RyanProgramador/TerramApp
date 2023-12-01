@@ -395,17 +395,6 @@ class _GpsTecToFazendaWidgetState extends State<GpsTecToFazendaWidget> {
                                                         r'''$.osdes_id''',
                                                       ).toString())!;
                                             });
-                                            FFAppState().update(() {
-                                              FFAppState()
-                                                  .addToTrOsDeslocamentosJsonFinalizados(
-                                                      FFAppState()
-                                                          .trOsDeslocamentoJsonAtual);
-                                              FFAppState().trDeslocGeo2 =
-                                                  FFAppState()
-                                                      .trDeslocGeo2
-                                                      .toList()
-                                                      .cast<dynamic>();
-                                            });
                                             await Future.delayed(const Duration(
                                                 milliseconds: 1000));
                                             await showDialog(
