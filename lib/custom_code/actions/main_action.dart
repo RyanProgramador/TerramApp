@@ -63,7 +63,7 @@ Future mainAction(
 
   Future<void> captureLocation(bool? pausado) async {
     // Reinicie o timer a cada 5 segundos
-    timer = Timer.periodic(Duration(seconds: 5), (Timer t) {
+    timer = Timer.periodic(Duration(seconds: 8), (Timer t) {
       if (!pausado!) {
         // Correção: Adicione o ponto de exclamação para indicar que _pausado não pode ser nulo
         updateNotificationWithTimer(5);
@@ -96,9 +96,9 @@ Future mainAction(
           // Add the Map to the list
           if (data != null && data.isNotEmpty) {
             // Correção: Adicione a verificação de que o mapa não está vazio
-            //FFAppState().trOsDeslocamentos.add(data);
-            //FFAppState().trOsDeslocamentoLatLng.add(data2);
-            FFAppState().trDeslocamentoGeo.add(data2);
+            //FFApSate().trOsDeslocamentos.add(data);
+            //FFAppSte().trOsDeslocamentoLatLng.add(data2);
+            //FFAppate().trDeslocamentoGeo.add(data2);
             FFAppState().trDeslocGeo2.add(data2);
           }
         });
