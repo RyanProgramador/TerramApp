@@ -38,7 +38,11 @@ Future mainAction(
 
   await BackgroundLocation.startLocationService(distanceFilter: 1);
 
-  Timer? timer;
+  // Guarda o timestamp inicial
+  final DateTime initialTimestamp = DateTime.now();
+  // Calcula o timestamp que indica 8 segundos após o início
+  final DateTime eightSecondsLaterTimestamp =
+      initialTimestamp.add(Duration(seconds: 8));
 
   // Função para atualizar a notificação com o tempo restante
   void updateNotificationWithTimer(int timeRemaining) {
@@ -84,13 +88,14 @@ Future mainAction(
     }
   }
 
-  timer = Timer(Duration(seconds: 8), () async {
-    // Inicie a captura de localização
-    await captureLocation(pausado);
-    // Restart the timer
-    timer?.cancel();
-    timer = Timer.periodic(Duration(seconds: 8), (Timer t) async {
+  Timer? timer;
+  timer = Timer.periodic(Duration(seconds: 1), (Timer t) async {
+    final DateTime currentTimestamp = DateTime.now();
+
+    if (currentTimestamp.isAfter(eightSecondsLaterTimestamp)) {
       await captureLocation(pausado);
-    });
+
+      timer?.cancel();
+    }
   });
 }
