@@ -467,56 +467,69 @@ List<dynamic>? sortListJson(
   List<dynamic>? listaJson,
   String? termoPesquisa,
 ) {
-  if (sortPath == null ||
-      crescente == null ||
-      listaJson == null ||
-      termoPesquisa == null) {
-    return null; // Pode ajustar conforme necessário
+  if (sortPath == null || crescente == null || listaJson == null) {
+    return null;
   }
 
-  // Converte o caminho do sortPath em uma lista de chaves
-  List<String> keys = sortPath.split('.');
+  if (termoPesquisa != null) {
+    List<String> keys = sortPath.split('.');
 
-  // Função para acessar um valor em um mapa aninhado usando uma lista de chaves
-  dynamic getValue(Map<String, dynamic> map, List<String> keys) {
-    dynamic value = map;
-    for (String key in keys) {
-      if (value is Map<String, dynamic> && value.containsKey(key)) {
-        value = value[key];
-      } else {
-        return null;
+    dynamic getValue(Map<String, dynamic> map, List<String> keys) {
+      dynamic value = map;
+      for (String key in keys) {
+        if (value is Map<String, dynamic> && value.containsKey(key)) {
+          value = value[key];
+        } else {
+          return null;
+        }
       }
+      return value;
     }
-    return value;
-  }
 
-  // Converte o termo de pesquisa em uma string
-  String searchTerm = termoPesquisa.toString();
+    String searchTerm = termoPesquisa.toString();
 
-  // Filtra os itens que contêm o termoPesquisa no caminho especificado
-  List<dynamic>? filteredList = listaJson.where((item) {
-    dynamic value = getValue(item, keys);
+    List<dynamic>? filteredList = listaJson.where((item) {
+      dynamic value = getValue(item, keys);
 
-    // Converte o valor para uma string antes de comparar
-    String stringValue = value?.toString() ?? "";
+      String stringValue = value?.toString() ?? "";
 
-    return stringValue.contains(searchTerm);
-  }).toList();
+      return stringValue.contains(searchTerm);
+    }).toList();
 
-  // Ordena a lista filtrada
-  if (crescente) {
-    filteredList?.sort((a, b) {
-      dynamic aValue = getValue(a, keys);
-      dynamic bValue = getValue(b, keys);
+    if (crescente) {
+      filteredList?.sort((a, b) {
+        dynamic aValue = getValue(a, keys);
+        dynamic bValue = getValue(b, keys);
 
-      // Ajuste se os valores forem de tipos diferentes
+        if (aValue is Comparable && bValue is Comparable) {
+          return Comparable.compare(aValue, bValue);
+        } else {
+          return 0;
+        }
+      });
+    }
+
+    return filteredList;
+  } else {
+    listaJson.sort((a, b) {
+      dynamic aValue = a[sortPath];
+      dynamic bValue = b[sortPath];
+
       if (aValue is Comparable && bValue is Comparable) {
-        return Comparable.compare(aValue, bValue);
+        if (aValue is String && bValue is String) {
+          return crescente
+              ? aValue.compareTo(bValue)
+              : bValue.compareTo(aValue);
+        } else {
+          return crescente
+              ? Comparable.compare(aValue, bValue)
+              : Comparable.compare(bValue, aValue);
+        }
       } else {
-        return 0; // Não é possível comparar, mantém a ordem original
+        return 0;
       }
     });
-  }
 
-  return filteredList;
+    return listaJson;
+  }
 }
