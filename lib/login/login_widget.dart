@@ -298,6 +298,101 @@ class _LoginWidgetState extends State<LoginWidget> {
                                               _model.passwordLoginController,
                                           focusNode:
                                               _model.passwordLoginFocusNode,
+                                          onFieldSubmitted: (_) async {
+                                            var _shouldSetState = false;
+                                            _model.loginStatusOnSubmit =
+                                                await ModuloSeguraGroup
+                                                    .loginsCall
+                                                    .call(
+                                              login: _model
+                                                  .emailAddressLoginController
+                                                  .text,
+                                              senha: _model
+                                                  .passwordLoginController.text,
+                                              urlapicall:
+                                                  FFAppState().urlapicall,
+                                            );
+                                            _shouldSetState = true;
+                                            if (ModuloSeguraGroup.loginsCall
+                                                .statusLogin(
+                                              (_model.loginStatusOnSubmit
+                                                      ?.jsonBody ??
+                                                  ''),
+                                            )) {
+                                              FFAppState().update(() {
+                                                FFAppState().tecID =
+                                                    ModuloSeguraGroup.loginsCall
+                                                        .idLogin(
+                                                          (_model.loginStatusOnSubmit
+                                                                  ?.jsonBody ??
+                                                              ''),
+                                                        )
+                                                        .toString();
+                                                FFAppState().tecNome =
+                                                    ModuloSeguraGroup.loginsCall
+                                                        .nomeLogin(
+                                                          (_model.loginStatusOnSubmit
+                                                                  ?.jsonBody ??
+                                                              ''),
+                                                        )
+                                                        .toString();
+                                                FFAppState().userLogin = _model
+                                                    .emailAddressLoginController
+                                                    .text;
+                                                FFAppState().psdwLogin = _model
+                                                    .passwordLoginController
+                                                    .text;
+                                              });
+                                              await Future.delayed(
+                                                  const Duration(
+                                                      milliseconds: 1500));
+
+                                              context.goNamed(
+                                                'SelecionarOS',
+                                                extra: <String, dynamic>{
+                                                  kTransitionInfoKey:
+                                                      TransitionInfo(
+                                                    hasTransition: true,
+                                                    transitionType:
+                                                        PageTransitionType.fade,
+                                                    duration: Duration(
+                                                        milliseconds: 600),
+                                                  ),
+                                                },
+                                              );
+                                            } else {
+                                              await showDialog(
+                                                context: context,
+                                                builder: (alertDialogContext) {
+                                                  return AlertDialog(
+                                                    content: Text(
+                                                        ModuloSeguraGroup
+                                                            .loginsCall
+                                                            .messageLogin(
+                                                              (_model.loginStatus
+                                                                      ?.jsonBody ??
+                                                                  ''),
+                                                            )
+                                                            .toString()),
+                                                    actions: [
+                                                      TextButton(
+                                                        onPressed: () =>
+                                                            Navigator.pop(
+                                                                alertDialogContext),
+                                                        child: Text('Ok'),
+                                                      ),
+                                                    ],
+                                                  );
+                                                },
+                                              );
+                                              if (_shouldSetState)
+                                                setState(() {});
+                                              return;
+                                            }
+
+                                            if (_shouldSetState)
+                                              setState(() {});
+                                          },
                                           obscureText:
                                               !_model.passwordLoginVisibility,
                                           decoration: InputDecoration(

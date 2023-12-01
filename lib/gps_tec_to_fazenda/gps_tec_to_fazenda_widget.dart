@@ -347,51 +347,13 @@ class _GpsTecToFazendaWidgetState extends State<GpsTecToFazendaWidget> {
                                                       },
                                                     ) ??
                                                     false;
-                                            if (confirmDialogResponse) {
-                                              await showDialog(
-                                                context: context,
-                                                builder: (alertDialogContext) {
-                                                  return AlertDialog(
-                                                    title: Text(
-                                                        'Finalizado com sucesso!'),
-                                                    content: Text('3'),
-                                                    actions: [
-                                                      TextButton(
-                                                        onPressed: () =>
-                                                            Navigator.pop(
-                                                                alertDialogContext),
-                                                        child: Text('Ok'),
-                                                      ),
-                                                    ],
-                                                  );
-                                                },
-                                              );
-                                            } else {
+                                            if (!confirmDialogResponse) {
                                               return;
                                             }
-
                                             await actions.stopMainAction(
                                               widget.servicoId,
                                               widget.tecnicoId,
                                               '1',
-                                            );
-                                            await showDialog(
-                                              context: context,
-                                              builder: (alertDialogContext) {
-                                                return AlertDialog(
-                                                  title: Text(
-                                                      'Finalizado com sucesso!'),
-                                                  content: Text('2'),
-                                                  actions: [
-                                                    TextButton(
-                                                      onPressed: () =>
-                                                          Navigator.pop(
-                                                              alertDialogContext),
-                                                      child: Text('Ok'),
-                                                    ),
-                                                  ],
-                                                );
-                                              },
                                             );
                                             await Future.delayed(const Duration(
                                                 milliseconds: 1000));
@@ -452,7 +414,6 @@ class _GpsTecToFazendaWidgetState extends State<GpsTecToFazendaWidget> {
                                                 return AlertDialog(
                                                   title: Text(
                                                       'Finalizado com sucesso!'),
-                                                  content: Text('Fim'),
                                                   actions: [
                                                     TextButton(
                                                       onPressed: () =>
