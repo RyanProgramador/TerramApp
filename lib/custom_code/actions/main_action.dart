@@ -69,7 +69,7 @@ Future mainAction(
     if (!pausado!) {
       updateNotificationWithTimer(5);
 
-      DateTime? previousTimestamp; // Store the previous timestamp
+      DateTime? previousTimestamp;
 
       BackgroundLocation.getLocationUpdates((location) async {
         final latitude = location.latitude.toString();
@@ -77,7 +77,6 @@ Future mainAction(
 
         DateTime currentTimestamp = getCurrentTimestamp;
 
-        // Check if previousTimestamp is null or the time difference is greater than 8 seconds
         if (previousTimestamp == null ||
             currentTimestamp.difference(previousTimestamp!).inSeconds >= 8) {
           Map<String, dynamic> data2 = {
@@ -91,7 +90,6 @@ Future mainAction(
             FFAppState().trDeslocGeo2.add(data2);
           }
 
-          // Update previousTimestamp with the current timestamp
           previousTimestamp = currentTimestamp;
         }
       });
