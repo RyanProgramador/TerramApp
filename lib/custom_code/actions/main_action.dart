@@ -84,9 +84,13 @@ Future mainAction(
     }
   }
 
-// Reinicia o timer a cada 5 segundos
-  timer = Timer.periodic(Duration(seconds: 8), (Timer t) async {
+  timer = Timer(Duration(seconds: 8), () async {
     // Inicie a captura de localização
     await captureLocation(pausado);
+    // Restart the timer
+    timer?.cancel();
+    timer = Timer.periodic(Duration(seconds: 8), (Timer t) async {
+      await captureLocation(pausado);
+    });
   });
 }
