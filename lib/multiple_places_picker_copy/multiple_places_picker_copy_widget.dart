@@ -766,7 +766,8 @@ class _MultiplePlacesPickerCopyWidgetState
                                                   final trDeslocGoItem =
                                                       trDeslocGo[
                                                           trDeslocGoIndex];
-                                                  return Text(
+                                                  return SelectionArea(
+                                                      child: Text(
                                                     trDeslocGoItem.toString(),
                                                     style: FlutterFlowTheme.of(
                                                             context)
@@ -776,7 +777,7 @@ class _MultiplePlacesPickerCopyWidgetState
                                                               'Readex Pro',
                                                           fontSize: 10.0,
                                                         ),
-                                                  );
+                                                  ));
                                                 }),
                                               ),
                                             );

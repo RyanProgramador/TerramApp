@@ -75,7 +75,7 @@ Future mainAction(
             "osdes_id": osdesId,
             "osdes_latitude": "$latitude",
             "osdes_longitude": "$longitude",
-            "osdes_horario": getCurrentTimestamp(),
+            "osdes_horario": getCurrentTimestamp,
           };
 
           // Add the Map to the list
