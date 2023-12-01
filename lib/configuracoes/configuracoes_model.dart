@@ -14,6 +14,8 @@ class ConfiguracoesModel extends FlutterFlowModel<ConfiguracoesWidget> {
 
   // Stores action output result for [Backend Call - API (TrSincronizaCelularComBD)] action in materialList_Item_2 widget.
   ApiCallResponse? apiResultxxd;
+  // State field(s) for Switch widget.
+  bool? switchValue;
 
   /// Initialization and disposal methods.
 

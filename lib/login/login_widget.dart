@@ -131,47 +131,48 @@ class _LoginWidgetState extends State<LoginWidget> {
             alignment: AlignmentDirectional(0.00, -1.00),
             child: ClipRRect(
               child: Container(
-                width: double.infinity,
-                height: double.infinity,
+                width: MediaQuery.sizeOf(context).width * 1.0,
+                height: MediaQuery.sizeOf(context).height * 1.0,
                 decoration: BoxDecoration(
                   color: Color(0x9400736D),
                 ),
                 alignment: AlignmentDirectional(0.00, -1.00),
-                child: Padding(
-                  padding: EdgeInsetsDirectional.fromSTEB(0.0, 70.0, 0.0, 0.0),
-                  child: SingleChildScrollView(
-                    child: Column(
-                      mainAxisSize: MainAxisSize.max,
-                      children: [
-                        Padding(
-                          padding: EdgeInsetsDirectional.fromSTEB(
-                              0.0, 16.0, 0.0, 20.0),
-                          child: Row(
-                            mainAxisSize: MainAxisSize.max,
-                            mainAxisAlignment: MainAxisAlignment.center,
-                            children: [
-                              Align(
-                                alignment: AlignmentDirectional(0.00, 0.00),
-                                child: Image.asset(
-                                  'assets/images/terram-branco.png',
-                                  width: 382.0,
-                                  height: 82.0,
-                                  fit: BoxFit.cover,
-                                ),
+                child: Align(
+                  alignment: AlignmentDirectional(0.00, 0.00),
+                  child: Column(
+                    mainAxisSize: MainAxisSize.max,
+                    mainAxisAlignment: MainAxisAlignment.center,
+                    children: [
+                      Padding(
+                        padding: EdgeInsetsDirectional.fromSTEB(
+                            0.0, 16.0, 0.0, 20.0),
+                        child: Row(
+                          mainAxisSize: MainAxisSize.max,
+                          mainAxisAlignment: MainAxisAlignment.center,
+                          children: [
+                            Align(
+                              alignment: AlignmentDirectional(0.00, 0.00),
+                              child: Image.asset(
+                                'assets/images/terram-branco.png',
+                                width: 382.0,
+                                height: 82.0,
+                                fit: BoxFit.cover,
                               ),
-                            ],
-                          ),
-                        ),
-                        Flexible(
-                          child: Container(
-                            width: double.infinity,
-                            height: MediaQuery.sizeOf(context).height * 0.75,
-                            decoration: BoxDecoration(
-                              color: Color(0x000C0C0C),
                             ),
-                            child: Padding(
-                              padding: EdgeInsetsDirectional.fromSTEB(
-                                  44.0, 70.0, 44.0, 0.0),
+                          ],
+                        ),
+                      ),
+                      Flexible(
+                        child: Container(
+                          width: MediaQuery.sizeOf(context).width * 1.0,
+                          height: MediaQuery.sizeOf(context).height * 0.75,
+                          decoration: BoxDecoration(
+                            color: Color(0x000C0C0C),
+                          ),
+                          child: Padding(
+                            padding: EdgeInsetsDirectional.fromSTEB(
+                                44.0, 70.0, 44.0, 0.0),
+                            child: SingleChildScrollView(
                               child: Column(
                                 mainAxisSize: MainAxisSize.max,
                                 mainAxisAlignment: MainAxisAlignment.start,
@@ -731,8 +732,8 @@ class _LoginWidgetState extends State<LoginWidget> {
                             ),
                           ),
                         ),
-                      ],
-                    ),
+                      ),
+                    ],
                   ),
                 ),
               ),

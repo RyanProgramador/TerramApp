@@ -209,6 +209,85 @@ class _ConfiguracoesWidgetState extends State<ConfiguracoesWidget> {
                               ),
                             ),
                           ),
+                          Padding(
+                            padding: EdgeInsetsDirectional.fromSTEB(
+                                0.0, 0.0, 0.0, 1.0),
+                            child: Container(
+                              width: double.infinity,
+                              decoration: BoxDecoration(),
+                              child: Padding(
+                                padding: EdgeInsetsDirectional.fromSTEB(
+                                    16.0, 16.0, 16.0, 16.0),
+                                child: Row(
+                                  mainAxisSize: MainAxisSize.max,
+                                  mainAxisAlignment:
+                                      MainAxisAlignment.spaceBetween,
+                                  children: [
+                                    Text(
+                                      'Sincronizar automaticamente',
+                                      style: FlutterFlowTheme.of(context)
+                                          .titleLarge,
+                                    ),
+                                    Switch.adaptive(
+                                      value: _model.switchValue ??= false,
+                                      onChanged: (newValue) async {
+                                        setState(() =>
+                                            _model.switchValue = newValue!);
+                                        if (newValue!) {
+                                          var confirmDialogResponse =
+                                              await showDialog<bool>(
+                                                    context: context,
+                                                    builder:
+                                                        (alertDialogContext) {
+                                                      return AlertDialog(
+                                                        title: Text('Atenção!'),
+                                                        content: Text(
+                                                            'Ao ativar a sincronização automática você estará enviando os dados recem coletados para a empresa'),
+                                                        actions: [
+                                                          TextButton(
+                                                            onPressed: () =>
+                                                                Navigator.pop(
+                                                                    alertDialogContext,
+                                                                    false),
+                                                            child: Text(
+                                                                'Cancelar'),
+                                                          ),
+                                                          TextButton(
+                                                            onPressed: () =>
+                                                                Navigator.pop(
+                                                                    alertDialogContext,
+                                                                    true),
+                                                            child: Text(
+                                                                'Prosseguir'),
+                                                          ),
+                                                        ],
+                                                      );
+                                                    },
+                                                  ) ??
+                                                  false;
+                                          if (!confirmDialogResponse) {
+                                            setState(() {
+                                              _model.switchValue = false;
+                                            });
+                                            return;
+                                          }
+                                        }
+                                      },
+                                      activeColor: Color(0xFF005E59),
+                                      activeTrackColor:
+                                          FlutterFlowTheme.of(context).success,
+                                      inactiveTrackColor:
+                                          FlutterFlowTheme.of(context)
+                                              .alternate,
+                                      inactiveThumbColor:
+                                          FlutterFlowTheme.of(context)
+                                              .secondaryText,
+                                    ),
+                                  ],
+                                ),
+                              ),
+                            ),
+                          ),
                           if (FFAppState().Desenvolvimento)
                             Padding(
                               padding: EdgeInsetsDirectional.fromSTEB(
