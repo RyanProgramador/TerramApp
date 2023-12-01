@@ -107,386 +107,387 @@ class _LoginWidgetState extends State<LoginWidget> {
       key: scaffoldKey,
       backgroundColor: FlutterFlowTheme.of(context).primary,
       body: Align(
-        alignment: AlignmentDirectional(0.00, -1.00),
-        child: ClipRRect(
-          child: Container(
-            width: double.infinity,
-            height: double.infinity,
-            constraints: BoxConstraints(
-              minWidth: double.infinity,
-              minHeight: double.infinity,
-              maxWidth: double.infinity,
-              maxHeight: double.infinity,
+        alignment: AlignmentDirectional(0.00, 0.00),
+        child: Container(
+          width: double.infinity,
+          height: double.infinity,
+          constraints: BoxConstraints(
+            minWidth: double.infinity,
+            minHeight: double.infinity,
+            maxWidth: double.infinity,
+            maxHeight: double.infinity,
+          ),
+          decoration: BoxDecoration(
+            color: Color(0xFF14181B),
+            image: DecorationImage(
+              fit: BoxFit.cover,
+              alignment: AlignmentDirectional(0.00, -1.00),
+              image: Image.asset(
+                'assets/images/unsplash_jin4W1HqgL4.png',
+              ).image,
             ),
-            decoration: BoxDecoration(
-              color: Color(0xFF14181B),
-              image: DecorationImage(
-                fit: BoxFit.cover,
-                alignment: AlignmentDirectional(0.00, -1.00),
-                image: Image.asset(
-                  'assets/images/unsplash_jin4W1HqgL4.png',
-                ).image,
+          ),
+          alignment: AlignmentDirectional(0.00, -1.00),
+          child: Align(
+            alignment: AlignmentDirectional(0.00, 0.00),
+            child: Container(
+              width: double.infinity,
+              height: double.infinity,
+              decoration: BoxDecoration(
+                color: Color(0x9400736D),
               ),
-            ),
-            alignment: AlignmentDirectional(0.00, -1.00),
-            child: ClipRRect(
-              child: Container(
-                width: MediaQuery.sizeOf(context).width * 1.0,
-                height: MediaQuery.sizeOf(context).height * 1.0,
-                decoration: BoxDecoration(
-                  color: Color(0x9400736D),
-                ),
-                alignment: AlignmentDirectional(0.00, -1.00),
-                child: Align(
-                  alignment: AlignmentDirectional(0.00, 0.00),
-                  child: Column(
-                    mainAxisSize: MainAxisSize.max,
-                    mainAxisAlignment: MainAxisAlignment.center,
-                    children: [
-                      Padding(
-                        padding: EdgeInsetsDirectional.fromSTEB(
-                            0.0, 16.0, 0.0, 20.0),
-                        child: Row(
-                          mainAxisSize: MainAxisSize.max,
-                          mainAxisAlignment: MainAxisAlignment.center,
-                          children: [
-                            Align(
-                              alignment: AlignmentDirectional(0.00, 0.00),
-                              child: Image.asset(
-                                'assets/images/terram-branco.png',
-                                width: 382.0,
-                                height: 82.0,
-                                fit: BoxFit.cover,
-                              ),
+              alignment: AlignmentDirectional(0.00, -1.00),
+              child: Align(
+                alignment: AlignmentDirectional(0.00, 0.00),
+                child: Column(
+                  mainAxisSize: MainAxisSize.max,
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  children: [
+                    Padding(
+                      padding:
+                          EdgeInsetsDirectional.fromSTEB(0.0, 16.0, 0.0, 20.0),
+                      child: Row(
+                        mainAxisSize: MainAxisSize.max,
+                        mainAxisAlignment: MainAxisAlignment.center,
+                        children: [
+                          Align(
+                            alignment: AlignmentDirectional(0.00, 0.00),
+                            child: Image.asset(
+                              'assets/images/terram-branco.png',
+                              width: 382.0,
+                              height: 82.0,
+                              fit: BoxFit.cover,
                             ),
-                          ],
-                        ),
-                      ),
-                      Flexible(
-                        child: Container(
-                          width: MediaQuery.sizeOf(context).width * 1.0,
-                          height: MediaQuery.sizeOf(context).height * 0.75,
-                          decoration: BoxDecoration(
-                            color: Color(0x000C0C0C),
                           ),
-                          child: Padding(
-                            padding: EdgeInsetsDirectional.fromSTEB(
-                                44.0, 70.0, 44.0, 0.0),
-                            child: SingleChildScrollView(
-                              child: Column(
-                                mainAxisSize: MainAxisSize.max,
-                                mainAxisAlignment: MainAxisAlignment.start,
-                                crossAxisAlignment: CrossAxisAlignment.start,
-                                children: [
-                                  Flexible(
-                                    child: Padding(
-                                      padding: EdgeInsetsDirectional.fromSTEB(
-                                          0.0, 0.0, 0.0, 10.0),
-                                      child: Container(
-                                        width: double.infinity,
-                                        height:
-                                            MediaQuery.sizeOf(context).height *
-                                                0.62,
-                                        decoration: BoxDecoration(),
-                                        child: Column(
-                                          mainAxisSize: MainAxisSize.max,
-                                          crossAxisAlignment:
-                                              CrossAxisAlignment.start,
-                                          children: [
-                                            Text(
-                                              'ACESSAR',
-                                              style: FlutterFlowTheme.of(
-                                                      context)
-                                                  .bodyMedium
-                                                  .override(
-                                                    fontFamily: 'Readex Pro',
+                        ],
+                      ),
+                    ),
+                    Flexible(
+                      child: Container(
+                        width: MediaQuery.sizeOf(context).width * 1.0,
+                        height: MediaQuery.sizeOf(context).height * 0.75,
+                        decoration: BoxDecoration(
+                          color: Color(0x000C0C0C),
+                        ),
+                        child: Padding(
+                          padding: EdgeInsetsDirectional.fromSTEB(
+                              44.0, 70.0, 44.0, 0.0),
+                          child: SingleChildScrollView(
+                            child: Column(
+                              mainAxisSize: MainAxisSize.max,
+                              mainAxisAlignment: MainAxisAlignment.start,
+                              crossAxisAlignment: CrossAxisAlignment.start,
+                              children: [
+                                Flexible(
+                                  child: Padding(
+                                    padding: EdgeInsetsDirectional.fromSTEB(
+                                        0.0, 0.0, 0.0, 10.0),
+                                    child: Container(
+                                      width: double.infinity,
+                                      height:
+                                          MediaQuery.sizeOf(context).height *
+                                              0.62,
+                                      decoration: BoxDecoration(),
+                                      child: Column(
+                                        mainAxisSize: MainAxisSize.max,
+                                        crossAxisAlignment:
+                                            CrossAxisAlignment.start,
+                                        children: [
+                                          Text(
+                                            'ACESSAR',
+                                            style: FlutterFlowTheme.of(context)
+                                                .bodyMedium
+                                                .override(
+                                                  fontFamily: 'Readex Pro',
+                                                  color: Colors.white,
+                                                  fontSize: 18.0,
+                                                  fontWeight: FontWeight.bold,
+                                                ),
+                                          ),
+                                          Padding(
+                                            padding:
+                                                EdgeInsetsDirectional.fromSTEB(
+                                                    0.0, 20.0, 0.0, 0.0),
+                                            child: TextFormField(
+                                              controller: _model
+                                                  .emailAddressLoginController,
+                                              focusNode: _model
+                                                  .emailAddressLoginFocusNode,
+                                              obscureText: false,
+                                              decoration: InputDecoration(
+                                                labelText: 'CPF',
+                                                labelStyle: FlutterFlowTheme.of(
+                                                        context)
+                                                    .bodyMedium
+                                                    .override(
+                                                      fontFamily: 'Lexend Deca',
+                                                      color:
+                                                          FlutterFlowTheme.of(
+                                                                  context)
+                                                              .primaryBtnText,
+                                                      fontSize: 18.0,
+                                                      fontWeight:
+                                                          FontWeight.normal,
+                                                    ),
+                                                alignLabelWithHint: false,
+                                                hintStyle: FlutterFlowTheme.of(
+                                                        context)
+                                                    .bodyMedium
+                                                    .override(
+                                                      fontFamily: 'Lexend Deca',
+                                                      color: Color(0x0095A1AC),
+                                                      fontSize: 14.0,
+                                                      fontWeight:
+                                                          FontWeight.normal,
+                                                    ),
+                                                enabledBorder:
+                                                    UnderlineInputBorder(
+                                                  borderSide: BorderSide(
                                                     color: Colors.white,
-                                                    fontSize: 18.0,
-                                                    fontWeight: FontWeight.bold,
+                                                    width: 2.0,
                                                   ),
-                                            ),
-                                            Padding(
-                                              padding: EdgeInsetsDirectional
-                                                  .fromSTEB(
-                                                      0.0, 20.0, 0.0, 0.0),
-                                              child: TextFormField(
-                                                controller: _model
-                                                    .emailAddressLoginController,
-                                                focusNode: _model
-                                                    .emailAddressLoginFocusNode,
-                                                obscureText: false,
-                                                decoration: InputDecoration(
-                                                  labelText: 'CPF',
-                                                  labelStyle: FlutterFlowTheme
-                                                          .of(context)
-                                                      .bodyMedium
-                                                      .override(
-                                                        fontFamily:
-                                                            'Lexend Deca',
-                                                        color:
-                                                            FlutterFlowTheme.of(
-                                                                    context)
-                                                                .primaryBtnText,
-                                                        fontSize: 18.0,
-                                                        fontWeight:
-                                                            FontWeight.normal,
-                                                      ),
-                                                  alignLabelWithHint: false,
-                                                  hintStyle: FlutterFlowTheme
-                                                          .of(context)
-                                                      .bodyMedium
-                                                      .override(
-                                                        fontFamily:
-                                                            'Lexend Deca',
-                                                        color:
-                                                            Color(0x0095A1AC),
-                                                        fontSize: 14.0,
-                                                        fontWeight:
-                                                            FontWeight.normal,
-                                                      ),
-                                                  enabledBorder:
-                                                      UnderlineInputBorder(
-                                                    borderSide: BorderSide(
-                                                      color: Colors.white,
-                                                      width: 2.0,
-                                                    ),
-                                                    borderRadius:
-                                                        BorderRadius.circular(
-                                                            0.0),
-                                                  ),
-                                                  focusedBorder:
-                                                      UnderlineInputBorder(
-                                                    borderSide: BorderSide(
-                                                      color: Colors.white,
-                                                      width: 2.0,
-                                                    ),
-                                                    borderRadius:
-                                                        BorderRadius.circular(
-                                                            0.0),
-                                                  ),
-                                                  errorBorder:
-                                                      UnderlineInputBorder(
-                                                    borderSide: BorderSide(
-                                                      color: Colors.white,
-                                                      width: 2.0,
-                                                    ),
-                                                    borderRadius:
-                                                        BorderRadius.circular(
-                                                            0.0),
-                                                  ),
-                                                  focusedErrorBorder:
-                                                      UnderlineInputBorder(
-                                                    borderSide: BorderSide(
-                                                      color: Colors.white,
-                                                      width: 2.0,
-                                                    ),
-                                                    borderRadius:
-                                                        BorderRadius.circular(
-                                                            0.0),
-                                                  ),
-                                                  filled: true,
-                                                  fillColor: Color(0x005C7473),
-                                                  contentPadding:
-                                                      EdgeInsetsDirectional
-                                                          .fromSTEB(0.0, 24.0,
-                                                              20.0, 24.0),
+                                                  borderRadius:
+                                                      BorderRadius.circular(
+                                                          0.0),
                                                 ),
-                                                style:
-                                                    FlutterFlowTheme.of(context)
-                                                        .titleSmall
-                                                        .override(
-                                                          fontFamily:
-                                                              'Readex Pro',
-                                                          color: Colors.white,
-                                                          fontWeight:
-                                                              FontWeight.normal,
-                                                        ),
-                                                textAlign: TextAlign.start,
-                                                maxLines: null,
-                                                validator: _model
-                                                    .emailAddressLoginControllerValidator
-                                                    .asValidator(context),
-                                                inputFormatters: [
-                                                  _model.emailAddressLoginMask
-                                                ],
-                                              ),
-                                            ),
-                                            Padding(
-                                              padding: EdgeInsetsDirectional
-                                                  .fromSTEB(
-                                                      0.0, 12.0, 0.0, 0.0),
-                                              child: TextFormField(
-                                                controller: _model
-                                                    .passwordLoginController,
-                                                focusNode: _model
-                                                    .passwordLoginFocusNode,
-                                                obscureText: !_model
-                                                    .passwordLoginVisibility,
-                                                decoration: InputDecoration(
-                                                  labelText: 'Senha',
-                                                  labelStyle: FlutterFlowTheme
-                                                          .of(context)
-                                                      .bodyMedium
-                                                      .override(
-                                                        fontFamily:
-                                                            'Lexend Deca',
-                                                        color:
-                                                            FlutterFlowTheme.of(
-                                                                    context)
-                                                                .primaryBtnText,
-                                                        fontSize: 18.0,
-                                                        fontWeight:
-                                                            FontWeight.normal,
-                                                      ),
-                                                  alignLabelWithHint: false,
-                                                  hintStyle: FlutterFlowTheme
-                                                          .of(context)
-                                                      .bodyMedium
-                                                      .override(
-                                                        fontFamily:
-                                                            'Lexend Deca',
-                                                        color: Colors.white,
-                                                        fontSize: 14.0,
-                                                        fontWeight:
-                                                            FontWeight.normal,
-                                                      ),
-                                                  enabledBorder:
-                                                      UnderlineInputBorder(
-                                                    borderSide: BorderSide(
-                                                      color: Colors.white,
-                                                      width: 2.0,
-                                                    ),
-                                                    borderRadius:
-                                                        BorderRadius.circular(
-                                                            0.0),
+                                                focusedBorder:
+                                                    UnderlineInputBorder(
+                                                  borderSide: BorderSide(
+                                                    color: Colors.white,
+                                                    width: 2.0,
                                                   ),
-                                                  focusedBorder:
-                                                      UnderlineInputBorder(
-                                                    borderSide: BorderSide(
-                                                      color: Colors.white,
-                                                      width: 2.0,
-                                                    ),
-                                                    borderRadius:
-                                                        BorderRadius.circular(
-                                                            0.0),
-                                                  ),
-                                                  errorBorder:
-                                                      UnderlineInputBorder(
-                                                    borderSide: BorderSide(
-                                                      color: Colors.white,
-                                                      width: 2.0,
-                                                    ),
-                                                    borderRadius:
-                                                        BorderRadius.circular(
-                                                            0.0),
-                                                  ),
-                                                  focusedErrorBorder:
-                                                      UnderlineInputBorder(
-                                                    borderSide: BorderSide(
-                                                      color: Colors.white,
-                                                      width: 2.0,
-                                                    ),
-                                                    borderRadius:
-                                                        BorderRadius.circular(
-                                                            0.0),
-                                                  ),
-                                                  filled: true,
-                                                  fillColor: Color(0x00FFFFFF),
-                                                  contentPadding:
-                                                      EdgeInsetsDirectional
-                                                          .fromSTEB(0.0, 24.0,
-                                                              20.0, 24.0),
-                                                  suffixIcon: InkWell(
-                                                    onTap: () => setState(
-                                                      () => _model
-                                                              .passwordLoginVisibility =
-                                                          !_model
-                                                              .passwordLoginVisibility,
-                                                    ),
-                                                    focusNode: FocusNode(
-                                                        skipTraversal: true),
-                                                    child: Icon(
-                                                      _model.passwordLoginVisibility
-                                                          ? Icons
-                                                              .visibility_outlined
-                                                          : Icons
-                                                              .visibility_off_outlined,
-                                                      color: Color(0xFFF4F4F4),
-                                                      size: 20.0,
-                                                    ),
-                                                  ),
+                                                  borderRadius:
+                                                      BorderRadius.circular(
+                                                          0.0),
                                                 ),
-                                                style:
-                                                    FlutterFlowTheme.of(context)
-                                                        .titleSmall
-                                                        .override(
-                                                          fontFamily:
-                                                              'Readex Pro',
-                                                          color: Colors.white,
-                                                          fontWeight:
-                                                              FontWeight.normal,
-                                                        ),
-                                                textAlign: TextAlign.start,
-                                                validator: _model
-                                                    .passwordLoginControllerValidator
-                                                    .asValidator(context),
+                                                errorBorder:
+                                                    UnderlineInputBorder(
+                                                  borderSide: BorderSide(
+                                                    color: Colors.white,
+                                                    width: 2.0,
+                                                  ),
+                                                  borderRadius:
+                                                      BorderRadius.circular(
+                                                          0.0),
+                                                ),
+                                                focusedErrorBorder:
+                                                    UnderlineInputBorder(
+                                                  borderSide: BorderSide(
+                                                    color: Colors.white,
+                                                    width: 2.0,
+                                                  ),
+                                                  borderRadius:
+                                                      BorderRadius.circular(
+                                                          0.0),
+                                                ),
+                                                filled: true,
+                                                fillColor: Color(0x005C7473),
+                                                contentPadding:
+                                                    EdgeInsetsDirectional
+                                                        .fromSTEB(0.0, 24.0,
+                                                            20.0, 24.0),
                                               ),
-                                            ),
-                                            Padding(
-                                              padding: EdgeInsetsDirectional
-                                                  .fromSTEB(
-                                                      0.0, 20.0, 0.0, 0.0),
-                                              child: FFButtonWidget(
-                                                onPressed: () async {
-                                                  context.pushNamed(
-                                                    'EsqueceuSenha',
-                                                    extra: <String, dynamic>{
-                                                      kTransitionInfoKey:
-                                                          TransitionInfo(
-                                                        hasTransition: true,
-                                                        transitionType:
-                                                            PageTransitionType
-                                                                .fade,
-                                                        duration: Duration(
-                                                            milliseconds: 650),
-                                                      ),
-                                                    },
-                                                  );
-                                                },
-                                                text: 'Esqueceu a senha?',
-                                                options: FFButtonOptions(
-                                                  padding: EdgeInsetsDirectional
-                                                      .fromSTEB(
-                                                          0.0, 0.0, 0.0, 0.0),
-                                                  iconPadding:
-                                                      EdgeInsetsDirectional
-                                                          .fromSTEB(0.0, 0.0,
-                                                              0.0, 0.0),
-                                                  color: Color(0x0039D2C0),
-                                                  textStyle: FlutterFlowTheme
-                                                          .of(context)
-                                                      .titleMedium
+                                              style:
+                                                  FlutterFlowTheme.of(context)
+                                                      .titleSmall
                                                       .override(
                                                         fontFamily:
                                                             'Readex Pro',
-                                                        color:
-                                                            FlutterFlowTheme.of(
-                                                                    context)
-                                                                .primaryBtnText,
-                                                        fontSize: 16.0,
+                                                        color: Colors.white,
+                                                        fontWeight:
+                                                            FontWeight.normal,
                                                       ),
-                                                  elevation: 0.0,
+                                              textAlign: TextAlign.start,
+                                              maxLines: null,
+                                              validator: _model
+                                                  .emailAddressLoginControllerValidator
+                                                  .asValidator(context),
+                                              inputFormatters: [
+                                                _model.emailAddressLoginMask
+                                              ],
+                                            ),
+                                          ),
+                                          Padding(
+                                            padding:
+                                                EdgeInsetsDirectional.fromSTEB(
+                                                    0.0, 12.0, 0.0, 0.0),
+                                            child: TextFormField(
+                                              controller: _model
+                                                  .passwordLoginController,
+                                              focusNode:
+                                                  _model.passwordLoginFocusNode,
+                                              obscureText: !_model
+                                                  .passwordLoginVisibility,
+                                              decoration: InputDecoration(
+                                                labelText: 'Senha',
+                                                labelStyle: FlutterFlowTheme.of(
+                                                        context)
+                                                    .bodyMedium
+                                                    .override(
+                                                      fontFamily: 'Lexend Deca',
+                                                      color:
+                                                          FlutterFlowTheme.of(
+                                                                  context)
+                                                              .primaryBtnText,
+                                                      fontSize: 18.0,
+                                                      fontWeight:
+                                                          FontWeight.normal,
+                                                    ),
+                                                alignLabelWithHint: false,
+                                                hintStyle:
+                                                    FlutterFlowTheme.of(context)
+                                                        .bodyMedium
+                                                        .override(
+                                                          fontFamily:
+                                                              'Lexend Deca',
+                                                          color: Colors.white,
+                                                          fontSize: 14.0,
+                                                          fontWeight:
+                                                              FontWeight.normal,
+                                                        ),
+                                                enabledBorder:
+                                                    UnderlineInputBorder(
                                                   borderSide: BorderSide(
-                                                    color: Colors.transparent,
-                                                    width: 1.0,
+                                                    color: Colors.white,
+                                                    width: 2.0,
+                                                  ),
+                                                  borderRadius:
+                                                      BorderRadius.circular(
+                                                          0.0),
+                                                ),
+                                                focusedBorder:
+                                                    UnderlineInputBorder(
+                                                  borderSide: BorderSide(
+                                                    color: Colors.white,
+                                                    width: 2.0,
+                                                  ),
+                                                  borderRadius:
+                                                      BorderRadius.circular(
+                                                          0.0),
+                                                ),
+                                                errorBorder:
+                                                    UnderlineInputBorder(
+                                                  borderSide: BorderSide(
+                                                    color: Colors.white,
+                                                    width: 2.0,
+                                                  ),
+                                                  borderRadius:
+                                                      BorderRadius.circular(
+                                                          0.0),
+                                                ),
+                                                focusedErrorBorder:
+                                                    UnderlineInputBorder(
+                                                  borderSide: BorderSide(
+                                                    color: Colors.white,
+                                                    width: 2.0,
+                                                  ),
+                                                  borderRadius:
+                                                      BorderRadius.circular(
+                                                          0.0),
+                                                ),
+                                                filled: true,
+                                                fillColor: Color(0x00FFFFFF),
+                                                contentPadding:
+                                                    EdgeInsetsDirectional
+                                                        .fromSTEB(0.0, 24.0,
+                                                            20.0, 24.0),
+                                                suffixIcon: InkWell(
+                                                  onTap: () => setState(
+                                                    () => _model
+                                                            .passwordLoginVisibility =
+                                                        !_model
+                                                            .passwordLoginVisibility,
+                                                  ),
+                                                  focusNode: FocusNode(
+                                                      skipTraversal: true),
+                                                  child: Icon(
+                                                    _model.passwordLoginVisibility
+                                                        ? Icons
+                                                            .visibility_outlined
+                                                        : Icons
+                                                            .visibility_off_outlined,
+                                                    color: Color(0xFFF4F4F4),
+                                                    size: 20.0,
                                                   ),
                                                 ),
                                               ),
+                                              style:
+                                                  FlutterFlowTheme.of(context)
+                                                      .titleSmall
+                                                      .override(
+                                                        fontFamily:
+                                                            'Readex Pro',
+                                                        color: Colors.white,
+                                                        fontWeight:
+                                                            FontWeight.normal,
+                                                      ),
+                                              textAlign: TextAlign.start,
+                                              validator: _model
+                                                  .passwordLoginControllerValidator
+                                                  .asValidator(context),
                                             ),
-                                            Flexible(
-                                              child: Align(
-                                                alignment: AlignmentDirectional(
-                                                    0.00, 1.00),
+                                          ),
+                                          Padding(
+                                            padding:
+                                                EdgeInsetsDirectional.fromSTEB(
+                                                    0.0, 20.0, 0.0, 0.0),
+                                            child: FFButtonWidget(
+                                              onPressed: () async {
+                                                context.pushNamed(
+                                                  'EsqueceuSenha',
+                                                  extra: <String, dynamic>{
+                                                    kTransitionInfoKey:
+                                                        TransitionInfo(
+                                                      hasTransition: true,
+                                                      transitionType:
+                                                          PageTransitionType
+                                                              .fade,
+                                                      duration: Duration(
+                                                          milliseconds: 650),
+                                                    ),
+                                                  },
+                                                );
+                                              },
+                                              text: 'Esqueceu a senha?',
+                                              options: FFButtonOptions(
+                                                padding: EdgeInsetsDirectional
+                                                    .fromSTEB(
+                                                        0.0, 0.0, 0.0, 0.0),
+                                                iconPadding:
+                                                    EdgeInsetsDirectional
+                                                        .fromSTEB(
+                                                            0.0, 0.0, 0.0, 0.0),
+                                                color: Color(0x0039D2C0),
+                                                textStyle: FlutterFlowTheme.of(
+                                                        context)
+                                                    .titleMedium
+                                                    .override(
+                                                      fontFamily: 'Readex Pro',
+                                                      color:
+                                                          FlutterFlowTheme.of(
+                                                                  context)
+                                                              .primaryBtnText,
+                                                      fontSize: 16.0,
+                                                    ),
+                                                elevation: 0.0,
+                                                borderSide: BorderSide(
+                                                  color: Colors.transparent,
+                                                  width: 1.0,
+                                                ),
+                                              ),
+                                            ),
+                                          ),
+                                          Flexible(
+                                            child: Align(
+                                              alignment: AlignmentDirectional(
+                                                  0.00, 1.00),
+                                              child: Container(
+                                                width: double.infinity,
+                                                height:
+                                                    MediaQuery.sizeOf(context)
+                                                            .height *
+                                                        0.1,
+                                                decoration: BoxDecoration(),
                                                 child: Row(
                                                   mainAxisSize:
                                                       MainAxisSize.max,
@@ -722,19 +723,19 @@ class _LoginWidgetState extends State<LoginWidget> {
                                                 ),
                                               ),
                                             ),
-                                          ],
-                                        ),
+                                          ),
+                                        ],
                                       ),
                                     ),
                                   ),
-                                ],
-                              ),
+                                ),
+                              ],
                             ),
                           ),
                         ),
                       ),
-                    ],
-                  ),
+                    ),
+                  ],
                 ),
               ),
             ),
