@@ -62,31 +62,31 @@ Future mainAction(
   }
 
   Future<void> captureLocation(bool? pausado) async {
-    // Reinicia o timer a cada 5 segundos
-    timer = Timer.periodic(Duration(seconds: 8), (Timer t) {
-      if (!pausado!) {
-        updateNotificationWithTimer(5);
+    if (!pausado!) {
+      updateNotificationWithTimer(5);
 
-        BackgroundLocation.getLocationUpdates((location) async {
-          final latitude = location.latitude.toString();
-          final longitude = location.longitude.toString();
+      BackgroundLocation.getLocationUpdates((location) async {
+        final latitude = location.latitude.toString();
+        final longitude = location.longitude.toString();
 
-          Map<String, dynamic> data2 = {
-            "osdes_id": osdesId,
-            "osdes_latitude": "$latitude",
-            "osdes_longitude": "$longitude",
-            "osdes_horario": getCurrentTimestamp,
-          };
+        Map<String, dynamic> data2 = {
+          "osdes_id": osdesId,
+          "osdes_latitude": "$latitude",
+          "osdes_longitude": "$longitude",
+          "osdes_horario": getCurrentTimestamp,
+        };
 
-          // Add the Map to the list
-          if (data2 != null && data2.isNotEmpty) {
-            FFAppState().trDeslocGeo2.add(data2);
-          }
-        });
-      }
-    });
+        // Add the Map to the list
+        if (data2 != null && data2.isNotEmpty) {
+          FFAppState().trDeslocGeo2.add(data2);
+        }
+      });
+    }
   }
 
-  // Inicie a captura de localização
-  await captureLocation(pausado);
+// Reinicia o timer a cada 5 segundos
+  timer = Timer.periodic(Duration(seconds: 8), (Timer t) async {
+    // Inicie a captura de localização
+    await captureLocation(pausado);
+  });
 }
