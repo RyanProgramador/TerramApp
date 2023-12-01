@@ -69,33 +69,34 @@ Future mainAction(
     if (!pausado!) {
       updateNotificationWithTimer(5);
 
+      DateTime? previousTimestamp; // Store the previous timestamp
+
       BackgroundLocation.getLocationUpdates((location) async {
         final latitude = location.latitude.toString();
         final longitude = location.longitude.toString();
 
-        Map<String, dynamic> data2 = {
-          "osdes_id": osdesId,
-          "osdes_latitude": "$latitude",
-          "osdes_longitude": "$longitude",
-          "osdes_horario": getCurrentTimestamp,
-        };
+        DateTime currentTimestamp = getCurrentTimestamp;
 
-        // Add the Map to the list
-        if (data2 != null && data2.isNotEmpty) {
-          FFAppState().trDeslocGeo2.add(data2);
+        // Check if previousTimestamp is null or the time difference is greater than 8 seconds
+        if (previousTimestamp == null ||
+            currentTimestamp.difference(previousTimestamp!).inSeconds >= 8) {
+          Map<String, dynamic> data2 = {
+            "osdes_id": osdesId,
+            "osdes_latitude": "$latitude",
+            "osdes_longitude": "$longitude",
+            "osdes_horario": currentTimestamp,
+          };
+
+          if (data2 != null && data2.isNotEmpty) {
+            FFAppState().trDeslocGeo2.add(data2);
+          }
+
+          // Update previousTimestamp with the current timestamp
+          previousTimestamp = currentTimestamp;
         }
       });
     }
   }
 
-  Timer? timer;
-  timer = Timer.periodic(Duration(seconds: 1), (Timer t) async {
-    final DateTime currentTimestamp = DateTime.now();
-
-    if (currentTimestamp.isAfter(eightSecondsLaterTimestamp)) {
-      await captureLocation(pausado);
-
-      timer?.cancel();
-    }
-  });
+  await captureLocation(pausado);
 }
