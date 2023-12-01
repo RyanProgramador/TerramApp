@@ -747,9 +747,16 @@ class _MultiplePlacesPickerCopyWidgetState
                                         ),
                                         Builder(
                                           builder: (context) {
-                                            final trDeslocGo = FFAppState()
-                                                .trDeslocGeo2
-                                                .toList();
+                                            final trDeslocGo = functions
+                                                    .sortListJson(
+                                                        'osdes_id',
+                                                        true,
+                                                        FFAppState()
+                                                            .trDeslocGeo2
+                                                            .toList(),
+                                                        null)
+                                                    ?.toList() ??
+                                                [];
                                             return SingleChildScrollView(
                                               child: Column(
                                                 mainAxisSize: MainAxisSize.max,
