@@ -161,6 +161,38 @@ class _SelecionarOSWidgetState extends State<SelecionarOSWidget>
               .toList()
               .cast<dynamic>();
         });
+        if ((FFAppState().trOsDeslocamentosJsonFinalizados.length != 0) &&
+            (FFAppState().sincronizcaoAutomatica == true)) {
+          await showDialog(
+            context: context,
+            builder: (alertDialogContext) {
+              return AlertDialog(
+                title: Text('Sincronizado'),
+                actions: [
+                  TextButton(
+                    onPressed: () => Navigator.pop(alertDialogContext),
+                    child: Text('Ok'),
+                  ),
+                ],
+              );
+            },
+          );
+        } else {
+          await showDialog(
+            context: context,
+            builder: (alertDialogContext) {
+              return AlertDialog(
+                title: Text('ops'),
+                actions: [
+                  TextButton(
+                    onPressed: () => Navigator.pop(alertDialogContext),
+                    child: Text('Ok'),
+                  ),
+                ],
+              );
+            },
+          );
+        }
       } else {
         await showDialog(
           context: context,
