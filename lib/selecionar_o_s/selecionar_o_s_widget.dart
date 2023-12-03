@@ -93,6 +93,22 @@ class _SelecionarOSWidgetState extends State<SelecionarOSWidget>
             );
           },
         );
+      } else if ((FFAppState().sincronizcaoAutomatica == false) &&
+          (FFAppState().servicosFinalizadosComSucesso.length != 0)) {
+        await showDialog(
+          context: context,
+          builder: (alertDialogContext) {
+            return AlertDialog(
+              title: Text('Não sincroniza'),
+              actions: [
+                TextButton(
+                  onPressed: () => Navigator.pop(alertDialogContext),
+                  child: Text('Ok'),
+                ),
+              ],
+            );
+          },
+        );
       } else {
         await showDialog(
           context: context,
