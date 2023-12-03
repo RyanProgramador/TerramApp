@@ -423,7 +423,7 @@ class _MultiplePlacesPickerCopyWidgetState
                                         builder: (context) {
                                           final ordemServicos = functions
                                                   .sortListJson(
-                                                      'oserv_id_os',
+                                                      'oserv_id',
                                                       true,
                                                       FFAppState()
                                                           .trOsServicos
