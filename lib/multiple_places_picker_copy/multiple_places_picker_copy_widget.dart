@@ -220,7 +220,7 @@ class _MultiplePlacesPickerCopyWidgetState
                               context.goNamed('SelecionarOS');
                             },
                             child: Icon(
-                              Icons.transfer_within_a_station,
+                              Icons.arrow_back_rounded,
                               color: FlutterFlowTheme.of(context).secondaryText,
                               size: 24.0,
                             ),

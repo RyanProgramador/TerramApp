@@ -1,7 +1,7 @@
 import '/backend/api_requests/api_calls.dart';
 import '/components/iniciar_deslocamento_widget.dart';
 import '/components/loading_comp_widget.dart';
-import '/components/pesquisa_avanada_widget.dart';
+import '/components/pesquisa_avanadabtn_widget.dart';
 import '/flutter_flow/flutter_flow_animations.dart';
 import '/flutter_flow/flutter_flow_icon_button.dart';
 import '/flutter_flow/flutter_flow_theme.dart';
@@ -49,6 +49,8 @@ class SelecionarOSModel extends FlutterFlowModel<SelecionarOSWidget> {
   String? Function(BuildContext, String?)? searchBarControllerValidator;
   // Stores action output result for [Backend Call - API (apiRotasPolylines)] action in Row widget.
   ApiCallResponse? polyline1;
+  // Stores action output result for [Backend Call - API (apiRotasPolylines)] action in Row widget.
+  ApiCallResponse? polyline2;
 
   /// Initialization and disposal methods.
 
