@@ -229,7 +229,8 @@ class _ConfiguracoesWidgetState extends State<ConfiguracoesWidget> {
                                           .titleLarge,
                                     ),
                                     Switch.adaptive(
-                                      value: _model.switchValue ??= false,
+                                      value: _model.switchValue ??=
+                                          FFAppState().sincronizcaoAutomatica,
                                       onChanged: (newValue) async {
                                         setState(() =>
                                             _model.switchValue = newValue!);
@@ -265,12 +266,40 @@ class _ConfiguracoesWidgetState extends State<ConfiguracoesWidget> {
                                                     },
                                                   ) ??
                                                   false;
-                                          if (!confirmDialogResponse) {
+                                          if (confirmDialogResponse) {
+                                            setState(() {
+                                              FFAppState()
+                                                      .sincronizcaoAutomatica =
+                                                  true;
+                                            });
+                                            await showDialog(
+                                              context: context,
+                                              builder: (alertDialogContext) {
+                                                return AlertDialog(
+                                                  title: Text(
+                                                      'Sincronização automatica ativada'),
+                                                  actions: [
+                                                    TextButton(
+                                                      onPressed: () =>
+                                                          Navigator.pop(
+                                                              alertDialogContext),
+                                                      child: Text('Ok'),
+                                                    ),
+                                                  ],
+                                                );
+                                              },
+                                            );
+                                          } else {
                                             setState(() {
                                               _model.switchValue = false;
                                             });
                                             return;
                                           }
+                                        } else {
+                                          setState(() {
+                                            FFAppState()
+                                                .sincronizcaoAutomatica = false;
+                                          });
                                         }
                                       },
                                       activeColor: Color(0xFF005E59),

@@ -276,6 +276,10 @@ class FFAppState extends ChangeNotifier {
       _Desenvolvimento =
           prefs.getBool('ff_Desenvolvimento') ?? _Desenvolvimento;
     });
+    _safeInit(() {
+      _sincronizcaoAutomatica =
+          prefs.getBool('ff_sincronizcaoAutomatica') ?? _sincronizcaoAutomatica;
+    });
   }
 
   void update(VoidCallback callback) {
@@ -1137,11 +1141,18 @@ class FFAppState extends ChangeNotifier {
     prefs.setString('ff_trOsDeslocamentoJsonAtual', jsonEncode(_value));
   }
 
-  bool _Desenvolvimento = true;
+  bool _Desenvolvimento = false;
   bool get Desenvolvimento => _Desenvolvimento;
   set Desenvolvimento(bool _value) {
     _Desenvolvimento = _value;
     prefs.setBool('ff_Desenvolvimento', _value);
+  }
+
+  bool _sincronizcaoAutomatica = false;
+  bool get sincronizcaoAutomatica => _sincronizcaoAutomatica;
+  set sincronizcaoAutomatica(bool _value) {
+    _sincronizcaoAutomatica = _value;
+    prefs.setBool('ff_sincronizcaoAutomatica', _value);
   }
 }
 

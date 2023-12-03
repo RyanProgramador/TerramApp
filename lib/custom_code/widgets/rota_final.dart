@@ -18,6 +18,7 @@ import 'package:http/http.dart' as http;
 import 'package:flutter_polyline_points/flutter_polyline_points.dart' as poly;
 import 'package:google_maps_flutter/google_maps_flutter.dart' as google_maps;
 import 'package:custom_marker/marker_icon.dart' as cust;
+import 'dart:math';
 
 //NOTA MENTAL, ESSE CODIGO ESTA EM DESENVOLVIMENTO,
 //OS COMENTARIOS FEITOS NESSE CODIGO FORAM FEITOS APÓS ELE ESTAR SEMI-FINALIZADO,
@@ -50,10 +51,62 @@ class RotaFinal extends StatefulWidget {
 class _MapsRoutesState extends State<RotaFinal> {
   //position é a posição atual
   Position? position;
+  //position para calclar o bearing
+  Position? previousPosition;
   //esse é o formato do icone cara
   Uint8List? customIconBytes;
+
+  //icobe do modo livre
+  String icone = "crop_free";
+  IconData getIconData() {
+    // Convert the string to IconData using Icons class
+    switch (icone) {
+      case "crop_free":
+        return Icons.crop_free;
+      case "center_focus_weak":
+        return Icons.center_focus_weak;
+      // Add more cases as needed for other icon names
+      default:
+        return Icons.crop_free; // Default icon
+    }
+  }
+
   //inporante para o controle do maps
   google_maps.GoogleMapController? _googleMapController;
+//modo pausado /modolivre
+  bool estalivre = false;
+//modo carro
+  bool modocarrobool = false;
+  double currentBearing = 0.0;
+
+// Função para calcular o bearing entre dois pontos
+  double _calculateBearing(
+    double startLat,
+    double startLng,
+    double endLat,
+    double endLng,
+  ) {
+    // Converte as latitudes e longitudes de graus para radianos
+    double startLatRad = startLat * pi / 180;
+    double startLngRad = startLng * pi / 180;
+    double endLatRad = endLat * pi / 180;
+    double endLngRad = endLng * pi / 180;
+
+    // Calcula a diferença de longitudes e a diferença de longitudes radianas
+    double deltaLng = endLngRad - startLngRad;
+
+    // Calcula o bearing (azimute) usando a fórmula trigonométrica
+    double x = sin(deltaLng) * cos(endLatRad);
+    double y = cos(startLatRad) * sin(endLatRad) -
+        sin(startLatRad) * cos(endLatRad) * cos(deltaLng);
+    double bearing = atan2(x, y);
+
+    // Converte o bearing de radianos para graus
+    bearing = (bearing * 180 / pi + 360) % 360;
+
+    return bearing;
+  }
+
 //adiciona quando o mapa é criado
   void _onMapCreated(google_maps.GoogleMapController controller) {
     _googleMapController = controller;
@@ -145,11 +198,13 @@ class _MapsRoutesState extends State<RotaFinal> {
       google_maps.Marker(
         markerId: google_maps.MarkerId('CustomMarkerID'),
         position: customMarkerLatLng,
+        flat: true,
         icon: customIconBytes != null
             ? google_maps.BitmapDescriptor.fromBytes(customIconBytes!)
             : google_maps.BitmapDescriptor.defaultMarkerWithHue(
                 google_maps.BitmapDescriptor.hueBlue,
               ),
+        rotation: currentBearing,
         // Call a separate function to get the custom icon.
         anchor: Offset(0.5, 0.5),
       ),
@@ -186,28 +241,103 @@ class _MapsRoutesState extends State<RotaFinal> {
     }
   }
 
+  //RECENTRALIZAR COM UM BOTÃO
+  void retiraPosicaoAtualDeRodar() async {
+    if (!estalivre) {
+      estalivre = true;
+      icone = "center_focus_weak";
+    } else {
+      estalivre = false;
+      icone = "crop_free";
+    }
+  }
+
+  //RECENTRALIZAR COM UM BOTÃO
+  void voltaPosicaoAtualDeRodar() async {
+    estalivre = false;
+  } //RECENTRALIZAR COM UM BOTÃO
+
+  void modoCarro() async {
+    if (!modocarrobool) {
+      modocarrobool = true;
+    } else {
+      modocarrobool = false;
+    }
+  }
+
 //atualiza a cada momento a posição atual do user
   void _getCurrentLocation() async {
-    Geolocator.getPositionStream().listen((Position newLoc) async {
-      if (_googleMapController != null) {
-        double currentZoomLevel = await _googleMapController!.getZoomLevel();
+    Geolocator.getPositionStream(
+      locationSettings: LocationSettings(
+        accuracy: LocationAccuracy.best,
+        distanceFilter: 0, // Minimum distance of 0 meters
+      ),
+    ).listen((Position newLoc) async {
+      if (!modocarrobool) {
+        //se o modo carro estiver desabilitado
+        if (!estalivre) {
+          if (_googleMapController != null) {
+            double currentZoomLevel =
+                await _googleMapController!.getZoomLevel();
 
-        _googleMapController!.animateCamera(
-          google_maps.CameraUpdate.newCameraPosition(
-            google_maps.CameraPosition(
-              target: google_maps.LatLng(
+            _googleMapController!.animateCamera(
+              google_maps.CameraUpdate.newCameraPosition(
+                google_maps.CameraPosition(
+                  target: google_maps.LatLng(
+                    newLoc.latitude,
+                    newLoc.longitude,
+                  ),
+                  zoom: currentZoomLevel ?? 14,
+                  bearing: currentBearing,
+                ),
+              ),
+            );
+          }
+
+          setState(() {
+            position = newLoc;
+          });
+        }
+      } else {
+        //modo carro habilitado
+        if (!estalivre) {
+          if (_googleMapController != null) {
+            double currentZoomLevel =
+                await _googleMapController!.getZoomLevel();
+
+            // Calcula o bearing (azimute) entre a posição anterior e a posição atual
+            double bearing = 0.0;
+            if (previousPosition != null) {
+              bearing = _calculateBearing(
+                previousPosition!.latitude,
+                previousPosition!.longitude,
                 newLoc.latitude,
                 newLoc.longitude,
-              ),
-              zoom: currentZoomLevel ?? 14,
-            ),
-          ),
-        );
-      }
+              );
+            }
 
-      setState(() {
-        position = newLoc;
-      });
+            _googleMapController!.animateCamera(
+              google_maps.CameraUpdate.newCameraPosition(
+                google_maps.CameraPosition(
+                  target: google_maps.LatLng(
+                    newLoc.latitude,
+                    newLoc.longitude,
+                  ),
+                  zoom: currentZoomLevel ?? 20,
+                  tilt: 90,
+                  bearing: bearing,
+                ),
+              ),
+            );
+          }
+
+          setState(() {
+            position = newLoc;
+          });
+        }
+// Atualiza a posição anterior
+        previousPosition = newLoc;
+      }
     });
   }
 
@@ -216,6 +346,10 @@ class _MapsRoutesState extends State<RotaFinal> {
     super.initState();
     _getCurrentLocation();
     addRoutePoints();
+    retiraPosicaoAtualDeRodar();
+    voltaPosicaoAtualDeRodar();
+    modoCarro();
+
     _loadCustomIcon();
   }
 
@@ -261,38 +395,94 @@ class _MapsRoutesState extends State<RotaFinal> {
     Set<google_maps.Marker> allMarkers =
         routeMarkers.union(_createCustomMarker());
 
-    return Container(
-      width: widget.width ?? 400.0,
-      height: widget.height ?? 400.0,
-      child: google_maps.GoogleMap(
-        initialCameraPosition: google_maps.CameraPosition(
-          target: google_maps.LatLng(
-            position?.latitude ?? finalLatLng.latitude,
-            position?.longitude ?? finalLatLng.latitude,
-          ),
-          zoom: 19,
-          tilt: 60,
-          bearing: 90,
-        ),
-        onMapCreated: _onMapCreated,
-        markers: allMarkers,
-        polylines: {
-          google_maps.Polyline(
-            //polylineId: google_maps.PolylineId("PolylineID"),
-            //color: Colors.blue,
-            //points: routeMarkers.map((marker) => marker.position).toList(),
+    return Stack(
+      children: [
+        Container(
+          width: widget.width ?? 400.0,
+          height: widget.height ?? 400.0,
+          child: google_maps.GoogleMap(
+            initialCameraPosition: google_maps.CameraPosition(
+              target: google_maps.LatLng(
+                position?.latitude ?? finalLatLng.latitude,
+                position?.longitude ?? finalLatLng.latitude,
+              ),
+              zoom: 19,
+              tilt: 60,
+              bearing: 90,
+            ),
+            onMapCreated: _onMapCreated,
+            onCameraMove: (google_maps.CameraPosition position) {
+              // Atualize o bearing atual com o novo valor durante o movimento da câmera
+              currentBearing = position.bearing;
+            },
+            markers: allMarkers,
+            polylines: {
+              google_maps.Polyline(
+                //polylineId: google_maps.PolylineId("PolylineID"),
+                //color: Colors.blue,
+                //points: routeMarkers.map((marker) => marker.position).toList(),
 
-            //points: routePoints,
-            //geodesic: true,
-            //),
-            //google_maps.Polyline(
-            polylineId: google_maps.PolylineId("RedPolyline"),
-            color: Colors.blue,
-            points: routePoints ??
-                routeMarkers.map((marker) => marker.position).toList(),
+                //points: routePoints,
+                //geodesic: true,
+                //),
+                //google_maps.Polyline(
+                polylineId: google_maps.PolylineId("RedPolyline"),
+                color: Colors.blue,
+                points: routePoints ??
+                    routeMarkers.map((marker) => marker.position).toList(),
+              ),
+            },
           ),
-        },
-      ),
+        ),
+        Positioned(
+          top: MediaQuery.of(context).size.height / 3.2 -
+              28.0, // Adjust the top position as needed
+          right: 5, // Adjust the left position as needed
+          child: ElevatedButton(
+            onPressed: () {
+              retiraPosicaoAtualDeRodar();
+              setState(() {
+                if (!estalivre) {
+                  icone = "center_focus_weak";
+                } else {
+                  icone = "crop_free";
+                }
+              });
+            },
+            style: ElevatedButton.styleFrom(
+              shape: CircleBorder(),
+              backgroundColor: Color(0xFF00736D),
+            ),
+            child: Icon(
+              getIconData(), // or any other compass-related icon
+              size: 25.0,
+              color: Colors.white, // Adjust the size as needed
+            ),
+          ),
+        ),
+        Positioned(
+          top: MediaQuery.of(context).size.height / 4 -
+              28.0, // Adjust the top position as needed
+          right: 5, // Adjust the left position as needed
+          child: ElevatedButton(
+            onPressed: () {
+              modoCarro();
+            },
+            style: ElevatedButton.styleFrom(
+              shape: CircleBorder(),
+              backgroundColor: Color(0xFF00736D),
+            ),
+            child: Transform.rotate(
+              angle: 30, // Your rotation angle here based on compass direction,
+              child: Icon(
+                Icons.explore, // or any other compass-related icon
+                size: 25.0,
+                color: Colors.white, // Adjust the size as needed
+              ),
+            ),
+          ),
+        ),
+      ],
     );
   }
 }
