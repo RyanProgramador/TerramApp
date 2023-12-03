@@ -27,6 +27,8 @@ class SelecionarOSModel extends FlutterFlowModel<SelecionarOSWidget> {
   bool? checkgps;
   // Stores action output result for [Custom Action - temInternet] action in SelecionarOS widget.
   bool? temInternetOsLoad;
+  // Stores action output result for [Backend Call - API (TrSincronizaCelularComBD)] action in SelecionarOS widget.
+  ApiCallResponse? apiResultxxdOnLoadPage;
   // Stores action output result for [Backend Call - API (trOsTecnico)] action in SelecionarOS widget.
   ApiCallResponse? trOsTecnicosSincroniza;
   // Stores action output result for [Backend Call - API (ordemDeServico)] action in SelecionarOS widget.

@@ -421,9 +421,17 @@ class _MultiplePlacesPickerCopyWidgetState
                                       ),
                                       child: Builder(
                                         builder: (context) {
-                                          final ordemServicos = FFAppState()
-                                              .trOsServicos
-                                              .toList();
+                                          final ordemServicos = functions
+                                                  .sortListJson(
+                                                      'oserv_id_os',
+                                                      true,
+                                                      FFAppState()
+                                                          .trOsServicos
+                                                          .toList(),
+                                                      _model
+                                                          .textController.text)
+                                                  ?.toList() ??
+                                              [];
                                           return SingleChildScrollView(
                                             child: Column(
                                               mainAxisSize: MainAxisSize.max,

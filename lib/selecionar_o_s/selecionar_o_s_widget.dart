@@ -79,52 +79,41 @@ class _SelecionarOSWidgetState extends State<SelecionarOSWidget>
       }
       if ((FFAppState().trOsDeslocamentosJsonFinalizados.length != 0) &&
           (FFAppState().sincronizcaoAutomatica == true)) {
-        await showDialog(
-          context: context,
-          builder: (alertDialogContext) {
-            return AlertDialog(
-              title: Text('Sincronizado'),
-              actions: [
-                TextButton(
-                  onPressed: () => Navigator.pop(alertDialogContext),
-                  child: Text('Ok'),
-                ),
-              ],
-            );
-          },
+        _model.apiResultxxdOnLoadPage =
+            await SincronizarGroup.trSincronizaCelularComBDCall.call(
+          urlapicall: FFAppState().urlapicall,
+          lista: functions.jsonListToStr(
+              FFAppState().trOsDeslocamentosJsonFinalizados.toList()),
+          listaGeo: functions.jsonListToStr(FFAppState().trDeslocGeo2.toList()),
         );
+        if (SincronizarGroup.trSincronizaCelularComBDCall.statusSincComCelular(
+          (_model.apiResultxxdOnLoadPage?.jsonBody ?? ''),
+        )) {
+          FFAppState().update(() {
+            FFAppState().trOsDeslocamentosJsonFinalizados = [];
+            FFAppState().trDeslocamentoGeo = [];
+            FFAppState().trDeslocGeo2 = [];
+          });
+        } else {
+          await showDialog(
+            context: context,
+            builder: (alertDialogContext) {
+              return AlertDialog(
+                title: Text('Ops!'),
+                content: Text(
+                    'Um erro inesperado aconteceu ao sincronizar automaticamente'),
+                actions: [
+                  TextButton(
+                    onPressed: () => Navigator.pop(alertDialogContext),
+                    child: Text('Ok'),
+                  ),
+                ],
+              );
+            },
+          );
+        }
       } else if ((FFAppState().sincronizcaoAutomatica == false) &&
-          (FFAppState().servicosFinalizadosComSucesso.length != 0)) {
-        await showDialog(
-          context: context,
-          builder: (alertDialogContext) {
-            return AlertDialog(
-              title: Text('Não sincroniza'),
-              actions: [
-                TextButton(
-                  onPressed: () => Navigator.pop(alertDialogContext),
-                  child: Text('Ok'),
-                ),
-              ],
-            );
-          },
-        );
-      } else {
-        await showDialog(
-          context: context,
-          builder: (alertDialogContext) {
-            return AlertDialog(
-              title: Text('ops'),
-              actions: [
-                TextButton(
-                  onPressed: () => Navigator.pop(alertDialogContext),
-                  child: Text('Ok'),
-                ),
-              ],
-            );
-          },
-        );
-      }
+          (FFAppState().servicosFinalizadosComSucesso.length != 0)) {}
 
       setState(() {
         FFAppState().AtualLocalizcao = currentUserLocationValue!.toString();
