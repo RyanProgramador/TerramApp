@@ -674,6 +674,9 @@ List<String>? retornaListaPelaData(
     return null;
   }
 
+  // Adiciona 1 dia à data final para incluir todo o último dia no intervalo
+  dataFinal = dataFinal.add(Duration(days: 1));
+
   List<String> resultados = [];
 
   for (var item in listaJsonQueDesejaRetornar) {
@@ -686,6 +689,7 @@ List<String>? retornaListaPelaData(
     }
   }
 
+  // Retorna resultados se houver, caso contrário, retorna null
   return resultados.isNotEmpty ? resultados : null;
 }
 
