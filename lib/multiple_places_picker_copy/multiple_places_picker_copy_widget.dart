@@ -494,7 +494,7 @@ class _MultiplePlacesPickerCopyWidgetState
                                       child: Builder(
                                         builder: (context) {
                                           final ordemServicos = FFAppState()
-                                              .trOrdemServicos
+                                              .trOsServicos
                                               .toList();
                                           return SingleChildScrollView(
                                             child: Column(
