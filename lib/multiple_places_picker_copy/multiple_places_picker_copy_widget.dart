@@ -423,22 +423,79 @@ class _MultiplePlacesPickerCopyWidgetState
                                         builder: (context) {
                                           final ordemServicos = functions
                                                   .sortListJson(
-                                                      'oserv_id_os',
+                                                      'oserv_id_serv',
                                                       true,
                                                       FFAppState()
                                                           .trOsServicos
                                                           .toList(),
-                                                      functions.retornaLigacaoFaz(
-                                                          FFAppState()
-                                                              .trFazendas
-                                                              .toList(),
-                                                          FFAppState()
-                                                              .trOrdemServicos
-                                                              .toList(),
-                                                          _model.textController
-                                                              .text))
+                                                      functions
+                                                          .retornaIdPeloNome(
+                                                              'serv_nome',
+                                                              'serv_id',
+                                                              _model
+                                                                  .textController
+                                                                  .text,
+                                                              FFAppState()
+                                                                  .trServicos
+                                                                  .toList()))
                                                   ?.toList() ??
                                               [];
+                                          return SingleChildScrollView(
+                                            child: Column(
+                                              mainAxisSize: MainAxisSize.max,
+                                              children: List.generate(
+                                                  ordemServicos.length,
+                                                  (ordemServicosIndex) {
+                                                final ordemServicosItem =
+                                                    ordemServicos[
+                                                        ordemServicosIndex];
+                                                return SelectionArea(
+                                                    child: Text(
+                                                  ordemServicosItem.toString(),
+                                                  style: FlutterFlowTheme.of(
+                                                          context)
+                                                      .bodyMedium
+                                                      .override(
+                                                        fontFamily:
+                                                            'Readex Pro',
+                                                        fontSize: 10.0,
+                                                      ),
+                                                ));
+                                              }),
+                                            ),
+                                          );
+                                        },
+                                      ),
+                                    ),
+                                  ),
+                                ),
+                              ),
+                            ],
+                          ),
+                        ),
+                        Padding(
+                          padding: EdgeInsetsDirectional.fromSTEB(
+                              10.0, 10.0, 10.0, 0.0),
+                          child: Row(
+                            mainAxisSize: MainAxisSize.max,
+                            crossAxisAlignment: CrossAxisAlignment.start,
+                            children: [
+                              Expanded(
+                                child: Align(
+                                  alignment: AlignmentDirectional(0.00, 0.63),
+                                  child: ClipRRect(
+                                    child: Container(
+                                      width: double.infinity,
+                                      height: 100.0,
+                                      decoration: BoxDecoration(
+                                        color: FlutterFlowTheme.of(context)
+                                            .secondaryBackground,
+                                      ),
+                                      child: Builder(
+                                        builder: (context) {
+                                          final ordemServicos = FFAppState()
+                                              .trOrdemServicos
+                                              .toList();
                                           return SingleChildScrollView(
                                             child: Column(
                                               mainAxisSize: MainAxisSize.max,

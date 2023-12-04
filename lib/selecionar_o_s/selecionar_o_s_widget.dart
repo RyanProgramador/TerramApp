@@ -379,11 +379,23 @@ class _SelecionarOSWidgetState extends State<SelecionarOSWidget>
                                                       obscureText: false,
                                                       decoration:
                                                           InputDecoration(
-                                                        labelText: FFAppState()
-                                                                    .JsonPathPesquisaAvancada ==
-                                                                'oserv_id'
-                                                            ? 'Pesquisar número da OS'
-                                                            : 'Pesquisar por cliente',
+                                                        labelText: () {
+                                                          if (FFAppState()
+                                                                  .qualSwitchEstaAtivo ==
+                                                              4) {
+                                                            return 'Pesquisar número da OS';
+                                                          } else if (FFAppState()
+                                                                  .qualSwitchEstaAtivo ==
+                                                              2) {
+                                                            return 'Pesquisar por fazenda';
+                                                          } else if (FFAppState()
+                                                                  .qualSwitchEstaAtivo ==
+                                                              3) {
+                                                            return 'Pesquisar por tipo de serviço';
+                                                          } else {
+                                                            return 'Pesquisar por cliente';
+                                                          }
+                                                        }(),
                                                         labelStyle:
                                                             FlutterFlowTheme.of(
                                                                     context)
@@ -1272,6 +1284,10 @@ class _SelecionarOSWidgetState extends State<SelecionarOSWidget>
                                                     .toList(),
                                                 _model
                                                     .searchBarController.text);
+                                          } else if (FFAppState()
+                                                  .qualSwitchEstaAtivo ==
+                                              3) {
+                                            return 'e';
                                           } else {
                                             return functions.retornaLigacaoEmp(
                                                 FFAppState()

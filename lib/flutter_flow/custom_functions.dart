@@ -589,3 +589,70 @@ String? retornaLigacaoFaz(
     }
   }
 }
+
+String? retornaIdPeloNome(
+  String? jsonPathPesquisa,
+  String? jsonpathRetorno,
+  String? valorjsonPathPesquisa,
+  List<dynamic>? lista1,
+) {
+  if (lista1 == null ||
+      jsonPathPesquisa == null ||
+      jsonpathRetorno == null ||
+      valorjsonPathPesquisa == null) {
+    return null; // Retorna null se algum dos parâmetros for nulo
+  }
+
+  // Itera sobre a lista1 e encontra o item correspondente ao valorjsonPathPesquisa
+  for (var item1 in lista1) {
+    var valorCampoLista1 = _getJsonValue(item1, jsonPathPesquisa);
+
+    // Compara o valor do campo com o valorjsonPathPesquisa
+    if (valorCampoLista1 != null &&
+        valorCampoLista1
+            .toString()
+            .toLowerCase()
+            .contains(valorjsonPathPesquisa.toLowerCase())) {
+      // Retorna o valor correspondente ao jsonpathRetorno
+      return _getJsonValue(item1, jsonpathRetorno)?.toString();
+    }
+  }
+
+  // Se não encontrar correspondência, retorna null
+  return null;
+}
+
+dynamic _getJsonValue(dynamic json, String? jsonPath) {
+  if (jsonPath == null) {
+    return null;
+  }
+
+  var keys = jsonPath.split('.');
+  dynamic result = json;
+
+  for (var key in keys) {
+    if (result is Map) {
+      if (result.containsKey(key)) {
+        result = result[key];
+      } else {
+        return null;
+      }
+    } else if (result is List) {
+      int index;
+      try {
+        index = int.parse(key);
+      } catch (e) {
+        return null;
+      }
+      if (index >= 0 && index < result.length) {
+        result = result[index];
+      } else {
+        return null;
+      }
+    } else {
+      return null;
+    }
+  }
+
+  return result;
+}
