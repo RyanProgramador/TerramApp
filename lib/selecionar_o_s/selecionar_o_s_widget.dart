@@ -1330,28 +1330,7 @@ class _SelecionarOSWidgetState extends State<SelecionarOSWidget>
                                           } else if (FFAppState()
                                                   .qualSwitchEstaAtivo ==
                                               5) {
-                                            return (functions.retornaListaPelaData(
-                                                            _model.calendarRange
-                                                                ?.first,
-                                                            _model.calendarRange
-                                                                ?.last,
-                                                            'oserv_dthr_agendamento',
-                                                            FFAppState()
-                                                                .trOsServicos
-                                                                .toList()) !=
-                                                        null &&
-                                                    functions
-                                                        .retornaListaPelaData(
-                                                            _model.calendarRange
-                                                                ?.first,
-                                                            _model.calendarRange
-                                                                ?.last,
-                                                            'oserv_dthr_agendamento',
-                                                            FFAppState()
-                                                                .trOsServicos
-                                                                .toList())
-                                                        .isNotEmpty)
-                                                .toString();
+                                            return 'd';
                                           } else {
                                             return functions.retornaLigacaoEmp(
                                                 FFAppState()
