@@ -221,7 +221,8 @@ class _SelecionarOSWidgetState extends State<SelecionarOSWidget>
     });
 
     _model.searchBarController ??= TextEditingController(
-        text: FFAppState().qualSwitchEstaAtivo == 5
+        text: (FFAppState().qualSwitchEstaAtivo == 5) &&
+                (_model.calendarRange?.first != null)
             ? 'De: ${dateTimeFormat(
                 'd/M/y',
                 _model.calendarRange?.first,
@@ -547,6 +548,7 @@ class _SelecionarOSWidgetState extends State<SelecionarOSWidget>
                                                             .calendarRangerAction(
                                                       context,
                                                     );
+                                                    setState(() {});
 
                                                     setState(() {});
                                                   },
