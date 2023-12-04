@@ -1246,29 +1246,44 @@ class _SelecionarOSWidgetState extends State<SelecionarOSWidget>
                                   _model.searchBarController.text != '')
                                 Builder(
                                   builder: (context) {
-                                    final trOsServicos = functions
-                                            .sortListJson(
+                                    final trOsServicos = functions.sortListJson(
+                                            FFAppState()
+                                                .JsonPathPesquisaAvancada,
+                                            true,
+                                            FFAppState().trOsServicos.toList(),
+                                            () {
+                                          if ((FFAppState()
+                                                      .JsonPathPesquisaAvancada ==
+                                                  'oserv_id') &&
+                                              (FFAppState()
+                                                      .qualSwitchEstaAtivo ==
+                                                  4)) {
+                                            return _model
+                                                .searchBarController.text;
+                                          } else if (FFAppState()
+                                                  .qualSwitchEstaAtivo ==
+                                              2) {
+                                            return functions.retornaLigacaoFaz(
                                                 FFAppState()
-                                                    .JsonPathPesquisaAvancada,
-                                                true,
-                                                FFAppState()
-                                                    .trOsServicos
+                                                    .trFazendas
                                                     .toList(),
-                                                FFAppState().JsonPathPesquisaAvancada ==
-                                                        'oserv_id'
-                                                    ? _model.searchBarController
-                                                        .text
-                                                    : functions.retornaLigacaoEmp(
-                                                        FFAppState()
-                                                            .trEmpresas
-                                                            .toList(),
-                                                        FFAppState()
-                                                            .trOrdemServicos
-                                                            .toList(),
-                                                        _model
-                                                            .searchBarController
-                                                            .text))
-                                            ?.toList() ??
+                                                FFAppState()
+                                                    .trOrdemServicos
+                                                    .toList(),
+                                                _model
+                                                    .searchBarController.text);
+                                          } else {
+                                            return functions.retornaLigacaoEmp(
+                                                FFAppState()
+                                                    .trEmpresas
+                                                    .toList(),
+                                                FFAppState()
+                                                    .trOrdemServicos
+                                                    .toList(),
+                                                _model
+                                                    .searchBarController.text);
+                                          }
+                                        }())?.toList() ??
                                         [];
                                     if (trOsServicos.isEmpty) {
                                       return Center(
