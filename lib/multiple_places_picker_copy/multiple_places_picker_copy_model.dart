@@ -6,6 +6,7 @@ import '/flutter_flow/flutter_flow_timer.dart';
 import '/flutter_flow/flutter_flow_util.dart';
 import '/flutter_flow/flutter_flow_widgets.dart';
 import '/backend/schema/structs/index.dart';
+import '/custom_code/actions/index.dart' as actions;
 import '/flutter_flow/custom_functions.dart' as functions;
 import 'multiple_places_picker_copy_widget.dart'
     show MultiplePlacesPickerCopyWidget;
@@ -48,6 +49,8 @@ class MultiplePlacesPickerCopyModel
   FlutterFlowTimerController timer1Controller =
       FlutterFlowTimerController(StopWatchTimer(mode: StopWatchMode.countDown));
 
+  // Stores action output result for [Custom Action - calendarRangerAction] action in Row widget.
+  List<DateTime>? retornoCalendar;
   // State field(s) for TextField widget.
   FocusNode? textFieldFocusNode;
   TextEditingController? textController;

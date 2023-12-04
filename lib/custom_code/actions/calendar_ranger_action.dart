@@ -1,0 +1,28 @@
+// Automatic FlutterFlow imports
+import '/backend/schema/structs/index.dart';
+import '/flutter_flow/flutter_flow_theme.dart';
+import '/flutter_flow/flutter_flow_util.dart';
+import 'index.dart'; // Imports other custom actions
+import '/flutter_flow/custom_functions.dart'; // Imports custom functions
+import 'package:flutter/material.dart';
+// Begin custom action code
+// DO NOT REMOVE OR MODIFY THE CODE ABOVE!
+
+import 'package:calendar_date_picker2/calendar_date_picker2.dart';
+
+Future<List<DateTime>?> calendarRangerAction(BuildContext context) async {
+  final values = await showCalendarDatePicker2Dialog(
+    context: context,
+    config: CalendarDatePicker2WithActionButtonsConfig(
+      calendarType: CalendarDatePicker2Type.range,
+    ),
+    dialogSize: const Size(325, 400),
+  );
+
+  if (values != null && values.length == 2) {
+    final selectedDates = values.map((date) => date ?? DateTime.now()).toList();
+    return selectedDates;
+  }
+
+  return null;
+}

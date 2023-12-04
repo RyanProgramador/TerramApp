@@ -659,3 +659,79 @@ dynamic _getJsonValue(dynamic json, String? jsonPath) {
 
   return result ?? null;
 }
+
+List<String>? retornaListaPelaData(
+  DateTime? datainicial,
+  DateTime? dataFinal,
+  String? jsonPath,
+  List<dynamic>? listaJsonQueDesejaRetornar,
+) {
+//teste
+  if (datainicial == null ||
+      dataFinal == null ||
+      jsonPath == null ||
+      listaJsonQueDesejaRetornar == null) {
+    return null;
+  }
+
+  List<String> resultados = [];
+
+  for (var item in listaJsonQueDesejaRetornar) {
+    var dataAgendamento = _getJsonDateTime(item, jsonPath);
+
+    if (dataAgendamento != null &&
+        dataAgendamento.isAfter(datainicial) &&
+        dataAgendamento.isBefore(dataFinal)) {
+      resultados.add(item.toString());
+    }
+  }
+
+  return resultados.isNotEmpty ? resultados : null;
+}
+
+DateTime? _getJsonDateTime(dynamic json, String jsonPath) {
+  var value = _getJsonFieldValue(json, jsonPath);
+  if (value is String) {
+    try {
+      return DateTime.parse(value);
+    } catch (e) {
+      return null;
+    }
+  }
+  return null;
+}
+
+dynamic _getJsonFieldValue(dynamic json, String jsonPath) {
+  if (jsonPath == null) {
+    return null;
+  }
+
+  var keys = jsonPath.split('.');
+  dynamic result = json;
+
+  for (var key in keys) {
+    if (result is Map) {
+      if (result.containsKey(key)) {
+        result = result[key];
+      } else {
+        return null;
+      }
+    } else if (result is List) {
+      int index;
+      try {
+        index = int.parse(key);
+      } catch (e) {
+        return null;
+      }
+      if (index >= 0 && index < result.length) {
+        result = result[index];
+      } else {
+        return null;
+      }
+    } else {
+      return null;
+    }
+  }
+
+  return result;
+}
