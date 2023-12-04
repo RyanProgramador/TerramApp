@@ -367,7 +367,7 @@ class _SelecionarOSWidgetState extends State<SelecionarOSWidget>
                                                           EasyDebounce.debounce(
                                                         '_model.searchBarController',
                                                         Duration(
-                                                            milliseconds: 2000),
+                                                            milliseconds: 100),
                                                         () async {
                                                           setState(() {});
                                                         },
