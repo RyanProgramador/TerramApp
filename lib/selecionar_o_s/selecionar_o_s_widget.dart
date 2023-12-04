@@ -1306,12 +1306,9 @@ class _SelecionarOSWidgetState extends State<SelecionarOSWidget>
                                   (FFAppState().qualSwitchEstaAtivo == 5))
                                 Builder(
                                   builder: (context) {
-                                    final trOsServicos = ((FFAppState()
-                                                            .qualSwitchEstaAtivo ==
-                                                        5) &&
-                                                    (_model.calendarRange
-                                                            ?.first !=
-                                                        null)
+                                    final trOsServicos = (FFAppState()
+                                                        .qualSwitchEstaAtivo ==
+                                                    5
                                                 ? functions.retornaListaPelaData(
                                                     _model.calendarRange?.first,
                                                     _model.calendarRange?.last,
