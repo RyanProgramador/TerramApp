@@ -16,14 +16,16 @@ class PesquisaAvanadabtnModel
 
   ///  State fields for stateful widgets in this component.
 
-  // State field(s) for Switch widget.
-  bool? switchValue1;
-  // State field(s) for Switch widget.
-  bool? switchValue2;
-  // State field(s) for Switch widget.
-  bool? switchValue3;
-  // State field(s) for Switch widget.
-  bool? switchValue4;
+  // State field(s) for Switch1 widget.
+  bool? switch1Value;
+  // State field(s) for Switch2 widget.
+  bool? switch2Value;
+  // State field(s) for Switch3 widget.
+  bool? switch3Value;
+  // State field(s) for Switch4 widget.
+  bool? switch4Value;
+  // State field(s) for Switch5 widget.
+  bool? switch5Value;
 
   /// Initialization and disposal methods.
 

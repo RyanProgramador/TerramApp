@@ -107,9 +107,23 @@ class _PesquisaAvanadabtnWidgetState extends State<PesquisaAvanadabtnWidget> {
                         ),
                   ),
                   Switch.adaptive(
-                    value: _model.switchValue1 ??= false,
+                    value: _model.switch1Value ??= false,
                     onChanged: (newValue) async {
-                      setState(() => _model.switchValue1 = newValue!);
+                      setState(() => _model.switch1Value = newValue!);
+                      if (newValue!) {
+                        setState(() {
+                          _model.switch4Value = false;
+                        });
+                        setState(() {
+                          _model.switch3Value = false;
+                        });
+                        setState(() {
+                          _model.switch2Value = false;
+                        });
+                        setState(() {
+                          _model.switch5Value = false;
+                        });
+                      }
                     },
                     activeColor: FlutterFlowTheme.of(context).primary,
                     activeTrackColor: Color(0x4B00736D),
@@ -134,9 +148,23 @@ class _PesquisaAvanadabtnWidgetState extends State<PesquisaAvanadabtnWidget> {
                         ),
                   ),
                   Switch.adaptive(
-                    value: _model.switchValue2 ??= false,
+                    value: _model.switch2Value ??= false,
                     onChanged: (newValue) async {
-                      setState(() => _model.switchValue2 = newValue!);
+                      setState(() => _model.switch2Value = newValue!);
+                      if (newValue!) {
+                        setState(() {
+                          _model.switch4Value = false;
+                        });
+                        setState(() {
+                          _model.switch3Value = false;
+                        });
+                        setState(() {
+                          _model.switch1Value = false;
+                        });
+                        setState(() {
+                          _model.switch5Value = false;
+                        });
+                      }
                     },
                     activeColor: FlutterFlowTheme.of(context).primary,
                     activeTrackColor: Color(0x4B00736D),
@@ -161,9 +189,64 @@ class _PesquisaAvanadabtnWidgetState extends State<PesquisaAvanadabtnWidget> {
                         ),
                   ),
                   Switch.adaptive(
-                    value: _model.switchValue3 ??= false,
+                    value: _model.switch3Value ??= false,
                     onChanged: (newValue) async {
-                      setState(() => _model.switchValue3 = newValue!);
+                      setState(() => _model.switch3Value = newValue!);
+                      if (newValue!) {
+                        setState(() {
+                          _model.switch4Value = false;
+                        });
+                        setState(() {
+                          _model.switch1Value = false;
+                        });
+                        setState(() {
+                          _model.switch2Value = false;
+                        });
+                        setState(() {
+                          _model.switch5Value = false;
+                        });
+                      }
+                    },
+                    activeColor: FlutterFlowTheme.of(context).primary,
+                    activeTrackColor: Color(0x4B00736D),
+                    inactiveTrackColor: FlutterFlowTheme.of(context).alternate,
+                    inactiveThumbColor:
+                        FlutterFlowTheme.of(context).secondaryText,
+                  ),
+                ],
+              ),
+            ),
+            Expanded(
+              child: Row(
+                mainAxisSize: MainAxisSize.max,
+                mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                children: [
+                  Text(
+                    'N° OS',
+                    style: FlutterFlowTheme.of(context).bodyMedium.override(
+                          fontFamily: 'Outfit',
+                          fontSize: 18.0,
+                          fontWeight: FontWeight.w500,
+                        ),
+                  ),
+                  Switch.adaptive(
+                    value: _model.switch4Value ??= true,
+                    onChanged: (newValue) async {
+                      setState(() => _model.switch4Value = newValue!);
+                      if (newValue!) {
+                        setState(() {
+                          _model.switch1Value = false;
+                        });
+                        setState(() {
+                          _model.switch3Value = false;
+                        });
+                        setState(() {
+                          _model.switch2Value = false;
+                        });
+                        setState(() {
+                          _model.switch5Value = false;
+                        });
+                      }
                     },
                     activeColor: FlutterFlowTheme.of(context).primary,
                     activeTrackColor: Color(0x4B00736D),
@@ -188,9 +271,23 @@ class _PesquisaAvanadabtnWidgetState extends State<PesquisaAvanadabtnWidget> {
                         ),
                   ),
                   Switch.adaptive(
-                    value: _model.switchValue4 ??= false,
+                    value: _model.switch5Value ??= false,
                     onChanged: (newValue) async {
-                      setState(() => _model.switchValue4 = newValue!);
+                      setState(() => _model.switch5Value = newValue!);
+                      if (newValue!) {
+                        setState(() {
+                          _model.switch1Value = false;
+                        });
+                        setState(() {
+                          _model.switch3Value = false;
+                        });
+                        setState(() {
+                          _model.switch2Value = false;
+                        });
+                        setState(() {
+                          _model.switch4Value = false;
+                        });
+                      }
                     },
                     activeColor: FlutterFlowTheme.of(context).primary,
                     activeTrackColor: Color(0x4B00736D),
@@ -203,7 +300,7 @@ class _PesquisaAvanadabtnWidgetState extends State<PesquisaAvanadabtnWidget> {
             ),
             Container(
               width: double.infinity,
-              height: 100.0,
+              height: 60.0,
               decoration: BoxDecoration(
                 color: FlutterFlowTheme.of(context).secondaryBackground,
               ),

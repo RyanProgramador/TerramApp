@@ -1228,7 +1228,8 @@ class _SelecionarOSWidgetState extends State<SelecionarOSWidget>
                                 builder: (context) {
                                   final trOsServicos = functions
                                           .sortListJson(
-                                              'oserv_id',
+                                              FFAppState()
+                                                  .JsonPathPesquisaAvancada,
                                               true,
                                               FFAppState()
                                                   .trOsServicos

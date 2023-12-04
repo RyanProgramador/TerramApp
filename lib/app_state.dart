@@ -280,6 +280,11 @@ class FFAppState extends ChangeNotifier {
       _sincronizcaoAutomatica =
           prefs.getBool('ff_sincronizcaoAutomatica') ?? _sincronizcaoAutomatica;
     });
+    _safeInit(() {
+      _JsonPathPesquisaAvancada =
+          prefs.getString('ff_JsonPathPesquisaAvancada') ??
+              _JsonPathPesquisaAvancada;
+    });
   }
 
   void update(VoidCallback callback) {
@@ -1153,6 +1158,13 @@ class FFAppState extends ChangeNotifier {
   set sincronizcaoAutomatica(bool _value) {
     _sincronizcaoAutomatica = _value;
     prefs.setBool('ff_sincronizcaoAutomatica', _value);
+  }
+
+  String _JsonPathPesquisaAvancada = 'oserv_id';
+  String get JsonPathPesquisaAvancada => _JsonPathPesquisaAvancada;
+  set JsonPathPesquisaAvancada(String _value) {
+    _JsonPathPesquisaAvancada = _value;
+    prefs.setString('ff_JsonPathPesquisaAvancada', _value);
   }
 }
 
