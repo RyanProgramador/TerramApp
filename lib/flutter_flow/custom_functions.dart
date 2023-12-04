@@ -602,12 +602,15 @@ String? retornaIdPeloNome(
       valorjsonPathPesquisa == null) {
     return null; // Retorna null se algum dos parâmetros for nulo
   }
+  if (valorjsonPathPesquisa == null || valorjsonPathPesquisa.trim().isEmpty) {
+    return null;
+  }
 
   // Itera sobre a lista1 e encontra o item correspondente ao valorjsonPathPesquisa
   for (var item1 in lista1) {
     var valorCampoLista1 = _getJsonValue(item1, jsonPathPesquisa);
 
-    // Compara o valor do campo com o valorjsonPathPesquisa
+    // Compara o valor do campo com o valorjsonPathPesquisa, ignorando maiúsculas e minúsculas
     if (valorCampoLista1 != null &&
         valorCampoLista1
             .toString()
@@ -622,6 +625,7 @@ String? retornaIdPeloNome(
   return null;
 }
 
+// Função auxiliar para obter o valor de um campo em uma estrutura JSON
 dynamic _getJsonValue(dynamic json, String? jsonPath) {
   if (jsonPath == null) {
     return null;
@@ -654,5 +658,5 @@ dynamic _getJsonValue(dynamic json, String? jsonPath) {
     }
   }
 
-  return result;
+  return result; // Retorna o valor final ou null se não encontrado
 }
