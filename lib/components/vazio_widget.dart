@@ -4,18 +4,18 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:provider/provider.dart';
-import 'loading_comp_model.dart';
-export 'loading_comp_model.dart';
+import 'vazio_model.dart';
+export 'vazio_model.dart';
 
-class LoadingCompWidget extends StatefulWidget {
-  const LoadingCompWidget({Key? key}) : super(key: key);
+class VazioWidget extends StatefulWidget {
+  const VazioWidget({Key? key}) : super(key: key);
 
   @override
-  _LoadingCompWidgetState createState() => _LoadingCompWidgetState();
+  _VazioWidgetState createState() => _VazioWidgetState();
 }
 
-class _LoadingCompWidgetState extends State<LoadingCompWidget> {
-  late LoadingCompModel _model;
+class _VazioWidgetState extends State<VazioWidget> {
+  late VazioModel _model;
 
   @override
   void setState(VoidCallback callback) {
@@ -26,7 +26,7 @@ class _LoadingCompWidgetState extends State<LoadingCompWidget> {
   @override
   void initState() {
     super.initState();
-    _model = createModel(context, () => LoadingCompModel());
+    _model = createModel(context, () => VazioModel());
   }
 
   @override
@@ -59,7 +59,7 @@ class _LoadingCompWidgetState extends State<LoadingCompWidget> {
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
                   Text(
-                    'Ops! parece que não ha registros!',
+                    'Carregando...',
                     textAlign: TextAlign.start,
                     style: FlutterFlowTheme.of(context).headlineLarge.override(
                           fontFamily: 'Outfit',
@@ -68,7 +68,7 @@ class _LoadingCompWidgetState extends State<LoadingCompWidget> {
                         ),
                   ),
                   Text(
-                    'Por favor, tente novamente.',
+                    'Por favor, aguarde.',
                     style: FlutterFlowTheme.of(context).headlineLarge.override(
                           fontFamily: 'Readex Pro',
                           color: Colors.black,
