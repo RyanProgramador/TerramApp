@@ -220,7 +220,18 @@ class _SelecionarOSWidgetState extends State<SelecionarOSWidget>
       }
     });
 
-    _model.searchBarController ??= TextEditingController();
+    _model.searchBarController ??= TextEditingController(
+        text: FFAppState().qualSwitchEstaAtivo == 5
+            ? 'De: ${dateTimeFormat(
+                'd/M/y',
+                _model.calendarRange?.first,
+                locale: FFLocalizations.of(context).languageCode,
+              )} até ${dateTimeFormat(
+                'd/M/y',
+                _model.calendarRange?.last,
+                locale: FFLocalizations.of(context).languageCode,
+              )}'
+            : null);
     _model.searchBarFocusNode ??= FocusNode();
   }
 
@@ -392,6 +403,10 @@ class _SelecionarOSWidgetState extends State<SelecionarOSWidget>
                                                                   .qualSwitchEstaAtivo ==
                                                               3) {
                                                             return 'Pesquisar por tipo de serviço';
+                                                          } else if (FFAppState()
+                                                                  .qualSwitchEstaAtivo ==
+                                                              5) {
+                                                            return 'Pesquisar por data de agendamento';
                                                           } else {
                                                             return 'Pesquisar por cliente';
                                                           }
@@ -542,7 +557,7 @@ class _SelecionarOSWidgetState extends State<SelecionarOSWidget>
                                                         1.0,
                                                     height: 65.0,
                                                     decoration: BoxDecoration(
-                                                      color: Color(0xACFFFFFF),
+                                                      color: Color(0x00FFFFFF),
                                                     ),
                                                   ),
                                                 ),
