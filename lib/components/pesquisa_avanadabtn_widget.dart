@@ -292,7 +292,8 @@ class _PesquisaAvanadabtnWidgetState extends State<PesquisaAvanadabtnWidget> {
                         ),
                   ),
                   Switch.adaptive(
-                    value: _model.switch5Value ??= false,
+                    value: _model.switch5Value ??=
+                        FFAppState().qualSwitchEstaAtivo == 5 ? true : false,
                     onChanged: (newValue) async {
                       setState(() => _model.switch5Value = newValue!);
                       if (newValue!) {

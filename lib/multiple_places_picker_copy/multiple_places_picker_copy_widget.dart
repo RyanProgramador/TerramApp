@@ -467,7 +467,10 @@ class _MultiplePlacesPickerCopyWidgetState
                                                         ordemServicosIndex];
                                                 return SelectionArea(
                                                     child: Text(
-                                                  ordemServicosItem.toString(),
+                                                  getJsonField(
+                                                    ordemServicosItem,
+                                                    r'''$.oserv_id''',
+                                                  ).toString(),
                                                   style: FlutterFlowTheme.of(
                                                           context)
                                                       .bodyMedium
