@@ -205,6 +205,10 @@ class _PesquisaAvanadabtnWidgetState extends State<PesquisaAvanadabtnWidget> {
                         setState(() {
                           _model.switch5Value = false;
                         });
+                        setState(() {
+                          FFAppState().JsonPathPesquisaAvancada =
+                              'oserv_id_serv';
+                        });
                       }
                     },
                     activeColor: FlutterFlowTheme.of(context).primary,
@@ -245,6 +249,9 @@ class _PesquisaAvanadabtnWidgetState extends State<PesquisaAvanadabtnWidget> {
                         });
                         setState(() {
                           _model.switch5Value = false;
+                        });
+                        setState(() {
+                          FFAppState().JsonPathPesquisaAvancada = 'oserv_id';
                         });
                       }
                     },

@@ -10,6 +10,7 @@ import '/flutter_flow/flutter_flow_widgets.dart';
 import '/custom_code/actions/index.dart' as actions;
 import '/flutter_flow/custom_functions.dart' as functions;
 import '/flutter_flow/permissions_util.dart';
+import 'package:easy_debounce/easy_debounce.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/scheduler.dart';
 import 'package:flutter/services.dart';
@@ -362,13 +363,23 @@ class _SelecionarOSWidgetState extends State<SelecionarOSWidget>
                                                           .searchBarController,
                                                       focusNode: _model
                                                           .searchBarFocusNode,
+                                                      onChanged: (_) =>
+                                                          EasyDebounce.debounce(
+                                                        '_model.searchBarController',
+                                                        Duration(
+                                                            milliseconds: 2000),
+                                                        () async {
+                                                          setState(() {});
+                                                        },
+                                                      ),
                                                       textCapitalization:
                                                           TextCapitalization
                                                               .words,
                                                       obscureText: false,
                                                       decoration:
                                                           InputDecoration(
-                                                        labelText: 'Pesquisar',
+                                                        labelText:
+                                                            'Pesquisar número da OS',
                                                         labelStyle:
                                                             FlutterFlowTheme.of(
                                                                     context)
