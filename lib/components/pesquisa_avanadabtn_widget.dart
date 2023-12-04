@@ -308,6 +308,9 @@ class _PesquisaAvanadabtnWidgetState extends State<PesquisaAvanadabtnWidget> {
                         setState(() {
                           _model.switch4Value = false;
                         });
+                        setState(() {
+                          FFAppState().qualSwitchEstaAtivo = 5;
+                        });
                       }
                     },
                     activeColor: FlutterFlowTheme.of(context).primary,

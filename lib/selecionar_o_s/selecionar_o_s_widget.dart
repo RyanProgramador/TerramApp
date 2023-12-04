@@ -542,7 +542,7 @@ class _SelecionarOSWidgetState extends State<SelecionarOSWidget>
                                                         1.0,
                                                     height: 65.0,
                                                     decoration: BoxDecoration(
-                                                      color: Color(0x00FFFFFF),
+                                                      color: Color(0xACFFFFFF),
                                                     ),
                                                   ),
                                                 ),
