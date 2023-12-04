@@ -107,7 +107,8 @@ class _PesquisaAvanadabtnWidgetState extends State<PesquisaAvanadabtnWidget> {
                         ),
                   ),
                   Switch.adaptive(
-                    value: _model.switch1Value ??= false,
+                    value: _model.switch1Value ??=
+                        FFAppState().qualSwitchEstaAtivo == 1 ? true : false,
                     onChanged: (newValue) async {
                       setState(() => _model.switch1Value = newValue!);
                       if (newValue!) {
@@ -125,6 +126,7 @@ class _PesquisaAvanadabtnWidgetState extends State<PesquisaAvanadabtnWidget> {
                         });
                         setState(() {
                           FFAppState().JsonPathPesquisaAvancada = 'oserv_id_os';
+                          FFAppState().qualSwitchEstaAtivo = 1;
                         });
                       }
                     },
@@ -151,7 +153,8 @@ class _PesquisaAvanadabtnWidgetState extends State<PesquisaAvanadabtnWidget> {
                         ),
                   ),
                   Switch.adaptive(
-                    value: _model.switch2Value ??= false,
+                    value: _model.switch2Value ??=
+                        FFAppState().qualSwitchEstaAtivo == 2 ? true : false,
                     onChanged: (newValue) async {
                       setState(() => _model.switch2Value = newValue!);
                       if (newValue!) {
@@ -166,6 +169,9 @@ class _PesquisaAvanadabtnWidgetState extends State<PesquisaAvanadabtnWidget> {
                         });
                         setState(() {
                           _model.switch5Value = false;
+                        });
+                        setState(() {
+                          FFAppState().qualSwitchEstaAtivo = 2;
                         });
                       }
                     },
@@ -192,7 +198,8 @@ class _PesquisaAvanadabtnWidgetState extends State<PesquisaAvanadabtnWidget> {
                         ),
                   ),
                   Switch.adaptive(
-                    value: _model.switch3Value ??= false,
+                    value: _model.switch3Value ??=
+                        FFAppState().qualSwitchEstaAtivo == 3 ? true : false,
                     onChanged: (newValue) async {
                       setState(() => _model.switch3Value = newValue!);
                       if (newValue!) {
@@ -211,6 +218,7 @@ class _PesquisaAvanadabtnWidgetState extends State<PesquisaAvanadabtnWidget> {
                         setState(() {
                           FFAppState().JsonPathPesquisaAvancada =
                               'oserv_id_serv';
+                          FFAppState().qualSwitchEstaAtivo = 3;
                         });
                       }
                     },
@@ -237,7 +245,8 @@ class _PesquisaAvanadabtnWidgetState extends State<PesquisaAvanadabtnWidget> {
                         ),
                   ),
                   Switch.adaptive(
-                    value: _model.switch4Value ??= true,
+                    value: _model.switch4Value ??=
+                        FFAppState().qualSwitchEstaAtivo == 4 ? true : false,
                     onChanged: (newValue) async {
                       setState(() => _model.switch4Value = newValue!);
                       if (newValue!) {
@@ -255,6 +264,7 @@ class _PesquisaAvanadabtnWidgetState extends State<PesquisaAvanadabtnWidget> {
                         });
                         setState(() {
                           FFAppState().JsonPathPesquisaAvancada = 'oserv_id';
+                          FFAppState().qualSwitchEstaAtivo = 4;
                         });
                       }
                     },
@@ -284,23 +294,25 @@ class _PesquisaAvanadabtnWidgetState extends State<PesquisaAvanadabtnWidget> {
                     ),
                     Switch.adaptive(
                       value: _model.switch5Value ??= false,
-                      onChanged: (newValue) async {
-                        setState(() => _model.switch5Value = newValue!);
-                        if (newValue!) {
-                          setState(() {
-                            _model.switch1Value = false;
-                          });
-                          setState(() {
-                            _model.switch3Value = false;
-                          });
-                          setState(() {
-                            _model.switch2Value = false;
-                          });
-                          setState(() {
-                            _model.switch4Value = false;
-                          });
-                        }
-                      },
+                      onChanged: true != false
+                          ? null
+                          : (newValue) async {
+                              setState(() => _model.switch5Value = newValue!);
+                              if (newValue!) {
+                                setState(() {
+                                  _model.switch1Value = false;
+                                });
+                                setState(() {
+                                  _model.switch3Value = false;
+                                });
+                                setState(() {
+                                  _model.switch2Value = false;
+                                });
+                                setState(() {
+                                  _model.switch4Value = false;
+                                });
+                              }
+                            },
                       activeColor: FlutterFlowTheme.of(context).primary,
                       activeTrackColor: Color(0x4B00736D),
                       inactiveTrackColor:

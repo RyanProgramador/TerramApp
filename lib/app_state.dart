@@ -285,6 +285,10 @@ class FFAppState extends ChangeNotifier {
           prefs.getString('ff_JsonPathPesquisaAvancada') ??
               _JsonPathPesquisaAvancada;
     });
+    _safeInit(() {
+      _qualSwitchEstaAtivo =
+          prefs.getInt('ff_qualSwitchEstaAtivo') ?? _qualSwitchEstaAtivo;
+    });
   }
 
   void update(VoidCallback callback) {
@@ -1165,6 +1169,13 @@ class FFAppState extends ChangeNotifier {
   set JsonPathPesquisaAvancada(String _value) {
     _JsonPathPesquisaAvancada = _value;
     prefs.setString('ff_JsonPathPesquisaAvancada', _value);
+  }
+
+  int _qualSwitchEstaAtivo = 4;
+  int get qualSwitchEstaAtivo => _qualSwitchEstaAtivo;
+  set qualSwitchEstaAtivo(int _value) {
+    _qualSwitchEstaAtivo = _value;
+    prefs.setInt('ff_qualSwitchEstaAtivo', _value);
   }
 }
 
