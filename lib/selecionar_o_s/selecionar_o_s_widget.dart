@@ -378,8 +378,11 @@ class _SelecionarOSWidgetState extends State<SelecionarOSWidget>
                                                       obscureText: false,
                                                       decoration:
                                                           InputDecoration(
-                                                        labelText:
-                                                            'Pesquisar número da OS',
+                                                        labelText: FFAppState()
+                                                                    .JsonPathPesquisaAvancada ==
+                                                                'oserv_id'
+                                                            ? 'Pesquisar número da OS'
+                                                            : 'Pesquisar por cliente',
                                                         labelStyle:
                                                             FlutterFlowTheme.of(
                                                                     context)
