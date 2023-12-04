@@ -635,7 +635,7 @@ class _MultiplePlacesPickerCopyWidgetState
                                 style: FlutterFlowTheme.of(context).bodyMedium,
                               ),
                               Text(
-                                'Empresas',
+                                'Serviços',
                                 style: FlutterFlowTheme.of(context).bodyMedium,
                               ),
                             ],
@@ -734,7 +734,7 @@ class _MultiplePlacesPickerCopyWidgetState
                                               builder: (context) {
                                                 final trEmpresasList =
                                                     FFAppState()
-                                                        .trEmpresas
+                                                        .trServicos
                                                         .toList();
                                                 return SingleChildScrollView(
                                                   child: Column(
