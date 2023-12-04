@@ -732,7 +732,7 @@ class _MultiplePlacesPickerCopyWidgetState
                                             ),
                                             child: Builder(
                                               builder: (context) {
-                                                final trEmpresasList =
+                                                final trServiosList =
                                                     FFAppState()
                                                         .trServicos
                                                         .toList();
@@ -741,13 +741,13 @@ class _MultiplePlacesPickerCopyWidgetState
                                                     mainAxisSize:
                                                         MainAxisSize.max,
                                                     children: List.generate(
-                                                        trEmpresasList.length,
-                                                        (trEmpresasListIndex) {
-                                                      final trEmpresasListItem =
-                                                          trEmpresasList[
-                                                              trEmpresasListIndex];
+                                                        trServiosList.length,
+                                                        (trServiosListIndex) {
+                                                      final trServiosListItem =
+                                                          trServiosList[
+                                                              trServiosListIndex];
                                                       return Text(
-                                                        trEmpresasListItem
+                                                        trServiosListItem
                                                             .toString(),
                                                         style: FlutterFlowTheme
                                                                 .of(context)
