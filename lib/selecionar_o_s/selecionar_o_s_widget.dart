@@ -1249,7 +1249,19 @@ class _SelecionarOSWidgetState extends State<SelecionarOSWidget>
                                               FFAppState()
                                                   .trOsServicos
                                                   .toList(),
-                                              _model.searchBarController.text)
+                                              FFAppState().JsonPathPesquisaAvancada ==
+                                                      'oserv_id'
+                                                  ? _model
+                                                      .searchBarController.text
+                                                  : functions.retornaLigacao(
+                                                      FFAppState()
+                                                          .trEmpresas
+                                                          .toList(),
+                                                      FFAppState()
+                                                          .trOrdemServicos
+                                                          .toList(),
+                                                      _model.searchBarController
+                                                          .text))
                                           ?.toList() ??
                                       [];
                                   if (trOsServicos.isEmpty) {

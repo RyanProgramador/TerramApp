@@ -533,3 +533,32 @@ List<dynamic>? sortListJson(
     return listaJson;
   }
 }
+
+String? retornaLigacao(
+  List<dynamic>? listaQueContemOTermoNaListaPesquisado,
+  List<dynamic>? listaQueEstaLigadaAListaDoTermo,
+  String? termoPesquisado,
+) {
+  if (listaQueContemOTermoNaListaPesquisado == null ||
+      listaQueEstaLigadaAListaDoTermo == null ||
+      termoPesquisado == null) {
+    return null;
+  }
+
+  for (var itemNaLista in listaQueContemOTermoNaListaPesquisado) {
+    if (itemNaLista.containsKey("emp_nome") &&
+        itemNaLista["emp_nome"]
+            .toString()
+            .toLowerCase()
+            .contains(termoPesquisado.toLowerCase())) {
+      for (var itemLigadoNaLista in listaQueEstaLigadaAListaDoTermo) {
+        if (itemLigadoNaLista.containsKey("os_id_emp") &&
+            itemLigadoNaLista["os_id_emp"] == itemNaLista["emp_id"]) {
+          return itemLigadoNaLista["os_id"].toString();
+        }
+      }
+    }
+  }
+
+  return null;
+}

@@ -70,7 +70,7 @@ class _PesquisaAvanadabtnWidgetState extends State<PesquisaAvanadabtnWidget> {
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: [
                 Text(
-                  'Pesquisar por',
+                  'Pesquisar por...',
                   style: FlutterFlowTheme.of(context).bodyMedium.override(
                         fontFamily: 'Outfit',
                         fontSize: 18.0,
@@ -122,6 +122,9 @@ class _PesquisaAvanadabtnWidgetState extends State<PesquisaAvanadabtnWidget> {
                         });
                         setState(() {
                           _model.switch5Value = false;
+                        });
+                        setState(() {
+                          FFAppState().JsonPathPesquisaAvancada = 'oserv_id_os';
                         });
                       }
                     },
@@ -265,44 +268,48 @@ class _PesquisaAvanadabtnWidgetState extends State<PesquisaAvanadabtnWidget> {
               ),
             ),
             Expanded(
-              child: Row(
-                mainAxisSize: MainAxisSize.max,
-                mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                children: [
-                  Text(
-                    'Período',
-                    style: FlutterFlowTheme.of(context).bodyMedium.override(
-                          fontFamily: 'Outfit',
-                          fontSize: 18.0,
-                          fontWeight: FontWeight.w500,
-                        ),
-                  ),
-                  Switch.adaptive(
-                    value: _model.switch5Value ??= false,
-                    onChanged: (newValue) async {
-                      setState(() => _model.switch5Value = newValue!);
-                      if (newValue!) {
-                        setState(() {
-                          _model.switch1Value = false;
-                        });
-                        setState(() {
-                          _model.switch3Value = false;
-                        });
-                        setState(() {
-                          _model.switch2Value = false;
-                        });
-                        setState(() {
-                          _model.switch4Value = false;
-                        });
-                      }
-                    },
-                    activeColor: FlutterFlowTheme.of(context).primary,
-                    activeTrackColor: Color(0x4B00736D),
-                    inactiveTrackColor: FlutterFlowTheme.of(context).alternate,
-                    inactiveThumbColor:
-                        FlutterFlowTheme.of(context).secondaryText,
-                  ),
-                ],
+              child: Opacity(
+                opacity: 0.3,
+                child: Row(
+                  mainAxisSize: MainAxisSize.max,
+                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                  children: [
+                    Text(
+                      'Período',
+                      style: FlutterFlowTheme.of(context).bodyMedium.override(
+                            fontFamily: 'Outfit',
+                            fontSize: 18.0,
+                            fontWeight: FontWeight.w500,
+                          ),
+                    ),
+                    Switch.adaptive(
+                      value: _model.switch5Value ??= false,
+                      onChanged: (newValue) async {
+                        setState(() => _model.switch5Value = newValue!);
+                        if (newValue!) {
+                          setState(() {
+                            _model.switch1Value = false;
+                          });
+                          setState(() {
+                            _model.switch3Value = false;
+                          });
+                          setState(() {
+                            _model.switch2Value = false;
+                          });
+                          setState(() {
+                            _model.switch4Value = false;
+                          });
+                        }
+                      },
+                      activeColor: FlutterFlowTheme.of(context).primary,
+                      activeTrackColor: Color(0x4B00736D),
+                      inactiveTrackColor:
+                          FlutterFlowTheme.of(context).alternate,
+                      inactiveThumbColor:
+                          FlutterFlowTheme.of(context).secondaryText,
+                    ),
+                  ],
+                ),
               ),
             ),
             Container(

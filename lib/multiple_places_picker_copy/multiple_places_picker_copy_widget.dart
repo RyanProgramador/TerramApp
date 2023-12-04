@@ -423,13 +423,20 @@ class _MultiplePlacesPickerCopyWidgetState
                                         builder: (context) {
                                           final ordemServicos = functions
                                                   .sortListJson(
-                                                      'oserv_id',
+                                                      'oserv_id_os',
                                                       true,
                                                       FFAppState()
                                                           .trOsServicos
                                                           .toList(),
-                                                      _model
-                                                          .textController.text)
+                                                      functions.retornaLigacao(
+                                                          FFAppState()
+                                                              .trEmpresas
+                                                              .toList(),
+                                                          FFAppState()
+                                                              .trOrdemServicos
+                                                              .toList(),
+                                                          _model.textController
+                                                              .text))
                                                   ?.toList() ??
                                               [];
                                           return SingleChildScrollView(
