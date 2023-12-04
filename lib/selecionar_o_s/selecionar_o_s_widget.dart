@@ -61,6 +61,12 @@ class _SelecionarOSWidgetState extends State<SelecionarOSWidget>
       currentUserLocationValue =
           await getCurrentUserLocation(defaultLocation: LatLng(0.0, 0.0));
       _model.checkgps = await actions.checkGps();
+      setState(() {
+        _model.searchBarController?.text =
+            (FFAppState().qualSwitchEstaAtivo == 5
+                ? _model.searchBarController.text
+                : null!);
+      });
       _model.temInternetOsLoad = await actions.temInternet();
       if (!_model.checkgps!) {
         await showDialog(
