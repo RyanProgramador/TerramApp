@@ -59,7 +59,7 @@ class _LoadingCompWidgetState extends State<LoadingCompWidget> {
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
                   Text(
-                    'Ops! parece que não ha registros!',
+                    'Carregando...',
                     textAlign: TextAlign.start,
                     style: FlutterFlowTheme.of(context).headlineLarge.override(
                           fontFamily: 'Outfit',
@@ -68,7 +68,7 @@ class _LoadingCompWidgetState extends State<LoadingCompWidget> {
                         ),
                   ),
                   Text(
-                    'Por favor, tente novamente.',
+                    'Por favor, aguarde.',
                     style: FlutterFlowTheme.of(context).headlineLarge.override(
                           fontFamily: 'Readex Pro',
                           color: Colors.black,

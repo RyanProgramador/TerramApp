@@ -59,7 +59,7 @@ class _VazioWidgetState extends State<VazioWidget> {
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
                   Text(
-                    'Carregando...',
+                    'Ops! parece que não ha registros!',
                     textAlign: TextAlign.start,
                     style: FlutterFlowTheme.of(context).headlineLarge.override(
                           fontFamily: 'Outfit',
@@ -68,7 +68,7 @@ class _VazioWidgetState extends State<VazioWidget> {
                         ),
                   ),
                   Text(
-                    'Por favor, aguarde.',
+                    'Por favor, tente novamente.',
                     style: FlutterFlowTheme.of(context).headlineLarge.override(
                           fontFamily: 'Readex Pro',
                           color: Colors.black,
