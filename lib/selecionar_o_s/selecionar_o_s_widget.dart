@@ -549,6 +549,33 @@ class _SelecionarOSWidgetState extends State<SelecionarOSWidget>
                                                       context,
                                                     );
                                                     setState(() {});
+                                                    setState(() {
+                                                      _model.searchBarController
+                                                          ?.text = ((FFAppState()
+                                                                      .qualSwitchEstaAtivo ==
+                                                                  5) &&
+                                                              (_model.calendarRange
+                                                                      ?.first !=
+                                                                  null)
+                                                          ? 'De: ${dateTimeFormat(
+                                                              'd/M/y',
+                                                              _model
+                                                                  .calendarRange
+                                                                  ?.first,
+                                                              locale: FFLocalizations
+                                                                      .of(context)
+                                                                  .languageCode,
+                                                            )} até ${dateTimeFormat(
+                                                              'd/M/y',
+                                                              _model
+                                                                  .calendarRange
+                                                                  ?.last,
+                                                              locale: FFLocalizations
+                                                                      .of(context)
+                                                                  .languageCode,
+                                                            )}'
+                                                          : null!);
+                                                    });
 
                                                     setState(() {});
                                                   },
