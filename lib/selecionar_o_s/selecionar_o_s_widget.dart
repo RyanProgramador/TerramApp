@@ -1287,7 +1287,13 @@ class _SelecionarOSWidgetState extends State<SelecionarOSWidget>
                                           } else if (FFAppState()
                                                   .qualSwitchEstaAtivo ==
                                               3) {
-                                            return 'e';
+                                            return functions.retornaIdPeloNome(
+                                                'serv_nome',
+                                                'serv_id',
+                                                _model.searchBarController.text,
+                                                FFAppState()
+                                                    .trServicos
+                                                    .toList());
                                           } else {
                                             return functions.retornaLigacaoEmp(
                                                 FFAppState()

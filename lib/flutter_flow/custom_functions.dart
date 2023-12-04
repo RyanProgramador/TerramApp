@@ -602,20 +602,15 @@ String? retornaIdPeloNome(
       valorjsonPathPesquisa == null) {
     return null; // Retorna null se algum dos parâmetros for nulo
   }
-  if (valorjsonPathPesquisa == null || valorjsonPathPesquisa.trim().isEmpty) {
-    return null;
-  }
 
   // Itera sobre a lista1 e encontra o item correspondente ao valorjsonPathPesquisa
   for (var item1 in lista1) {
     var valorCampoLista1 = _getJsonValue(item1, jsonPathPesquisa);
 
-    // Compara o valor do campo com o valorjsonPathPesquisa, ignorando maiúsculas e minúsculas
+    // Compara o valor do campo com o valorjsonPathPesquisa
     if (valorCampoLista1 != null &&
-        valorCampoLista1
-            .toString()
-            .toLowerCase()
-            .contains(valorjsonPathPesquisa.toLowerCase())) {
+        _containsWholeWord(
+            valorCampoLista1.toString(), valorjsonPathPesquisa)) {
       // Retorna o valor correspondente ao jsonpathRetorno
       return _getJsonValue(item1, jsonpathRetorno)?.toString();
     }
@@ -625,7 +620,11 @@ String? retornaIdPeloNome(
   return null;
 }
 
-// Função auxiliar para obter o valor de um campo em uma estrutura JSON
+bool _containsWholeWord(String haystack, String needle) {
+  final pattern = RegExp('(?:^|\\s)${RegExp.escape(needle)}(?:\\s|\$)');
+  return pattern.hasMatch(haystack);
+}
+
 dynamic _getJsonValue(dynamic json, String? jsonPath) {
   if (jsonPath == null) {
     return null;
@@ -658,5 +657,5 @@ dynamic _getJsonValue(dynamic json, String? jsonPath) {
     }
   }
 
-  return result; // Retorna o valor final ou null se não encontrado
+  return result ?? null;
 }
