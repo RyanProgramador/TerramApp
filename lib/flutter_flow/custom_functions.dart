@@ -660,7 +660,7 @@ dynamic _getJsonValue(dynamic json, String? jsonPath) {
   return result ?? null;
 }
 
-List<String>? retornaListaPelaData(
+List<dynamic>? retornaListaPelaData(
   DateTime? datainicial,
   DateTime? dataFinal,
   String? jsonPath,

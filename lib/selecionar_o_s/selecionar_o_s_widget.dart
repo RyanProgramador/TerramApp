@@ -1291,58 +1291,74 @@ class _SelecionarOSWidgetState extends State<SelecionarOSWidget>
                                   (FFAppState().qualSwitchEstaAtivo == 5))
                                 Builder(
                                   builder: (context) {
-                                    final trOsServicos = functions.sortListJson(
-                                            FFAppState()
-                                                .JsonPathPesquisaAvancada,
-                                            true,
-                                            FFAppState().trOsServicos.toList(),
-                                            () {
-                                          if ((FFAppState()
-                                                      .JsonPathPesquisaAvancada ==
-                                                  'oserv_id') &&
-                                              (FFAppState()
-                                                      .qualSwitchEstaAtivo ==
-                                                  4)) {
-                                            return _model
-                                                .searchBarController.text;
-                                          } else if (FFAppState()
-                                                  .qualSwitchEstaAtivo ==
-                                              2) {
-                                            return functions.retornaLigacaoFaz(
-                                                FFAppState()
-                                                    .trFazendas
-                                                    .toList(),
-                                                FFAppState()
-                                                    .trOrdemServicos
-                                                    .toList(),
-                                                _model
-                                                    .searchBarController.text);
-                                          } else if (FFAppState()
-                                                  .qualSwitchEstaAtivo ==
-                                              3) {
-                                            return functions.retornaIdPeloNome(
-                                                'serv_nome',
-                                                'serv_id',
-                                                _model.searchBarController.text,
-                                                FFAppState()
-                                                    .trServicos
-                                                    .toList());
-                                          } else if (FFAppState()
-                                                  .qualSwitchEstaAtivo ==
-                                              5) {
-                                            return 'd';
-                                          } else {
-                                            return functions.retornaLigacaoEmp(
-                                                FFAppState()
-                                                    .trEmpresas
-                                                    .toList(),
-                                                FFAppState()
-                                                    .trOrdemServicos
-                                                    .toList(),
-                                                _model
-                                                    .searchBarController.text);
-                                          }
-                                        }())?.toList() ??
+                                    final trOsServicos = (FFAppState()
+                                                        .qualSwitchEstaAtivo ==
+                                                    5
+                                                ? functions.retornaListaPelaData(
+                                                    _model.calendarRange?.first,
+                                                    _model.calendarRange?.last,
+                                                    'oserv_dthr_agendamento',
+                                                    FFAppState()
+                                                        .trOsServicos
+                                                        .toList())
+                                                : functions.sortListJson(
+                                                    FFAppState()
+                                                        .JsonPathPesquisaAvancada,
+                                                    true,
+                                                    FFAppState()
+                                                        .trOsServicos
+                                                        .toList(), () {
+                                                    if ((FFAppState()
+                                                                .JsonPathPesquisaAvancada ==
+                                                            'oserv_id') &&
+                                                        (FFAppState()
+                                                                .qualSwitchEstaAtivo ==
+                                                            4)) {
+                                                      return _model
+                                                          .searchBarController
+                                                          .text;
+                                                    } else if (FFAppState()
+                                                            .qualSwitchEstaAtivo ==
+                                                        2) {
+                                                      return functions
+                                                          .retornaLigacaoFaz(
+                                                              FFAppState()
+                                                                  .trFazendas
+                                                                  .toList(),
+                                                              FFAppState()
+                                                                  .trOrdemServicos
+                                                                  .toList(),
+                                                              _model
+                                                                  .searchBarController
+                                                                  .text);
+                                                    } else if (FFAppState()
+                                                            .qualSwitchEstaAtivo ==
+                                                        3) {
+                                                      return functions
+                                                          .retornaIdPeloNome(
+                                                              'serv_nome',
+                                                              'serv_id',
+                                                              _model
+                                                                  .searchBarController
+                                                                  .text,
+                                                              FFAppState()
+                                                                  .trServicos
+                                                                  .toList());
+                                                    } else {
+                                                      return functions
+                                                          .retornaLigacaoEmp(
+                                                              FFAppState()
+                                                                  .trEmpresas
+                                                                  .toList(),
+                                                              FFAppState()
+                                                                  .trOrdemServicos
+                                                                  .toList(),
+                                                              _model
+                                                                  .searchBarController
+                                                                  .text);
+                                                    }
+                                                  }()))
+                                            ?.toList() ??
                                         [];
                                     if (trOsServicos.isEmpty) {
                                       return Center(

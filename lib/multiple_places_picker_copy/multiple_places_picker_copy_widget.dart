@@ -467,7 +467,7 @@ class _MultiplePlacesPickerCopyWidgetState
                                                         ordemServicosIndex];
                                                 return SelectionArea(
                                                     child: Text(
-                                                  ordemServicosItem,
+                                                  ordemServicosItem.toString(),
                                                   style: FlutterFlowTheme.of(
                                                           context)
                                                       .bodyMedium
