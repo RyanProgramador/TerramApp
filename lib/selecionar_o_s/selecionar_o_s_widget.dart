@@ -514,6 +514,38 @@ class _SelecionarOSWidgetState extends State<SelecionarOSWidget>
                                                   ),
                                                 ),
                                               ),
+                                              if (FFAppState()
+                                                      .qualSwitchEstaAtivo ==
+                                                  5)
+                                                InkWell(
+                                                  splashColor:
+                                                      Colors.transparent,
+                                                  focusColor:
+                                                      Colors.transparent,
+                                                  hoverColor:
+                                                      Colors.transparent,
+                                                  highlightColor:
+                                                      Colors.transparent,
+                                                  onTap: () async {
+                                                    _model.calendarRange =
+                                                        await actions
+                                                            .calendarRangerAction(
+                                                      context,
+                                                    );
+
+                                                    setState(() {});
+                                                  },
+                                                  child: Container(
+                                                    width: MediaQuery.sizeOf(
+                                                                context)
+                                                            .width *
+                                                        1.0,
+                                                    height: 65.0,
+                                                    decoration: BoxDecoration(
+                                                      color: Color(0x00FFFFFF),
+                                                    ),
+                                                  ),
+                                                ),
                                             ],
                                           ),
                                         ),
@@ -1254,8 +1286,9 @@ class _SelecionarOSWidgetState extends State<SelecionarOSWidget>
                                     );
                                   },
                                 ),
-                              if (_model.searchBarController.text != null &&
-                                  _model.searchBarController.text != '')
+                              if ((_model.searchBarController.text != null &&
+                                      _model.searchBarController.text != '') ||
+                                  (FFAppState().qualSwitchEstaAtivo == 5))
                                 Builder(
                                   builder: (context) {
                                     final trOsServicos = functions.sortListJson(
@@ -1294,6 +1327,31 @@ class _SelecionarOSWidgetState extends State<SelecionarOSWidget>
                                                 FFAppState()
                                                     .trServicos
                                                     .toList());
+                                          } else if (FFAppState()
+                                                  .qualSwitchEstaAtivo ==
+                                              5) {
+                                            return (functions.retornaListaPelaData(
+                                                            _model.calendarRange
+                                                                ?.first,
+                                                            _model.calendarRange
+                                                                ?.last,
+                                                            'oserv_dthr_agendamento',
+                                                            FFAppState()
+                                                                .trOsServicos
+                                                                .toList()) !=
+                                                        null &&
+                                                    functions
+                                                        .retornaListaPelaData(
+                                                            _model.calendarRange
+                                                                ?.first,
+                                                            _model.calendarRange
+                                                                ?.last,
+                                                            'oserv_dthr_agendamento',
+                                                            FFAppState()
+                                                                .trOsServicos
+                                                                .toList())
+                                                        .isNotEmpty)
+                                                .toString();
                                           } else {
                                             return functions.retornaLigacaoEmp(
                                                 FFAppState()

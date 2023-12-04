@@ -355,8 +355,6 @@ class _GpsTecToFazendaWidgetState extends State<GpsTecToFazendaWidget> {
                                               widget.tecnicoId,
                                               '1',
                                             );
-                                            await Future.delayed(const Duration(
-                                                milliseconds: 1000));
                                             FFAppState().update(() {
                                               FFAppState().DeslocamentoPausado =
                                                   false;
@@ -406,8 +404,6 @@ class _GpsTecToFazendaWidgetState extends State<GpsTecToFazendaWidget> {
                                                       .toList()
                                                       .cast<dynamic>();
                                             });
-                                            await Future.delayed(const Duration(
-                                                milliseconds: 1000));
                                             await showDialog(
                                               context: context,
                                               builder: (alertDialogContext) {

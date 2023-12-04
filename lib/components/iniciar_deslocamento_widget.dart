@@ -446,14 +446,21 @@ class _IniciarDeslocamentoWidgetState extends State<IniciarDeslocamentoWidget> {
                                       style: FlutterFlowTheme.of(context)
                                           .labelMedium,
                                     ),
-                                    Text(
-                                      widget.observacao!,
-                                      style: FlutterFlowTheme.of(context)
-                                          .labelMedium
-                                          .override(
-                                            fontFamily: 'Readex Pro',
-                                            fontWeight: FontWeight.w500,
+                                    SingleChildScrollView(
+                                      child: Column(
+                                        mainAxisSize: MainAxisSize.max,
+                                        children: [
+                                          Text(
+                                            widget.observacao!,
+                                            style: FlutterFlowTheme.of(context)
+                                                .labelMedium
+                                                .override(
+                                                  fontFamily: 'Readex Pro',
+                                                  fontWeight: FontWeight.w500,
+                                                ),
                                           ),
+                                        ],
+                                      ),
                                     ),
                                   ],
                                 ),

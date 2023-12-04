@@ -49,6 +49,8 @@ class SelecionarOSModel extends FlutterFlowModel<SelecionarOSWidget> {
   FocusNode? searchBarFocusNode;
   TextEditingController? searchBarController;
   String? Function(BuildContext, String?)? searchBarControllerValidator;
+  // Stores action output result for [Custom Action - calendarRangerAction] action in Container widget.
+  List<DateTime>? calendarRange;
   // Stores action output result for [Backend Call - API (apiRotasPolylines)] action in Row widget.
   ApiCallResponse? polyline1;
   // Stores action output result for [Backend Call - API (apiRotasPolylines)] action in Row widget.
