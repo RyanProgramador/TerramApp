@@ -434,8 +434,16 @@ class _MultiplePlacesPickerCopyWidgetState
                                                       FFAppState()
                                                           .trOsServicos
                                                           .toList(),
-                                                      _model
-                                                          .textController.text)
+                                                      functions
+                                                          .retornaIdPeloNome(
+                                                              'serv_nome',
+                                                              'serv_id',
+                                                              _model
+                                                                  .textController
+                                                                  .text,
+                                                              FFAppState()
+                                                                  .trServicos
+                                                                  .toList()))
                                                   ?.toList() ??
                                               [];
                                           return SingleChildScrollView(
