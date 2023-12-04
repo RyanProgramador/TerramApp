@@ -1256,7 +1256,7 @@ class _SelecionarOSWidgetState extends State<SelecionarOSWidget>
                                                       'oserv_id'
                                                   ? _model
                                                       .searchBarController.text
-                                                  : functions.retornaLigacao(
+                                                  : functions.retornaLigacaoEmp(
                                                       FFAppState()
                                                           .trEmpresas
                                                           .toList(),

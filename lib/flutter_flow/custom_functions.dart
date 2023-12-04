@@ -534,7 +534,7 @@ List<dynamic>? sortListJson(
   }
 }
 
-String? retornaLigacao(
+String? retornaLigacaoEmp(
   List<dynamic>? listaQueContemOTermoNaListaPesquisado,
   List<dynamic>? listaQueEstaLigadaAListaDoTermo,
   String? termoPesquisado,
@@ -561,4 +561,31 @@ String? retornaLigacao(
   }
 
   return null;
+}
+
+String? retornaLigacaoFaz(
+  List<dynamic>? listaQueContemOTermoNaListaPesquisado,
+  List<dynamic>? listaQueEstaLigadaAListaDoTermo,
+  String? termoPesquisado,
+) {
+  if (listaQueContemOTermoNaListaPesquisado == null ||
+      listaQueEstaLigadaAListaDoTermo == null ||
+      termoPesquisado == null) {
+    return null;
+  }
+
+  for (var itemNaLista in listaQueContemOTermoNaListaPesquisado) {
+    if (itemNaLista.containsKey("faz_nome") &&
+        itemNaLista["faz_nome"]
+            .toString()
+            .toLowerCase()
+            .contains(termoPesquisado.toLowerCase())) {
+      for (var itemLigadoNaLista in listaQueEstaLigadaAListaDoTermo) {
+        if (itemLigadoNaLista.containsKey("os_id_faz") &&
+            itemLigadoNaLista["os_id_faz"] == itemNaLista["faz_id"]) {
+          return itemLigadoNaLista["os_id"].toString();
+        }
+      }
+    }
+  }
 }

@@ -428,9 +428,9 @@ class _MultiplePlacesPickerCopyWidgetState
                                                       FFAppState()
                                                           .trOsServicos
                                                           .toList(),
-                                                      functions.retornaLigacao(
+                                                      functions.retornaLigacaoFaz(
                                                           FFAppState()
-                                                              .trEmpresas
+                                                              .trFazendas
                                                               .toList(),
                                                           FFAppState()
                                                               .trOrdemServicos
@@ -529,7 +529,8 @@ class _MultiplePlacesPickerCopyWidgetState
                                                       (fazendasIndex) {
                                                     final fazendasItem =
                                                         fazendas[fazendasIndex];
-                                                    return Text(
+                                                    return SelectionArea(
+                                                        child: Text(
                                                       fazendasItem.toString(),
                                                       style:
                                                           FlutterFlowTheme.of(
@@ -540,7 +541,7 @@ class _MultiplePlacesPickerCopyWidgetState
                                                                     'Readex Pro',
                                                                 fontSize: 10.0,
                                                               ),
-                                                    );
+                                                    ));
                                                   }),
                                                 ),
                                               );
