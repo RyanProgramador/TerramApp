@@ -679,7 +679,7 @@ class _SelecionarOSWidgetState extends State<SelecionarOSWidget>
                               ),
                               if ((_model.searchBarController.text == null ||
                                       _model.searchBarController.text == '') ||
-                                  (FFAppState().qualSwitchEstaAtivo != 5))
+                                  (FFAppState().qualSwitchEstaAtivo == 5))
                                 Builder(
                                   builder: (context) {
                                     final trOsServicos =
