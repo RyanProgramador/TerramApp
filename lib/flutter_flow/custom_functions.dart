@@ -677,7 +677,7 @@ List<dynamic>? retornaListaPelaData(
   // Adiciona 1 dia à data final para incluir todo o último dia no intervalo
   dataFinal = dataFinal.add(Duration(days: 1));
 
-  List<String> resultados = [];
+  List<Map<String, dynamic>> resultados = [];
 
   for (var item in listaJsonQueDesejaRetornar) {
     var dataAgendamento = _getJsonDateTime(item, jsonPath);
@@ -685,7 +685,7 @@ List<dynamic>? retornaListaPelaData(
     if (dataAgendamento != null &&
         dataAgendamento.isAfter(datainicial) &&
         dataAgendamento.isBefore(dataFinal)) {
-      resultados.add(item.toString());
+      resultados.add(item);
     }
   }
 
