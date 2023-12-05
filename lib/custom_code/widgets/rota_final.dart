@@ -401,6 +401,7 @@ class _MapsRoutesState extends State<RotaFinal> {
           width: widget.width ?? 400.0,
           height: widget.height ?? 400.0,
           child: google_maps.GoogleMap(
+            zoomControlsEnabled: false,
             initialCameraPosition: google_maps.CameraPosition(
               target: google_maps.LatLng(
                 position?.latitude ?? finalLatLng.latitude,
