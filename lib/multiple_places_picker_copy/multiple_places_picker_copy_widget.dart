@@ -205,7 +205,16 @@ class _MultiplePlacesPickerCopyWidgetState
                             hoverColor: Colors.transparent,
                             highlightColor: Colors.transparent,
                             onTap: () async {
-                              context.goNamed('MultiplePlacesPicker');
+                              context.goNamed(
+                                'testecontorno',
+                                extra: <String, dynamic>{
+                                  kTransitionInfoKey: TransitionInfo(
+                                    hasTransition: true,
+                                    transitionType: PageTransitionType.fade,
+                                    duration: Duration(milliseconds: 0),
+                                  ),
+                                },
+                              );
                             },
                             child: Icon(
                               Icons.transfer_within_a_station,
