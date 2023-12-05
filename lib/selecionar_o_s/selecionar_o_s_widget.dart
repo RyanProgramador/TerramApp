@@ -80,7 +80,8 @@ class _SelecionarOSWidgetState extends State<SelecionarOSWidget>
         return;
       }
       if ((FFAppState().trOsDeslocamentosJsonFinalizados.length != 0) &&
-          (FFAppState().sincronizcaoAutomatica == true)) {
+          (FFAppState().sincronizcaoAutomatica == true) &&
+          _model.temInternetOsLoad!) {
         _model.apiResultxxdOnLoadPage =
             await SincronizarGroup.trSincronizaCelularComBDCall.call(
           urlapicall: FFAppState().urlapicall,

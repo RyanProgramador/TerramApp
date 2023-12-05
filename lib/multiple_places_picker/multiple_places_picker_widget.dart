@@ -232,45 +232,6 @@ class _MultiplePlacesPickerWidgetState
                               ),
                               child: Stack(
                                 children: [
-                                  Container(
-                                    width: double.infinity,
-                                    height: double.infinity,
-                                    child: custom_widgets.RotaFinal(
-                                      width: double.infinity,
-                                      height: double.infinity,
-                                      coordenadasIniciais: FFAppState()
-                                                  .trOsDeslocamentos
-                                                  .length >
-                                              0
-                                          ? functions
-                                              .listaStrToListaLatLng(
-                                                  FFAppState()
-                                                      .trOsDeslocamentos
-                                                      .toList(),
-                                                  'osdes_latitude',
-                                                  'osdes_longitude')!
-                                              .first
-                                          : currentUserLocationValue!,
-                                      coordenadasFinais: FFAppState()
-                                                  .trOsDeslocamentos
-                                                  .length >
-                                              0
-                                          ? functions
-                                              .listaStrToListaLatLng(
-                                                  FFAppState()
-                                                      .trOsDeslocamentos
-                                                      .toList(),
-                                                  'osdes_latitude',
-                                                  'osdes_longitude')!
-                                              .last
-                                          : currentUserLocationValue!,
-                                      json2: functions.jsonToStr(
-                                          ApiRotasDirectionsCall.tudo(
-                                        containerApiRotasDirectionsResponse
-                                            .jsonBody,
-                                      ))!,
-                                    ),
-                                  ),
                                   Align(
                                     alignment: AlignmentDirectional(0.00, 0.90),
                                     child: Row(
@@ -319,6 +280,51 @@ class _MultiplePlacesPickerWidgetState
                                           ),
                                         ),
                                       ],
+                                    ),
+                                  ),
+                                  Container(
+                                    width: double.infinity,
+                                    height: double.infinity,
+                                    child: custom_widgets.RouteViewLive2(
+                                      width: double.infinity,
+                                      height: double.infinity,
+                                      coordinates: FFAppState()
+                                                  .trOsDeslocamentos
+                                                  .length >
+                                              0
+                                          ? functions.listaStrToListaLatLng(
+                                              FFAppState()
+                                                  .trDeslocGeo2
+                                                  .toList(),
+                                              'des_latitude',
+                                              'des_longitude')!
+                                          : FFAppState().Erro,
+                                      coordenadasIniciais: FFAppState()
+                                                  .trOsDeslocamentos
+                                                  .length >
+                                              0
+                                          ? functions
+                                              .listaStrToListaLatLng(
+                                                  FFAppState()
+                                                      .trOsDeslocamentos
+                                                      .toList(),
+                                                  'osdes_latitude',
+                                                  'osdes_longitude')!
+                                              .first
+                                          : currentUserLocationValue!,
+                                      coordenadasFinais: FFAppState()
+                                                  .trOsDeslocamentos
+                                                  .length >
+                                              0
+                                          ? functions
+                                              .listaStrToListaLatLng(
+                                                  FFAppState()
+                                                      .trOsDeslocamentos
+                                                      .toList(),
+                                                  'osdes_latitude',
+                                                  'osdes_longitude')!
+                                              .last
+                                          : currentUserLocationValue!,
                                     ),
                                   ),
                                 ],

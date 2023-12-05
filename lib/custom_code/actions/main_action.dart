@@ -81,9 +81,8 @@ Future mainAction(
             currentTimestamp.difference(previousTimestamp!).inSeconds >= 8) {
           Map<String, dynamic> data2 = {
             "osdes_id": osdesId,
-            "osdes_latitude": "$latitude",
-            "osdes_longitude": "$longitude",
-            "osdes_horario": currentTimestamp,
+            "des_latitude": "$latitude",
+            "des_longitude": "$longitude",
           };
 
           if (data2 != null && data2.isNotEmpty) {
