@@ -127,6 +127,11 @@ GoRouter createRouter(AppStateNotifier appStateNotifier) => GoRouter(
                 retornopolylines:
                     params.getParam('retornopolylines', ParamType.String),
               ),
+            ),
+            FFRoute(
+              name: 'testecontorno',
+              path: 'testecontorno',
+              builder: (context, params) => TestecontornoWidget(),
             )
           ].map((r) => r.toRoute(appStateNotifier)).toList(),
         ),
