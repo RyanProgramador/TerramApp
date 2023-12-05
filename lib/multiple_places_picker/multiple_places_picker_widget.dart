@@ -284,19 +284,9 @@ class _MultiplePlacesPickerWidgetState
                                   Container(
                                     width: double.infinity,
                                     height: double.infinity,
-                                    child: custom_widgets.RouteViewLive2(
+                                    child: custom_widgets.ContornoMap(
                                       width: double.infinity,
                                       height: double.infinity,
-                                      coordenadasIniciais:
-                                          currentUserLocationValue!,
-                                      coordenadasFinais:
-                                          FFAppState().excluirLocal!,
-                                      json2: ApiRotasDirectionsCall.tudo(
-                                        containerApiRotasDirectionsResponse
-                                            .jsonBody,
-                                      ).toString(),
-                                      stringDoRotas2:
-                                          'zwquDrcnwH`@qPFkBhNj@HiEL}DtB{FTk@bHgCjCeAnBi@hDi@|HkAn@}SrCc@jAUXKx@e@f@_@d@i@f@aA|AcGHs@Bm@I_Ai@wD?]m@}EAUBg@@aBWcBEOm@}AcF_Iu@kAg@g@sEmCo@_@q@i@s@_ASk@kEyTk@cDKuAGsA?q@FsCBW{Rw@QWWGQDg@AqBMGY?KDE~BLNADCDIAKGEs@@sGUg@PyG_@',
                                     ),
                                   ),
                                 ],
