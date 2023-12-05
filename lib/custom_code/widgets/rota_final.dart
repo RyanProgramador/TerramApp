@@ -42,7 +42,7 @@ class RotaFinal extends StatefulWidget {
   final String? stringDoRotas;
 
   final String customIconUrl =
-      'https://cdn-icons-png.flaticon.com/512/3253/3253113.png';
+      'https://cdn-icons-png.flaticon.com/128/3253/3253113.png';
 
   @override
   _MapsRoutesState createState() => _MapsRoutesState();
