@@ -24,10 +24,10 @@ class ContornoMap extends StatefulWidget {
   final double? height;
 
   @override
-  _MapsRoutesState createState() => _MapsRoutesState();
+  _ContornoMapState createState() => _ContornoMapState();
 }
 
-class _MapsRoutesState extends State<ContornoMap> {
+class _ContornoMapState extends State<ContornoMap> {
   Position? position;
   google_maps.GoogleMapController? _googleMapController;
 
