@@ -4,7 +4,6 @@ import '/flutter_flow/flutter_flow_timer.dart';
 import '/flutter_flow/flutter_flow_util.dart';
 import '/flutter_flow/flutter_flow_widgets.dart';
 import '/custom_code/widgets/index.dart' as custom_widgets;
-import '/flutter_flow/custom_functions.dart' as functions;
 import '/flutter_flow/permissions_util.dart';
 import 'multiple_places_picker_widget.dart' show MultiplePlacesPickerWidget;
 import 'package:stop_watch_timer/stop_watch_timer.dart';

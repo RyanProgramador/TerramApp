@@ -289,6 +289,10 @@ class FFAppState extends ChangeNotifier {
       _qualSwitchEstaAtivo =
           prefs.getInt('ff_qualSwitchEstaAtivo') ?? _qualSwitchEstaAtivo;
     });
+    _safeInit(() {
+      _excluirLocal = _latLngFromString(prefs.getString('ff_excluirLocal')) ??
+          _excluirLocal;
+    });
   }
 
   void update(VoidCallback callback) {
@@ -1182,6 +1186,15 @@ class FFAppState extends ChangeNotifier {
   set qualSwitchEstaAtivo(int _value) {
     _qualSwitchEstaAtivo = _value;
     prefs.setInt('ff_qualSwitchEstaAtivo', _value);
+  }
+
+  LatLng? _excluirLocal = LatLng(-29.91356438838432, -51.1952166424928);
+  LatLng? get excluirLocal => _excluirLocal;
+  set excluirLocal(LatLng? _value) {
+    _excluirLocal = _value;
+    _value != null
+        ? prefs.setString('ff_excluirLocal', _value.serialize())
+        : prefs.remove('ff_excluirLocal');
   }
 }
 

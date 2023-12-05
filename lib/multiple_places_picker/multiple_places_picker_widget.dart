@@ -4,7 +4,6 @@ import '/flutter_flow/flutter_flow_timer.dart';
 import '/flutter_flow/flutter_flow_util.dart';
 import '/flutter_flow/flutter_flow_widgets.dart';
 import '/custom_code/widgets/index.dart' as custom_widgets;
-import '/flutter_flow/custom_functions.dart' as functions;
 import '/flutter_flow/permissions_util.dart';
 import 'package:stop_watch_timer/stop_watch_timer.dart';
 import 'package:flutter/material.dart';
@@ -288,43 +287,16 @@ class _MultiplePlacesPickerWidgetState
                                     child: custom_widgets.RouteViewLive2(
                                       width: double.infinity,
                                       height: double.infinity,
-                                      coordinates: FFAppState()
-                                                  .trOsDeslocamentos
-                                                  .length >
-                                              0
-                                          ? functions.listaStrToListaLatLng(
-                                              FFAppState()
-                                                  .trDeslocGeo2
-                                                  .toList(),
-                                              'des_latitude',
-                                              'des_longitude')!
-                                          : FFAppState().Erro,
-                                      coordenadasIniciais: FFAppState()
-                                                  .trOsDeslocamentos
-                                                  .length >
-                                              0
-                                          ? functions
-                                              .listaStrToListaLatLng(
-                                                  FFAppState()
-                                                      .trOsDeslocamentos
-                                                      .toList(),
-                                                  'osdes_latitude',
-                                                  'osdes_longitude')!
-                                              .first
-                                          : currentUserLocationValue!,
-                                      coordenadasFinais: FFAppState()
-                                                  .trOsDeslocamentos
-                                                  .length >
-                                              0
-                                          ? functions
-                                              .listaStrToListaLatLng(
-                                                  FFAppState()
-                                                      .trOsDeslocamentos
-                                                      .toList(),
-                                                  'osdes_latitude',
-                                                  'osdes_longitude')!
-                                              .last
-                                          : currentUserLocationValue!,
+                                      coordenadasIniciais:
+                                          currentUserLocationValue!,
+                                      coordenadasFinais:
+                                          FFAppState().excluirLocal!,
+                                      json2: ApiRotasDirectionsCall.tudo(
+                                        containerApiRotasDirectionsResponse
+                                            .jsonBody,
+                                      ).toString(),
+                                      stringDoRotas2:
+                                          'zwquDrcnwH`@qPFkBhNj@HiEL}DtB{FTk@bHgCjCeAnBi@hDi@|HkAn@}SrCc@jAUXKx@e@f@_@d@i@f@aA|AcGHs@Bm@I_Ai@wD?]m@}EAUBg@@aBWcBEOm@}AcF_Iu@kAg@g@sEmCo@_@q@i@s@_ASk@kEyTk@cDKuAGsA?q@FsCBW{Rw@QWWGQDg@AqBMGY?KDE~BLNADCDIAKGEs@@sGUg@PyG_@',
                                     ),
                                   ),
                                 ],
