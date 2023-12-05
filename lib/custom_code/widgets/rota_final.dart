@@ -42,7 +42,7 @@ class RotaFinal extends StatefulWidget {
   final String? stringDoRotas;
 
   final String customIconUrl =
-      'https://lh3.googleusercontent.com/u/9/drive-viewer/AK7aPaD4V4OUOT1q2oukdiVXFD-_sP6u4FeZRmV9RxR7CRR8Oi9Ga237m_3yoSHbXNRqx4JvQW1PmOUtuHYdk-71UYL-DjQZEw=w1278-h913';
+      'https://cdn-icons-png.flaticon.com/512/3253/3253113.png';
 
   @override
   _MapsRoutesState createState() => _MapsRoutesState();
@@ -441,11 +441,24 @@ class _MapsRoutesState extends State<RotaFinal> {
           child: ElevatedButton(
             onPressed: () {
               retiraPosicaoAtualDeRodar();
+
               setState(() {
                 if (!estalivre) {
                   icone = "center_focus_weak";
+                  ScaffoldMessenger.of(context).showSnackBar(
+                    SnackBar(
+                      content: Text("Centralizando..."),
+                      duration: Duration(seconds: 3),
+                    ),
+                  );
                 } else {
                   icone = "crop_free";
+                  ScaffoldMessenger.of(context).showSnackBar(
+                    SnackBar(
+                      content: Text("Mapa fixado"),
+                      duration: Duration(seconds: 5),
+                    ),
+                  );
                 }
               });
             },

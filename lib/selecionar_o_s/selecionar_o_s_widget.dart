@@ -602,23 +602,6 @@ class _SelecionarOSWidgetState extends State<SelecionarOSWidget>
                                         8.0, 12.0, 16.0, 0.0),
                                     child: FFButtonWidget(
                                       onPressed: () async {
-                                        await showDialog(
-                                          context: context,
-                                          builder: (alertDialogContext) {
-                                            return AlertDialog(
-                                              title: Text(
-                                                  'Nossa equipe ainda esta trabalhando nessa parte.'),
-                                              actions: [
-                                                TextButton(
-                                                  onPressed: () =>
-                                                      Navigator.pop(
-                                                          alertDialogContext),
-                                                  child: Text('Ok'),
-                                                ),
-                                              ],
-                                            );
-                                          },
-                                        );
                                         await showModalBottomSheet(
                                           isScrollControlled: true,
                                           backgroundColor: Colors.transparent,
