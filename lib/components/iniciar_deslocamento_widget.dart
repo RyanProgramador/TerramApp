@@ -469,11 +469,11 @@ class _IniciarDeslocamentoWidgetState extends State<IniciarDeslocamentoWidget> {
                               json2: functions
                                   .jsonToStr(ApiRotasDirectionsCall.tudo(
                                 cardActionsApiRotasDirectionsResponse.jsonBody,
-                              ))!,
+                              )),
                               coordenadasIniciais: currentUserLocationValue,
                               coordenadasFinais: widget.latlngFaz!,
                               stringDoRotas:
-                                  widget.polylinhaQueVemDoMenuInicial!,
+                                  widget.polylinhaQueVemDoMenuInicial,
                             ),
                           ),
                         ),

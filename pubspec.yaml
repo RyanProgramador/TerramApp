@@ -38,6 +38,7 @@ dependencies:
   flutter_cache_manager: 3.3.1
   flutter_local_notifications: ^15.1.0
   flutter_map: ^0.14.0
+  flutter_map_tile_cacher: ^0.1.5
   flutter_native_splash: 2.3.1
   flutter_plugin_android_lifecycle: 2.0.17
   flutter_polyline_points: ^1.0.0

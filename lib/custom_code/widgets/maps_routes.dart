@@ -27,16 +27,16 @@ class MapsRoutes extends StatefulWidget {
     this.height,
     required this.coordenadasIniciais,
     required this.coordenadasFinais,
-    required this.json2,
-    required this.stringDoRotas,
+    this.json2,
+    this.stringDoRotas,
   }) : super(key: key);
 
   final double? width;
   final double? height;
   final LatLng? coordenadasIniciais;
   final LatLng coordenadasFinais;
-  final String json2;
-  final String stringDoRotas;
+  final String? json2;
+  final String? stringDoRotas;
   final String customIconUrl =
       'https://lh3.googleusercontent.com/u/9/drive-viewer/AK7aPaD4V4OUOT1q2oukdiVXFD-_sP6u4FeZRmV9RxR7CRR8Oi9Ga237m_3yoSHbXNRqx4JvQW1PmOUtuHYdk-71UYL-DjQZEw=w1278-h913';
 
@@ -180,7 +180,7 @@ class _MapsRoutesState extends State<MapsRoutes> {
 
   @override
   Widget build(BuildContext context) {
-    var response = json.decode(widget.json2);
+    var response = json.decode(widget.json2 ?? '');
 
     List<dynamic> steps = (response['routes'] as List?)?[0]['legs']?[0]['steps']
             as List<dynamic>? ??
