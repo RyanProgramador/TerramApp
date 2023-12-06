@@ -849,6 +849,7 @@ class _SelecionarOSWidgetState extends State<SelecionarOSWidget>
                                                     key:
                                                         'AIzaSyDpk1wIZmA1OTS57D_cB13BD01zqrTiQNI',
                                                   );
+                                                  Navigator.pop(context);
                                                   await showModalBottomSheet(
                                                     isScrollControlled: true,
                                                     backgroundColor:
@@ -1054,8 +1055,6 @@ class _SelecionarOSWidgetState extends State<SelecionarOSWidget>
                                                     },
                                                   ).then((value) =>
                                                       safeSetState(() {}));
-
-                                                  Navigator.pop(context);
 
                                                   setState(() {});
                                                 },
@@ -1603,6 +1602,7 @@ class _SelecionarOSWidgetState extends State<SelecionarOSWidget>
                                                     key:
                                                         'AIzaSyDpk1wIZmA1OTS57D_cB13BD01zqrTiQNI',
                                                   );
+                                                  Navigator.pop(context);
                                                   await showModalBottomSheet(
                                                     isScrollControlled: true,
                                                     backgroundColor:
@@ -1808,8 +1808,6 @@ class _SelecionarOSWidgetState extends State<SelecionarOSWidget>
                                                     },
                                                   ).then((value) =>
                                                       safeSetState(() {}));
-
-                                                  Navigator.pop(context);
 
                                                   setState(() {});
                                                 },
