@@ -983,7 +983,7 @@ class _SelecionarOSWidgetState extends State<SelecionarOSWidget>
                                                                       r'''$.oserv_id''',
                                                                     ).toString()),
                                                                 polylinhaQueVemDoMenuInicial:
-                                                                    null!,
+                                                                    null,
                                                               ),
                                                             ),
                                                           ),
