@@ -43,7 +43,9 @@ class _CarregandoOsWidgetState extends State<CarregandoOsWidget> {
     return Container(
       width: double.infinity,
       height: double.infinity,
-      decoration: BoxDecoration(),
+      decoration: BoxDecoration(
+        color: Color(0x20000000),
+      ),
       child: Column(
         mainAxisSize: MainAxisSize.max,
         mainAxisAlignment: MainAxisAlignment.center,
