@@ -1055,6 +1055,8 @@ class _SelecionarOSWidgetState extends State<SelecionarOSWidget>
                                                   ).then((value) =>
                                                       safeSetState(() {}));
 
+                                                  Navigator.pop(context);
+
                                                   setState(() {});
                                                 },
                                                 child: Row(
@@ -1806,6 +1808,8 @@ class _SelecionarOSWidgetState extends State<SelecionarOSWidget>
                                                     },
                                                   ).then((value) =>
                                                       safeSetState(() {}));
+
+                                                  Navigator.pop(context);
 
                                                   setState(() {});
                                                 },
