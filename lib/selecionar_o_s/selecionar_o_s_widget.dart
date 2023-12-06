@@ -1489,7 +1489,31 @@ class _SelecionarOSWidgetState extends State<SelecionarOSWidget>
                                                                           'os_id',
                                                                           'os_id_faz'),
                                                                       '404',
-                                                                    ))}',
+                                                                    ))} , ${functions.strToLatLng(functions.ligaoDeNome(FFAppState().trFazendas.toList(), 'faz_id', 'faz_latitude', valueOrDefault<String>(
+                                                                      functions.ligacaoEntreListas(
+                                                                          getJsonField(
+                                                                            trOsServicosItem,
+                                                                            r'''$''',
+                                                                            true,
+                                                                          ),
+                                                                          FFAppState().trOrdemServicos.toList(),
+                                                                          'oserv_id_os',
+                                                                          'os_id',
+                                                                          'os_id_faz'),
+                                                                      '404',
+                                                                    )), functions.ligaoDeNome(FFAppState().trFazendas.toList(), 'faz_id', 'faz_longitude', valueOrDefault<String>(
+                                                                      functions.ligacaoEntreListas(
+                                                                          getJsonField(
+                                                                            trOsServicosItem,
+                                                                            r'''$''',
+                                                                            true,
+                                                                          ),
+                                                                          FFAppState().trOrdemServicos.toList(),
+                                                                          'oserv_id_os',
+                                                                          'os_id',
+                                                                          'os_id_faz'),
+                                                                      '404',
+                                                                    )))?.toString()}',
                                                                 style: FlutterFlowTheme.of(
                                                                         context)
                                                                     .bodyLarge
