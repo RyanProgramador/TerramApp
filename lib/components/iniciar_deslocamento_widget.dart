@@ -131,19 +131,6 @@ class _IniciarDeslocamentoWidgetState extends State<IniciarDeslocamentoWidget> {
             onTap: () async {
               currentUserLocationValue = await getCurrentUserLocation(
                   defaultLocation: LatLng(0.0, 0.0));
-              _model.chamadaPolylinesOnload = await ApiRotasPolylinesCall.call(
-                latitudeOrigem: functions.separadorLatDeLng(
-                    true, functions.latLngToStr(currentUserLocationValue)),
-                longitudeOrigem: functions.separadorLatDeLng(
-                    false, functions.latLngToStr(currentUserLocationValue)),
-                latitudeDestino: functions.separadorLatDeLng(
-                    true, functions.latLngToStr(widget.latlngFaz)),
-                longitudeDestonp: functions.separadorLatDeLng(
-                    false, functions.latLngToStr(widget.latlngFaz)),
-                key: 'AIzaSyDpk1wIZmA1OTS57D_cB13BD01zqrTiQNI',
-              );
-
-              setState(() {});
             },
             child: ClipRRect(
               borderRadius: BorderRadius.circular(0.0),

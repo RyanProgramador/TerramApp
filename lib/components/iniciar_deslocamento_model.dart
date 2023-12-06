@@ -18,8 +18,6 @@ class IniciarDeslocamentoModel
     extends FlutterFlowModel<IniciarDeslocamentoWidget> {
   ///  State fields for stateful widgets in this component.
 
-  // Stores action output result for [Backend Call - API (apiRotasPolylines)] action in card_Actions widget.
-  ApiCallResponse? chamadaPolylinesOnload;
   // State field(s) for GoogleMap widget.
   LatLng? googleMapsCenter;
   final googleMapsController = Completer<GoogleMapController>();
