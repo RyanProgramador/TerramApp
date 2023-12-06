@@ -728,7 +728,9 @@ class _SelecionarOSWidgetState extends State<SelecionarOSWidget>
                                                     isScrollControlled: true,
                                                     backgroundColor:
                                                         Colors.transparent,
+                                                    isDismissible: false,
                                                     enableDrag: false,
+                                                    useSafeArea: true,
                                                     context: context,
                                                     builder: (context) {
                                                       return GestureDetector(
@@ -848,6 +850,7 @@ class _SelecionarOSWidgetState extends State<SelecionarOSWidget>
                                                     key:
                                                         'AIzaSyDpk1wIZmA1OTS57D_cB13BD01zqrTiQNI',
                                                   );
+                                                  Navigator.pop(context);
                                                   await showModalBottomSheet(
                                                     isScrollControlled: true,
                                                     backgroundColor:
@@ -1602,6 +1605,7 @@ class _SelecionarOSWidgetState extends State<SelecionarOSWidget>
                                                   ).then((value) =>
                                                       safeSetState(() {}));
 
+                                                  Navigator.pop(context);
                                                   await showModalBottomSheet(
                                                     isScrollControlled: true,
                                                     backgroundColor:
