@@ -732,6 +732,7 @@ class _SelecionarOSWidgetState extends State<SelecionarOSWidget>
                                                       await getCurrentUserLocation(
                                                           defaultLocation:
                                                               LatLng(0.0, 0.0));
+                                                  var _shouldSetState = false;
                                                   showModalBottomSheet(
                                                     isScrollControlled: true,
                                                     backgroundColor:
@@ -764,6 +765,246 @@ class _SelecionarOSWidgetState extends State<SelecionarOSWidget>
                                                   ).then((value) =>
                                                       safeSetState(() {}));
 
+                                                  _model.temNetNoServico =
+                                                      await actions
+                                                          .temInternet();
+                                                  _shouldSetState = true;
+                                                  if (!_model
+                                                      .temNetNoServico!) {
+                                                    await showDialog(
+                                                      context: context,
+                                                      builder:
+                                                          (alertDialogContext) {
+                                                        return AlertDialog(
+                                                          title: Text('Ops!'),
+                                                          content: Text(
+                                                              'Você não tem internet, você podera usar o serviço de localização, entretanto, nenhuma rota será sugerida no momento.'),
+                                                          actions: [
+                                                            TextButton(
+                                                              onPressed: () =>
+                                                                  Navigator.pop(
+                                                                      alertDialogContext),
+                                                              child: Text('Ok'),
+                                                            ),
+                                                          ],
+                                                        );
+                                                      },
+                                                    );
+                                                    Navigator.pop(context);
+                                                    await showModalBottomSheet(
+                                                      isScrollControlled: true,
+                                                      backgroundColor:
+                                                          Colors.transparent,
+                                                      enableDrag: false,
+                                                      context: context,
+                                                      builder: (context) {
+                                                        return GestureDetector(
+                                                          onTap: () => _model
+                                                                  .unfocusNode
+                                                                  .canRequestFocus
+                                                              ? FocusScope.of(
+                                                                      context)
+                                                                  .requestFocus(
+                                                                      _model
+                                                                          .unfocusNode)
+                                                              : FocusScope.of(
+                                                                      context)
+                                                                  .unfocus(),
+                                                          child: Padding(
+                                                            padding: MediaQuery
+                                                                .viewInsetsOf(
+                                                                    context),
+                                                            child: Container(
+                                                              height: double
+                                                                  .infinity,
+                                                              child:
+                                                                  IniciarDeslocamentoWidget(
+                                                                etapade: functions
+                                                                    .ligaoDeNome(
+                                                                        FFAppState()
+                                                                            .trServicos
+                                                                            .toList(),
+                                                                        'serv_id',
+                                                                        'serv_nome',
+                                                                        getJsonField(
+                                                                          trOsServicosItem,
+                                                                          r'''$.oserv_id_serv''',
+                                                                        ).toString())!,
+                                                                fazendaNome: functions
+                                                                    .ligaoDeNome(
+                                                                        FFAppState()
+                                                                            .trFazendas
+                                                                            .toList(),
+                                                                        'faz_id',
+                                                                        'faz_nome',
+                                                                        valueOrDefault<
+                                                                            String>(
+                                                                          functions.ligacaoEntreListas(
+                                                                              getJsonField(
+                                                                                trOsServicosItem,
+                                                                                r'''$''',
+                                                                                true,
+                                                                              ),
+                                                                              FFAppState().trOrdemServicos.toList(),
+                                                                              'oserv_id_os',
+                                                                              'os_id',
+                                                                              'os_id_faz'),
+                                                                          '404',
+                                                                        ))!,
+                                                                latlngFaz: functions.strToLatLng(
+                                                                    functions.ligaoDeNome(
+                                                                        FFAppState().trFazendas.toList(),
+                                                                        'faz_id',
+                                                                        'faz_latitude',
+                                                                        valueOrDefault<String>(
+                                                                          functions.ligacaoEntreListas(
+                                                                              getJsonField(
+                                                                                trOsServicosItem,
+                                                                                r'''$''',
+                                                                                true,
+                                                                              ),
+                                                                              FFAppState().trOrdemServicos.toList(),
+                                                                              'oserv_id_os',
+                                                                              'os_id',
+                                                                              'os_id_faz'),
+                                                                          '404',
+                                                                        )),
+                                                                    functions.ligaoDeNome(
+                                                                        FFAppState().trFazendas.toList(),
+                                                                        'faz_id',
+                                                                        'faz_longitude',
+                                                                        valueOrDefault<String>(
+                                                                          functions.ligacaoEntreListas(
+                                                                              getJsonField(
+                                                                                trOsServicosItem,
+                                                                                r'''$''',
+                                                                                true,
+                                                                              ),
+                                                                              FFAppState().trOrdemServicos.toList(),
+                                                                              'oserv_id_os',
+                                                                              'os_id',
+                                                                              'os_id_faz'),
+                                                                          '404',
+                                                                        )))!,
+                                                                cidadeFaz: functions
+                                                                    .ligaoDeNome(
+                                                                        FFAppState()
+                                                                            .trFazendas
+                                                                            .toList(),
+                                                                        'faz_id',
+                                                                        'faz_cidade',
+                                                                        valueOrDefault<
+                                                                            String>(
+                                                                          functions.ligacaoEntreListas(
+                                                                              getJsonField(
+                                                                                trOsServicosItem,
+                                                                                r'''$''',
+                                                                                true,
+                                                                              ),
+                                                                              FFAppState().trOrdemServicos.toList(),
+                                                                              'oserv_id_os',
+                                                                              'os_id',
+                                                                              'os_id_faz'),
+                                                                          '404',
+                                                                        ))!,
+                                                                estadoFaz: functions
+                                                                    .ligaoDeNome(
+                                                                        FFAppState()
+                                                                            .trFazendas
+                                                                            .toList(),
+                                                                        'faz_id',
+                                                                        'faz_estado',
+                                                                        valueOrDefault<
+                                                                            String>(
+                                                                          functions.ligacaoEntreListas(
+                                                                              getJsonField(
+                                                                                trOsServicosItem,
+                                                                                r'''$''',
+                                                                                true,
+                                                                              ),
+                                                                              FFAppState().trOrdemServicos.toList(),
+                                                                              'oserv_id_os',
+                                                                              'os_id',
+                                                                              'os_id_faz'),
+                                                                          '404',
+                                                                        ))!,
+                                                                observacao:
+                                                                    getJsonField(
+                                                                  trOsServicosItem,
+                                                                  r'''$.oserv_observacao''',
+                                                                ).toString(),
+                                                                tecnicoId:
+                                                                    valueOrDefault<
+                                                                        String>(
+                                                                  functions.ligacaoEntreListas(
+                                                                      getJsonField(
+                                                                        trOsServicosItem,
+                                                                        r'''$''',
+                                                                        true,
+                                                                      ),
+                                                                      FFAppState().trOsTecnicos.toList(),
+                                                                      'oserv_id',
+                                                                      'ostec_id_serv',
+                                                                      'ostec_id_tec'),
+                                                                  '404',
+                                                                ),
+                                                                servicoId:
+                                                                    getJsonField(
+                                                                  trOsServicosItem,
+                                                                  r'''$.oserv_id_os''',
+                                                                ).toString(),
+                                                                data: functions
+                                                                    .strToData(
+                                                                        valueOrDefault<
+                                                                            String>(
+                                                                  getJsonField(
+                                                                    trOsServicosItem,
+                                                                    r'''$.oserv_dthr_agendamento''',
+                                                                  ).toString(),
+                                                                  '2099-01-01 00:00:00',
+                                                                ))!,
+                                                                hora: functions
+                                                                    .strToHORA(
+                                                                        valueOrDefault<
+                                                                            String>(
+                                                                  getJsonField(
+                                                                    trOsServicosItem,
+                                                                    r'''$.oserv_dthr_agendamento''',
+                                                                  ).toString(),
+                                                                  '2099-01-01 00:00:00',
+                                                                ))!,
+                                                                jsonServico:
+                                                                    trOsServicosItem,
+                                                                deslocamentoAtualFinzalizado: FFAppState()
+                                                                    .servicosFinalizadosComSucesso
+                                                                    .contains(
+                                                                        getJsonField(
+                                                                      trOsServicosItem,
+                                                                      r'''$.oserv_id''',
+                                                                    ).toString()),
+                                                                polylinhaQueVemDoMenuInicial:
+                                                                    valueOrDefault<
+                                                                        String>(
+                                                                  ApiRotasPolylinesCall
+                                                                      .criptografadapolyline(
+                                                                    (_model.polyline1
+                                                                            ?.jsonBody ??
+                                                                        ''),
+                                                                  ).toString(),
+                                                                  '.',
+                                                                ),
+                                                              ),
+                                                            ),
+                                                          ),
+                                                        );
+                                                      },
+                                                    ).then((value) =>
+                                                        safeSetState(() {}));
+
+                                                    if (_shouldSetState)
+                                                      setState(() {});
+                                                    return;
+                                                  }
                                                   _model.polyline1 =
                                                       await ApiRotasPolylinesCall
                                                           .call(
@@ -854,6 +1095,7 @@ class _SelecionarOSWidgetState extends State<SelecionarOSWidget>
                                                     key:
                                                         'AIzaSyDpk1wIZmA1OTS57D_cB13BD01zqrTiQNI',
                                                   );
+                                                  _shouldSetState = true;
                                                   Navigator.pop(context);
                                                   await showModalBottomSheet(
                                                     isScrollControlled: true,
@@ -1065,7 +1307,8 @@ class _SelecionarOSWidgetState extends State<SelecionarOSWidget>
                                                   ).then((value) =>
                                                       safeSetState(() {}));
 
-                                                  setState(() {});
+                                                  if (_shouldSetState)
+                                                    setState(() {});
                                                 },
                                                 child: Row(
                                                   mainAxisSize:
@@ -1805,12 +2048,16 @@ class _SelecionarOSWidgetState extends State<SelecionarOSWidget>
                                                                         r'''$.oserv_id''',
                                                                       ).toString()),
                                                               polylinhaQueVemDoMenuInicial:
-                                                                  ApiRotasPolylinesCall
-                                                                      .criptografadapolyline(
-                                                                (_model.polyline2
-                                                                        ?.jsonBody ??
-                                                                    ''),
-                                                              ).toString(),
+                                                                  valueOrDefault<
+                                                                      String>(
+                                                                ApiRotasPolylinesCall
+                                                                    .criptografadapolyline(
+                                                                  (_model.polyline2
+                                                                          ?.jsonBody ??
+                                                                      ''),
+                                                                ).toString(),
+                                                                '.',
+                                                              ),
                                                             ),
                                                           ),
                                                         ),
