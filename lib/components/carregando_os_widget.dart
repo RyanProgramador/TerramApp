@@ -52,8 +52,8 @@ class _CarregandoOsWidgetState extends State<CarregandoOsWidget> {
         mainAxisAlignment: MainAxisAlignment.center,
         children: [
           Container(
-            width: double.infinity,
-            height: MediaQuery.sizeOf(context).height * 0.99,
+            width: 150.0,
+            height: 150.0,
             decoration: BoxDecoration(),
             alignment: AlignmentDirectional(0.00, 0.00),
             child: Container(
