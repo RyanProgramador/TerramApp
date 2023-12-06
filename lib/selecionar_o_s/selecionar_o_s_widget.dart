@@ -1,4 +1,5 @@
 import '/backend/api_requests/api_calls.dart';
+import '/components/carregando_os_widget.dart';
 import '/components/iniciar_deslocamento_widget.dart';
 import '/components/loading_comp_widget.dart';
 import '/components/pesquisa_avanadabtn_widget.dart';
@@ -726,6 +727,38 @@ class _SelecionarOSWidgetState extends State<SelecionarOSWidget>
                                                       await getCurrentUserLocation(
                                                           defaultLocation:
                                                               LatLng(0.0, 0.0));
+                                                  await showModalBottomSheet(
+                                                    isScrollControlled: true,
+                                                    backgroundColor:
+                                                        Colors.transparent,
+                                                    isDismissible: false,
+                                                    enableDrag: false,
+                                                    useSafeArea: true,
+                                                    context: context,
+                                                    builder: (context) {
+                                                      return GestureDetector(
+                                                        onTap: () => _model
+                                                                .unfocusNode
+                                                                .canRequestFocus
+                                                            ? FocusScope.of(
+                                                                    context)
+                                                                .requestFocus(_model
+                                                                    .unfocusNode)
+                                                            : FocusScope.of(
+                                                                    context)
+                                                                .unfocus(),
+                                                        child: Padding(
+                                                          padding: MediaQuery
+                                                              .viewInsetsOf(
+                                                                  context),
+                                                          child:
+                                                              CarregandoOsWidget(),
+                                                        ),
+                                                      );
+                                                    },
+                                                  ).then((value) =>
+                                                      safeSetState(() {}));
+
                                                   _model.polyline1 =
                                                       await ApiRotasPolylinesCall
                                                           .call(
@@ -1446,6 +1479,38 @@ class _SelecionarOSWidgetState extends State<SelecionarOSWidget>
                                                       await getCurrentUserLocation(
                                                           defaultLocation:
                                                               LatLng(0.0, 0.0));
+                                                  await showModalBottomSheet(
+                                                    isScrollControlled: true,
+                                                    backgroundColor:
+                                                        Colors.transparent,
+                                                    isDismissible: false,
+                                                    enableDrag: false,
+                                                    useSafeArea: true,
+                                                    context: context,
+                                                    builder: (context) {
+                                                      return GestureDetector(
+                                                        onTap: () => _model
+                                                                .unfocusNode
+                                                                .canRequestFocus
+                                                            ? FocusScope.of(
+                                                                    context)
+                                                                .requestFocus(_model
+                                                                    .unfocusNode)
+                                                            : FocusScope.of(
+                                                                    context)
+                                                                .unfocus(),
+                                                        child: Padding(
+                                                          padding: MediaQuery
+                                                              .viewInsetsOf(
+                                                                  context),
+                                                          child:
+                                                              CarregandoOsWidget(),
+                                                        ),
+                                                      );
+                                                    },
+                                                  ).then((value) =>
+                                                      safeSetState(() {}));
+
                                                   _model.polyline2 =
                                                       await ApiRotasPolylinesCall
                                                           .call(
