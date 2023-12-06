@@ -821,7 +821,6 @@ class _SelecionarOSWidgetState extends State<SelecionarOSWidget>
                                                     isScrollControlled: true,
                                                     backgroundColor:
                                                         Colors.transparent,
-                                                    isDismissible: false,
                                                     enableDrag: false,
                                                     useSafeArea: true,
                                                     context: context,
