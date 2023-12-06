@@ -1,5 +1,6 @@
 import '/flutter_flow/flutter_flow_theme.dart';
 import '/flutter_flow/flutter_flow_util.dart';
+import '/custom_code/widgets/index.dart' as custom_widgets;
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:google_fonts/google_fonts.dart';
@@ -50,13 +51,21 @@ class _CarregandoOsWidgetState extends State<CarregandoOsWidget> {
         mainAxisSize: MainAxisSize.max,
         mainAxisAlignment: MainAxisAlignment.center,
         children: [
-          Text(
-            'Carregando...',
-            style: FlutterFlowTheme.of(context).bodyMedium.override(
-                  fontFamily: 'Readex Pro',
-                  color: FlutterFlowTheme.of(context).primaryText,
-                  fontSize: 32.0,
-                ),
+          Container(
+            width: double.infinity,
+            height: MediaQuery.sizeOf(context).height * 0.99,
+            decoration: BoxDecoration(),
+            alignment: AlignmentDirectional(0.00, 0.00),
+            child: Container(
+              width: 140.0,
+              height: 140.0,
+              child: custom_widgets.LoadingCircle(
+                width: 140.0,
+                height: 140.0,
+                color: FlutterFlowTheme.of(context).primary,
+                circleRadius: 120.0,
+              ),
+            ),
           ),
         ],
       ),
