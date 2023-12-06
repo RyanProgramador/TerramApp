@@ -156,6 +156,7 @@ class _SelecionarOSWidgetState extends State<SelecionarOSWidget>
       _model.trCFG = await SincronizarGroup.trCFGCall.call(
         urlapicall: FFAppState().urlapicall,
       );
+      FFAppState().update(() {});
       if ((_model.trTecnicosSinc?.succeeded ?? true) &&
           (_model.trOsServicosSinc?.succeeded ?? true) &&
           (_model.trServicosSinc?.succeeded ?? true) &&
