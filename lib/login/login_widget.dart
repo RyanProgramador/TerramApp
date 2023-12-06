@@ -369,7 +369,7 @@ class _LoginWidgetState extends State<LoginWidget> {
                                                         ModuloSeguraGroup
                                                             .loginsCall
                                                             .messageLogin(
-                                                              (_model.loginStatus
+                                                              (_model.loginStatusOnSubmit
                                                                       ?.jsonBody ??
                                                                   ''),
                                                             )
