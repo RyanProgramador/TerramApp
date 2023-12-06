@@ -65,6 +65,7 @@ Future mainAction(String? servicoId, String? tecnicoId, String? entradaOuSaida,
       updateNotificationWithTimer((tempoEmSegundosDeAtualizacao ?? 4));
 
       DateTime? previousTimestamp;
+      String? previousLocationLat;
 
       BackgroundLocation.getLocationUpdates((location) async {
         final latitude = location.latitude.toString();
@@ -72,20 +73,24 @@ Future mainAction(String? servicoId, String? tecnicoId, String? entradaOuSaida,
 
         DateTime currentTimestamp = getCurrentTimestamp;
 
-        if (previousTimestamp == null ||
-            currentTimestamp.difference(previousTimestamp!).inSeconds >=
-                (tempoEmSegundosDeAtualizacao ?? 4)) {
-          Map<String, dynamic> data2 = {
-            "osdes_id": osdesId,
-            "des_latitude": "$latitude",
-            "des_longitude": "$longitude",
-          };
+        if (previousLocationLat != latitude) {
+          if (previousTimestamp == null ||
+              currentTimestamp.difference(previousTimestamp!).inSeconds >=
+                  (tempoEmSegundosDeAtualizacao ?? 4)) {
+            Map<String, dynamic> data2 = {
+              "osdes_id": osdesId,
+              "des_latitude": "$latitude",
+              "des_longitude": "$longitude",
+            };
 
-          if (data2 != null && data2.isNotEmpty) {
-            FFAppState().trDeslocGeo2.add(data2);
+            if (data2 != null && data2.isNotEmpty) {
+              FFAppState().trDeslocGeo2.add(data2);
+            }
+
+            previousTimestamp = currentTimestamp;
+            previousLocationLat =
+                latitude; // Atualize a variável para evitar duplicatas
           }
-
-          previousTimestamp = currentTimestamp;
         }
       });
     }
