@@ -162,7 +162,7 @@ class _SelecionarOSWidgetState extends State<SelecionarOSWidget>
           (_model.trFazendasSinc?.succeeded ?? true) &&
           (_model.sincOsRet?.succeeded ?? true) &&
           (_model.trOsTecnicosSincroniza?.succeeded ?? true)) {
-        setState(() {
+        FFAppState().update(() {
           FFAppState().trOrdemServicos = SincronizarGroup.ordemDeServicoCall
               .ordemServicoDados(
                 (_model.sincOsRet?.jsonBody ?? ''),
