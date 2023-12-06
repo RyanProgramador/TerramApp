@@ -529,18 +529,15 @@ class _IniciarDeslocamentoWidgetState extends State<IniciarDeslocamentoWidget> {
                                       ParamType.LatLng,
                                     ),
                                     'retornoAPI': serializeParam(
-                                      'teste',
+                                      'teste2',
                                       ParamType.String,
                                     ),
                                     'retornopolylines': serializeParam(
-                                      valueOrDefault<String>(
-                                        ApiRotasPolylinesCall
-                                            .criptografadapolyline(
-                                          (_model.porfavorFuncione?.jsonBody ??
-                                              ''),
-                                        ).toString(),
-                                        'teste',
-                                      ),
+                                      ApiRotasPolylinesCall
+                                          .criptografadapolyline(
+                                        (_model.porfavorFuncione?.jsonBody ??
+                                            ''),
+                                      ).toString(),
                                       ParamType.String,
                                     ),
                                   }.withoutNulls,
