@@ -1280,16 +1280,12 @@ class _SelecionarOSWidgetState extends State<SelecionarOSWidget>
                                                                         r'''$.oserv_id''',
                                                                       ).toString()),
                                                               polylinhaQueVemDoMenuInicial:
-                                                                  valueOrDefault<
-                                                                      String>(
-                                                                ApiRotasPolylinesCall
-                                                                    .criptografadapolyline(
-                                                                  (_model.polyline1
-                                                                          ?.jsonBody ??
-                                                                      ''),
-                                                                ).toString(),
-                                                                '.',
-                                                              ),
+                                                                  ApiRotasPolylinesCall
+                                                                      .criptografadapolyline(
+                                                                (_model.polyline1
+                                                                        ?.jsonBody ??
+                                                                    ''),
+                                                              ).toString(),
                                                             ),
                                                           ),
                                                         ),
