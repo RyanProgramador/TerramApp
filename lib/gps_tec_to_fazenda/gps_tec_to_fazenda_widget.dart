@@ -629,6 +629,8 @@ class _GpsTecToFazendaWidgetState extends State<GpsTecToFazendaWidget> {
                                                     .trOsDeslocamentoJsonAtual,
                                                 r'''$.osdes_id''',
                                               ).toString()),
+                                              FFAppState()
+                                                  .tempoEmSegundosPadraoDeCapturaDeLocal,
                                             );
                                           },
                                           child: Icon(

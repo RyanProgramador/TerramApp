@@ -153,6 +153,9 @@ class _SelecionarOSWidgetState extends State<SelecionarOSWidget>
       _model.trEmpresas = await SincronizarGroup.trEmpresasCall.call(
         urlapicall: FFAppState().urlapicall,
       );
+      _model.trCFG = await SincronizarGroup.trCFGCall.call(
+        urlapicall: FFAppState().urlapicall,
+      );
       if ((_model.trTecnicosSinc?.succeeded ?? true) &&
           (_model.trOsServicosSinc?.succeeded ?? true) &&
           (_model.trServicosSinc?.succeeded ?? true) &&
@@ -202,6 +205,10 @@ class _SelecionarOSWidgetState extends State<SelecionarOSWidget>
               )!
               .toList()
               .cast<dynamic>();
+          FFAppState().tempoEmSegundosPadraoDeCapturaDeLocal =
+              SincronizarGroup.trCFGCall.dadosCFG(
+            (_model.trCFG?.jsonBody ?? ''),
+          );
         });
       } else {
         await showDialog(
@@ -748,12 +755,8 @@ class _SelecionarOSWidgetState extends State<SelecionarOSWidget>
                                                           padding: MediaQuery
                                                               .viewInsetsOf(
                                                                   context),
-                                                          child: Container(
-                                                            height:
-                                                                double.infinity,
-                                                            child:
-                                                                CarregandoOsWidget(),
-                                                          ),
+                                                          child:
+                                                              CarregandoOsWidget(),
                                                         ),
                                                       );
                                                     },
@@ -1505,12 +1508,8 @@ class _SelecionarOSWidgetState extends State<SelecionarOSWidget>
                                                           padding: MediaQuery
                                                               .viewInsetsOf(
                                                                   context),
-                                                          child: Container(
-                                                            height:
-                                                                double.infinity,
-                                                            child:
-                                                                CarregandoOsWidget(),
-                                                          ),
+                                                          child:
+                                                              CarregandoOsWidget(),
                                                         ),
                                                       );
                                                     },

@@ -12,13 +12,8 @@ import 'package:background_location/background_location.dart';
 import 'package:flutter_local_notifications/flutter_local_notifications.dart';
 import 'dart:async';
 
-Future mainAction(
-  String? servicoId,
-  String? tecnicoId,
-  String? entradaOuSaida,
-  bool? pausado,
-  String? osdesId,
-) async {
+Future mainAction(String? servicoId, String? tecnicoId, String? entradaOuSaida,
+    bool? pausado, String? osdesId, int? tempoEmSegundosDeAtualizacao) async {
   final FlutterLocalNotificationsPlugin flutterLocalNotificationsPlugin =
       FlutterLocalNotificationsPlugin();
 
@@ -36,13 +31,13 @@ Future mainAction(
     icon: '@mipmap/ic_launcher',
   );
 
-  await BackgroundLocation.startLocationService(distanceFilter: 1);
+  await BackgroundLocation.startLocationService(distanceFilter: 0);
 
   // Guarda o timestamp inicial
   final DateTime initialTimestamp = DateTime.now();
   // Calcula o timestamp que indica 8 segundos após o início
-  final DateTime eightSecondsLaterTimestamp =
-      initialTimestamp.add(Duration(seconds: 8));
+  final DateTime eightSecondsLaterTimestamp = initialTimestamp
+      .add(Duration(seconds: tempoEmSegundosDeAtualizacao ?? 4));
 
   // Função para atualizar a notificação com o tempo restante
   void updateNotificationWithTimer(int timeRemaining) {
@@ -67,7 +62,7 @@ Future mainAction(
 
   Future<void> captureLocation(bool? pausado) async {
     if (!pausado!) {
-      updateNotificationWithTimer(5);
+      updateNotificationWithTimer((tempoEmSegundosDeAtualizacao ?? 4));
 
       DateTime? previousTimestamp;
 
@@ -78,7 +73,8 @@ Future mainAction(
         DateTime currentTimestamp = getCurrentTimestamp;
 
         if (previousTimestamp == null ||
-            currentTimestamp.difference(previousTimestamp!).inSeconds >= 8) {
+            currentTimestamp.difference(previousTimestamp!).inSeconds >=
+                (tempoEmSegundosDeAtualizacao ?? 4)) {
           Map<String, dynamic> data2 = {
             "osdes_id": osdesId,
             "des_latitude": "$latitude",

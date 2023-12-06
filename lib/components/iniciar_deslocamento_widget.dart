@@ -4,7 +4,6 @@ import '/flutter_flow/flutter_flow_google_map.dart';
 import '/flutter_flow/flutter_flow_theme.dart';
 import '/flutter_flow/flutter_flow_util.dart';
 import '/flutter_flow/flutter_flow_widgets.dart';
-import '/custom_code/actions/index.dart' as actions;
 import '/custom_code/widgets/index.dart' as custom_widgets;
 import '/flutter_flow/custom_functions.dart' as functions;
 import 'package:flutter/material.dart';
@@ -687,22 +686,6 @@ class _IniciarDeslocamentoWidgetState extends State<IniciarDeslocamentoWidget> {
                                       onPressed: () async {
                                         await Future.delayed(
                                             const Duration(milliseconds: 1000));
-                                        await actions.mainAction(
-                                          widget.servicoId,
-                                          widget.tecnicoId,
-                                          '1',
-                                          true,
-                                          functions.umMaisUm(getJsonField(
-                                            FFAppState()
-                                                .trOsDeslocamentoJsonAtual,
-                                            r'''$.osdes_id''',
-                                          ).toString()),
-                                        );
-                                        await actions.stopMainAction(
-                                          widget.servicoId,
-                                          widget.tecnicoId,
-                                          '1',
-                                        );
                                         await showDialog(
                                           context: context,
                                           builder: (alertDialogContext) {

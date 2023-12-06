@@ -293,6 +293,11 @@ class FFAppState extends ChangeNotifier {
       _excluirLocal = _latLngFromString(prefs.getString('ff_excluirLocal')) ??
           _excluirLocal;
     });
+    _safeInit(() {
+      _tempoEmSegundosPadraoDeCapturaDeLocal =
+          prefs.getInt('ff_tempoEmSegundosPadraoDeCapturaDeLocal') ??
+              _tempoEmSegundosPadraoDeCapturaDeLocal;
+    });
   }
 
   void update(VoidCallback callback) {
@@ -1195,6 +1200,14 @@ class FFAppState extends ChangeNotifier {
     _value != null
         ? prefs.setString('ff_excluirLocal', _value.serialize())
         : prefs.remove('ff_excluirLocal');
+  }
+
+  int _tempoEmSegundosPadraoDeCapturaDeLocal = 0;
+  int get tempoEmSegundosPadraoDeCapturaDeLocal =>
+      _tempoEmSegundosPadraoDeCapturaDeLocal;
+  set tempoEmSegundosPadraoDeCapturaDeLocal(int _value) {
+    _tempoEmSegundosPadraoDeCapturaDeLocal = _value;
+    prefs.setInt('ff_tempoEmSegundosPadraoDeCapturaDeLocal', _value);
   }
 }
 

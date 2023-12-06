@@ -22,6 +22,7 @@ class SincronizarGroup {
   static TrSincronizaCelularComBDCall trSincronizaCelularComBDCall =
       TrSincronizaCelularComBDCall();
   static TrEmpresasCall trEmpresasCall = TrEmpresasCall();
+  static TrCFGCall trCFGCall = TrCFGCall();
 }
 
 class OrdemDeServicoCall {
@@ -595,6 +596,39 @@ class TrEmpresasCall {
   dynamic statusTrEmpresas(dynamic response) => getJsonField(
         response,
         r'''$.status''',
+      );
+}
+
+class TrCFGCall {
+  Future<ApiCallResponse> call({
+    String? urlapicall = '',
+  }) async {
+    final ffApiRequestBody = '''
+{
+  "tipo": "apk_sinc_cfg"
+}''';
+    return ApiManager.instance.makeApiCall(
+      callName: 'trCFG',
+      apiUrl: '${SincronizarGroup.baseUrl}${urlapicall}',
+      callType: ApiCallType.POST,
+      headers: {},
+      params: {},
+      body: ffApiRequestBody,
+      bodyType: BodyType.JSON,
+      returnBody: true,
+      encodeBodyUtf8: false,
+      decodeUtf8: false,
+      cache: false,
+    );
+  }
+
+  dynamic statusCFG(dynamic response) => getJsonField(
+        response,
+        r'''$.status''',
+      );
+  dynamic dadosCFG(dynamic response) => getJsonField(
+        response,
+        r'''$.dados''',
       );
 }
 

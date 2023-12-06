@@ -46,6 +46,8 @@ class SelecionarOSModel extends FlutterFlowModel<SelecionarOSWidget> {
   ApiCallResponse? trTecnicosSinc;
   // Stores action output result for [Backend Call - API (trEmpresas)] action in SelecionarOS widget.
   ApiCallResponse? trEmpresas;
+  // Stores action output result for [Backend Call - API (trCFG)] action in SelecionarOS widget.
+  ApiCallResponse? trCFG;
   // State field(s) for searchBar widget.
   FocusNode? searchBarFocusNode;
   TextEditingController? searchBarController;
