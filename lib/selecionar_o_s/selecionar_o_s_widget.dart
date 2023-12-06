@@ -688,10 +688,7 @@ class _SelecionarOSWidgetState extends State<SelecionarOSWidget>
                                           padding:
                                               EdgeInsetsDirectional.fromSTEB(
                                                   16.0, 8.0, 16.0, 0.0),
-                                          child: AnimatedContainer(
-                                            duration:
-                                                Duration(milliseconds: 100),
-                                            curve: Curves.easeInOut,
+                                          child: Container(
                                             width: double.infinity,
                                             height: 78.0,
                                             decoration: BoxDecoration(
@@ -761,6 +758,9 @@ class _SelecionarOSWidgetState extends State<SelecionarOSWidget>
                                                   ).then((value) =>
                                                       safeSetState(() {}));
 
+                                                  await Future.delayed(
+                                                      const Duration(
+                                                          milliseconds: 1000));
                                                   Navigator.pop(context);
                                                   _model.polyline1 =
                                                       await ApiRotasPolylinesCall
