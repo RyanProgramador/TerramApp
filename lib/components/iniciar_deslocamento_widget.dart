@@ -4,7 +4,6 @@ import '/flutter_flow/flutter_flow_google_map.dart';
 import '/flutter_flow/flutter_flow_theme.dart';
 import '/flutter_flow/flutter_flow_util.dart';
 import '/flutter_flow/flutter_flow_widgets.dart';
-import '/custom_code/widgets/index.dart' as custom_widgets;
 import '/flutter_flow/custom_functions.dart' as functions;
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
@@ -460,22 +459,6 @@ class _IniciarDeslocamentoWidgetState extends State<IniciarDeslocamentoWidget> {
                         child: Container(
                           width: double.infinity,
                           decoration: BoxDecoration(),
-                          child: Container(
-                            width: double.infinity,
-                            height: 275.0,
-                            child: custom_widgets.MapsRoutes(
-                              width: double.infinity,
-                              height: 275.0,
-                              json2: functions
-                                  .jsonToStr(ApiRotasDirectionsCall.tudo(
-                                cardActionsApiRotasDirectionsResponse.jsonBody,
-                              )),
-                              coordenadasIniciais: currentUserLocationValue,
-                              coordenadasFinais: widget.latlngFaz!,
-                              stringDoRotas:
-                                  widget.polylinhaQueVemDoMenuInicial,
-                            ),
-                          ),
                         ),
                       ),
                       Expanded(
