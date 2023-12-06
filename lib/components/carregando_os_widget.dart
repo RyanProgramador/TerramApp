@@ -54,6 +54,7 @@ class _CarregandoOsWidgetState extends State<CarregandoOsWidget> {
             'Carregando...',
             style: FlutterFlowTheme.of(context).bodyMedium.override(
                   fontFamily: 'Readex Pro',
+                  color: FlutterFlowTheme.of(context).primaryText,
                   fontSize: 32.0,
                 ),
           ),
