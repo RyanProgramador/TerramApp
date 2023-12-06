@@ -1,5 +1,4 @@
 import '/backend/api_requests/api_calls.dart';
-import '/components/carregando_os_widget.dart';
 import '/components/iniciar_deslocamento_widget.dart';
 import '/components/loading_comp_widget.dart';
 import '/components/pesquisa_avanadabtn_widget.dart';
@@ -9,6 +8,7 @@ import '/flutter_flow/flutter_flow_icon_button.dart';
 import '/flutter_flow/flutter_flow_theme.dart';
 import '/flutter_flow/flutter_flow_util.dart';
 import '/flutter_flow/flutter_flow_widgets.dart';
+import 'dart:async';
 import '/custom_code/actions/index.dart' as actions;
 import '/flutter_flow/custom_functions.dart' as functions;
 import '/flutter_flow/permissions_util.dart';
@@ -724,44 +724,6 @@ class _SelecionarOSWidgetState extends State<SelecionarOSWidget>
                                                       await getCurrentUserLocation(
                                                           defaultLocation:
                                                               LatLng(0.0, 0.0));
-                                                  await showModalBottomSheet(
-                                                    isScrollControlled: true,
-                                                    backgroundColor:
-                                                        Colors.transparent,
-                                                    enableDrag: false,
-                                                    context: context,
-                                                    builder: (context) {
-                                                      return GestureDetector(
-                                                        onTap: () => _model
-                                                                .unfocusNode
-                                                                .canRequestFocus
-                                                            ? FocusScope.of(
-                                                                    context)
-                                                                .requestFocus(_model
-                                                                    .unfocusNode)
-                                                            : FocusScope.of(
-                                                                    context)
-                                                                .unfocus(),
-                                                        child: Padding(
-                                                          padding: MediaQuery
-                                                              .viewInsetsOf(
-                                                                  context),
-                                                          child: Container(
-                                                            height:
-                                                                double.infinity,
-                                                            child:
-                                                                CarregandoOsWidget(),
-                                                          ),
-                                                        ),
-                                                      );
-                                                    },
-                                                  ).then((value) =>
-                                                      safeSetState(() {}));
-
-                                                  await Future.delayed(
-                                                      const Duration(
-                                                          milliseconds: 1000));
-                                                  Navigator.pop(context);
                                                   _model.polyline1 =
                                                       await ApiRotasPolylinesCall
                                                           .call(
@@ -1482,130 +1444,101 @@ class _SelecionarOSWidgetState extends State<SelecionarOSWidget>
                                                       await getCurrentUserLocation(
                                                           defaultLocation:
                                                               LatLng(0.0, 0.0));
-                                                  await showModalBottomSheet(
-                                                    isScrollControlled: true,
-                                                    backgroundColor:
-                                                        Colors.transparent,
-                                                    enableDrag: false,
-                                                    context: context,
-                                                    builder: (context) {
-                                                      return GestureDetector(
-                                                        onTap: () => _model
-                                                                .unfocusNode
-                                                                .canRequestFocus
-                                                            ? FocusScope.of(
-                                                                    context)
-                                                                .requestFocus(_model
-                                                                    .unfocusNode)
-                                                            : FocusScope.of(
-                                                                    context)
-                                                                .unfocus(),
-                                                        child: Padding(
-                                                          padding: MediaQuery
-                                                              .viewInsetsOf(
-                                                                  context),
-                                                          child: Container(
-                                                            height:
-                                                                double.infinity,
-                                                            child:
-                                                                CarregandoOsWidget(),
-                                                          ),
-                                                        ),
-                                                      );
-                                                    },
-                                                  ).then((value) =>
-                                                      safeSetState(() {}));
-
-                                                  Navigator.pop(context);
-                                                  _model.polyline2 =
-                                                      await ApiRotasPolylinesCall
-                                                          .call(
-                                                    latitudeOrigem: functions
-                                                        .separadorLatDeLng(
+                                                  unawaited(
+                                                    () async {
+                                                      _model.polyline2 =
+                                                          await ApiRotasPolylinesCall
+                                                              .call(
+                                                        latitudeOrigem: functions
+                                                            .separadorLatDeLng(
+                                                                true,
+                                                                functions
+                                                                    .latLngToStr(
+                                                                        currentUserLocationValue)),
+                                                        longitudeOrigem: functions
+                                                            .separadorLatDeLng(
+                                                                false,
+                                                                functions
+                                                                    .latLngToStr(
+                                                                        currentUserLocationValue)),
+                                                        latitudeDestino: functions.separadorLatDeLng(
                                                             true,
-                                                            functions.latLngToStr(
-                                                                currentUserLocationValue)),
-                                                    longitudeOrigem: functions
-                                                        .separadorLatDeLng(
+                                                            functions.latLngToStr(functions.strToLatLng(
+                                                                functions.ligaoDeNome(
+                                                                    FFAppState().trFazendas.toList(),
+                                                                    'faz_id',
+                                                                    'faz_latitude',
+                                                                    valueOrDefault<String>(
+                                                                      functions.ligacaoEntreListas(
+                                                                          getJsonField(
+                                                                            trOsServicosItem,
+                                                                            r'''$''',
+                                                                            true,
+                                                                          ),
+                                                                          FFAppState().trOrdemServicos.toList(),
+                                                                          'oserv_id_os',
+                                                                          'os_id',
+                                                                          'os_id_faz'),
+                                                                      '404',
+                                                                    )),
+                                                                functions.ligaoDeNome(
+                                                                    FFAppState().trFazendas.toList(),
+                                                                    'faz_id',
+                                                                    'faz_longitude',
+                                                                    valueOrDefault<String>(
+                                                                      functions.ligacaoEntreListas(
+                                                                          getJsonField(
+                                                                            trOsServicosItem,
+                                                                            r'''$''',
+                                                                            true,
+                                                                          ),
+                                                                          FFAppState().trOrdemServicos.toList(),
+                                                                          'oserv_id_os',
+                                                                          'os_id',
+                                                                          'os_id_faz'),
+                                                                      '404',
+                                                                    ))))),
+                                                        longitudeDestonp: functions.separadorLatDeLng(
                                                             false,
-                                                            functions.latLngToStr(
-                                                                currentUserLocationValue)),
-                                                    latitudeDestino: functions.separadorLatDeLng(
-                                                        true,
-                                                        functions.latLngToStr(functions.strToLatLng(
-                                                            functions.ligaoDeNome(
-                                                                FFAppState().trFazendas.toList(),
-                                                                'faz_id',
-                                                                'faz_latitude',
-                                                                valueOrDefault<String>(
-                                                                  functions.ligacaoEntreListas(
-                                                                      getJsonField(
-                                                                        trOsServicosItem,
-                                                                        r'''$''',
-                                                                        true,
-                                                                      ),
-                                                                      FFAppState().trOrdemServicos.toList(),
-                                                                      'oserv_id_os',
-                                                                      'os_id',
-                                                                      'os_id_faz'),
-                                                                  '404',
-                                                                )),
-                                                            functions.ligaoDeNome(
-                                                                FFAppState().trFazendas.toList(),
-                                                                'faz_id',
-                                                                'faz_longitude',
-                                                                valueOrDefault<String>(
-                                                                  functions.ligacaoEntreListas(
-                                                                      getJsonField(
-                                                                        trOsServicosItem,
-                                                                        r'''$''',
-                                                                        true,
-                                                                      ),
-                                                                      FFAppState().trOrdemServicos.toList(),
-                                                                      'oserv_id_os',
-                                                                      'os_id',
-                                                                      'os_id_faz'),
-                                                                  '404',
-                                                                ))))),
-                                                    longitudeDestonp: functions.separadorLatDeLng(
-                                                        false,
-                                                        functions.latLngToStr(functions.strToLatLng(
-                                                            functions.ligaoDeNome(
-                                                                FFAppState().trFazendas.toList(),
-                                                                'faz_id',
-                                                                'faz_latitude',
-                                                                valueOrDefault<String>(
-                                                                  functions.ligacaoEntreListas(
-                                                                      getJsonField(
-                                                                        trOsServicosItem,
-                                                                        r'''$''',
-                                                                        true,
-                                                                      ),
-                                                                      FFAppState().trOrdemServicos.toList(),
-                                                                      'oserv_id_os',
-                                                                      'os_id',
-                                                                      'os_id_faz'),
-                                                                  '404',
-                                                                )),
-                                                            functions.ligaoDeNome(
-                                                                FFAppState().trFazendas.toList(),
-                                                                'faz_id',
-                                                                'faz_longitude',
-                                                                valueOrDefault<String>(
-                                                                  functions.ligacaoEntreListas(
-                                                                      getJsonField(
-                                                                        trOsServicosItem,
-                                                                        r'''$''',
-                                                                        true,
-                                                                      ),
-                                                                      FFAppState().trOrdemServicos.toList(),
-                                                                      'oserv_id_os',
-                                                                      'os_id',
-                                                                      'os_id_faz'),
-                                                                  '404',
-                                                                ))))),
-                                                    key:
-                                                        'AIzaSyDpk1wIZmA1OTS57D_cB13BD01zqrTiQNI',
+                                                            functions.latLngToStr(functions.strToLatLng(
+                                                                functions.ligaoDeNome(
+                                                                    FFAppState().trFazendas.toList(),
+                                                                    'faz_id',
+                                                                    'faz_latitude',
+                                                                    valueOrDefault<String>(
+                                                                      functions.ligacaoEntreListas(
+                                                                          getJsonField(
+                                                                            trOsServicosItem,
+                                                                            r'''$''',
+                                                                            true,
+                                                                          ),
+                                                                          FFAppState().trOrdemServicos.toList(),
+                                                                          'oserv_id_os',
+                                                                          'os_id',
+                                                                          'os_id_faz'),
+                                                                      '404',
+                                                                    )),
+                                                                functions.ligaoDeNome(
+                                                                    FFAppState().trFazendas.toList(),
+                                                                    'faz_id',
+                                                                    'faz_longitude',
+                                                                    valueOrDefault<String>(
+                                                                      functions.ligacaoEntreListas(
+                                                                          getJsonField(
+                                                                            trOsServicosItem,
+                                                                            r'''$''',
+                                                                            true,
+                                                                          ),
+                                                                          FFAppState().trOrdemServicos.toList(),
+                                                                          'oserv_id_os',
+                                                                          'os_id',
+                                                                          'os_id_faz'),
+                                                                      '404',
+                                                                    ))))),
+                                                        key:
+                                                            'AIzaSyDpk1wIZmA1OTS57D_cB13BD01zqrTiQNI',
+                                                      );
+                                                    }(),
                                                   );
                                                   await showModalBottomSheet(
                                                     isScrollControlled: true,
