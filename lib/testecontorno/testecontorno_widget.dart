@@ -153,7 +153,7 @@ class _TestecontornoWidgetState extends State<TestecontornoWidget> {
                   child: Container(
                     width: double.infinity,
                     height: double.infinity,
-                    child: custom_widgets.MapsOffline(
+                    child: custom_widgets.RotaFinalOffline(
                       width: double.infinity,
                       height: double.infinity,
                       coordenadasIniciais: currentUserLocationValue,
