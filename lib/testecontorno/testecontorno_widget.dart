@@ -156,7 +156,7 @@ class _TestecontornoWidgetState extends State<TestecontornoWidget> {
                     child: custom_widgets.RotaFinalOffline(
                       width: double.infinity,
                       height: double.infinity,
-                      coordenadasIniciais: currentUserLocationValue,
+                      coordenadasIniciais: currentUserLocationValue!,
                       coordenadasFinais: FFAppState().excluirLocal!,
                     ),
                   ),
