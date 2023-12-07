@@ -153,30 +153,10 @@ class _TestecontornoWidgetState extends State<TestecontornoWidget> {
                   child: Container(
                     width: double.infinity,
                     height: double.infinity,
-                    child: custom_widgets.MapsRoutesOffline(
+                    child: custom_widgets.MapsOffline(
                       width: double.infinity,
                       height: double.infinity,
                       coordenadasIniciais: currentUserLocationValue,
-                      coordenadasFinais: FFAppState().excluirLocal!,
-                    ),
-                  ),
-                ),
-              ),
-              Expanded(
-                flex: 8,
-                child: Container(
-                  width: double.infinity,
-                  height: 400.0,
-                  decoration: BoxDecoration(
-                    color: FlutterFlowTheme.of(context).secondaryBackground,
-                  ),
-                  child: Container(
-                    width: double.infinity,
-                    height: double.infinity,
-                    child: custom_widgets.MapsRoutesOffline(
-                      width: double.infinity,
-                      height: double.infinity,
-                      coordenadasIniciais: FFAppState().excluirLocal,
                       coordenadasFinais: FFAppState().excluirLocal!,
                     ),
                   ),

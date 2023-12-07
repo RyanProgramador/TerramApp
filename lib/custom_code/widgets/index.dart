@@ -4,4 +4,5 @@ export 'actual_position.dart' show ActualPosition;
 export 'maps_routes2.dart' show MapsRoutes2;
 export 'rota_final.dart' show RotaFinal;
 export 'loading_circle.dart' show LoadingCircle;
+export 'maps_offline.dart' show MapsOffline;
 export 'maps_routes_offline.dart' show MapsRoutesOffline;
