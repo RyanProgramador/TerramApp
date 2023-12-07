@@ -1193,7 +1193,7 @@ class FFAppState extends ChangeNotifier {
     prefs.setInt('ff_qualSwitchEstaAtivo', _value);
   }
 
-  LatLng? _excluirLocal = LatLng(-28.2622601, -52.41027949999999);
+  LatLng? _excluirLocal = LatLng(-29.63239633087104, -51.50037197484937);
   LatLng? get excluirLocal => _excluirLocal;
   set excluirLocal(LatLng? _value) {
     _excluirLocal = _value;
