@@ -20,8 +20,8 @@ import 'package:google_maps_flutter/google_maps_flutter.dart' as google_maps;
 import 'package:custom_marker/marker_icon.dart' as cust;
 import 'package:google_maps_flutter/google_maps_flutter.dart' as google_maps;
 
-class MapsRoutesOffline extends StatefulWidget {
-  const MapsRoutesOffline({
+class RotaFinalOffline extends StatefulWidget {
+  const RotaFinalOffline({
     Key? key,
     this.width,
     this.height,
@@ -41,10 +41,10 @@ class MapsRoutesOffline extends StatefulWidget {
       'https://lh3.googleusercontent.com/u/9/drive-viewer/AK7aPaD4V4OUOT1q2oukdiVXFD-_sP6u4FeZRmV9RxR7CRR8Oi9Ga237m_3yoSHbXNRqx4JvQW1PmOUtuHYdk-71UYL-DjQZEw=w1278-h913';
 
   @override
-  _MapsRoutesOfflineState createState() => _MapsRoutesOfflineState();
+  _RotaFinalOfflineState createState() => _RotaFinalOfflineState();
 }
 
-class _MapsRoutesOfflineState extends State<MapsRoutesOffline> {
+class _RotaFinalOfflineState extends State<RotaFinalOffline> {
   Uint8List? customIconBytes;
 
   //para polylines
