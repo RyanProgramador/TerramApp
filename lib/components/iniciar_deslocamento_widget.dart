@@ -487,7 +487,7 @@ class _IniciarDeslocamentoWidgetState extends State<IniciarDeslocamentoWidget> {
                             ),
                           ),
                         ),
-                      if (_model.temInternetOnLoadInicioOs ?? true)
+                      if (!_model.temInternetOnLoadInicioOs!)
                         Expanded(
                           flex: 6,
                           child: Container(

@@ -778,7 +778,7 @@ class _SelecionarOSWidgetState extends State<SelecionarOSWidget>
                                                         return AlertDialog(
                                                           title: Text('Ops!'),
                                                           content: Text(
-                                                              'Você não tem internet, você podera usar o serviço de localização, entretanto, nenhuma rota será sugerida no momento.'),
+                                                              'Você não tem internet, você poderá usar o serviço de localização, entretanto, nenhuma rota será sugerida no momento.'),
                                                           actions: [
                                                             TextButton(
                                                               onPressed: () =>
