@@ -197,7 +197,7 @@ class _GpsTecToFazendaWidgetState extends State<GpsTecToFazendaWidget> {
                               child: custom_widgets.RotaFinalOffline(
                                 width: double.infinity,
                                 height: double.infinity,
-                                coordenadasIniciais: FFAppState().excluirLocal!,
+                                coordenadasIniciais: currentUserLocationValue!,
                                 coordenadasFinais: widget.latlngFaz!,
                               ),
                             ),

@@ -153,7 +153,7 @@ class _MapsRoutesState extends State<RotaFinalOffline> {
             : google_maps.BitmapDescriptor.defaultMarkerWithHue(
                 google_maps.BitmapDescriptor.hueBlue,
               ),
-        rotation: currentBearing,
+        rotation: -currentBearing,
         // Call a separate function to get the custom icon.
         anchor: Offset(0.5, 0.5),
       ),

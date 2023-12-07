@@ -58,6 +58,8 @@ class SelecionarOSModel extends FlutterFlowModel<SelecionarOSWidget> {
   bool? temNetNoServico;
   // Stores action output result for [Backend Call - API (apiRotasPolylines)] action in Row widget.
   ApiCallResponse? polyline1;
+  // Stores action output result for [Custom Action - temInternet] action in Row widget.
+  bool? temInternetOsInicia;
   // Stores action output result for [Backend Call - API (apiRotasPolylines)] action in Row widget.
   ApiCallResponse? polyline2;
 

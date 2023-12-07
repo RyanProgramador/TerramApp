@@ -92,7 +92,7 @@ class _MapsOfflineState extends State<MapsOffline> {
   }
 
   double calculateZoomLevel(LatLng point1, LatLng point2) {
-    const double initialZoom = 12.64567; // Zoom inicial
+    const double initialZoom = 11.64567; // Zoom inicial
     const double zoomThreshold =
         12.0; // Limite de distância para o zoom inicial
 
