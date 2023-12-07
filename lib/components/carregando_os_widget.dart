@@ -63,7 +63,7 @@ class _CarregandoOsWidgetState extends State<CarregandoOsWidget> {
                 width: 140.0,
                 height: 140.0,
                 color: FlutterFlowTheme.of(context).primary,
-                circleRadius: 120.0,
+                circleRadius: 30.0,
               ),
             ),
           ),
