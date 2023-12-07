@@ -1,4 +1,5 @@
 import '/backend/api_requests/api_calls.dart';
+import '/components/carregando_os_widget.dart';
 import '/flutter_flow/flutter_flow_theme.dart';
 import '/flutter_flow/flutter_flow_util.dart';
 import '/flutter_flow/flutter_flow_widgets.dart';
@@ -114,6 +115,21 @@ class _ConfiguracoesWidgetState extends State<ConfiguracoesWidget> {
                               highlightColor: Colors.transparent,
                               onTap: () async {
                                 var _shouldSetState = false;
+                                showModalBottomSheet(
+                                  isScrollControlled: true,
+                                  backgroundColor: Colors.transparent,
+                                  isDismissible: false,
+                                  enableDrag: false,
+                                  useSafeArea: true,
+                                  context: context,
+                                  builder: (context) {
+                                    return Padding(
+                                      padding: MediaQuery.viewInsetsOf(context),
+                                      child: CarregandoOsWidget(),
+                                    );
+                                  },
+                                ).then((value) => safeSetState(() {}));
+
                                 _model.apiResultxxd = await SincronizarGroup
                                     .trSincronizaCelularComBDCall
                                     .call(
@@ -157,6 +173,7 @@ class _ConfiguracoesWidgetState extends State<ConfiguracoesWidget> {
                                     FFAppState().trDeslocamentoGeo = [];
                                     FFAppState().trDeslocGeo2 = [];
                                   });
+                                  Navigator.pop(context);
                                 } else {
                                   await showDialog(
                                     context: context,
@@ -175,6 +192,7 @@ class _ConfiguracoesWidgetState extends State<ConfiguracoesWidget> {
                                       );
                                     },
                                   );
+                                  Navigator.pop(context);
                                   if (_shouldSetState) setState(() {});
                                   return;
                                 }
