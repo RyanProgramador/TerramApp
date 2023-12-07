@@ -4,9 +4,11 @@ import '/flutter_flow/flutter_flow_google_map.dart';
 import '/flutter_flow/flutter_flow_theme.dart';
 import '/flutter_flow/flutter_flow_util.dart';
 import '/flutter_flow/flutter_flow_widgets.dart';
+import '/custom_code/actions/index.dart' as actions;
 import '/custom_code/widgets/index.dart' as custom_widgets;
 import '/flutter_flow/custom_functions.dart' as functions;
 import 'package:flutter/material.dart';
+import 'package:flutter/scheduler.dart';
 import 'package:flutter/services.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:google_fonts/google_fonts.dart';
@@ -67,6 +69,11 @@ class _IniciarDeslocamentoWidgetState extends State<IniciarDeslocamentoWidget> {
   void initState() {
     super.initState();
     _model = createModel(context, () => IniciarDeslocamentoModel());
+
+    // On component load action.
+    SchedulerBinding.instance.addPostFrameCallback((_) async {
+      _model.temInternetOnLoadInicioOs = await actions.temInternet();
+    });
 
     getCurrentUserLocation(defaultLocation: LatLng(0.0, 0.0), cached: true)
         .then((loc) => setState(() => currentUserLocationValue = loc));
@@ -455,29 +462,49 @@ class _IniciarDeslocamentoWidgetState extends State<IniciarDeslocamentoWidget> {
                           ],
                         ),
                       ),
-                      Expanded(
-                        flex: 6,
-                        child: Container(
-                          width: double.infinity,
-                          decoration: BoxDecoration(),
+                      if (_model.temInternetOnLoadInicioOs ?? true)
+                        Expanded(
+                          flex: 6,
                           child: Container(
                             width: double.infinity,
-                            height: 275.0,
-                            child: custom_widgets.MapsRoutes(
+                            decoration: BoxDecoration(),
+                            child: Container(
                               width: double.infinity,
                               height: 275.0,
-                              json2: functions
-                                  .jsonToStr(ApiRotasDirectionsCall.tudo(
-                                cardActionsApiRotasDirectionsResponse.jsonBody,
-                              )),
-                              coordenadasIniciais: currentUserLocationValue,
-                              coordenadasFinais: widget.latlngFaz!,
-                              stringDoRotas:
-                                  widget.polylinhaQueVemDoMenuInicial,
+                              child: custom_widgets.MapsRoutes(
+                                width: double.infinity,
+                                height: 275.0,
+                                json2: functions
+                                    .jsonToStr(ApiRotasDirectionsCall.tudo(
+                                  cardActionsApiRotasDirectionsResponse
+                                      .jsonBody,
+                                )),
+                                coordenadasIniciais: currentUserLocationValue,
+                                coordenadasFinais: widget.latlngFaz!,
+                                stringDoRotas:
+                                    widget.polylinhaQueVemDoMenuInicial,
+                              ),
                             ),
                           ),
                         ),
-                      ),
+                      if (_model.temInternetOnLoadInicioOs ?? true)
+                        Expanded(
+                          flex: 6,
+                          child: Container(
+                            width: double.infinity,
+                            decoration: BoxDecoration(),
+                            child: Container(
+                              width: double.infinity,
+                              height: double.infinity,
+                              child: custom_widgets.MapsOffline(
+                                width: double.infinity,
+                                height: double.infinity,
+                                coordenadasIniciais: currentUserLocationValue,
+                                coordenadasFinais: widget.latlngFaz!,
+                              ),
+                            ),
+                          ),
+                        ),
                       Expanded(
                         flex: 2,
                         child: Padding(

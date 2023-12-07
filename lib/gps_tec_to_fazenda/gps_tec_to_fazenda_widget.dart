@@ -7,6 +7,7 @@ import '/custom_code/actions/index.dart' as actions;
 import '/custom_code/widgets/index.dart' as custom_widgets;
 import '/flutter_flow/custom_functions.dart' as functions;
 import 'package:flutter/material.dart';
+import 'package:flutter/scheduler.dart';
 import 'package:flutter/services.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:provider/provider.dart';
@@ -47,6 +48,11 @@ class _GpsTecToFazendaWidgetState extends State<GpsTecToFazendaWidget> {
   void initState() {
     super.initState();
     _model = createModel(context, () => GpsTecToFazendaModel());
+
+    // On page load action.
+    SchedulerBinding.instance.addPostFrameCallback((_) async {
+      _model.temInternetOnLoadGPSOs = await actions.temInternet();
+    });
 
     getCurrentUserLocation(defaultLocation: LatLng(0.0, 0.0), cached: true)
         .then((loc) => setState(() => currentUserLocationValue = loc));
@@ -103,54 +109,106 @@ class _GpsTecToFazendaWidgetState extends State<GpsTecToFazendaWidget> {
               Expanded(
                 child: Stack(
                   children: [
-                    FutureBuilder<ApiCallResponse>(
-                      future: ApiRotasDirectionsCall.call(
-                        origem: functions.latLngToStr(currentUserLocationValue),
-                        destino: functions.latLngToStr(widget.latlngFaz),
-                        key: 'AIzaSyDpk1wIZmA1OTS57D_cB13BD01zqrTiQNI',
-                      ),
-                      builder: (context, snapshot) {
-                        // Customize what your widget looks like when it's loading.
-                        if (!snapshot.hasData) {
-                          return Center(
-                            child: SizedBox(
-                              width: 50.0,
-                              height: 50.0,
-                              child: CircularProgressIndicator(
-                                valueColor: AlwaysStoppedAnimation<Color>(
-                                  FlutterFlowTheme.of(context).primary,
+                    if (_model.temInternetOnLoadGPSOs ?? true)
+                      FutureBuilder<ApiCallResponse>(
+                        future: ApiRotasDirectionsCall.call(
+                          origem:
+                              functions.latLngToStr(currentUserLocationValue),
+                          destino: functions.latLngToStr(widget.latlngFaz),
+                          key: 'AIzaSyDpk1wIZmA1OTS57D_cB13BD01zqrTiQNI',
+                        ),
+                        builder: (context, snapshot) {
+                          // Customize what your widget looks like when it's loading.
+                          if (!snapshot.hasData) {
+                            return Center(
+                              child: SizedBox(
+                                width: 50.0,
+                                height: 50.0,
+                                child: CircularProgressIndicator(
+                                  valueColor: AlwaysStoppedAnimation<Color>(
+                                    FlutterFlowTheme.of(context).primary,
+                                  ),
                                 ),
+                              ),
+                            );
+                          }
+                          final containerApiRotasDirectionsResponse =
+                              snapshot.data!;
+                          return Container(
+                            width: double.infinity,
+                            height: double.infinity,
+                            decoration: BoxDecoration(
+                              color: FlutterFlowTheme.of(context)
+                                  .secondaryBackground,
+                            ),
+                            child: Container(
+                              width: double.infinity,
+                              height: double.infinity,
+                              child: custom_widgets.RotaFinal(
+                                width: double.infinity,
+                                height: double.infinity,
+                                json2: functions
+                                    .jsonToStr(ApiRotasDirectionsCall.tudo(
+                                  containerApiRotasDirectionsResponse.jsonBody,
+                                ))!,
+                                coordenadasIniciais: currentUserLocationValue!,
+                                coordenadasFinais: widget.latlngFaz!,
+                                stringDoRotas: widget.retornopolylines,
                               ),
                             ),
                           );
-                        }
-                        final containerApiRotasDirectionsResponse =
-                            snapshot.data!;
-                        return Container(
-                          width: double.infinity,
-                          height: double.infinity,
-                          decoration: BoxDecoration(
-                            color: FlutterFlowTheme.of(context)
-                                .secondaryBackground,
-                          ),
-                          child: Container(
+                        },
+                      ),
+                    if (!_model.temInternetOnLoadGPSOs!)
+                      FutureBuilder<ApiCallResponse>(
+                        future: ApiRotasDirectionsCall.call(
+                          origem:
+                              functions.latLngToStr(currentUserLocationValue),
+                          destino: functions.latLngToStr(widget.latlngFaz),
+                          key: 'AIzaSyDpk1wIZmA1OTS57D_cB13BD01zqrTiQNI',
+                        ),
+                        builder: (context, snapshot) {
+                          // Customize what your widget looks like when it's loading.
+                          if (!snapshot.hasData) {
+                            return Center(
+                              child: SizedBox(
+                                width: 50.0,
+                                height: 50.0,
+                                child: CircularProgressIndicator(
+                                  valueColor: AlwaysStoppedAnimation<Color>(
+                                    FlutterFlowTheme.of(context).primary,
+                                  ),
+                                ),
+                              ),
+                            );
+                          }
+                          final containerApiRotasDirectionsResponse =
+                              snapshot.data!;
+                          return Container(
                             width: double.infinity,
                             height: double.infinity,
-                            child: custom_widgets.RotaFinal(
+                            decoration: BoxDecoration(
+                              color: FlutterFlowTheme.of(context)
+                                  .secondaryBackground,
+                            ),
+                            child: Container(
                               width: double.infinity,
                               height: double.infinity,
-                              json2: functions
-                                  .jsonToStr(ApiRotasDirectionsCall.tudo(
-                                containerApiRotasDirectionsResponse.jsonBody,
-                              ))!,
-                              coordenadasIniciais: currentUserLocationValue!,
-                              coordenadasFinais: widget.latlngFaz!,
-                              stringDoRotas: widget.retornopolylines,
+                              child: custom_widgets.RotaFinal(
+                                width: double.infinity,
+                                height: double.infinity,
+                                json2: functions
+                                    .jsonToStr(ApiRotasDirectionsCall.tudo(
+                                  containerApiRotasDirectionsResponse.jsonBody,
+                                ))!,
+                                coordenadasIniciais: currentUserLocationValue!,
+                                coordenadasFinais: widget.latlngFaz!,
+                                stringDoRotas: widget.retornopolylines,
+                              ),
                             ),
-                          ),
-                        );
-                      },
-                    ),
+                          );
+                        },
+                      ),
                     ClipRRect(
                       borderRadius: BorderRadius.only(
                         bottomLeft: Radius.circular(60.0),
