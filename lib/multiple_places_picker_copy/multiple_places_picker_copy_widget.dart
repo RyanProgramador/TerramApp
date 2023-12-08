@@ -298,6 +298,7 @@ class _MultiplePlacesPickerCopyWidgetState
                                   FFAppState().servicosFinalizadosComSucesso =
                                       [];
                                   FFAppState().MotivoPausaDeslocamento = [];
+                                  FFAppState().rotainversa = [];
                                 });
                               },
                               text: 'Limpar tudo',
