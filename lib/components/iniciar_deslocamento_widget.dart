@@ -1053,16 +1053,12 @@ class _IniciarDeslocamentoWidgetState extends State<IniciarDeslocamentoWidget> {
                                               ),
                                               'retornopolylines':
                                                   serializeParam(
-                                                valueOrDefault<String>(
-                                                  functions
-                                                      .jsonToStr(getJsonField(
-                                                    FFAppState()
-                                                        .rotainversa
-                                                        .first,
-                                                    r'''$.rota_inversa''',
-                                                  )),
-                                                  'hnjuDld`wHXQBk@G[Lu@\\s@^sArAaDHGnAwDd@wCN]pAz@|@t@`DhDbFjEdAnAdB`Cl@~@p@b@^J`@NhFb@nFTnAVr@RtBr@fATnAP|FfAlHlB|Al@fBfAhBxAhAfAfAn@l@ThBb@tBl@~Bz@fAl@tA`ArAn@z@L^@jDK\\BVDd@N\\|@|AxCHTJzCHfCRpBVxAb@jB\\fAHZRpABhAEpA}BfRtDf@jAVdBf@nBz@pBlAbChBfAfA~BnCrAfAbAl@xBx@`Ch@JPFDLp@@hAUpNY|LGlCDrBXnEDbBApBM|EQpFSxJ_Bnk@a@`K@f@}@bZa@fOShFU~EOxF?rAYlIF\\CbAWfCc@dDO~AIxCChBO|H_@AKVo@bC@j@ZvBDR^BMbGYbLOPk@bBb@zBLVStKbM\\|Mf@~DXzHt@dH`@hLf@nIV[nL',
-                                                ),
+                                                getJsonField(
+                                                  FFAppState()
+                                                      .rotainversa
+                                                      .first,
+                                                  r'''$.rota_inversa''',
+                                                ).toString(),
                                                 ParamType.String,
                                               ),
                                               'comRota': serializeParam(
