@@ -59,15 +59,9 @@ class _GpsTecToFazendaWidgetState extends State<GpsTecToFazendaWidget> {
     // On page load action.
     SchedulerBinding.instance.addPostFrameCallback((_) async {
       _model.temInternetOnLoadGPSOs = await actions.temInternet();
-      if (!((_model.temInternetOnLoadGPSOs == true) &&
-          (widget.rotaInversaString != null &&
-              widget.rotaInversaString != ''))) {
+      if (_model.temInternetOnLoadGPSOs != true) {
         return;
       }
-      await actions.gravaRotaInversa(
-        widget.servicoId,
-        widget.rotaInversaString,
-      );
     });
 
     getCurrentUserLocation(defaultLocation: LatLng(0.0, 0.0), cached: true)

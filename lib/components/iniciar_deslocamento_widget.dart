@@ -590,32 +590,6 @@ class _IniciarDeslocamentoWidgetState extends State<IniciarDeslocamentoWidget> {
                                     _shouldSetState = true;
                                     if (_model
                                         .temInternetAntesDoDeslocamento!) {
-                                      _model.rotaInvertida =
-                                          await ApiRotasPolylinesCall.call(
-                                        latitudeOrigem:
-                                            functions.separadorLatDeLng(
-                                                true,
-                                                functions.latLngToStr(
-                                                    widget.latlngFaz)),
-                                        longitudeOrigem:
-                                            functions.separadorLatDeLng(
-                                                false,
-                                                functions.latLngToStr(
-                                                    widget.latlngFaz)),
-                                        latitudeDestino:
-                                            functions.separadorLatDeLng(
-                                                true,
-                                                functions.latLngToStr(
-                                                    currentUserLocationValue)),
-                                        longitudeDestonp:
-                                            functions.separadorLatDeLng(
-                                                false,
-                                                functions.latLngToStr(
-                                                    currentUserLocationValue)),
-                                        key:
-                                            'AIzaSyDpk1wIZmA1OTS57D_cB13BD01zqrTiQNI',
-                                      );
-                                      _shouldSetState = true;
                                       if (widget
                                           .deslocamentoAtualFinzalizado!) {
                                         var confirmDialogResponse =
@@ -724,12 +698,13 @@ class _IniciarDeslocamentoWidgetState extends State<IniciarDeslocamentoWidget> {
                                               ),
                                               'retornopolylines':
                                                   serializeParam(
-                                                ApiRotasPolylinesCall
-                                                    .criptografadapolyline(
-                                                  (_model.porfavorFuncioneComRotaInvertida
-                                                          ?.jsonBody ??
-                                                      ''),
-                                                ).toString(),
+                                                functions
+                                                    .jsonToStr(getJsonField(
+                                                  FFAppState()
+                                                      .rotainversa
+                                                      .first,
+                                                  r'''$.rota_inversa''',
+                                                )),
                                                 ParamType.String,
                                               ),
                                               'comRota': serializeParam(
@@ -742,12 +717,13 @@ class _IniciarDeslocamentoWidgetState extends State<IniciarDeslocamentoWidget> {
                                               ),
                                               'rotaInversaString':
                                                   serializeParam(
-                                                ApiRotasPolylinesCall
-                                                    .criptografadapolyline(
-                                                  (_model.rotaInvertida
-                                                          ?.jsonBody ??
-                                                      ''),
-                                                ).toString(),
+                                                functions
+                                                    .jsonToStr(getJsonField(
+                                                  FFAppState()
+                                                      .rotainversa
+                                                      .first,
+                                                  r'''$.rota_inversa''',
+                                                )),
                                                 ParamType.String,
                                               ),
                                             }.withoutNulls,
@@ -856,6 +832,40 @@ class _IniciarDeslocamentoWidgetState extends State<IniciarDeslocamentoWidget> {
                                           return;
                                         }
                                       } else {
+                                        _model.rotaInvertida =
+                                            await ApiRotasPolylinesCall.call(
+                                          latitudeOrigem:
+                                              functions.separadorLatDeLng(
+                                                  true,
+                                                  functions.latLngToStr(
+                                                      widget.latlngFaz)),
+                                          longitudeOrigem:
+                                              functions.separadorLatDeLng(
+                                                  false,
+                                                  functions.latLngToStr(
+                                                      widget.latlngFaz)),
+                                          latitudeDestino:
+                                              functions.separadorLatDeLng(
+                                                  true,
+                                                  functions.latLngToStr(
+                                                      currentUserLocationValue)),
+                                          longitudeDestonp:
+                                              functions.separadorLatDeLng(
+                                                  false,
+                                                  functions.latLngToStr(
+                                                      currentUserLocationValue)),
+                                          key:
+                                              'AIzaSyDpk1wIZmA1OTS57D_cB13BD01zqrTiQNI',
+                                        );
+                                        _shouldSetState = true;
+                                        await actions.gravaRotaInversa(
+                                          widget.servicoId,
+                                          ApiRotasPolylinesCall
+                                              .criptografadapolyline(
+                                            (_model.rotaInvertida?.jsonBody ??
+                                                ''),
+                                          ).toString(),
+                                        );
                                         await showDialog(
                                           context: context,
                                           builder: (alertDialogContext) {
