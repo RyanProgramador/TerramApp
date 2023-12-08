@@ -661,22 +661,22 @@ class _IniciarDeslocamentoWidgetState extends State<IniciarDeslocamentoWidget> {
                                                 functions.separadorLatDeLng(
                                                     true,
                                                     functions.latLngToStr(
-                                                        currentUserLocationValue)),
+                                                        widget.latlngFaz)),
                                             longitudeOrigem:
                                                 functions.separadorLatDeLng(
                                                     false,
                                                     functions.latLngToStr(
-                                                        currentUserLocationValue)),
+                                                        widget.latlngFaz)),
                                             latitudeDestino:
                                                 functions.separadorLatDeLng(
                                                     true,
                                                     functions.latLngToStr(
-                                                        widget.latlngFaz)),
+                                                        currentUserLocationValue)),
                                             longitudeDestonp:
                                                 functions.separadorLatDeLng(
                                                     false,
                                                     functions.latLngToStr(
-                                                        widget.latlngFaz)),
+                                                        currentUserLocationValue)),
                                             key:
                                                 'AIzaSyDpk1wIZmA1OTS57D_cB13BD01zqrTiQNI',
                                           );
