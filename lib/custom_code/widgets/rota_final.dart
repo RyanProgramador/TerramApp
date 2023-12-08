@@ -118,49 +118,6 @@ class _MapsRoutesState extends State<RotaFinal> {
     Set<google_maps.Marker> routeMarkers = Set();
     List<google_maps.LatLng> routeCoordinates = [];
 
-    for (var step in steps) {
-      var startLocation = (step['start_location'] as Map<String, dynamic>);
-      var endLocation = (step['end_location'] as Map<String, dynamic>);
-
-      var startLatLng = google_maps.LatLng(
-        startLocation['lat'] as double,
-        startLocation['lng'] as double,
-      );
-      var endLatLng = google_maps.LatLng(
-        endLocation['lat'] as double,
-        endLocation['lng'] as double,
-      );
-
-      routeCoordinates.add(startLatLng);
-
-      if (routeCoordinates.length > 1) {
-        routeCoordinates.removeLast();
-      }
-
-      routeMarkers.add(
-        google_maps.Marker(
-          markerId: google_maps.MarkerId(
-              'MarkerID-Start-${startLatLng.latitude}-${startLatLng.longitude}'),
-          position: startLatLng,
-          visible: false,
-          icon: google_maps.BitmapDescriptor.defaultMarkerWithHue(
-            google_maps.BitmapDescriptor.hueGreen,
-          ),
-        ),
-      );
-      routeMarkers.add(
-        google_maps.Marker(
-          markerId: google_maps.MarkerId(
-              'MarkerID-End-${endLatLng.latitude}-${endLatLng.longitude}'),
-          position: endLatLng,
-          visible: false,
-          icon: google_maps.BitmapDescriptor.defaultMarkerWithHue(
-            google_maps.BitmapDescriptor.hueRed,
-          ),
-        ),
-      );
-    }
-
     return routeMarkers;
   }
 

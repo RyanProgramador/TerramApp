@@ -35,6 +35,17 @@ class _TestecontornoWidgetState extends State<TestecontornoWidget> {
     SchedulerBinding.instance.addPostFrameCallback((_) async {
       currentUserLocationValue =
           await getCurrentUserLocation(defaultLocation: LatLng(0.0, 0.0));
+      _model.polyline1 = await ApiRotasPolylinesCall.call(
+        latitudeOrigem: functions.separadorLatDeLng(
+            true, functions.latLngToStr(currentUserLocationValue)),
+        longitudeOrigem: functions.separadorLatDeLng(
+            false, functions.latLngToStr(currentUserLocationValue)),
+        latitudeDestino: functions.separadorLatDeLng(
+            true, functions.latLngToStr(FFAppState().excluirLocal)),
+        longitudeDestonp: functions.separadorLatDeLng(
+            false, functions.latLngToStr(FFAppState().excluirLocal)),
+        key: 'AIzaSyDpk1wIZmA1OTS57D_cB13BD01zqrTiQNI',
+      );
       setState(() {
         FFAppState().addToErro(currentUserLocationValue!);
       });
@@ -168,7 +179,9 @@ class _TestecontornoWidgetState extends State<TestecontornoWidget> {
                           width: double.infinity,
                           height: double.infinity,
                           stringDoRotas:
-                              'zwquDrcnwH`@qPFkBhNj@HiEL}DtB{FTk@bHgCjCeAnBi@hDi@|HkAn@}SrCc@jAUXKx@e@f@_@d@i@f@aA|AcGHs@Bm@I_Ai@wD?]m@}EAUBg@@aBiADkANoCLoJJgCHaHJsCD}BEgNi@v@aZ\\\\sKDgBN_HN_HZsG@]PKFUCUSUWEOFwCQGY?KDE~BLNADCDIAKGEs@@sGUg@PyG_@',
+                              ApiRotasPolylinesCall.criptografadapolyline(
+                            (_model.polyline1?.jsonBody ?? ''),
+                          ).toString(),
                           coordenadasIniciais: currentUserLocationValue!,
                           coordenadasFinais: FFAppState().excluirLocal!,
                         ),

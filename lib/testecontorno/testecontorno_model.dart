@@ -22,6 +22,8 @@ class TestecontornoModel extends FlutterFlowModel<TestecontornoWidget> {
   ///  State fields for stateful widgets in this page.
 
   final unfocusNode = FocusNode();
+  // Stores action output result for [Backend Call - API (apiRotasPolylines)] action in testecontorno widget.
+  ApiCallResponse? polyline1;
 
   /// Initialization and disposal methods.
 
