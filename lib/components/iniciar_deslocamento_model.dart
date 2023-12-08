@@ -28,11 +28,11 @@ class IniciarDeslocamentoModel
   // Stores action output result for [Custom Action - temInternet] action in Button widget.
   bool? temInternetAntesDoDeslocamento;
   // Stores action output result for [Backend Call - API (apiRotasPolylines)] action in Button widget.
-  ApiCallResponse? porfavorFuncione;
+  ApiCallResponse? porfavorFuncioneComRotaInvertida;
   // Stores action output result for [Backend Call - API (apiRotasPolylines)] action in Button widget.
-  ApiCallResponse? porfavorFuncione;
+  ApiCallResponse? porfavorFuncioneSemRota;
   // Stores action output result for [Backend Call - API (apiRotasPolylines)] action in Button widget.
-  ApiCallResponse? porfavorFuncione;
+  ApiCallResponse? porfavorFuncioneTecAteFaz;
   // Stores action output result for [Backend Call - API (apiRotasPolylines)] action in Button widget.
   ApiCallResponse? porfavorFuncione;
 

@@ -655,7 +655,7 @@ class _IniciarDeslocamentoWidgetState extends State<IniciarDeslocamentoWidget> {
                                               );
                                             },
                                           );
-                                          _model.porfavorFuncione =
+                                          _model.porfavorFuncioneComRotaInvertida =
                                               await ApiRotasPolylinesCall.call(
                                             latitudeOrigem:
                                                 functions.separadorLatDeLng(
@@ -717,7 +717,7 @@ class _IniciarDeslocamentoWidgetState extends State<IniciarDeslocamentoWidget> {
                                                   serializeParam(
                                                 ApiRotasPolylinesCall
                                                     .criptografadapolyline(
-                                                  (_model.porfavorFuncione
+                                                  (_model.porfavorFuncioneComRotaInvertida
                                                           ?.jsonBody ??
                                                       ''),
                                                 ).toString(),
@@ -754,7 +754,7 @@ class _IniciarDeslocamentoWidgetState extends State<IniciarDeslocamentoWidget> {
                                               );
                                             },
                                           );
-                                          _model.porfavorFuncione =
+                                          _model.porfavorFuncioneSemRota =
                                               await ApiRotasPolylinesCall.call(
                                             latitudeOrigem:
                                                 functions.separadorLatDeLng(
@@ -816,7 +816,7 @@ class _IniciarDeslocamentoWidgetState extends State<IniciarDeslocamentoWidget> {
                                                   serializeParam(
                                                 ApiRotasPolylinesCall
                                                     .criptografadapolyline(
-                                                  (_model.porfavorFuncione
+                                                  (_model.porfavorFuncioneSemRota
                                                           ?.jsonBody ??
                                                       ''),
                                                 ).toString(),
@@ -853,7 +853,7 @@ class _IniciarDeslocamentoWidgetState extends State<IniciarDeslocamentoWidget> {
                                             );
                                           },
                                         );
-                                        _model.porfavorFuncione =
+                                        _model.porfavorFuncioneTecAteFaz =
                                             await ApiRotasPolylinesCall.call(
                                           latitudeOrigem:
                                               functions.separadorLatDeLng(
@@ -914,7 +914,7 @@ class _IniciarDeslocamentoWidgetState extends State<IniciarDeslocamentoWidget> {
                                             'retornopolylines': serializeParam(
                                               ApiRotasPolylinesCall
                                                   .criptografadapolyline(
-                                                (_model.porfavorFuncione
+                                                (_model.porfavorFuncioneTecAteFaz
                                                         ?.jsonBody ??
                                                     ''),
                                               ).toString(),
