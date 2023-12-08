@@ -119,8 +119,7 @@ class _GpsTecToFazendaWidgetState extends State<GpsTecToFazendaWidget> {
               Expanded(
                 child: Stack(
                   children: [
-                    if ((_model.temInternetOnLoadGPSOs == true) &&
-                        widget.comRota)
+                    if (widget.comRota)
                       Container(
                         width: double.infinity,
                         height: double.infinity,
