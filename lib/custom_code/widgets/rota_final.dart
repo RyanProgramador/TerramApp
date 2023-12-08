@@ -46,6 +46,10 @@ class RotaFinal extends StatefulWidget {
   _MapsRoutesState createState() => _MapsRoutesState();
 }
 
+extension BruteStringExtension on String {
+  String get asBruteString => r'' + this;
+}
+
 class _MapsRoutesState extends State<RotaFinal> {
   //position é a posição atual
   Position? position;
@@ -170,7 +174,10 @@ class _MapsRoutesState extends State<RotaFinal> {
 
 //faço a menor ideia, acho que é a parte de posição de cada atualização com a position atual
   void addRoutePoints() {
-    var polylinesRed = widget.stringDoRotas;
+    var polylinesRed = widget.stringDoRotas ?? '';
+
+    polylinesRed = polylinesRed.asBruteString;
+
     if (polylinesRed != null) {
       List<poly.PointLatLng> decodedPolylinePoints =
           poly.PolylinePoints().decodePolyline(polylinesRed);
