@@ -740,6 +740,16 @@ class _IniciarDeslocamentoWidgetState extends State<IniciarDeslocamentoWidget> {
                                                 true,
                                                 ParamType.bool,
                                               ),
+                                              'rotaInversaString':
+                                                  serializeParam(
+                                                ApiRotasPolylinesCall
+                                                    .criptografadapolyline(
+                                                  (_model.rotaInvertida
+                                                          ?.jsonBody ??
+                                                      ''),
+                                                ).toString(),
+                                                ParamType.String,
+                                              ),
                                             }.withoutNulls,
                                           );
 
