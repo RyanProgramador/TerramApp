@@ -1063,6 +1063,17 @@ class _IniciarDeslocamentoWidgetState extends State<IniciarDeslocamentoWidget> {
                                                 true,
                                                 ParamType.bool,
                                               ),
+                                              'rotaInversaString':
+                                                  serializeParam(
+                                                functions
+                                                    .jsonToStr(getJsonField(
+                                                  FFAppState()
+                                                      .rotainversa
+                                                      .first,
+                                                  r'''$.rota_inversa''',
+                                                )),
+                                                ParamType.String,
+                                              ),
                                             }.withoutNulls,
                                           );
 

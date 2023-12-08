@@ -12,10 +12,9 @@ Future gravaRotaInversa(
   String? idDoServico,
   String? retornoStringRotaInvertida,
 ) async {
-  final retornoStringRotaInvertida = r"$retornoStringRotaInvertida";
   Map<String, dynamic> rota = {
     "osserv_id": idDoServico,
-    "rota_inversa": "$retornoStringRotaInvertida",
+    "rota_inversa": r'$retornoStringRotaInvertida',
   };
   if (rota != null && rota.isNotEmpty) {
     FFAppState().rotainversa.add(rota);
