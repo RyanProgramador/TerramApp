@@ -298,6 +298,17 @@ class FFAppState extends ChangeNotifier {
           prefs.getInt('ff_tempoEmSegundosPadraoDeCapturaDeLocal') ??
               _tempoEmSegundosPadraoDeCapturaDeLocal;
     });
+    _safeInit(() {
+      _rotainversa = prefs.getStringList('ff_rotainversa')?.map((x) {
+            try {
+              return jsonDecode(x);
+            } catch (e) {
+              print("Can't decode persisted json. Error: $e.");
+              return {};
+            }
+          }).toList() ??
+          _rotainversa;
+    });
   }
 
   void update(VoidCallback callback) {
@@ -1208,6 +1219,47 @@ class FFAppState extends ChangeNotifier {
   set tempoEmSegundosPadraoDeCapturaDeLocal(int _value) {
     _tempoEmSegundosPadraoDeCapturaDeLocal = _value;
     prefs.setInt('ff_tempoEmSegundosPadraoDeCapturaDeLocal', _value);
+  }
+
+  List<dynamic> _rotainversa = [];
+  List<dynamic> get rotainversa => _rotainversa;
+  set rotainversa(List<dynamic> _value) {
+    _rotainversa = _value;
+    prefs.setStringList(
+        'ff_rotainversa', _value.map((x) => jsonEncode(x)).toList());
+  }
+
+  void addToRotainversa(dynamic _value) {
+    _rotainversa.add(_value);
+    prefs.setStringList(
+        'ff_rotainversa', _rotainversa.map((x) => jsonEncode(x)).toList());
+  }
+
+  void removeFromRotainversa(dynamic _value) {
+    _rotainversa.remove(_value);
+    prefs.setStringList(
+        'ff_rotainversa', _rotainversa.map((x) => jsonEncode(x)).toList());
+  }
+
+  void removeAtIndexFromRotainversa(int _index) {
+    _rotainversa.removeAt(_index);
+    prefs.setStringList(
+        'ff_rotainversa', _rotainversa.map((x) => jsonEncode(x)).toList());
+  }
+
+  void updateRotainversaAtIndex(
+    int _index,
+    dynamic Function(dynamic) updateFn,
+  ) {
+    _rotainversa[_index] = updateFn(_rotainversa[_index]);
+    prefs.setStringList(
+        'ff_rotainversa', _rotainversa.map((x) => jsonEncode(x)).toList());
+  }
+
+  void insertAtIndexInRotainversa(int _index, dynamic _value) {
+    _rotainversa.insert(_index, _value);
+    prefs.setStringList(
+        'ff_rotainversa', _rotainversa.map((x) => jsonEncode(x)).toList());
   }
 }
 

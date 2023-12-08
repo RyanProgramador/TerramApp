@@ -26,6 +26,7 @@ class GpsTecToFazendaWidget extends StatefulWidget {
     required this.retornopolylines,
     bool? comRota,
     bool? rotaInversa,
+    this.rotaInversaString,
   })  : this.comRota = comRota ?? false,
         this.rotaInversa = rotaInversa ?? false,
         super(key: key);
@@ -39,6 +40,7 @@ class GpsTecToFazendaWidget extends StatefulWidget {
   final String? retornopolylines;
   final bool comRota;
   final bool rotaInversa;
+  final String? rotaInversaString;
 
   @override
   _GpsTecToFazendaWidgetState createState() => _GpsTecToFazendaWidgetState();
@@ -58,6 +60,15 @@ class _GpsTecToFazendaWidgetState extends State<GpsTecToFazendaWidget> {
     // On page load action.
     SchedulerBinding.instance.addPostFrameCallback((_) async {
       _model.temInternetOnLoadGPSOs = await actions.temInternet();
+      if (!((_model.temInternetOnLoadGPSOs == true) &&
+          (widget.rotaInversaString != null &&
+              widget.rotaInversaString != ''))) {
+        return;
+      }
+      await actions.gravaRotaInversa(
+        widget.servicoId,
+        widget.rotaInversaString,
+      );
     });
 
     getCurrentUserLocation(defaultLocation: LatLng(0.0, 0.0), cached: true)
@@ -115,7 +126,8 @@ class _GpsTecToFazendaWidgetState extends State<GpsTecToFazendaWidget> {
               Expanded(
                 child: Stack(
                   children: [
-                    if (_model.temInternetOnLoadGPSOs ?? true)
+                    if ((_model.temInternetOnLoadGPSOs == true) &&
+                        widget.comRota)
                       FutureBuilder<ApiCallResponse>(
                         future: ApiRotasDirectionsCall.call(
                           origem:
@@ -165,7 +177,8 @@ class _GpsTecToFazendaWidgetState extends State<GpsTecToFazendaWidget> {
                           );
                         },
                       ),
-                    if (!_model.temInternetOnLoadGPSOs!)
+                    if ((_model.temInternetOnLoadGPSOs == false) ||
+                        (widget.comRota == false))
                       FutureBuilder<ApiCallResponse>(
                         future: ApiRotasDirectionsCall.call(
                           origem:

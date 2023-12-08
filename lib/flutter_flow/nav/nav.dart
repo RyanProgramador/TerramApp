@@ -128,6 +128,8 @@ GoRouter createRouter(AppStateNotifier appStateNotifier) => GoRouter(
                     params.getParam('retornopolylines', ParamType.String),
                 comRota: params.getParam('comRota', ParamType.bool),
                 rotaInversa: params.getParam('rotaInversa', ParamType.bool),
+                rotaInversaString:
+                    params.getParam('rotaInversaString', ParamType.String),
               ),
             ),
             FFRoute(

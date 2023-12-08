@@ -125,7 +125,7 @@ class _TestecontornoWidgetState extends State<TestecontornoWidget> {
                 ),
               ),
               Expanded(
-                flex: 2,
+                flex: 7,
                 child: Container(
                   width: double.infinity,
                   height: 400.0,
@@ -135,9 +135,13 @@ class _TestecontornoWidgetState extends State<TestecontornoWidget> {
                   child: Container(
                     width: double.infinity,
                     height: double.infinity,
-                    child: custom_widgets.ContornoMap(
+                    child: custom_widgets.RotaFinal(
                       width: double.infinity,
                       height: double.infinity,
+                      stringDoRotas:
+                          'zwquDrcnwH`@qPFkBhNj@HiEL}DtB{FTk@bHgCjCeAnBi@hDi@|HkAn@}SrCc@jAUXKx@e@f@_@d@i@f@aA|AcGHs@Bm@I_Ai@wD?]m@}EAUBg@@aBiADkANoCLoJJgCHaHJsCD}BEgNi@v@aZ\\\\sKDgBN_HN_HZsG@]PKFUCUSUWEOFwCQGY?KDE~BLNADCDIAKGEs@@sGUg@PyG_@',
+                      coordenadasIniciais: currentUserLocationValue!,
+                      coordenadasFinais: FFAppState().excluirLocal!,
                     ),
                   ),
                 ),

@@ -590,25 +590,34 @@ class _IniciarDeslocamentoWidgetState extends State<IniciarDeslocamentoWidget> {
                                     _shouldSetState = true;
                                     if (_model
                                         .temInternetAntesDoDeslocamento!) {
+                                      _model.rotaInvertida =
+                                          await ApiRotasPolylinesCall.call(
+                                        latitudeOrigem:
+                                            functions.separadorLatDeLng(
+                                                true,
+                                                functions.latLngToStr(
+                                                    widget.latlngFaz)),
+                                        longitudeOrigem:
+                                            functions.separadorLatDeLng(
+                                                false,
+                                                functions.latLngToStr(
+                                                    widget.latlngFaz)),
+                                        latitudeDestino:
+                                            functions.separadorLatDeLng(
+                                                true,
+                                                functions.latLngToStr(
+                                                    currentUserLocationValue)),
+                                        longitudeDestonp:
+                                            functions.separadorLatDeLng(
+                                                false,
+                                                functions.latLngToStr(
+                                                    currentUserLocationValue)),
+                                        key:
+                                            'AIzaSyDpk1wIZmA1OTS57D_cB13BD01zqrTiQNI',
+                                      );
+                                      _shouldSetState = true;
                                       if (widget
                                           .deslocamentoAtualFinzalizado!) {
-                                        await showDialog(
-                                          context: context,
-                                          builder: (alertDialogContext) {
-                                            return AlertDialog(
-                                              title:
-                                                  Text('mostra deslocamento'),
-                                              actions: [
-                                                TextButton(
-                                                  onPressed: () =>
-                                                      Navigator.pop(
-                                                          alertDialogContext),
-                                                  child: Text('Ok'),
-                                                ),
-                                              ],
-                                            );
-                                          },
-                                        );
                                         var confirmDialogResponse =
                                             await showDialog<bool>(
                                                   context: context,
@@ -935,100 +944,6 @@ class _IniciarDeslocamentoWidgetState extends State<IniciarDeslocamentoWidget> {
                                         return;
                                       }
                                     } else {
-                                      await showDialog(
-                                        context: context,
-                                        builder: (alertDialogContext) {
-                                          return AlertDialog(
-                                            title: Text(
-                                                'Não tem net, mostra sem rota'),
-                                            actions: [
-                                              TextButton(
-                                                onPressed: () => Navigator.pop(
-                                                    alertDialogContext),
-                                                child: Text('Ok'),
-                                              ),
-                                            ],
-                                          );
-                                        },
-                                      );
-                                      _model.porfavorFuncione =
-                                          await ApiRotasPolylinesCall.call(
-                                        latitudeOrigem:
-                                            functions.separadorLatDeLng(
-                                                true,
-                                                functions.latLngToStr(
-                                                    currentUserLocationValue)),
-                                        longitudeOrigem:
-                                            functions.separadorLatDeLng(
-                                                false,
-                                                functions.latLngToStr(
-                                                    currentUserLocationValue)),
-                                        latitudeDestino:
-                                            functions.separadorLatDeLng(
-                                                true,
-                                                functions.latLngToStr(
-                                                    widget.latlngFaz)),
-                                        longitudeDestonp:
-                                            functions.separadorLatDeLng(
-                                                false,
-                                                functions.latLngToStr(
-                                                    widget.latlngFaz)),
-                                        key:
-                                            'AIzaSyDpk1wIZmA1OTS57D_cB13BD01zqrTiQNI',
-                                      );
-                                      _shouldSetState = true;
-
-                                      context.pushNamed(
-                                        'GpsTecToFazenda',
-                                        queryParameters: {
-                                          'jsonServico': serializeParam(
-                                            widget.jsonServico,
-                                            ParamType.JSON,
-                                          ),
-                                          'tecnicoId': serializeParam(
-                                            widget.tecnicoId,
-                                            ParamType.String,
-                                          ),
-                                          'servicoId': serializeParam(
-                                            widget.servicoId,
-                                            ParamType.String,
-                                          ),
-                                          'fazNome': serializeParam(
-                                            widget.fazendaNome,
-                                            ParamType.String,
-                                          ),
-                                          'latlngFaz': serializeParam(
-                                            widget.latlngFaz,
-                                            ParamType.LatLng,
-                                          ),
-                                          'retornoAPI': serializeParam(
-                                            functions.jsonToStr(
-                                                ApiRotasDirectionsCall.tudo(
-                                              cardActionsApiRotasDirectionsResponse
-                                                  .jsonBody,
-                                            )),
-                                            ParamType.String,
-                                          ),
-                                          'retornopolylines': serializeParam(
-                                            ApiRotasPolylinesCall
-                                                .criptografadapolyline(
-                                              (_model.porfavorFuncione
-                                                      ?.jsonBody ??
-                                                  ''),
-                                            ).toString(),
-                                            ParamType.String,
-                                          ),
-                                          'comRota': serializeParam(
-                                            false,
-                                            ParamType.bool,
-                                          ),
-                                          'rotaInversa': serializeParam(
-                                            false,
-                                            ParamType.bool,
-                                          ),
-                                        }.withoutNulls,
-                                      );
-
                                       if (_shouldSetState) setState(() {});
                                       return;
                                     }
