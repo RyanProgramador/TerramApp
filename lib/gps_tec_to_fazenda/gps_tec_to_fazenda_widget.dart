@@ -142,8 +142,7 @@ class _GpsTecToFazendaWidgetState extends State<GpsTecToFazendaWidget> {
                           ),
                         ),
                       ),
-                    if ((_model.temInternetOnLoadGPSOs == false) ||
-                        (widget.comRota == false))
+                    if (widget.comRota == false)
                       Container(
                         width: double.infinity,
                         height: double.infinity,
