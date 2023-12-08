@@ -908,6 +908,13 @@ class _IniciarDeslocamentoWidgetState extends State<IniciarDeslocamentoWidget> {
                                               'AIzaSyDpk1wIZmA1OTS57D_cB13BD01zqrTiQNI',
                                         );
                                         _shouldSetState = true;
+                                        setState(() {
+                                          FFAppState().rotainversa =
+                                              FFAppState()
+                                                  .rotainversa
+                                                  .toList()
+                                                  .cast<dynamic>();
+                                        });
 
                                         context.pushNamed(
                                           'GpsTecToFazenda',
