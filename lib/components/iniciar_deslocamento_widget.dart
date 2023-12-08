@@ -621,23 +621,6 @@ class _IniciarDeslocamentoWidgetState extends State<IniciarDeslocamentoWidget> {
                                                 ) ??
                                                 false;
                                         if (confirmDialogResponse) {
-                                          await showDialog(
-                                            context: context,
-                                            builder: (alertDialogContext) {
-                                              return AlertDialog(
-                                                title: Text(
-                                                    'Sim (retornar com rota invertida)'),
-                                                actions: [
-                                                  TextButton(
-                                                    onPressed: () =>
-                                                        Navigator.pop(
-                                                            alertDialogContext),
-                                                    child: Text('Ok'),
-                                                  ),
-                                                ],
-                                              );
-                                            },
-                                          );
                                           _model.porfavorFuncioneComRotaInvertida =
                                               await ApiRotasPolylinesCall.call(
                                             latitudeOrigem:
@@ -732,23 +715,6 @@ class _IniciarDeslocamentoWidgetState extends State<IniciarDeslocamentoWidget> {
                                           if (_shouldSetState) setState(() {});
                                           return;
                                         } else {
-                                          await showDialog(
-                                            context: context,
-                                            builder: (alertDialogContext) {
-                                              return AlertDialog(
-                                                title: Text(
-                                                    'Não (retornar sem rota)'),
-                                                actions: [
-                                                  TextButton(
-                                                    onPressed: () =>
-                                                        Navigator.pop(
-                                                            alertDialogContext),
-                                                    child: Text('Ok'),
-                                                  ),
-                                                ],
-                                              );
-                                            },
-                                          );
                                           _model.porfavorFuncioneSemRota =
                                               await ApiRotasPolylinesCall.call(
                                             latitudeOrigem:
@@ -865,22 +831,6 @@ class _IniciarDeslocamentoWidgetState extends State<IniciarDeslocamentoWidget> {
                                             (_model.rotaInvertida?.jsonBody ??
                                                 ''),
                                           ).toString(),
-                                        );
-                                        await showDialog(
-                                          context: context,
-                                          builder: (alertDialogContext) {
-                                            return AlertDialog(
-                                              title: Text('Rota TEc até Faz'),
-                                              actions: [
-                                                TextButton(
-                                                  onPressed: () =>
-                                                      Navigator.pop(
-                                                          alertDialogContext),
-                                                  child: Text('Ok'),
-                                                ),
-                                              ],
-                                            );
-                                          },
                                         );
                                         _model.porfavorFuncioneTecAteFaz =
                                             await ApiRotasPolylinesCall.call(
@@ -1002,24 +952,6 @@ class _IniciarDeslocamentoWidgetState extends State<IniciarDeslocamentoWidget> {
                                                 ) ??
                                                 false;
                                         if (confirmDialogResponse) {
-                                          await showDialog(
-                                            context: context,
-                                            builder: (alertDialogContext) {
-                                              return AlertDialog(
-                                                title: Text(
-                                                    'Sim (retornar com rota invertida)'),
-                                                actions: [
-                                                  TextButton(
-                                                    onPressed: () =>
-                                                        Navigator.pop(
-                                                            alertDialogContext),
-                                                    child: Text('Ok'),
-                                                  ),
-                                                ],
-                                              );
-                                            },
-                                          );
-
                                           context.pushNamed(
                                             'GpsTecToFazenda',
                                             queryParameters: {
@@ -1071,16 +1003,12 @@ class _IniciarDeslocamentoWidgetState extends State<IniciarDeslocamentoWidget> {
                                               ),
                                               'rotaInversaString':
                                                   serializeParam(
-                                                valueOrDefault<String>(
-                                                  functions
-                                                      .jsonToStr(getJsonField(
-                                                    FFAppState()
-                                                        .rotainversa
-                                                        .first,
-                                                    r'''$.rota_inversa''',
-                                                  )),
-                                                  'hnjuDld`wHXQBk@G[Lu@\\s@^sArAaDHGnAwDd@wCN]pAz@|@t@`DhDbFjEdAnAdB`Cl@~@p@b@^J`@NhFb@nFTnAVr@RtBr@fATnAP|FfAlHlB|Al@fBfAhBxAhAfAfAn@l@ThBb@tBl@~Bz@fAl@tA`ArAn@z@L^@jDK\\BVDd@N\\|@|AxCHTJzCHfCRpBVxAb@jB\\fAHZRpABhAEpA}BfRtDf@jAVdBf@nBz@pBlAbChBfAfA~BnCrAfAbAl@xBx@`Ch@JPFDLp@@hAUpNY|LGlCDrBXnEDbBApBM|EQpFSxJ_Bnk@a@`K@f@}@bZa@fOShFU~EOxF?rAYlIF\\CbAWfCc@dDO~AIxCChBO|H_@AKVo@bC@j@ZvBDR^BMbGYbLOPk@bBb@zBLVStKbM\\|Mf@~DXzHt@dH`@hLf@nIV[nL',
-                                                ),
+                                                getJsonField(
+                                                  FFAppState()
+                                                      .rotainversa
+                                                      .first,
+                                                  r'''$.rota_inversa''',
+                                                ).toString(),
                                                 ParamType.String,
                                               ),
                                             }.withoutNulls,
@@ -1089,24 +1017,6 @@ class _IniciarDeslocamentoWidgetState extends State<IniciarDeslocamentoWidget> {
                                           if (_shouldSetState) setState(() {});
                                           return;
                                         } else {
-                                          await showDialog(
-                                            context: context,
-                                            builder: (alertDialogContext) {
-                                              return AlertDialog(
-                                                title: Text(
-                                                    'Não (retornar sem rota)'),
-                                                actions: [
-                                                  TextButton(
-                                                    onPressed: () =>
-                                                        Navigator.pop(
-                                                            alertDialogContext),
-                                                    child: Text('Ok'),
-                                                  ),
-                                                ],
-                                              );
-                                            },
-                                          );
-
                                           context.pushNamed(
                                             'GpsTecToFazenda',
                                             queryParameters: {
@@ -1158,23 +1068,6 @@ class _IniciarDeslocamentoWidgetState extends State<IniciarDeslocamentoWidget> {
                                           return;
                                         }
                                       } else {
-                                        await showDialog(
-                                          context: context,
-                                          builder: (alertDialogContext) {
-                                            return AlertDialog(
-                                              title: Text('Rota TEc até Faz'),
-                                              actions: [
-                                                TextButton(
-                                                  onPressed: () =>
-                                                      Navigator.pop(
-                                                          alertDialogContext),
-                                                  child: Text('Ok'),
-                                                ),
-                                              ],
-                                            );
-                                          },
-                                        );
-
                                         context.pushNamed(
                                           'GpsTecToFazenda',
                                           queryParameters: {
