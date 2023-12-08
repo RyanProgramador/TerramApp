@@ -165,10 +165,6 @@ class _GpsTecToFazendaWidgetState extends State<GpsTecToFazendaWidget> {
                               child: custom_widgets.RotaFinal(
                                 width: double.infinity,
                                 height: double.infinity,
-                                json2: functions
-                                    .jsonToStr(ApiRotasDirectionsCall.tudo(
-                                  containerApiRotasDirectionsResponse.jsonBody,
-                                ))!,
                                 coordenadasIniciais: currentUserLocationValue!,
                                 coordenadasFinais: widget.latlngFaz!,
                                 stringDoRotas: widget.retornopolylines,

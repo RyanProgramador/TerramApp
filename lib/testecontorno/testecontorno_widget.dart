@@ -167,9 +167,6 @@ class _TestecontornoWidgetState extends State<TestecontornoWidget> {
                         child: custom_widgets.RotaFinal(
                           width: double.infinity,
                           height: double.infinity,
-                          json2: ApiRotasDirectionsCall.tudo(
-                            testecontornoApiRotasDirectionsResponse.jsonBody,
-                          ).toString(),
                           stringDoRotas:
                               'zwquDrcnwH`@qPFkBhNj@HiEL}DtB{FTk@bHgCjCeAnBi@hDi@|HkAn@}SrCc@jAUXKx@e@f@_@d@i@f@aA|AcGHs@Bm@I_Ai@wD?]m@}EAUBg@@aBiADkANoCLoJJgCHaHJsCD}BEgNi@v@aZ\\\\sKDgBN_HN_HZsG@]PKFUCUSUWEOFwCQGY?KDE~BLNADCDIAKGEs@@sGUg@PyG_@',
                           coordenadasIniciais: currentUserLocationValue!,

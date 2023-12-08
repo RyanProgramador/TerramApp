@@ -30,7 +30,6 @@ class RotaFinal extends StatefulWidget {
     this.height,
     required this.coordenadasIniciais,
     required this.coordenadasFinais,
-    required this.json2,
     this.stringDoRotas,
   }) : super(key: key);
 
@@ -38,7 +37,6 @@ class RotaFinal extends StatefulWidget {
   final double? height;
   final LatLng coordenadasIniciais;
   final LatLng coordenadasFinais;
-  final String json2;
   final String? stringDoRotas;
 
   final String customIconUrl =
@@ -355,37 +353,14 @@ class _MapsRoutesState extends State<RotaFinal> {
 
   @override
   Widget build(BuildContext context) {
-    var response = json.decode(widget.json2);
-
-    List<dynamic> steps = (response['routes'] as List?)?[0]['legs']?[0]['steps']
-            as List<dynamic>? ??
-        [];
-
-    var finalLatLng = google_maps.LatLng(
-      (response['routes'] as List?)?[0]['legs']?[0]['end_location']?['lat']
-              as double? ??
-          0.0,
-      (response['routes'] as List?)?[0]['legs']?[0]['end_location']?['lng']
-              as double? ??
-          0.0,
-    );
-
-    var inicialLatLng = google_maps.LatLng(
-      (response['routes'] as List?)?[0]['legs']?[0]['start_location']?['lat']
-              as double? ??
-          0.0,
-      (response['routes'] as List?)?[0]['legs']?[0]['start_location']?['lng']
-              as double? ??
-          0.0,
-    );
-    Set<google_maps.Marker> routeMarkers = _createRouteFromSteps(steps);
+    Set<google_maps.Marker> routeMarkers = _createCustomMarker();
     routeMarkers.add(
       google_maps.Marker(
         markerId: google_maps.MarkerId(
-            'MarkerID-Fim-${finalLatLng.latitude}-${finalLatLng.longitude}'),
+            'MarkerID-Fim-${widget.coordenadasFinais.latitude}-${widget.coordenadasFinais.longitude}'),
         position: google_maps.LatLng(
-          finalLatLng.latitude,
-          finalLatLng.longitude,
+          widget.coordenadasFinais.latitude,
+          widget.coordenadasFinais.longitude,
         ),
         icon: google_maps.BitmapDescriptor.defaultMarkerWithHue(
           google_maps.BitmapDescriptor.hueRed,
@@ -404,8 +379,8 @@ class _MapsRoutesState extends State<RotaFinal> {
             zoomControlsEnabled: false,
             initialCameraPosition: google_maps.CameraPosition(
               target: google_maps.LatLng(
-                position?.latitude ?? finalLatLng.latitude,
-                position?.longitude ?? finalLatLng.latitude,
+                position?.latitude ?? widget.coordenadasFinais.latitude,
+                position?.longitude ?? widget.coordenadasFinais.latitude,
               ),
               zoom: 19,
               tilt: 60,
