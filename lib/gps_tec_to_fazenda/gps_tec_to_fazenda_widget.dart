@@ -24,7 +24,11 @@ class GpsTecToFazendaWidget extends StatefulWidget {
     required this.latlngFaz,
     required this.retornoAPI,
     required this.retornopolylines,
-  }) : super(key: key);
+    bool? comRota,
+    bool? rotaInversa,
+  })  : this.comRota = comRota ?? false,
+        this.rotaInversa = rotaInversa ?? false,
+        super(key: key);
 
   final dynamic jsonServico;
   final String? tecnicoId;
@@ -33,6 +37,8 @@ class GpsTecToFazendaWidget extends StatefulWidget {
   final LatLng? latlngFaz;
   final String? retornoAPI;
   final String? retornopolylines;
+  final bool comRota;
+  final bool rotaInversa;
 
   @override
   _GpsTecToFazendaWidgetState createState() => _GpsTecToFazendaWidgetState();

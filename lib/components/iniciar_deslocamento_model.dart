@@ -29,6 +29,12 @@ class IniciarDeslocamentoModel
   bool? temInternetAntesDoDeslocamento;
   // Stores action output result for [Backend Call - API (apiRotasPolylines)] action in Button widget.
   ApiCallResponse? porfavorFuncione;
+  // Stores action output result for [Backend Call - API (apiRotasPolylines)] action in Button widget.
+  ApiCallResponse? porfavorFuncione;
+  // Stores action output result for [Backend Call - API (apiRotasPolylines)] action in Button widget.
+  ApiCallResponse? porfavorFuncione;
+  // Stores action output result for [Backend Call - API (apiRotasPolylines)] action in Button widget.
+  ApiCallResponse? porfavorFuncione;
 
   /// Initialization and disposal methods.
 
