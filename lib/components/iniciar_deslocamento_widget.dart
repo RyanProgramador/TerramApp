@@ -462,49 +462,92 @@ class _IniciarDeslocamentoWidgetState extends State<IniciarDeslocamentoWidget> {
                           ],
                         ),
                       ),
-                      if (_model.temInternetOnLoadInicioOs ?? true)
-                        Expanded(
-                          flex: 6,
-                          child: Container(
-                            width: double.infinity,
-                            decoration: BoxDecoration(),
-                            child: Container(
-                              width: double.infinity,
-                              height: 275.0,
-                              child: custom_widgets.MapsRoutes(
-                                width: double.infinity,
-                                height: 275.0,
-                                json2: functions
-                                    .jsonToStr(ApiRotasDirectionsCall.tudo(
-                                  cardActionsApiRotasDirectionsResponse
-                                      .jsonBody,
-                                )),
-                                coordenadasIniciais: currentUserLocationValue,
-                                coordenadasFinais: widget.latlngFaz!,
-                                stringDoRotas:
-                                    widget.polylinhaQueVemDoMenuInicial,
+                      Expanded(
+                        flex: 6,
+                        child: Stack(
+                          children: [
+                            Align(
+                              alignment: AlignmentDirectional(1.00, -1.00),
+                              child: Padding(
+                                padding: EdgeInsetsDirectional.fromSTEB(
+                                    16.0, 16.0, 16.0, 16.0),
+                                child: FFButtonWidget(
+                                  onPressed: () async {
+                                    setState(() {});
+                                  },
+                                  text: '',
+                                  icon: Icon(
+                                    Icons.refresh_sharp,
+                                    color: Colors.white,
+                                    size: 30.0,
+                                  ),
+                                  options: FFButtonOptions(
+                                    width: 50.0,
+                                    height: 50.0,
+                                    padding: EdgeInsetsDirectional.fromSTEB(
+                                        0.0, 0.0, 0.0, 0.0),
+                                    iconPadding: EdgeInsetsDirectional.fromSTEB(
+                                        8.0, 0.0, 0.0, 0.0),
+                                    color: FlutterFlowTheme.of(context).primary,
+                                    textStyle: FlutterFlowTheme.of(context)
+                                        .titleSmall
+                                        .override(
+                                          fontFamily: 'Readex Pro',
+                                          color: Colors.white,
+                                          fontSize: 1.0,
+                                        ),
+                                    elevation: 3.0,
+                                    borderSide: BorderSide(
+                                      color: Colors.transparent,
+                                      width: 1.0,
+                                    ),
+                                    borderRadius: BorderRadius.circular(100.0),
+                                  ),
+                                ),
                               ),
                             ),
-                          ),
-                        ),
-                      if (!_model.temInternetOnLoadInicioOs!)
-                        Expanded(
-                          flex: 6,
-                          child: Container(
-                            width: double.infinity,
-                            decoration: BoxDecoration(),
-                            child: Container(
-                              width: double.infinity,
-                              height: double.infinity,
-                              child: custom_widgets.MapsOffline(
+                            if (_model.temInternetOnLoadInicioOs ?? true)
+                              Container(
                                 width: double.infinity,
-                                height: double.infinity,
-                                coordenadasIniciais: currentUserLocationValue,
-                                coordenadasFinais: widget.latlngFaz!,
+                                decoration: BoxDecoration(),
+                                child: Container(
+                                  width: double.infinity,
+                                  height: 275.0,
+                                  child: custom_widgets.MapsRoutes(
+                                    width: double.infinity,
+                                    height: 275.0,
+                                    json2: functions
+                                        .jsonToStr(ApiRotasDirectionsCall.tudo(
+                                      cardActionsApiRotasDirectionsResponse
+                                          .jsonBody,
+                                    )),
+                                    coordenadasIniciais:
+                                        currentUserLocationValue,
+                                    coordenadasFinais: widget.latlngFaz!,
+                                    stringDoRotas:
+                                        widget.polylinhaQueVemDoMenuInicial,
+                                  ),
+                                ),
                               ),
-                            ),
-                          ),
+                            if (!_model.temInternetOnLoadInicioOs!)
+                              Container(
+                                width: double.infinity,
+                                decoration: BoxDecoration(),
+                                child: Container(
+                                  width: double.infinity,
+                                  height: double.infinity,
+                                  child: custom_widgets.MapsOffline(
+                                    width: double.infinity,
+                                    height: double.infinity,
+                                    coordenadasIniciais:
+                                        currentUserLocationValue,
+                                    coordenadasFinais: widget.latlngFaz!,
+                                  ),
+                                ),
+                              ),
+                          ],
                         ),
+                      ),
                       Expanded(
                         flex: 2,
                         child: Padding(
