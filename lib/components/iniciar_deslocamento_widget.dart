@@ -466,6 +466,45 @@ class _IniciarDeslocamentoWidgetState extends State<IniciarDeslocamentoWidget> {
                         flex: 6,
                         child: Stack(
                           children: [
+                            if (_model.temInternetOnLoadInicioOs ?? true)
+                              Container(
+                                width: double.infinity,
+                                decoration: BoxDecoration(),
+                                child: Container(
+                                  width: double.infinity,
+                                  height: 275.0,
+                                  child: custom_widgets.MapsRoutes(
+                                    width: double.infinity,
+                                    height: 275.0,
+                                    json2: functions
+                                        .jsonToStr(ApiRotasDirectionsCall.tudo(
+                                      cardActionsApiRotasDirectionsResponse
+                                          .jsonBody,
+                                    )),
+                                    coordenadasIniciais:
+                                        currentUserLocationValue,
+                                    coordenadasFinais: widget.latlngFaz!,
+                                    stringDoRotas:
+                                        widget.polylinhaQueVemDoMenuInicial,
+                                  ),
+                                ),
+                              ),
+                            if (!_model.temInternetOnLoadInicioOs!)
+                              Container(
+                                width: double.infinity,
+                                decoration: BoxDecoration(),
+                                child: Container(
+                                  width: double.infinity,
+                                  height: double.infinity,
+                                  child: custom_widgets.MapsOffline(
+                                    width: double.infinity,
+                                    height: double.infinity,
+                                    coordenadasIniciais:
+                                        currentUserLocationValue,
+                                    coordenadasFinais: widget.latlngFaz!,
+                                  ),
+                                ),
+                              ),
                             Align(
                               alignment: AlignmentDirectional(1.00, -1.00),
                               child: Padding(
@@ -506,45 +545,6 @@ class _IniciarDeslocamentoWidgetState extends State<IniciarDeslocamentoWidget> {
                                 ),
                               ),
                             ),
-                            if (_model.temInternetOnLoadInicioOs ?? true)
-                              Container(
-                                width: double.infinity,
-                                decoration: BoxDecoration(),
-                                child: Container(
-                                  width: double.infinity,
-                                  height: 275.0,
-                                  child: custom_widgets.MapsRoutes(
-                                    width: double.infinity,
-                                    height: 275.0,
-                                    json2: functions
-                                        .jsonToStr(ApiRotasDirectionsCall.tudo(
-                                      cardActionsApiRotasDirectionsResponse
-                                          .jsonBody,
-                                    )),
-                                    coordenadasIniciais:
-                                        currentUserLocationValue,
-                                    coordenadasFinais: widget.latlngFaz!,
-                                    stringDoRotas:
-                                        widget.polylinhaQueVemDoMenuInicial,
-                                  ),
-                                ),
-                              ),
-                            if (!_model.temInternetOnLoadInicioOs!)
-                              Container(
-                                width: double.infinity,
-                                decoration: BoxDecoration(),
-                                child: Container(
-                                  width: double.infinity,
-                                  height: double.infinity,
-                                  child: custom_widgets.MapsOffline(
-                                    width: double.infinity,
-                                    height: double.infinity,
-                                    coordenadasIniciais:
-                                        currentUserLocationValue,
-                                    coordenadasFinais: widget.latlngFaz!,
-                                  ),
-                                ),
-                              ),
                           ],
                         ),
                       ),
