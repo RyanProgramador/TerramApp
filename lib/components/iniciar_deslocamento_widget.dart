@@ -517,7 +517,9 @@ class _IniciarDeslocamentoWidgetState extends State<IniciarDeslocamentoWidget> {
                                     await showModalBottomSheet(
                                       isScrollControlled: true,
                                       backgroundColor: Colors.transparent,
+                                      isDismissible: false,
                                       enableDrag: false,
+                                      useSafeArea: true,
                                       context: context,
                                       builder: (context) {
                                         return Padding(
