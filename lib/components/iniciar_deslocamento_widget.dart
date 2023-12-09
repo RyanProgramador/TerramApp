@@ -681,10 +681,13 @@ class _IniciarDeslocamentoWidgetState extends State<IniciarDeslocamentoWidget> {
                                               ),
                                               'retornopolylines':
                                                   serializeParam(
-                                                getJsonField(
-                                                  FFAppState().rotainversa.last,
-                                                  r'''$.rota_inversa''',
-                                                ).toString(),
+                                                functions.ligaoDeNome(
+                                                    FFAppState()
+                                                        .rotainversa
+                                                        .toList(),
+                                                    'oserv_id',
+                                                    'rota_inversa',
+                                                    widget.servicoId),
                                                 ParamType.String,
                                               ),
                                               'comRota': serializeParam(
@@ -697,10 +700,13 @@ class _IniciarDeslocamentoWidgetState extends State<IniciarDeslocamentoWidget> {
                                               ),
                                               'rotaInversaString':
                                                   serializeParam(
-                                                getJsonField(
-                                                  FFAppState().rotainversa.last,
-                                                  r'''$.rota_inversa''',
-                                                ).toString(),
+                                                functions.ligaoDeNome(
+                                                    FFAppState()
+                                                        .rotainversa
+                                                        .toList(),
+                                                    'oserv_id',
+                                                    'rota_inversa',
+                                                    widget.servicoId),
                                                 ParamType.String,
                                               ),
                                             }.withoutNulls,
