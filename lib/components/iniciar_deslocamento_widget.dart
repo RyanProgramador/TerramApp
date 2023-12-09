@@ -681,13 +681,10 @@ class _IniciarDeslocamentoWidgetState extends State<IniciarDeslocamentoWidget> {
                                               ),
                                               'retornopolylines':
                                                   serializeParam(
-                                                functions
-                                                    .jsonToStr(getJsonField(
-                                                  FFAppState()
-                                                      .rotainversa
-                                                      .first,
+                                                getJsonField(
+                                                  FFAppState().rotainversa.last,
                                                   r'''$.rota_inversa''',
-                                                )),
+                                                ).toString(),
                                                 ParamType.String,
                                               ),
                                               'comRota': serializeParam(
@@ -700,13 +697,10 @@ class _IniciarDeslocamentoWidgetState extends State<IniciarDeslocamentoWidget> {
                                               ),
                                               'rotaInversaString':
                                                   serializeParam(
-                                                functions
-                                                    .jsonToStr(getJsonField(
-                                                  FFAppState()
-                                                      .rotainversa
-                                                      .first,
+                                                getJsonField(
+                                                  FFAppState().rotainversa.last,
                                                   r'''$.rota_inversa''',
-                                                )),
+                                                ).toString(),
                                                 ParamType.String,
                                               ),
                                             }.withoutNulls,
@@ -985,12 +979,13 @@ class _IniciarDeslocamentoWidgetState extends State<IniciarDeslocamentoWidget> {
                                               ),
                                               'retornopolylines':
                                                   serializeParam(
-                                                getJsonField(
-                                                  FFAppState()
-                                                      .rotainversa
-                                                      .first,
-                                                  r'''$.rota_inversa''',
-                                                ).toString(),
+                                                functions.ligaoDeNome(
+                                                    FFAppState()
+                                                        .rotainversa
+                                                        .toList(),
+                                                    'oserv_id',
+                                                    'rota_inversa',
+                                                    widget.servicoId),
                                                 ParamType.String,
                                               ),
                                               'comRota': serializeParam(
@@ -1003,12 +998,13 @@ class _IniciarDeslocamentoWidgetState extends State<IniciarDeslocamentoWidget> {
                                               ),
                                               'rotaInversaString':
                                                   serializeParam(
-                                                getJsonField(
-                                                  FFAppState()
-                                                      .rotainversa
-                                                      .first,
-                                                  r'''$.rota_inversa''',
-                                                ).toString(),
+                                                functions.ligaoDeNome(
+                                                    FFAppState()
+                                                        .rotainversa
+                                                        .toList(),
+                                                    'oserv_id',
+                                                    'rota_inversa',
+                                                    widget.servicoId),
                                                 ParamType.String,
                                               ),
                                             }.withoutNulls,
