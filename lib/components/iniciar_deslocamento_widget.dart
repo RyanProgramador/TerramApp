@@ -512,7 +512,7 @@ class _IniciarDeslocamentoWidgetState extends State<IniciarDeslocamentoWidget> {
                                     16.0, 16.0, 16.0, 16.0),
                                 child: FFButtonWidget(
                                   onPressed: () async {
-                                    _model.updatePage(() {});
+                                    FFAppState().update(() {});
                                   },
                                   text: '',
                                   icon: Icon(
