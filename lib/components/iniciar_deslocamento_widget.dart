@@ -466,7 +466,8 @@ class _IniciarDeslocamentoWidgetState extends State<IniciarDeslocamentoWidget> {
                         flex: 6,
                         child: Stack(
                           children: [
-                            if (_model.temInternetOnLoadInicioOs ?? true)
+                            if ((_model.temInternetOnLoadInicioOs == true) ||
+                                _model.temNet!)
                               Container(
                                 width: double.infinity,
                                 decoration: BoxDecoration(),
@@ -489,7 +490,8 @@ class _IniciarDeslocamentoWidgetState extends State<IniciarDeslocamentoWidget> {
                                   ),
                                 ),
                               ),
-                            if (!_model.temInternetOnLoadInicioOs!)
+                            if ((_model.temInternetOnLoadInicioOs == false) ||
+                                !_model.temNet!)
                               Container(
                                 width: double.infinity,
                                 decoration: BoxDecoration(),
@@ -512,9 +514,15 @@ class _IniciarDeslocamentoWidgetState extends State<IniciarDeslocamentoWidget> {
                                     16.0, 16.0, 16.0, 16.0),
                                 child: FFButtonWidget(
                                   onPressed: () async {
-                                    await Future.delayed(
-                                        const Duration(milliseconds: 1000));
+                                    _model.temNetRefrash =
+                                        await actions.temInternet();
+                                    setState(() {
+                                      _model.temNet = _model.temNetRefrash;
+                                    });
                                     _model.updatePage(() {});
+                                    setState(() {});
+
+                                    setState(() {});
                                   },
                                   text: '',
                                   icon: Icon(

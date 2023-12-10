@@ -18,6 +18,10 @@ import 'package:provider/provider.dart';
 
 class IniciarDeslocamentoModel
     extends FlutterFlowModel<IniciarDeslocamentoWidget> {
+  ///  Local state fields for this component.
+
+  bool? temNet = false;
+
   ///  State fields for stateful widgets in this component.
 
   // Stores action output result for [Custom Action - temInternet] action in IniciarDeslocamento widget.
@@ -25,6 +29,8 @@ class IniciarDeslocamentoModel
   // State field(s) for GoogleMap widget.
   LatLng? googleMapsCenter;
   final googleMapsController = Completer<GoogleMapController>();
+  // Stores action output result for [Custom Action - temInternet] action in Button widget.
+  bool? temNetRefrash;
   // Stores action output result for [Custom Action - temInternet] action in Button widget.
   bool? temInternetAntesDoDeslocamento;
   // Stores action output result for [Backend Call - API (apiRotasPolylines)] action in Button widget.
