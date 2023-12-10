@@ -1,5 +1,4 @@
 import '/backend/api_requests/api_calls.dart';
-import '/components/loading_comp_widget.dart';
 import '/components/motivo_pausa_widget.dart';
 import '/flutter_flow/flutter_flow_google_map.dart';
 import '/flutter_flow/flutter_flow_theme.dart';
@@ -513,26 +512,9 @@ class _IniciarDeslocamentoWidgetState extends State<IniciarDeslocamentoWidget> {
                                     16.0, 16.0, 16.0, 16.0),
                                 child: FFButtonWidget(
                                   onPressed: () async {
-                                    _model.updatePage(() {});
-                                    await showModalBottomSheet(
-                                      isScrollControlled: true,
-                                      backgroundColor: Colors.transparent,
-                                      isDismissible: false,
-                                      enableDrag: false,
-                                      useSafeArea: true,
-                                      context: context,
-                                      builder: (context) {
-                                        return Padding(
-                                          padding:
-                                              MediaQuery.viewInsetsOf(context),
-                                          child: LoadingCompWidget(),
-                                        );
-                                      },
-                                    ).then((value) => safeSetState(() {}));
-
                                     await Future.delayed(
                                         const Duration(milliseconds: 1000));
-                                    Navigator.pop(context);
+                                    _model.updatePage(() {});
                                   },
                                   text: '',
                                   icon: Icon(
