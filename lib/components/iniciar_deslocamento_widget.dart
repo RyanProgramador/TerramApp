@@ -73,6 +73,10 @@ class _IniciarDeslocamentoWidgetState extends State<IniciarDeslocamentoWidget> {
     // On component load action.
     SchedulerBinding.instance.addPostFrameCallback((_) async {
       _model.temInternetOnLoadInicioOs = await actions.temInternet();
+      await Future.delayed(const Duration(milliseconds: 500));
+      setState(() {
+        _model.temNet = _model.temInternetOnLoadInicioOs;
+      });
     });
 
     getCurrentUserLocation(defaultLocation: LatLng(0.0, 0.0), cached: true)
