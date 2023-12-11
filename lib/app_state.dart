@@ -1190,7 +1190,7 @@ class FFAppState extends ChangeNotifier {
     prefs.setBool('ff_sincronizcaoAutomatica', _value);
   }
 
-  String _JsonPathPesquisaAvancada = 'oserv_id';
+  String _JsonPathPesquisaAvancada = 'oserv_id_os';
   String get JsonPathPesquisaAvancada => _JsonPathPesquisaAvancada;
   set JsonPathPesquisaAvancada(String _value) {
     _JsonPathPesquisaAvancada = _value;
