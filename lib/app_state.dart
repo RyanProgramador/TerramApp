@@ -319,7 +319,7 @@ class FFAppState extends ChangeNotifier {
   late SharedPreferences prefs;
 
   String _urlapicall =
-      'demo.conceittosistemas.com.br/terram/ws_flutterflow/index.php';
+      'dev.conceittosistemas.com.br/scriptcase/app/Terram/ws_flutterflow/index.php';
   String get urlapicall => _urlapicall;
   set urlapicall(String _value) {
     _urlapicall = _value;
@@ -1176,7 +1176,7 @@ class FFAppState extends ChangeNotifier {
     prefs.setString('ff_trOsDeslocamentoJsonAtual', jsonEncode(_value));
   }
 
-  bool _Desenvolvimento = false;
+  bool _Desenvolvimento = true;
   bool get Desenvolvimento => _Desenvolvimento;
   set Desenvolvimento(bool _value) {
     _Desenvolvimento = _value;

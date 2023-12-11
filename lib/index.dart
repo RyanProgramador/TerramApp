@@ -11,3 +11,5 @@ export '/configuracoes/configuracoes_widget.dart' show ConfiguracoesWidget;
 export '/gps_tec_to_fazenda/gps_tec_to_fazenda_widget.dart'
     show GpsTecToFazendaWidget;
 export '/testecontorno/testecontorno_widget.dart' show TestecontornoWidget;
+export '/contorno_da_fazenda/contorno_da_fazenda_widget.dart'
+    show ContornoDaFazendaWidget;

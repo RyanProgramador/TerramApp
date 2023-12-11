@@ -206,7 +206,7 @@ class _MultiplePlacesPickerCopyWidgetState
                             highlightColor: Colors.transparent,
                             onTap: () async {
                               context.goNamed(
-                                'testecontorno',
+                                'ContornoDaFazenda',
                                 extra: <String, dynamic>{
                                   kTransitionInfoKey: TransitionInfo(
                                     hasTransition: true,

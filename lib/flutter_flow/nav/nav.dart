@@ -136,6 +136,11 @@ GoRouter createRouter(AppStateNotifier appStateNotifier) => GoRouter(
               name: 'testecontorno',
               path: 'testecontorno',
               builder: (context, params) => TestecontornoWidget(),
+            ),
+            FFRoute(
+              name: 'ContornoDaFazenda',
+              path: 'contornoDaFazenda',
+              builder: (context, params) => ContornoDaFazendaWidget(),
             )
           ].map((r) => r.toRoute(appStateNotifier)).toList(),
         ),
