@@ -855,127 +855,208 @@ class _IniciarDeslocamentoWidgetState extends State<IniciarDeslocamentoWidget> {
                                           return;
                                         }
                                       } else {
-                                        _model.rotaInvertida =
-                                            await ApiRotasPolylinesCall.call(
-                                          latitudeOrigem:
-                                              functions.separadorLatDeLng(
-                                                  true,
-                                                  functions.latLngToStr(
-                                                      widget.latlngFaz)),
-                                          longitudeOrigem:
-                                              functions.separadorLatDeLng(
-                                                  false,
-                                                  functions.latLngToStr(
-                                                      widget.latlngFaz)),
-                                          latitudeDestino:
-                                              functions.separadorLatDeLng(
-                                                  true,
-                                                  functions.latLngToStr(
-                                                      currentUserLocationValue)),
-                                          longitudeDestonp:
-                                              functions.separadorLatDeLng(
-                                                  false,
-                                                  functions.latLngToStr(
-                                                      currentUserLocationValue)),
-                                          key:
-                                              'AIzaSyDpk1wIZmA1OTS57D_cB13BD01zqrTiQNI',
-                                        );
-                                        _shouldSetState = true;
-                                        await actions.gravaRotaInversa(
-                                          widget.servicoId,
-                                          ApiRotasPolylinesCall
-                                              .criptografadapolyline(
-                                            (_model.rotaInvertida?.jsonBody ??
-                                                ''),
-                                          ).toString(),
-                                        );
-                                        _model.porfavorFuncioneTecAteFaz =
-                                            await ApiRotasPolylinesCall.call(
-                                          latitudeOrigem:
-                                              functions.separadorLatDeLng(
-                                                  true,
-                                                  functions.latLngToStr(
-                                                      currentUserLocationValue)),
-                                          longitudeOrigem:
-                                              functions.separadorLatDeLng(
-                                                  false,
-                                                  functions.latLngToStr(
-                                                      currentUserLocationValue)),
-                                          latitudeDestino:
-                                              functions.separadorLatDeLng(
-                                                  true,
-                                                  functions.latLngToStr(
-                                                      widget.latlngFaz)),
-                                          longitudeDestonp:
-                                              functions.separadorLatDeLng(
-                                                  false,
-                                                  functions.latLngToStr(
-                                                      widget.latlngFaz)),
-                                          key:
-                                              'AIzaSyDpk1wIZmA1OTS57D_cB13BD01zqrTiQNI',
-                                        );
-                                        _shouldSetState = true;
-                                        setState(() {
-                                          FFAppState().rotainversa =
-                                              FFAppState()
-                                                  .rotainversa
-                                                  .toList()
-                                                  .cast<dynamic>();
-                                        });
+                                        var confirmDialogResponse =
+                                            await showDialog<bool>(
+                                                  context: context,
+                                                  builder:
+                                                      (alertDialogContext) {
+                                                    return AlertDialog(
+                                                      content: Text(
+                                                          'Você se deslocará direto para a fazenda?'),
+                                                      actions: [
+                                                        TextButton(
+                                                          onPressed: () =>
+                                                              Navigator.pop(
+                                                                  alertDialogContext,
+                                                                  false),
+                                                          child: Text('Não'),
+                                                        ),
+                                                        TextButton(
+                                                          onPressed: () =>
+                                                              Navigator.pop(
+                                                                  alertDialogContext,
+                                                                  true),
+                                                          child: Text('Sim'),
+                                                        ),
+                                                      ],
+                                                    );
+                                                  },
+                                                ) ??
+                                                false;
+                                        if (confirmDialogResponse) {
+                                          _model.rotaInvertida =
+                                              await ApiRotasPolylinesCall.call(
+                                            latitudeOrigem:
+                                                functions.separadorLatDeLng(
+                                                    true,
+                                                    functions.latLngToStr(
+                                                        widget.latlngFaz)),
+                                            longitudeOrigem:
+                                                functions.separadorLatDeLng(
+                                                    false,
+                                                    functions.latLngToStr(
+                                                        widget.latlngFaz)),
+                                            latitudeDestino:
+                                                functions.separadorLatDeLng(
+                                                    true,
+                                                    functions.latLngToStr(
+                                                        currentUserLocationValue)),
+                                            longitudeDestonp:
+                                                functions.separadorLatDeLng(
+                                                    false,
+                                                    functions.latLngToStr(
+                                                        currentUserLocationValue)),
+                                            key:
+                                                'AIzaSyDpk1wIZmA1OTS57D_cB13BD01zqrTiQNI',
+                                          );
+                                          _shouldSetState = true;
+                                          await actions.gravaRotaInversa(
+                                            widget.servicoId,
+                                            ApiRotasPolylinesCall
+                                                .criptografadapolyline(
+                                              (_model.rotaInvertida?.jsonBody ??
+                                                  ''),
+                                            ).toString(),
+                                          );
+                                          _model.porfavorFuncioneTecAteFaz =
+                                              await ApiRotasPolylinesCall.call(
+                                            latitudeOrigem:
+                                                functions.separadorLatDeLng(
+                                                    true,
+                                                    functions.latLngToStr(
+                                                        currentUserLocationValue)),
+                                            longitudeOrigem:
+                                                functions.separadorLatDeLng(
+                                                    false,
+                                                    functions.latLngToStr(
+                                                        currentUserLocationValue)),
+                                            latitudeDestino:
+                                                functions.separadorLatDeLng(
+                                                    true,
+                                                    functions.latLngToStr(
+                                                        widget.latlngFaz)),
+                                            longitudeDestonp:
+                                                functions.separadorLatDeLng(
+                                                    false,
+                                                    functions.latLngToStr(
+                                                        widget.latlngFaz)),
+                                            key:
+                                                'AIzaSyDpk1wIZmA1OTS57D_cB13BD01zqrTiQNI',
+                                          );
+                                          _shouldSetState = true;
+                                          setState(() {
+                                            FFAppState().rotainversa =
+                                                FFAppState()
+                                                    .rotainversa
+                                                    .toList()
+                                                    .cast<dynamic>();
+                                          });
 
-                                        context.pushNamed(
-                                          'GpsTecToFazenda',
-                                          queryParameters: {
-                                            'jsonServico': serializeParam(
-                                              widget.jsonServico,
-                                              ParamType.JSON,
-                                            ),
-                                            'tecnicoId': serializeParam(
-                                              widget.tecnicoId,
-                                              ParamType.String,
-                                            ),
-                                            'servicoId': serializeParam(
-                                              widget.servicoId,
-                                              ParamType.String,
-                                            ),
-                                            'fazNome': serializeParam(
-                                              widget.fazendaNome,
-                                              ParamType.String,
-                                            ),
-                                            'latlngFaz': serializeParam(
-                                              widget.latlngFaz,
-                                              ParamType.LatLng,
-                                            ),
-                                            'retornoAPI': serializeParam(
-                                              functions.jsonToStr(
-                                                  ApiRotasDirectionsCall.tudo(
-                                                cardActionsApiRotasDirectionsResponse
-                                                    .jsonBody,
-                                              )),
-                                              ParamType.String,
-                                            ),
-                                            'retornopolylines': serializeParam(
-                                              ApiRotasPolylinesCall
-                                                  .criptografadapolyline(
-                                                (_model.porfavorFuncioneTecAteFaz
-                                                        ?.jsonBody ??
-                                                    ''),
-                                              ).toString(),
-                                              ParamType.String,
-                                            ),
-                                            'comRota': serializeParam(
-                                              true,
-                                              ParamType.bool,
-                                            ),
-                                            'rotaInversa': serializeParam(
-                                              false,
-                                              ParamType.bool,
-                                            ),
-                                          }.withoutNulls,
-                                        );
+                                          context.pushNamed(
+                                            'GpsTecToFazenda',
+                                            queryParameters: {
+                                              'jsonServico': serializeParam(
+                                                widget.jsonServico,
+                                                ParamType.JSON,
+                                              ),
+                                              'tecnicoId': serializeParam(
+                                                widget.tecnicoId,
+                                                ParamType.String,
+                                              ),
+                                              'servicoId': serializeParam(
+                                                widget.servicoId,
+                                                ParamType.String,
+                                              ),
+                                              'fazNome': serializeParam(
+                                                widget.fazendaNome,
+                                                ParamType.String,
+                                              ),
+                                              'latlngFaz': serializeParam(
+                                                widget.latlngFaz,
+                                                ParamType.LatLng,
+                                              ),
+                                              'retornoAPI': serializeParam(
+                                                functions.jsonToStr(
+                                                    ApiRotasDirectionsCall.tudo(
+                                                  cardActionsApiRotasDirectionsResponse
+                                                      .jsonBody,
+                                                )),
+                                                ParamType.String,
+                                              ),
+                                              'retornopolylines':
+                                                  serializeParam(
+                                                ApiRotasPolylinesCall
+                                                    .criptografadapolyline(
+                                                  (_model.porfavorFuncioneTecAteFaz
+                                                          ?.jsonBody ??
+                                                      ''),
+                                                ).toString(),
+                                                ParamType.String,
+                                              ),
+                                              'comRota': serializeParam(
+                                                true,
+                                                ParamType.bool,
+                                              ),
+                                              'rotaInversa': serializeParam(
+                                                false,
+                                                ParamType.bool,
+                                              ),
+                                            }.withoutNulls,
+                                          );
 
-                                        if (_shouldSetState) setState(() {});
-                                        return;
+                                          if (_shouldSetState) setState(() {});
+                                          return;
+                                        } else {
+                                          context.pushNamed(
+                                            'GpsTecToFazenda',
+                                            queryParameters: {
+                                              'jsonServico': serializeParam(
+                                                widget.jsonServico,
+                                                ParamType.JSON,
+                                              ),
+                                              'tecnicoId': serializeParam(
+                                                widget.tecnicoId,
+                                                ParamType.String,
+                                              ),
+                                              'servicoId': serializeParam(
+                                                widget.servicoId,
+                                                ParamType.String,
+                                              ),
+                                              'fazNome': serializeParam(
+                                                widget.fazendaNome,
+                                                ParamType.String,
+                                              ),
+                                              'latlngFaz': serializeParam(
+                                                widget.latlngFaz,
+                                                ParamType.LatLng,
+                                              ),
+                                              'retornoAPI': serializeParam(
+                                                functions.jsonToStr(
+                                                    ApiRotasDirectionsCall.tudo(
+                                                  cardActionsApiRotasDirectionsResponse
+                                                      .jsonBody,
+                                                )),
+                                                ParamType.String,
+                                              ),
+                                              'retornopolylines':
+                                                  serializeParam(
+                                                '',
+                                                ParamType.String,
+                                              ),
+                                              'comRota': serializeParam(
+                                                false,
+                                                ParamType.bool,
+                                              ),
+                                              'rotaInversa': serializeParam(
+                                                false,
+                                                ParamType.bool,
+                                              ),
+                                            }.withoutNulls,
+                                          );
+
+                                          if (_shouldSetState) setState(() {});
+                                          return;
+                                        }
                                       }
                                     } else {
                                       if (widget
