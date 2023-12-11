@@ -62,29 +62,22 @@ class _ContornoDaFazendaWidgetState extends State<ContornoDaFazendaWidget> {
             children: [
               Stack(
                 children: [
-                  Align(
-                    alignment: AlignmentDirectional(0.00, 1.00),
-                    child: Padding(
-                      padding:
-                          EdgeInsetsDirectional.fromSTEB(0.0, 140.0, 0.0, 0.0),
+                  Padding(
+                    padding:
+                        EdgeInsetsDirectional.fromSTEB(0.0, 90.0, 0.0, 0.0),
+                    child: Container(
+                      width: MediaQuery.sizeOf(context).width * 1.0,
+                      height: MediaQuery.sizeOf(context).height * 1.0,
+                      decoration: BoxDecoration(
+                        color: FlutterFlowTheme.of(context).secondaryBackground,
+                      ),
+                      alignment: AlignmentDirectional(0.00, 1.00),
                       child: Container(
-                        width: MediaQuery.sizeOf(context).width * 1.0,
-                        height: MediaQuery.sizeOf(context).height * 1.0,
-                        decoration: BoxDecoration(
-                          color:
-                              FlutterFlowTheme.of(context).secondaryBackground,
-                        ),
-                        alignment: AlignmentDirectional(0.00, 1.00),
-                        child: Align(
-                          alignment: AlignmentDirectional(0.00, 1.00),
-                          child: Container(
-                            width: double.infinity,
-                            height: double.infinity,
-                            child: custom_widgets.ContornoMap(
-                              width: double.infinity,
-                              height: double.infinity,
-                            ),
-                          ),
+                        width: double.infinity,
+                        height: double.infinity,
+                        child: custom_widgets.ContornoMap(
+                          width: double.infinity,
+                          height: double.infinity,
                         ),
                       ),
                     ),

@@ -168,7 +168,7 @@ class _ContornoMapState extends State<ContornoMap> {
           ),
         ),
         Positioned(
-          top: 16,
+          top: 32,
           right: 16,
           child: ElevatedButton(
             onPressed: _toggleLocationPause,
@@ -193,7 +193,7 @@ class _ContornoMapState extends State<ContornoMap> {
           ),
         ),
         Positioned(
-          top: 16,
+          top: 32,
           left: MediaQuery.of(context).size.width / 2 - 44,
           child: ElevatedButton(
             style: ElevatedButton.styleFrom(
@@ -212,7 +212,7 @@ class _ContornoMapState extends State<ContornoMap> {
           ),
         ),
         Positioned(
-          top: 16,
+          top: 32,
           left: 16,
           child: ElevatedButton(
             style: ElevatedButton.styleFrom(
