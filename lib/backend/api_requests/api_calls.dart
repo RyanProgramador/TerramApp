@@ -816,6 +816,30 @@ class ApiRotasPolylinesCall {
       );
 }
 
+class HttpsdemoconceittosistemascombrterramwsflutterflowindexphpCall {
+  static Future<ApiCallResponse> call() async {
+    final ffApiRequestBody = '''
+{
+  "tipo": "apk_sinc_tr_os_servicos",
+  "id_tec": "10"
+}''';
+    return ApiManager.instance.makeApiCall(
+      callName: 'httpsdemoconceittosistemascombrterramwsflutterflowindexphp',
+      apiUrl:
+          'https://demo.conceittosistemas.com.br/terram/ws_flutterflow/index.php',
+      callType: ApiCallType.POST,
+      headers: {},
+      params: {},
+      body: ffApiRequestBody,
+      bodyType: BodyType.JSON,
+      returnBody: true,
+      encodeBodyUtf8: false,
+      decodeUtf8: false,
+      cache: false,
+    );
+  }
+}
+
 class ApiPagingParams {
   int nextPageNumber = 0;
   int numItems = 0;
