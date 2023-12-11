@@ -19,11 +19,13 @@ class ContornoMap extends StatefulWidget {
     this.width,
     this.height,
     this.ativoOuNao,
+    this.localAtual,
   }) : super(key: key);
 
   final double? width;
   final double? height;
   final bool? ativoOuNao;
+  final LatLng? localAtual;
 
   @override
   _ContornoMapState createState() => _ContornoMapState();
@@ -152,8 +154,8 @@ class _ContornoMapState extends State<ContornoMap> {
           height: widget.height ?? 400.0,
           child: google_maps.GoogleMap(
             initialCameraPosition: google_maps.CameraPosition(
-              target: google_maps.LatLng(
-                  position?.latitude ?? 0.0, position?.longitude ?? 0.0),
+              target: google_maps.LatLng(widget.localAtual?.latitude ?? 0.0,
+                  widget.localAtual?.longitude ?? 0.0),
               zoom: 10,
             ),
             onMapCreated: _onMapCreated,
