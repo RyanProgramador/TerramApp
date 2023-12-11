@@ -264,7 +264,7 @@ class _PesquisaAvanadabtnWidgetState extends State<PesquisaAvanadabtnWidget> {
                           _model.switch5Value = false;
                         });
                         setState(() {
-                          FFAppState().JsonPathPesquisaAvancada = 'oserv_id';
+                          FFAppState().JsonPathPesquisaAvancada = 'oserv_id_os';
                           FFAppState().qualSwitchEstaAtivo = 4;
                         });
                       }

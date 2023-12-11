@@ -951,7 +951,7 @@ class _SelecionarOSWidgetState extends State<SelecionarOSWidget>
                                                                 servicoId:
                                                                     getJsonField(
                                                                   trOsServicosItem,
-                                                                  r'''$.oserv_id_os''',
+                                                                  r'''$.oserv_id''',
                                                                 ).toString(),
                                                                 data: functions
                                                                     .strToData(
@@ -1247,7 +1247,7 @@ class _SelecionarOSWidgetState extends State<SelecionarOSWidget>
                                                               servicoId:
                                                                   getJsonField(
                                                                 trOsServicosItem,
-                                                                r'''$.oserv_id_os''',
+                                                                r'''$.oserv_id''',
                                                               ).toString(),
                                                               data: functions
                                                                   .strToData(
@@ -1422,7 +1422,7 @@ class _SelecionarOSWidgetState extends State<SelecionarOSWidget>
                                                               Text(
                                                                 '#${getJsonField(
                                                                   trOsServicosItem,
-                                                                  r'''$.oserv_id''',
+                                                                  r'''$.oserv_id_os''',
                                                                 ).toString()}',
                                                                 style: FlutterFlowTheme.of(
                                                                         context)
@@ -1939,7 +1939,7 @@ class _SelecionarOSWidgetState extends State<SelecionarOSWidget>
                                                                 servicoId:
                                                                     getJsonField(
                                                                   trOsServicosItem,
-                                                                  r'''$.oserv_id_os''',
+                                                                  r'''$.oserv_id''',
                                                                 ).toString(),
                                                                 data: functions
                                                                     .strToData(
@@ -2245,7 +2245,7 @@ class _SelecionarOSWidgetState extends State<SelecionarOSWidget>
                                                               servicoId:
                                                                   getJsonField(
                                                                 trOsServicosItem,
-                                                                r'''$.oserv_id_os''',
+                                                                r'''$.oserv_id''',
                                                               ).toString(),
                                                               data: functions
                                                                   .strToData(
