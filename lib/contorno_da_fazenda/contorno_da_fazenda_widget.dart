@@ -60,87 +60,142 @@ class _ContornoDaFazendaWidgetState extends State<ContornoDaFazendaWidget> {
           child: Column(
             mainAxisSize: MainAxisSize.max,
             children: [
-              Stack(
-                children: [
-                  Padding(
-                    padding:
-                        EdgeInsetsDirectional.fromSTEB(0.0, 90.0, 0.0, 0.0),
-                    child: Container(
-                      width: MediaQuery.sizeOf(context).width * 1.0,
-                      height: MediaQuery.sizeOf(context).height * 1.0,
-                      decoration: BoxDecoration(
-                        color: FlutterFlowTheme.of(context).secondaryBackground,
-                      ),
-                      alignment: AlignmentDirectional(0.00, 1.00),
+              Expanded(
+                child: Stack(
+                  children: [
+                    Padding(
+                      padding:
+                          EdgeInsetsDirectional.fromSTEB(0.0, 90.0, 0.0, 0.0),
                       child: Container(
-                        width: double.infinity,
-                        height: double.infinity,
-                        child: custom_widgets.ContornoMap(
+                        width: MediaQuery.sizeOf(context).width * 1.0,
+                        height: MediaQuery.sizeOf(context).height * 1.0,
+                        decoration: BoxDecoration(
+                          color:
+                              FlutterFlowTheme.of(context).secondaryBackground,
+                        ),
+                        alignment: AlignmentDirectional(0.00, 1.00),
+                        child: Container(
                           width: double.infinity,
                           height: double.infinity,
+                          child: custom_widgets.ContornoMap(
+                            width: double.infinity,
+                            height: double.infinity,
+                            ativoOuNao: _model.ativo,
+                          ),
                         ),
                       ),
                     ),
-                  ),
-                  ClipRRect(
-                    borderRadius: BorderRadius.only(
-                      bottomLeft: Radius.circular(60.0),
-                      bottomRight: Radius.circular(60.0),
-                      topLeft: Radius.circular(0.0),
-                      topRight: Radius.circular(0.0),
-                    ),
-                    child: Container(
-                      width: double.infinity,
-                      height: 150.0,
-                      decoration: BoxDecoration(
-                        color: Color(0xFF00736D),
-                        borderRadius: BorderRadius.only(
-                          bottomLeft: Radius.circular(60.0),
-                          bottomRight: Radius.circular(60.0),
-                          topLeft: Radius.circular(0.0),
-                          topRight: Radius.circular(0.0),
-                        ),
+                    ClipRRect(
+                      borderRadius: BorderRadius.only(
+                        bottomLeft: Radius.circular(60.0),
+                        bottomRight: Radius.circular(60.0),
+                        topLeft: Radius.circular(0.0),
+                        topRight: Radius.circular(0.0),
                       ),
-                      child: Column(
-                        mainAxisSize: MainAxisSize.max,
-                        children: [
-                          Align(
-                            alignment: AlignmentDirectional(-1.00, 0.00),
-                            child: Padding(
-                              padding: EdgeInsetsDirectional.fromSTEB(
-                                  16.0, 0.0, 0.0, 0.0),
-                              child: InkWell(
-                                splashColor: Colors.transparent,
-                                focusColor: Colors.transparent,
-                                hoverColor: Colors.transparent,
-                                highlightColor: Colors.transparent,
-                                onTap: () async {
-                                  context.safePop();
-                                },
-                                child: Icon(
-                                  Icons.keyboard_backspace_rounded,
-                                  color: Colors.white,
-                                  size: 50.0,
+                      child: Container(
+                        width: double.infinity,
+                        height: 150.0,
+                        decoration: BoxDecoration(
+                          color: Color(0xFF00736D),
+                          borderRadius: BorderRadius.only(
+                            bottomLeft: Radius.circular(60.0),
+                            bottomRight: Radius.circular(60.0),
+                            topLeft: Radius.circular(0.0),
+                            topRight: Radius.circular(0.0),
+                          ),
+                        ),
+                        child: Column(
+                          mainAxisSize: MainAxisSize.max,
+                          children: [
+                            Align(
+                              alignment: AlignmentDirectional(-1.00, 0.00),
+                              child: Padding(
+                                padding: EdgeInsetsDirectional.fromSTEB(
+                                    16.0, 0.0, 0.0, 0.0),
+                                child: InkWell(
+                                  splashColor: Colors.transparent,
+                                  focusColor: Colors.transparent,
+                                  hoverColor: Colors.transparent,
+                                  highlightColor: Colors.transparent,
+                                  onTap: () async {
+                                    context.safePop();
+                                  },
+                                  child: Icon(
+                                    Icons.keyboard_backspace_rounded,
+                                    color: Colors.white,
+                                    size: 50.0,
+                                  ),
                                 ),
                               ),
                             ),
-                          ),
-                          Text(
-                            '[nomedafazenda]',
-                            style: FlutterFlowTheme.of(context)
-                                .bodyMedium
-                                .override(
-                                  fontFamily: 'Readex Pro',
-                                  color: Color(0xFFF8F8F8),
-                                  fontSize: 24.0,
-                                  fontWeight: FontWeight.bold,
-                                ),
-                          ),
-                        ],
+                            Text(
+                              _model.ativo.toString(),
+                              style: FlutterFlowTheme.of(context)
+                                  .bodyMedium
+                                  .override(
+                                    fontFamily: 'Readex Pro',
+                                    color: Color(0xFFF8F8F8),
+                                    fontSize: 24.0,
+                                    fontWeight: FontWeight.bold,
+                                  ),
+                            ),
+                          ],
+                        ),
                       ),
                     ),
-                  ),
-                ],
+                    Align(
+                      alignment: AlignmentDirectional(1.00, 1.00),
+                      child: Padding(
+                        padding: EdgeInsetsDirectional.fromSTEB(
+                            0.0, 0.0, 16.0, 16.0),
+                        child: ClipOval(
+                          child: Container(
+                            width: 80.0,
+                            height: 80.0,
+                            decoration: BoxDecoration(
+                              color: FlutterFlowTheme.of(context)
+                                  .secondaryBackground,
+                              shape: BoxShape.circle,
+                            ),
+                            child: FFButtonWidget(
+                              onPressed: () async {
+                                setState(() {
+                                  _model.ativo = !_model.ativo;
+                                });
+                              },
+                              text: '',
+                              icon: Icon(
+                                Icons.format_shapes,
+                                size: 35.0,
+                              ),
+                              options: FFButtonOptions(
+                                width: double.infinity,
+                                height: double.infinity,
+                                padding: EdgeInsetsDirectional.fromSTEB(
+                                    10.0, 0.0, 0.0, 0.0),
+                                iconPadding: EdgeInsetsDirectional.fromSTEB(
+                                    0.0, 0.0, 0.0, 0.0),
+                                color: FlutterFlowTheme.of(context).primary,
+                                textStyle: FlutterFlowTheme.of(context)
+                                    .titleSmall
+                                    .override(
+                                      fontFamily: 'Readex Pro',
+                                      color: Colors.white,
+                                    ),
+                                elevation: 3.0,
+                                borderSide: BorderSide(
+                                  color: Colors.transparent,
+                                  width: 1.0,
+                                ),
+                                borderRadius: BorderRadius.circular(8.0),
+                              ),
+                            ),
+                          ),
+                        ),
+                      ),
+                    ),
+                  ],
+                ),
               ),
             ],
           ),

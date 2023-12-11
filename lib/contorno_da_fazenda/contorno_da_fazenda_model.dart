@@ -9,6 +9,10 @@ import 'package:google_fonts/google_fonts.dart';
 import 'package:provider/provider.dart';
 
 class ContornoDaFazendaModel extends FlutterFlowModel<ContornoDaFazendaWidget> {
+  ///  Local state fields for this page.
+
+  bool ativo = false;
+
   ///  State fields for stateful widgets in this page.
 
   final unfocusNode = FocusNode();

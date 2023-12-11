@@ -18,10 +18,12 @@ class ContornoMap extends StatefulWidget {
     Key? key,
     this.width,
     this.height,
+    this.ativoOuNao,
   }) : super(key: key);
 
   final double? width;
   final double? height;
+  final bool? ativoOuNao;
 
   @override
   _ContornoMapState createState() => _ContornoMapState();
@@ -34,7 +36,7 @@ class _ContornoMapState extends State<ContornoMap> {
   List<google_maps.Polygon> polygons = [];
   bool isLocationPaused = false;
 
-  double currentZoom = 19.0;
+  double currentZoom = 10.0;
   LatLng? currentTarget;
 
   void _onMapCreated(google_maps.GoogleMapController controller) {
@@ -43,48 +45,50 @@ class _ContornoMapState extends State<ContornoMap> {
   }
 
   void _getCurrentLocation() async {
-    if (!isLocationPaused) {
-      Position newLoc = await Geolocator.getCurrentPosition();
+    if (widget.ativoOuNao == true) {
+      if (!isLocationPaused) {
+        Position newLoc = await Geolocator.getCurrentPosition();
 
-      double currentZoomLevel = await _googleMapController!.getZoomLevel();
-      if (_googleMapController != null) {
-        _googleMapController!.animateCamera(
-          google_maps.CameraUpdate.newCameraPosition(
-            google_maps.CameraPosition(
-              target: google_maps.LatLng(
+        double currentZoomLevel = await _googleMapController!.getZoomLevel();
+        if (_googleMapController != null) {
+          _googleMapController!.animateCamera(
+            google_maps.CameraUpdate.newCameraPosition(
+              google_maps.CameraPosition(
+                target: google_maps.LatLng(
+                  newLoc.latitude,
+                  newLoc.longitude,
+                ),
+                zoom: currentZoomLevel,
+              ),
+            ),
+          );
+        }
+        currentTarget = LatLng(newLoc.latitude, newLoc.longitude);
+        currentZoom = 10; // Atualizar o zoom padrão
+
+        setState(() {
+          position = newLoc;
+          markers.add(
+            google_maps.Marker(
+              markerId: google_maps.MarkerId('UserMarkerID${markers.length}'),
+              position: google_maps.LatLng(
                 newLoc.latitude,
                 newLoc.longitude,
               ),
-              zoom: currentZoomLevel,
+              icon: google_maps.BitmapDescriptor.defaultMarkerWithHue(
+                google_maps.BitmapDescriptor.hueBlue,
+              ),
+              visible: true,
+              draggable: false,
+              infoWindow: google_maps.InfoWindow(
+                title:
+                    'UserMarkerID${markers.length}', // Define a posição do pop-up para o centro do marcador
+              ),
             ),
-          ),
-        );
+          );
+          _updatePolygon();
+        });
       }
-      currentTarget = LatLng(newLoc.latitude, newLoc.longitude);
-      currentZoom = 19; // Atualizar o zoom padrão
-
-      setState(() {
-        position = newLoc;
-        markers.add(
-          google_maps.Marker(
-            markerId: google_maps.MarkerId('UserMarkerID${markers.length}'),
-            position: google_maps.LatLng(
-              newLoc.latitude,
-              newLoc.longitude,
-            ),
-            icon: google_maps.BitmapDescriptor.defaultMarkerWithHue(
-              google_maps.BitmapDescriptor.hueBlue,
-            ),
-            visible: true,
-            draggable: false,
-            infoWindow: google_maps.InfoWindow(
-              title:
-                  'UserMarkerID${markers.length}', // Define a posição do pop-up para o centro do marcador
-            ),
-          ),
-        );
-        _updatePolygon();
-      });
     }
   }
 
@@ -98,13 +102,6 @@ class _ContornoMapState extends State<ContornoMap> {
       );
     }
   }
-
-  // void _onMarkerDragEnd(google_maps.LatLng position) {
-  //   // Handle marker drag end
-  //   print("Marker Drag End: $position");
-  //
-  //   //_updatePolygon();
-  // }
 
   void _updatePolygon() {
     setState(() {
@@ -159,7 +156,7 @@ class _ContornoMapState extends State<ContornoMap> {
                 position?.latitude ?? 0.0,
                 position?.longitude ?? 0.0,
               ),
-              zoom: 19,
+              zoom: 10,
             ),
             onMapCreated: _onMapCreated,
             markers: {...markers}.toSet(),
@@ -168,7 +165,7 @@ class _ContornoMapState extends State<ContornoMap> {
           ),
         ),
         Positioned(
-          top: 32,
+          top: 62,
           right: 16,
           child: ElevatedButton(
             onPressed: _toggleLocationPause,
@@ -193,7 +190,7 @@ class _ContornoMapState extends State<ContornoMap> {
           ),
         ),
         Positioned(
-          top: 32,
+          top: 62,
           left: MediaQuery.of(context).size.width / 2 - 44,
           child: ElevatedButton(
             style: ElevatedButton.styleFrom(
@@ -212,7 +209,7 @@ class _ContornoMapState extends State<ContornoMap> {
           ),
         ),
         Positioned(
-          top: 32,
+          top: 62,
           left: 16,
           child: ElevatedButton(
             style: ElevatedButton.styleFrom(
