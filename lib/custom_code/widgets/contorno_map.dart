@@ -14,16 +14,18 @@ import 'package:geolocator/geolocator.dart';
 import 'package:google_maps_flutter/google_maps_flutter.dart' as google_maps;
 
 class ContornoMap extends StatefulWidget {
-  const ContornoMap({
-    Key? key,
-    this.width,
-    this.height,
-    this.ativoOuNao,
-  }) : super(key: key);
+  const ContornoMap(
+      {Key? key,
+      this.width,
+      this.height,
+      this.ativoOuNao,
+      required this.localizacaoAtual})
+      : super(key: key);
 
   final double? width;
   final double? height;
   final bool? ativoOuNao;
+  final LatLng? localizacaoAtual;
 
   @override
   _ContornoMapState createState() => _ContornoMapState();
@@ -153,8 +155,8 @@ class _ContornoMapState extends State<ContornoMap> {
           child: google_maps.GoogleMap(
             initialCameraPosition: google_maps.CameraPosition(
               target: google_maps.LatLng(
-                position?.latitude ?? 0.0,
-                position?.longitude ?? 0.0,
+                widget.localizacaoAtual.latitude ?? 0.0,
+                widget.localizacaoAtual.longitude ?? 0.0,
               ),
               zoom: 10,
             ),
