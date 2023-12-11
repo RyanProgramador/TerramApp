@@ -733,7 +733,7 @@ class _SelecionarOSWidgetState extends State<SelecionarOSWidget>
                                                           defaultLocation:
                                                               LatLng(0.0, 0.0));
                                                   var _shouldSetState = false;
-                                                  showModalBottomSheet(
+                                                  await showModalBottomSheet(
                                                     isScrollControlled: true,
                                                     backgroundColor:
                                                         Colors.transparent,
@@ -1720,7 +1720,7 @@ class _SelecionarOSWidgetState extends State<SelecionarOSWidget>
                                                           defaultLocation:
                                                               LatLng(0.0, 0.0));
                                                   var _shouldSetState = false;
-                                                  showModalBottomSheet(
+                                                  await showModalBottomSheet(
                                                     isScrollControlled: true,
                                                     backgroundColor:
                                                         Colors.transparent,
