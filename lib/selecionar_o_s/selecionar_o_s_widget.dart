@@ -1610,7 +1610,7 @@ class _SelecionarOSWidgetState extends State<SelecionarOSWidget>
                                                         .toList(), () {
                                                     if ((FFAppState()
                                                                 .JsonPathPesquisaAvancada ==
-                                                            'oserv_id') &&
+                                                            'oserv_id_os') &&
                                                         (FFAppState()
                                                                 .qualSwitchEstaAtivo ==
                                                             4)) {
@@ -2424,7 +2424,7 @@ class _SelecionarOSWidgetState extends State<SelecionarOSWidget>
                                                               Text(
                                                                 '#${getJsonField(
                                                                   trOsServicosItem,
-                                                                  r'''$.oserv_id''',
+                                                                  r'''$.oserv_id_os''',
                                                                 ).toString()}',
                                                                 style: FlutterFlowTheme.of(
                                                                         context)
