@@ -733,7 +733,7 @@ class _SelecionarOSWidgetState extends State<SelecionarOSWidget>
                                                           defaultLocation:
                                                               LatLng(0.0, 0.0));
                                                   var _shouldSetState = false;
-                                                  await showModalBottomSheet(
+                                                  showModalBottomSheet(
                                                     isScrollControlled: true,
                                                     backgroundColor:
                                                         Colors.transparent,
@@ -1720,7 +1720,24 @@ class _SelecionarOSWidgetState extends State<SelecionarOSWidget>
                                                           defaultLocation:
                                                               LatLng(0.0, 0.0));
                                                   var _shouldSetState = false;
-                                                  await showModalBottomSheet(
+                                                  ScaffoldMessenger.of(context)
+                                                      .showSnackBar(
+                                                    SnackBar(
+                                                      content: Text(
+                                                        'Aguarde...',
+                                                        style: TextStyle(
+                                                          color: Colors.white,
+                                                        ),
+                                                      ),
+                                                      duration: Duration(
+                                                          milliseconds: 950),
+                                                      backgroundColor:
+                                                          FlutterFlowTheme.of(
+                                                                  context)
+                                                              .primary,
+                                                    ),
+                                                  );
+                                                  showModalBottomSheet(
                                                     isScrollControlled: true,
                                                     backgroundColor:
                                                         Colors.transparent,
