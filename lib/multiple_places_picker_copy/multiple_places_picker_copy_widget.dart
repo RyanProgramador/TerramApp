@@ -204,36 +204,7 @@ class _MultiplePlacesPickerCopyWidgetState
                             focusColor: Colors.transparent,
                             hoverColor: Colors.transparent,
                             highlightColor: Colors.transparent,
-                            onTap: () async {
-                              context.goNamed(
-                                'ContornoDaFazenda',
-                                queryParameters: {
-                                  'fazendaNome': serializeParam(
-                                    'Fazenda Sem Nome',
-                                    ParamType.String,
-                                  ),
-                                  'oservID': serializeParam(
-                                    '123321',
-                                    ParamType.String,
-                                  ),
-                                  'idDoContorno': serializeParam(
-                                    'x',
-                                    ParamType.String,
-                                  ),
-                                  'fazid': serializeParam(
-                                    '12',
-                                    ParamType.String,
-                                  ),
-                                }.withoutNulls,
-                                extra: <String, dynamic>{
-                                  kTransitionInfoKey: TransitionInfo(
-                                    hasTransition: true,
-                                    transitionType: PageTransitionType.fade,
-                                    duration: Duration(milliseconds: 0),
-                                  ),
-                                },
-                              );
-                            },
+                            onTap: () async {},
                             child: Icon(
                               Icons.transfer_within_a_station,
                               color: FlutterFlowTheme.of(context).secondaryText,
