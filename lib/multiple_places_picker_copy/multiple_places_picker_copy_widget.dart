@@ -221,7 +221,7 @@ class _MultiplePlacesPickerCopyWidgetState
                                     ParamType.String,
                                   ),
                                   'fazid': serializeParam(
-                                    '1',
+                                    '12',
                                     ParamType.String,
                                   ),
                                 }.withoutNulls,
