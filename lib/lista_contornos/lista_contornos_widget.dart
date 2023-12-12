@@ -144,8 +144,14 @@ class _ListaContornosWidgetState extends State<ListaContornosWidget> {
                   ),
                   Builder(
                     builder: (context) {
-                      final trGruposContornoFazenda =
-                          FFAppState().grupoContornoFazendas.toList();
+                      final trGruposContornoFazenda = functions
+                              .sortListJson(
+                                  'oserv_id',
+                                  true,
+                                  FFAppState().grupoContornoFazendas.toList(),
+                                  widget.oservID)
+                              ?.toList() ??
+                          [];
                       if (trGruposContornoFazenda.isEmpty) {
                         return Center(
                           child: Container(
