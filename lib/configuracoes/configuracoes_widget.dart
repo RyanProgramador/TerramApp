@@ -141,7 +141,7 @@ class _ConfiguracoesWidgetState extends State<ConfiguracoesWidget> {
                                       FFAppState().trDeslocGeo2.toList()),
                                 );
                                 _shouldSetState = true;
-                                await SincronizarGroup
+                                _model.trSincTalhao = await SincronizarGroup
                                     .trSincronizaTalhaoContornoCall
                                     .call(
                                   talhao: functions.jsonListToStr(FFAppState()
@@ -151,11 +151,16 @@ class _ConfiguracoesWidgetState extends State<ConfiguracoesWidget> {
                                       FFAppState().contornoFazenda.toList()),
                                   urlapicall: FFAppState().urlapicall,
                                 );
+                                _shouldSetState = true;
                                 if (SincronizarGroup
-                                    .trSincronizaCelularComBDCall
-                                    .statusSincComCelular(
-                                  (_model.apiResultxxd?.jsonBody ?? ''),
-                                )) {
+                                        .trSincronizaCelularComBDCall
+                                        .statusSincComCelular(
+                                      (_model.apiResultxxd?.jsonBody ?? ''),
+                                    ) &&
+                                    getJsonField(
+                                      (_model.trSincTalhao?.jsonBody ?? ''),
+                                      r'''$.status''',
+                                    )) {
                                   await showDialog(
                                     context: context,
                                     builder: (alertDialogContext) {
@@ -182,6 +187,8 @@ class _ConfiguracoesWidgetState extends State<ConfiguracoesWidget> {
                                         .trOsDeslocamentosJsonFinalizados = [];
                                     FFAppState().trDeslocamentoGeo = [];
                                     FFAppState().trDeslocGeo2 = [];
+                                    FFAppState().contornoFazenda = [];
+                                    FFAppState().grupoContornoFazendas = [];
                                   });
                                   Navigator.pop(context);
                                 } else {
