@@ -111,6 +111,8 @@ class _ContornoDaFazendaWidgetState extends State<ContornoDaFazendaWidget> {
                             height: double.infinity,
                             ativoOuNao: _model.ativo,
                             localAtual: currentUserLocationValue,
+                            oservid: widget.oservID,
+                            idContorno: widget.idDoContorno,
                           ),
                         ),
                       ),
@@ -159,7 +161,10 @@ class _ContornoDaFazendaWidgetState extends State<ContornoDaFazendaWidget> {
                               ),
                             ),
                             Text(
-                              _model.ativo.toString(),
+                              valueOrDefault<String>(
+                                widget.fazendaNome,
+                                'Fazenda sem nome',
+                              ),
                               style: FlutterFlowTheme.of(context)
                                   .bodyMedium
                                   .override(

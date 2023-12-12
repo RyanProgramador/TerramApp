@@ -1309,11 +1309,11 @@ class _IniciarDeslocamentoWidgetState extends State<IniciarDeslocamentoWidget> {
                                           ParamType.String,
                                         ),
                                         'oservID': serializeParam(
-                                          '',
+                                          widget.servicoId,
                                           ParamType.String,
                                         ),
                                         'idDoContorno': serializeParam(
-                                          '',
+                                          'x',
                                           ParamType.String,
                                         ),
                                       }.withoutNulls,
