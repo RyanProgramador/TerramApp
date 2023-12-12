@@ -227,14 +227,7 @@ class _ListaContornosWidgetState extends State<ListaContornosWidget> {
                                                   '# ${getJsonField(
                                                     trGruposContornoFazendaItem,
                                                     r'''$.contorno_grupo''',
-                                                  ).toString()} ${valueOrDefault<String>(
-                                                    functions
-                                                        .umMaisUm(getJsonField(
-                                                      trGruposContornoFazendaItem,
-                                                      r'''$.contorno_grupo''',
-                                                    ).toString()),
-                                                    '9',
-                                                  )}',
+                                                  ).toString()}',
                                                   style: FlutterFlowTheme.of(
                                                           context)
                                                       .bodyLarge
@@ -307,10 +300,10 @@ class _ListaContornosWidgetState extends State<ListaContornosWidget> {
                           ParamType.String,
                         ),
                         'idDoContorno': serializeParam(
-                          getJsonField(
+                          functions.umMaisUm(getJsonField(
                             FFAppState().grupoContornoFazendas.last,
                             r'''$.contorno_grupo''',
-                          ).toString(),
+                          ).toString()),
                           ParamType.String,
                         ),
                       }.withoutNulls,
