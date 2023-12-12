@@ -111,7 +111,10 @@ class _ContornoDaFazendaWidgetState extends State<ContornoDaFazendaWidget> {
                             height: double.infinity,
                             ativoOuNao: _model.ativo,
                             localAtual: currentUserLocationValue,
-                            oservid: widget.oservID,
+                            oservid: valueOrDefault<String>(
+                              widget.oservID,
+                              '1',
+                            ),
                             idContorno: '1',
                           ),
                         ),
