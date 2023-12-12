@@ -25,7 +25,7 @@ class ContornoMap extends StatefulWidget {
   final double? width;
   final double? height;
   final bool? ativoOuNao;
-  final LatLng? localAtual;
+  final google_maps.LatLng? localAtual;
 
   @override
   _ContornoMapState createState() => _ContornoMapState();
@@ -36,10 +36,12 @@ class _ContornoMapState extends State<ContornoMap> {
   google_maps.GoogleMapController? _googleMapController;
   List<google_maps.Marker> markers = [];
   List<google_maps.Polygon> polygons = [];
+  List<google_maps.Polyline> polylines = [];
   bool isLocationPaused = false;
-
-  double currentZoom = 10.0;
-  LatLng? currentTarget;
+  double currentZoom = 20.0;
+  google_maps.LatLng? currentTarget;
+  String observ_id = ""; // Variável para observação
+  List<Map<String, dynamic>> dados = []; // Variável para armazenar dados
 
   void _onMapCreated(google_maps.GoogleMapController controller) {
     _googleMapController = controller;
@@ -65,30 +67,13 @@ class _ContornoMapState extends State<ContornoMap> {
             ),
           );
         }
-        currentTarget = LatLng(newLoc.latitude, newLoc.longitude);
-        currentZoom = 10; // Atualizar o zoom padrão
+        currentTarget = google_maps.LatLng(newLoc.latitude, newLoc.longitude);
+        currentZoom = 20;
 
         setState(() {
           position = newLoc;
-          markers.add(
-            google_maps.Marker(
-              markerId: google_maps.MarkerId('UserMarkerID${markers.length}'),
-              position: google_maps.LatLng(
-                newLoc.latitude,
-                newLoc.longitude,
-              ),
-              icon: google_maps.BitmapDescriptor.defaultMarkerWithHue(
-                google_maps.BitmapDescriptor.hueBlue,
-              ),
-              visible: true,
-              draggable: false,
-              infoWindow: google_maps.InfoWindow(
-                title:
-                    'UserMarkerID${markers.length}', // Define a posição do pop-up para o centro do marcador
-              ),
-            ),
-          );
-          _updatePolygon();
+          _addUserMarker(google_maps.LatLng(newLoc.latitude, newLoc.longitude));
+          _updatePolyline();
         });
       }
     }
@@ -105,23 +90,67 @@ class _ContornoMapState extends State<ContornoMap> {
     }
   }
 
-  void _updatePolygon() {
+  void _updatePolyline() {
     setState(() {
-      // Recalcular as coordenadas do polígono
-      List<google_maps.LatLng> polygonCoordinates =
+      // Recalcular as coordenadas da linha
+      List<google_maps.LatLng> polylineCoordinates =
           markers.map((marker) => marker.position).toList();
-      polygons.clear(); // Limpar polígonos existentes
-      if (polygonCoordinates.length >= 3) {
-        var polygon = google_maps.Polygon(
-          polygonId: google_maps.PolygonId('AreaPolygon'),
-          points: polygonCoordinates,
-          fillColor: Colors.blue.withOpacity(0.2),
-          strokeColor: Colors.blue,
-          strokeWidth: 6,
+      polylines.clear(); // Limpar linhas existentes
+      if (polylineCoordinates.isNotEmpty) {
+        var polyline = google_maps.Polyline(
+          polylineId: google_maps.PolylineId('RoutePolyline'),
+          points: polylineCoordinates,
+          color: Colors.blue,
+          width: 3,
         );
-        polygons.add(polygon);
+        polylines.add(polyline);
       }
     });
+  }
+
+  void _finalizeArea() {
+    if (markers.isNotEmpty && _distanceToStart() <= 20) {
+      setState(() {
+        // Transformar a linha em um polígono fechado
+        var polygonCoordinates = List<google_maps.LatLng>.from(
+            markers.map((marker) => marker.position));
+        polygonCoordinates.add(markers.first.position); // Fechar o polígono
+        polygons.clear();
+        polygons.add(
+          google_maps.Polygon(
+            polygonId: google_maps.PolygonId('AreaPolygon'),
+            points: polygonCoordinates,
+            fillColor: Colors.blue.withOpacity(0.2),
+            strokeColor: Colors.blue,
+            strokeWidth: 3,
+          ),
+        );
+
+        // Salvar dados
+        int markerId = 1;
+        dados.clear();
+        for (var coord in polygonCoordinates) {
+          Map<String, dynamic> contorno = {
+            "MarkerID": markerId++,
+            "observ_id": observ_id,
+            "latlng": "${coord.latitude}, ${coord.longitude}"
+          };
+          FFAppState().contornoFazenda.add(contorno);
+        }
+      });
+    }
+  }
+
+  double _distanceToStart() {
+    if (markers.isEmpty || position == null) return double.infinity;
+    var start = markers.first.position;
+    var current = google_maps.LatLng(position!.latitude, position!.longitude);
+    return Geolocator.distanceBetween(
+      start.latitude,
+      start.longitude,
+      current.latitude,
+      current.longitude,
+    );
   }
 
   void _toggleLocationPause() {
@@ -134,7 +163,29 @@ class _ContornoMapState extends State<ContornoMap> {
     setState(() {
       markers.clear();
       polygons.clear();
+      polylines.clear();
+      dados.clear();
     });
+  }
+
+  void _addUserMarker(google_maps.LatLng position) {
+    markers.add(
+      google_maps.Marker(
+        markerId: google_maps.MarkerId('UserMarkerID'),
+        position: google_maps.LatLng(
+          position.latitude,
+          position.longitude,
+        ),
+        icon: google_maps.BitmapDescriptor.defaultMarkerWithHue(
+          google_maps.BitmapDescriptor.hueRed,
+        ),
+        visible: true,
+        draggable: false,
+        infoWindow: google_maps.InfoWindow(
+          title: 'Você esta aqui!', // Adicione o título do marcador
+        ),
+      ),
+    );
   }
 
   @override
@@ -154,14 +205,19 @@ class _ContornoMapState extends State<ContornoMap> {
           height: widget.height ?? 400.0,
           child: google_maps.GoogleMap(
             initialCameraPosition: google_maps.CameraPosition(
-              target: google_maps.LatLng(widget.localAtual?.latitude ?? 0.0,
-                  widget.localAtual?.longitude ?? 0.0),
-              zoom: 10,
+              target: google_maps.LatLng(
+                widget.localAtual?.latitude ?? 0.0,
+                widget.localAtual?.longitude ?? 0.0,
+              ),
+              zoom: 20,
             ),
             onMapCreated: _onMapCreated,
             markers: {...markers}.toSet(),
             polygons: {...polygons}.toSet(),
+            polylines: {...polylines}.toSet(),
             mapType: google_maps.MapType.satellite,
+            mapToolbarEnabled: false,
+            zoomControlsEnabled: false,
           ),
         ),
         Positioned(
@@ -223,6 +279,28 @@ class _ContornoMapState extends State<ContornoMap> {
                 Icons.delete,
                 size: 25.0,
                 color: Colors.white,
+              ),
+            ),
+          ),
+        ),
+        Positioned(
+          top: 552,
+          right: -8,
+          child: Visibility(
+            visible: _distanceToStart() <= 50,
+            child: ElevatedButton(
+              onPressed: _finalizeArea,
+              style: ElevatedButton.styleFrom(
+                shape: CircleBorder(),
+                backgroundColor: Color(0xFFC13131),
+              ),
+              child: Padding(
+                padding: const EdgeInsets.all(8.0),
+                child: Icon(
+                  Icons.check,
+                  size: 62.0,
+                  color: Colors.white,
+                ),
               ),
             ),
           ),

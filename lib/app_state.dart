@@ -309,6 +309,17 @@ class FFAppState extends ChangeNotifier {
           }).toList() ??
           _rotainversa;
     });
+    _safeInit(() {
+      _contornoFazenda = prefs.getStringList('ff_contornoFazenda')?.map((x) {
+            try {
+              return jsonDecode(x);
+            } catch (e) {
+              print("Can't decode persisted json. Error: $e.");
+              return {};
+            }
+          }).toList() ??
+          _contornoFazenda;
+    });
   }
 
   void update(VoidCallback callback) {
@@ -1260,6 +1271,47 @@ class FFAppState extends ChangeNotifier {
     _rotainversa.insert(_index, _value);
     prefs.setStringList(
         'ff_rotainversa', _rotainversa.map((x) => jsonEncode(x)).toList());
+  }
+
+  List<dynamic> _contornoFazenda = [];
+  List<dynamic> get contornoFazenda => _contornoFazenda;
+  set contornoFazenda(List<dynamic> _value) {
+    _contornoFazenda = _value;
+    prefs.setStringList(
+        'ff_contornoFazenda', _value.map((x) => jsonEncode(x)).toList());
+  }
+
+  void addToContornoFazenda(dynamic _value) {
+    _contornoFazenda.add(_value);
+    prefs.setStringList('ff_contornoFazenda',
+        _contornoFazenda.map((x) => jsonEncode(x)).toList());
+  }
+
+  void removeFromContornoFazenda(dynamic _value) {
+    _contornoFazenda.remove(_value);
+    prefs.setStringList('ff_contornoFazenda',
+        _contornoFazenda.map((x) => jsonEncode(x)).toList());
+  }
+
+  void removeAtIndexFromContornoFazenda(int _index) {
+    _contornoFazenda.removeAt(_index);
+    prefs.setStringList('ff_contornoFazenda',
+        _contornoFazenda.map((x) => jsonEncode(x)).toList());
+  }
+
+  void updateContornoFazendaAtIndex(
+    int _index,
+    dynamic Function(dynamic) updateFn,
+  ) {
+    _contornoFazenda[_index] = updateFn(_contornoFazenda[_index]);
+    prefs.setStringList('ff_contornoFazenda',
+        _contornoFazenda.map((x) => jsonEncode(x)).toList());
+  }
+
+  void insertAtIndexInContornoFazenda(int _index, dynamic _value) {
+    _contornoFazenda.insert(_index, _value);
+    prefs.setStringList('ff_contornoFazenda',
+        _contornoFazenda.map((x) => jsonEncode(x)).toList());
   }
 }
 
