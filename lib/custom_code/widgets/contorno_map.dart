@@ -43,7 +43,7 @@ class _ContornoMapState extends State<ContornoMap> {
   bool isLocationPaused = false;
   double currentZoom = 20.0;
   google_maps.LatLng? currentTarget;
-  late String observ_id;
+  late String oservid;
   late String idContorno;
   List<Map<String, dynamic>> dados = []; // Variável para armazenar dados
 
@@ -134,9 +134,9 @@ class _ContornoMapState extends State<ContornoMap> {
         int markerId = 1;
         for (var coord in polygonCoordinates) {
           Map<String, dynamic> contorno = {
-            "contorno_grupo": idContorno,
+            "contorno_grupo": widget.idContorno,
             "marker_id": markerId++,
-            "observ_id": observ_id,
+            "oserv_id": widget.oservid,
             "latlng": "${coord.latitude}, ${coord.longitude}"
           };
           FFAppState().contornoFazenda.add(contorno);

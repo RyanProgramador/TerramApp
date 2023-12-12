@@ -154,6 +154,13 @@ class _ContornoDaFazendaWidgetState extends State<ContornoDaFazendaWidget> {
                                   highlightColor: Colors.transparent,
                                   onTap: () async {
                                     context.safePop();
+                                    setState(() {
+                                      FFAppState().contornoFazenda =
+                                          FFAppState()
+                                              .contornoFazenda
+                                              .toList()
+                                              .cast<dynamic>();
+                                    });
                                   },
                                   child: Icon(
                                     Icons.keyboard_backspace_rounded,

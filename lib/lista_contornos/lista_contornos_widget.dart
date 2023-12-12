@@ -1,9 +1,11 @@
 import '/components/sem_contorno_no_momento_widget.dart';
+import '/flutter_flow/flutter_flow_google_map.dart';
 import '/flutter_flow/flutter_flow_theme.dart';
 import '/flutter_flow/flutter_flow_util.dart';
 import '/flutter_flow/flutter_flow_widgets.dart';
 import '/flutter_flow/custom_functions.dart' as functions;
 import 'package:flutter/material.dart';
+import 'package:flutter/scheduler.dart';
 import 'package:flutter/services.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:google_fonts/google_fonts.dart';
@@ -29,11 +31,23 @@ class _ListaContornosWidgetState extends State<ListaContornosWidget> {
   late ListaContornosModel _model;
 
   final scaffoldKey = GlobalKey<ScaffoldState>();
+  LatLng? currentUserLocationValue;
 
   @override
   void initState() {
     super.initState();
     _model = createModel(context, () => ListaContornosModel());
+
+    // On page load action.
+    SchedulerBinding.instance.addPostFrameCallback((_) async {
+      FFAppState().update(() {
+        FFAppState().contornoFazenda =
+            FFAppState().contornoFazenda.toList().cast<dynamic>();
+      });
+    });
+
+    getCurrentUserLocation(defaultLocation: LatLng(0.0, 0.0), cached: true)
+        .then((loc) => setState(() => currentUserLocationValue = loc));
   }
 
   @override
@@ -55,6 +69,22 @@ class _ListaContornosWidgetState extends State<ListaContornosWidget> {
     }
 
     context.watch<FFAppState>();
+    if (currentUserLocationValue == null) {
+      return Container(
+        color: FlutterFlowTheme.of(context).primaryBackground,
+        child: Center(
+          child: SizedBox(
+            width: 50.0,
+            height: 50.0,
+            child: CircularProgressIndicator(
+              valueColor: AlwaysStoppedAnimation<Color>(
+                FlutterFlowTheme.of(context).primary,
+              ),
+            ),
+          ),
+        ),
+      );
+    }
 
     return GestureDetector(
       onTap: () => _model.unfocusNode.canRequestFocus
@@ -62,6 +92,7 @@ class _ListaContornosWidgetState extends State<ListaContornosWidget> {
           : FocusScope.of(context).unfocus(),
       child: Scaffold(
         key: scaffoldKey,
+        resizeToAvoidBottomInset: false,
         backgroundColor: FlutterFlowTheme.of(context).primaryBackground,
         body: SafeArea(
           top: true,
@@ -135,9 +166,9 @@ class _ListaContornosWidgetState extends State<ListaContornosWidget> {
                   ),
                   Builder(
                     builder: (context) {
-                      final trOsServicos =
+                      final trContornoFazenda =
                           FFAppState().contornoFazenda.toList();
-                      if (trOsServicos.isEmpty) {
+                      if (trContornoFazenda.isEmpty) {
                         return Center(
                           child: Container(
                             width: double.infinity,
@@ -148,10 +179,10 @@ class _ListaContornosWidgetState extends State<ListaContornosWidget> {
                       }
                       return Column(
                         mainAxisSize: MainAxisSize.max,
-                        children: List.generate(trOsServicos.length,
-                            (trOsServicosIndex) {
-                          final trOsServicosItem =
-                              trOsServicos[trOsServicosIndex];
+                        children: List.generate(trContornoFazenda.length,
+                            (trContornoFazendaIndex) {
+                          final trContornoFazendaItem =
+                              trContornoFazenda[trContornoFazendaIndex];
                           return Padding(
                             padding: EdgeInsetsDirectional.fromSTEB(
                                 16.0, 8.0, 16.0, 0.0),
@@ -163,7 +194,7 @@ class _ListaContornosWidgetState extends State<ListaContornosWidget> {
                                     .primaryBackground,
                                 borderRadius: BorderRadius.circular(12.0),
                                 border: Border.all(
-                                  color: trOsServicosItem ==
+                                  color: trContornoFazendaItem ==
                                           FFAppState().trOsServicoEmAndamento
                                       ? FlutterFlowTheme.of(context)
                                           .customColor1
@@ -194,7 +225,7 @@ class _ListaContornosWidgetState extends State<ListaContornosWidget> {
                                                       'serv_id',
                                                       'serv_nome',
                                                       getJsonField(
-                                                        trOsServicosItem,
+                                                        trContornoFazendaItem,
                                                         r'''$.oserv_id_serv''',
                                                       ).toString()) ==
                                                   'Contorno') {
@@ -206,7 +237,7 @@ class _ListaContornosWidgetState extends State<ListaContornosWidget> {
                                                       'serv_id',
                                                       'serv_nome',
                                                       getJsonField(
-                                                        trOsServicosItem,
+                                                        trContornoFazendaItem,
                                                         r'''$.oserv_id_serv''',
                                                       ).toString()) ==
                                                   'Atualização de contorno') {
@@ -280,75 +311,62 @@ class _ListaContornosWidgetState extends State<ListaContornosWidget> {
                                         ),
                                       ),
                                     ),
-                                    if (!FFAppState()
-                                        .servicosFinalizadosComSucesso
-                                        .contains(getJsonField(
-                                          trOsServicosItem,
-                                          r'''$.oserv_id''',
-                                        ).toString()))
-                                      Expanded(
-                                        flex: 1,
-                                        child: Align(
-                                          alignment:
-                                              AlignmentDirectional(1.00, 0.00),
-                                          child: Icon(
-                                            Icons.arrow_forward,
-                                            color: () {
-                                              if ((getJsonField(
-                                                        trOsServicosItem,
-                                                        r'''$.oserv_id''',
-                                                      ) ==
-                                                      FFAppState()
-                                                          .trOsServicoEmAndamento) &&
-                                                  (FFAppState()
-                                                          .trDesloacamentoIniciado ==
-                                                      true) &&
-                                                  (FFAppState()
-                                                          .DeslocamentoPausado ==
-                                                      false)) {
-                                                return FlutterFlowTheme.of(
-                                                        context)
-                                                    .secondary;
-                                              } else if ((getJsonField(
-                                                        trOsServicosItem,
-                                                        r'''$.oserv_id''',
-                                                      ) ==
-                                                      FFAppState()
-                                                          .trOsServicoEmAndamento) &&
-                                                  (FFAppState()
-                                                          .DeslocamentoPausado ==
-                                                      true)) {
-                                                return FlutterFlowTheme.of(
-                                                        context)
-                                                    .error;
-                                              } else {
-                                                return FlutterFlowTheme.of(
-                                                        context)
-                                                    .lineColor;
-                                              }
-                                            }(),
-                                            size: 34.0,
-                                          ),
+                                    Expanded(
+                                      flex: 4,
+                                      child: Container(
+                                        decoration: BoxDecoration(),
+                                        child: FlutterFlowGoogleMap(
+                                          controller:
+                                              _model.googleMapsController,
+                                          onCameraIdle: (latLng) =>
+                                              _model.googleMapsCenter = latLng,
+                                          initialLocation:
+                                              _model.googleMapsCenter ??=
+                                                  currentUserLocationValue!,
+                                          markers: (functions
+                                                      .listaStrToListaLatLng(
+                                                          getJsonField(
+                                                            trContornoFazendaItem,
+                                                            r'''$''',
+                                                            true,
+                                                          ),
+                                                          functions
+                                                              .separadorLatDeLng(
+                                                                  true,
+                                                                  getJsonField(
+                                                                    trContornoFazendaItem,
+                                                                    r'''$.latlng''',
+                                                                  ).toString()),
+                                                          functions
+                                                              .separadorLatDeLng(
+                                                                  false,
+                                                                  getJsonField(
+                                                                    trContornoFazendaItem,
+                                                                    r'''$.latlng''',
+                                                                  ).toString())) ??
+                                                  [])
+                                              .map(
+                                                (marker) => FlutterFlowMarker(
+                                                  marker.serialize(),
+                                                  marker,
+                                                ),
+                                              )
+                                              .toList(),
+                                          markerColor: GoogleMarkerColor.violet,
+                                          mapType: MapType.normal,
+                                          style: GoogleMapStyle.standard,
+                                          initialZoom: 14.0,
+                                          allowInteraction: true,
+                                          allowZoom: true,
+                                          showZoomControls: true,
+                                          showLocation: true,
+                                          showCompass: false,
+                                          showMapToolbar: false,
+                                          showTraffic: false,
+                                          centerMapOnMarkerTap: true,
                                         ),
                                       ),
-                                    if (FFAppState()
-                                        .servicosFinalizadosComSucesso
-                                        .contains(getJsonField(
-                                          trOsServicosItem,
-                                          r'''$.oserv_id''',
-                                        ).toString()))
-                                      Expanded(
-                                        flex: 1,
-                                        child: Align(
-                                          alignment:
-                                              AlignmentDirectional(1.00, 0.00),
-                                          child: Icon(
-                                            Icons.task_alt,
-                                            color: Color(0xFF249677),
-                                            size: 34.0,
-                                          ),
-                                        ),
-                                      ),
+                                    ),
                                   ],
                                 ),
                               ),
