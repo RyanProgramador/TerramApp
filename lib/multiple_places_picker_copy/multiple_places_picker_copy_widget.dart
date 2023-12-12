@@ -313,6 +313,8 @@ class _MultiplePlacesPickerCopyWidgetState
                                       [];
                                   FFAppState().MotivoPausaDeslocamento = [];
                                   FFAppState().rotainversa = [];
+                                  FFAppState().contornoFazenda = [];
+                                  FFAppState().grupoContornoFazendas = [];
                                 });
                               },
                               text: 'Limpar tudo',
@@ -996,7 +998,8 @@ class _MultiplePlacesPickerCopyWidgetState
                                                       final trcontornoFazItem =
                                                           trcontornoFaz[
                                                               trcontornoFazIndex];
-                                                      return Text(
+                                                      return SelectionArea(
+                                                          child: Text(
                                                         trcontornoFazItem
                                                             .toString(),
                                                         style: FlutterFlowTheme
@@ -1007,7 +1010,7 @@ class _MultiplePlacesPickerCopyWidgetState
                                                                   'Readex Pro',
                                                               fontSize: 10.0,
                                                             ),
-                                                      );
+                                                      ));
                                                     }),
                                                   ),
                                                 );
@@ -1134,7 +1137,8 @@ class _MultiplePlacesPickerCopyWidgetState
                                                       final trGrupocontornoFazItem =
                                                           trGrupocontornoFaz[
                                                               trGrupocontornoFazIndex];
-                                                      return Text(
+                                                      return SelectionArea(
+                                                          child: Text(
                                                         trGrupocontornoFazItem
                                                             .toString(),
                                                         style: FlutterFlowTheme
@@ -1145,7 +1149,7 @@ class _MultiplePlacesPickerCopyWidgetState
                                                                   'Readex Pro',
                                                               fontSize: 10.0,
                                                             ),
-                                                      );
+                                                      ));
                                                     }),
                                                   ),
                                                 );

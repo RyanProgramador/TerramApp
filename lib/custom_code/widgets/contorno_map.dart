@@ -22,6 +22,7 @@ class ContornoMap extends StatefulWidget {
     this.localAtual,
     this.oservid,
     this.idContorno,
+    this.fazid,
   }) : super(key: key);
 
   final double? width;
@@ -30,6 +31,7 @@ class ContornoMap extends StatefulWidget {
   final LatLng? localAtual;
   final String? oservid;
   final String? idContorno;
+  final String? fazid;
   @override
   _ContornoMapState createState() => _ContornoMapState();
 }
@@ -45,6 +47,7 @@ class _ContornoMapState extends State<ContornoMap> {
   google_maps.LatLng? currentTarget;
   late String oservid;
   late String idContorno;
+  late String fazid;
   List<Map<String, dynamic>> dados = []; // Variável para armazenar dados
 
   void _onMapCreated(google_maps.GoogleMapController controller) {
@@ -150,6 +153,7 @@ class _ContornoMapState extends State<ContornoMap> {
           "contorno_grupo": widget.idContorno,
           "oserv_id": widget.oservid,
           "dthr_fim": formattedDataHora,
+          "faz_id": fazid
         };
         FFAppState().grupoContornoFazendas.add(grupocontorno);
       });

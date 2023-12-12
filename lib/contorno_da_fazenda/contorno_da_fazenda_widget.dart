@@ -115,6 +115,7 @@ class _ContornoDaFazendaWidgetState extends State<ContornoDaFazendaWidget> {
                               widget.oservID,
                               '1',
                             ),
+                            fazid: widget.idDoContorno,
                             idContorno: valueOrDefault<String>(
                               widget.idDoContorno,
                               '1',
