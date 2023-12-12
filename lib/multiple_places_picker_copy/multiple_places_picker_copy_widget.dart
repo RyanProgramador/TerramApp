@@ -220,6 +220,10 @@ class _MultiplePlacesPickerCopyWidgetState
                                     'x',
                                     ParamType.String,
                                   ),
+                                  'fazid': serializeParam(
+                                    '1',
+                                    ParamType.String,
+                                  ),
                                 }.withoutNulls,
                                 extra: <String, dynamic>{
                                   kTransitionInfoKey: TransitionInfo(

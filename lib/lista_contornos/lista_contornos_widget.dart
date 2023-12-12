@@ -17,10 +17,12 @@ class ListaContornosWidget extends StatefulWidget {
     Key? key,
     required this.nomeFazenda,
     required this.oservID,
+    this.fazid,
   }) : super(key: key);
 
   final String? nomeFazenda;
   final String? oservID;
+  final String? fazid;
 
   @override
   _ListaContornosWidgetState createState() => _ListaContornosWidgetState();
@@ -313,6 +315,10 @@ class _ListaContornosWidgetState extends State<ListaContornosWidget> {
                             FFAppState().grupoContornoFazendas.last,
                             r'''$.contorno_grupo''',
                           ).toString()),
+                          ParamType.String,
+                        ),
+                        'fazid': serializeParam(
+                          widget.fazid,
                           ParamType.String,
                         ),
                       }.withoutNulls,

@@ -144,6 +144,7 @@ GoRouter createRouter(AppStateNotifier appStateNotifier) => GoRouter(
                 fazendaNome: params.getParam('fazendaNome', ParamType.String),
                 oservID: params.getParam('oservID', ParamType.String),
                 idDoContorno: params.getParam('idDoContorno', ParamType.String),
+                fazid: params.getParam('fazid', ParamType.String),
               ),
             ),
             FFRoute(
@@ -152,6 +153,7 @@ GoRouter createRouter(AppStateNotifier appStateNotifier) => GoRouter(
               builder: (context, params) => ListaContornosWidget(
                 nomeFazenda: params.getParam('nomeFazenda', ParamType.String),
                 oservID: params.getParam('oservID', ParamType.String),
+                fazid: params.getParam('fazid', ParamType.String),
               ),
             )
           ].map((r) => r.toRoute(appStateNotifier)).toList(),

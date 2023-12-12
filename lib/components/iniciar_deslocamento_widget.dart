@@ -33,6 +33,7 @@ class IniciarDeslocamentoWidget extends StatefulWidget {
     required this.jsonServico,
     required this.deslocamentoAtualFinzalizado,
     this.polylinhaQueVemDoMenuInicial,
+    required this.fazid,
   }) : super(key: key);
 
   final String? etapade;
@@ -48,6 +49,7 @@ class IniciarDeslocamentoWidget extends StatefulWidget {
   final dynamic jsonServico;
   final bool? deslocamentoAtualFinzalizado;
   final String? polylinhaQueVemDoMenuInicial;
+  final String? fazid;
 
   @override
   _IniciarDeslocamentoWidgetState createState() =>
@@ -1310,6 +1312,10 @@ class _IniciarDeslocamentoWidgetState extends State<IniciarDeslocamentoWidget> {
                                         ),
                                         'oservID': serializeParam(
                                           widget.servicoId,
+                                          ParamType.String,
+                                        ),
+                                        'fazid': serializeParam(
+                                          '',
                                           ParamType.String,
                                         ),
                                       }.withoutNulls,
