@@ -23,6 +23,8 @@ class SincronizarGroup {
       TrSincronizaCelularComBDCall();
   static TrEmpresasCall trEmpresasCall = TrEmpresasCall();
   static TrCFGCall trCFGCall = TrCFGCall();
+  static TrSincronizaTalhaoContornoCall trSincronizaTalhaoContornoCall =
+      TrSincronizaTalhaoContornoCall();
 }
 
 class OrdemDeServicoCall {
@@ -630,6 +632,34 @@ class TrCFGCall {
         response,
         r'''$.dados''',
       );
+}
+
+class TrSincronizaTalhaoContornoCall {
+  Future<ApiCallResponse> call({
+    String? talhao = '',
+    String? contorno = '',
+    String? urlapicall = '',
+  }) async {
+    final ffApiRequestBody = '''
+{
+  "tipo": "apk_sinc_talhao_contornos",
+  "talhao": "${urlapicall}",
+  "contorno": "${contorno}"
+}''';
+    return ApiManager.instance.makeApiCall(
+      callName: 'trSincronizaTalhaoContorno',
+      apiUrl: '${SincronizarGroup.baseUrl}${urlapicall}',
+      callType: ApiCallType.POST,
+      headers: {},
+      params: {},
+      body: ffApiRequestBody,
+      bodyType: BodyType.JSON,
+      returnBody: true,
+      encodeBodyUtf8: false,
+      decodeUtf8: false,
+      cache: false,
+    );
+  }
 }
 
 /// End Sincronizar Group Code

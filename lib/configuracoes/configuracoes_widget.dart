@@ -141,6 +141,16 @@ class _ConfiguracoesWidgetState extends State<ConfiguracoesWidget> {
                                       FFAppState().trDeslocGeo2.toList()),
                                 );
                                 _shouldSetState = true;
+                                await SincronizarGroup
+                                    .trSincronizaTalhaoContornoCall
+                                    .call(
+                                  talhao: functions.jsonListToStr(FFAppState()
+                                      .grupoContornoFazendas
+                                      .toList()),
+                                  contorno: functions.jsonListToStr(
+                                      FFAppState().contornoFazenda.toList()),
+                                  urlapicall: FFAppState().urlapicall,
+                                );
                                 if (SincronizarGroup
                                     .trSincronizaCelularComBDCall
                                     .statusSincComCelular(
