@@ -332,6 +332,10 @@ class FFAppState extends ChangeNotifier {
               }).toList() ??
               _grupoContornoFazendas;
     });
+    _safeInit(() {
+      _contornoGrupoID =
+          prefs.getString('ff_contornoGrupoID') ?? _contornoGrupoID;
+    });
   }
 
   void update(VoidCallback callback) {
@@ -1365,6 +1369,13 @@ class FFAppState extends ChangeNotifier {
     _grupoContornoFazendas.insert(_index, _value);
     prefs.setStringList('ff_grupoContornoFazendas',
         _grupoContornoFazendas.map((x) => jsonEncode(x)).toList());
+  }
+
+  String _contornoGrupoID = '';
+  String get contornoGrupoID => _contornoGrupoID;
+  set contornoGrupoID(String _value) {
+    _contornoGrupoID = _value;
+    prefs.setString('ff_contornoGrupoID', _value);
   }
 }
 
