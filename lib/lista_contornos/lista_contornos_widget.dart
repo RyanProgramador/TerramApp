@@ -191,16 +191,19 @@ class _ListaContornosWidgetState extends State<ListaContornosWidget> {
                                       child: Padding(
                                         padding:
                                             MediaQuery.viewInsetsOf(context),
-                                        child: MapsRevisaoWidget(
-                                          pontos:
-                                              TrContornoFazendaStruct.fromMap(
-                                                      getJsonField(
-                                            trGruposContornoFazendaItem,
-                                            r'''$.latlng''',
-                                            true,
-                                          )!)
-                                                  .latlng,
-                                          inicio: currentUserLocationValue!,
+                                        child: Container(
+                                          height: 400.0,
+                                          child: MapsRevisaoWidget(
+                                            pontos:
+                                                TrContornoFazendaStruct.fromMap(
+                                                        getJsonField(
+                                              trGruposContornoFazendaItem,
+                                              r'''$.latlng''',
+                                              true,
+                                            )!)
+                                                    .latlng,
+                                            inicio: currentUserLocationValue!,
+                                          ),
                                         ),
                                       ),
                                     );
@@ -245,7 +248,7 @@ class _ListaContornosWidgetState extends State<ListaContornosWidget> {
                                                 color:
                                                     FlutterFlowTheme.of(context)
                                                         .secondaryText,
-                                                size: 24.0,
+                                                size: 32.0,
                                               ),
                                             ],
                                           ),
