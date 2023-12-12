@@ -310,7 +310,7 @@ class _ListaContornosWidgetState extends State<ListaContornosWidget> {
                           valueOrDefault<String>(
                             functions.umMaisUm(valueOrDefault<String>(
                               getJsonField(
-                                FFAppState().grupoContornoFazendas.first,
+                                FFAppState().grupoContornoFazendas.last,
                                 r'''$.contorno_grupo''',
                               ).toString(),
                               '123',
