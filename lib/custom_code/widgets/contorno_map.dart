@@ -25,7 +25,7 @@ class ContornoMap extends StatefulWidget {
   final double? width;
   final double? height;
   final bool? ativoOuNao;
-  final google_maps.LatLng localAtual;
+  final LatLng? localAtual;
 
   @override
   _ContornoMapState createState() => _ContornoMapState();
