@@ -320,6 +320,18 @@ class FFAppState extends ChangeNotifier {
           }).toList() ??
           _contornoFazenda;
     });
+    _safeInit(() {
+      _grupoContornoFazendas =
+          prefs.getStringList('ff_grupoContornoFazendas')?.map((x) {
+                try {
+                  return jsonDecode(x);
+                } catch (e) {
+                  print("Can't decode persisted json. Error: $e.");
+                  return {};
+                }
+              }).toList() ??
+              _grupoContornoFazendas;
+    });
   }
 
   void update(VoidCallback callback) {
@@ -1312,6 +1324,47 @@ class FFAppState extends ChangeNotifier {
     _contornoFazenda.insert(_index, _value);
     prefs.setStringList('ff_contornoFazenda',
         _contornoFazenda.map((x) => jsonEncode(x)).toList());
+  }
+
+  List<dynamic> _grupoContornoFazendas = [];
+  List<dynamic> get grupoContornoFazendas => _grupoContornoFazendas;
+  set grupoContornoFazendas(List<dynamic> _value) {
+    _grupoContornoFazendas = _value;
+    prefs.setStringList(
+        'ff_grupoContornoFazendas', _value.map((x) => jsonEncode(x)).toList());
+  }
+
+  void addToGrupoContornoFazendas(dynamic _value) {
+    _grupoContornoFazendas.add(_value);
+    prefs.setStringList('ff_grupoContornoFazendas',
+        _grupoContornoFazendas.map((x) => jsonEncode(x)).toList());
+  }
+
+  void removeFromGrupoContornoFazendas(dynamic _value) {
+    _grupoContornoFazendas.remove(_value);
+    prefs.setStringList('ff_grupoContornoFazendas',
+        _grupoContornoFazendas.map((x) => jsonEncode(x)).toList());
+  }
+
+  void removeAtIndexFromGrupoContornoFazendas(int _index) {
+    _grupoContornoFazendas.removeAt(_index);
+    prefs.setStringList('ff_grupoContornoFazendas',
+        _grupoContornoFazendas.map((x) => jsonEncode(x)).toList());
+  }
+
+  void updateGrupoContornoFazendasAtIndex(
+    int _index,
+    dynamic Function(dynamic) updateFn,
+  ) {
+    _grupoContornoFazendas[_index] = updateFn(_grupoContornoFazendas[_index]);
+    prefs.setStringList('ff_grupoContornoFazendas',
+        _grupoContornoFazendas.map((x) => jsonEncode(x)).toList());
+  }
+
+  void insertAtIndexInGrupoContornoFazendas(int _index, dynamic _value) {
+    _grupoContornoFazendas.insert(_index, _value);
+    prefs.setStringList('ff_grupoContornoFazendas',
+        _grupoContornoFazendas.map((x) => jsonEncode(x)).toList());
   }
 }
 

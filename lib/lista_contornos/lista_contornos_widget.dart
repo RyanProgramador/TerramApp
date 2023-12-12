@@ -1,5 +1,4 @@
 import '/components/sem_contorno_no_momento_widget.dart';
-import '/flutter_flow/flutter_flow_google_map.dart';
 import '/flutter_flow/flutter_flow_theme.dart';
 import '/flutter_flow/flutter_flow_util.dart';
 import '/flutter_flow/flutter_flow_widgets.dart';
@@ -31,7 +30,6 @@ class _ListaContornosWidgetState extends State<ListaContornosWidget> {
   late ListaContornosModel _model;
 
   final scaffoldKey = GlobalKey<ScaffoldState>();
-  LatLng? currentUserLocationValue;
 
   @override
   void initState() {
@@ -45,9 +43,6 @@ class _ListaContornosWidgetState extends State<ListaContornosWidget> {
             FFAppState().contornoFazenda.toList().cast<dynamic>();
       });
     });
-
-    getCurrentUserLocation(defaultLocation: LatLng(0.0, 0.0), cached: true)
-        .then((loc) => setState(() => currentUserLocationValue = loc));
   }
 
   @override
@@ -69,22 +64,6 @@ class _ListaContornosWidgetState extends State<ListaContornosWidget> {
     }
 
     context.watch<FFAppState>();
-    if (currentUserLocationValue == null) {
-      return Container(
-        color: FlutterFlowTheme.of(context).primaryBackground,
-        child: Center(
-          child: SizedBox(
-            width: 50.0,
-            height: 50.0,
-            child: CircularProgressIndicator(
-              valueColor: AlwaysStoppedAnimation<Color>(
-                FlutterFlowTheme.of(context).primary,
-              ),
-            ),
-          ),
-        ),
-      );
-    }
 
     return GestureDetector(
       onTap: () => _model.unfocusNode.canRequestFocus
@@ -92,7 +71,6 @@ class _ListaContornosWidgetState extends State<ListaContornosWidget> {
           : FocusScope.of(context).unfocus(),
       child: Scaffold(
         key: scaffoldKey,
-        resizeToAvoidBottomInset: false,
         backgroundColor: FlutterFlowTheme.of(context).primaryBackground,
         body: SafeArea(
           top: true,
@@ -166,9 +144,9 @@ class _ListaContornosWidgetState extends State<ListaContornosWidget> {
                   ),
                   Builder(
                     builder: (context) {
-                      final trContornoFazenda =
-                          FFAppState().contornoFazenda.toList();
-                      if (trContornoFazenda.isEmpty) {
+                      final trGruposContornoFazenda =
+                          FFAppState().grupoContornoFazendas.toList();
+                      if (trGruposContornoFazenda.isEmpty) {
                         return Center(
                           child: Container(
                             width: double.infinity,
@@ -179,10 +157,11 @@ class _ListaContornosWidgetState extends State<ListaContornosWidget> {
                       }
                       return Column(
                         mainAxisSize: MainAxisSize.max,
-                        children: List.generate(trContornoFazenda.length,
-                            (trContornoFazendaIndex) {
-                          final trContornoFazendaItem =
-                              trContornoFazenda[trContornoFazendaIndex];
+                        children: List.generate(trGruposContornoFazenda.length,
+                            (trGruposContornoFazendaIndex) {
+                          final trGruposContornoFazendaItem =
+                              trGruposContornoFazenda[
+                                  trGruposContornoFazendaIndex];
                           return Padding(
                             padding: EdgeInsetsDirectional.fromSTEB(
                                 16.0, 8.0, 16.0, 0.0),
@@ -194,7 +173,7 @@ class _ListaContornosWidgetState extends State<ListaContornosWidget> {
                                     .primaryBackground,
                                 borderRadius: BorderRadius.circular(12.0),
                                 border: Border.all(
-                                  color: trContornoFazendaItem ==
+                                  color: trGruposContornoFazendaItem ==
                                           FFAppState().trOsServicoEmAndamento
                                       ? FlutterFlowTheme.of(context)
                                           .customColor1
@@ -225,7 +204,7 @@ class _ListaContornosWidgetState extends State<ListaContornosWidget> {
                                                       'serv_id',
                                                       'serv_nome',
                                                       getJsonField(
-                                                        trContornoFazendaItem,
+                                                        trGruposContornoFazendaItem,
                                                         r'''$.oserv_id_serv''',
                                                       ).toString()) ==
                                                   'Contorno') {
@@ -237,7 +216,7 @@ class _ListaContornosWidgetState extends State<ListaContornosWidget> {
                                                       'serv_id',
                                                       'serv_nome',
                                                       getJsonField(
-                                                        trContornoFazendaItem,
+                                                        trGruposContornoFazendaItem,
                                                         r'''$.oserv_id_serv''',
                                                       ).toString()) ==
                                                   'Atualização de contorno') {
@@ -270,7 +249,10 @@ class _ListaContornosWidgetState extends State<ListaContornosWidget> {
                                                 CrossAxisAlignment.start,
                                             children: [
                                               Text(
-                                                '#',
+                                                '# ${getJsonField(
+                                                  trGruposContornoFazendaItem,
+                                                  r'''$.contorno_grupo''',
+                                                ).toString()}',
                                                 style:
                                                     FlutterFlowTheme.of(context)
                                                         .bodyLarge
@@ -315,56 +297,6 @@ class _ListaContornosWidgetState extends State<ListaContornosWidget> {
                                       flex: 4,
                                       child: Container(
                                         decoration: BoxDecoration(),
-                                        child: FlutterFlowGoogleMap(
-                                          controller:
-                                              _model.googleMapsController,
-                                          onCameraIdle: (latLng) =>
-                                              _model.googleMapsCenter = latLng,
-                                          initialLocation:
-                                              _model.googleMapsCenter ??=
-                                                  currentUserLocationValue!,
-                                          markers: (functions
-                                                      .listaStrToListaLatLng(
-                                                          getJsonField(
-                                                            trContornoFazendaItem,
-                                                            r'''$''',
-                                                            true,
-                                                          ),
-                                                          functions
-                                                              .separadorLatDeLng(
-                                                                  true,
-                                                                  getJsonField(
-                                                                    trContornoFazendaItem,
-                                                                    r'''$.latlng''',
-                                                                  ).toString()),
-                                                          functions
-                                                              .separadorLatDeLng(
-                                                                  false,
-                                                                  getJsonField(
-                                                                    trContornoFazendaItem,
-                                                                    r'''$.latlng''',
-                                                                  ).toString())) ??
-                                                  [])
-                                              .map(
-                                                (marker) => FlutterFlowMarker(
-                                                  marker.serialize(),
-                                                  marker,
-                                                ),
-                                              )
-                                              .toList(),
-                                          markerColor: GoogleMarkerColor.violet,
-                                          mapType: MapType.normal,
-                                          style: GoogleMapStyle.standard,
-                                          initialZoom: 14.0,
-                                          allowInteraction: true,
-                                          allowZoom: true,
-                                          showZoomControls: true,
-                                          showLocation: true,
-                                          showCompass: false,
-                                          showMapToolbar: false,
-                                          showTraffic: false,
-                                          centerMapOnMarkerTap: true,
-                                        ),
                                       ),
                                     ),
                                   ],

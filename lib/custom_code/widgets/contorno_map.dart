@@ -141,6 +141,17 @@ class _ContornoMapState extends State<ContornoMap> {
           };
           FFAppState().contornoFazenda.add(contorno);
         }
+        DateTime dataHoraAtual = DateTime.now();
+        String formattedDataHora = dataHoraAtual
+            .toLocal()
+            .toString(); // Obtém a data e hora atual como uma string
+
+        Map<String, dynamic> grupocontorno = {
+          "contorno_grupo": widget.idContorno,
+          "oserv_id": widget.oservid,
+          "dthr_fim": formattedDataHora
+        };
+        FFAppState().grupoContornoFazendas.add(grupocontorno);
       });
     }
   }
