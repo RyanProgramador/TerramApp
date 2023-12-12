@@ -309,59 +309,71 @@ class _ListaContornosWidgetState extends State<ListaContornosWidget> {
                   ),
                 ],
               ),
-              Padding(
-                padding: EdgeInsetsDirectional.fromSTEB(0.0, 0.0, 0.0, 16.0),
-                child: FFButtonWidget(
-                  onPressed: () async {
-                    context.goNamed(
-                      'ContornoDaFazenda',
-                      queryParameters: {
-                        'fazendaNome': serializeParam(
-                          widget.nomeFazenda,
-                          ParamType.String,
-                        ),
-                        'oservID': serializeParam(
-                          widget.oservID,
-                          ParamType.String,
-                        ),
-                        'idDoContorno': serializeParam(
-                          '20',
-                          ParamType.String,
-                        ),
-                        'fazid': serializeParam(
-                          widget.fazid,
-                          ParamType.String,
-                        ),
-                      }.withoutNulls,
-                      extra: <String, dynamic>{
-                        kTransitionInfoKey: TransitionInfo(
-                          hasTransition: true,
-                          transitionType: PageTransitionType.fade,
-                          duration: Duration(milliseconds: 0),
-                        ),
+              Row(
+                mainAxisSize: MainAxisSize.max,
+                mainAxisAlignment: MainAxisAlignment.center,
+                children: [
+                  Padding(
+                    padding:
+                        EdgeInsetsDirectional.fromSTEB(0.0, 0.0, 0.0, 16.0),
+                    child: FFButtonWidget(
+                      onPressed: () async {
+                        context.goNamed(
+                          'ContornoDaFazenda',
+                          queryParameters: {
+                            'fazendaNome': serializeParam(
+                              widget.nomeFazenda,
+                              ParamType.String,
+                            ),
+                            'oservID': serializeParam(
+                              widget.oservID,
+                              ParamType.String,
+                            ),
+                            'idDoContorno': serializeParam(
+                              getJsonField(
+                                FFAppState().grupoContornoFazendas.last,
+                                r'''$.contorno_grupo''',
+                              ).toString(),
+                              ParamType.String,
+                            ),
+                            'fazid': serializeParam(
+                              widget.fazid,
+                              ParamType.String,
+                            ),
+                          }.withoutNulls,
+                          extra: <String, dynamic>{
+                            kTransitionInfoKey: TransitionInfo(
+                              hasTransition: true,
+                              transitionType: PageTransitionType.fade,
+                              duration: Duration(milliseconds: 0),
+                            ),
+                          },
+                        );
                       },
-                    );
-                  },
-                  text: 'Iniciar contorno',
-                  options: FFButtonOptions(
-                    width: 200.0,
-                    height: 50.0,
-                    padding: EdgeInsetsDirectional.fromSTEB(0.0, 0.0, 0.0, 0.0),
-                    iconPadding:
-                        EdgeInsetsDirectional.fromSTEB(0.0, 0.0, 0.0, 0.0),
-                    color: FlutterFlowTheme.of(context).primary,
-                    textStyle: FlutterFlowTheme.of(context).titleSmall.override(
-                          fontFamily: 'Readex Pro',
-                          color: Colors.white,
+                      text: 'Iniciar contorno',
+                      options: FFButtonOptions(
+                        width: 200.0,
+                        height: 50.0,
+                        padding:
+                            EdgeInsetsDirectional.fromSTEB(0.0, 0.0, 0.0, 0.0),
+                        iconPadding:
+                            EdgeInsetsDirectional.fromSTEB(0.0, 0.0, 0.0, 0.0),
+                        color: FlutterFlowTheme.of(context).primary,
+                        textStyle:
+                            FlutterFlowTheme.of(context).titleSmall.override(
+                                  fontFamily: 'Readex Pro',
+                                  color: Colors.white,
+                                ),
+                        elevation: 3.0,
+                        borderSide: BorderSide(
+                          color: Colors.transparent,
+                          width: 1.0,
                         ),
-                    elevation: 3.0,
-                    borderSide: BorderSide(
-                      color: Colors.transparent,
-                      width: 1.0,
+                        borderRadius: BorderRadius.circular(100.0),
+                      ),
                     ),
-                    borderRadius: BorderRadius.circular(100.0),
                   ),
-                ),
+                ],
               ),
             ],
           ),
