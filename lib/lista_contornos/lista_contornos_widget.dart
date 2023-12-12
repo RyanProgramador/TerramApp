@@ -17,12 +17,13 @@ class ListaContornosWidget extends StatefulWidget {
     Key? key,
     required this.nomeFazenda,
     required this.oservID,
-    required this.fazid,
-  }) : super(key: key);
+    String? fazid,
+  })  : this.fazid = fazid ?? '1',
+        super(key: key);
 
   final String? nomeFazenda;
   final String? oservID;
-  final String? fazid;
+  final String fazid;
 
   @override
   _ListaContornosWidgetState createState() => _ListaContornosWidgetState();

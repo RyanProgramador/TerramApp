@@ -161,7 +161,6 @@ class _ContornoDaFazendaWidgetState extends State<ContornoDaFazendaWidget> {
                                   hoverColor: Colors.transparent,
                                   highlightColor: Colors.transparent,
                                   onTap: () async {
-                                    context.safePop();
                                     setState(() {
                                       FFAppState().contornoFazenda =
                                           FFAppState()
@@ -175,6 +174,18 @@ class _ContornoDaFazendaWidgetState extends State<ContornoDaFazendaWidget> {
                                               .cast<dynamic>();
                                     });
                                     setState(() {});
+
+                                    context.goNamed(
+                                      'SelecionarOS',
+                                      extra: <String, dynamic>{
+                                        kTransitionInfoKey: TransitionInfo(
+                                          hasTransition: true,
+                                          transitionType:
+                                              PageTransitionType.fade,
+                                          duration: Duration(milliseconds: 0),
+                                        ),
+                                      },
+                                    );
                                   },
                                   child: Icon(
                                     Icons.keyboard_backspace_rounded,
