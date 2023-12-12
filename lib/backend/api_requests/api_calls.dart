@@ -643,7 +643,7 @@ class TrSincronizaTalhaoContornoCall {
     final ffApiRequestBody = '''
 {
   "tipo": "apk_sinc_talhao_contornos",
-  "talhao": "${urlapicall}",
+  "talhao": "${talhao}",
   "contorno": "${contorno}"
 }''';
     return ApiManager.instance.makeApiCall(
