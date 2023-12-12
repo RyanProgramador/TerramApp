@@ -134,9 +134,9 @@ class _ContornoMapState extends State<ContornoMap> {
         int markerId = 1;
         for (var coord in polygonCoordinates) {
           Map<String, dynamic> contorno = {
-            "id_contorno_grupo": "$idContorno",
+            "contorno_grupo": idContorno,
             "marker_id": markerId++,
-            "observ_id": "$observ_id",
+            "observ_id": observ_id,
             "latlng": "${coord.latitude}, ${coord.longitude}"
           };
           FFAppState().contornoFazenda.add(contorno);
