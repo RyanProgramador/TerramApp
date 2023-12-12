@@ -1315,7 +1315,7 @@ class _IniciarDeslocamentoWidgetState extends State<IniciarDeslocamentoWidget> {
                                           ParamType.String,
                                         ),
                                         'fazid': serializeParam(
-                                          '',
+                                          widget.fazid,
                                           ParamType.String,
                                         ),
                                       }.withoutNulls,
