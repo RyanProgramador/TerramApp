@@ -161,6 +161,7 @@ class _ContornoDaFazendaWidgetState extends State<ContornoDaFazendaWidget> {
                                               .toList()
                                               .cast<dynamic>();
                                     });
+                                    setState(() {});
                                   },
                                   child: Icon(
                                     Icons.keyboard_backspace_rounded,

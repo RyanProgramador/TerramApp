@@ -1,8 +1,9 @@
+import '/components/maps_revisao_widget.dart';
 import '/components/sem_contorno_no_momento_widget.dart';
 import '/flutter_flow/flutter_flow_theme.dart';
 import '/flutter_flow/flutter_flow_util.dart';
 import '/flutter_flow/flutter_flow_widgets.dart';
-import '/flutter_flow/custom_functions.dart' as functions;
+import '/backend/schema/structs/index.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/scheduler.dart';
 import 'package:flutter/services.dart';
@@ -30,6 +31,7 @@ class _ListaContornosWidgetState extends State<ListaContornosWidget> {
   late ListaContornosModel _model;
 
   final scaffoldKey = GlobalKey<ScaffoldState>();
+  LatLng? currentUserLocationValue;
 
   @override
   void initState() {
@@ -165,66 +167,79 @@ class _ListaContornosWidgetState extends State<ListaContornosWidget> {
                           return Padding(
                             padding: EdgeInsetsDirectional.fromSTEB(
                                 16.0, 8.0, 16.0, 0.0),
-                            child: Container(
-                              width: double.infinity,
-                              height: 78.0,
-                              decoration: BoxDecoration(
-                                color: FlutterFlowTheme.of(context)
-                                    .primaryBackground,
-                                borderRadius: BorderRadius.circular(12.0),
-                                border: Border.all(
-                                  color: trGruposContornoFazendaItem ==
-                                          FFAppState().trOsServicoEmAndamento
-                                      ? FlutterFlowTheme.of(context)
-                                          .customColor1
-                                      : FlutterFlowTheme.of(context).lineColor,
+                            child: InkWell(
+                              splashColor: Colors.transparent,
+                              focusColor: Colors.transparent,
+                              hoverColor: Colors.transparent,
+                              highlightColor: Colors.transparent,
+                              onTap: () async {
+                                currentUserLocationValue =
+                                    await getCurrentUserLocation(
+                                        defaultLocation: LatLng(0.0, 0.0));
+                                await showModalBottomSheet(
+                                  isScrollControlled: true,
+                                  backgroundColor: Colors.transparent,
+                                  enableDrag: false,
+                                  context: context,
+                                  builder: (context) {
+                                    return GestureDetector(
+                                      onTap: () => _model
+                                              .unfocusNode.canRequestFocus
+                                          ? FocusScope.of(context)
+                                              .requestFocus(_model.unfocusNode)
+                                          : FocusScope.of(context).unfocus(),
+                                      child: Padding(
+                                        padding:
+                                            MediaQuery.viewInsetsOf(context),
+                                        child: MapsRevisaoWidget(
+                                          pontos:
+                                              TrContornoFazendaStruct.fromMap(
+                                                      getJsonField(
+                                            trGruposContornoFazendaItem,
+                                            r'''$.latlng''',
+                                            true,
+                                          )!)
+                                                  .latlng,
+                                          inicio: currentUserLocationValue!,
+                                        ),
+                                      ),
+                                    );
+                                  },
+                                ).then((value) => safeSetState(() {}));
+                              },
+                              child: Container(
+                                width: double.infinity,
+                                height: 78.0,
+                                decoration: BoxDecoration(
+                                  color: FlutterFlowTheme.of(context)
+                                      .primaryBackground,
+                                  borderRadius: BorderRadius.circular(12.0),
+                                  border: Border.all(
+                                    color: trGruposContornoFazendaItem ==
+                                            FFAppState().trOsServicoEmAndamento
+                                        ? FlutterFlowTheme.of(context)
+                                            .customColor1
+                                        : FlutterFlowTheme.of(context)
+                                            .lineColor,
+                                  ),
                                 ),
-                              ),
-                              child: Padding(
-                                padding: EdgeInsetsDirectional.fromSTEB(
-                                    8.0, 8.0, 12.0, 8.0),
-                                child: Row(
-                                  mainAxisSize: MainAxisSize.max,
-                                  crossAxisAlignment: CrossAxisAlignment.center,
-                                  children: [
-                                    Expanded(
-                                      flex: 2,
-                                      child: Container(
-                                        decoration: BoxDecoration(),
-                                        child: Row(
-                                          mainAxisSize: MainAxisSize.max,
-                                          mainAxisAlignment:
-                                              MainAxisAlignment.center,
-                                          children: [
-                                            if (() {
-                                              if (functions.ligaoDeNome(
-                                                      FFAppState()
-                                                          .trServicos
-                                                          .toList(),
-                                                      'serv_id',
-                                                      'serv_nome',
-                                                      getJsonField(
-                                                        trGruposContornoFazendaItem,
-                                                        r'''$.oserv_id_serv''',
-                                                      ).toString()) ==
-                                                  'Contorno') {
-                                                return false;
-                                              } else if (functions.ligaoDeNome(
-                                                      FFAppState()
-                                                          .trServicos
-                                                          .toList(),
-                                                      'serv_id',
-                                                      'serv_nome',
-                                                      getJsonField(
-                                                        trGruposContornoFazendaItem,
-                                                        r'''$.oserv_id_serv''',
-                                                      ).toString()) ==
-                                                  'Atualização de contorno') {
-                                                return true;
-                                              } else {
-                                                return false;
-                                              }
-                                            }())
+                                child: Padding(
+                                  padding: EdgeInsetsDirectional.fromSTEB(
+                                      8.0, 8.0, 12.0, 8.0),
+                                  child: Row(
+                                    mainAxisSize: MainAxisSize.max,
+                                    crossAxisAlignment:
+                                        CrossAxisAlignment.center,
+                                    children: [
+                                      Expanded(
+                                        flex: 2,
+                                        child: Container(
+                                          decoration: BoxDecoration(),
+                                          child: Row(
+                                            mainAxisSize: MainAxisSize.max,
+                                            mainAxisAlignment:
+                                                MainAxisAlignment.center,
+                                            children: [
                                               FaIcon(
                                                 FontAwesomeIcons.route,
                                                 color:
@@ -232,77 +247,79 @@ class _ListaContornosWidgetState extends State<ListaContornosWidget> {
                                                         .secondaryText,
                                                 size: 24.0,
                                               ),
-                                          ],
-                                        ),
-                                      ),
-                                    ),
-                                    Expanded(
-                                      flex: 7,
-                                      child: ClipRRect(
-                                        child: Container(
-                                          decoration: BoxDecoration(),
-                                          child: Column(
-                                            mainAxisSize: MainAxisSize.max,
-                                            mainAxisAlignment:
-                                                MainAxisAlignment.center,
-                                            crossAxisAlignment:
-                                                CrossAxisAlignment.start,
-                                            children: [
-                                              Text(
-                                                '# ${getJsonField(
-                                                  trGruposContornoFazendaItem,
-                                                  r'''$.contorno_grupo''',
-                                                ).toString()}',
-                                                style:
-                                                    FlutterFlowTheme.of(context)
-                                                        .bodyLarge
-                                                        .override(
-                                                          fontFamily:
-                                                              'Readex Pro',
-                                                          fontSize: 12.0,
-                                                        ),
-                                              ),
-                                              Text(
-                                                'Contorno'.maybeHandleOverflow(
-                                                  maxChars: 20,
-                                                  replacement: '…',
-                                                ),
-                                                style:
-                                                    FlutterFlowTheme.of(context)
-                                                        .bodyLarge
-                                                        .override(
-                                                          fontFamily:
-                                                              'Readex Pro',
-                                                          fontWeight:
-                                                              FontWeight.w500,
-                                                        ),
-                                              ),
-                                              Text(
-                                                '${getJsonField(
-                                                  trGruposContornoFazendaItem,
-                                                  r'''$.dthr_fim''',
-                                                ).toString()}',
-                                                style:
-                                                    FlutterFlowTheme.of(context)
-                                                        .bodyLarge
-                                                        .override(
-                                                          fontFamily:
-                                                              'Readex Pro',
-                                                          fontSize: 12.0,
-                                                        ),
-                                              ),
                                             ],
                                           ),
                                         ),
                                       ),
-                                    ),
-                                    Expanded(
-                                      flex: 4,
-                                      child: Container(
-                                        decoration: BoxDecoration(),
+                                      Expanded(
+                                        flex: 7,
+                                        child: ClipRRect(
+                                          child: Container(
+                                            decoration: BoxDecoration(),
+                                            child: Column(
+                                              mainAxisSize: MainAxisSize.max,
+                                              mainAxisAlignment:
+                                                  MainAxisAlignment.center,
+                                              crossAxisAlignment:
+                                                  CrossAxisAlignment.start,
+                                              children: [
+                                                Text(
+                                                  '# ${getJsonField(
+                                                    trGruposContornoFazendaItem,
+                                                    r'''$.contorno_grupo''',
+                                                  ).toString()}',
+                                                  style: FlutterFlowTheme.of(
+                                                          context)
+                                                      .bodyLarge
+                                                      .override(
+                                                        fontFamily:
+                                                            'Readex Pro',
+                                                        fontSize: 12.0,
+                                                      ),
+                                                ),
+                                                Text(
+                                                  'Contorno'
+                                                      .maybeHandleOverflow(
+                                                    maxChars: 20,
+                                                    replacement: '…',
+                                                  ),
+                                                  style: FlutterFlowTheme.of(
+                                                          context)
+                                                      .bodyLarge
+                                                      .override(
+                                                        fontFamily:
+                                                            'Readex Pro',
+                                                        fontWeight:
+                                                            FontWeight.w500,
+                                                      ),
+                                                ),
+                                                Text(
+                                                  '${getJsonField(
+                                                    trGruposContornoFazendaItem,
+                                                    r'''$.dthr_fim''',
+                                                  ).toString()}',
+                                                  style: FlutterFlowTheme.of(
+                                                          context)
+                                                      .bodyLarge
+                                                      .override(
+                                                        fontFamily:
+                                                            'Readex Pro',
+                                                        fontSize: 12.0,
+                                                      ),
+                                                ),
+                                              ],
+                                            ),
+                                          ),
+                                        ),
                                       ),
-                                    ),
-                                  ],
+                                      Expanded(
+                                        flex: 4,
+                                        child: Container(
+                                          decoration: BoxDecoration(),
+                                        ),
+                                      ),
+                                    ],
+                                  ),
                                 ),
                               ),
                             ),
