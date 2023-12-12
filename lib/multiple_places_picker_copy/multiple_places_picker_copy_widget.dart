@@ -871,7 +871,7 @@ class _MultiplePlacesPickerCopyWidgetState
                                 style: FlutterFlowTheme.of(context).bodyMedium,
                               ),
                               Text(
-                                'Serviços',
+                                'ContornoFazendas',
                                 style: FlutterFlowTheme.of(context).bodyMedium,
                               ),
                             ],
@@ -968,22 +968,22 @@ class _MultiplePlacesPickerCopyWidgetState
                                             ),
                                             child: Builder(
                                               builder: (context) {
-                                                final trServiosList =
+                                                final trcontornoFaz =
                                                     FFAppState()
-                                                        .trServicos
+                                                        .contornoFazenda
                                                         .toList();
                                                 return SingleChildScrollView(
                                                   child: Column(
                                                     mainAxisSize:
                                                         MainAxisSize.max,
                                                     children: List.generate(
-                                                        trServiosList.length,
-                                                        (trServiosListIndex) {
-                                                      final trServiosListItem =
-                                                          trServiosList[
-                                                              trServiosListIndex];
+                                                        trcontornoFaz.length,
+                                                        (trcontornoFazIndex) {
+                                                      final trcontornoFazItem =
+                                                          trcontornoFaz[
+                                                              trcontornoFazIndex];
                                                       return Text(
-                                                        trServiosListItem
+                                                        trcontornoFazItem
                                                             .toString(),
                                                         style: FlutterFlowTheme
                                                                 .of(context)

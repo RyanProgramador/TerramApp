@@ -25,7 +25,7 @@ class ContornoMap extends StatefulWidget {
   final double? width;
   final double? height;
   final bool? ativoOuNao;
-  final google_maps.LatLng? localAtual;
+  final google_maps.LatLng localAtual;
 
   @override
   _ContornoMapState createState() => _ContornoMapState();
@@ -40,7 +40,7 @@ class _ContornoMapState extends State<ContornoMap> {
   bool isLocationPaused = false;
   double currentZoom = 20.0;
   google_maps.LatLng? currentTarget;
-  String observ_id = ""; // Variável para observação
+  String observ_id = "1"; // Variável para observação
   List<Map<String, dynamic>> dados = []; // Variável para armazenar dados
 
   void _onMapCreated(google_maps.GoogleMapController controller) {
