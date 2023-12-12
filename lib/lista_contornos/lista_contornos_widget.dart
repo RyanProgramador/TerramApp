@@ -299,7 +299,7 @@ class _ListaContornosWidgetState extends State<ListaContornosWidget> {
                 padding: EdgeInsetsDirectional.fromSTEB(0.0, 0.0, 0.0, 16.0),
                 child: FFButtonWidget(
                   onPressed: () async {
-                    context.pushNamed(
+                    context.goNamed(
                       'ContornoDaFazenda',
                       queryParameters: {
                         'fazendaNome': serializeParam(
@@ -311,10 +311,16 @@ class _ListaContornosWidgetState extends State<ListaContornosWidget> {
                           ParamType.String,
                         ),
                         'idDoContorno': serializeParam(
-                          functions.umMaisUm(getJsonField(
-                            FFAppState().grupoContornoFazendas.last,
-                            r'''$.contorno_grupo''',
-                          ).toString()),
+                          valueOrDefault<String>(
+                            functions.umMaisUm(valueOrDefault<String>(
+                              getJsonField(
+                                FFAppState().grupoContornoFazendas.last,
+                                r'''$.contorno_grupo''',
+                              ).toString(),
+                              '0',
+                            )),
+                            '0',
+                          ),
                           ParamType.String,
                         ),
                         'fazid': serializeParam(
@@ -322,6 +328,13 @@ class _ListaContornosWidgetState extends State<ListaContornosWidget> {
                           ParamType.String,
                         ),
                       }.withoutNulls,
+                      extra: <String, dynamic>{
+                        kTransitionInfoKey: TransitionInfo(
+                          hasTransition: true,
+                          transitionType: PageTransitionType.fade,
+                          duration: Duration(milliseconds: 0),
+                        ),
+                      },
                     );
                   },
                   text: 'Iniciar contorno',
