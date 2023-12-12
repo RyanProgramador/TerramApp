@@ -3,7 +3,7 @@ import '/components/sem_contorno_no_momento_widget.dart';
 import '/flutter_flow/flutter_flow_theme.dart';
 import '/flutter_flow/flutter_flow_util.dart';
 import '/flutter_flow/flutter_flow_widgets.dart';
-import '/backend/schema/structs/index.dart';
+import '/flutter_flow/custom_functions.dart' as functions;
 import 'package:flutter/material.dart';
 import 'package:flutter/scheduler.dart';
 import 'package:flutter/services.dart';
@@ -195,13 +195,24 @@ class _ListaContornosWidgetState extends State<ListaContornosWidget> {
                                           height: 400.0,
                                           child: MapsRevisaoWidget(
                                             pontos:
-                                                TrContornoFazendaStruct.fromMap(
+                                                functions.listaStrToListaLatLng(
+                                                    getJsonField(
+                                                      trGruposContornoFazendaItem,
+                                                      r'''$.latlng''',
+                                                      true,
+                                                    ),
+                                                    functions.separadorLatDeLng(
+                                                        true,
                                                         getJsonField(
-                                              trGruposContornoFazendaItem,
-                                              r'''$.latlng''',
-                                              true,
-                                            )!)
-                                                    .latlng,
+                                                          trGruposContornoFazendaItem,
+                                                          r'''$.latlng''',
+                                                        ).toString()),
+                                                    functions.separadorLatDeLng(
+                                                        false,
+                                                        getJsonField(
+                                                          trGruposContornoFazendaItem,
+                                                          r'''$.latlng''',
+                                                        ).toString()))!,
                                             inicio: currentUserLocationValue!,
                                           ),
                                         ),
@@ -297,10 +308,10 @@ class _ListaContornosWidgetState extends State<ListaContornosWidget> {
                                                       ),
                                                 ),
                                                 Text(
-                                                  '${getJsonField(
+                                                  '${functions.strToData(getJsonField(
                                                     trGruposContornoFazendaItem,
                                                     r'''$.dthr_fim''',
-                                                  ).toString()}',
+                                                  ).toString())}',
                                                   style: FlutterFlowTheme.of(
                                                           context)
                                                       .bodyLarge
@@ -313,12 +324,6 @@ class _ListaContornosWidgetState extends State<ListaContornosWidget> {
                                               ],
                                             ),
                                           ),
-                                        ),
-                                      ),
-                                      Expanded(
-                                        flex: 4,
-                                        child: Container(
-                                          decoration: BoxDecoration(),
                                         ),
                                       ),
                                     ],
