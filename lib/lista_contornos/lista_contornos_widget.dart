@@ -311,19 +311,16 @@ class _ListaContornosWidgetState extends State<ListaContornosWidget> {
                           ParamType.String,
                         ),
                         'idDoContorno': serializeParam(
-                          valueOrDefault<String>(
-                            functions.umMaisUm(getJsonField(
-                                      FFAppState().grupoContornoFazendas.last,
-                                      r'''$.contorno_grupo''',
-                                    ) !=
-                                    null
-                                ? getJsonField(
+                          functions.umMaisUm(getJsonField(
                                     FFAppState().grupoContornoFazendas.last,
                                     r'''$.contorno_grupo''',
-                                  ).toString()
-                                : '1'),
-                            '0',
-                          ),
+                                  ) !=
+                                  null
+                              ? getJsonField(
+                                  FFAppState().grupoContornoFazendas.last,
+                                  r'''$.contorno_grupo''',
+                                ).toString()
+                              : '1'),
                           ParamType.String,
                         ),
                         'fazid': serializeParam(
