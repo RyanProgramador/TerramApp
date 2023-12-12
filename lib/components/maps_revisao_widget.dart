@@ -69,34 +69,37 @@ class _MapsRevisaoWidgetState extends State<MapsRevisaoWidget> {
       decoration: BoxDecoration(),
       child: Stack(
         children: [
-          Builder(builder: (context) {
-            final _googleMapMarker = currentUserLocationValue;
-            return FlutterFlowGoogleMap(
-              controller: _model.googleMapsController,
-              onCameraIdle: (latLng) => _model.googleMapsCenter = latLng,
-              initialLocation: _model.googleMapsCenter ??=
-                  currentUserLocationValue!,
-              markers: [
-                if (_googleMapMarker != null)
-                  FlutterFlowMarker(
-                    _googleMapMarker.serialize(),
-                    _googleMapMarker,
-                  ),
-              ],
-              markerColor: GoogleMarkerColor.violet,
-              mapType: MapType.normal,
-              style: GoogleMapStyle.standard,
-              initialZoom: 12.0,
-              allowInteraction: true,
-              allowZoom: true,
-              showZoomControls: false,
-              showLocation: false,
-              showCompass: false,
-              showMapToolbar: false,
-              showTraffic: false,
-              centerMapOnMarkerTap: false,
-            );
-          }),
+          Align(
+            alignment: AlignmentDirectional(0.00, 0.00),
+            child: Builder(builder: (context) {
+              final _googleMapMarker = currentUserLocationValue;
+              return FlutterFlowGoogleMap(
+                controller: _model.googleMapsController,
+                onCameraIdle: (latLng) => _model.googleMapsCenter = latLng,
+                initialLocation: _model.googleMapsCenter ??=
+                    currentUserLocationValue!,
+                markers: [
+                  if (_googleMapMarker != null)
+                    FlutterFlowMarker(
+                      _googleMapMarker.serialize(),
+                      _googleMapMarker,
+                    ),
+                ],
+                markerColor: GoogleMarkerColor.violet,
+                mapType: MapType.normal,
+                style: GoogleMapStyle.standard,
+                initialZoom: 12.0,
+                allowInteraction: true,
+                allowZoom: true,
+                showZoomControls: false,
+                showLocation: false,
+                showCompass: false,
+                showMapToolbar: false,
+                showTraffic: false,
+                centerMapOnMarkerTap: false,
+              );
+            }),
+          ),
           Align(
             alignment: AlignmentDirectional(1.00, -1.00),
             child: PointerInterceptor(

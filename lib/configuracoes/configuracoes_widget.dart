@@ -403,7 +403,7 @@ class _ConfiguracoesWidgetState extends State<ConfiguracoesWidget> {
                                 padding: EdgeInsetsDirectional.fromSTEB(
                                     0.0, 4.0, 0.0, 0.0),
                                 child: Text(
-                                  'v1.7.2',
+                                  'v1.7.3',
                                   style: FlutterFlowTheme.of(context)
                                       .labelMedium
                                       .override(

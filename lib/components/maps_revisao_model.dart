@@ -9,6 +9,17 @@ import 'package:pointer_interceptor/pointer_interceptor.dart';
 import 'package:provider/provider.dart';
 
 class MapsRevisaoModel extends FlutterFlowModel<MapsRevisaoWidget> {
+  ///  Local state fields for this component.
+
+  List<dynamic> latlng = [];
+  void addToLatlng(dynamic item) => latlng.add(item);
+  void removeFromLatlng(dynamic item) => latlng.remove(item);
+  void removeAtIndexFromLatlng(int index) => latlng.removeAt(index);
+  void insertAtIndexInLatlng(int index, dynamic item) =>
+      latlng.insert(index, item);
+  void updateLatlngAtIndex(int index, Function(dynamic) updateFn) =>
+      latlng[index] = updateFn(latlng[index]);
+
   ///  State fields for stateful widgets in this component.
 
   // State field(s) for GoogleMap widget.

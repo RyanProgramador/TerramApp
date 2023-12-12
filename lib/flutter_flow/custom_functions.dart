@@ -739,3 +739,31 @@ dynamic _getJsonFieldValue(dynamic json, String jsonPath) {
 
   return result;
 }
+
+List<LatLng>? listaStrToListaLatLngSemPath(
+  List<dynamic>? listaDeJson,
+  String? jsonPath,
+) {
+  if (listaDeJson == null || jsonPath == null) {
+    return null;
+  }
+  List<LatLng> listaLatLng = [];
+
+  for (var json in listaDeJson) {
+    if (json is Map<String, dynamic> && json.containsKey(jsonPath)) {
+      String? latLngString = json[jsonPath];
+      if (latLngString != null) {
+        List<String> latLngParts = latLngString.split(',');
+        if (latLngParts.length == 2) {
+          double? lat = double.tryParse(latLngParts[0]);
+          double? lng = double.tryParse(latLngParts[1]);
+          if (lat != null && lng != null) {
+            listaLatLng.add(LatLng(lat, lng));
+          }
+        }
+      }
+    }
+  }
+
+  return listaLatLng.isNotEmpty ? listaLatLng : null;
+}

@@ -227,7 +227,7 @@ class _ListaContornosWidgetState extends State<ListaContornosWidget> {
                                                   '# ${getJsonField(
                                                     trGruposContornoFazendaItem,
                                                     r'''$.contorno_grupo''',
-                                                  ).toString()} k',
+                                                  ).toString()}',
                                                   style: FlutterFlowTheme.of(
                                                           context)
                                                       .bodyLarge
@@ -255,6 +255,9 @@ class _ListaContornosWidgetState extends State<ListaContornosWidget> {
                                                 ),
                                                 Text(
                                                   '${functions.strToData(getJsonField(
+                                                    trGruposContornoFazendaItem,
+                                                    r'''$.dthr_fim''',
+                                                  ).toString())} ás ${functions.strToHORA(getJsonField(
                                                     trGruposContornoFazendaItem,
                                                     r'''$.dthr_fim''',
                                                   ).toString())}',
