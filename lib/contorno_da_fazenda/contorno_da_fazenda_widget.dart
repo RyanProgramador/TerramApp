@@ -2,6 +2,7 @@ import '/flutter_flow/flutter_flow_theme.dart';
 import '/flutter_flow/flutter_flow_util.dart';
 import '/flutter_flow/flutter_flow_widgets.dart';
 import '/custom_code/widgets/index.dart' as custom_widgets;
+import '/flutter_flow/custom_functions.dart' as functions;
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:google_fonts/google_fonts.dart';
@@ -115,7 +116,7 @@ class _ContornoDaFazendaWidgetState extends State<ContornoDaFazendaWidget> {
                               widget.oservID,
                               '1',
                             ),
-                            idContorno: '1',
+                            idContorno: functions.umMaisUm(widget.idDoContorno),
                           ),
                         ),
                       ),
@@ -158,6 +159,11 @@ class _ContornoDaFazendaWidgetState extends State<ContornoDaFazendaWidget> {
                                       FFAppState().contornoFazenda =
                                           FFAppState()
                                               .contornoFazenda
+                                              .toList()
+                                              .cast<dynamic>();
+                                      FFAppState().grupoContornoFazendas =
+                                          FFAppState()
+                                              .grupoContornoFazendas
                                               .toList()
                                               .cast<dynamic>();
                                     });

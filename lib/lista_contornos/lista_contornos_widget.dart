@@ -196,30 +196,7 @@ class _ListaContornosWidgetState extends State<ListaContornosWidget> {
                                               MediaQuery.viewInsetsOf(context),
                                           child: Container(
                                             height: 400.0,
-                                            child: MapsRevisaoWidget(
-                                              pontos: functions
-                                                  .listaStrToListaLatLng(
-                                                      getJsonField(
-                                                        trGruposContornoFazendaItem,
-                                                        r'''$.latlng''',
-                                                        true,
-                                                      ),
-                                                      functions
-                                                          .separadorLatDeLng(
-                                                              true,
-                                                              getJsonField(
-                                                                trGruposContornoFazendaItem,
-                                                                r'''$.latlng''',
-                                                              ).toString()),
-                                                      functions
-                                                          .separadorLatDeLng(
-                                                              false,
-                                                              getJsonField(
-                                                                trGruposContornoFazendaItem,
-                                                                r'''$.latlng''',
-                                                              ).toString()))!,
-                                              inicio: currentUserLocationValue!,
-                                            ),
+                                            child: MapsRevisaoWidget(),
                                           ),
                                         ),
                                       );
@@ -361,13 +338,18 @@ class _ListaContornosWidgetState extends State<ListaContornosWidget> {
                           ParamType.String,
                         ),
                         'idDoContorno': serializeParam(
-                          '1',
+                          functions
+                              .maiorNumero(getJsonField(
+                                FFAppState().grupoContornoFazendas.last,
+                                r'''$.contorno_grupo''',
+                              ).toString())
+                              .toString(),
                           ParamType.String,
                         ),
                       }.withoutNulls,
                     );
                   },
-                  text: 'Criar contorno',
+                  text: 'Iniciar contorno',
                   options: FFButtonOptions(
                     width: 200.0,
                     height: 50.0,

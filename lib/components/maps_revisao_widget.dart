@@ -10,14 +10,7 @@ import 'maps_revisao_model.dart';
 export 'maps_revisao_model.dart';
 
 class MapsRevisaoWidget extends StatefulWidget {
-  const MapsRevisaoWidget({
-    Key? key,
-    required this.pontos,
-    required this.inicio,
-  }) : super(key: key);
-
-  final List<LatLng>? pontos;
-  final LatLng? inicio;
+  const MapsRevisaoWidget({Key? key}) : super(key: key);
 
   @override
   _MapsRevisaoWidgetState createState() => _MapsRevisaoWidgetState();
@@ -25,6 +18,8 @@ class MapsRevisaoWidget extends StatefulWidget {
 
 class _MapsRevisaoWidgetState extends State<MapsRevisaoWidget> {
   late MapsRevisaoModel _model;
+
+  LatLng? currentUserLocationValue;
 
   @override
   void setState(VoidCallback callback) {
@@ -36,6 +31,9 @@ class _MapsRevisaoWidgetState extends State<MapsRevisaoWidget> {
   void initState() {
     super.initState();
     _model = createModel(context, () => MapsRevisaoModel());
+
+    getCurrentUserLocation(defaultLocation: LatLng(0.0, 0.0), cached: true)
+        .then((loc) => setState(() => currentUserLocationValue = loc));
   }
 
   @override
@@ -48,6 +46,22 @@ class _MapsRevisaoWidgetState extends State<MapsRevisaoWidget> {
   @override
   Widget build(BuildContext context) {
     context.watch<FFAppState>();
+    if (currentUserLocationValue == null) {
+      return Container(
+        color: FlutterFlowTheme.of(context).primaryBackground,
+        child: Center(
+          child: SizedBox(
+            width: 50.0,
+            height: 50.0,
+            child: CircularProgressIndicator(
+              valueColor: AlwaysStoppedAnimation<Color>(
+                FlutterFlowTheme.of(context).primary,
+              ),
+            ),
+          ),
+        ),
+      );
+    }
 
     return Container(
       width: double.infinity,
@@ -55,31 +69,34 @@ class _MapsRevisaoWidgetState extends State<MapsRevisaoWidget> {
       decoration: BoxDecoration(),
       child: Stack(
         children: [
-          FlutterFlowGoogleMap(
-            controller: _model.googleMapsController,
-            onCameraIdle: (latLng) => _model.googleMapsCenter = latLng,
-            initialLocation: _model.googleMapsCenter ??= widget.inicio!,
-            markers: (widget.pontos ?? [])
-                .map(
-                  (marker) => FlutterFlowMarker(
-                    marker.serialize(),
-                    marker,
+          Builder(builder: (context) {
+            final _googleMapMarker = currentUserLocationValue;
+            return FlutterFlowGoogleMap(
+              controller: _model.googleMapsController,
+              onCameraIdle: (latLng) => _model.googleMapsCenter = latLng,
+              initialLocation: _model.googleMapsCenter ??=
+                  currentUserLocationValue!,
+              markers: [
+                if (_googleMapMarker != null)
+                  FlutterFlowMarker(
+                    _googleMapMarker.serialize(),
+                    _googleMapMarker,
                   ),
-                )
-                .toList(),
-            markerColor: GoogleMarkerColor.violet,
-            mapType: MapType.normal,
-            style: GoogleMapStyle.standard,
-            initialZoom: 12.0,
-            allowInteraction: true,
-            allowZoom: true,
-            showZoomControls: false,
-            showLocation: false,
-            showCompass: false,
-            showMapToolbar: false,
-            showTraffic: false,
-            centerMapOnMarkerTap: false,
-          ),
+              ],
+              markerColor: GoogleMarkerColor.violet,
+              mapType: MapType.normal,
+              style: GoogleMapStyle.standard,
+              initialZoom: 12.0,
+              allowInteraction: true,
+              allowZoom: true,
+              showZoomControls: false,
+              showLocation: false,
+              showCompass: false,
+              showMapToolbar: false,
+              showTraffic: false,
+              centerMapOnMarkerTap: false,
+            );
+          }),
           Align(
             alignment: AlignmentDirectional(1.00, -1.00),
             child: PointerInterceptor(
