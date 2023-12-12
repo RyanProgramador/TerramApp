@@ -140,7 +140,19 @@ GoRouter createRouter(AppStateNotifier appStateNotifier) => GoRouter(
             FFRoute(
               name: 'ContornoDaFazenda',
               path: 'contornoDaFazenda',
-              builder: (context, params) => ContornoDaFazendaWidget(),
+              builder: (context, params) => ContornoDaFazendaWidget(
+                fazendaNome: params.getParam('fazendaNome', ParamType.String),
+                oservID: params.getParam('oservID', ParamType.String),
+                idDoContorno: params.getParam('idDoContorno', ParamType.String),
+              ),
+            ),
+            FFRoute(
+              name: 'ListaContornos',
+              path: 'listaContornos',
+              builder: (context, params) => ListaContornosWidget(
+                nomeFazenda: params.getParam('nomeFazenda', ParamType.String),
+                oservID: params.getParam('oservID', ParamType.String),
+              ),
             )
           ].map((r) => r.toRoute(appStateNotifier)).toList(),
         ),

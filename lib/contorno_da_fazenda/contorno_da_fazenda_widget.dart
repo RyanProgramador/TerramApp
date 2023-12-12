@@ -10,7 +10,16 @@ import 'contorno_da_fazenda_model.dart';
 export 'contorno_da_fazenda_model.dart';
 
 class ContornoDaFazendaWidget extends StatefulWidget {
-  const ContornoDaFazendaWidget({Key? key}) : super(key: key);
+  const ContornoDaFazendaWidget({
+    Key? key,
+    required this.fazendaNome,
+    required this.oservID,
+    required this.idDoContorno,
+  }) : super(key: key);
+
+  final String? fazendaNome;
+  final String? oservID;
+  final String? idDoContorno;
 
   @override
   _ContornoDaFazendaWidgetState createState() =>

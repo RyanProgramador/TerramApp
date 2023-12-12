@@ -13,3 +13,4 @@ export '/gps_tec_to_fazenda/gps_tec_to_fazenda_widget.dart'
 export '/testecontorno/testecontorno_widget.dart' show TestecontornoWidget;
 export '/contorno_da_fazenda/contorno_da_fazenda_widget.dart'
     show ContornoDaFazendaWidget;
+export '/lista_contornos/lista_contornos_widget.dart' show ListaContornosWidget;

@@ -207,6 +207,20 @@ class _MultiplePlacesPickerCopyWidgetState
                             onTap: () async {
                               context.goNamed(
                                 'ContornoDaFazenda',
+                                queryParameters: {
+                                  'fazendaNome': serializeParam(
+                                    'Fazenda Sem Nome',
+                                    ParamType.String,
+                                  ),
+                                  'oservID': serializeParam(
+                                    '123321',
+                                    ParamType.String,
+                                  ),
+                                  'idDoContorno': serializeParam(
+                                    'x',
+                                    ParamType.String,
+                                  ),
+                                }.withoutNulls,
                                 extra: <String, dynamic>{
                                   kTransitionInfoKey: TransitionInfo(
                                     hasTransition: true,

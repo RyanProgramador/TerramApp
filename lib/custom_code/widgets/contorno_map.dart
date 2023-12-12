@@ -20,13 +20,16 @@ class ContornoMap extends StatefulWidget {
     this.height,
     this.ativoOuNao,
     this.localAtual,
+    this.oservid,
+    this.idContorno,
   }) : super(key: key);
 
   final double? width;
   final double? height;
   final bool? ativoOuNao;
   final LatLng? localAtual;
-
+  final String? oservid;
+  final String? idContorno;
   @override
   _ContornoMapState createState() => _ContornoMapState();
 }
@@ -40,7 +43,8 @@ class _ContornoMapState extends State<ContornoMap> {
   bool isLocationPaused = false;
   double currentZoom = 20.0;
   google_maps.LatLng? currentTarget;
-  String observ_id = "1"; // Variável para observação
+  late String observ_id;
+  late String idContorno;
   List<Map<String, dynamic>> dados = []; // Variável para armazenar dados
 
   void _onMapCreated(google_maps.GoogleMapController controller) {
@@ -109,7 +113,7 @@ class _ContornoMapState extends State<ContornoMap> {
   }
 
   void _finalizeArea() {
-    if (markers.isNotEmpty && _distanceToStart() <= 20) {
+    if (markers.isNotEmpty && _distanceToStart() <= 50) {
       setState(() {
         // Transformar a linha em um polígono fechado
         var polygonCoordinates = List<google_maps.LatLng>.from(
@@ -131,7 +135,8 @@ class _ContornoMapState extends State<ContornoMap> {
         dados.clear();
         for (var coord in polygonCoordinates) {
           Map<String, dynamic> contorno = {
-            "MarkerID": markerId++,
+            "id_contorno_grupo": idContorno,
+            "marker_id": markerId++,
             "observ_id": observ_id,
             "latlng": "${coord.latitude}, ${coord.longitude}"
           };
