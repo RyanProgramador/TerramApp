@@ -150,7 +150,6 @@ class _ContornoMapState extends State<ContornoMap> {
           "contorno_grupo": widget.idContorno,
           "oserv_id": widget.oservid,
           "dthr_fim": formattedDataHora,
-          "latlngFim": widget.localAtual
         };
         FFAppState().grupoContornoFazendas.add(grupocontorno);
       });
