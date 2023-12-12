@@ -209,28 +209,6 @@ class _ContornoDaFazendaWidgetState extends State<ContornoDaFazendaWidget> {
                                     fontWeight: FontWeight.bold,
                                   ),
                             ),
-                            Text(
-                              widget.idDoContorno,
-                              style: FlutterFlowTheme.of(context)
-                                  .bodyMedium
-                                  .override(
-                                    fontFamily: 'Readex Pro',
-                                    color: Color(0xFFF8F8F8),
-                                    fontSize: 24.0,
-                                    fontWeight: FontWeight.bold,
-                                  ),
-                            ),
-                            Text(
-                              widget.fazid,
-                              style: FlutterFlowTheme.of(context)
-                                  .bodyMedium
-                                  .override(
-                                    fontFamily: 'Readex Pro',
-                                    color: Color(0xFFF8F8F8),
-                                    fontSize: 24.0,
-                                    fontWeight: FontWeight.bold,
-                                  ),
-                            ),
                           ],
                         ),
                       ),

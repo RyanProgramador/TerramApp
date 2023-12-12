@@ -299,18 +299,6 @@ class _IniciarDeslocamentoWidgetState extends State<IniciarDeslocamentoWidget> {
                                             .labelMedium,
                                       ),
                                     ),
-                                    Padding(
-                                      padding: EdgeInsetsDirectional.fromSTEB(
-                                          8.0, 0.0, 0.0, 0.0),
-                                      child: Text(
-                                        valueOrDefault<String>(
-                                          widget.fazid,
-                                          '1',
-                                        ),
-                                        style: FlutterFlowTheme.of(context)
-                                            .labelMedium,
-                                      ),
-                                    ),
                                   ],
                                 ),
                               ),

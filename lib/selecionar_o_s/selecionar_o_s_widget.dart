@@ -1470,19 +1470,7 @@ class _SelecionarOSWidgetState extends State<SelecionarOSWidget>
                                                                 '#${getJsonField(
                                                                   trOsServicosItem,
                                                                   r'''$.oserv_id_os''',
-                                                                ).toString()}    ${valueOrDefault<String>(
-                                                                  functions.ligacaoEntreListas(
-                                                                      getJsonField(
-                                                                        trOsServicosItem,
-                                                                        r'''$''',
-                                                                        true,
-                                                                      ),
-                                                                      FFAppState().trOrdemServicos.toList(),
-                                                                      'oserv_id_os',
-                                                                      'os_id',
-                                                                      'os_id_faz'),
-                                                                  '404',
-                                                                )}',
+                                                                ).toString()}',
                                                                 style: FlutterFlowTheme.of(
                                                                         context)
                                                                     .bodyLarge

@@ -60,14 +60,19 @@ class _SemContornoNoMomentoWidgetState
                 mainAxisAlignment: MainAxisAlignment.center,
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
-                  Text(
-                    'Sem contornos para esta fazenda!',
-                    textAlign: TextAlign.start,
-                    style: FlutterFlowTheme.of(context).headlineLarge.override(
-                          fontFamily: 'Outfit',
-                          color: Colors.black,
-                          fontWeight: FontWeight.w600,
-                        ),
+                  Padding(
+                    padding: EdgeInsetsDirectional.fromSTEB(0.0, 0.0, 0.0, 4.0),
+                    child: Text(
+                      'Sem contornos para esta fazenda!',
+                      textAlign: TextAlign.start,
+                      maxLines: 2,
+                      style:
+                          FlutterFlowTheme.of(context).headlineLarge.override(
+                                fontFamily: 'Outfit',
+                                color: Colors.black,
+                                fontWeight: FontWeight.w600,
+                              ),
+                    ),
                   ),
                   Text(
                     'Por favor, Insira-os.',
