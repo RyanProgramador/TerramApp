@@ -278,7 +278,10 @@ class _ListaContornosWidgetState extends State<ListaContornosWidget> {
                                                         ),
                                               ),
                                               Text(
-                                                'Data e hora',
+                                                '${getJsonField(
+                                                  trGruposContornoFazendaItem,
+                                                  r'''$.dthr_fim''',
+                                                ).toString()}',
                                                 style:
                                                     FlutterFlowTheme.of(context)
                                                         .bodyLarge
