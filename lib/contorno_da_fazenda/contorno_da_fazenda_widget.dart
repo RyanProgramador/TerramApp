@@ -15,13 +15,14 @@ class ContornoDaFazendaWidget extends StatefulWidget {
     required this.fazendaNome,
     required this.oservID,
     required this.idDoContorno,
-    required this.fazid,
-  }) : super(key: key);
+    String? fazid,
+  })  : this.fazid = fazid ?? '20',
+        super(key: key);
 
   final String? fazendaNome;
   final String? oservID;
   final String? idDoContorno;
-  final String? fazid;
+  final String fazid;
 
   @override
   _ContornoDaFazendaWidgetState createState() =>
@@ -105,25 +106,25 @@ class _ContornoDaFazendaWidgetState extends State<ContornoDaFazendaWidget> {
                               FlutterFlowTheme.of(context).secondaryBackground,
                         ),
                         alignment: AlignmentDirectional(0.00, 1.00),
-                        child: Container(
-                          width: double.infinity,
-                          height: double.infinity,
-                          child: custom_widgets.ContornoMap(
-                            width: double.infinity,
-                            height: double.infinity,
-                            ativoOuNao: _model.ativo,
-                            localAtual: currentUserLocationValue,
-                            oservid: valueOrDefault<String>(
-                              widget.oservID,
-                              '1',
-                            ),
-                            idContorno: valueOrDefault<String>(
-                              widget.idDoContorno,
-                              '1',
-                            ),
-                            fazid: valueOrDefault<String>(
-                              widget.fazid,
-                              '1',
+                        child: Align(
+                          alignment: AlignmentDirectional(0.00, 0.00),
+                          child: Container(
+                            width: MediaQuery.sizeOf(context).width * 0.99,
+                            height: MediaQuery.sizeOf(context).height * 0.99,
+                            child: custom_widgets.ContornoMap(
+                              width: MediaQuery.sizeOf(context).width * 0.99,
+                              height: MediaQuery.sizeOf(context).height * 0.99,
+                              ativoOuNao: _model.ativo,
+                              localAtual: currentUserLocationValue,
+                              oservid: valueOrDefault<String>(
+                                widget.oservID,
+                                '1',
+                              ),
+                              idContorno: valueOrDefault<String>(
+                                widget.idDoContorno,
+                                '1',
+                              ),
+                              fazid: widget.fazid,
                             ),
                           ),
                         ),

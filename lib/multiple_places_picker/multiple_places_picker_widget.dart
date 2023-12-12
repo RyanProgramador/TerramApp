@@ -2,7 +2,6 @@ import '/flutter_flow/flutter_flow_theme.dart';
 import '/flutter_flow/flutter_flow_timer.dart';
 import '/flutter_flow/flutter_flow_util.dart';
 import '/flutter_flow/flutter_flow_widgets.dart';
-import '/custom_code/widgets/index.dart' as custom_widgets;
 import 'package:stop_watch_timer/stop_watch_timer.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/scheduler.dart';
@@ -242,14 +241,6 @@ class _MultiplePlacesPickerWidgetState
                                       ),
                                     ),
                                   ],
-                                ),
-                              ),
-                              Container(
-                                width: double.infinity,
-                                height: double.infinity,
-                                child: custom_widgets.ContornoMap(
-                                  width: double.infinity,
-                                  height: double.infinity,
                                 ),
                               ),
                             ],
