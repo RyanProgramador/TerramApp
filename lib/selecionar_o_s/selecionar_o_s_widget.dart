@@ -1001,27 +1001,21 @@ class _SelecionarOSWidgetState extends State<SelecionarOSWidget>
                                                                     ).toString()),
                                                                 polylinhaQueVemDoMenuInicial:
                                                                     null,
-                                                                fazid: functions
-                                                                    .ligaoDeNome(
-                                                                        FFAppState()
-                                                                            .trFazendas
-                                                                            .toList(),
-                                                                        'faz_id',
-                                                                        'faz_id',
-                                                                        valueOrDefault<
-                                                                            String>(
-                                                                          functions.ligacaoEntreListas(
-                                                                              getJsonField(
-                                                                                trOsServicosItem,
-                                                                                r'''$''',
-                                                                                true,
-                                                                              ),
-                                                                              FFAppState().trOrdemServicos.toList(),
-                                                                              'oserv_id_os',
-                                                                              'os_id',
-                                                                              'os_id_faz'),
-                                                                          '404',
-                                                                        ))!,
+                                                                fazid:
+                                                                    valueOrDefault<
+                                                                        String>(
+                                                                  functions.ligacaoEntreListas(
+                                                                      getJsonField(
+                                                                        trOsServicosItem,
+                                                                        r'''$''',
+                                                                        true,
+                                                                      ),
+                                                                      FFAppState().trOrdemServicos.toList(),
+                                                                      'oserv_id_os',
+                                                                      'os_id',
+                                                                      'os_id_faz'),
+                                                                  '404',
+                                                                ),
                                                               ),
                                                             ),
                                                           ),
@@ -1324,27 +1318,21 @@ class _SelecionarOSWidgetState extends State<SelecionarOSWidget>
                                                                         ?.jsonBody ??
                                                                     ''),
                                                               ).toString(),
-                                                              fazid: functions
-                                                                  .ligaoDeNome(
-                                                                      FFAppState()
-                                                                          .trFazendas
-                                                                          .toList(),
-                                                                      'faz_id',
-                                                                      'faz_id',
-                                                                      valueOrDefault<
-                                                                          String>(
-                                                                        functions.ligacaoEntreListas(
-                                                                            getJsonField(
-                                                                              trOsServicosItem,
-                                                                              r'''$''',
-                                                                              true,
-                                                                            ),
-                                                                            FFAppState().trOrdemServicos.toList(),
-                                                                            'oserv_id_os',
-                                                                            'os_id',
-                                                                            'os_id_faz'),
-                                                                        '404',
-                                                                      ))!,
+                                                              fazid:
+                                                                  valueOrDefault<
+                                                                      String>(
+                                                                functions.ligacaoEntreListas(
+                                                                    getJsonField(
+                                                                      trOsServicosItem,
+                                                                      r'''$''',
+                                                                      true,
+                                                                    ),
+                                                                    FFAppState().trOrdemServicos.toList(),
+                                                                    'oserv_id_os',
+                                                                    'os_id',
+                                                                    'os_id_faz'),
+                                                                '404',
+                                                              ),
                                                             ),
                                                           ),
                                                         ),
