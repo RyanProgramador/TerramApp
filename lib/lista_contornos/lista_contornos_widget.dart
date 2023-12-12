@@ -17,7 +17,7 @@ class ListaContornosWidget extends StatefulWidget {
     Key? key,
     required this.nomeFazenda,
     required this.oservID,
-    this.fazid,
+    required this.fazid,
   }) : super(key: key);
 
   final String? nomeFazenda;
@@ -130,6 +130,20 @@ class _ListaContornosWidgetState extends State<ListaContornosWidget> {
                             valueOrDefault<String>(
                               widget.nomeFazenda,
                               'Fazenda Sem Nome',
+                            ),
+                            style: FlutterFlowTheme.of(context)
+                                .bodyMedium
+                                .override(
+                                  fontFamily: 'Readex Pro',
+                                  color: Color(0xFFF8F8F8),
+                                  fontSize: 24.0,
+                                  fontWeight: FontWeight.bold,
+                                ),
+                          ),
+                          Text(
+                            valueOrDefault<String>(
+                              widget.fazid,
+                              '1',
                             ),
                             style: FlutterFlowTheme.of(context)
                                 .bodyMedium

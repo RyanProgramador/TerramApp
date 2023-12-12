@@ -33,8 +33,9 @@ class IniciarDeslocamentoWidget extends StatefulWidget {
     required this.jsonServico,
     required this.deslocamentoAtualFinzalizado,
     this.polylinhaQueVemDoMenuInicial,
-    required this.fazid,
-  }) : super(key: key);
+    String? fazid,
+  })  : this.fazid = fazid ?? '1',
+        super(key: key);
 
   final String? etapade;
   final String? fazendaNome;
@@ -49,7 +50,7 @@ class IniciarDeslocamentoWidget extends StatefulWidget {
   final dynamic jsonServico;
   final bool? deslocamentoAtualFinzalizado;
   final String? polylinhaQueVemDoMenuInicial;
-  final String? fazid;
+  final String fazid;
 
   @override
   _IniciarDeslocamentoWidgetState createState() =>
@@ -294,6 +295,18 @@ class _IniciarDeslocamentoWidgetState extends State<IniciarDeslocamentoWidget> {
                                           8.0, 0.0, 0.0, 0.0),
                                       child: Text(
                                         widget.cidadeFaz!,
+                                        style: FlutterFlowTheme.of(context)
+                                            .labelMedium,
+                                      ),
+                                    ),
+                                    Padding(
+                                      padding: EdgeInsetsDirectional.fromSTEB(
+                                          8.0, 0.0, 0.0, 0.0),
+                                      child: Text(
+                                        valueOrDefault<String>(
+                                          widget.fazid,
+                                          '1',
+                                        ),
                                         style: FlutterFlowTheme.of(context)
                                             .labelMedium,
                                       ),
