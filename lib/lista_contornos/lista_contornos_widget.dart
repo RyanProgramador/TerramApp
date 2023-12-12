@@ -227,10 +227,14 @@ class _ListaContornosWidgetState extends State<ListaContornosWidget> {
                                                   '# ${getJsonField(
                                                     trGruposContornoFazendaItem,
                                                     r'''$.contorno_grupo''',
-                                                  ).toString()} ${functions.umMaisUm(getJsonField(
-                                                    trGruposContornoFazendaItem,
-                                                    r'''$.contorno_grupo''',
-                                                  ).toString())}',
+                                                  ).toString()} ${valueOrDefault<String>(
+                                                    functions
+                                                        .umMaisUm(getJsonField(
+                                                      trGruposContornoFazendaItem,
+                                                      r'''$.contorno_grupo''',
+                                                    ).toString()),
+                                                    '9',
+                                                  )}',
                                                   style: FlutterFlowTheme.of(
                                                           context)
                                                       .bodyLarge
