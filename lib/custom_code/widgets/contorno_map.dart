@@ -156,7 +156,7 @@ class _ContornoMapState extends State<ContornoMap> {
           "faz_id": widget.fazid
         };
         FFAppState().grupoContornoFazendas.add(grupocontorno);
-        FFAppState().contornoGrupoID.replaceAll(toString(markerId));
+        FFAppState().contornoGrupoID = markerId.toString();
       });
     }
   }
