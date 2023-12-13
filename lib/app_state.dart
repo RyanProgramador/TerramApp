@@ -369,7 +369,8 @@ class FFAppState extends ChangeNotifier {
 
   List<LatLng> _Erro = [
     LatLng(-29.8813641, -51.16721629999999),
-    LatLng(-29.9151627, -51.1952651)
+    LatLng(-29.9151627, -51.1952651),
+    LatLng(-29.9175426, -51.19687039999999)
   ];
   List<LatLng> get Erro => _Erro;
   set Erro(List<LatLng> _value) {

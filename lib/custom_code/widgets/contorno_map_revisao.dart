@@ -9,19 +9,21 @@ import 'package:flutter/material.dart';
 // Begin custom widget code
 // DO NOT REMOVE OR MODIFY THE CODE ABOVE!
 
+import 'dart:async';
+import 'package:geolocator/geolocator.dart';
 import 'package:google_maps_flutter/google_maps_flutter.dart' as google_maps;
 
 class ContornoMapRevisao extends StatefulWidget {
-  final double? width;
-  final double? height;
-  final List<google_maps.LatLng>? listaDeLatLng;
-
   const ContornoMapRevisao({
     Key? key,
     this.width,
     this.height,
     required this.listaDeLatLng,
   }) : super(key: key);
+
+  final double? width;
+  final double? height;
+  final List<google_maps.LatLng> listaDeLatLng;
 
   @override
   _ContornoMapRevisaoState createState() => _ContornoMapRevisaoState();
@@ -31,49 +33,39 @@ class _ContornoMapRevisaoState extends State<ContornoMapRevisao> {
   google_maps.GoogleMapController? _googleMapController;
 
   @override
+  void initState() {
+    super.initState();
+  }
+
+  @override
   Widget build(BuildContext context) {
-    return Container(
-      width: widget.width ?? double.infinity,
-      height: widget.height ?? double.infinity,
-      child: google_maps.GoogleMap(
-        onMapCreated: _onMapCreated,
-        initialCameraPosition: google_maps.CameraPosition(
-          target: widget.listaDeLatLng?.first ?? google_maps.LatLng(0, 0),
-          zoom: 14.0,
-        ),
-        markers: _buildMarkers(),
-        polygons: _buildPolygons(),
-      ),
-    );
-  }
-
-  void _onMapCreated(google_maps.GoogleMapController controller) {
-    setState(() {
-      _googleMapController = controller;
-    });
-  }
-
-  Set<google_maps.Marker> _buildMarkers() {
-    return widget.listaDeLatLng?.map((google_maps.LatLng latLng) {
-          return google_maps.Marker(
-            markerId: google_maps.MarkerId('PolygonMarker'),
-            position: latLng,
-          );
-        }).toSet() ??
-        {};
-  }
-
-  Set<google_maps.Polygon> _buildPolygons() {
-    return widget.listaDeLatLng != null && widget.listaDeLatLng!.length >= 3
-        ? [
-            google_maps.Polygon(
-              polygonId: google_maps.PolygonId('Polygon'),
-              points: widget.listaDeLatLng!,
-              strokeWidth: 2,
-              strokeColor: Colors.blue,
-              fillColor: Colors.blue.withOpacity(0.3),
+    return Stack(
+      children: [
+        Container(
+          width: widget.width ?? MediaQuery.of(context).size.width,
+          height: widget.height ?? MediaQuery.of(context).size.height,
+          child: google_maps.GoogleMap(
+            initialCameraPosition: google_maps.CameraPosition(
+              target: widget.listaDeLatLng![0], // Define o centro do mapa
+              zoom: 15.0, // Define o nível de zoom inicial
             ),
-          ].toSet()
-        : {};
+            onMapCreated: (controller) {
+              setState(() {
+                _googleMapController = controller;
+              });
+            },
+            polygons: <google_maps.Polygon>{
+              google_maps.Polygon(
+                polygonId: google_maps.PolygonId('area'),
+                points: widget.listaDeLatLng!,
+                strokeWidth: 2,
+                strokeColor: Colors.blue,
+                fillColor: Colors.blue.withOpacity(0.3),
+              ),
+            },
+          ),
+        ),
+      ],
+    );
   }
 }

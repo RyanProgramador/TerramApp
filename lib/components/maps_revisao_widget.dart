@@ -1,7 +1,6 @@
 import '/flutter_flow/flutter_flow_theme.dart';
 import '/flutter_flow/flutter_flow_util.dart';
 import '/custom_code/widgets/index.dart' as custom_widgets;
-import '/flutter_flow/custom_functions.dart' as functions;
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:google_fonts/google_fonts.dart';
@@ -58,8 +57,7 @@ class _MapsRevisaoWidgetState extends State<MapsRevisaoWidget> {
               child: custom_widgets.ContornoMapRevisao(
                 width: double.infinity,
                 height: double.infinity,
-                listaDeLatLng: functions.listaStrToListaLatLngSemPath(
-                    FFAppState().contornoFazenda.take(1).toList(), 'latlng'),
+                listaDeLatLng: FFAppState().Erro,
               ),
             ),
             Align(

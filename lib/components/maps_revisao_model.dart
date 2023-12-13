@@ -1,7 +1,6 @@
 import '/flutter_flow/flutter_flow_theme.dart';
 import '/flutter_flow/flutter_flow_util.dart';
 import '/custom_code/widgets/index.dart' as custom_widgets;
-import '/flutter_flow/custom_functions.dart' as functions;
 import 'maps_revisao_widget.dart' show MapsRevisaoWidget;
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
