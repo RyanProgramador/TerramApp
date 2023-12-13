@@ -242,7 +242,7 @@ class _ListaContornosWidgetState extends State<ListaContornosWidget> {
                                                                       .toList(),
                                                                   getJsonField(
                                                                     trGruposContornoFazendaItem,
-                                                                    r'''$''',
+                                                                    r'''$.contorno_grupo''',
                                                                   ).toString())
                                                               ?.toList(),
                                                           'latlng')!,
@@ -285,39 +285,43 @@ class _ListaContornosWidgetState extends State<ListaContornosWidget> {
                                               ClipRRect(
                                                 child: Container(
                                                   decoration: BoxDecoration(),
-                                                  child: Column(
+                                                  child: Row(
                                                     mainAxisSize:
                                                         MainAxisSize.max,
-                                                    mainAxisAlignment:
-                                                        MainAxisAlignment
-                                                            .center,
-                                                    crossAxisAlignment:
-                                                        CrossAxisAlignment
-                                                            .start,
                                                     children: [
-                                                      Text(
-                                                        '# ${getJsonField(
-                                                          trGruposContornoFazendaItem,
-                                                          r'''$.contorno_grupo''',
-                                                        ).toString()}',
-                                                        style: FlutterFlowTheme
-                                                                .of(context)
-                                                            .bodyLarge
-                                                            .override(
-                                                              fontFamily:
-                                                                  'Readex Pro',
-                                                              fontSize: 12.0,
+                                                      Column(
+                                                        mainAxisSize:
+                                                            MainAxisSize.max,
+                                                        mainAxisAlignment:
+                                                            MainAxisAlignment
+                                                                .center,
+                                                        crossAxisAlignment:
+                                                            CrossAxisAlignment
+                                                                .start,
+                                                        children: [
+                                                          Text(
+                                                            '# ${getJsonField(
+                                                              trGruposContornoFazendaItem,
+                                                              r'''$.contorno_grupo''',
+                                                            ).toString()}',
+                                                            style: FlutterFlowTheme
+                                                                    .of(context)
+                                                                .bodyLarge
+                                                                .override(
+                                                                  fontFamily:
+                                                                      'Readex Pro',
+                                                                  fontSize:
+                                                                      12.0,
+                                                                ),
+                                                          ),
+                                                          Text(
+                                                            'Contorno'
+                                                                .maybeHandleOverflow(
+                                                              maxChars: 20,
+                                                              replacement: '…',
                                                             ),
-                                                      ),
-                                                      Text(
-                                                        'Contorno'
-                                                            .maybeHandleOverflow(
-                                                          maxChars: 20,
-                                                          replacement: '…',
-                                                        ),
-                                                        style:
-                                                            FlutterFlowTheme.of(
-                                                                    context)
+                                                            style: FlutterFlowTheme
+                                                                    .of(context)
                                                                 .bodyLarge
                                                                 .override(
                                                                   fontFamily:
@@ -326,23 +330,74 @@ class _ListaContornosWidgetState extends State<ListaContornosWidget> {
                                                                       FontWeight
                                                                           .w500,
                                                                 ),
+                                                          ),
+                                                          Text(
+                                                            '${functions.strToData(getJsonField(
+                                                              trGruposContornoFazendaItem,
+                                                              r'''$.dthr_fim''',
+                                                            ).toString())} ás ${functions.strToHORA(getJsonField(
+                                                              trGruposContornoFazendaItem,
+                                                              r'''$.dthr_fim''',
+                                                            ).toString())}',
+                                                            style: FlutterFlowTheme
+                                                                    .of(context)
+                                                                .bodyLarge
+                                                                .override(
+                                                                  fontFamily:
+                                                                      'Readex Pro',
+                                                                  fontSize:
+                                                                      12.0,
+                                                                ),
+                                                          ),
+                                                        ],
                                                       ),
-                                                      Text(
-                                                        '${functions.strToData(getJsonField(
-                                                          trGruposContornoFazendaItem,
-                                                          r'''$.dthr_fim''',
-                                                        ).toString())} ás ${functions.strToHORA(getJsonField(
-                                                          trGruposContornoFazendaItem,
-                                                          r'''$.dthr_fim''',
-                                                        ).toString())}',
-                                                        style: FlutterFlowTheme
-                                                                .of(context)
-                                                            .bodyLarge
-                                                            .override(
-                                                              fontFamily:
-                                                                  'Readex Pro',
-                                                              fontSize: 12.0,
-                                                            ),
+                                                      Builder(
+                                                        builder: (context) {
+                                                          final teste = functions
+                                                                  .acessarJsonListaDeterminadoValor(
+                                                                      functions
+                                                                          .sortListJson(
+                                                                              'contorno_grupo',
+                                                                              false,
+                                                                              FFAppState().contornoFazenda.toList(),
+                                                                              '6')
+                                                                          ?.toList(),
+                                                                      'latlng')
+                                                                  ?.toList() ??
+                                                              [];
+                                                          return Column(
+                                                            mainAxisSize:
+                                                                MainAxisSize
+                                                                    .max,
+                                                            mainAxisAlignment:
+                                                                MainAxisAlignment
+                                                                    .center,
+                                                            crossAxisAlignment:
+                                                                CrossAxisAlignment
+                                                                    .start,
+                                                            children:
+                                                                List.generate(
+                                                                    teste
+                                                                        .length,
+                                                                    (testeIndex) {
+                                                              final testeItem =
+                                                                  teste[
+                                                                      testeIndex];
+                                                              return Text(
+                                                                testeItem,
+                                                                style: FlutterFlowTheme.of(
+                                                                        context)
+                                                                    .bodyLarge
+                                                                    .override(
+                                                                      fontFamily:
+                                                                          'Readex Pro',
+                                                                      fontSize:
+                                                                          12.0,
+                                                                    ),
+                                                              );
+                                                            }),
+                                                          );
+                                                        },
                                                       ),
                                                     ],
                                                   ),
