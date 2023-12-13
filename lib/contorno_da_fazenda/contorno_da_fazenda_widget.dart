@@ -179,7 +179,7 @@ class _ContornoDaFazendaWidgetState extends State<ContornoDaFazendaWidget> {
                                       'ListaContornos',
                                       queryParameters: {
                                         'nomeFazenda': serializeParam(
-                                          widget.fazid,
+                                          widget.fazendaNome,
                                           ParamType.String,
                                         ),
                                         'oservID': serializeParam(

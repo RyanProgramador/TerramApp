@@ -157,6 +157,8 @@ class _ContornoMapState extends State<ContornoMap> {
         };
         FFAppState().grupoContornoFazendas.add(grupocontorno);
         FFAppState().contornoGrupoID = markerId.toString();
+
+        isLocationPaused = true;
       });
     }
   }
