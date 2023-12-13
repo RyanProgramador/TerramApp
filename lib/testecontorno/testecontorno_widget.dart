@@ -165,7 +165,7 @@ class _TestecontornoWidgetState extends State<TestecontornoWidget> {
                     ),
                   ),
                   Expanded(
-                    flex: 7,
+                    flex: 8,
                     child: Container(
                       width: double.infinity,
                       height: 400.0,
@@ -175,15 +175,18 @@ class _TestecontornoWidgetState extends State<TestecontornoWidget> {
                       child: Container(
                         width: double.infinity,
                         height: double.infinity,
-                        child: custom_widgets.RotaFinal(
+                        child: custom_widgets.ContornoMapRevisao(
                           width: double.infinity,
                           height: double.infinity,
-                          stringDoRotas:
-                              ApiRotasPolylinesCall.criptografadapolyline(
-                            (_model.polyline1?.jsonBody ?? ''),
-                          ).toString(),
-                          coordenadasIniciais: currentUserLocationValue!,
-                          coordenadasFinais: FFAppState().excluirLocal!,
+                          listaDeLatLng: FFAppState()
+                              .contornoFazenda
+                              .map((e) => getJsonField(
+                                    e,
+                                    r'''$.latlng''',
+                                  ))
+                              .toList()
+                              .map((e) => e.toString())
+                              .toList(),
                         ),
                       ),
                     ),
@@ -196,15 +199,26 @@ class _TestecontornoWidgetState extends State<TestecontornoWidget> {
                       decoration: BoxDecoration(
                         color: FlutterFlowTheme.of(context).secondaryBackground,
                       ),
-                      child: Container(
-                        width: double.infinity,
-                        height: double.infinity,
-                        child: custom_widgets.RotaFinalOffline(
-                          width: double.infinity,
-                          height: double.infinity,
-                          coordenadasIniciais: currentUserLocationValue!,
-                          coordenadasFinais: FFAppState().excluirLocal!,
-                        ),
+                      child: Builder(
+                        builder: (context) {
+                          final teste = FFAppState()
+                              .contornoFazenda
+                              .map((e) => getJsonField(
+                                    e,
+                                    r'''$.latlng''',
+                                  ))
+                              .toList();
+                          return Column(
+                            mainAxisSize: MainAxisSize.max,
+                            children: List.generate(teste.length, (testeIndex) {
+                              final testeItem = teste[testeIndex];
+                              return Text(
+                                testeItem.toString(),
+                                style: FlutterFlowTheme.of(context).bodyMedium,
+                              );
+                            }),
+                          );
+                        },
                       ),
                     ),
                   ),
