@@ -43,6 +43,7 @@ class _ContornoMapState extends State<ContornoMap> {
   List<google_maps.Polygon> polygons = [];
   List<google_maps.Polyline> polylines = [];
   bool isLocationPaused = false;
+  bool isVisivel = true;
   double currentZoom = 20.0;
   google_maps.LatLng? currentTarget;
   late String oservid;
@@ -156,7 +157,12 @@ class _ContornoMapState extends State<ContornoMap> {
           "faz_id": widget.fazid
         };
         FFAppState().grupoContornoFazendas.add(grupocontorno);
-        FFAppState().contornoGrupoID = markerId.toString();
+        // FFAppState().contornoGrupoID = markerId.toString();
+
+        FFAppState().contornoGrupoID =
+            (int.parse(widget.idContorno ?? '123') + 1).toString();
+
+        isVisivel = false;
 
         isLocationPaused = true;
       });
@@ -309,7 +315,7 @@ class _ContornoMapState extends State<ContornoMap> {
           top: 552,
           right: -8,
           child: Visibility(
-            visible: _distanceToStart() <= 50,
+            visible: _distanceToStart() <= 50 && isVisivel == true,
             child: ElevatedButton(
               onPressed: _finalizeArea,
               style: ElevatedButton.styleFrom(
