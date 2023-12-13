@@ -15,15 +15,14 @@ class ContornoDaFazendaWidget extends StatefulWidget {
     required this.fazendaNome,
     required this.oservID,
     String? idDoContorno,
-    String? fazid,
+    required this.fazid,
   })  : this.idDoContorno = idDoContorno ?? '1',
-        this.fazid = fazid ?? '20',
         super(key: key);
 
   final String? fazendaNome;
   final String? oservID;
   final String idDoContorno;
-  final String fazid;
+  final String? fazid;
 
   @override
   _ContornoDaFazendaWidgetState createState() =>
@@ -122,7 +121,7 @@ class _ContornoDaFazendaWidgetState extends State<ContornoDaFazendaWidget> {
                                 '1',
                               ),
                               idContorno: widget.idDoContorno,
-                              fazid: widget.fazid,
+                              fazid: widget.fazid!,
                             ),
                           ),
                         ),
@@ -184,6 +183,10 @@ class _ContornoDaFazendaWidgetState extends State<ContornoDaFazendaWidget> {
                                         ),
                                         'oservID': serializeParam(
                                           widget.oservID,
+                                          ParamType.String,
+                                        ),
+                                        'fazid': serializeParam(
+                                          widget.fazid,
                                           ParamType.String,
                                         ),
                                       }.withoutNulls,
