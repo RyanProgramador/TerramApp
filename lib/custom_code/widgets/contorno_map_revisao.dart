@@ -9,12 +9,12 @@ import 'package:flutter/material.dart';
 // Begin custom widget code
 // DO NOT REMOVE OR MODIFY THE CODE ABOVE!
 
-import 'package:google_maps_flutter/google_maps_flutter.dart';
+import 'package:google_maps_flutter/google_maps_flutter.dart' as google_maps;
 
 class ContornoMapRevisao extends StatefulWidget {
   final double? width;
   final double? height;
-  final List<LatLng>? listaDeLatLng;
+  final List<google_maps.LatLng>? listaDeLatLng;
 
   const ContornoMapRevisao({
     Key? key,
@@ -28,17 +28,17 @@ class ContornoMapRevisao extends StatefulWidget {
 }
 
 class _ContornoMapRevisaoState extends State<ContornoMapRevisao> {
-  GoogleMapController? _googleMapController;
+  google_maps.GoogleMapController? _googleMapController;
 
   @override
   Widget build(BuildContext context) {
     return Container(
       width: widget.width ?? double.infinity,
       height: widget.height ?? double.infinity,
-      child: GoogleMap(
+      child: google_maps.GoogleMap(
         onMapCreated: _onMapCreated,
-        initialCameraPosition: CameraPosition(
-          target: widget.listaDeLatLng?.first ?? LatLng(0, 0),
+        initialCameraPosition: google_maps.CameraPosition(
+          target: widget.listaDeLatLng?.first ?? google_maps.LatLng(0, 0),
           zoom: 14.0,
         ),
         markers: _buildMarkers(),
@@ -47,27 +47,27 @@ class _ContornoMapRevisaoState extends State<ContornoMapRevisao> {
     );
   }
 
-  void _onMapCreated(GoogleMapController controller) {
+  void _onMapCreated(google_maps.GoogleMapController controller) {
     setState(() {
       _googleMapController = controller;
     });
   }
 
-  Set<Marker> _buildMarkers() {
-    return widget.listaDeLatLng?.map((LatLng latLng) {
-          return Marker(
-            markerId: MarkerId('PolygonMarker'),
+  Set<google_maps.Marker> _buildMarkers() {
+    return widget.listaDeLatLng?.map((google_maps.LatLng latLng) {
+          return google_maps.Marker(
+            markerId: google_maps.MarkerId('PolygonMarker'),
             position: latLng,
           );
         }).toSet() ??
         {};
   }
 
-  Set<Polygon> _buildPolygons() {
+  Set<google_maps.Polygon> _buildPolygons() {
     return widget.listaDeLatLng != null && widget.listaDeLatLng!.length >= 3
         ? [
-            Polygon(
-              polygonId: PolygonId('Polygon'),
+            google_maps.Polygon(
+              polygonId: google_maps.PolygonId('Polygon'),
               points: widget.listaDeLatLng!,
               strokeWidth: 2,
               strokeColor: Colors.blue,
