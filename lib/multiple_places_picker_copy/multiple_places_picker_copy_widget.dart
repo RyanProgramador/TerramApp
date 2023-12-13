@@ -1046,24 +1046,44 @@ class _MultiplePlacesPickerCopyWidgetState
                                             color: FlutterFlowTheme.of(context)
                                                 .secondaryBackground,
                                           ),
-                                          child: SingleChildScrollView(
-                                            child: Column(
-                                              mainAxisSize: MainAxisSize.max,
-                                              children: [
-                                                SelectionArea(
-                                                    child: Text(
-                                                  'Hello World',
-                                                  style: FlutterFlowTheme.of(
-                                                          context)
-                                                      .bodyMedium
-                                                      .override(
-                                                        fontFamily:
-                                                            'Readex Pro',
-                                                        fontSize: 10.0,
-                                                      ),
-                                                )),
-                                              ],
-                                            ),
+                                          child: Builder(
+                                            builder: (context) {
+                                              final teste = functions
+                                                      .sortListJson(
+                                                          'contorno_grupo',
+                                                          false,
+                                                          FFAppState()
+                                                              .contornoFazenda
+                                                              .toList(),
+                                                          '6')
+                                                      ?.toList() ??
+                                                  [];
+                                              return SingleChildScrollView(
+                                                child: Column(
+                                                  mainAxisSize:
+                                                      MainAxisSize.max,
+                                                  children: List.generate(
+                                                      teste.length,
+                                                      (testeIndex) {
+                                                    final testeItem =
+                                                        teste[testeIndex];
+                                                    return SelectionArea(
+                                                        child: Text(
+                                                      testeItem.toString(),
+                                                      style:
+                                                          FlutterFlowTheme.of(
+                                                                  context)
+                                                              .bodyMedium
+                                                              .override(
+                                                                fontFamily:
+                                                                    'Readex Pro',
+                                                                fontSize: 10.0,
+                                                              ),
+                                                    ));
+                                                  }),
+                                                ),
+                                              );
+                                            },
                                           ),
                                         ),
                                       ),

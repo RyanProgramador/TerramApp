@@ -48,7 +48,7 @@ class _MapsRevisaoWidgetState extends State<MapsRevisaoWidget> {
 
     return Container(
       width: double.infinity,
-      height: 400.0,
+      height: 600.0,
       decoration: BoxDecoration(),
       child: Container(
         width: MediaQuery.sizeOf(context).width * 1.0,

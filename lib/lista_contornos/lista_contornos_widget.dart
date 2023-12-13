@@ -231,19 +231,8 @@ class _ListaContornosWidgetState extends State<ListaContornosWidget> {
                                               child: Container(
                                                 height: 600.0,
                                                 child: MapsRevisaoWidget(
-                                                  listaLatLngEmString: functions
-                                                      .sortListJson(
-                                                          'latlng',
-                                                          true,
-                                                          FFAppState()
-                                                              .contornoFazenda
-                                                              .toList(),
-                                                          getJsonField(
-                                                            trGruposContornoFazendaItem,
-                                                            r'''$.contorno_grupo''',
-                                                          ).toString())!
-                                                      .map((e) => e.toString())
-                                                      .toList(),
+                                                  listaLatLngEmString:
+                                                      trGruposContornoFazendaItem,
                                                 ),
                                               ),
                                             ),
