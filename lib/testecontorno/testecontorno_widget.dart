@@ -2,7 +2,6 @@ import '/backend/api_requests/api_calls.dart';
 import '/flutter_flow/flutter_flow_theme.dart';
 import '/flutter_flow/flutter_flow_util.dart';
 import '/flutter_flow/flutter_flow_widgets.dart';
-import '/backend/schema/structs/index.dart';
 import '/custom_code/widgets/index.dart' as custom_widgets;
 import '/flutter_flow/custom_functions.dart' as functions;
 import 'package:flutter/material.dart';
@@ -202,52 +201,21 @@ class _TestecontornoWidgetState extends State<TestecontornoWidget> {
                       ),
                       child: Builder(
                         builder: (context) {
-                          final teste = FFAppState()
+                          final itemlatlng = FFAppState()
                               .contornoFazenda
-                              .map((e) =>
-                                  (getJsonField(
-                                                        e,
-                                                        r'''$.latlng''',
-                                                      ) !=
-                                                      null &&
-                                                  getJsonField(
-                                                        e,
-                                                        r'''$.latlng''',
-                                                      ) !=
-                                                      ''
-                                              ? TrContornoFazendaStruct.fromMap(
-                                                  getJsonField(
-                                                  e,
-                                                  r'''$.latlng''',
-                                                ))
-                                              : null)
-                                          ?.latlng !=
-                                      null &&
-                                  (getJsonField(
-                                                    e,
-                                                    r'''$.latlng''',
-                                                  ) !=
-                                                  null &&
-                                              getJsonField(
-                                                    e,
-                                                    r'''$.latlng''',
-                                                  ) !=
-                                                  ''
-                                          ? TrContornoFazendaStruct.fromMap(
-                                              getJsonField(
-                                              e,
-                                              r'''$.latlng''',
-                                            ))
-                                          : null)
-                                      ?.latlng
-                                      .isNotEmpty)
+                              .map((e) => getJsonField(
+                                    e,
+                                    r'''$.latlng''',
+                                  ))
                               .toList();
                           return Column(
                             mainAxisSize: MainAxisSize.max,
-                            children: List.generate(teste.length, (testeIndex) {
-                              final testeItem = teste[testeIndex];
+                            children: List.generate(itemlatlng.length,
+                                (itemlatlngIndex) {
+                              final itemlatlngItem =
+                                  itemlatlng[itemlatlngIndex];
                               return Text(
-                                testeItem.toString(),
+                                itemlatlngItem.toString(),
                                 style: FlutterFlowTheme.of(context).bodyMedium,
                               );
                             }),
