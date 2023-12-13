@@ -23,7 +23,7 @@ class ContornoMapRevisao extends StatefulWidget {
 
   final double? width;
   final double? height;
-  final List<google_maps.LatLng> listaDeLatLng;
+  final List<google_maps.LatLng>? listaDeLatLng;
 
   @override
   _ContornoMapRevisaoState createState() => _ContornoMapRevisaoState();
