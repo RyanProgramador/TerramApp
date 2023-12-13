@@ -177,6 +177,16 @@ class _ContornoDaFazendaWidgetState extends State<ContornoDaFazendaWidget> {
 
                                     context.goNamed(
                                       'ListaContornos',
+                                      queryParameters: {
+                                        'nomeFazenda': serializeParam(
+                                          widget.fazid,
+                                          ParamType.String,
+                                        ),
+                                        'oservID': serializeParam(
+                                          widget.oservID,
+                                          ParamType.String,
+                                        ),
+                                      }.withoutNulls,
                                       extra: <String, dynamic>{
                                         kTransitionInfoKey: TransitionInfo(
                                           hasTransition: true,
