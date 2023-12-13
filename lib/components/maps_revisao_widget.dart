@@ -57,7 +57,15 @@ class _MapsRevisaoWidgetState extends State<MapsRevisaoWidget> {
               child: custom_widgets.ContornoMapRevisao(
                 width: double.infinity,
                 height: double.infinity,
-                listaDeLatLng: FFAppState().Erro,
+                listaDeLatLng: FFAppState()
+                    .contornoFazenda
+                    .map((e) => getJsonField(
+                          e,
+                          r'''$.latlng''',
+                        ))
+                    .toList()
+                    .map((e) => e.toString())
+                    .toList(),
               ),
             ),
             Align(
