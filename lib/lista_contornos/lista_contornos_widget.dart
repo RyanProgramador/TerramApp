@@ -351,54 +351,6 @@ class _ListaContornosWidgetState extends State<ListaContornosWidget> {
                                                           ),
                                                         ],
                                                       ),
-                                                      Builder(
-                                                        builder: (context) {
-                                                          final teste = functions
-                                                                  .acessarJsonListaDeterminadoValor(
-                                                                      functions
-                                                                          .sortListJson(
-                                                                              'contorno_grupo',
-                                                                              false,
-                                                                              FFAppState().contornoFazenda.toList(),
-                                                                              '6')
-                                                                          ?.toList(),
-                                                                      'latlng')
-                                                                  ?.toList() ??
-                                                              [];
-                                                          return Column(
-                                                            mainAxisSize:
-                                                                MainAxisSize
-                                                                    .max,
-                                                            mainAxisAlignment:
-                                                                MainAxisAlignment
-                                                                    .center,
-                                                            crossAxisAlignment:
-                                                                CrossAxisAlignment
-                                                                    .start,
-                                                            children:
-                                                                List.generate(
-                                                                    teste
-                                                                        .length,
-                                                                    (testeIndex) {
-                                                              final testeItem =
-                                                                  teste[
-                                                                      testeIndex];
-                                                              return Text(
-                                                                testeItem,
-                                                                style: FlutterFlowTheme.of(
-                                                                        context)
-                                                                    .bodyLarge
-                                                                    .override(
-                                                                      fontFamily:
-                                                                          'Readex Pro',
-                                                                      fontSize:
-                                                                          12.0,
-                                                                    ),
-                                                              );
-                                                            }),
-                                                          );
-                                                        },
-                                                      ),
                                                     ],
                                                   ),
                                                 ),
