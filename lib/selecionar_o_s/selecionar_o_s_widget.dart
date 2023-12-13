@@ -90,13 +90,28 @@ class _SelecionarOSWidgetState extends State<SelecionarOSWidget>
               FFAppState().trOsDeslocamentosJsonFinalizados.toList()),
           listaGeo: functions.jsonListToStr(FFAppState().trDeslocGeo2.toList()),
         );
+        _model.trSincTalhao =
+            await SincronizarGroup.trSincronizaTalhaoContornoCall.call(
+          talhao: functions
+              .jsonListToStr(FFAppState().grupoContornoFazendas.toList()),
+          contorno:
+              functions.jsonListToStr(FFAppState().contornoFazenda.toList()),
+          urlapicall: FFAppState().urlapicall,
+        );
         if (SincronizarGroup.trSincronizaCelularComBDCall.statusSincComCelular(
-          (_model.apiResultxxdOnLoadPage?.jsonBody ?? ''),
-        )) {
+              (_model.apiResultxxdOnLoadPage?.jsonBody ?? ''),
+            ) &&
+            getJsonField(
+              (_model.trSincTalhao?.jsonBody ?? ''),
+              r'''$.status''',
+            )) {
           FFAppState().update(() {
             FFAppState().trOsDeslocamentosJsonFinalizados = [];
             FFAppState().trDeslocamentoGeo = [];
             FFAppState().trDeslocGeo2 = [];
+            FFAppState().contornoGrupoID = '';
+            FFAppState().grupoContornoFazendas = [];
+            FFAppState().contornoFazenda = [];
           });
         } else {
           await showDialog(

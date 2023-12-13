@@ -32,6 +32,8 @@ class SelecionarOSModel extends FlutterFlowModel<SelecionarOSWidget> {
   bool? temInternetOsLoad;
   // Stores action output result for [Backend Call - API (TrSincronizaCelularComBD)] action in SelecionarOS widget.
   ApiCallResponse? apiResultxxdOnLoadPage;
+  // Stores action output result for [Backend Call - API (trSincronizaTalhaoContorno)] action in SelecionarOS widget.
+  ApiCallResponse? trSincTalhao;
   // Stores action output result for [Backend Call - API (trOsTecnico)] action in SelecionarOS widget.
   ApiCallResponse? trOsTecnicosSincroniza;
   // Stores action output result for [Backend Call - API (ordemDeServico)] action in SelecionarOS widget.
