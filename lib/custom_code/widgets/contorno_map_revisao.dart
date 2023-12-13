@@ -28,39 +28,37 @@ class ContornoMapRevisao extends StatefulWidget {
 }
 
 class _ContornoMapRevisaoState extends State<ContornoMapRevisao> {
-  List<google_maps.LatLng> toLatLng(List<String>? latLngStrings) {
-    if (latLngStrings == null) return [];
-
-    return latLngStrings
-        .map((latLngString) {
-          final latLngSplit =
-              latLngString.split(',').map((s) => s.trim()).toList();
-          if (latLngSplit.length == 2) {
-            final lat = double.tryParse(latLngSplit[0]);
-            final lng = double.tryParse(latLngSplit[1]);
-            if (lat != null && lng != null) {
-              return google_maps.LatLng(lat, lng);
-            }
-          }
-          return null;
-        })
-        .where((latLng) => latLng != null)
-        .cast<google_maps.LatLng>()
-        .toList();
-  }
-
   google_maps.GoogleMapController? _googleMapController;
   Set<google_maps.Polygon> polygons = Set();
+  List<google_maps.LatLng> latLngList = [];
 
   @override
   void initState() {
     super.initState();
-    _initializePolygons();
+    if (widget.listaDeLatLng != null) {
+      latLngList = toLatLng(widget.listaDeLatLng!);
+      _initializePolygons();
+    }
+  }
+
+  List<google_maps.LatLng> toLatLng(List<String> latLngStrings) {
+    List<google_maps.LatLng> latLngList = [];
+    for (String latLngString in latLngStrings) {
+      final latLngSplit = latLngString.split(',').map((s) => s.trim()).toList();
+      if (latLngSplit.length == 2) {
+        try {
+          final lat = double.parse(latLngSplit[0]);
+          final lng = double.parse(latLngSplit[1]);
+          latLngList.add(google_maps.LatLng(lat, lng));
+        } catch (e) {
+          // Handle parsing error if any.
+        }
+      }
+    }
+    return latLngList;
   }
 
   void _initializePolygons() {
-    final List<google_maps.LatLng> latLngList = toLatLng(widget.listaDeLatLng);
-
     if (latLngList.isNotEmpty) {
       final polygon = google_maps.Polygon(
         polygonId: const google_maps.PolygonId('AreaPolygon'),
@@ -79,9 +77,7 @@ class _ContornoMapRevisaoState extends State<ContornoMapRevisao> {
   @override
   Widget build(BuildContext context) {
     final initialTarget =
-        widget.listaDeLatLng != null && widget.listaDeLatLng!.isNotEmpty
-            ? toLatLng(widget.listaDeLatLng)?.first
-            : google_maps.LatLng(0.0, 0.0);
+        latLngList.isNotEmpty ? latLngList.first : google_maps.LatLng(0.0, 0.0);
 
     return Container(
       width: widget.width ?? double.infinity,

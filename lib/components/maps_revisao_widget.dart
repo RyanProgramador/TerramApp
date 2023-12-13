@@ -9,7 +9,12 @@ import 'maps_revisao_model.dart';
 export 'maps_revisao_model.dart';
 
 class MapsRevisaoWidget extends StatefulWidget {
-  const MapsRevisaoWidget({Key? key}) : super(key: key);
+  const MapsRevisaoWidget({
+    Key? key,
+    required this.listaLatLngEmString,
+  }) : super(key: key);
+
+  final List<String>? listaLatLngEmString;
 
   @override
   _MapsRevisaoWidgetState createState() => _MapsRevisaoWidgetState();
@@ -57,15 +62,7 @@ class _MapsRevisaoWidgetState extends State<MapsRevisaoWidget> {
               child: custom_widgets.ContornoMapRevisao(
                 width: double.infinity,
                 height: double.infinity,
-                listaDeLatLng: FFAppState()
-                    .contornoFazenda
-                    .map((e) => getJsonField(
-                          e,
-                          r'''$.latlng''',
-                        ))
-                    .toList()
-                    .map((e) => e.toString())
-                    .toList(),
+                listaDeLatLng: widget.listaLatLngEmString,
               ),
             ),
             Align(

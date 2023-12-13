@@ -14,7 +14,12 @@ import 'testecontorno_model.dart';
 export 'testecontorno_model.dart';
 
 class TestecontornoWidget extends StatefulWidget {
-  const TestecontornoWidget({Key? key}) : super(key: key);
+  const TestecontornoWidget({
+    Key? key,
+    this.contornoGrupo,
+  }) : super(key: key);
+
+  final dynamic contornoGrupo;
 
   @override
   _TestecontornoWidgetState createState() => _TestecontornoWidgetState();
@@ -172,6 +177,42 @@ class _TestecontornoWidgetState extends State<TestecontornoWidget> {
                       decoration: BoxDecoration(
                         color: FlutterFlowTheme.of(context).secondaryBackground,
                       ),
+                      child: Builder(
+                        builder: (context) {
+                          final itemlatlng = FFAppState()
+                              .contornoFazenda
+                              .map((e) => getJsonField(
+                                    e,
+                                    r'''$.latlng''',
+                                  ))
+                              .toList();
+                          return SingleChildScrollView(
+                            child: Column(
+                              mainAxisSize: MainAxisSize.max,
+                              children: List.generate(itemlatlng.length,
+                                  (itemlatlngIndex) {
+                                final itemlatlngItem =
+                                    itemlatlng[itemlatlngIndex];
+                                return Text(
+                                  itemlatlngItem.toString(),
+                                  style:
+                                      FlutterFlowTheme.of(context).bodyMedium,
+                                );
+                              }),
+                            ),
+                          );
+                        },
+                      ),
+                    ),
+                  ),
+                  Expanded(
+                    flex: 8,
+                    child: Container(
+                      width: double.infinity,
+                      height: 400.0,
+                      decoration: BoxDecoration(
+                        color: FlutterFlowTheme.of(context).secondaryBackground,
+                      ),
                       child: Container(
                         width: double.infinity,
                         height: double.infinity,
@@ -185,42 +226,16 @@ class _TestecontornoWidgetState extends State<TestecontornoWidget> {
                                     r'''$.latlng''',
                                   ))
                               .toList()
+                              .where((e) =>
+                                  getJsonField(
+                                    e,
+                                    r'''$.contorno_grupo''',
+                                  ) ==
+                                  widget.contornoGrupo)
+                              .toList()
                               .map((e) => e.toString())
                               .toList(),
                         ),
-                      ),
-                    ),
-                  ),
-                  Expanded(
-                    flex: 8,
-                    child: Container(
-                      width: double.infinity,
-                      height: 400.0,
-                      decoration: BoxDecoration(
-                        color: FlutterFlowTheme.of(context).secondaryBackground,
-                      ),
-                      child: Builder(
-                        builder: (context) {
-                          final itemlatlng = FFAppState()
-                              .contornoFazenda
-                              .map((e) => getJsonField(
-                                    e,
-                                    r'''$.latlng''',
-                                  ))
-                              .toList();
-                          return Column(
-                            mainAxisSize: MainAxisSize.max,
-                            children: List.generate(itemlatlng.length,
-                                (itemlatlngIndex) {
-                              final itemlatlngItem =
-                                  itemlatlng[itemlatlngIndex];
-                              return Text(
-                                itemlatlngItem.toString(),
-                                style: FlutterFlowTheme.of(context).bodyMedium,
-                              );
-                            }),
-                          );
-                        },
                       ),
                     ),
                   ),

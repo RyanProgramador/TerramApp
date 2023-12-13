@@ -135,7 +135,9 @@ GoRouter createRouter(AppStateNotifier appStateNotifier) => GoRouter(
             FFRoute(
               name: 'testecontorno',
               path: 'testecontorno',
-              builder: (context, params) => TestecontornoWidget(),
+              builder: (context, params) => TestecontornoWidget(
+                contornoGrupo: params.getParam('contornoGrupo', ParamType.JSON),
+              ),
             ),
             FFRoute(
               name: 'ContornoDaFazenda',
