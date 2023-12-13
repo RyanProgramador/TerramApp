@@ -176,7 +176,7 @@ class _ContornoDaFazendaWidgetState extends State<ContornoDaFazendaWidget> {
                                     setState(() {});
 
                                     context.goNamed(
-                                      'SelecionarOS',
+                                      'ListaContornos',
                                       extra: <String, dynamic>{
                                         kTransitionInfoKey: TransitionInfo(
                                           hasTransition: true,
