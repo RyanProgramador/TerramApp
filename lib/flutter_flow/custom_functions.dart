@@ -767,3 +767,42 @@ List<LatLng>? listaStrToListaLatLngSemPath(
 
   return listaLatLng.isNotEmpty ? listaLatLng : null;
 }
+
+List<String>? acessarJsonListaDeterminadoValor(
+  List<dynamic>? listaJsonQueContemOValor,
+  String? jsonPath,
+) {
+  if (listaJsonQueContemOValor == null || jsonPath == null) {
+    return null;
+  }
+
+  List<String> resultados = [];
+
+  for (var item in listaJsonQueContemOValor) {
+    String? valor = _extrairValorJson(item, jsonPath);
+    if (valor != null) {
+      resultados.add(valor);
+    }
+  }
+
+  return resultados.isNotEmpty ? resultados : null;
+}
+
+String? _extrairValorJson(dynamic jsonObject, String jsonPath) {
+  final List<String> caminho = jsonPath.split('.');
+  dynamic valor = jsonObject;
+
+  for (var campo in caminho) {
+    if (valor is Map<String, dynamic> && valor.containsKey(campo)) {
+      valor = valor[campo];
+    } else {
+      return null;
+    }
+  }
+
+  if (valor != null) {
+    return valor.toString();
+  }
+
+  return null;
+}

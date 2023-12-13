@@ -1049,13 +1049,17 @@ class _MultiplePlacesPickerCopyWidgetState
                                           child: Builder(
                                             builder: (context) {
                                               final teste = functions
-                                                      .sortListJson(
-                                                          'contorno_grupo',
-                                                          false,
-                                                          FFAppState()
-                                                              .contornoFazenda
-                                                              .toList(),
-                                                          '6')
+                                                      .acessarJsonListaDeterminadoValor(
+                                                          functions
+                                                              .sortListJson(
+                                                                  'contorno_grupo',
+                                                                  false,
+                                                                  FFAppState()
+                                                                      .contornoFazenda
+                                                                      .toList(),
+                                                                  '6')
+                                                              ?.toList(),
+                                                          'latlng')
                                                       ?.toList() ??
                                                   [];
                                               return SingleChildScrollView(
@@ -1069,7 +1073,7 @@ class _MultiplePlacesPickerCopyWidgetState
                                                         teste[testeIndex];
                                                     return SelectionArea(
                                                         child: Text(
-                                                      testeItem.toString(),
+                                                      testeItem,
                                                       style:
                                                           FlutterFlowTheme.of(
                                                                   context)
