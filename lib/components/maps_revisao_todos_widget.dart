@@ -68,6 +68,7 @@ class _MapsRevisaoTodosWidgetState extends State<MapsRevisaoTodosWidget> {
                 height: double.infinity,
                 listaDeGrupos: widget.listagrupoTodos,
                 listaDeContornos: widget.listaContornoTodos,
+                fazlatlng: widget.fazlatlng,
               ),
             ),
             Align(
