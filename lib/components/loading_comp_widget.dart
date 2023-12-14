@@ -34,7 +34,7 @@ class _LoadingCompWidgetState extends State<LoadingCompWidget> {
 
     // On component load action.
     SchedulerBinding.instance.addPostFrameCallback((_) async {
-      _model.timerController.onStartTimer();
+      _model.timerController.onResetTimer();
     });
 
     WidgetsBinding.instance.addPostFrameCallback((_) => setState(() {}));
@@ -153,35 +153,38 @@ class _LoadingCompWidgetState extends State<LoadingCompWidget> {
               ],
             ),
           ),
-          Padding(
-            padding: EdgeInsetsDirectional.fromSTEB(16.0, 24.0, 16.0, 24.0),
-            child: Row(
-              mainAxisSize: MainAxisSize.max,
-              mainAxisAlignment: MainAxisAlignment.center,
-              children: [
-                FlutterFlowTimer(
-                  initialTime: _model.timerMilliseconds,
-                  getDisplayTime: (value) => StopWatchTimer.getDisplayTime(
-                    value,
-                    hours: false,
-                    milliSecond: false,
+          Opacity(
+            opacity: 0.9,
+            child: Padding(
+              padding: EdgeInsetsDirectional.fromSTEB(16.0, 24.0, 16.0, 24.0),
+              child: Row(
+                mainAxisSize: MainAxisSize.max,
+                mainAxisAlignment: MainAxisAlignment.center,
+                children: [
+                  FlutterFlowTimer(
+                    initialTime: _model.timerMilliseconds,
+                    getDisplayTime: (value) => StopWatchTimer.getDisplayTime(
+                      value,
+                      hours: false,
+                      milliSecond: false,
+                    ),
+                    controller: _model.timerController,
+                    updateStateInterval: Duration(milliseconds: 1000),
+                    onChanged: (value, displayTime, shouldUpdate) {
+                      _model.timerMilliseconds = value;
+                      _model.timerValue = displayTime;
+                      if (shouldUpdate) setState(() {});
+                    },
+                    onEnded: () async {
+                      setState(() {
+                        _model.mostraNaTela = true;
+                      });
+                    },
+                    textAlign: TextAlign.start,
+                    style: FlutterFlowTheme.of(context).headlineSmall,
                   ),
-                  controller: _model.timerController,
-                  updateStateInterval: Duration(milliseconds: 1000),
-                  onChanged: (value, displayTime, shouldUpdate) {
-                    _model.timerMilliseconds = value;
-                    _model.timerValue = displayTime;
-                    if (shouldUpdate) setState(() {});
-                  },
-                  onEnded: () async {
-                    setState(() {
-                      _model.mostraNaTela = true;
-                    });
-                  },
-                  textAlign: TextAlign.start,
-                  style: FlutterFlowTheme.of(context).headlineSmall,
-                ),
-              ],
+                ],
+              ),
             ),
           ),
         ],
