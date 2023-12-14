@@ -675,7 +675,9 @@ class _SelecionarOSWidgetState extends State<SelecionarOSWidget>
                               child: Container(
                                 width: double.infinity,
                                 height: double.infinity,
-                                decoration: BoxDecoration(),
+                                decoration: BoxDecoration(
+                                  color: Color(0xFFCB0E0E),
+                                ),
                                 child: Visibility(
                                   visible:
                                       _model.searchBarController.text == null ||
