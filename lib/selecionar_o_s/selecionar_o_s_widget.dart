@@ -133,22 +133,8 @@ class _SelecionarOSWidgetState extends State<SelecionarOSWidget>
         }
       } else if ((FFAppState().sincronizcaoAutomatica == false) &&
           (FFAppState().servicosFinalizadosComSucesso.length != 0)) {
-      } else if (FFAppState().trOrdemServicos.length <= 0) {
-        await showDialog(
-          context: context,
-          builder: (alertDialogContext) {
-            return AlertDialog(
-              title: Text('zerado'),
-              actions: [
-                TextButton(
-                  onPressed: () => Navigator.pop(alertDialogContext),
-                  child: Text('Ok'),
-                ),
-              ],
-            );
-          },
-        );
-      }
+      } else if ((FFAppState().trOrdemServicos.length <= 0) &&
+          _model.foiAtualizado) {}
 
       setState(() {
         FFAppState().AtualLocalizcao = currentUserLocationValue!.toString();
@@ -713,7 +699,7 @@ class _SelecionarOSWidgetState extends State<SelecionarOSWidget>
                                           return RefreshIndicator(
                                             onRefresh: () async {
                                               context.goNamed(
-                                                'SelecionarOS',
+                                                'blankRedirecona',
                                                 extra: <String, dynamic>{
                                                   kTransitionInfoKey:
                                                       TransitionInfo(

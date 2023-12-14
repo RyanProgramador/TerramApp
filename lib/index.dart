@@ -14,3 +14,5 @@ export '/testecontorno/testecontorno_widget.dart' show TestecontornoWidget;
 export '/contorno_da_fazenda/contorno_da_fazenda_widget.dart'
     show ContornoDaFazendaWidget;
 export '/lista_contornos/lista_contornos_widget.dart' show ListaContornosWidget;
+export '/blank_redirecona/blank_redirecona_widget.dart'
+    show BlankRedireconaWidget;

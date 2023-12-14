@@ -157,6 +157,11 @@ GoRouter createRouter(AppStateNotifier appStateNotifier) => GoRouter(
                 oservID: params.getParam('oservID', ParamType.String),
                 fazid: params.getParam('fazid', ParamType.String),
               ),
+            ),
+            FFRoute(
+              name: 'blankRedirecona',
+              path: 'blankRedirecona',
+              builder: (context, params) => BlankRedireconaWidget(),
             )
           ].map((r) => r.toRoute(appStateNotifier)).toList(),
         ),
