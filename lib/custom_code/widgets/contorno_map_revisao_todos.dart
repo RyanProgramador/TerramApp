@@ -11,6 +11,9 @@ import 'package:flutter/material.dart';
 
 import 'package:google_maps_flutter/google_maps_flutter.dart' as google_maps;
 
+import 'package:terram_app/flutter_flow/lat_lng.dart'
+    as ff_lat_lng; // Importe seu próprio pacote de LatLng
+
 class ContornoMapRevisaoTodos extends StatefulWidget {
   const ContornoMapRevisaoTodos({
     Key? key,
@@ -25,7 +28,9 @@ class ContornoMapRevisaoTodos extends StatefulWidget {
   final double? height;
   final List<dynamic>? listaDeGrupos;
   final List<dynamic>? listaDeContornos;
-  final google_maps.LatLng? fazlatlng;
+  //final google_maps.LatLng? fazlatlng;
+
+  final ff_lat_lng.LatLng? fazlatlng;
 
   @override
   _ContornoMapRevisaoTodosState createState() =>
@@ -81,8 +86,8 @@ class _ContornoMapRevisaoTodosState extends State<ContornoMapRevisaoTodos> {
 
   @override
   Widget build(BuildContext context) {
-    final initialTarget = widget.fazlatlng ??
-        google_maps.LatLng(0.0, 0.0); // Defina um ponto inicial adequado
+    final initialTarget = _convertToGoogleLatLng(widget.fazlatlng) ??
+        google_maps.LatLng(0.0, 0.0);
 
     return Container(
       width: widget.width ?? double.infinity,
@@ -100,6 +105,13 @@ class _ContornoMapRevisaoTodosState extends State<ContornoMapRevisaoTodos> {
       ),
     );
   }
+}
+
+google_maps.LatLng? _convertToGoogleLatLng(ff_lat_lng.LatLng? latLng) {
+  if (latLng == null) {
+    return null;
+  }
+  return google_maps.LatLng(latLng.latitude, latLng.longitude);
 }
 
 class HexColor extends Color {
