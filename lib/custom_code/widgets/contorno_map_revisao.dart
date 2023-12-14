@@ -17,14 +17,28 @@ class ContornoMapRevisao extends StatefulWidget {
     this.width,
     this.height,
     this.listaDeLatLng,
+    this.cor,
   }) : super(key: key);
 
   final double? width;
   final double? height;
   final List<String>? listaDeLatLng;
+  final Color? cor;
 
   @override
   _ContornoMapRevisaoState createState() => _ContornoMapRevisaoState();
+}
+
+class HexColor extends Color {
+  HexColor(final String hexColor) : super(_getColorFromHex(hexColor));
+
+  static int _getColorFromHex(String hexColor) {
+    hexColor = hexColor.toUpperCase().replaceAll('#', '');
+    if (hexColor.length == 6) {
+      hexColor = 'FF' + hexColor;
+    }
+    return int.parse(hexColor, radix: 16);
+  }
 }
 
 class _ContornoMapRevisaoState extends State<ContornoMapRevisao> {
@@ -63,8 +77,8 @@ class _ContornoMapRevisaoState extends State<ContornoMapRevisao> {
       final polygon = google_maps.Polygon(
         polygonId: const google_maps.PolygonId('AreaPolygon'),
         points: latLngList,
-        fillColor: Colors.blue.withOpacity(0.2),
-        strokeColor: Colors.blue,
+        fillColor: HexColor($widget.cor).withOpacity(0.2),
+        strokeColor: HexColor($widget.cor),
         strokeWidth: 3,
       );
 

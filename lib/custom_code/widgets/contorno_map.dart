@@ -10,6 +10,8 @@ import 'package:flutter/material.dart';
 // DO NOT REMOVE OR MODIFY THE CODE ABOVE!
 
 import 'dart:async';
+import 'dart:math';
+
 import 'package:geolocator/geolocator.dart';
 import 'package:google_maps_flutter/google_maps_flutter.dart' as google_maps;
 
@@ -41,6 +43,18 @@ class ContornoMap extends StatefulWidget {
   _ContornoMapState createState() => _ContornoMapState();
 }
 
+class HexColor extends Color {
+  HexColor(final String hexColor) : super(_getColorFromHex(hexColor));
+
+  static int _getColorFromHex(String hexColor) {
+    hexColor = hexColor.toUpperCase().replaceAll('#', '');
+    if (hexColor.length == 6) {
+      hexColor = 'FF' + hexColor;
+    }
+    return int.parse(hexColor, radix: 16);
+  }
+}
+
 class _ContornoMapState extends State<ContornoMap> {
   Position? position;
   google_maps.GoogleMapController? _googleMapController;
@@ -56,7 +70,84 @@ class _ContornoMapState extends State<ContornoMap> {
   late String fazid;
 //isso é para mudar o estado de fora do widget custom
   late ContornoDaFazendaModel _model;
+//cores do contorno
+  List<String> coresHex = [
+    "#FF0000", // Vermelho
+    "#FFA500", // Laranja
+    "#FFFF00", // Amarelo
+    "#FFC0CB", // Rosa
+    "#FF69B4", // Rosa Choque
+    "#FF4500", // Vermelho Laranja
+    "#800080", // Roxo
+    "#800000", // Marrom
+    "#A52A2A", // Marrom avermelhado
+    "#B22222", // Vermelho Fogo
+    "#CD5C5C", // Vermelho Indiana
+    "#D2691E", // Marrom Queimado
+    "#8B0000", // Vermelho Escuro
+    "#DC143C", // Carmesim
+    "#E9967A", // Tom de Salmão
+    "#FF6347", // Tomate
+    "#FF7F50", // Coral
+    "#F08080", // Vermelho Claro
+    "#FF4500", // Laranja Vermelho
+    "#FFD700", // Amarelo Ouro
+    "#FFA07A", // Salmão
+    "#FF8C00", // Laranja Escuro
+    "#FF69B4", // Rosa Choque
+    "#FF1493", // Rosa Profundo
+    "#FF00FF", // Magenta
+    "#BA55D3", // Orquídea
+    "#9932CC", // Azul Violeta
+    "#8A2BE2", // Azul Violeta Escuro
+    "#9400D3", // Violeta Escuro
+    "#9370DB", // Azul Médio
+    "#6A5ACD", // Azul Lavanda
+    "#483D8B", // Azul Escuro
+    "#000080", // Azul Marinho
+    "#0000CD", // Azul Médio
+    "#0000FF" // Azul
+        "#FF0000", // Vermelho
+    "#FFA500", // Laranja
+    "#FFFF00", // Amarelo
+    "#FFC0CB", // Rosa
+    "#FF69B4", // Rosa Choque
+    "#FF4500", // Vermelho Laranja
+    "#800080", // Roxo
+    "#800000", // Marrom
+    "#A52A2A", // Marrom avermelhado
+    "#B22222", // Vermelho Fogo
+    "#CD5C5C", // Vermelho Indiana
+    "#D2691E", // Marrom Queimado
+    "#8B0000", // Vermelho Escuro
+    "#DC143C", // Carmesim
+    "#E9967A", // Tom de Salmão
+    "#FF6347", // Tomate
+    "#FF7F50", // Coral
+    "#F08080", // Vermelho Claro
+    "#FF4500", // Laranja Vermelho
+    "#FFD700", // Amarelo Ouro
+    "#FFA07A", // Salmão
+    "#FF8C00", // Laranja Escuro
+    "#FF1493", // Rosa Profundo
+    "#FF00FF", // Magenta
+    "#BA55D3", // Orquídea
+    "#9932CC", // Azul Violeta
+    "#8A2BE2", // Azul Violeta Escuro
+    "#9400D3", // Violeta Escuro
+    "#9370DB", // Azul Médio
+    "#6A5ACD", // Azul Lavanda
+    "#483D8B", // Azul Escuro
+    "#000080", // Azul Marinho
+    "#0000CD", // Azul Médio
+    "#0000FF", // Azul
+    "#8B008B", // Violeta
+    "#4B0082", // Índigo
+    "#9370DB", // Azul Médio
+    "#E0FFFF" // Azul Pálido
+  ];
 
+  //
   List<Map<String, dynamic>> dados = []; // Variável para armazenar dados
 
   void _onMapCreated(google_maps.GoogleMapController controller) {
@@ -117,7 +208,8 @@ class _ContornoMapState extends State<ContornoMap> {
           polylineId: google_maps.PolylineId('RoutePolyline'),
           points: polylineCoordinates,
           color: Colors.blue,
-          width: 3,
+          // color: HexColor("$corAleatoria"),
+          width: isLocationPaused ? 0 : 5,
         );
         polylines.add(polyline);
       }
@@ -126,6 +218,9 @@ class _ContornoMapState extends State<ContornoMap> {
 
   void _finalizeArea() {
     if (markers.isNotEmpty && _distanceToStart() <= 50) {
+      final Random random = Random();
+      final String corAleatoria = coresHex[random.nextInt(coresHex.length)];
+
       setState(() {
         // Transformar a linha em um polígono fechado
         var polygonCoordinates = List<google_maps.LatLng>.from(
@@ -136,8 +231,8 @@ class _ContornoMapState extends State<ContornoMap> {
           google_maps.Polygon(
             polygonId: google_maps.PolygonId('AreaPolygon'),
             points: polygonCoordinates,
-            fillColor: Colors.blue.withOpacity(0.2),
-            strokeColor: Colors.blue,
+            fillColor: HexColor("#DB2400").withOpacity(0.2),
+            strokeColor: HexColor("#DB2400"),
             strokeWidth: 3,
           ),
         );
@@ -149,7 +244,8 @@ class _ContornoMapState extends State<ContornoMap> {
             "contorno_grupo": widget.idContorno,
             "marker_id": markerId++,
             "oserv_id": widget.oservid,
-            "latlng": "${coord.latitude}, ${coord.longitude}"
+            "latlng": "${coord.latitude}, ${coord.longitude}",
+            "cor": "$corAleatoria"
           };
           FFAppState().contornoFazenda.add(contorno);
         }
@@ -173,6 +269,7 @@ class _ContornoMapState extends State<ContornoMap> {
         isLocationPaused = true;
       });
     }
+    _updatePolyline();
   }
 
   void _setFinalizou() {
@@ -270,7 +367,7 @@ class _ContornoMapState extends State<ContornoMap> {
           actions: [
             TextButton(
               onPressed: () {
-                _setFinalizou();
+                // _setFinalizou();
                 Navigator.of(context).pop();
               },
               child: Text("OK"),
@@ -297,6 +394,7 @@ class _ContornoMapState extends State<ContornoMap> {
             TextButton(
               onPressed: () {
                 _clearMarkersAndPolygons();
+
                 Navigator.of(context).pop(); // Fecha o diálogo.
               },
               child: Text("Sim"),

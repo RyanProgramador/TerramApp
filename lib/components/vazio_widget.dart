@@ -49,7 +49,7 @@ class _VazioWidgetState extends State<VazioWidget> {
       child: RefreshIndicator(
         onRefresh: () async {
           context.goNamed(
-            'SelecionarOS',
+            'blankRedirecona',
             extra: <String, dynamic>{
               kTransitionInfoKey: TransitionInfo(
                 hasTransition: true,
