@@ -114,7 +114,7 @@ class _IniciarDeslocamentoWidgetState extends State<IniciarDeslocamentoWidget> {
     }
 
     return Align(
-      alignment: AlignmentDirectional(0.00, 0.00),
+      alignment: AlignmentDirectional(0.0, 0.0),
       child: FutureBuilder<ApiCallResponse>(
         future: ApiRotasDirectionsCall.call(
           origem: functions.latLngToStr(currentUserLocationValue),
@@ -515,10 +515,9 @@ class _IniciarDeslocamentoWidgetState extends State<IniciarDeslocamentoWidget> {
                                 ),
                               ),
                             Align(
-                              alignment: AlignmentDirectional(1.00, -1.00),
+                              alignment: AlignmentDirectional(1.0, -1.0),
                               child: Padding(
-                                padding: EdgeInsetsDirectional.fromSTEB(
-                                    16.0, 16.0, 16.0, 16.0),
+                                padding: EdgeInsets.all(16.0),
                                 child: FFButtonWidget(
                                   onPressed: () async {
                                     _model.temNetRefrash =
@@ -540,8 +539,7 @@ class _IniciarDeslocamentoWidgetState extends State<IniciarDeslocamentoWidget> {
                                   options: FFButtonOptions(
                                     width: 50.0,
                                     height: 50.0,
-                                    padding: EdgeInsetsDirectional.fromSTEB(
-                                        0.0, 0.0, 0.0, 0.0),
+                                    padding: EdgeInsets.all(0.0),
                                     iconPadding: EdgeInsetsDirectional.fromSTEB(
                                         8.0, 0.0, 0.0, 0.0),
                                     color: FlutterFlowTheme.of(context).primary,

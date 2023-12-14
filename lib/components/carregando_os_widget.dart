@@ -55,7 +55,7 @@ class _CarregandoOsWidgetState extends State<CarregandoOsWidget> {
             width: 150.0,
             height: 150.0,
             decoration: BoxDecoration(),
-            alignment: AlignmentDirectional(0.00, 0.00),
+            alignment: AlignmentDirectional(0.0, 0.0),
             child: Container(
               width: 140.0,
               height: 140.0,

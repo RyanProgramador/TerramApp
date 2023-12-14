@@ -69,7 +69,7 @@ class _MapsRevisaoTodosWidgetState extends State<MapsRevisaoTodosWidget> {
               ),
             ),
             Align(
-              alignment: AlignmentDirectional(1.00, -1.00),
+              alignment: AlignmentDirectional(1.0, -1.0),
               child: Padding(
                 padding: EdgeInsetsDirectional.fromSTEB(0.0, 10.0, 10.0, 0.0),
                 child: InkWell(

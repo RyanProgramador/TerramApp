@@ -436,7 +436,7 @@ class _MultiplePlacesPickerCopyWidgetState
                             children: [
                               Expanded(
                                 child: Align(
-                                  alignment: AlignmentDirectional(0.00, 0.63),
+                                  alignment: AlignmentDirectional(0.0, 0.63),
                                   child: ClipRRect(
                                     child: Container(
                                       width: double.infinity,
@@ -504,7 +504,7 @@ class _MultiplePlacesPickerCopyWidgetState
                             children: [
                               Expanded(
                                 child: Align(
-                                  alignment: AlignmentDirectional(0.00, 0.63),
+                                  alignment: AlignmentDirectional(0.0, 0.63),
                                   child: ClipRRect(
                                     child: Container(
                                       width: double.infinity,
@@ -583,7 +583,7 @@ class _MultiplePlacesPickerCopyWidgetState
                                   children: [
                                     Align(
                                       alignment:
-                                          AlignmentDirectional(0.00, 0.63),
+                                          AlignmentDirectional(0.0, 0.63),
                                       child: ClipRRect(
                                         child: Container(
                                           width:
@@ -646,7 +646,7 @@ class _MultiplePlacesPickerCopyWidgetState
                                     Expanded(
                                       child: Align(
                                         alignment:
-                                            AlignmentDirectional(0.00, 0.63),
+                                            AlignmentDirectional(0.0, 0.63),
                                         child: ClipRRect(
                                           child: Container(
                                             width: MediaQuery.sizeOf(context)
@@ -734,7 +734,7 @@ class _MultiplePlacesPickerCopyWidgetState
                                   children: [
                                     Align(
                                       alignment:
-                                          AlignmentDirectional(0.00, 0.63),
+                                          AlignmentDirectional(0.0, 0.63),
                                       child: ClipRRect(
                                         child: Container(
                                           width:
@@ -797,7 +797,7 @@ class _MultiplePlacesPickerCopyWidgetState
                                     Expanded(
                                       child: Align(
                                         alignment:
-                                            AlignmentDirectional(0.00, 0.63),
+                                            AlignmentDirectional(0.0, 0.63),
                                         child: ClipRRect(
                                           child: Container(
                                             width: MediaQuery.sizeOf(context)
@@ -884,7 +884,7 @@ class _MultiplePlacesPickerCopyWidgetState
                                   children: [
                                     Align(
                                       alignment:
-                                          AlignmentDirectional(0.00, 0.63),
+                                          AlignmentDirectional(0.0, 0.63),
                                       child: ClipRRect(
                                         child: Container(
                                           width:
@@ -947,7 +947,7 @@ class _MultiplePlacesPickerCopyWidgetState
                                     Expanded(
                                       child: Align(
                                         alignment:
-                                            AlignmentDirectional(0.00, 0.63),
+                                            AlignmentDirectional(0.0, 0.63),
                                         child: ClipRRect(
                                           child: Container(
                                             width: MediaQuery.sizeOf(context)
@@ -1035,7 +1035,7 @@ class _MultiplePlacesPickerCopyWidgetState
                                   children: [
                                     Align(
                                       alignment:
-                                          AlignmentDirectional(0.00, 0.63),
+                                          AlignmentDirectional(0.0, 0.63),
                                       child: ClipRRect(
                                         child: Container(
                                           width:
@@ -1109,7 +1109,7 @@ class _MultiplePlacesPickerCopyWidgetState
                                     Expanded(
                                       child: Align(
                                         alignment:
-                                            AlignmentDirectional(0.00, 0.63),
+                                            AlignmentDirectional(0.0, 0.63),
                                         child: ClipRRect(
                                           child: Container(
                                             width: MediaQuery.sizeOf(context)
@@ -1191,7 +1191,7 @@ class _MultiplePlacesPickerCopyWidgetState
                         children: [
                           Expanded(
                             child: Align(
-                              alignment: AlignmentDirectional(0.00, 0.63),
+                              alignment: AlignmentDirectional(0.0, 0.63),
                               child: ClipRRect(
                                 child: Container(
                                   width: double.infinity,
@@ -1258,7 +1258,7 @@ class _MultiplePlacesPickerCopyWidgetState
                         children: [
                           Expanded(
                             child: Align(
-                              alignment: AlignmentDirectional(0.00, 0.63),
+                              alignment: AlignmentDirectional(0.0, 0.63),
                               child: ClipRRect(
                                 child: Container(
                                   width: double.infinity,
@@ -1363,7 +1363,7 @@ class _MultiplePlacesPickerCopyWidgetState
                         children: [
                           Expanded(
                             child: Align(
-                              alignment: AlignmentDirectional(0.00, 0.63),
+                              alignment: AlignmentDirectional(0.0, 0.63),
                               child: ClipRRect(
                                 child: Container(
                                   width: double.infinity,
@@ -1422,7 +1422,7 @@ class _MultiplePlacesPickerCopyWidgetState
                         children: [
                           Expanded(
                             child: Align(
-                              alignment: AlignmentDirectional(0.00, 0.63),
+                              alignment: AlignmentDirectional(0.0, 0.63),
                               child: ClipRRect(
                                 child: Container(
                                   width: double.infinity,
@@ -1512,7 +1512,7 @@ class _MultiplePlacesPickerCopyWidgetState
                         children: [
                           Expanded(
                             child: Align(
-                              alignment: AlignmentDirectional(0.00, 0.63),
+                              alignment: AlignmentDirectional(0.0, 0.63),
                               child: ClipRRect(
                                 child: Container(
                                   width: double.infinity,
@@ -1613,7 +1613,7 @@ class _MultiplePlacesPickerCopyWidgetState
                   options: FFButtonOptions(
                     width: 50.0,
                     height: 50.0,
-                    padding: EdgeInsetsDirectional.fromSTEB(0.0, 0.0, 0.0, 0.0),
+                    padding: EdgeInsets.all(0.0),
                     iconPadding:
                         EdgeInsetsDirectional.fromSTEB(10.0, 0.0, 0.0, 0.0),
                     color: FlutterFlowTheme.of(context).primary,

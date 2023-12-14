@@ -63,7 +63,7 @@ class _AlertasWidgetState extends State<AlertasWidget> {
                 height: MediaQuery.sizeOf(context).height * 0.9,
                 decoration: BoxDecoration(),
                 child: Align(
-                  alignment: AlignmentDirectional(0.00, 0.00),
+                  alignment: AlignmentDirectional(0.0, 0.0),
                   child: Text(
                     'Em desenvolvimento',
                     style: FlutterFlowTheme.of(context).bodyMedium,

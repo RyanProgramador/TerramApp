@@ -220,8 +220,7 @@ class _ConfiguracoesWidgetState extends State<ConfiguracoesWidget> {
                                 width: double.infinity,
                                 decoration: BoxDecoration(),
                                 child: Padding(
-                                  padding: EdgeInsetsDirectional.fromSTEB(
-                                      16.0, 16.0, 16.0, 16.0),
+                                  padding: EdgeInsets.all(16.0),
                                   child: Row(
                                     mainAxisSize: MainAxisSize.max,
                                     mainAxisAlignment:
@@ -251,8 +250,7 @@ class _ConfiguracoesWidgetState extends State<ConfiguracoesWidget> {
                               width: double.infinity,
                               decoration: BoxDecoration(),
                               child: Padding(
-                                padding: EdgeInsetsDirectional.fromSTEB(
-                                    16.0, 16.0, 16.0, 16.0),
+                                padding: EdgeInsets.all(16.0),
                                 child: Row(
                                   mainAxisSize: MainAxisSize.max,
                                   mainAxisAlignment:
@@ -360,8 +358,7 @@ class _ConfiguracoesWidgetState extends State<ConfiguracoesWidget> {
                                 width: double.infinity,
                                 decoration: BoxDecoration(),
                                 child: Padding(
-                                  padding: EdgeInsetsDirectional.fromSTEB(
-                                      16.0, 16.0, 16.0, 16.0),
+                                  padding: EdgeInsets.all(16.0),
                                   child: InkWell(
                                     splashColor: Colors.transparent,
                                     focusColor: Colors.transparent,
@@ -397,13 +394,13 @@ class _ConfiguracoesWidgetState extends State<ConfiguracoesWidget> {
                       ),
                     ),
                     Align(
-                      alignment: AlignmentDirectional(-1.00, 1.00),
+                      alignment: AlignmentDirectional(-1.0, 1.0),
                       child: Padding(
                         padding:
                             EdgeInsetsDirectional.fromSTEB(22.0, 0.0, 0.0, 0.0),
                         child: Container(
                           decoration: BoxDecoration(),
-                          alignment: AlignmentDirectional(-1.00, 1.00),
+                          alignment: AlignmentDirectional(-1.0, 1.0),
                           child: Column(
                             mainAxisSize: MainAxisSize.max,
                             children: [
@@ -440,10 +437,10 @@ class _ConfiguracoesWidgetState extends State<ConfiguracoesWidget> {
               ),
               Expanded(
                 child: Align(
-                  alignment: AlignmentDirectional(0.00, 0.00),
+                  alignment: AlignmentDirectional(0.0, 0.0),
                   child: Container(
                     decoration: BoxDecoration(),
-                    alignment: AlignmentDirectional(0.00, 0.00),
+                    alignment: AlignmentDirectional(0.0, 0.0),
                     child: Padding(
                       padding:
                           EdgeInsetsDirectional.fromSTEB(0.0, 12.0, 0.0, 0.0),

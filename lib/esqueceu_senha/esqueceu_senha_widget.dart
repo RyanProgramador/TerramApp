@@ -92,7 +92,7 @@ class _EsqueceuSenhaWidgetState extends State<EsqueceuSenhaWidget>
             color: Color(0xFF14181B),
             image: DecorationImage(
               fit: BoxFit.cover,
-              alignment: AlignmentDirectional(0.00, -1.00),
+              alignment: AlignmentDirectional(0.0, -1.0),
               image: Image.asset(
                 'assets/images/unsplash_jin4W1HqgL4.png',
               ).image,
@@ -140,7 +140,7 @@ class _EsqueceuSenhaWidgetState extends State<EsqueceuSenhaWidget>
                       mainAxisAlignment: MainAxisAlignment.center,
                       children: [
                         Align(
-                          alignment: AlignmentDirectional(0.00, 0.00),
+                          alignment: AlignmentDirectional(0.0, 0.0),
                           child: Image.asset(
                             'assets/images/terram-branco.png',
                             width: 382.0,
@@ -278,7 +278,7 @@ class _EsqueceuSenhaWidgetState extends State<EsqueceuSenhaWidget>
                             ),
                             Flexible(
                               child: Align(
-                                alignment: AlignmentDirectional(0.00, 1.00),
+                                alignment: AlignmentDirectional(0.0, 1.0),
                                 child: Padding(
                                   padding: EdgeInsetsDirectional.fromSTEB(
                                       0.0, 0.0, 0.0, 25.0),
@@ -406,8 +406,8 @@ class _EsqueceuSenhaWidgetState extends State<EsqueceuSenhaWidget>
                                             ),
                                           ),
                                           child: Align(
-                                            alignment: AlignmentDirectional(
-                                                0.00, 0.00),
+                                            alignment:
+                                                AlignmentDirectional(0.0, 0.0),
                                             child: FaIcon(
                                               FontAwesomeIcons.arrowRight,
                                               color: Colors.white,

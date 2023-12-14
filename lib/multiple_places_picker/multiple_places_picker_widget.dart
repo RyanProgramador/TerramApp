@@ -200,7 +200,7 @@ class _MultiplePlacesPickerWidgetState
                           child: Stack(
                             children: [
                               Align(
-                                alignment: AlignmentDirectional(0.00, 0.90),
+                                alignment: AlignmentDirectional(0.0, 0.9),
                                 child: Row(
                                   mainAxisSize: MainAxisSize.max,
                                   mainAxisAlignment: MainAxisAlignment.center,
@@ -225,9 +225,7 @@ class _MultiplePlacesPickerWidgetState
                                           ),
                                         ),
                                         child: Padding(
-                                          padding:
-                                              EdgeInsetsDirectional.fromSTEB(
-                                                  15.0, 15.0, 15.0, 15.0),
+                                          padding: EdgeInsets.all(15.0),
                                           child: Text(
                                             'Atual: ${currentUserLocationValue?.toString()}',
                                             style: FlutterFlowTheme.of(context)
@@ -327,7 +325,7 @@ class _MultiplePlacesPickerWidgetState
                       children: [
                         Expanded(
                           child: Align(
-                            alignment: AlignmentDirectional(0.00, 0.63),
+                            alignment: AlignmentDirectional(0.0, 0.63),
                             child: Container(
                               width: double.infinity,
                               height: 100.0,

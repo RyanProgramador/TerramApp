@@ -107,7 +107,7 @@ class _LoginWidgetState extends State<LoginWidget> {
       key: scaffoldKey,
       backgroundColor: FlutterFlowTheme.of(context).primary,
       body: Align(
-        alignment: AlignmentDirectional(0.00, 0.00),
+        alignment: AlignmentDirectional(0.0, 0.0),
         child: Container(
           width: double.infinity,
           height: double.infinity,
@@ -121,24 +121,24 @@ class _LoginWidgetState extends State<LoginWidget> {
             color: Color(0xFF14181B),
             image: DecorationImage(
               fit: BoxFit.cover,
-              alignment: AlignmentDirectional(0.00, -1.00),
+              alignment: AlignmentDirectional(0.0, -1.0),
               image: Image.asset(
                 'assets/images/unsplash_jin4W1HqgL4.png',
               ).image,
             ),
           ),
-          alignment: AlignmentDirectional(0.00, -1.00),
+          alignment: AlignmentDirectional(0.0, -1.0),
           child: Align(
-            alignment: AlignmentDirectional(0.00, 0.00),
+            alignment: AlignmentDirectional(0.0, 0.0),
             child: Container(
               width: double.infinity,
               height: double.infinity,
               decoration: BoxDecoration(
                 color: Color(0x9400736D),
               ),
-              alignment: AlignmentDirectional(0.00, -1.00),
+              alignment: AlignmentDirectional(0.0, -1.0),
               child: Align(
-                alignment: AlignmentDirectional(0.00, 0.00),
+                alignment: AlignmentDirectional(0.0, 0.0),
                 child: Column(
                   mainAxisSize: MainAxisSize.max,
                   mainAxisAlignment: MainAxisAlignment.center,
@@ -151,7 +151,7 @@ class _LoginWidgetState extends State<LoginWidget> {
                         mainAxisAlignment: MainAxisAlignment.center,
                         children: [
                           Align(
-                            alignment: AlignmentDirectional(0.00, 0.00),
+                            alignment: AlignmentDirectional(0.0, 0.0),
                             child: Image.asset(
                               'assets/images/terram-branco.png',
                               width: 382.0,
@@ -539,7 +539,7 @@ class _LoginWidgetState extends State<LoginWidget> {
                                       Flexible(
                                         child: Align(
                                           alignment:
-                                              AlignmentDirectional(0.00, 1.00),
+                                              AlignmentDirectional(0.0, 1.0),
                                           child: ClipRRect(
                                             child: Container(
                                               width: double.infinity,
@@ -753,11 +753,11 @@ class _LoginWidgetState extends State<LoginWidget> {
                                                         ),
                                                         alignment:
                                                             AlignmentDirectional(
-                                                                0.00, 0.00),
+                                                                0.0, 0.0),
                                                         child: Align(
                                                           alignment:
                                                               AlignmentDirectional(
-                                                                  0.00, 0.00),
+                                                                  0.0, 0.0),
                                                           child: FaIcon(
                                                             FontAwesomeIcons
                                                                 .arrowRight,

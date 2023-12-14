@@ -47,69 +47,91 @@ class OrdemDeServicoCall {
       encodeBodyUtf8: false,
       decodeUtf8: false,
       cache: false,
+      alwaysAllowBody: false,
     );
   }
 
-  dynamic ordemServicoOsUsuAlt(dynamic response) => getJsonField(
+  List<String>? ordemServicoOsUsuAlt(dynamic response) => (getJsonField(
         response,
         r'''$.dados[:].os_usu_alt''',
         true,
-      );
-  dynamic ordemServicoOsdthrAlt(dynamic response) => getJsonField(
+      ) as List?)
+          ?.withoutNulls
+          .cast<String>();
+  List<String>? ordemServicoOsdthrAlt(dynamic response) => (getJsonField(
         response,
         r'''$.dados[:].os_dthr_alt''',
         true,
-      );
-  dynamic ordemServicoOsUsuCad(dynamic response) => getJsonField(
+      ) as List?)
+          ?.withoutNulls
+          .cast<String>();
+  List<String>? ordemServicoOsUsuCad(dynamic response) => (getJsonField(
         response,
         r'''$.dados[:].os_usu_cad''',
         true,
-      );
-  dynamic ordemServicoOsDthrCad(dynamic response) => getJsonField(
+      ) as List?)
+          ?.withoutNulls
+          .cast<String>();
+  List<String>? ordemServicoOsDthrCad(dynamic response) => (getJsonField(
         response,
         r'''$.dados[:].os_dthr_cad''',
         true,
-      );
-  dynamic ordemServicoOsStatus(dynamic response) => getJsonField(
+      ) as List?)
+          ?.withoutNulls
+          .cast<String>();
+  List<String>? ordemServicoOsStatus(dynamic response) => (getJsonField(
         response,
         r'''$.dados[:].os_status''',
         true,
-      );
-  dynamic ordemServicoOsObservacao(dynamic response) => getJsonField(
+      ) as List?)
+          ?.withoutNulls
+          .cast<String>();
+  List<String>? ordemServicoOsObservacao(dynamic response) => (getJsonField(
         response,
         r'''$.dados[:].os_observacao''',
         true,
-      );
-  dynamic ordemServicoOsDthrFinalizao(dynamic response) => getJsonField(
+      ) as List?)
+          ?.withoutNulls
+          .cast<String>();
+  List? ordemServicoOsDthrFinalizao(dynamic response) => getJsonField(
         response,
         r'''$.dados[:].os_dthr_finalizacao''',
         true,
-      );
-  dynamic ordemServicoOsDthrAgendamento(dynamic response) => getJsonField(
+      ) as List?;
+  List<String>? ordemServicoOsDthrAgendamento(dynamic response) =>
+      (getJsonField(
         response,
         r'''$.dados[:].os_dthr_agendamento''',
         true,
-      );
-  dynamic ordemServicoOsIDFaz(dynamic response) => getJsonField(
+      ) as List?)
+          ?.withoutNulls
+          .cast<String>();
+  List<int>? ordemServicoOsIDFaz(dynamic response) => (getJsonField(
         response,
         r'''$.dados[:].os_id_faz''',
         true,
-      );
-  dynamic ordemServicoOsIDEmp(dynamic response) => getJsonField(
+      ) as List?)
+          ?.withoutNulls
+          .cast<int>();
+  List<int>? ordemServicoOsIDEmp(dynamic response) => (getJsonField(
         response,
         r'''$.dados[:].os_id_emp''',
         true,
-      );
-  dynamic ordemServicoOsID(dynamic response) => getJsonField(
+      ) as List?)
+          ?.withoutNulls
+          .cast<int>();
+  List<int>? ordemServicoOsID(dynamic response) => (getJsonField(
         response,
         r'''$.dados[:].os_id''',
         true,
-      );
-  dynamic ordemServicoDados(dynamic response) => getJsonField(
+      ) as List?)
+          ?.withoutNulls
+          .cast<int>();
+  List? ordemServicoDados(dynamic response) => getJsonField(
         response,
         r'''$.dados''',
         true,
-      );
+      ) as List?;
   dynamic ordemServicoStatus(dynamic response) => getJsonField(
         response,
         r'''$.status''',
@@ -140,49 +162,62 @@ class TrOsTecnicoCall {
       encodeBodyUtf8: false,
       decodeUtf8: false,
       cache: false,
+      alwaysAllowBody: false,
     );
   }
 
-  dynamic ostecusualtTrOsTecnico(dynamic response) => getJsonField(
+  List<String>? ostecusualtTrOsTecnico(dynamic response) => (getJsonField(
         response,
         r'''$.dados[:].ostec_usu_alt''',
         true,
-      );
-  dynamic ostecdthraltTrOsTecnico(dynamic response) => getJsonField(
+      ) as List?)
+          ?.withoutNulls
+          .cast<String>();
+  List? ostecdthraltTrOsTecnico(dynamic response) => getJsonField(
         response,
         r'''$.dados[:].ostec_dthr_alt''',
         true,
-      );
-  dynamic ostecusucadTrOsTecnico(dynamic response) => getJsonField(
+      ) as List?;
+  List<String>? ostecusucadTrOsTecnico(dynamic response) => (getJsonField(
         response,
         r'''$.dados[:].ostec_usu_cad''',
         true,
-      );
-  dynamic ostecdthrcadTrOsTecnico(dynamic response) => getJsonField(
+      ) as List?)
+          ?.withoutNulls
+          .cast<String>();
+  List<String>? ostecdthrcadTrOsTecnico(dynamic response) => (getJsonField(
         response,
         r'''$.dados[:].ostec_dthr_cad''',
         true,
-      );
-  dynamic ostecidtecTrOsTecnico(dynamic response) => getJsonField(
+      ) as List?)
+          ?.withoutNulls
+          .cast<String>();
+  List<int>? ostecidtecTrOsTecnico(dynamic response) => (getJsonField(
         response,
         r'''$.dados[:].ostec_id_tec''',
         true,
-      );
-  dynamic ostecidservTrOsTecnico(dynamic response) => getJsonField(
+      ) as List?)
+          ?.withoutNulls
+          .cast<int>();
+  List<int>? ostecidservTrOsTecnico(dynamic response) => (getJsonField(
         response,
         r'''$.dados[:].ostec_id_serv''',
         true,
-      );
-  dynamic ostecidTrOsTecnico(dynamic response) => getJsonField(
+      ) as List?)
+          ?.withoutNulls
+          .cast<int>();
+  List<int>? ostecidTrOsTecnico(dynamic response) => (getJsonField(
         response,
         r'''$.dados[:].ostec_id''',
         true,
-      );
-  dynamic dadosTrOsTecnico(dynamic response) => getJsonField(
+      ) as List?)
+          ?.withoutNulls
+          .cast<int>();
+  List? dadosTrOsTecnico(dynamic response) => getJsonField(
         response,
         r'''$.dados''',
         true,
-      );
+      ) as List?;
   dynamic statusTrOsTecnico(dynamic response) => getJsonField(
         response,
         r'''$.status''',
@@ -213,79 +248,106 @@ class TrFazendasCall {
       encodeBodyUtf8: false,
       decodeUtf8: false,
       cache: false,
+      alwaysAllowBody: false,
     );
   }
 
-  dynamic fazusualtTrFazendas(dynamic response) => getJsonField(
+  List<String>? fazusualtTrFazendas(dynamic response) => (getJsonField(
         response,
         r'''$.dados[:].faz_usu_alt''',
         true,
-      );
-  dynamic fazdthraltTrFazendas(dynamic response) => getJsonField(
+      ) as List?)
+          ?.withoutNulls
+          .cast<String>();
+  List<String>? fazdthraltTrFazendas(dynamic response) => (getJsonField(
         response,
         r'''$.dados[:].faz_dthr_alt''',
         true,
-      );
-  dynamic fazusucadTrFazendas(dynamic response) => getJsonField(
+      ) as List?)
+          ?.withoutNulls
+          .cast<String>();
+  List<String>? fazusucadTrFazendas(dynamic response) => (getJsonField(
         response,
         r'''$.dados[:].faz_usu_cad''',
         true,
-      );
-  dynamic fazdthrcadTrFazendas(dynamic response) => getJsonField(
+      ) as List?)
+          ?.withoutNulls
+          .cast<String>();
+  List<String>? fazdthrcadTrFazendas(dynamic response) => (getJsonField(
         response,
         r'''$.dados[:].faz_dthr_cad''',
         true,
-      );
-  dynamic fazstatusTrFazendas(dynamic response) => getJsonField(
+      ) as List?)
+          ?.withoutNulls
+          .cast<String>();
+  List<String>? fazstatusTrFazendas(dynamic response) => (getJsonField(
         response,
         r'''$.dados[:].faz_status''',
         true,
-      );
-  dynamic fazestadoTrFazendas(dynamic response) => getJsonField(
+      ) as List?)
+          ?.withoutNulls
+          .cast<String>();
+  List<String>? fazestadoTrFazendas(dynamic response) => (getJsonField(
         response,
         r'''$.dados[:].faz_estado''',
         true,
-      );
-  dynamic fazpontorefTrFazendas(dynamic response) => getJsonField(
+      ) as List?)
+          ?.withoutNulls
+          .cast<String>();
+  List<String>? fazpontorefTrFazendas(dynamic response) => (getJsonField(
         response,
         r'''$.dados[:].faz_ponto_ref''',
         true,
-      );
-  dynamic fazcidadeTrFazendas(dynamic response) => getJsonField(
+      ) as List?)
+          ?.withoutNulls
+          .cast<String>();
+  List<String>? fazcidadeTrFazendas(dynamic response) => (getJsonField(
         response,
         r'''$.dados[:].faz_cidade''',
         true,
-      );
-  dynamic fazlongitudeTrFazendas(dynamic response) => getJsonField(
+      ) as List?)
+          ?.withoutNulls
+          .cast<String>();
+  List<String>? fazlongitudeTrFazendas(dynamic response) => (getJsonField(
         response,
         r'''$.dados[:].faz_longitude''',
         true,
-      );
-  dynamic fazlatitudeTrFazendas(dynamic response) => getJsonField(
+      ) as List?)
+          ?.withoutNulls
+          .cast<String>();
+  List<String>? fazlatitudeTrFazendas(dynamic response) => (getJsonField(
         response,
         r'''$.dados[:].faz_latitude''',
         true,
-      );
-  dynamic faznomeTrFazendas(dynamic response) => getJsonField(
+      ) as List?)
+          ?.withoutNulls
+          .cast<String>();
+  List<String>? faznomeTrFazendas(dynamic response) => (getJsonField(
         response,
         r'''$.dados[:].faz_nome''',
         true,
-      );
-  dynamic fazidempTrFazendas(dynamic response) => getJsonField(
+      ) as List?)
+          ?.withoutNulls
+          .cast<String>();
+  List<int>? fazidempTrFazendas(dynamic response) => (getJsonField(
         response,
         r'''$.dados[:].faz_id_emp''',
         true,
-      );
-  dynamic fazidTrFazendas(dynamic response) => getJsonField(
+      ) as List?)
+          ?.withoutNulls
+          .cast<int>();
+  List<int>? fazidTrFazendas(dynamic response) => (getJsonField(
         response,
         r'''$.dados[:].faz_id''',
         true,
-      );
-  dynamic dadosTrFazendas(dynamic response) => getJsonField(
+      ) as List?)
+          ?.withoutNulls
+          .cast<int>();
+  List? dadosTrFazendas(dynamic response) => getJsonField(
         response,
         r'''$.dados''',
         true,
-      );
+      ) as List?;
   dynamic statusTrFazendas(dynamic response) => getJsonField(
         response,
         r'''$.status''',
@@ -316,49 +378,50 @@ class TrServicosCall {
       encodeBodyUtf8: false,
       decodeUtf8: false,
       cache: false,
+      alwaysAllowBody: false,
     );
   }
 
-  dynamic servusualtTrServicos(dynamic response) => getJsonField(
+  List? servusualtTrServicos(dynamic response) => getJsonField(
         response,
         r'''$.dados[:].serv_usu_alt''',
         true,
-      );
-  dynamic servdthraltTrServicos(dynamic response) => getJsonField(
+      ) as List?;
+  List? servdthraltTrServicos(dynamic response) => getJsonField(
         response,
         r'''$.dados[:].serv_dthr_alt''',
         true,
-      );
-  dynamic servusucadTrServicos(dynamic response) => getJsonField(
+      ) as List?;
+  List? servusucadTrServicos(dynamic response) => getJsonField(
         response,
         r'''$.dados[:].serv_usu_cad''',
         true,
-      );
-  dynamic servdthrcadTrServicos(dynamic response) => getJsonField(
+      ) as List?;
+  List? servdthrcadTrServicos(dynamic response) => getJsonField(
         response,
         r'''$.dados[:].serv_dthr_cad''',
         true,
-      );
-  dynamic servnomeTrServicos(dynamic response) => getJsonField(
+      ) as List?;
+  List? servnomeTrServicos(dynamic response) => getJsonField(
         response,
         r'''$.dados[:].serv_nome''',
         true,
-      );
-  dynamic servidtpTrServicos(dynamic response) => getJsonField(
+      ) as List?;
+  List? servidtpTrServicos(dynamic response) => getJsonField(
         response,
         r'''$.dados[:].serv_id_tp''',
         true,
-      );
-  dynamic servidTrServicos(dynamic response) => getJsonField(
+      ) as List?;
+  List? servidTrServicos(dynamic response) => getJsonField(
         response,
         r'''$.dados[:].serv_id''',
         true,
-      );
-  dynamic dadosTrServicos(dynamic response) => getJsonField(
+      ) as List?;
+  List? dadosTrServicos(dynamic response) => getJsonField(
         response,
         r'''$.dados''',
         true,
-      );
+      ) as List?;
   dynamic statusTrServicos(dynamic response) => getJsonField(
         response,
         r'''$.status''',
@@ -387,78 +450,79 @@ class TrOsServicosCall {
       encodeBodyUtf8: false,
       decodeUtf8: false,
       cache: false,
+      alwaysAllowBody: false,
     );
   }
 
-  dynamic oservusualtTrOsServicos(dynamic response) => getJsonField(
+  List? oservusualtTrOsServicos(dynamic response) => getJsonField(
         response,
         r'''$.dados[:].oserv_usu_alt''',
         true,
-      );
-  dynamic oservdthraltTrOsServicos(dynamic response) => getJsonField(
+      ) as List?;
+  List? oservdthraltTrOsServicos(dynamic response) => getJsonField(
         response,
         r'''$.dados[:].oserv_dthr_alt''',
         true,
-      );
-  dynamic oservusucadTrOsServicos(dynamic response) => getJsonField(
+      ) as List?;
+  List? oservusucadTrOsServicos(dynamic response) => getJsonField(
         response,
         r'''$.dados[:].oserv_usu_cad''',
         true,
-      );
-  dynamic oservdthrcadTrOsServicos(dynamic response) => getJsonField(
+      ) as List?;
+  List? oservdthrcadTrOsServicos(dynamic response) => getJsonField(
         response,
         r'''$.dados[:].oserv_dthr_cad''',
         true,
-      );
-  dynamic oservstatusTrOsServicos(dynamic response) => getJsonField(
+      ) as List?;
+  List? oservstatusTrOsServicos(dynamic response) => getJsonField(
         response,
         r'''$.dados[:].oserv_status''',
         true,
-      );
-  dynamic oservobservacaoTrOsServicos(dynamic response) => getJsonField(
+      ) as List?;
+  List? oservobservacaoTrOsServicos(dynamic response) => getJsonField(
         response,
         r'''$.dados[:].oserv_observacao''',
         true,
-      );
-  dynamic oservdthrexecucaoTrOsServicos(dynamic response) => getJsonField(
+      ) as List?;
+  List? oservdthrexecucaoTrOsServicos(dynamic response) => getJsonField(
         response,
         r'''$.dados[:].oserv_dthr_execucao''',
         true,
-      );
-  dynamic oservgeoTrOsServicos(dynamic response) => getJsonField(
+      ) as List?;
+  List? oservgeoTrOsServicos(dynamic response) => getJsonField(
         response,
         r'''$.dados[:].oserv_geo''',
         true,
-      );
-  dynamic oservidservTrOsServicos(dynamic response) => getJsonField(
+      ) as List?;
+  List? oservidservTrOsServicos(dynamic response) => getJsonField(
         response,
         r'''$.dados[:].oserv_id_serv''',
         true,
-      );
-  dynamic oservidTrOsServicos(dynamic response) => getJsonField(
+      ) as List?;
+  List? oservidTrOsServicos(dynamic response) => getJsonField(
         response,
         r'''$.dados[:].oserv_id''',
         true,
-      );
-  dynamic dadosTrOsServicos(dynamic response) => getJsonField(
+      ) as List?;
+  List? dadosTrOsServicos(dynamic response) => getJsonField(
         response,
         r'''$.dados''',
         true,
-      );
+      ) as List?;
   dynamic statusTrOsServicos(dynamic response) => getJsonField(
         response,
         r'''$.status''',
       );
-  dynamic oservidosTrOsServicos(dynamic response) => getJsonField(
+  List? oservidosTrOsServicos(dynamic response) => getJsonField(
         response,
         r'''$.dados[:].oserv_id_os''',
         true,
-      );
-  dynamic oservdthragendamentoTrOsServicos(dynamic response) => getJsonField(
+      ) as List?;
+  List? oservdthragendamentoTrOsServicos(dynamic response) => getJsonField(
         response,
         r'''$.dados[:].oserv_dthr_agendamento''',
         true,
-      );
+      ) as List?;
 }
 
 class TrTecnicosCall {
@@ -481,49 +545,50 @@ class TrTecnicosCall {
       encodeBodyUtf8: false,
       decodeUtf8: false,
       cache: false,
+      alwaysAllowBody: false,
     );
   }
 
-  dynamic tecusualtTrTecnicos(dynamic response) => getJsonField(
+  List? tecusualtTrTecnicos(dynamic response) => getJsonField(
         response,
         r'''$.dados[:].tec_usu_alt''',
         true,
-      );
-  dynamic tecdthraltTrTecnicos(dynamic response) => getJsonField(
+      ) as List?;
+  List? tecdthraltTrTecnicos(dynamic response) => getJsonField(
         response,
         r'''$.dados[:].tec_dthr_alt''',
         true,
-      );
-  dynamic tecusucadTrTecnicos(dynamic response) => getJsonField(
+      ) as List?;
+  List? tecusucadTrTecnicos(dynamic response) => getJsonField(
         response,
         r'''$.dados[:].tec_usu_cad''',
         true,
-      );
-  dynamic tecdthrcadTrTecnicos(dynamic response) => getJsonField(
+      ) as List?;
+  List? tecdthrcadTrTecnicos(dynamic response) => getJsonField(
         response,
         r'''$.dados[:].tec_dthr_cad''',
         true,
-      );
-  dynamic tecnomeTrTecnicos(dynamic response) => getJsonField(
+      ) as List?;
+  List? tecnomeTrTecnicos(dynamic response) => getJsonField(
         response,
         r'''$.dados[:].tec_nome''',
         true,
-      );
-  dynamic tecidunidTrTecnicos(dynamic response) => getJsonField(
+      ) as List?;
+  List? tecidunidTrTecnicos(dynamic response) => getJsonField(
         response,
         r'''$.dados[:].tec_id_unid''',
         true,
-      );
-  dynamic tecidTrTecnicos(dynamic response) => getJsonField(
+      ) as List?;
+  List? tecidTrTecnicos(dynamic response) => getJsonField(
         response,
         r'''$.dados[:].tec_id''',
         true,
-      );
-  dynamic dadosTrTecnicos(dynamic response) => getJsonField(
+      ) as List?;
+  List? dadosTrTecnicos(dynamic response) => getJsonField(
         response,
         r'''$.dados''',
         true,
-      );
+      ) as List?;
   dynamic statusTrTecnicos(dynamic response) => getJsonField(
         response,
         r'''$.status''',
@@ -554,6 +619,7 @@ class TrSincronizaCelularComBDCall {
       encodeBodyUtf8: false,
       decodeUtf8: false,
       cache: false,
+      alwaysAllowBody: false,
     );
   }
 
@@ -587,14 +653,15 @@ class TrEmpresasCall {
       encodeBodyUtf8: false,
       decodeUtf8: false,
       cache: false,
+      alwaysAllowBody: false,
     );
   }
 
-  dynamic dadosTrEmpresas(dynamic response) => getJsonField(
+  List? dadosTrEmpresas(dynamic response) => getJsonField(
         response,
         r'''$.dados''',
         true,
-      );
+      ) as List?;
   dynamic statusTrEmpresas(dynamic response) => getJsonField(
         response,
         r'''$.status''',
@@ -621,6 +688,7 @@ class TrCFGCall {
       encodeBodyUtf8: false,
       decodeUtf8: false,
       cache: false,
+      alwaysAllowBody: false,
     );
   }
 
@@ -658,6 +726,7 @@ class TrSincronizaTalhaoContornoCall {
       encodeBodyUtf8: false,
       decodeUtf8: false,
       cache: false,
+      alwaysAllowBody: false,
     );
   }
 }
@@ -697,6 +766,7 @@ class LoginsCall {
       encodeBodyUtf8: false,
       decodeUtf8: false,
       cache: false,
+      alwaysAllowBody: false,
     );
   }
 
@@ -740,6 +810,7 @@ class EsqueceuSenhaCall {
       encodeBodyUtf8: false,
       decodeUtf8: false,
       cache: false,
+      alwaysAllowBody: false,
     );
   }
 
@@ -773,6 +844,7 @@ class ApiRotasDirectionsCall {
       encodeBodyUtf8: false,
       decodeUtf8: false,
       cache: false,
+      alwaysAllowBody: false,
     );
   }
 
@@ -837,6 +909,7 @@ class ApiRotasPolylinesCall {
       encodeBodyUtf8: false,
       decodeUtf8: false,
       cache: false,
+      alwaysAllowBody: false,
     );
   }
 
@@ -866,6 +939,7 @@ class HttpsdemoconceittosistemascombrterramwsflutterflowindexphpCall {
       encodeBodyUtf8: false,
       decodeUtf8: false,
       cache: false,
+      alwaysAllowBody: false,
     );
   }
 }

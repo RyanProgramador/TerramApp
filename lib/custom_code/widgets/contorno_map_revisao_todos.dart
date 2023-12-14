@@ -16,14 +16,14 @@ class ContornoMapRevisaoTodos extends StatefulWidget {
     Key? key,
     this.width,
     this.height,
-    required this.listaDeGrupos,
-    required this.listaDeContornos,
+    this.listaDeGrupos,
+    this.listaDeContornos,
   }) : super(key: key);
 
   final double? width;
   final double? height;
-  final List<Map<String, dynamic>> listaDeGrupos;
-  final List<Map<String, dynamic>> listaDeContornos;
+  final List<dynamic>? listaDeGrupos;
+  final List<dynamic>? listaDeContornos;
 
   @override
   _ContornoMapRevisaoTodosState createState() =>
@@ -33,19 +33,23 @@ class ContornoMapRevisaoTodos extends StatefulWidget {
 class _ContornoMapRevisaoTodosState extends State<ContornoMapRevisaoTodos> {
   google_maps.GoogleMapController? _googleMapController;
   Set<google_maps.Polygon> polygons = Set();
+  List<Map<String, dynamic>> convertedGrupos = [];
+  List<Map<String, dynamic>> convertedContornos = [];
 
   @override
   void initState() {
     super.initState();
+    convertedGrupos = convertToMapList(widget.listaDeGrupos);
+    convertedContornos = convertToMapList(widget.listaDeContornos);
     _initializePolygons();
   }
 
   void _initializePolygons() {
-    for (var grupo in widget.listaDeGrupos) {
+    for (var grupo in convertedGrupos) {
       var corGrupo = HexColor(grupo['cor']);
       var grupoId = grupo['contorno_grupo'];
 
-      var pontosGrupo = widget.listaDeContornos
+      var pontosGrupo = convertedContornos
           .where((contorno) => contorno['contorno_grupo'] == grupoId)
           .map((contorno) => _toLatLng(contorno['latlng']))
           .toList();
@@ -106,4 +110,9 @@ class HexColor extends Color {
     }
     return int.parse('0x$hexColor');
   }
+}
+
+List<Map<String, dynamic>> convertToMapList(List<dynamic>? dynamicList) {
+  return dynamicList?.map((item) => item as Map<String, dynamic>).toList() ??
+      [];
 }

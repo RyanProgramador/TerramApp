@@ -113,9 +113,9 @@ class _ContornoDaFazendaWidgetState extends State<ContornoDaFazendaWidget> {
                           color:
                               FlutterFlowTheme.of(context).secondaryBackground,
                         ),
-                        alignment: AlignmentDirectional(0.00, 1.00),
+                        alignment: AlignmentDirectional(0.0, 1.0),
                         child: Align(
-                          alignment: AlignmentDirectional(0.00, 0.00),
+                          alignment: AlignmentDirectional(0.0, 0.0),
                           child: Container(
                             width: MediaQuery.sizeOf(context).width * 0.99,
                             height: MediaQuery.sizeOf(context).height * 0.99,
@@ -159,7 +159,7 @@ class _ContornoDaFazendaWidgetState extends State<ContornoDaFazendaWidget> {
                           mainAxisSize: MainAxisSize.max,
                           children: [
                             Align(
-                              alignment: AlignmentDirectional(-1.00, 0.00),
+                              alignment: AlignmentDirectional(-1.0, 0.0),
                               child: Padding(
                                 padding: EdgeInsetsDirectional.fromSTEB(
                                     16.0, 0.0, 0.0, 0.0),
@@ -247,7 +247,7 @@ class _ContornoDaFazendaWidgetState extends State<ContornoDaFazendaWidget> {
                       ),
                     ),
                     Align(
-                      alignment: AlignmentDirectional(1.00, 1.00),
+                      alignment: AlignmentDirectional(1.0, 1.0),
                       child: Padding(
                         padding: EdgeInsetsDirectional.fromSTEB(
                             0.0, 0.0, 16.0, 16.0),
@@ -278,8 +278,7 @@ class _ContornoDaFazendaWidgetState extends State<ContornoDaFazendaWidget> {
                                 height: double.infinity,
                                 padding: EdgeInsetsDirectional.fromSTEB(
                                     10.0, 0.0, 0.0, 0.0),
-                                iconPadding: EdgeInsetsDirectional.fromSTEB(
-                                    0.0, 0.0, 0.0, 0.0),
+                                iconPadding: EdgeInsets.all(0.0),
                                 color: FlutterFlowTheme.of(context).primary,
                                 textStyle: FlutterFlowTheme.of(context)
                                     .titleSmall

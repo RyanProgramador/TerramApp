@@ -375,21 +375,20 @@ class _SelecionarOSWidgetState extends State<SelecionarOSWidget>
                               children: [
                                 Expanded(
                                   child: Align(
-                                    alignment: AlignmentDirectional(0.00, 0.00),
+                                    alignment: AlignmentDirectional(0.0, 0.0),
                                     child: Container(
                                       decoration: BoxDecoration(),
-                                      alignment:
-                                          AlignmentDirectional(0.00, 0.00),
+                                      alignment: AlignmentDirectional(0.0, 0.0),
                                       child: Align(
                                         alignment:
-                                            AlignmentDirectional(0.00, 0.00),
+                                            AlignmentDirectional(0.0, 0.0),
                                         child: Stack(
                                           alignment:
                                               AlignmentDirectional(0.0, 0.0),
                                           children: [
                                             Align(
                                               alignment: AlignmentDirectional(
-                                                  0.00, 0.00),
+                                                  0.0, 0.0),
                                               child: Padding(
                                                 padding: EdgeInsetsDirectional
                                                     .fromSTEB(
@@ -642,9 +641,7 @@ class _SelecionarOSWidgetState extends State<SelecionarOSWidget>
                                       height: 58.0,
                                       padding: EdgeInsetsDirectional.fromSTEB(
                                           24.0, 0.0, 24.0, 0.0),
-                                      iconPadding:
-                                          EdgeInsetsDirectional.fromSTEB(
-                                              0.0, 0.0, 0.0, 0.0),
+                                      iconPadding: EdgeInsets.all(0.0),
                                       color:
                                           FlutterFlowTheme.of(context).primary,
                                       textStyle: FlutterFlowTheme.of(context)
@@ -1590,8 +1587,8 @@ class _SelecionarOSWidgetState extends State<SelecionarOSWidget>
                                                                   child: Align(
                                                                     alignment:
                                                                         AlignmentDirectional(
-                                                                            1.00,
-                                                                            0.00),
+                                                                            1.0,
+                                                                            0.0),
                                                                     child: Icon(
                                                                       Icons
                                                                           .arrow_forward,
@@ -1636,8 +1633,8 @@ class _SelecionarOSWidgetState extends State<SelecionarOSWidget>
                                                                   child: Align(
                                                                     alignment:
                                                                         AlignmentDirectional(
-                                                                            1.00,
-                                                                            0.00),
+                                                                            1.0,
+                                                                            0.0),
                                                                     child: Icon(
                                                                       Icons
                                                                           .task_alt,
@@ -2672,8 +2669,8 @@ class _SelecionarOSWidgetState extends State<SelecionarOSWidget>
                                                                 child: Align(
                                                                   alignment:
                                                                       AlignmentDirectional(
-                                                                          1.00,
-                                                                          0.00),
+                                                                          1.0,
+                                                                          0.0),
                                                                   child: Icon(
                                                                     Icons
                                                                         .arrow_forward,
@@ -2721,8 +2718,8 @@ class _SelecionarOSWidgetState extends State<SelecionarOSWidget>
                                                                 child: Align(
                                                                   alignment:
                                                                       AlignmentDirectional(
-                                                                          1.00,
-                                                                          0.00),
+                                                                          1.0,
+                                                                          0.0),
                                                                   child: Icon(
                                                                     Icons
                                                                         .task_alt,
