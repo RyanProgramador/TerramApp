@@ -134,7 +134,11 @@ class _SelecionarOSWidgetState extends State<SelecionarOSWidget>
       } else if ((FFAppState().sincronizcaoAutomatica == false) &&
           (FFAppState().servicosFinalizadosComSucesso.length != 0)) {
       } else if (_model.foiAtualizado &&
-          (FFAppState().servicosFinalizadosComSucesso.length == 0)) {}
+          (FFAppState().servicosFinalizadosComSucesso.length == 0)) {
+        setState(() {
+          _model.foiAtualizado = false;
+        });
+      }
 
       setState(() {
         FFAppState().AtualLocalizcao = currentUserLocationValue!.toString();
@@ -669,6 +673,7 @@ class _SelecionarOSWidgetState extends State<SelecionarOSWidget>
                               flex: 10,
                               child: Container(
                                 width: double.infinity,
+                                height: double.infinity,
                                 decoration: BoxDecoration(),
                                 child: Visibility(
                                   visible:
@@ -1666,6 +1671,8 @@ class _SelecionarOSWidgetState extends State<SelecionarOSWidget>
                             Expanded(
                               flex: 10,
                               child: Container(
+                                width: double.infinity,
+                                height: double.infinity,
                                 decoration: BoxDecoration(),
                                 child: Visibility(
                                   visible:
