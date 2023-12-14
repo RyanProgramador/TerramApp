@@ -171,8 +171,6 @@ class _ContornoMapState extends State<ContornoMap> {
 
         isVisivel = false;
         isLocationPaused = true;
-
-        _model.finalizou = true;
       });
     }
   }
@@ -339,7 +337,6 @@ class _ContornoMapState extends State<ContornoMap> {
   @override
   void initState() {
     super.initState();
-    _model = createModel(context, () => ContornoDaFazendaModel());
     _getCurrentLocation();
     // Update location every 2 seconds
     Timer.periodic(Duration(seconds: 2), (Timer t) => _getCurrentLocation());
