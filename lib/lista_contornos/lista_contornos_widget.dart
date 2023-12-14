@@ -277,7 +277,7 @@ class _ListaContornosWidgetState extends State<ListaContornosWidget> {
                                                                                       r'''$.contorno_grupo''',
                                                                                     ).toString())
                                                                                 ?.toList(),
-                                                                            'latlng') !=
+                                                                            'cor') !=
                                                                         null &&
                                                                     functions
                                                                         .acessarJsonListaDeterminadoValor(
@@ -291,7 +291,7 @@ class _ListaContornosWidgetState extends State<ListaContornosWidget> {
                                                                                       r'''$.contorno_grupo''',
                                                                                     ).toString())
                                                                                 ?.toList(),
-                                                                            'latlng')
+                                                                            'cor')
                                                                         .isNotEmpty)
                                                                 .toString(),
                                                             '#ffffff',

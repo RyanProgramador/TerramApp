@@ -67,7 +67,10 @@ class _MapsRevisaoWidgetState extends State<MapsRevisaoWidget> {
                   width: double.infinity,
                   height: double.infinity,
                   listaDeLatLng: widget.listaLatLngEmString,
-                  cor: widget.cor,
+                  cor: valueOrDefault<String>(
+                    widget.cor,
+                    '#ffffff',
+                  ),
                 ),
               ),
             ),

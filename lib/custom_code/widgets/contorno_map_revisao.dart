@@ -84,8 +84,9 @@ class _ContornoMapRevisaoState extends State<ContornoMapRevisao> {
       final polygon = google_maps.Polygon(
         polygonId: const google_maps.PolygonId('AreaPolygon'),
         points: latLngList,
-        fillColor: HexColor("$corSTR").withOpacity(0.2),
-        strokeColor: HexColor("$corSTR"),
+        fillColor: HexColor("$corSTR").withOpacity(0.2) ??
+            Colors.blue.withOpacity(0.2),
+        strokeColor: HexColor("$corSTR") ?? Colors.blue,
         strokeWidth: 3,
       );
 
