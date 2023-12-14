@@ -133,7 +133,7 @@ class _SelecionarOSWidgetState extends State<SelecionarOSWidget>
         }
       } else if ((FFAppState().sincronizcaoAutomatica == false) &&
           (FFAppState().servicosFinalizadosComSucesso.length != 0)) {
-      } else if (FFAppState().trOsDeslocamentosJsonFinalizados.length <= 0) {
+      } else if (FFAppState().trOrdemServicos.length <= 0) {
         await showDialog(
           context: context,
           builder: (alertDialogContext) {
