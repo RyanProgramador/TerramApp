@@ -806,3 +806,17 @@ String? _extrairValorJson(dynamic jsonObject, String jsonPath) {
 
   return null;
 }
+
+Color? transformaStringEmCor(String? stringQueContemCor) {
+  if (stringQueContemCor == null || stringQueContemCor.isEmpty) {
+    return null;
+  }
+
+  String hexColor = stringQueContemCor.toUpperCase().replaceAll('#', '');
+
+  if (hexColor.length == 6) {
+    hexColor = 'FF$hexColor';
+  }
+
+  return Color(int.parse('0x$hexColor'));
+}

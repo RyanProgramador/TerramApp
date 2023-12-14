@@ -354,9 +354,16 @@ class _ListaContornosWidgetState extends State<ListaContornosWidget> {
                                                         FaIcon(
                                                           FontAwesomeIcons
                                                               .route,
-                                                          color: FlutterFlowTheme
-                                                                  .of(context)
-                                                              .secondaryText,
+                                                          color: valueOrDefault<
+                                                              Color>(
+                                                            functions
+                                                                .transformaStringEmCor(
+                                                                    getJsonField(
+                                                              trGruposContornoFazendaItem,
+                                                              r'''$.cor''',
+                                                            ).toString()),
+                                                            Color(0xFF2DFF06),
+                                                          ),
                                                           size: 32.0,
                                                         ),
                                                       ],
