@@ -63,7 +63,7 @@ class _MapsRevisaoWidgetState extends State<MapsRevisaoWidget> {
                 width: double.infinity,
                 height: double.infinity,
                 listaDeLatLng: widget.listaLatLngEmString,
-                cor: Color(0xFFFF0606),
+                cor: Color(0xFF2DFF06),
               ),
             ),
             Align(
