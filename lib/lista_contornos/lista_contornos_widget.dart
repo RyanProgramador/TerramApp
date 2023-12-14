@@ -264,22 +264,10 @@ class _ListaContornosWidgetState extends State<ListaContornosWidget> {
                                                                           ).toString())
                                                                       ?.toList(),
                                                                   'latlng')!,
-                                                          cor: valueOrDefault<
-                                                              String>(
-                                                            functions.acessarJsonListaDeterminadoValor(
-                                                                functions
-                                                                    .sortListJson(
-                                                                        'contorno_grupo',
-                                                                        false,
-                                                                        FFAppState().contornoFazenda.toList(),
-                                                                        getJsonField(
-                                                                          trGruposContornoFazendaItem,
-                                                                          r'''$.contorno_grupo''',
-                                                                        ).toString())
-                                                                    ?.toList(),
-                                                                'cor')?[1],
-                                                            '#ffffff',
-                                                          ),
+                                                          cor: getJsonField(
+                                                            trGruposContornoFazendaItem,
+                                                            r'''$.cor''',
+                                                          ).toString(),
                                                         ),
                                                       ),
                                                     ),
@@ -344,6 +332,9 @@ class _ListaContornosWidgetState extends State<ListaContornosWidget> {
                                                                     '# ${getJsonField(
                                                                       trGruposContornoFazendaItem,
                                                                       r'''$.contorno_grupo''',
+                                                                    ).toString()}  ${getJsonField(
+                                                                      trGruposContornoFazendaItem,
+                                                                      r'''$.cor''',
                                                                     ).toString()}',
                                                                     style: FlutterFlowTheme.of(
                                                                             context)
