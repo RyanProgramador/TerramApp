@@ -25,6 +25,7 @@ class ContornoMap extends StatefulWidget {
     this.localAtual,
     this.oservid,
     this.idContorno,
+    this.fazNome,
     required this.fazid,
   }) : super(key: key);
 
@@ -35,6 +36,7 @@ class ContornoMap extends StatefulWidget {
   final String? oservid;
   final String? idContorno;
   final String fazid;
+  final String? fazNome;
   @override
   _ContornoMapState createState() => _ContornoMapState();
 }
@@ -197,7 +199,7 @@ class _ContornoMapState extends State<ContornoMap> {
       'ListaContornos',
       queryParameters: {
         'nomeFazenda': serializeParam(
-          "Ops errei aqui no nome da fazenda",
+          widget.fazNome,
           ParamType.String,
         ),
         'oservID': serializeParam(
