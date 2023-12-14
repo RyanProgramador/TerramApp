@@ -132,7 +132,9 @@ class _SelecionarOSWidgetState extends State<SelecionarOSWidget>
           );
         }
       } else if ((FFAppState().sincronizcaoAutomatica == false) &&
-          (FFAppState().servicosFinalizadosComSucesso.length != 0)) {}
+          (FFAppState().servicosFinalizadosComSucesso.length != 0)) {
+      } else if (_model.foiAtualizado &&
+          (FFAppState().servicosFinalizadosComSucesso.length == 0)) {}
 
       setState(() {
         FFAppState().AtualLocalizcao = currentUserLocationValue!.toString();
@@ -700,6 +702,10 @@ class _SelecionarOSWidgetState extends State<SelecionarOSWidget>
                                               ),
                                             },
                                           );
+
+                                          setState(() {
+                                            _model.foiAtualizado = true;
+                                          });
                                         },
                                         child: SingleChildScrollView(
                                           physics:

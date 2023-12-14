@@ -23,6 +23,10 @@ import 'package:google_fonts/google_fonts.dart';
 import 'package:provider/provider.dart';
 
 class SelecionarOSModel extends FlutterFlowModel<SelecionarOSWidget> {
+  ///  Local state fields for this page.
+
+  bool foiAtualizado = false;
+
   ///  State fields for stateful widgets in this page.
 
   final unfocusNode = FocusNode();

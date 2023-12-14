@@ -61,12 +61,24 @@ class _LoadingCompWidgetState extends State<LoadingCompWidget> {
       decoration: BoxDecoration(
         color: Color(0x00F1F4F8),
       ),
-      child: RefreshIndicator(
-        onRefresh: () async {
-          FFAppState().update(() {});
+      child: InkWell(
+        splashColor: Colors.transparent,
+        focusColor: Colors.transparent,
+        hoverColor: Colors.transparent,
+        highlightColor: Colors.transparent,
+        onTap: () async {
+          context.goNamed(
+            'SelecionarOS',
+            extra: <String, dynamic>{
+              kTransitionInfoKey: TransitionInfo(
+                hasTransition: true,
+                transitionType: PageTransitionType.fade,
+                duration: Duration(milliseconds: 0),
+              ),
+            },
+          );
         },
         child: SingleChildScrollView(
-          physics: const AlwaysScrollableScrollPhysics(),
           child: Column(
             mainAxisSize: MainAxisSize.max,
             children: [
