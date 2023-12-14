@@ -172,7 +172,7 @@ class _LoadingCompWidgetState extends State<LoadingCompWidget> {
                     mainAxisAlignment: MainAxisAlignment.center,
                     children: [
                       Opacity(
-                        opacity: 0.0,
+                        opacity: 0.5,
                         child: FlutterFlowTimer(
                           initialTime: _model.timerMilliseconds,
                           getDisplayTime: (value) =>
