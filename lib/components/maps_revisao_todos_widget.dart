@@ -60,15 +60,18 @@ class _MapsRevisaoTodosWidgetState extends State<MapsRevisaoTodosWidget> {
         child: Stack(
           alignment: AlignmentDirectional(0.0, 0.0),
           children: [
-            Container(
-              width: double.infinity,
-              height: double.infinity,
-              child: custom_widgets.ContornoMapRevisaoTodos(
+            Align(
+              alignment: AlignmentDirectional(0.0, 0.0),
+              child: Container(
                 width: double.infinity,
                 height: double.infinity,
-                listaDeGrupos: widget.listagrupoTodos,
-                listaDeContornos: widget.listaContornoTodos,
-                fazlatlng: widget.fazlatlng,
+                child: custom_widgets.ContornoMapRevisaoTodos(
+                  width: double.infinity,
+                  height: double.infinity,
+                  listaDeGrupos: widget.listagrupoTodos,
+                  listaDeContornos: widget.listaContornoTodos,
+                  fazlatlng: widget.fazlatlng,
+                ),
               ),
             ),
             Align(

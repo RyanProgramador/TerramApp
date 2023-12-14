@@ -147,6 +147,7 @@ GoRouter createRouter(AppStateNotifier appStateNotifier) => GoRouter(
                 oservID: params.getParam('oservID', ParamType.String),
                 idDoContorno: params.getParam('idDoContorno', ParamType.String),
                 fazid: params.getParam('fazid', ParamType.String),
+                fazlatlng: params.getParam('fazlatlng', ParamType.LatLng),
               ),
             ),
             FFRoute(

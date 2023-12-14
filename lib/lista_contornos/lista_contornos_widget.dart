@@ -541,6 +541,10 @@ class _ListaContornosWidgetState extends State<ListaContornosWidget> {
                                           widget.fazid,
                                           ParamType.String,
                                         ),
+                                        'fazlatlng': serializeParam(
+                                          widget.fazlatlng,
+                                          ParamType.LatLng,
+                                        ),
                                       }.withoutNulls,
                                       extra: <String, dynamic>{
                                         kTransitionInfoKey: TransitionInfo(

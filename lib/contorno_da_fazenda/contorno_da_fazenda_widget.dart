@@ -17,6 +17,7 @@ class ContornoDaFazendaWidget extends StatefulWidget {
     required this.oservID,
     String? idDoContorno,
     required this.fazid,
+    this.fazlatlng,
   })  : this.idDoContorno = idDoContorno ?? '1',
         super(key: key);
 
@@ -24,6 +25,7 @@ class ContornoDaFazendaWidget extends StatefulWidget {
   final String? oservID;
   final String idDoContorno;
   final String? fazid;
+  final LatLng? fazlatlng;
 
   @override
   _ContornoDaFazendaWidgetState createState() =>
@@ -197,6 +199,10 @@ class _ContornoDaFazendaWidgetState extends State<ContornoDaFazendaWidget> {
                                         'fazid': serializeParam(
                                           widget.fazid,
                                           ParamType.String,
+                                        ),
+                                        'fazlatlng': serializeParam(
+                                          widget.fazlatlng,
+                                          ParamType.LatLng,
                                         ),
                                       }.withoutNulls,
                                       extra: <String, dynamic>{
