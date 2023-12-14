@@ -190,11 +190,6 @@ class _ContornoMapState extends State<ContornoMap> {
     FFAppState().grupoContornoFazendas =
         FFAppState().grupoContornoFazendas.toList().cast<dynamic>();
 
-    setState(() {
-      _model.finalizou = true;
-    });
-    _model.finalizou = true;
-
     context.goNamed(
       'ListaContornos',
       queryParameters: {

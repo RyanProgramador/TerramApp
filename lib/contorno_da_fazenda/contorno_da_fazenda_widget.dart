@@ -3,6 +3,7 @@ import '/flutter_flow/flutter_flow_util.dart';
 import '/flutter_flow/flutter_flow_widgets.dart';
 import '/custom_code/widgets/index.dart' as custom_widgets;
 import 'package:flutter/material.dart';
+import 'package:flutter/scheduler.dart';
 import 'package:flutter/services.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:provider/provider.dart';
@@ -39,6 +40,13 @@ class _ContornoDaFazendaWidgetState extends State<ContornoDaFazendaWidget> {
   void initState() {
     super.initState();
     _model = createModel(context, () => ContornoDaFazendaModel());
+
+    // On page load action.
+    SchedulerBinding.instance.addPostFrameCallback((_) async {
+      setState(() {
+        _model.textoInicioEFimDeContorno = 'Inicie o contorno!';
+      });
+    });
 
     getCurrentUserLocation(defaultLocation: LatLng(0.0, 0.0), cached: true)
         .then((loc) => setState(() => currentUserLocationValue = loc));
@@ -174,9 +182,6 @@ class _ContornoDaFazendaWidgetState extends State<ContornoDaFazendaWidget> {
                                               .cast<dynamic>();
                                     });
                                     setState(() {});
-                                    setState(() {
-                                      _model.finalizou = true;
-                                    });
 
                                     context.goNamed(
                                       'ListaContornos',
@@ -227,7 +232,7 @@ class _ContornoDaFazendaWidgetState extends State<ContornoDaFazendaWidget> {
                                   ),
                             ),
                             Text(
-                              _model.finalizou.toString(),
+                              _model.textoInicioEFimDeContorno,
                               style: FlutterFlowTheme.of(context)
                                   .bodyMedium
                                   .override(
@@ -259,6 +264,8 @@ class _ContornoDaFazendaWidgetState extends State<ContornoDaFazendaWidget> {
                               onPressed: () async {
                                 setState(() {
                                   _model.ativo = !_model.ativo;
+                                  _model.textoInicioEFimDeContorno =
+                                      'Contorno em andamento.';
                                 });
                               },
                               text: '',

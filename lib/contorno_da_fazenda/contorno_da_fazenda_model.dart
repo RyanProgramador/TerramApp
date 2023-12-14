@@ -4,6 +4,7 @@ import '/flutter_flow/flutter_flow_widgets.dart';
 import '/custom_code/widgets/index.dart' as custom_widgets;
 import 'contorno_da_fazenda_widget.dart' show ContornoDaFazendaWidget;
 import 'package:flutter/material.dart';
+import 'package:flutter/scheduler.dart';
 import 'package:flutter/services.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:provider/provider.dart';
@@ -13,7 +14,7 @@ class ContornoDaFazendaModel extends FlutterFlowModel<ContornoDaFazendaWidget> {
 
   bool ativo = false;
 
-  bool finalizou = false;
+  String textoInicioEFimDeContorno = '';
 
   ///  State fields for stateful widgets in this page.
 
