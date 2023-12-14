@@ -134,11 +134,21 @@ class _SelecionarOSWidgetState extends State<SelecionarOSWidget>
         }
       } else if ((FFAppState().sincronizcaoAutomatica == false) &&
           (FFAppState().servicosFinalizadosComSucesso.length != 0)) {
-      } else if (_model.foiAtualizado &&
-          (FFAppState().servicosFinalizadosComSucesso.length == 0)) {
-        setState(() {
-          _model.foiAtualizado = false;
-        });
+      } else if (FFAppState().trOsDeslocamentosJsonFinalizados.length <= 0) {
+        await showDialog(
+          context: context,
+          builder: (alertDialogContext) {
+            return AlertDialog(
+              title: Text('zerado'),
+              actions: [
+                TextButton(
+                  onPressed: () => Navigator.pop(alertDialogContext),
+                  child: Text('Ok'),
+                ),
+              ],
+            );
+          },
+        );
       }
 
       setState(() {
