@@ -270,7 +270,8 @@ class _ContornoMapState extends State<ContornoMap> {
           actions: [
             TextButton(
               onPressed: () {
-                Navigator.of(context).pop(); // Fecha o diálogo.
+                _setFinalizou();
+                Navigator.of(context).pop();
               },
               child: Text("OK"),
             ),
@@ -322,9 +323,10 @@ class _ContornoMapState extends State<ContornoMap> {
             TextButton(
               onPressed: () {
                 _finalizeArea();
-                _setFinalizou();
+
                 Navigator.of(context).pop();
-                _showSuccessDialog(context); // Fecha o diálogo.
+                _showSuccessDialog(context);
+                // Navigator.of(context).pop();
               },
               child: Text("Sim"),
             ),
@@ -337,6 +339,7 @@ class _ContornoMapState extends State<ContornoMap> {
   @override
   void initState() {
     super.initState();
+    _model = createModel(context, () => ContornoDaFazendaModel());
     _getCurrentLocation();
     // Update location every 2 seconds
     Timer.periodic(Duration(seconds: 2), (Timer t) => _getCurrentLocation());

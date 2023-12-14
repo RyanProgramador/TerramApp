@@ -155,323 +155,364 @@ class _ListaContornosWidgetState extends State<ListaContornosWidget> {
                       ),
                     ),
                   ),
-                  Builder(
-                    builder: (context) {
-                      final trGruposContornoFazenda = functions
-                              .sortListJson(
-                                  'oserv_id',
-                                  true,
-                                  FFAppState().grupoContornoFazendas.toList(),
-                                  widget.oservID)
-                              ?.toList() ??
-                          [];
-                      if (trGruposContornoFazenda.isEmpty) {
-                        return Center(
-                          child: Container(
-                            width: double.infinity,
-                            height: 150.0,
-                            child: SemContornoNoMomentoWidget(),
-                          ),
-                        );
-                      }
-                      return SingleChildScrollView(
-                        child: Column(
-                          mainAxisSize: MainAxisSize.max,
-                          children:
-                              List.generate(trGruposContornoFazenda.length,
-                                  (trGruposContornoFazendaIndex) {
-                            final trGruposContornoFazendaItem =
-                                trGruposContornoFazenda[
-                                    trGruposContornoFazendaIndex];
-                            return Padding(
-                              padding: EdgeInsetsDirectional.fromSTEB(
-                                  16.0, 8.0, 16.0, 0.0),
-                              child: Container(
-                                width: double.infinity,
-                                height: 78.0,
-                                decoration: BoxDecoration(
-                                  color: FlutterFlowTheme.of(context)
-                                      .primaryBackground,
-                                  borderRadius: BorderRadius.circular(12.0),
-                                  border: Border.all(
-                                    color: trGruposContornoFazendaItem ==
-                                            FFAppState().trOsServicoEmAndamento
-                                        ? FlutterFlowTheme.of(context)
-                                            .customColor1
-                                        : FlutterFlowTheme.of(context)
-                                            .lineColor,
+                  Container(
+                    width: double.infinity,
+                    height: MediaQuery.sizeOf(context).height * 0.7,
+                    decoration: BoxDecoration(),
+                    child: Container(
+                      width: double.infinity,
+                      height: double.infinity,
+                      child: Stack(
+                        children: [
+                          Builder(
+                            builder: (context) {
+                              final trGruposContornoFazenda = functions
+                                      .sortListJson(
+                                          'oserv_id',
+                                          true,
+                                          FFAppState()
+                                              .grupoContornoFazendas
+                                              .toList(),
+                                          widget.oservID)
+                                      ?.toList() ??
+                                  [];
+                              if (trGruposContornoFazenda.isEmpty) {
+                                return Center(
+                                  child: Container(
+                                    width: double.infinity,
+                                    height: 150.0,
+                                    child: SemContornoNoMomentoWidget(),
                                   ),
-                                ),
-                                child: Padding(
-                                  padding: EdgeInsetsDirectional.fromSTEB(
-                                      8.0, 8.0, 12.0, 8.0),
-                                  child: InkWell(
-                                    splashColor: Colors.transparent,
-                                    focusColor: Colors.transparent,
-                                    hoverColor: Colors.transparent,
-                                    highlightColor: Colors.transparent,
-                                    onTap: () async {
-                                      await showModalBottomSheet(
-                                        isScrollControlled: true,
-                                        backgroundColor: Colors.transparent,
-                                        enableDrag: false,
-                                        context: context,
-                                        builder: (context) {
-                                          return GestureDetector(
-                                            onTap: () => _model
-                                                    .unfocusNode.canRequestFocus
-                                                ? FocusScope.of(context)
-                                                    .requestFocus(
-                                                        _model.unfocusNode)
-                                                : FocusScope.of(context)
-                                                    .unfocus(),
-                                            child: Padding(
-                                              padding: MediaQuery.viewInsetsOf(
-                                                  context),
-                                              child: Container(
-                                                height: 600.0,
-                                                child: MapsRevisaoWidget(
-                                                  listaLatLngEmString: functions
-                                                      .acessarJsonListaDeterminadoValor(
-                                                          functions
-                                                              .sortListJson(
-                                                                  'contorno_grupo',
-                                                                  false,
-                                                                  FFAppState()
-                                                                      .contornoFazenda
-                                                                      .toList(),
-                                                                  getJsonField(
-                                                                    trGruposContornoFazendaItem,
-                                                                    r'''$.contorno_grupo''',
-                                                                  ).toString())
-                                                              ?.toList(),
-                                                          'latlng')!,
-                                                ),
-                                              ),
-                                            ),
-                                          );
-                                        },
-                                      ).then((value) => safeSetState(() {}));
-                                    },
-                                    child: Row(
-                                      mainAxisSize: MainAxisSize.max,
-                                      crossAxisAlignment:
-                                          CrossAxisAlignment.center,
-                                      children: [
-                                        Expanded(
-                                          flex: 2,
-                                          child: Container(
-                                            decoration: BoxDecoration(),
+                                );
+                              }
+                              return SingleChildScrollView(
+                                child: Column(
+                                  mainAxisSize: MainAxisSize.max,
+                                  children: List.generate(
+                                      trGruposContornoFazenda.length,
+                                      (trGruposContornoFazendaIndex) {
+                                    final trGruposContornoFazendaItem =
+                                        trGruposContornoFazenda[
+                                            trGruposContornoFazendaIndex];
+                                    return Padding(
+                                      padding: EdgeInsetsDirectional.fromSTEB(
+                                          16.0, 8.0, 16.0, 0.0),
+                                      child: Container(
+                                        width: double.infinity,
+                                        height: 78.0,
+                                        decoration: BoxDecoration(
+                                          color: FlutterFlowTheme.of(context)
+                                              .primaryBackground,
+                                          borderRadius:
+                                              BorderRadius.circular(12.0),
+                                          border: Border.all(
+                                            color: trGruposContornoFazendaItem ==
+                                                    FFAppState()
+                                                        .trOsServicoEmAndamento
+                                                ? FlutterFlowTheme.of(context)
+                                                    .customColor1
+                                                : FlutterFlowTheme.of(context)
+                                                    .lineColor,
+                                          ),
+                                        ),
+                                        child: Padding(
+                                          padding:
+                                              EdgeInsetsDirectional.fromSTEB(
+                                                  8.0, 8.0, 12.0, 8.0),
+                                          child: InkWell(
+                                            splashColor: Colors.transparent,
+                                            focusColor: Colors.transparent,
+                                            hoverColor: Colors.transparent,
+                                            highlightColor: Colors.transparent,
+                                            onTap: () async {
+                                              await showModalBottomSheet(
+                                                isScrollControlled: true,
+                                                backgroundColor:
+                                                    Colors.transparent,
+                                                enableDrag: false,
+                                                context: context,
+                                                builder: (context) {
+                                                  return GestureDetector(
+                                                    onTap: () => _model
+                                                            .unfocusNode
+                                                            .canRequestFocus
+                                                        ? FocusScope.of(context)
+                                                            .requestFocus(_model
+                                                                .unfocusNode)
+                                                        : FocusScope.of(context)
+                                                            .unfocus(),
+                                                    child: Padding(
+                                                      padding: MediaQuery
+                                                          .viewInsetsOf(
+                                                              context),
+                                                      child: Container(
+                                                        height: 600.0,
+                                                        child:
+                                                            MapsRevisaoWidget(
+                                                          listaLatLngEmString: functions
+                                                              .acessarJsonListaDeterminadoValor(
+                                                                  functions
+                                                                      .sortListJson(
+                                                                          'contorno_grupo',
+                                                                          false,
+                                                                          FFAppState()
+                                                                              .contornoFazenda
+                                                                              .toList(),
+                                                                          getJsonField(
+                                                                            trGruposContornoFazendaItem,
+                                                                            r'''$.contorno_grupo''',
+                                                                          ).toString())
+                                                                      ?.toList(),
+                                                                  'latlng')!,
+                                                        ),
+                                                      ),
+                                                    ),
+                                                  );
+                                                },
+                                              ).then((value) =>
+                                                  safeSetState(() {}));
+                                            },
                                             child: Row(
                                               mainAxisSize: MainAxisSize.max,
-                                              mainAxisAlignment:
-                                                  MainAxisAlignment.center,
+                                              crossAxisAlignment:
+                                                  CrossAxisAlignment.center,
                                               children: [
-                                                FaIcon(
-                                                  FontAwesomeIcons.route,
-                                                  color: FlutterFlowTheme.of(
-                                                          context)
-                                                      .secondaryText,
-                                                  size: 32.0,
+                                                Expanded(
+                                                  flex: 2,
+                                                  child: Container(
+                                                    decoration: BoxDecoration(),
+                                                    child: Row(
+                                                      mainAxisSize:
+                                                          MainAxisSize.max,
+                                                      mainAxisAlignment:
+                                                          MainAxisAlignment
+                                                              .center,
+                                                      children: [
+                                                        FaIcon(
+                                                          FontAwesomeIcons
+                                                              .route,
+                                                          color: FlutterFlowTheme
+                                                                  .of(context)
+                                                              .secondaryText,
+                                                          size: 32.0,
+                                                        ),
+                                                      ],
+                                                    ),
+                                                  ),
+                                                ),
+                                                Expanded(
+                                                  flex: 7,
+                                                  child: Stack(
+                                                    children: [
+                                                      ClipRRect(
+                                                        child: Container(
+                                                          decoration:
+                                                              BoxDecoration(),
+                                                          child: Row(
+                                                            mainAxisSize:
+                                                                MainAxisSize
+                                                                    .max,
+                                                            children: [
+                                                              Column(
+                                                                mainAxisSize:
+                                                                    MainAxisSize
+                                                                        .max,
+                                                                mainAxisAlignment:
+                                                                    MainAxisAlignment
+                                                                        .center,
+                                                                crossAxisAlignment:
+                                                                    CrossAxisAlignment
+                                                                        .start,
+                                                                children: [
+                                                                  Text(
+                                                                    '# ${getJsonField(
+                                                                      trGruposContornoFazendaItem,
+                                                                      r'''$.contorno_grupo''',
+                                                                    ).toString()}',
+                                                                    style: FlutterFlowTheme.of(
+                                                                            context)
+                                                                        .bodyLarge
+                                                                        .override(
+                                                                          fontFamily:
+                                                                              'Readex Pro',
+                                                                          fontSize:
+                                                                              12.0,
+                                                                        ),
+                                                                  ),
+                                                                  Text(
+                                                                    'Contorno'
+                                                                        .maybeHandleOverflow(
+                                                                      maxChars:
+                                                                          20,
+                                                                      replacement:
+                                                                          '…',
+                                                                    ),
+                                                                    style: FlutterFlowTheme.of(
+                                                                            context)
+                                                                        .bodyLarge
+                                                                        .override(
+                                                                          fontFamily:
+                                                                              'Readex Pro',
+                                                                          fontWeight:
+                                                                              FontWeight.w500,
+                                                                        ),
+                                                                  ),
+                                                                  Text(
+                                                                    '${functions.strToData(getJsonField(
+                                                                      trGruposContornoFazendaItem,
+                                                                      r'''$.dthr_fim''',
+                                                                    ).toString())} ás ${functions.strToHORA(getJsonField(
+                                                                      trGruposContornoFazendaItem,
+                                                                      r'''$.dthr_fim''',
+                                                                    ).toString())}',
+                                                                    style: FlutterFlowTheme.of(
+                                                                            context)
+                                                                        .bodyLarge
+                                                                        .override(
+                                                                          fontFamily:
+                                                                              'Readex Pro',
+                                                                          fontSize:
+                                                                              12.0,
+                                                                        ),
+                                                                  ),
+                                                                ],
+                                                              ),
+                                                            ],
+                                                          ),
+                                                        ),
+                                                      ),
+                                                      Align(
+                                                        alignment:
+                                                            AlignmentDirectional(
+                                                                1.00, -1.00),
+                                                        child: Padding(
+                                                          padding:
+                                                              EdgeInsetsDirectional
+                                                                  .fromSTEB(
+                                                                      0.0,
+                                                                      4.0,
+                                                                      8.0,
+                                                                      0.0),
+                                                          child: InkWell(
+                                                            splashColor: Colors
+                                                                .transparent,
+                                                            focusColor: Colors
+                                                                .transparent,
+                                                            hoverColor: Colors
+                                                                .transparent,
+                                                            highlightColor:
+                                                                Colors
+                                                                    .transparent,
+                                                            onTap: () async {
+                                                              setState(() {
+                                                                FFAppState()
+                                                                    .removeAtIndexFromGrupoContornoFazendas(
+                                                                        trGruposContornoFazendaIndex);
+                                                              });
+                                                            },
+                                                            child: Icon(
+                                                              Icons.clear,
+                                                              color: FlutterFlowTheme
+                                                                      .of(context)
+                                                                  .error,
+                                                              size: 24.0,
+                                                            ),
+                                                          ),
+                                                        ),
+                                                      ),
+                                                    ],
+                                                  ),
                                                 ),
                                               ],
                                             ),
                                           ),
                                         ),
-                                        Expanded(
-                                          flex: 7,
-                                          child: Stack(
-                                            children: [
-                                              ClipRRect(
-                                                child: Container(
-                                                  decoration: BoxDecoration(),
-                                                  child: Row(
-                                                    mainAxisSize:
-                                                        MainAxisSize.max,
-                                                    children: [
-                                                      Column(
-                                                        mainAxisSize:
-                                                            MainAxisSize.max,
-                                                        mainAxisAlignment:
-                                                            MainAxisAlignment
-                                                                .center,
-                                                        crossAxisAlignment:
-                                                            CrossAxisAlignment
-                                                                .start,
-                                                        children: [
-                                                          Text(
-                                                            '# ${getJsonField(
-                                                              trGruposContornoFazendaItem,
-                                                              r'''$.contorno_grupo''',
-                                                            ).toString()}',
-                                                            style: FlutterFlowTheme
-                                                                    .of(context)
-                                                                .bodyLarge
-                                                                .override(
-                                                                  fontFamily:
-                                                                      'Readex Pro',
-                                                                  fontSize:
-                                                                      12.0,
-                                                                ),
-                                                          ),
-                                                          Text(
-                                                            'Contorno'
-                                                                .maybeHandleOverflow(
-                                                              maxChars: 20,
-                                                              replacement: '…',
-                                                            ),
-                                                            style: FlutterFlowTheme
-                                                                    .of(context)
-                                                                .bodyLarge
-                                                                .override(
-                                                                  fontFamily:
-                                                                      'Readex Pro',
-                                                                  fontWeight:
-                                                                      FontWeight
-                                                                          .w500,
-                                                                ),
-                                                          ),
-                                                          Text(
-                                                            '${functions.strToData(getJsonField(
-                                                              trGruposContornoFazendaItem,
-                                                              r'''$.dthr_fim''',
-                                                            ).toString())} ás ${functions.strToHORA(getJsonField(
-                                                              trGruposContornoFazendaItem,
-                                                              r'''$.dthr_fim''',
-                                                            ).toString())}',
-                                                            style: FlutterFlowTheme
-                                                                    .of(context)
-                                                                .bodyLarge
-                                                                .override(
-                                                                  fontFamily:
-                                                                      'Readex Pro',
-                                                                  fontSize:
-                                                                      12.0,
-                                                                ),
-                                                          ),
-                                                        ],
-                                                      ),
-                                                    ],
-                                                  ),
-                                                ),
-                                              ),
-                                              Align(
-                                                alignment: AlignmentDirectional(
-                                                    1.00, -1.00),
-                                                child: Padding(
-                                                  padding: EdgeInsetsDirectional
-                                                      .fromSTEB(
-                                                          0.0, 4.0, 8.0, 0.0),
-                                                  child: InkWell(
-                                                    splashColor:
-                                                        Colors.transparent,
-                                                    focusColor:
-                                                        Colors.transparent,
-                                                    hoverColor:
-                                                        Colors.transparent,
-                                                    highlightColor:
-                                                        Colors.transparent,
-                                                    onTap: () async {
-                                                      setState(() {
-                                                        FFAppState()
-                                                            .removeAtIndexFromGrupoContornoFazendas(
-                                                                trGruposContornoFazendaIndex);
-                                                      });
-                                                    },
-                                                    child: Icon(
-                                                      Icons.clear,
-                                                      color:
-                                                          FlutterFlowTheme.of(
-                                                                  context)
-                                                              .error,
-                                                      size: 24.0,
-                                                    ),
-                                                  ),
-                                                ),
-                                              ),
-                                            ],
-                                          ),
+                                      ),
+                                    );
+                                  }),
+                                ),
+                              );
+                            },
+                          ),
+                          Align(
+                            alignment: AlignmentDirectional(0.00, 1.00),
+                            child: Row(
+                              mainAxisSize: MainAxisSize.max,
+                              mainAxisAlignment: MainAxisAlignment.center,
+                              crossAxisAlignment: CrossAxisAlignment.end,
+                              children: [
+                                FFButtonWidget(
+                                  onPressed: () async {
+                                    context.goNamed(
+                                      'ContornoDaFazenda',
+                                      queryParameters: {
+                                        'fazendaNome': serializeParam(
+                                          widget.nomeFazenda,
+                                          ParamType.String,
                                         ),
-                                      ],
+                                        'oservID': serializeParam(
+                                          widget.oservID,
+                                          ParamType.String,
+                                        ),
+                                        'idDoContorno': serializeParam(
+                                          valueOrDefault<String>(
+                                            FFAppState().contornoGrupoID !=
+                                                        null &&
+                                                    FFAppState()
+                                                            .contornoGrupoID !=
+                                                        ''
+                                                ? valueOrDefault<String>(
+                                                    FFAppState()
+                                                        .contornoGrupoID,
+                                                    '1',
+                                                  )
+                                                : '1',
+                                            '1',
+                                          ),
+                                          ParamType.String,
+                                        ),
+                                        'fazid': serializeParam(
+                                          widget.fazid,
+                                          ParamType.String,
+                                        ),
+                                      }.withoutNulls,
+                                      extra: <String, dynamic>{
+                                        kTransitionInfoKey: TransitionInfo(
+                                          hasTransition: true,
+                                          transitionType:
+                                              PageTransitionType.fade,
+                                          duration: Duration(milliseconds: 0),
+                                        ),
+                                      },
+                                    );
+                                  },
+                                  text: 'Iniciar contorno',
+                                  options: FFButtonOptions(
+                                    width: 200.0,
+                                    height: 50.0,
+                                    padding: EdgeInsetsDirectional.fromSTEB(
+                                        0.0, 0.0, 0.0, 0.0),
+                                    iconPadding: EdgeInsetsDirectional.fromSTEB(
+                                        0.0, 0.0, 0.0, 0.0),
+                                    color: FlutterFlowTheme.of(context).primary,
+                                    textStyle: FlutterFlowTheme.of(context)
+                                        .titleSmall
+                                        .override(
+                                          fontFamily: 'Readex Pro',
+                                          color: Colors.white,
+                                        ),
+                                    elevation: 3.0,
+                                    borderSide: BorderSide(
+                                      color: Colors.transparent,
+                                      width: 1.0,
                                     ),
+                                    borderRadius: BorderRadius.circular(100.0),
                                   ),
                                 ),
-                              ),
-                            );
-                          }),
-                        ),
-                      );
-                    },
-                  ),
-                ],
-              ),
-              Row(
-                mainAxisSize: MainAxisSize.max,
-                mainAxisAlignment: MainAxisAlignment.center,
-                children: [
-                  Padding(
-                    padding:
-                        EdgeInsetsDirectional.fromSTEB(0.0, 0.0, 0.0, 16.0),
-                    child: FFButtonWidget(
-                      onPressed: () async {
-                        context.goNamed(
-                          'ContornoDaFazenda',
-                          queryParameters: {
-                            'fazendaNome': serializeParam(
-                              widget.nomeFazenda,
-                              ParamType.String,
+                              ],
                             ),
-                            'oservID': serializeParam(
-                              widget.oservID,
-                              ParamType.String,
-                            ),
-                            'idDoContorno': serializeParam(
-                              valueOrDefault<String>(
-                                FFAppState().contornoGrupoID != null &&
-                                        FFAppState().contornoGrupoID != ''
-                                    ? valueOrDefault<String>(
-                                        FFAppState().contornoGrupoID,
-                                        '1',
-                                      )
-                                    : '1',
-                                '1',
-                              ),
-                              ParamType.String,
-                            ),
-                            'fazid': serializeParam(
-                              widget.fazid,
-                              ParamType.String,
-                            ),
-                          }.withoutNulls,
-                          extra: <String, dynamic>{
-                            kTransitionInfoKey: TransitionInfo(
-                              hasTransition: true,
-                              transitionType: PageTransitionType.fade,
-                              duration: Duration(milliseconds: 0),
-                            ),
-                          },
-                        );
-                      },
-                      text: 'Iniciar contorno',
-                      options: FFButtonOptions(
-                        width: 200.0,
-                        height: 50.0,
-                        padding:
-                            EdgeInsetsDirectional.fromSTEB(0.0, 0.0, 0.0, 0.0),
-                        iconPadding:
-                            EdgeInsetsDirectional.fromSTEB(0.0, 0.0, 0.0, 0.0),
-                        color: FlutterFlowTheme.of(context).primary,
-                        textStyle:
-                            FlutterFlowTheme.of(context).titleSmall.override(
-                                  fontFamily: 'Readex Pro',
-                                  color: Colors.white,
-                                ),
-                        elevation: 3.0,
-                        borderSide: BorderSide(
-                          color: Colors.transparent,
-                          width: 1.0,
-                        ),
-                        borderRadius: BorderRadius.circular(100.0),
+                          ),
+                        ],
                       ),
                     ),
                   ),
