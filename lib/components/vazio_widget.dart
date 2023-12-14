@@ -46,41 +46,68 @@ class _VazioWidgetState extends State<VazioWidget> {
       decoration: BoxDecoration(
         color: Color(0x00F1F4F8),
       ),
-      child: Padding(
-        padding: EdgeInsetsDirectional.fromSTEB(16.0, 24.0, 16.0, 24.0),
-        child: Row(
-          mainAxisSize: MainAxisSize.max,
-          mainAxisAlignment: MainAxisAlignment.center,
-          children: [
-            Expanded(
-              child: Column(
-                mainAxisSize: MainAxisSize.min,
-                mainAxisAlignment: MainAxisAlignment.center,
-                crossAxisAlignment: CrossAxisAlignment.start,
-                children: [
-                  Text(
-                    'Nenhum registro encontrado',
-                    textAlign: TextAlign.start,
-                    style: FlutterFlowTheme.of(context).headlineLarge.override(
-                          fontFamily: 'Outfit',
-                          color: Colors.black,
-                          fontSize: 20.0,
-                          fontWeight: FontWeight.w600,
-                        ),
-                  ),
-                  Text(
-                    'Por favor, tente novamente.',
-                    style: FlutterFlowTheme.of(context).headlineLarge.override(
-                          fontFamily: 'Readex Pro',
-                          color: Colors.black,
-                          fontSize: 16.0,
-                          fontWeight: FontWeight.w300,
-                        ),
-                  ),
-                ],
+      child: RefreshIndicator(
+        onRefresh: () async {
+          context.goNamed(
+            'SelecionarOS',
+            extra: <String, dynamic>{
+              kTransitionInfoKey: TransitionInfo(
+                hasTransition: true,
+                transitionType: PageTransitionType.fade,
+                duration: Duration(milliseconds: 0),
               ),
-            ),
-          ],
+            },
+          );
+        },
+        child: SingleChildScrollView(
+          physics: const AlwaysScrollableScrollPhysics(),
+          child: Column(
+            mainAxisSize: MainAxisSize.max,
+            mainAxisAlignment: MainAxisAlignment.center,
+            children: [
+              Padding(
+                padding: EdgeInsetsDirectional.fromSTEB(16.0, 24.0, 16.0, 24.0),
+                child: Row(
+                  mainAxisSize: MainAxisSize.max,
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  children: [
+                    Expanded(
+                      child: Column(
+                        mainAxisSize: MainAxisSize.min,
+                        mainAxisAlignment: MainAxisAlignment.center,
+                        crossAxisAlignment: CrossAxisAlignment.start,
+                        children: [
+                          Text(
+                            'Nenhum registro encontrado',
+                            textAlign: TextAlign.start,
+                            style: FlutterFlowTheme.of(context)
+                                .headlineLarge
+                                .override(
+                                  fontFamily: 'Outfit',
+                                  color: Colors.black,
+                                  fontSize: 20.0,
+                                  fontWeight: FontWeight.w600,
+                                ),
+                          ),
+                          Text(
+                            'Por favor, tente novamente.',
+                            style: FlutterFlowTheme.of(context)
+                                .headlineLarge
+                                .override(
+                                  fontFamily: 'Readex Pro',
+                                  color: Colors.black,
+                                  fontSize: 16.0,
+                                  fontWeight: FontWeight.w300,
+                                ),
+                          ),
+                        ],
+                      ),
+                    ),
+                  ],
+                ),
+              ),
+            ],
+          ),
         ),
       ),
     );

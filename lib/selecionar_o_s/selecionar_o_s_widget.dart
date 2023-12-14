@@ -672,9 +672,7 @@ class _SelecionarOSWidgetState extends State<SelecionarOSWidget>
                                 child: Container(
                                   width: double.infinity,
                                   height: double.infinity,
-                                  decoration: BoxDecoration(
-                                    color: Color(0xFFCB0E0E),
-                                  ),
+                                  decoration: BoxDecoration(),
                                   child: Visibility(
                                     visible: _model.searchBarController.text ==
                                             null ||
@@ -1767,7 +1765,7 @@ class _SelecionarOSWidgetState extends State<SelecionarOSWidget>
                                         return RefreshIndicator(
                                           onRefresh: () async {
                                             context.goNamed(
-                                              'SelecionarOS',
+                                              'blankRedirecona',
                                               extra: <String, dynamic>{
                                                 kTransitionInfoKey:
                                                     TransitionInfo(
