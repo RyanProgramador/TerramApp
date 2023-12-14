@@ -266,34 +266,18 @@ class _ListaContornosWidgetState extends State<ListaContornosWidget> {
                                                                   'latlng')!,
                                                           cor: valueOrDefault<
                                                               String>(
-                                                            (functions.acessarJsonListaDeterminadoValor(
-                                                                            functions
-                                                                                .sortListJson(
-                                                                                    'contorno_grupo',
-                                                                                    false,
-                                                                                    FFAppState().contornoFazenda.toList(),
-                                                                                    getJsonField(
-                                                                                      trGruposContornoFazendaItem,
-                                                                                      r'''$.contorno_grupo''',
-                                                                                    ).toString())
-                                                                                ?.toList(),
-                                                                            'cor') !=
-                                                                        null &&
-                                                                    functions
-                                                                        .acessarJsonListaDeterminadoValor(
-                                                                            functions
-                                                                                .sortListJson(
-                                                                                    'contorno_grupo',
-                                                                                    false,
-                                                                                    FFAppState().contornoFazenda.toList(),
-                                                                                    getJsonField(
-                                                                                      trGruposContornoFazendaItem,
-                                                                                      r'''$.contorno_grupo''',
-                                                                                    ).toString())
-                                                                                ?.toList(),
-                                                                            'cor')
-                                                                        .isNotEmpty)
-                                                                .toString(),
+                                                            functions.acessarJsonListaDeterminadoValor(
+                                                                functions
+                                                                    .sortListJson(
+                                                                        'contorno_grupo',
+                                                                        false,
+                                                                        FFAppState().contornoFazenda.toList(),
+                                                                        getJsonField(
+                                                                          trGruposContornoFazendaItem,
+                                                                          r'''$.contorno_grupo''',
+                                                                        ).toString())
+                                                                    ?.toList(),
+                                                                'cor')?[1],
                                                             '#ffffff',
                                                           ),
                                                         ),
