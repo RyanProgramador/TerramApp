@@ -73,12 +73,13 @@ class _ContornoMapRevisaoState extends State<ContornoMapRevisao> {
   }
 
   void _initializePolygons() {
+    var corSTR = widget.cor.toString();
     if (latLngList.isNotEmpty) {
       final polygon = google_maps.Polygon(
         polygonId: const google_maps.PolygonId('AreaPolygon'),
         points: latLngList,
-        fillColor: HexColor(widget.cor).withOpacity(0.2),
-        strokeColor: HexColor(widget.cor),
+        fillColor: HexColor("$corSTR").withOpacity(0.2),
+        strokeColor: HexColor("$corSTR"),
         strokeWidth: 3,
       );
 
