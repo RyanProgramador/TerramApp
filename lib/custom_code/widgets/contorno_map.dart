@@ -13,6 +13,8 @@ import 'dart:async';
 import 'package:geolocator/geolocator.dart';
 import 'package:google_maps_flutter/google_maps_flutter.dart' as google_maps;
 
+export 'package:terram_app/contorno_da_fazenda/contorno_da_fazenda_model.dart';
+
 class ContornoMap extends StatefulWidget {
   const ContornoMap({
     Key? key,
@@ -49,6 +51,9 @@ class _ContornoMapState extends State<ContornoMap> {
   late String oservid;
   late String idContorno;
   late String fazid;
+//isso é para mudar o estado de fora do widget custom
+  late ContornoDaFazendaModel _model;
+
   List<Map<String, dynamic>> dados = []; // Variável para armazenar dados
 
   void _onMapCreated(google_maps.GoogleMapController controller) {
@@ -157,14 +162,16 @@ class _ContornoMapState extends State<ContornoMap> {
           "faz_id": widget.fazid
         };
         FFAppState().grupoContornoFazendas.add(grupocontorno);
-        // FFAppState().contornoGrupoID = markerId.toString();
 
         FFAppState().contornoGrupoID =
             (int.parse(widget.idContorno ?? '123') + 1).toString();
 
         isVisivel = false;
-
         isLocationPaused = true;
+
+        setState(() {
+          _model.finalizou = !_model.finalizou;
+        });
       });
     }
   }

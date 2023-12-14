@@ -13,6 +13,8 @@ class ContornoDaFazendaModel extends FlutterFlowModel<ContornoDaFazendaWidget> {
 
   bool ativo = false;
 
+  bool finalizou = false;
+
   ///  State fields for stateful widgets in this page.
 
   final unfocusNode = FocusNode();
