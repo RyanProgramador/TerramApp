@@ -171,28 +171,31 @@ class _LoadingCompWidgetState extends State<LoadingCompWidget> {
                     mainAxisSize: MainAxisSize.max,
                     mainAxisAlignment: MainAxisAlignment.center,
                     children: [
-                      FlutterFlowTimer(
-                        initialTime: _model.timerMilliseconds,
-                        getDisplayTime: (value) =>
-                            StopWatchTimer.getDisplayTime(
-                          value,
-                          hours: false,
-                          milliSecond: false,
+                      Opacity(
+                        opacity: 0.0,
+                        child: FlutterFlowTimer(
+                          initialTime: _model.timerMilliseconds,
+                          getDisplayTime: (value) =>
+                              StopWatchTimer.getDisplayTime(
+                            value,
+                            hours: false,
+                            milliSecond: false,
+                          ),
+                          controller: _model.timerController,
+                          updateStateInterval: Duration(milliseconds: 1000),
+                          onChanged: (value, displayTime, shouldUpdate) {
+                            _model.timerMilliseconds = value;
+                            _model.timerValue = displayTime;
+                            if (shouldUpdate) setState(() {});
+                          },
+                          onEnded: () async {
+                            setState(() {
+                              _model.mostraNaTela = true;
+                            });
+                          },
+                          textAlign: TextAlign.start,
+                          style: FlutterFlowTheme.of(context).headlineSmall,
                         ),
-                        controller: _model.timerController,
-                        updateStateInterval: Duration(milliseconds: 1000),
-                        onChanged: (value, displayTime, shouldUpdate) {
-                          _model.timerMilliseconds = value;
-                          _model.timerValue = displayTime;
-                          if (shouldUpdate) setState(() {});
-                        },
-                        onEnded: () async {
-                          setState(() {
-                            _model.mostraNaTela = true;
-                          });
-                        },
-                        textAlign: TextAlign.start,
-                        style: FlutterFlowTheme.of(context).headlineSmall,
                       ),
                     ],
                   ),
