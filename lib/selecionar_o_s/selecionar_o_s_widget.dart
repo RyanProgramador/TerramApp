@@ -1671,10 +1671,7 @@ class _SelecionarOSWidgetState extends State<SelecionarOSWidget>
                                 child: Container(
                                   width: double.infinity,
                                   height: double.infinity,
-                                  decoration: BoxDecoration(
-                                    color: FlutterFlowTheme.of(context)
-                                        .customColor1,
-                                  ),
+                                  decoration: BoxDecoration(),
                                   child: Visibility(
                                     visible: _model.searchBarController.text !=
                                             null &&
