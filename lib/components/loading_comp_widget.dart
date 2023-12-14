@@ -36,9 +36,7 @@ class _LoadingCompWidgetState extends State<LoadingCompWidget> {
     // On component load action.
     SchedulerBinding.instance.addPostFrameCallback((_) async {
       unawaited(
-        () async {
-          setState(() {});
-        }(),
+        () async {}(),
       );
       _model.timerController.onStartTimer();
     });
