@@ -362,7 +362,7 @@ class _ListaContornosWidgetState extends State<ListaContornosWidget> {
                                                               trGruposContornoFazendaItem,
                                                               r'''$.cor''',
                                                             ).toString()),
-                                                            Color(0xFF2DFF06),
+                                                            Colors.black,
                                                           ),
                                                           size: 32.0,
                                                         ),
@@ -398,9 +398,6 @@ class _ListaContornosWidgetState extends State<ListaContornosWidget> {
                                                                     '# ${getJsonField(
                                                                       trGruposContornoFazendaItem,
                                                                       r'''$.contorno_grupo''',
-                                                                    ).toString()}  ${getJsonField(
-                                                                      trGruposContornoFazendaItem,
-                                                                      r'''$.cor''',
                                                                     ).toString()}',
                                                                     style: FlutterFlowTheme.of(
                                                                             context)
