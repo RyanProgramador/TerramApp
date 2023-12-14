@@ -12,7 +12,7 @@ class MapsRevisaoWidget extends StatefulWidget {
   const MapsRevisaoWidget({
     Key? key,
     required this.listaLatLngEmString,
-    required this.cor,
+    this.cor,
   }) : super(key: key);
 
   final List<String>? listaLatLngEmString;
