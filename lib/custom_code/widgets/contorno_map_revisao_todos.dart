@@ -18,12 +18,14 @@ class ContornoMapRevisaoTodos extends StatefulWidget {
     this.height,
     this.listaDeGrupos,
     this.listaDeContornos,
+    this.fazlatlng,
   }) : super(key: key);
 
   final double? width;
   final double? height;
   final List<dynamic>? listaDeGrupos;
   final List<dynamic>? listaDeContornos;
+  final google_maps.LatLng? fazlatlng;
 
   @override
   _ContornoMapRevisaoTodosState createState() =>
@@ -79,7 +81,7 @@ class _ContornoMapRevisaoTodosState extends State<ContornoMapRevisaoTodos> {
 
   @override
   Widget build(BuildContext context) {
-    final initialTarget =
+    final initialTarget = widget.fazlatlng ??
         google_maps.LatLng(0.0, 0.0); // Defina um ponto inicial adequado
 
     return Container(

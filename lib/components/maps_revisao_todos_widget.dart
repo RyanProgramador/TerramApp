@@ -13,10 +13,12 @@ class MapsRevisaoTodosWidget extends StatefulWidget {
     Key? key,
     this.listagrupoTodos,
     this.listaContornoTodos,
+    this.fazlatlng,
   }) : super(key: key);
 
   final List<dynamic>? listagrupoTodos;
   final List<dynamic>? listaContornoTodos;
+  final LatLng? fazlatlng;
 
   @override
   _MapsRevisaoTodosWidgetState createState() => _MapsRevisaoTodosWidgetState();

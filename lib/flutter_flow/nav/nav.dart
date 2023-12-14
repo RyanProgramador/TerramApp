@@ -156,6 +156,7 @@ GoRouter createRouter(AppStateNotifier appStateNotifier) => GoRouter(
                 nomeFazenda: params.getParam('nomeFazenda', ParamType.String),
                 oservID: params.getParam('oservID', ParamType.String),
                 fazid: params.getParam('fazid', ParamType.String),
+                fazlatlng: params.getParam('fazlatlng', ParamType.LatLng),
               ),
             ),
             FFRoute(

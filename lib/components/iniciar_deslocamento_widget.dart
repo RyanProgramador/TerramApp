@@ -1319,6 +1319,10 @@ class _IniciarDeslocamentoWidgetState extends State<IniciarDeslocamentoWidget> {
                                             widget.fazid,
                                             ParamType.String,
                                           ),
+                                          'fazlatlng': serializeParam(
+                                            widget.latlngFaz,
+                                            ParamType.LatLng,
+                                          ),
                                         }.withoutNulls,
                                       );
                                     },
