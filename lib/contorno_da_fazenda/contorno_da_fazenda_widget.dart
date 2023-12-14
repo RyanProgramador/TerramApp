@@ -173,6 +173,9 @@ class _ContornoDaFazendaWidgetState extends State<ContornoDaFazendaWidget> {
                                               .cast<dynamic>();
                                     });
                                     setState(() {});
+                                    setState(() {
+                                      _model.finalizou = true;
+                                    });
 
                                     context.goNamed(
                                       'ListaContornos',

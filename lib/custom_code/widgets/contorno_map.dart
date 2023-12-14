@@ -13,6 +13,7 @@ import 'dart:async';
 import 'package:geolocator/geolocator.dart';
 import 'package:google_maps_flutter/google_maps_flutter.dart' as google_maps;
 
+import '../../contorno_da_fazenda/contorno_da_fazenda_model.dart';
 export 'package:terram_app/contorno_da_fazenda/contorno_da_fazenda_model.dart';
 
 class ContornoMap extends StatefulWidget {
@@ -169,11 +170,53 @@ class _ContornoMapState extends State<ContornoMap> {
         isVisivel = false;
         isLocationPaused = true;
 
-        setState(() {
-          _model.finalizou = !_model.finalizou;
-        });
+        _model.finalizou = true;
       });
     }
+  }
+
+  void _setFinalizou() {
+    setState(() {
+      FFAppState().contornoFazenda =
+          FFAppState().contornoFazenda.toList().cast<dynamic>();
+      FFAppState().grupoContornoFazendas =
+          FFAppState().grupoContornoFazendas.toList().cast<dynamic>();
+    });
+
+    FFAppState().contornoFazenda =
+        FFAppState().contornoFazenda.toList().cast<dynamic>();
+    FFAppState().grupoContornoFazendas =
+        FFAppState().grupoContornoFazendas.toList().cast<dynamic>();
+
+    setState(() {
+      _model.finalizou = true;
+    });
+    _model.finalizou = true;
+
+    context.goNamed(
+      'ListaContornos',
+      queryParameters: {
+        'nomeFazenda': serializeParam(
+          "Ops errei aqui no nome da fazenda",
+          ParamType.String,
+        ),
+        'oservID': serializeParam(
+          widget.oservid,
+          ParamType.String,
+        ),
+        'fazid': serializeParam(
+          widget.fazid,
+          ParamType.String,
+        ),
+      }.withoutNulls,
+      extra: <String, dynamic>{
+        kTransitionInfoKey: TransitionInfo(
+          hasTransition: true,
+          transitionType: PageTransitionType.fade,
+          duration: Duration(milliseconds: 0),
+        ),
+      },
+    );
   }
 
   double _distanceToStart() {
@@ -223,9 +266,83 @@ class _ContornoMapState extends State<ContornoMap> {
     );
   }
 
+  void _showSuccessDialog(BuildContext context) {
+    showDialog(
+      context: context,
+      builder: (BuildContext context) {
+        return AlertDialog(
+          title: Text("Contorno finalizado com sucesso!"),
+          actions: [
+            TextButton(
+              onPressed: () {
+                Navigator.of(context).pop(); // Fecha o diálogo.
+              },
+              child: Text("OK"),
+            ),
+          ],
+        );
+      },
+    );
+  }
+
+  void _showDeletarContornoDialog(BuildContext context) {
+    showDialog(
+      context: context,
+      builder: (BuildContext context) {
+        return AlertDialog(
+          title: Text("Contorno finalizado com sucesso!"),
+          actions: [
+            TextButton(
+              onPressed: () {
+                Navigator.of(context).pop(); // Fecha o diálogo.
+              },
+              child: Text("Não"),
+            ),
+            TextButton(
+              onPressed: () {
+                _clearMarkersAndPolygons();
+                Navigator.of(context).pop(); // Fecha o diálogo.
+              },
+              child: Text("Sim"),
+            ),
+          ],
+        );
+      },
+    );
+  }
+
+  void _mensagemDeConfimacaoDeFinalizacao(BuildContext context) {
+    showDialog(
+      context: context,
+      builder: (BuildContext context) {
+        return AlertDialog(
+          title: Text("Deseja finalizar o contorno?"),
+          actions: [
+            TextButton(
+              onPressed: () {
+                Navigator.of(context).pop(); // Fecha o diálogo.
+              },
+              child: Text("Não"),
+            ),
+            TextButton(
+              onPressed: () {
+                _finalizeArea();
+                _setFinalizou();
+                Navigator.of(context).pop();
+                _showSuccessDialog(context); // Fecha o diálogo.
+              },
+              child: Text("Sim"),
+            ),
+          ],
+        );
+      },
+    );
+  }
+
   @override
   void initState() {
     super.initState();
+    _model = createModel(context, () => ContornoDaFazendaModel());
     _getCurrentLocation();
     // Update location every 2 seconds
     Timer.periodic(Duration(seconds: 2), (Timer t) => _getCurrentLocation());
@@ -307,7 +424,9 @@ class _ContornoMapState extends State<ContornoMap> {
               shape: CircleBorder(),
               backgroundColor: Color(0xFF00736D),
             ),
-            onPressed: _clearMarkersAndPolygons,
+            onPressed: () {
+              _showDeletarContornoDialog(context);
+            },
             child: Padding(
               padding: const EdgeInsets.all(8.0),
               child: Icon(
@@ -324,7 +443,9 @@ class _ContornoMapState extends State<ContornoMap> {
           child: Visibility(
             visible: _distanceToStart() <= 50 && isVisivel == true,
             child: ElevatedButton(
-              onPressed: _finalizeArea,
+              onPressed: () {
+                _mensagemDeConfimacaoDeFinalizacao(context);
+              },
               style: ElevatedButton.styleFrom(
                 shape: CircleBorder(),
                 backgroundColor: Color(0xFFC13131),
