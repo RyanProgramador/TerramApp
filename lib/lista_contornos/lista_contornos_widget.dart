@@ -174,13 +174,8 @@ class _ListaContornosWidgetState extends State<ListaContornosWidget> {
                               child: Container(
                                 height: 600.0,
                                 child: MapsRevisaoTodosWidget(
-                                  listagrupoTodos: functions.sortListJson(
-                                      'oserv_id',
-                                      true,
-                                      FFAppState()
-                                          .grupoContornoFazendas
-                                          .toList(),
-                                      widget.oservID),
+                                  listagrupoTodos:
+                                      FFAppState().grupoContornoFazendas,
                                   listaContornoTodos:
                                       FFAppState().contornoFazenda,
                                 ),
