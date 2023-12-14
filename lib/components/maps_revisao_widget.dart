@@ -12,9 +12,11 @@ class MapsRevisaoWidget extends StatefulWidget {
   const MapsRevisaoWidget({
     Key? key,
     required this.listaLatLngEmString,
+    required this.cor,
   }) : super(key: key);
 
   final List<String>? listaLatLngEmString;
+  final String? cor;
 
   @override
   _MapsRevisaoWidgetState createState() => _MapsRevisaoWidgetState();
@@ -56,14 +58,17 @@ class _MapsRevisaoWidgetState extends State<MapsRevisaoWidget> {
         child: Stack(
           alignment: AlignmentDirectional(0.0, 0.0),
           children: [
-            Container(
-              width: double.infinity,
-              height: double.infinity,
-              child: custom_widgets.ContornoMapRevisao(
+            Align(
+              alignment: AlignmentDirectional(0.00, 0.00),
+              child: Container(
                 width: double.infinity,
                 height: double.infinity,
-                listaDeLatLng: widget.listaLatLngEmString,
-                cor: Color(0xFF2DFF06),
+                child: custom_widgets.ContornoMapRevisao(
+                  width: double.infinity,
+                  height: double.infinity,
+                  listaDeLatLng: widget.listaLatLngEmString,
+                  cor: widget.cor,
+                ),
               ),
             ),
             Align(

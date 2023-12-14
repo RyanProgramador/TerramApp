@@ -19,6 +19,8 @@ class MapsRevisaoModel extends FlutterFlowModel<MapsRevisaoWidget> {
   void updateLatlngAtIndex(int index, Function(String) updateFn) =>
       latlng[index] = updateFn(latlng[index]);
 
+  Color? cor;
+
   /// Initialization and disposal methods.
 
   void initState(BuildContext context) {}

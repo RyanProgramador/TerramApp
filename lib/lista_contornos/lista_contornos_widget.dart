@@ -264,6 +264,34 @@ class _ListaContornosWidgetState extends State<ListaContornosWidget> {
                                                                           ).toString())
                                                                       ?.toList(),
                                                                   'latlng')!,
+                                                          cor: (functions.acessarJsonListaDeterminadoValor(
+                                                                          functions
+                                                                              .sortListJson(
+                                                                                  'contorno_grupo',
+                                                                                  false,
+                                                                                  FFAppState().contornoFazenda.toList(),
+                                                                                  getJsonField(
+                                                                                    trGruposContornoFazendaItem,
+                                                                                    r'''$.contorno_grupo''',
+                                                                                  ).toString())
+                                                                              ?.toList(),
+                                                                          'latlng') !=
+                                                                      null &&
+                                                                  functions
+                                                                      .acessarJsonListaDeterminadoValor(
+                                                                          functions
+                                                                              .sortListJson(
+                                                                                  'contorno_grupo',
+                                                                                  false,
+                                                                                  FFAppState().contornoFazenda.toList(),
+                                                                                  getJsonField(
+                                                                                    trGruposContornoFazendaItem,
+                                                                                    r'''$.contorno_grupo''',
+                                                                                  ).toString())
+                                                                              ?.toList(),
+                                                                          'latlng')
+                                                                      .isNotEmpty)
+                                                              .toString(),
                                                         ),
                                                       ),
                                                     ),

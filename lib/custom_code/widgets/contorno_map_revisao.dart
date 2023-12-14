@@ -23,7 +23,7 @@ class ContornoMapRevisao extends StatefulWidget {
   final double? width;
   final double? height;
   final List<String>? listaDeLatLng;
-  final Color? cor;
+  final String? cor;
 
   @override
   _ContornoMapRevisaoState createState() => _ContornoMapRevisaoState();
@@ -33,11 +33,17 @@ class HexColor extends Color {
   HexColor(final String hexColor) : super(_getColorFromHex(hexColor));
 
   static int _getColorFromHex(String hexColor) {
-    hexColor = hexColor.toUpperCase().replaceAll('#', '');
+    hexColor = _extractHexCode(hexColor);
     if (hexColor.length == 6) {
       hexColor = 'FF' + hexColor;
     }
-    return int.parse(hexColor, radix: 16);
+    return int.parse('0x$hexColor');
+  }
+
+  static String _extractHexCode(String input) {
+    RegExp regex = RegExp(r'([0-9A-Fa-f]{6}|[0-9A-Fa-f]{8})');
+    Match match = regex.firstMatch(input)!;
+    return match.group(0)!;
   }
 }
 
