@@ -149,7 +149,7 @@ class _TestecontornoWidgetState extends State<TestecontornoWidget> {
                           highlightColor: Colors.transparent,
                           onTap: () async {
                             context.goNamed(
-                              'MultiplePlacesPickerCopy',
+                              'testecontorno',
                               extra: <String, dynamic>{
                                 kTransitionInfoKey: TransitionInfo(
                                   hasTransition: true,
@@ -177,64 +177,12 @@ class _TestecontornoWidgetState extends State<TestecontornoWidget> {
                       decoration: BoxDecoration(
                         color: FlutterFlowTheme.of(context).secondaryBackground,
                       ),
-                      child: Builder(
-                        builder: (context) {
-                          final itemlatlng = FFAppState()
-                              .contornoFazenda
-                              .map((e) => getJsonField(
-                                    e,
-                                    r'''$.latlng''',
-                                  ))
-                              .toList();
-                          return SingleChildScrollView(
-                            child: Column(
-                              mainAxisSize: MainAxisSize.max,
-                              children: List.generate(itemlatlng.length,
-                                  (itemlatlngIndex) {
-                                final itemlatlngItem =
-                                    itemlatlng[itemlatlngIndex];
-                                return Text(
-                                  itemlatlngItem.toString(),
-                                  style:
-                                      FlutterFlowTheme.of(context).bodyMedium,
-                                );
-                              }),
-                            ),
-                          );
-                        },
-                      ),
-                    ),
-                  ),
-                  Expanded(
-                    flex: 8,
-                    child: Container(
-                      width: double.infinity,
-                      height: 400.0,
-                      decoration: BoxDecoration(
-                        color: FlutterFlowTheme.of(context).secondaryBackground,
-                      ),
                       child: Container(
                         width: double.infinity,
                         height: double.infinity,
-                        child: custom_widgets.ContornoMapRevisao(
+                        child: custom_widgets.Coleta(
                           width: double.infinity,
                           height: double.infinity,
-                          listaDeLatLng: FFAppState()
-                              .contornoFazenda
-                              .map((e) => getJsonField(
-                                    e,
-                                    r'''$.latlng''',
-                                  ))
-                              .toList()
-                              .where((e) =>
-                                  getJsonField(
-                                    e,
-                                    r'''$.contorno_grupo''',
-                                  ) ==
-                                  widget.contornoGrupo)
-                              .toList()
-                              .map((e) => e.toString())
-                              .toList(),
                         ),
                       ),
                     ),

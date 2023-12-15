@@ -8,3 +8,4 @@ export 'rota_final.dart' show RotaFinal;
 export 'loading_circle.dart' show LoadingCircle;
 export 'maps_offline.dart' show MapsOffline;
 export 'rota_final_offline.dart' show RotaFinalOffline;
+export 'coleta.dart' show Coleta;
