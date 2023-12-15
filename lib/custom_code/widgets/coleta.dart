@@ -16,10 +16,20 @@ class Coleta extends StatefulWidget {
     Key? key,
     this.width,
     this.height,
+    this.listaDeLatLng,
+    this.cor,
   }) : super(key: key);
 
   final double? width;
   final double? height;
+  final listaDeLatLng = [
+    "-29.915044039743226, -51.19579759024589",
+    "-29.91509095866606, -51.194011266055504",
+    "-29.913644281711285, -51.1939300695014",
+    "-29.913558262419595, -51.19556302242291"
+  ];
+  final cor = "#0000ff";
+
   @override
   _ColetaState createState() => _ColetaState();
 }
