@@ -160,7 +160,7 @@ class _LoginWidgetState extends State<LoginWidget> {
                               onLongPress: () async {
                                 setState(() {
                                   FFAppState().urlapicall =
-                                      'https://dev.conceittosistemas.com.br/scriptcase/app/Terram/ws_flutterflow/index.php';
+                                      'dev.conceittosistemas.com.br/scriptcase/app/Terram/ws_flutterflow/index.php';
                                 });
                                 ScaffoldMessenger.of(context).showSnackBar(
                                   SnackBar(
@@ -171,9 +171,9 @@ class _LoginWidgetState extends State<LoginWidget> {
                                             .primaryText,
                                       ),
                                     ),
-                                    duration: Duration(milliseconds: 4000),
+                                    duration: Duration(milliseconds: 1450),
                                     backgroundColor:
-                                        FlutterFlowTheme.of(context).secondary,
+                                        FlutterFlowTheme.of(context).primary,
                                   ),
                                 );
                               },

@@ -11,7 +11,7 @@ const _kPrivateApiFunctionName = 'ffPrivateApiCall';
 /// Start Sincronizar Group Code
 
 class SincronizarGroup {
-  static String baseUrl = '[]';
+  static String baseUrl = 'https://';
   static Map<String, String> headers = {};
   static OrdemDeServicoCall ordemDeServicoCall = OrdemDeServicoCall();
   static TrOsTecnicoCall trOsTecnicoCall = TrOsTecnicoCall();
@@ -736,7 +736,7 @@ class TrSincronizaTalhaoContornoCall {
 /// Start ModuloSegura Group Code
 
 class ModuloSeguraGroup {
-  static String baseUrl = '[]';
+  static String baseUrl = 'https://';
   static Map<String, String> headers = {};
   static LoginsCall loginsCall = LoginsCall();
   static EsqueceuSenhaCall esqueceuSenhaCall = EsqueceuSenhaCall();
