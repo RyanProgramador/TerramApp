@@ -162,6 +162,20 @@ class _LoginWidgetState extends State<LoginWidget> {
                                   FFAppState().urlapicall =
                                       'https://dev.conceittosistemas.com.br/scriptcase/app/Terram/ws_flutterflow/index.php';
                                 });
+                                ScaffoldMessenger.of(context).showSnackBar(
+                                  SnackBar(
+                                    content: Text(
+                                      'Conexão alterada com sucesso!',
+                                      style: TextStyle(
+                                        color: FlutterFlowTheme.of(context)
+                                            .primaryText,
+                                      ),
+                                    ),
+                                    duration: Duration(milliseconds: 4000),
+                                    backgroundColor:
+                                        FlutterFlowTheme.of(context).secondary,
+                                  ),
+                                );
                               },
                               child: Image.asset(
                                 'assets/images/terram-branco.png',
