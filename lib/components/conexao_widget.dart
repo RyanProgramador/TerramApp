@@ -146,6 +146,8 @@ class _ConexaoWidgetState extends State<ConexaoWidget> {
                           ),
                         ),
                         style: FlutterFlowTheme.of(context).bodyMedium,
+                        maxLines: 3,
+                        minLines: 2,
                         validator:
                             _model.textControllerValidator.asValidator(context),
                       ),
