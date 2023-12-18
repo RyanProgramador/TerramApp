@@ -2,6 +2,7 @@ import '/flutter_flow/flutter_flow_theme.dart';
 import '/flutter_flow/flutter_flow_util.dart';
 import '/flutter_flow/flutter_flow_widgets.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/scheduler.dart';
 import 'package:flutter/services.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:provider/provider.dart';
@@ -28,6 +29,26 @@ class _ConexaoWidgetState extends State<ConexaoWidget> {
   void initState() {
     super.initState();
     _model = createModel(context, () => ConexaoModel());
+
+    // On component load action.
+    SchedulerBinding.instance.addPostFrameCallback((_) async {
+      await showDialog(
+        context: context,
+        builder: (alertDialogContext) {
+          return AlertDialog(
+            title: Text('Atenção!'),
+            content: Text(
+                'O protocolo usado no momento é o \"http\" não sendo possível ainda alterar para o protocolo \"https\"!'),
+            actions: [
+              TextButton(
+                onPressed: () => Navigator.pop(alertDialogContext),
+                child: Text('Ok'),
+              ),
+            ],
+          );
+        },
+      );
+    });
 
     _model.textController ??=
         TextEditingController(text: FFAppState().urlapicall);

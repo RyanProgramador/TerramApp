@@ -11,8 +11,10 @@ const _kPrivateApiFunctionName = 'ffPrivateApiCall';
 /// Start Sincronizar Group Code
 
 class SincronizarGroup {
-  static String baseUrl = '[protocolo]';
-  static Map<String, String> headers = {};
+  static String baseUrl = 'http://';
+  static Map<String, String> headers = {
+    'http': '//',
+  };
   static OrdemDeServicoCall ordemDeServicoCall = OrdemDeServicoCall();
   static TrOsTecnicoCall trOsTecnicoCall = TrOsTecnicoCall();
   static TrFazendasCall trFazendasCall = TrFazendasCall();
@@ -30,7 +32,6 @@ class SincronizarGroup {
 class OrdemDeServicoCall {
   Future<ApiCallResponse> call({
     String? urlapicall = '',
-    String? protocolo = '',
   }) async {
     final ffApiRequestBody = '''
 {
@@ -40,7 +41,9 @@ class OrdemDeServicoCall {
       callName: 'ordemDeServico',
       apiUrl: '${SincronizarGroup.baseUrl}${urlapicall}',
       callType: ApiCallType.POST,
-      headers: {},
+      headers: {
+        'http': '//',
+      },
       params: {},
       body: ffApiRequestBody,
       bodyType: BodyType.JSON,
@@ -146,7 +149,6 @@ class OrdemDeServicoCall {
 class TrOsTecnicoCall {
   Future<ApiCallResponse> call({
     String? urlapicall = '',
-    String? protocolo = '',
   }) async {
     final ffApiRequestBody = '''
 {
@@ -156,7 +158,9 @@ class TrOsTecnicoCall {
       callName: 'trOsTecnico',
       apiUrl: '${SincronizarGroup.baseUrl}${urlapicall}',
       callType: ApiCallType.POST,
-      headers: {},
+      headers: {
+        'http': '//',
+      },
       params: {},
       body: ffApiRequestBody,
       bodyType: BodyType.JSON,
@@ -233,7 +237,6 @@ class TrOsTecnicoCall {
 class TrFazendasCall {
   Future<ApiCallResponse> call({
     String? urlapicall = '',
-    String? protocolo = '',
   }) async {
     final ffApiRequestBody = '''
 {
@@ -243,7 +246,9 @@ class TrFazendasCall {
       callName: 'trFazendas',
       apiUrl: '${SincronizarGroup.baseUrl}${urlapicall}',
       callType: ApiCallType.POST,
-      headers: {},
+      headers: {
+        'http': '//',
+      },
       params: {},
       body: ffApiRequestBody,
       bodyType: BodyType.JSON,
@@ -364,7 +369,6 @@ class TrFazendasCall {
 class TrServicosCall {
   Future<ApiCallResponse> call({
     String? urlapicall = '',
-    String? protocolo = '',
   }) async {
     final ffApiRequestBody = '''
 {
@@ -374,7 +378,9 @@ class TrServicosCall {
       callName: 'trServicos',
       apiUrl: '${SincronizarGroup.baseUrl}${urlapicall}',
       callType: ApiCallType.POST,
-      headers: {},
+      headers: {
+        'http': '//',
+      },
       params: {},
       body: ffApiRequestBody,
       bodyType: BodyType.JSON,
@@ -436,7 +442,6 @@ class TrOsServicosCall {
   Future<ApiCallResponse> call({
     String? tecId = '',
     String? urlapicall = '',
-    String? protocolo = '',
   }) async {
     final ffApiRequestBody = '''
 {
@@ -447,7 +452,9 @@ class TrOsServicosCall {
       callName: 'trOsServicos',
       apiUrl: '${SincronizarGroup.baseUrl}${urlapicall}',
       callType: ApiCallType.POST,
-      headers: {},
+      headers: {
+        'http': '//',
+      },
       params: {},
       body: ffApiRequestBody,
       bodyType: BodyType.JSON,
@@ -533,7 +540,6 @@ class TrOsServicosCall {
 class TrTecnicosCall {
   Future<ApiCallResponse> call({
     String? urlapicall = '',
-    String? protocolo = '',
   }) async {
     final ffApiRequestBody = '''
 {
@@ -543,7 +549,9 @@ class TrTecnicosCall {
       callName: 'trTecnicos',
       apiUrl: '${SincronizarGroup.baseUrl}${urlapicall}',
       callType: ApiCallType.POST,
-      headers: {},
+      headers: {
+        'http': '//',
+      },
       params: {},
       body: ffApiRequestBody,
       bodyType: BodyType.JSON,
@@ -606,7 +614,6 @@ class TrSincronizaCelularComBDCall {
     String? lista = '',
     String? listaGeo = '',
     String? urlapicall = '',
-    String? protocolo = '',
   }) async {
     final ffApiRequestBody = '''
 {
@@ -618,7 +625,9 @@ class TrSincronizaCelularComBDCall {
       callName: 'TrSincronizaCelularComBD',
       apiUrl: '${SincronizarGroup.baseUrl}${urlapicall}',
       callType: ApiCallType.POST,
-      headers: {},
+      headers: {
+        'http': '//',
+      },
       params: {},
       body: ffApiRequestBody,
       bodyType: BodyType.JSON,
@@ -643,7 +652,6 @@ class TrSincronizaCelularComBDCall {
 class TrEmpresasCall {
   Future<ApiCallResponse> call({
     String? urlapicall = '',
-    String? protocolo = '',
   }) async {
     final ffApiRequestBody = '''
 {
@@ -653,7 +661,9 @@ class TrEmpresasCall {
       callName: 'trEmpresas',
       apiUrl: '${SincronizarGroup.baseUrl}${urlapicall}',
       callType: ApiCallType.POST,
-      headers: {},
+      headers: {
+        'http': '//',
+      },
       params: {},
       body: ffApiRequestBody,
       bodyType: BodyType.JSON,
@@ -679,7 +689,6 @@ class TrEmpresasCall {
 class TrCFGCall {
   Future<ApiCallResponse> call({
     String? urlapicall = '',
-    String? protocolo = '',
   }) async {
     final ffApiRequestBody = '''
 {
@@ -689,7 +698,9 @@ class TrCFGCall {
       callName: 'trCFG',
       apiUrl: '${SincronizarGroup.baseUrl}${urlapicall}',
       callType: ApiCallType.POST,
-      headers: {},
+      headers: {
+        'http': '//',
+      },
       params: {},
       body: ffApiRequestBody,
       bodyType: BodyType.JSON,
@@ -716,7 +727,6 @@ class TrSincronizaTalhaoContornoCall {
     String? talhao = '',
     String? contorno = '',
     String? urlapicall = '',
-    String? protocolo = '',
   }) async {
     final ffApiRequestBody = '''
 {
@@ -728,7 +738,9 @@ class TrSincronizaTalhaoContornoCall {
       callName: 'trSincronizaTalhaoContorno',
       apiUrl: '${SincronizarGroup.baseUrl}${urlapicall}',
       callType: ApiCallType.POST,
-      headers: {},
+      headers: {
+        'http': '//',
+      },
       params: {},
       body: ffApiRequestBody,
       bodyType: BodyType.JSON,
@@ -746,7 +758,7 @@ class TrSincronizaTalhaoContornoCall {
 /// Start ModuloSegura Group Code
 
 class ModuloSeguraGroup {
-  static String baseUrl = '[protocolo]';
+  static String baseUrl = 'http://';
   static Map<String, String> headers = {};
   static LoginsCall loginsCall = LoginsCall();
   static EsqueceuSenhaCall esqueceuSenhaCall = EsqueceuSenhaCall();
