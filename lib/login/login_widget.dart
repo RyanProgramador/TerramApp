@@ -1,4 +1,5 @@
 import '/backend/api_requests/api_calls.dart';
+import '/components/conexao_widget.dart';
 import '/flutter_flow/flutter_flow_theme.dart';
 import '/flutter_flow/flutter_flow_util.dart';
 import '/flutter_flow/flutter_flow_widgets.dart';
@@ -158,10 +159,20 @@ class _LoginWidgetState extends State<LoginWidget> {
                               hoverColor: Colors.transparent,
                               highlightColor: Colors.transparent,
                               onLongPress: () async {
-                                setState(() {
-                                  FFAppState().urlapicall =
-                                      'dev.conceittosistemas.com.br/scriptcase/app/Terram/ws_flutterflow/index.php';
-                                });
+                                await showModalBottomSheet(
+                                  isScrollControlled: true,
+                                  backgroundColor: Colors.transparent,
+                                  enableDrag: false,
+                                  useSafeArea: true,
+                                  context: context,
+                                  builder: (context) {
+                                    return Padding(
+                                      padding: MediaQuery.viewInsetsOf(context),
+                                      child: ConexaoWidget(),
+                                    );
+                                  },
+                                ).then((value) => safeSetState(() {}));
+
                                 ScaffoldMessenger.of(context).showSnackBar(
                                   SnackBar(
                                     content: Text(
