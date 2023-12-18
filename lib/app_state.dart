@@ -346,7 +346,7 @@ class FFAppState extends ChangeNotifier {
   late SharedPreferences prefs;
 
   String _urlapicall =
-      'dev.conceittosistemas.com.br/scriptcase/app/Terram/ws_flutterflow/index.php';
+      'https://dev.conceittosistemas.com.br/scriptcase/app/Terram/ws_flutterflow/index.php';
   String get urlapicall => _urlapicall;
   set urlapicall(String _value) {
     _urlapicall = _value;

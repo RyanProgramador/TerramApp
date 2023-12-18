@@ -12,6 +12,7 @@ import 'package:flutter/material.dart';
 import 'dart:async';
 import 'package:google_maps_flutter/google_maps_flutter.dart' as google_maps;
 import 'package:geolocator/geolocator.dart';
+import 'package:http/http.dart' as http;
 
 class Coleta extends StatefulWidget {
   final double? width;
@@ -22,7 +23,8 @@ class Coleta extends StatefulWidget {
     this.width,
     this.height,
   }) : super(key: key);
-
+  final String customIconUrl =
+      'https://cdn-icons-png.flaticon.com/128/3253/3253113.png';
   @override
   _ColetaState createState() => _ColetaState();
 }
@@ -34,16 +36,53 @@ class _ColetaState extends State<Coleta> {
   Position? _currentPosition;
   StreamSubscription<Position>? _positionStreamSubscription;
   double? _userZoom;
+  double _currentZoom = 18.0; // Inicializa o zoom padrão
 
-  double _currentZoom = 15.0; // Inicializa o zoom padrão
   Map<String, bool> coletados = {};
+  Map<String, google_maps.LatLng> markerPositions = {};
+// ICONE
+
+  Uint8List? customIconBytes;
+  //IMPEDIR DE PEGAR NO MESMO LUGAR
+  Position? lastPosition;
+
+  Position? position;
+  double currentZoom = 20.0;
+  google_maps.LatLng? currentTarget;
+  //
+  dynamic listaDeLocais = [
+    {"grupo": "2", "latlng": "-29.915044, -51.195798"},
+    {"grupo": "2", "latlng": "-29.915091, -51.194011"},
+    {"grupo": "2", "latlng": "-29.913644, -51.193930"},
+    {"grupo": "2", "latlng": "-29.913558, -51.195563"},
+  ];
+  // Implementação de exemplo
+  List<Map<String, String>> latLngListMarcadores = [
+    {
+      "marcador_nome": "A",
+      "latlng_marcadores": "-29.914939224621914, -51.195420011983714"
+    },
+    {
+      "marcador_nome": "B",
+      "latlng_marcadores": "-29.91495486428177, -51.19437347868409"
+    },
+    {
+      "marcador_nome": "C",
+      "latlng_marcadores": "-29.914305816333297, -51.19483359246237"
+    },
+    {
+      "marcador_nome": "D",
+      "latlng_marcadores": "-29.91391738877275, -51.19420634010805"
+    },
+  ];
 
   @override
   void initState() {
     super.initState();
     _initializePolygons();
     _criaMarcadores();
-
+    _getCurrentLocation();
+    _loadCustomIcon();
     _trackUserLocation();
   }
 
@@ -54,18 +93,65 @@ class _ColetaState extends State<Coleta> {
     super.dispose();
   }
 
+  void _onMapCreated(google_maps.GoogleMapController controller) {
+    _googleMapController = controller;
+    _getCurrentLocation(); // Inicializar a posição atual ao criar o mapa
+  }
+
+  void _getCurrentLocation() async {
+    Position newLoc = await Geolocator.getCurrentPosition();
+    // Se for a primeira vez ou se a distância entre a última posição e a nova for >= 1m
+    if (lastPosition == null ||
+        Geolocator.distanceBetween(
+              lastPosition!.latitude,
+              lastPosition!.longitude,
+              newLoc.latitude,
+              newLoc.longitude,
+            ) >=
+            1) {
+      // Atualiza a última posição conhecida
+      lastPosition = newLoc;
+      double currentZoomLevel = await _googleMapController!.getZoomLevel();
+      if (_googleMapController != null) {
+        _googleMapController!.animateCamera(
+          google_maps.CameraUpdate.newCameraPosition(
+            google_maps.CameraPosition(
+              target: google_maps.LatLng(
+                newLoc.latitude,
+                newLoc.longitude,
+              ),
+              zoom: currentZoomLevel,
+            ),
+          ),
+        );
+      }
+      currentTarget = google_maps.LatLng(newLoc.latitude, newLoc.longitude);
+      currentZoom = 20;
+
+      setState(() {
+        position = newLoc;
+        _addUserMarker(google_maps.LatLng(newLoc.latitude, newLoc.longitude));
+      });
+    }
+  }
+
   void _onCameraMove(google_maps.CameraPosition position) {
     _currentZoom = position.zoom; // Atualiza o zoom atual
   }
 
+  //trnasforme json em um formato elegivel pelo sistema
+  List<google_maps.LatLng> _transformaJsonEmLatLng(List<dynamic> jsonList) {
+    return jsonList.map((jsonItem) {
+      List<String> latLng = jsonItem["latlng"].split(', ');
+      return google_maps.LatLng(
+          double.parse(latLng[0]), double.parse(latLng[1]));
+    }).toList();
+  }
+
   void _initializePolygons() {
     // Implementação de exemplo
-    List<google_maps.LatLng> latLngList = [
-      google_maps.LatLng(-29.915044, -51.195798),
-      google_maps.LatLng(-29.915091, -51.194011),
-      google_maps.LatLng(-29.913644, -51.193930),
-      google_maps.LatLng(-29.913558, -51.195563),
-    ];
+    List<google_maps.LatLng> latLngList =
+        _transformaJsonEmLatLng(listaDeLocais);
     String cor = "#000000";
 
     final polygon = google_maps.Polygon(
@@ -82,22 +168,6 @@ class _ColetaState extends State<Coleta> {
   }
 
   void _criaMarcadores() {
-    // Implementação de exemplo
-    List<Map<String, String>> latLngListMarcadores = [
-      {
-        "marcador_nome": "A",
-        "latlng_marcadores": "-29.914939224621914, -51.195420011983714"
-      },
-      {
-        "marcador_nome": "B",
-        "latlng_marcadores": "-29.91495486428177, -51.19437347868409"
-      },
-      {
-        "marcador_nome": "C",
-        "latlng_marcadores": "-29.914305816333297, -51.19483359246237"
-      },
-    ];
-
     for (var marcador in latLngListMarcadores) {
       var latlng = marcador["latlng_marcadores"]!.split(",");
       var marker = google_maps.Marker(
@@ -118,12 +188,31 @@ class _ColetaState extends State<Coleta> {
     }
   }
 
+  Future<void> _loadCustomIcon() async {
+    final String customIconUrl =
+        'https://cdn3.iconfinder.com/data/icons/map-14/144/Map-10-128.png';
+    try {
+      final response = await http.get(Uri.parse(customIconUrl));
+      if (response.statusCode == 200) {
+        setState(() {
+          customIconBytes = response.bodyBytes;
+        });
+      } else {
+        print(
+            "Failed to load custom icon. Status code: ${response.statusCode}");
+      }
+    } catch (e) {
+      print("Error loading custom icon: $e");
+    }
+  }
+
   void _addUserMarker(google_maps.LatLng position) {
     final userLocationMarker = google_maps.Marker(
       markerId: const google_maps.MarkerId('current_location'),
       position: position,
-      icon: google_maps.BitmapDescriptor
-          .defaultMarker, // Substitua por um ícone personalizado se necessário
+      icon: customIconBytes == null
+          ? google_maps.BitmapDescriptor.defaultMarker
+          : google_maps.BitmapDescriptor.fromBytes(customIconBytes!),
     );
 
     setState(() {
@@ -136,10 +225,28 @@ class _ColetaState extends State<Coleta> {
       (Position position) {
         setState(() {
           _currentPosition = position;
+          _updateUserLocationMarker(
+              position); // Método para atualizar o marcador
           _updateMapLocation();
         });
       },
     );
+  }
+
+  void _updateUserLocationMarker(Position position) {
+    final userLocationMarker = google_maps.Marker(
+      markerId: const google_maps.MarkerId('current_location'),
+      position: google_maps.LatLng(position.latitude, position.longitude),
+      icon: customIconBytes == null
+          ? google_maps.BitmapDescriptor.defaultMarker
+          : google_maps.BitmapDescriptor.fromBytes(customIconBytes!),
+    );
+
+    setState(() {
+      markers.removeWhere((marker) =>
+          marker.markerId == google_maps.MarkerId('current_location'));
+      markers.add(userLocationMarker);
+    });
   }
 
   void _updateMapLocation() {
@@ -149,7 +256,7 @@ class _ColetaState extends State<Coleta> {
           google_maps.CameraPosition(
             target: google_maps.LatLng(
                 _currentPosition!.latitude, _currentPosition!.longitude),
-            zoom: _currentZoom ?? 18,
+            zoom: _currentZoom,
           ),
         ),
       );
@@ -166,7 +273,12 @@ class _ColetaState extends State<Coleta> {
             mainAxisSize: MainAxisSize.min,
             children: <Widget>[
               ElevatedButton(
-                child: Text("Coletar"),
+                child: Text(
+                  "Coletar ponto",
+                  style: TextStyle(
+                    color: Colors.black, // Defina a cor do texto como preto
+                  ),
+                ),
                 onPressed: () {
                   Navigator.of(context).pop();
                   _ontapColetar(idMarcador);
@@ -174,7 +286,12 @@ class _ColetaState extends State<Coleta> {
                 style: ElevatedButton.styleFrom(primary: Colors.green),
               ),
               ElevatedButton(
-                child: Text("Informar Inacessibilidade"),
+                child: Text(
+                  "Informar Inacessibilidade",
+                  style: TextStyle(
+                    color: Colors.black, // Defina a cor do texto como preto
+                  ),
+                ),
                 onPressed: () {
                   Navigator.of(context).pop();
                   _ontapInacessivel(idMarcador);
@@ -183,17 +300,20 @@ class _ColetaState extends State<Coleta> {
               ),
             ],
           ),
-          actions: <Widget>[
-            Align(
-              alignment: Alignment.topRight,
-              child: IconButton(
-                icon: Icon(Icons.close),
-                onPressed: () {
-                  Navigator.of(context).pop();
-                },
-              ),
-            ),
-          ],
+          // actions: <Widget>[
+          //   Stack(
+          //     alignment: Alignment.topRight,
+          //     children: [
+          //       IconButton(
+          //         icon: Icon(Icons.close),
+          //         onPressed: () {
+          //           Navigator.of(context).pop();
+          //         },
+          //       ),
+          //       // Adicione outros widgets que deseja sobrepor aqui
+          //     ],
+          //   ),
+          // ],
         );
       },
     );
@@ -201,8 +321,24 @@ class _ColetaState extends State<Coleta> {
 
   void _ontapColetar(String marcadorNome) {
     setState(() {
-      coletados[marcadorNome] = true;
-      _updateMarkerColor(marcadorNome, true);
+      var markerPos = markerPositions[marcadorNome];
+      if (markerPos != null) {
+        var newMarker = google_maps.Marker(
+          markerId: google_maps.MarkerId(marcadorNome),
+          position: markerPos,
+          icon: google_maps.BitmapDescriptor.defaultMarkerWithHue(
+              google_maps.BitmapDescriptor.hueGreen),
+          onTap: () {
+            _showModalOptions(marcadorNome);
+          },
+          draggable: false,
+        );
+        markers.removeWhere((m) => m.markerId.value == marcadorNome);
+        markers.add(newMarker);
+      } else {
+        coletados[marcadorNome] = true;
+        _updateMarkerColor(marcadorNome, true);
+      }
     });
   }
 
@@ -253,7 +389,11 @@ class _ColetaState extends State<Coleta> {
     setState(() {
       markers = markers.map((m) {
         if (m.markerId.value == marcadorNome) {
-          return m.copyWith(draggableParam: true);
+          return m.copyWith(
+              draggableParam: true,
+              onDragEndParam: (newPosition) {
+                markerPositions[marcadorNome] = newPosition;
+              });
         }
         return m;
       }).toSet();
@@ -263,6 +403,7 @@ class _ColetaState extends State<Coleta> {
   void _removeMarker(String marcadorNome) {
     setState(() {
       markers.removeWhere((m) => m.markerId.value == marcadorNome);
+      markerPositions.remove(marcadorNome);
     });
   }
 
@@ -278,9 +419,9 @@ class _ColetaState extends State<Coleta> {
         ),
         onMapCreated: (controller) {
           _googleMapController = controller;
+          _onMapCreated(controller); // Passe os argumentos necessários aqui
         },
         onCameraMove: _onCameraMove,
-        // Monitora movimentos da câmera
         polygons: polygons,
         markers: markers,
         mapType: google_maps.MapType.satellite,

@@ -1,5 +1,6 @@
 import '/backend/api_requests/api_calls.dart';
 import '/components/carregando_os_widget.dart';
+import '/components/conexao_widget.dart';
 import '/flutter_flow/flutter_flow_theme.dart';
 import '/flutter_flow/flutter_flow_util.dart';
 import '/flutter_flow/flutter_flow_widgets.dart';
@@ -105,6 +106,56 @@ class _ConfiguracoesWidgetState extends State<ConfiguracoesWidget> {
                         shrinkWrap: true,
                         scrollDirection: Axis.vertical,
                         children: [
+                          Padding(
+                            padding: EdgeInsetsDirectional.fromSTEB(
+                                0.0, 0.0, 0.0, 1.0),
+                            child: InkWell(
+                              splashColor: Colors.transparent,
+                              focusColor: Colors.transparent,
+                              hoverColor: Colors.transparent,
+                              highlightColor: Colors.transparent,
+                              onTap: () async {
+                                await showModalBottomSheet(
+                                  isScrollControlled: true,
+                                  backgroundColor: Colors.transparent,
+                                  enableDrag: false,
+                                  useSafeArea: true,
+                                  context: context,
+                                  builder: (context) {
+                                    return Padding(
+                                      padding: MediaQuery.viewInsetsOf(context),
+                                      child: ConexaoWidget(),
+                                    );
+                                  },
+                                ).then((value) => safeSetState(() {}));
+                              },
+                              child: Container(
+                                width: double.infinity,
+                                decoration: BoxDecoration(),
+                                child: Padding(
+                                  padding: EdgeInsets.all(16.0),
+                                  child: Row(
+                                    mainAxisSize: MainAxisSize.max,
+                                    mainAxisAlignment:
+                                        MainAxisAlignment.spaceBetween,
+                                    children: [
+                                      Text(
+                                        'Configurações de Conexão',
+                                        style: FlutterFlowTheme.of(context)
+                                            .titleLarge,
+                                      ),
+                                      Icon(
+                                        Icons.chevron_right_rounded,
+                                        color: FlutterFlowTheme.of(context)
+                                            .secondaryText,
+                                        size: 24.0,
+                                      ),
+                                    ],
+                                  ),
+                                ),
+                              ),
+                            ),
+                          ),
                           Padding(
                             padding: EdgeInsetsDirectional.fromSTEB(
                                 0.0, 0.0, 0.0, 1.0),
