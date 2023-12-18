@@ -211,7 +211,8 @@ class _ColetaState extends State<Coleta> {
       markerId: const google_maps.MarkerId('current_location'),
       position: position,
       icon: customIconBytes == null
-          ? google_maps.BitmapDescriptor.defaultMarker
+          ? google_maps.BitmapDescriptor.defaultMarkerWithHue(
+              google_maps.BitmapDescriptor.hueBlue)
           : google_maps.BitmapDescriptor.fromBytes(customIconBytes!),
     );
 
