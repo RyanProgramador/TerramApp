@@ -152,11 +152,23 @@ class _LoginWidgetState extends State<LoginWidget> {
                         children: [
                           Align(
                             alignment: AlignmentDirectional(0.0, 0.0),
-                            child: Image.asset(
-                              'assets/images/terram-branco.png',
-                              width: 382.0,
-                              height: 82.0,
-                              fit: BoxFit.cover,
+                            child: InkWell(
+                              splashColor: Colors.transparent,
+                              focusColor: Colors.transparent,
+                              hoverColor: Colors.transparent,
+                              highlightColor: Colors.transparent,
+                              onLongPress: () async {
+                                setState(() {
+                                  FFAppState().urlapicall =
+                                      'https://dev.conceittosistemas.com.br/scriptcase/app/Terram/ws_flutterflow/index.php';
+                                });
+                              },
+                              child: Image.asset(
+                                'assets/images/terram-branco.png',
+                                width: 382.0,
+                                height: 82.0,
+                                fit: BoxFit.cover,
+                              ),
                             ),
                           ),
                         ],
