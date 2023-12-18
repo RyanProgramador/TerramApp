@@ -24,6 +24,9 @@ class FFAppState extends ChangeNotifier {
       _urlapicall = prefs.getString('ff_urlapicall') ?? _urlapicall;
     });
     _safeInit(() {
+      _protocolo = prefs.getString('ff_protocolo') ?? _protocolo;
+    });
+    _safeInit(() {
       _tecID = prefs.getString('ff_tecID') ?? _tecID;
     });
     _safeInit(() {
@@ -351,6 +354,13 @@ class FFAppState extends ChangeNotifier {
   set urlapicall(String _value) {
     _urlapicall = _value;
     prefs.setString('ff_urlapicall', _value);
+  }
+
+  String _protocolo = 'https://';
+  String get protocolo => _protocolo;
+  set protocolo(String _value) {
+    _protocolo = _value;
+    prefs.setString('ff_protocolo', _value);
   }
 
   String _tecID = '';
