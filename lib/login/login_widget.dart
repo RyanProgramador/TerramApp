@@ -161,6 +161,7 @@ class _LoginWidgetState extends State<LoginWidget> {
                                 setState(() {
                                   FFAppState().urlapicall =
                                       'dev.conceittosistemas.com.br/scriptcase/app/Terram/ws_flutterflow/index.php';
+                                  FFAppState().protocolo = 'https://';
                                 });
                                 ScaffoldMessenger.of(context).showSnackBar(
                                   SnackBar(
@@ -337,6 +338,7 @@ class _LoginWidgetState extends State<LoginWidget> {
                                                   .passwordLoginController.text,
                                               urlapicall:
                                                   FFAppState().urlapicall,
+                                              protocolo: FFAppState().protocolo,
                                             );
                                             _shouldSetState = true;
                                             if (ModuloSeguraGroup.loginsCall
@@ -670,6 +672,8 @@ class _LoginWidgetState extends State<LoginWidget> {
                                                             .text,
                                                         urlapicall: FFAppState()
                                                             .urlapicall,
+                                                        protocolo: FFAppState()
+                                                            .protocolo,
                                                       );
                                                       _shouldSetState = true;
                                                       if (ModuloSeguraGroup

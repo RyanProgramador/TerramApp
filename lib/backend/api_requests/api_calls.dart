@@ -11,7 +11,7 @@ const _kPrivateApiFunctionName = 'ffPrivateApiCall';
 /// Start Sincronizar Group Code
 
 class SincronizarGroup {
-  static String baseUrl = 'https://';
+  static String baseUrl = '[protocolo]';
   static Map<String, String> headers = {};
   static OrdemDeServicoCall ordemDeServicoCall = OrdemDeServicoCall();
   static TrOsTecnicoCall trOsTecnicoCall = TrOsTecnicoCall();
@@ -30,6 +30,7 @@ class SincronizarGroup {
 class OrdemDeServicoCall {
   Future<ApiCallResponse> call({
     String? urlapicall = '',
+    String? protocolo = '',
   }) async {
     final ffApiRequestBody = '''
 {
@@ -145,6 +146,7 @@ class OrdemDeServicoCall {
 class TrOsTecnicoCall {
   Future<ApiCallResponse> call({
     String? urlapicall = '',
+    String? protocolo = '',
   }) async {
     final ffApiRequestBody = '''
 {
@@ -231,6 +233,7 @@ class TrOsTecnicoCall {
 class TrFazendasCall {
   Future<ApiCallResponse> call({
     String? urlapicall = '',
+    String? protocolo = '',
   }) async {
     final ffApiRequestBody = '''
 {
@@ -361,6 +364,7 @@ class TrFazendasCall {
 class TrServicosCall {
   Future<ApiCallResponse> call({
     String? urlapicall = '',
+    String? protocolo = '',
   }) async {
     final ffApiRequestBody = '''
 {
@@ -432,6 +436,7 @@ class TrOsServicosCall {
   Future<ApiCallResponse> call({
     String? tecId = '',
     String? urlapicall = '',
+    String? protocolo = '',
   }) async {
     final ffApiRequestBody = '''
 {
@@ -528,6 +533,7 @@ class TrOsServicosCall {
 class TrTecnicosCall {
   Future<ApiCallResponse> call({
     String? urlapicall = '',
+    String? protocolo = '',
   }) async {
     final ffApiRequestBody = '''
 {
@@ -600,6 +606,7 @@ class TrSincronizaCelularComBDCall {
     String? lista = '',
     String? listaGeo = '',
     String? urlapicall = '',
+    String? protocolo = '',
   }) async {
     final ffApiRequestBody = '''
 {
@@ -636,6 +643,7 @@ class TrSincronizaCelularComBDCall {
 class TrEmpresasCall {
   Future<ApiCallResponse> call({
     String? urlapicall = '',
+    String? protocolo = '',
   }) async {
     final ffApiRequestBody = '''
 {
@@ -671,6 +679,7 @@ class TrEmpresasCall {
 class TrCFGCall {
   Future<ApiCallResponse> call({
     String? urlapicall = '',
+    String? protocolo = '',
   }) async {
     final ffApiRequestBody = '''
 {
@@ -707,6 +716,7 @@ class TrSincronizaTalhaoContornoCall {
     String? talhao = '',
     String? contorno = '',
     String? urlapicall = '',
+    String? protocolo = '',
   }) async {
     final ffApiRequestBody = '''
 {
@@ -736,7 +746,7 @@ class TrSincronizaTalhaoContornoCall {
 /// Start ModuloSegura Group Code
 
 class ModuloSeguraGroup {
-  static String baseUrl = 'https://';
+  static String baseUrl = '[protocolo]';
   static Map<String, String> headers = {};
   static LoginsCall loginsCall = LoginsCall();
   static EsqueceuSenhaCall esqueceuSenhaCall = EsqueceuSenhaCall();
@@ -747,6 +757,7 @@ class LoginsCall {
     String? login = '',
     String? senha = '',
     String? urlapicall = '',
+    String? protocolo = '',
   }) async {
     final ffApiRequestBody = '''
 {
@@ -792,6 +803,7 @@ class EsqueceuSenhaCall {
   Future<ApiCallResponse> call({
     String? login = '',
     String? urlapicall = '',
+    String? protocolo = '',
   }) async {
     final ffApiRequestBody = '''
 {
