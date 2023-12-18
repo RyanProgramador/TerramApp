@@ -70,6 +70,7 @@ class _ConfiguracoesWidgetState extends State<ConfiguracoesWidget> {
             mainAxisSize: MainAxisSize.max,
             children: [
               Expanded(
+                flex: 3,
                 child: Column(
                   mainAxisSize: MainAxisSize.min,
                   crossAxisAlignment: CrossAxisAlignment.start,
@@ -487,6 +488,7 @@ class _ConfiguracoesWidgetState extends State<ConfiguracoesWidget> {
                 ),
               ),
               Expanded(
+                flex: 2,
                 child: Align(
                   alignment: AlignmentDirectional(0.0, 0.0),
                   child: Container(
