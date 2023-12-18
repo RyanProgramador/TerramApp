@@ -1,6 +1,7 @@
 import '/flutter_flow/flutter_flow_theme.dart';
 import '/flutter_flow/flutter_flow_util.dart';
 import '/flutter_flow/flutter_flow_widgets.dart';
+import '/flutter_flow/custom_functions.dart' as functions;
 import 'package:flutter/material.dart';
 import 'package:flutter/scheduler.dart';
 import 'package:flutter/services.dart';
@@ -51,7 +52,7 @@ class _ConexaoWidgetState extends State<ConexaoWidget> {
     });
 
     _model.textController ??=
-        TextEditingController(text: FFAppState().urlapicall);
+        TextEditingController(text: 'http${FFAppState().urlapicall}');
     _model.textFieldFocusNode ??= FocusNode();
   }
 
@@ -185,7 +186,8 @@ class _ConexaoWidgetState extends State<ConexaoWidget> {
                   FFButtonWidget(
                     onPressed: () async {
                       FFAppState().update(() {
-                        FFAppState().urlapicall = _model.textController.text;
+                        FFAppState().urlapicall = functions
+                            .protocoloComSeguranca(_model.textController.text)!;
                       });
                       ScaffoldMessenger.of(context).showSnackBar(
                         SnackBar(

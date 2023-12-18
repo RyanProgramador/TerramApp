@@ -161,7 +161,6 @@ class _LoginWidgetState extends State<LoginWidget> {
                                 setState(() {
                                   FFAppState().urlapicall =
                                       'dev.conceittosistemas.com.br/scriptcase/app/Terram/ws_flutterflow/index.php';
-                                  FFAppState().protocolo = 'https://';
                                 });
                                 ScaffoldMessenger.of(context).showSnackBar(
                                   SnackBar(

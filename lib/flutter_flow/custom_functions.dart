@@ -820,3 +820,11 @@ Color? transformaStringEmCor(String? stringQueContemCor) {
 
   return Color(int.parse('0x$hexColor'));
 }
+
+String? protocoloComSeguranca(String? url) {
+  if (url != null) {
+    url = url.replaceAll("http", ""); // Remove "http://"
+  }
+
+  return url;
+}

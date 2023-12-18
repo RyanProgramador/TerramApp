@@ -11,10 +11,8 @@ const _kPrivateApiFunctionName = 'ffPrivateApiCall';
 /// Start Sincronizar Group Code
 
 class SincronizarGroup {
-  static String baseUrl = 'http://';
-  static Map<String, String> headers = {
-    'http': '//',
-  };
+  static String baseUrl = 'http';
+  static Map<String, String> headers = {};
   static OrdemDeServicoCall ordemDeServicoCall = OrdemDeServicoCall();
   static TrOsTecnicoCall trOsTecnicoCall = TrOsTecnicoCall();
   static TrFazendasCall trFazendasCall = TrFazendasCall();
@@ -41,9 +39,7 @@ class OrdemDeServicoCall {
       callName: 'ordemDeServico',
       apiUrl: '${SincronizarGroup.baseUrl}${urlapicall}',
       callType: ApiCallType.POST,
-      headers: {
-        'http': '//',
-      },
+      headers: {},
       params: {},
       body: ffApiRequestBody,
       bodyType: BodyType.JSON,
@@ -158,9 +154,7 @@ class TrOsTecnicoCall {
       callName: 'trOsTecnico',
       apiUrl: '${SincronizarGroup.baseUrl}${urlapicall}',
       callType: ApiCallType.POST,
-      headers: {
-        'http': '//',
-      },
+      headers: {},
       params: {},
       body: ffApiRequestBody,
       bodyType: BodyType.JSON,
@@ -246,9 +240,7 @@ class TrFazendasCall {
       callName: 'trFazendas',
       apiUrl: '${SincronizarGroup.baseUrl}${urlapicall}',
       callType: ApiCallType.POST,
-      headers: {
-        'http': '//',
-      },
+      headers: {},
       params: {},
       body: ffApiRequestBody,
       bodyType: BodyType.JSON,
@@ -378,9 +370,7 @@ class TrServicosCall {
       callName: 'trServicos',
       apiUrl: '${SincronizarGroup.baseUrl}${urlapicall}',
       callType: ApiCallType.POST,
-      headers: {
-        'http': '//',
-      },
+      headers: {},
       params: {},
       body: ffApiRequestBody,
       bodyType: BodyType.JSON,
@@ -452,9 +442,7 @@ class TrOsServicosCall {
       callName: 'trOsServicos',
       apiUrl: '${SincronizarGroup.baseUrl}${urlapicall}',
       callType: ApiCallType.POST,
-      headers: {
-        'http': '//',
-      },
+      headers: {},
       params: {},
       body: ffApiRequestBody,
       bodyType: BodyType.JSON,
@@ -549,9 +537,7 @@ class TrTecnicosCall {
       callName: 'trTecnicos',
       apiUrl: '${SincronizarGroup.baseUrl}${urlapicall}',
       callType: ApiCallType.POST,
-      headers: {
-        'http': '//',
-      },
+      headers: {},
       params: {},
       body: ffApiRequestBody,
       bodyType: BodyType.JSON,
@@ -625,9 +611,7 @@ class TrSincronizaCelularComBDCall {
       callName: 'TrSincronizaCelularComBD',
       apiUrl: '${SincronizarGroup.baseUrl}${urlapicall}',
       callType: ApiCallType.POST,
-      headers: {
-        'http': '//',
-      },
+      headers: {},
       params: {},
       body: ffApiRequestBody,
       bodyType: BodyType.JSON,
@@ -661,9 +645,7 @@ class TrEmpresasCall {
       callName: 'trEmpresas',
       apiUrl: '${SincronizarGroup.baseUrl}${urlapicall}',
       callType: ApiCallType.POST,
-      headers: {
-        'http': '//',
-      },
+      headers: {},
       params: {},
       body: ffApiRequestBody,
       bodyType: BodyType.JSON,
@@ -698,9 +680,7 @@ class TrCFGCall {
       callName: 'trCFG',
       apiUrl: '${SincronizarGroup.baseUrl}${urlapicall}',
       callType: ApiCallType.POST,
-      headers: {
-        'http': '//',
-      },
+      headers: {},
       params: {},
       body: ffApiRequestBody,
       bodyType: BodyType.JSON,
@@ -738,9 +718,7 @@ class TrSincronizaTalhaoContornoCall {
       callName: 'trSincronizaTalhaoContorno',
       apiUrl: '${SincronizarGroup.baseUrl}${urlapicall}',
       callType: ApiCallType.POST,
-      headers: {
-        'http': '//',
-      },
+      headers: {},
       params: {},
       body: ffApiRequestBody,
       bodyType: BodyType.JSON,
@@ -758,7 +736,7 @@ class TrSincronizaTalhaoContornoCall {
 /// Start ModuloSegura Group Code
 
 class ModuloSeguraGroup {
-  static String baseUrl = 'http://';
+  static String baseUrl = 'http';
   static Map<String, String> headers = {};
   static LoginsCall loginsCall = LoginsCall();
   static EsqueceuSenhaCall esqueceuSenhaCall = EsqueceuSenhaCall();
