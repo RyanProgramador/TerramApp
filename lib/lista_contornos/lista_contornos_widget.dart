@@ -511,6 +511,294 @@ class _ListaContornosWidgetState extends State<ListaContornosWidget> {
                               );
                             },
                           ),
+                          if ((FFAppState()
+                                      .grupoContornoFazendasPosSincronizado
+                                      .length >=
+                                  1) &&
+                              (FFAppState().grupoContornoFazendas.length == 0))
+                            Builder(
+                              builder: (context) {
+                                final trGruposContornoFazenda = functions
+                                        .sortListJson(
+                                            'oserv_id',
+                                            true,
+                                            FFAppState()
+                                                .grupoContornoFazendasPosSincronizado
+                                                .toList(),
+                                            widget.oservID)
+                                        ?.toList() ??
+                                    [];
+                                if (trGruposContornoFazenda.isEmpty) {
+                                  return Center(
+                                    child: Container(
+                                      width: double.infinity,
+                                      height: 150.0,
+                                      child: SemContornoNoMomentoWidget(),
+                                    ),
+                                  );
+                                }
+                                return SingleChildScrollView(
+                                  child: Column(
+                                    mainAxisSize: MainAxisSize.max,
+                                    children: List.generate(
+                                        trGruposContornoFazenda.length,
+                                        (trGruposContornoFazendaIndex) {
+                                      final trGruposContornoFazendaItem =
+                                          trGruposContornoFazenda[
+                                              trGruposContornoFazendaIndex];
+                                      return Padding(
+                                        padding: EdgeInsetsDirectional.fromSTEB(
+                                            16.0, 8.0, 16.0, 0.0),
+                                        child: Container(
+                                          width: double.infinity,
+                                          height: 78.0,
+                                          decoration: BoxDecoration(
+                                            color: FlutterFlowTheme.of(context)
+                                                .primaryBackground,
+                                            borderRadius:
+                                                BorderRadius.circular(12.0),
+                                            border: Border.all(
+                                              color: trGruposContornoFazendaItem ==
+                                                      FFAppState()
+                                                          .trOsServicoEmAndamento
+                                                  ? FlutterFlowTheme.of(context)
+                                                      .customColor1
+                                                  : FlutterFlowTheme.of(context)
+                                                      .lineColor,
+                                            ),
+                                          ),
+                                          child: Padding(
+                                            padding:
+                                                EdgeInsetsDirectional.fromSTEB(
+                                                    8.0, 8.0, 12.0, 8.0),
+                                            child: InkWell(
+                                              splashColor: Colors.transparent,
+                                              focusColor: Colors.transparent,
+                                              hoverColor: Colors.transparent,
+                                              highlightColor:
+                                                  Colors.transparent,
+                                              onTap: () async {
+                                                await showModalBottomSheet(
+                                                  isScrollControlled: true,
+                                                  backgroundColor:
+                                                      Colors.transparent,
+                                                  enableDrag: false,
+                                                  context: context,
+                                                  builder: (context) {
+                                                    return GestureDetector(
+                                                      onTap: () => _model
+                                                              .unfocusNode
+                                                              .canRequestFocus
+                                                          ? FocusScope.of(
+                                                                  context)
+                                                              .requestFocus(_model
+                                                                  .unfocusNode)
+                                                          : FocusScope.of(
+                                                                  context)
+                                                              .unfocus(),
+                                                      child: Padding(
+                                                        padding: MediaQuery
+                                                            .viewInsetsOf(
+                                                                context),
+                                                        child: Container(
+                                                          height: 600.0,
+                                                          child:
+                                                              MapsRevisaoWidget(
+                                                            listaLatLngEmString: functions.acessarJsonListaDeterminadoValor(
+                                                                functions
+                                                                    .sortListJson(
+                                                                        'contorno_grupo',
+                                                                        false,
+                                                                        FFAppState().contornoFazenda.toList(),
+                                                                        getJsonField(
+                                                                          trGruposContornoFazendaItem,
+                                                                          r'''$.contorno_grupo''',
+                                                                        ).toString())
+                                                                    ?.toList(),
+                                                                'latlng')!,
+                                                            cor: getJsonField(
+                                                              trGruposContornoFazendaItem,
+                                                              r'''$.cor''',
+                                                            ).toString(),
+                                                          ),
+                                                        ),
+                                                      ),
+                                                    );
+                                                  },
+                                                ).then((value) =>
+                                                    safeSetState(() {}));
+                                              },
+                                              child: Row(
+                                                mainAxisSize: MainAxisSize.max,
+                                                crossAxisAlignment:
+                                                    CrossAxisAlignment.center,
+                                                children: [
+                                                  Expanded(
+                                                    flex: 2,
+                                                    child: Container(
+                                                      decoration:
+                                                          BoxDecoration(),
+                                                      child: Row(
+                                                        mainAxisSize:
+                                                            MainAxisSize.max,
+                                                        mainAxisAlignment:
+                                                            MainAxisAlignment
+                                                                .center,
+                                                        children: [
+                                                          FaIcon(
+                                                            FontAwesomeIcons
+                                                                .route,
+                                                            color:
+                                                                valueOrDefault<
+                                                                    Color>(
+                                                              functions
+                                                                  .transformaStringEmCor(
+                                                                      getJsonField(
+                                                                trGruposContornoFazendaItem,
+                                                                r'''$.cor''',
+                                                              ).toString()),
+                                                              Colors.black,
+                                                            ),
+                                                            size: 32.0,
+                                                          ),
+                                                        ],
+                                                      ),
+                                                    ),
+                                                  ),
+                                                  Expanded(
+                                                    flex: 7,
+                                                    child: Stack(
+                                                      children: [
+                                                        ClipRRect(
+                                                          child: Container(
+                                                            decoration:
+                                                                BoxDecoration(),
+                                                            child: Row(
+                                                              mainAxisSize:
+                                                                  MainAxisSize
+                                                                      .max,
+                                                              children: [
+                                                                Column(
+                                                                  mainAxisSize:
+                                                                      MainAxisSize
+                                                                          .max,
+                                                                  mainAxisAlignment:
+                                                                      MainAxisAlignment
+                                                                          .center,
+                                                                  crossAxisAlignment:
+                                                                      CrossAxisAlignment
+                                                                          .start,
+                                                                  children: [
+                                                                    Text(
+                                                                      '# ${getJsonField(
+                                                                        trGruposContornoFazendaItem,
+                                                                        r'''$.contorno_grupo''',
+                                                                      ).toString()}',
+                                                                      style: FlutterFlowTheme.of(
+                                                                              context)
+                                                                          .bodyLarge
+                                                                          .override(
+                                                                            fontFamily:
+                                                                                'Readex Pro',
+                                                                            fontSize:
+                                                                                12.0,
+                                                                          ),
+                                                                    ),
+                                                                    Text(
+                                                                      'Contorno'
+                                                                          .maybeHandleOverflow(
+                                                                        maxChars:
+                                                                            20,
+                                                                        replacement:
+                                                                            '…',
+                                                                      ),
+                                                                      style: FlutterFlowTheme.of(
+                                                                              context)
+                                                                          .bodyLarge
+                                                                          .override(
+                                                                            fontFamily:
+                                                                                'Readex Pro',
+                                                                            fontWeight:
+                                                                                FontWeight.w500,
+                                                                          ),
+                                                                    ),
+                                                                    Text(
+                                                                      '${functions.strToData(getJsonField(
+                                                                        trGruposContornoFazendaItem,
+                                                                        r'''$.dthr_fim''',
+                                                                      ).toString())} ás ${functions.strToHORA(getJsonField(
+                                                                        trGruposContornoFazendaItem,
+                                                                        r'''$.dthr_fim''',
+                                                                      ).toString())}',
+                                                                      style: FlutterFlowTheme.of(
+                                                                              context)
+                                                                          .bodyLarge
+                                                                          .override(
+                                                                            fontFamily:
+                                                                                'Readex Pro',
+                                                                            fontSize:
+                                                                                12.0,
+                                                                          ),
+                                                                    ),
+                                                                  ],
+                                                                ),
+                                                              ],
+                                                            ),
+                                                          ),
+                                                        ),
+                                                        Align(
+                                                          alignment:
+                                                              AlignmentDirectional(
+                                                                  1.0, -1.0),
+                                                          child: Padding(
+                                                            padding:
+                                                                EdgeInsetsDirectional
+                                                                    .fromSTEB(
+                                                                        0.0,
+                                                                        4.0,
+                                                                        8.0,
+                                                                        0.0),
+                                                            child: InkWell(
+                                                              splashColor: Colors
+                                                                  .transparent,
+                                                              focusColor: Colors
+                                                                  .transparent,
+                                                              hoverColor: Colors
+                                                                  .transparent,
+                                                              highlightColor:
+                                                                  Colors
+                                                                      .transparent,
+                                                              onTap: () async {
+                                                                setState(() {
+                                                                  FFAppState()
+                                                                      .removeAtIndexFromGrupoContornoFazendas(
+                                                                          trGruposContornoFazendaIndex);
+                                                                });
+                                                              },
+                                                              child: Icon(
+                                                                Icons.clear,
+                                                                color: FlutterFlowTheme.of(
+                                                                        context)
+                                                                    .error,
+                                                                size: 24.0,
+                                                              ),
+                                                            ),
+                                                          ),
+                                                        ),
+                                                      ],
+                                                    ),
+                                                  ),
+                                                ],
+                                              ),
+                                            ),
+                                          ),
+                                        ),
+                                      );
+                                    }),
+                                  ),
+                                );
+                              },
+                            ),
                           Align(
                             alignment: AlignmentDirectional(0.0, 1.0),
                             child: Row(

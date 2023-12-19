@@ -324,6 +324,18 @@ class FFAppState extends ChangeNotifier {
           _contornoFazenda;
     });
     _safeInit(() {
+      _contornoFazendaPosSincronizado =
+          prefs.getStringList('ff_contornoFazendaPosSincronizado')?.map((x) {
+                try {
+                  return jsonDecode(x);
+                } catch (e) {
+                  print("Can't decode persisted json. Error: $e.");
+                  return {};
+                }
+              }).toList() ??
+              _contornoFazendaPosSincronizado;
+    });
+    _safeInit(() {
       _grupoContornoFazendas =
           prefs.getStringList('ff_grupoContornoFazendas')?.map((x) {
                 try {
@@ -334,6 +346,19 @@ class FFAppState extends ChangeNotifier {
                 }
               }).toList() ??
               _grupoContornoFazendas;
+    });
+    _safeInit(() {
+      _grupoContornoFazendasPosSincronizado = prefs
+              .getStringList('ff_grupoContornoFazendasPosSincronizado')
+              ?.map((x) {
+            try {
+              return jsonDecode(x);
+            } catch (e) {
+              print("Can't decode persisted json. Error: $e.");
+              return {};
+            }
+          }).toList() ??
+          _grupoContornoFazendasPosSincronizado;
     });
     _safeInit(() {
       _contornoGrupoID =
@@ -1340,6 +1365,50 @@ class FFAppState extends ChangeNotifier {
         _contornoFazenda.map((x) => jsonEncode(x)).toList());
   }
 
+  List<dynamic> _contornoFazendaPosSincronizado = [];
+  List<dynamic> get contornoFazendaPosSincronizado =>
+      _contornoFazendaPosSincronizado;
+  set contornoFazendaPosSincronizado(List<dynamic> _value) {
+    _contornoFazendaPosSincronizado = _value;
+    prefs.setStringList('ff_contornoFazendaPosSincronizado',
+        _value.map((x) => jsonEncode(x)).toList());
+  }
+
+  void addToContornoFazendaPosSincronizado(dynamic _value) {
+    _contornoFazendaPosSincronizado.add(_value);
+    prefs.setStringList('ff_contornoFazendaPosSincronizado',
+        _contornoFazendaPosSincronizado.map((x) => jsonEncode(x)).toList());
+  }
+
+  void removeFromContornoFazendaPosSincronizado(dynamic _value) {
+    _contornoFazendaPosSincronizado.remove(_value);
+    prefs.setStringList('ff_contornoFazendaPosSincronizado',
+        _contornoFazendaPosSincronizado.map((x) => jsonEncode(x)).toList());
+  }
+
+  void removeAtIndexFromContornoFazendaPosSincronizado(int _index) {
+    _contornoFazendaPosSincronizado.removeAt(_index);
+    prefs.setStringList('ff_contornoFazendaPosSincronizado',
+        _contornoFazendaPosSincronizado.map((x) => jsonEncode(x)).toList());
+  }
+
+  void updateContornoFazendaPosSincronizadoAtIndex(
+    int _index,
+    dynamic Function(dynamic) updateFn,
+  ) {
+    _contornoFazendaPosSincronizado[_index] =
+        updateFn(_contornoFazendaPosSincronizado[_index]);
+    prefs.setStringList('ff_contornoFazendaPosSincronizado',
+        _contornoFazendaPosSincronizado.map((x) => jsonEncode(x)).toList());
+  }
+
+  void insertAtIndexInContornoFazendaPosSincronizado(
+      int _index, dynamic _value) {
+    _contornoFazendaPosSincronizado.insert(_index, _value);
+    prefs.setStringList('ff_contornoFazendaPosSincronizado',
+        _contornoFazendaPosSincronizado.map((x) => jsonEncode(x)).toList());
+  }
+
   List<dynamic> _grupoContornoFazendas = [];
   List<dynamic> get grupoContornoFazendas => _grupoContornoFazendas;
   set grupoContornoFazendas(List<dynamic> _value) {
@@ -1379,6 +1448,65 @@ class FFAppState extends ChangeNotifier {
     _grupoContornoFazendas.insert(_index, _value);
     prefs.setStringList('ff_grupoContornoFazendas',
         _grupoContornoFazendas.map((x) => jsonEncode(x)).toList());
+  }
+
+  List<dynamic> _grupoContornoFazendasPosSincronizado = [];
+  List<dynamic> get grupoContornoFazendasPosSincronizado =>
+      _grupoContornoFazendasPosSincronizado;
+  set grupoContornoFazendasPosSincronizado(List<dynamic> _value) {
+    _grupoContornoFazendasPosSincronizado = _value;
+    prefs.setStringList('ff_grupoContornoFazendasPosSincronizado',
+        _value.map((x) => jsonEncode(x)).toList());
+  }
+
+  void addToGrupoContornoFazendasPosSincronizado(dynamic _value) {
+    _grupoContornoFazendasPosSincronizado.add(_value);
+    prefs.setStringList(
+        'ff_grupoContornoFazendasPosSincronizado',
+        _grupoContornoFazendasPosSincronizado
+            .map((x) => jsonEncode(x))
+            .toList());
+  }
+
+  void removeFromGrupoContornoFazendasPosSincronizado(dynamic _value) {
+    _grupoContornoFazendasPosSincronizado.remove(_value);
+    prefs.setStringList(
+        'ff_grupoContornoFazendasPosSincronizado',
+        _grupoContornoFazendasPosSincronizado
+            .map((x) => jsonEncode(x))
+            .toList());
+  }
+
+  void removeAtIndexFromGrupoContornoFazendasPosSincronizado(int _index) {
+    _grupoContornoFazendasPosSincronizado.removeAt(_index);
+    prefs.setStringList(
+        'ff_grupoContornoFazendasPosSincronizado',
+        _grupoContornoFazendasPosSincronizado
+            .map((x) => jsonEncode(x))
+            .toList());
+  }
+
+  void updateGrupoContornoFazendasPosSincronizadoAtIndex(
+    int _index,
+    dynamic Function(dynamic) updateFn,
+  ) {
+    _grupoContornoFazendasPosSincronizado[_index] =
+        updateFn(_grupoContornoFazendasPosSincronizado[_index]);
+    prefs.setStringList(
+        'ff_grupoContornoFazendasPosSincronizado',
+        _grupoContornoFazendasPosSincronizado
+            .map((x) => jsonEncode(x))
+            .toList());
+  }
+
+  void insertAtIndexInGrupoContornoFazendasPosSincronizado(
+      int _index, dynamic _value) {
+    _grupoContornoFazendasPosSincronizado.insert(_index, _value);
+    prefs.setStringList(
+        'ff_grupoContornoFazendasPosSincronizado',
+        _grupoContornoFazendasPosSincronizado
+            .map((x) => jsonEncode(x))
+            .toList());
   }
 
   String _contornoGrupoID = '';

@@ -162,7 +162,8 @@ class _ContornoMapState extends State<ContornoMap> {
   void _getCurrentLocation() async {
     if (widget.ativoOuNao == true) {
       if (!isLocationPaused) {
-        Position newLoc = await Geolocator.getCurrentPosition();
+        Position newLoc = await Geolocator.getCurrentPosition(
+            desiredAccuracy: LocationAccuracy.best);
         // Se for a primeira vez ou se a distância entre a última posição e a nova for >= 1m
         if (lastPosition == null ||
             Geolocator.distanceBetween(
