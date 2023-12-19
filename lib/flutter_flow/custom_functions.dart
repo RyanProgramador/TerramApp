@@ -828,3 +828,16 @@ String? protocoloComSeguranca(String? url) {
 
   return url;
 }
+
+List<dynamic>? juntarDuasListasJson(
+  List<dynamic>? lista1,
+  List<dynamic>? lista2,
+) {
+  if (lista1 == null) {
+    return lista2;
+  } else if (lista2 == null) {
+    return lista1;
+  } else {
+    return [...lista1, ...lista2];
+  }
+}

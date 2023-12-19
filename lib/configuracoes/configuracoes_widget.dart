@@ -237,14 +237,26 @@ class _ConfiguracoesWidgetState extends State<ConfiguracoesWidget> {
                                   setState(() {
                                     FFAppState()
                                             .grupoContornoFazendasPosSincronizado =
-                                        FFAppState()
-                                            .grupoContornoFazendas
+                                        functions
+                                            .juntarDuasListasJson(
+                                                FFAppState()
+                                                    .grupoContornoFazendas
+                                                    .toList(),
+                                                FFAppState()
+                                                    .grupoContornoFazendasPosSincronizado
+                                                    .toList())!
                                             .toList()
                                             .cast<dynamic>();
                                     FFAppState()
                                             .contornoFazendaPosSincronizado =
-                                        FFAppState()
-                                            .contornoFazenda
+                                        functions
+                                            .juntarDuasListasJson(
+                                                FFAppState()
+                                                    .contornoFazenda
+                                                    .toList(),
+                                                FFAppState()
+                                                    .contornoFazendaPosSincronizado
+                                                    .toList())!
                                             .toList()
                                             .cast<dynamic>();
                                   });
