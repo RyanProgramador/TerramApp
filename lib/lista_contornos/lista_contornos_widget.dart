@@ -165,61 +165,123 @@ class _ListaContornosWidgetState extends State<ListaContornosWidget> {
                       ),
                     ),
                   ),
-                  FFButtonWidget(
-                    onPressed: () async {
-                      await showModalBottomSheet(
-                        isScrollControlled: true,
-                        backgroundColor: Colors.transparent,
-                        enableDrag: false,
-                        context: context,
-                        builder: (context) {
-                          return GestureDetector(
-                            onTap: () => _model.unfocusNode.canRequestFocus
-                                ? FocusScope.of(context)
-                                    .requestFocus(_model.unfocusNode)
-                                : FocusScope.of(context).unfocus(),
-                            child: Padding(
-                              padding: MediaQuery.viewInsetsOf(context),
-                              child: Container(
-                                height: 600.0,
-                                child: MapsRevisaoTodosWidget(
-                                  listagrupoTodos: functions.sortListJson(
-                                      'oserv_id',
-                                      true,
-                                      FFAppState()
-                                          .grupoContornoFazendas
-                                          .toList(),
-                                      widget.oservID),
-                                  listaContornoTodos:
-                                      FFAppState().contornoFazenda,
-                                  fazlatlng: widget.fazlatlng,
+                  Row(
+                    mainAxisSize: MainAxisSize.max,
+                    mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                    children: [
+                      FFButtonWidget(
+                        onPressed: () async {
+                          await showModalBottomSheet(
+                            isScrollControlled: true,
+                            backgroundColor: Colors.transparent,
+                            enableDrag: false,
+                            context: context,
+                            builder: (context) {
+                              return GestureDetector(
+                                onTap: () => _model.unfocusNode.canRequestFocus
+                                    ? FocusScope.of(context)
+                                        .requestFocus(_model.unfocusNode)
+                                    : FocusScope.of(context).unfocus(),
+                                child: Padding(
+                                  padding: MediaQuery.viewInsetsOf(context),
+                                  child: Container(
+                                    height: 600.0,
+                                    child: MapsRevisaoTodosWidget(
+                                      listagrupoTodos: functions.sortListJson(
+                                          'oserv_id',
+                                          true,
+                                          FFAppState()
+                                              .grupoContornoFazendas
+                                              .toList(),
+                                          widget.oservID),
+                                      listaContornoTodos:
+                                          FFAppState().contornoFazenda,
+                                      fazlatlng: widget.fazlatlng,
+                                    ),
+                                  ),
                                 ),
-                              ),
-                            ),
-                          );
+                              );
+                            },
+                          ).then((value) => safeSetState(() {}));
                         },
-                      ).then((value) => safeSetState(() {}));
-                    },
-                    text: 'Ver todos',
-                    options: FFButtonOptions(
-                      height: 40.0,
-                      padding:
-                          EdgeInsetsDirectional.fromSTEB(24.0, 0.0, 24.0, 0.0),
-                      iconPadding:
-                          EdgeInsetsDirectional.fromSTEB(0.0, 0.0, 0.0, 0.0),
-                      color: FlutterFlowTheme.of(context).primary,
-                      textStyle:
-                          FlutterFlowTheme.of(context).titleSmall.override(
-                                fontFamily: 'Readex Pro',
-                                color: Colors.white,
-                              ),
-                      elevation: 3.0,
-                      borderSide: BorderSide(
-                        color: Colors.transparent,
-                        width: 1.0,
+                        text: 'Ver sincronizados',
+                        options: FFButtonOptions(
+                          height: 40.0,
+                          padding: EdgeInsetsDirectional.fromSTEB(
+                              24.0, 0.0, 24.0, 0.0),
+                          iconPadding: EdgeInsetsDirectional.fromSTEB(
+                              0.0, 0.0, 0.0, 0.0),
+                          color: FlutterFlowTheme.of(context).primary,
+                          textStyle:
+                              FlutterFlowTheme.of(context).titleSmall.override(
+                                    fontFamily: 'Readex Pro',
+                                    color: Colors.white,
+                                  ),
+                          elevation: 3.0,
+                          borderSide: BorderSide(
+                            color: Colors.transparent,
+                            width: 1.0,
+                          ),
+                          borderRadius: BorderRadius.circular(8.0),
+                        ),
                       ),
-                      borderRadius: BorderRadius.circular(8.0),
-                    ),
+                      FFButtonWidget(
+                        onPressed: () async {
+                          await showModalBottomSheet(
+                            isScrollControlled: true,
+                            backgroundColor: Colors.transparent,
+                            enableDrag: false,
+                            context: context,
+                            builder: (context) {
+                              return GestureDetector(
+                                onTap: () => _model.unfocusNode.canRequestFocus
+                                    ? FocusScope.of(context)
+                                        .requestFocus(_model.unfocusNode)
+                                    : FocusScope.of(context).unfocus(),
+                                child: Padding(
+                                  padding: MediaQuery.viewInsetsOf(context),
+                                  child: Container(
+                                    height: 600.0,
+                                    child: MapsRevisaoTodosWidget(
+                                      listagrupoTodos: functions.sortListJson(
+                                          'oserv_id',
+                                          true,
+                                          FFAppState()
+                                              .grupoContornoFazendas
+                                              .toList(),
+                                          widget.oservID),
+                                      listaContornoTodos:
+                                          FFAppState().contornoFazenda,
+                                      fazlatlng: widget.fazlatlng,
+                                    ),
+                                  ),
+                                ),
+                              );
+                            },
+                          ).then((value) => safeSetState(() {}));
+                        },
+                        text: 'Ver novos',
+                        options: FFButtonOptions(
+                          height: 40.0,
+                          padding: EdgeInsetsDirectional.fromSTEB(
+                              24.0, 0.0, 24.0, 0.0),
+                          iconPadding: EdgeInsetsDirectional.fromSTEB(
+                              0.0, 0.0, 0.0, 0.0),
+                          color: FlutterFlowTheme.of(context).primary,
+                          textStyle:
+                              FlutterFlowTheme.of(context).titleSmall.override(
+                                    fontFamily: 'Readex Pro',
+                                    color: Colors.white,
+                                  ),
+                          elevation: 3.0,
+                          borderSide: BorderSide(
+                            color: Colors.transparent,
+                            width: 1.0,
+                          ),
+                          borderRadius: BorderRadius.circular(8.0),
+                        ),
+                      ),
+                    ],
                   ),
                   Container(
                     width: double.infinity,
@@ -819,7 +881,7 @@ class _ListaContornosWidgetState extends State<ListaContornosWidget> {
                                                                         setState(
                                                                             () {
                                                                           FFAppState()
-                                                                              .removeAtIndexFromGrupoContornoFazendas(trGruposContornoFazenda2Index);
+                                                                              .removeAtIndexFromGrupoContornoFazendasPosSincronizado(trGruposContornoFazenda2Index);
                                                                         });
                                                                       },
                                                                       child:
