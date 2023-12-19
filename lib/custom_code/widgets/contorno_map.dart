@@ -316,6 +316,10 @@ class _ContornoMapState extends State<ContornoMap> {
           widget.fazid,
           ParamType.String,
         ),
+        'fazlatlng': serializeParam(
+          widget.fazLatLng,
+          ParamType.LatLng,
+        ),
       }.withoutNulls,
       extra: <String, dynamic>{
         kTransitionInfoKey: TransitionInfo(
@@ -383,7 +387,7 @@ class _ContornoMapState extends State<ContornoMap> {
           actions: [
             TextButton(
               onPressed: () {
-                // _setFinalizou();
+                _setFinalizou();
                 Navigator.of(context).pop();
               },
               child: Text("OK"),
@@ -399,7 +403,7 @@ class _ContornoMapState extends State<ContornoMap> {
       context: context,
       builder: (BuildContext context) {
         return AlertDialog(
-          title: Text("Contorno finalizado com sucesso!"),
+          title: Text("Deseja excluir progresso atual?"),
           actions: [
             TextButton(
               onPressed: () {

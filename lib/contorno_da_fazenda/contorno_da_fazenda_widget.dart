@@ -133,6 +133,7 @@ class _ContornoDaFazendaWidgetState extends State<ContornoDaFazendaWidget> {
                               idContorno: widget.idDoContorno,
                               fazid: widget.fazid!,
                               fazNome: widget.fazendaNome,
+                              fazLatLng: widget.fazlatlng,
                             ),
                           ),
                         ),
