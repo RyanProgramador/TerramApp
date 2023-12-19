@@ -49,6 +49,13 @@ class _ListaContornosWidgetState extends State<ListaContornosWidget> {
         FFAppState().contornoFazenda =
             FFAppState().contornoFazenda.toList().cast<dynamic>();
       });
+      setState(() {
+        FFAppState().contornoFazenda =
+            FFAppState().contornoFazenda.toList().cast<dynamic>();
+        FFAppState().grupoContornoFazendas =
+            FFAppState().grupoContornoFazendas.toList().cast<dynamic>();
+      });
+      setState(() {});
     });
   }
 

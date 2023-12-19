@@ -28,6 +28,7 @@ class ContornoMap extends StatefulWidget {
     this.oservid,
     this.idContorno,
     this.fazNome,
+    this.fazLatLng,
     required this.fazid,
   }) : super(key: key);
 
@@ -39,6 +40,7 @@ class ContornoMap extends StatefulWidget {
   final String? idContorno;
   final String fazid;
   final String? fazNome;
+  final LatLng? fazLatLng;
   @override
   _ContornoMapState createState() => _ContornoMapState();
 }
