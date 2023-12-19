@@ -231,25 +231,26 @@ class _ListaContornosWidgetState extends State<ListaContornosWidget> {
                           child: Column(
                             mainAxisSize: MainAxisSize.max,
                             children: [
-                              Container(
-                                decoration: BoxDecoration(),
-                                child: Column(
-                                  mainAxisSize: MainAxisSize.max,
-                                  crossAxisAlignment: CrossAxisAlignment.start,
-                                  children: [
-                                    Padding(
-                                      padding: EdgeInsetsDirectional.fromSTEB(
-                                          22.0, 0.0, 0.0, 0.0),
-                                      child: Text(
-                                        'Contornos novos:',
-                                        style: FlutterFlowTheme.of(context)
-                                            .bodyMedium,
+                              if (FFAppState()
+                                      .grupoContornoFazendasPosSincronizado
+                                      .length ==
+                                  0)
+                                Container(
+                                  decoration: BoxDecoration(),
+                                  child: Column(
+                                    mainAxisSize: MainAxisSize.max,
+                                    crossAxisAlignment:
+                                        CrossAxisAlignment.start,
+                                    children: [
+                                      Padding(
+                                        padding: EdgeInsetsDirectional.fromSTEB(
+                                            22.0, 0.0, 0.0, 0.0),
+                                        child: Text(
+                                          'Contornos novos:',
+                                          style: FlutterFlowTheme.of(context)
+                                              .bodyMedium,
+                                        ),
                                       ),
-                                    ),
-                                    if (FFAppState()
-                                            .grupoContornoFazendasPosSincronizado
-                                            .length ==
-                                        0)
                                       Builder(
                                         builder: (context) {
                                           final trGruposContornoFazenda = functions
@@ -538,32 +539,31 @@ class _ListaContornosWidgetState extends State<ListaContornosWidget> {
                                           );
                                         },
                                       ),
-                                  ],
+                                    ],
+                                  ),
                                 ),
-                              ),
-                              Container(
-                                decoration: BoxDecoration(),
-                                child: Column(
-                                  mainAxisSize: MainAxisSize.max,
-                                  crossAxisAlignment: CrossAxisAlignment.start,
-                                  children: [
-                                    Padding(
-                                      padding: EdgeInsetsDirectional.fromSTEB(
-                                          22.0, 0.0, 0.0, 0.0),
-                                      child: Text(
-                                        'Contornos já sincronizados',
-                                        style: FlutterFlowTheme.of(context)
-                                            .bodyMedium,
+                              if ((FFAppState()
+                                          .grupoContornoFazendasPosSincronizado
+                                          .length >=
+                                      1) &&
+                                  (FFAppState().grupoContornoFazendas.length ==
+                                      0))
+                                Container(
+                                  decoration: BoxDecoration(),
+                                  child: Column(
+                                    mainAxisSize: MainAxisSize.max,
+                                    crossAxisAlignment:
+                                        CrossAxisAlignment.start,
+                                    children: [
+                                      Padding(
+                                        padding: EdgeInsetsDirectional.fromSTEB(
+                                            22.0, 0.0, 0.0, 0.0),
+                                        child: Text(
+                                          'Contornos já sincronizados:',
+                                          style: FlutterFlowTheme.of(context)
+                                              .bodyMedium,
+                                        ),
                                       ),
-                                    ),
-                                    if ((FFAppState()
-                                                .grupoContornoFazendasPosSincronizado
-                                                .length >=
-                                            1) &&
-                                        (FFAppState()
-                                                .grupoContornoFazendas
-                                                .length ==
-                                            0))
                                       Builder(
                                         builder: (context) {
                                           final trGruposContornoFazenda2 = functions
@@ -853,9 +853,9 @@ class _ListaContornosWidgetState extends State<ListaContornosWidget> {
                                           );
                                         },
                                       ),
-                                  ],
+                                    ],
+                                  ),
                                 ),
-                              ),
                             ],
                           ),
                         ),
