@@ -1238,7 +1238,7 @@ class FFAppState extends ChangeNotifier {
     prefs.setString('ff_trOsDeslocamentoJsonAtual', jsonEncode(_value));
   }
 
-  bool _Desenvolvimento = false;
+  bool _Desenvolvimento = true;
   bool get Desenvolvimento => _Desenvolvimento;
   set Desenvolvimento(bool _value) {
     _Desenvolvimento = _value;
