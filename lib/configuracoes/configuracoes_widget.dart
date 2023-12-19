@@ -244,7 +244,7 @@ class _ConfiguracoesWidgetState extends State<ConfiguracoesWidget> {
                                     FFAppState()
                                             .contornoFazendaPosSincronizado =
                                         FFAppState()
-                                            .contornoFazendaPosSincronizado
+                                            .contornoFazenda
                                             .toList()
                                             .cast<dynamic>();
                                   });
