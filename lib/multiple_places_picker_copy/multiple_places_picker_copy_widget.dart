@@ -1277,7 +1277,7 @@ class _MultiplePlacesPickerCopyWidgetState
                                               builder: (context) {
                                                 final trGrupocontornoFaz =
                                                     FFAppState()
-                                                        .grupoContornoFazendas
+                                                        .grupoContornoFazendasPosSincronizado
                                                         .toList();
                                                 return SingleChildScrollView(
                                                   child: Column(

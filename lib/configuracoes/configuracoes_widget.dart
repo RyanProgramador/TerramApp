@@ -234,6 +234,20 @@ class _ConfiguracoesWidgetState extends State<ConfiguracoesWidget> {
                                       );
                                     },
                                   );
+                                  setState(() {
+                                    FFAppState()
+                                            .grupoContornoFazendasPosSincronizado =
+                                        FFAppState()
+                                            .grupoContornoFazendas
+                                            .toList()
+                                            .cast<dynamic>();
+                                    FFAppState()
+                                            .contornoFazendaPosSincronizado =
+                                        FFAppState()
+                                            .contornoFazendaPosSincronizado
+                                            .toList()
+                                            .cast<dynamic>();
+                                  });
                                   FFAppState().update(() {
                                     FFAppState()
                                         .trOsDeslocamentosJsonFinalizados = [];
