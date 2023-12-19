@@ -61,9 +61,10 @@ class _SemContornoNoMomentoWidgetState
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
                   Padding(
-                    padding: EdgeInsetsDirectional.fromSTEB(0.0, 0.0, 0.0, 4.0),
+                    padding:
+                        EdgeInsetsDirectional.fromSTEB(0.0, 0.0, 0.0, 12.0),
                     child: Text(
-                      'Sem contornos para esta fazenda!',
+                      'Sem contornos novos para esta fazenda!',
                       textAlign: TextAlign.start,
                       maxLines: 2,
                       style:

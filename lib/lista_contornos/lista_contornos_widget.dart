@@ -191,11 +191,11 @@ class _ListaContornosWidgetState extends State<ListaContornosWidget> {
                                           'oserv_id',
                                           true,
                                           FFAppState()
-                                              .grupoContornoFazendas
+                                              .grupoContornoFazendasPosSincronizado
                                               .toList(),
                                           widget.oservID),
-                                      listaContornoTodos:
-                                          FFAppState().contornoFazenda,
+                                      listaContornoTodos: FFAppState()
+                                          .contornoFazendaPosSincronizado,
                                       fazlatlng: widget.fazlatlng,
                                     ),
                                   ),
