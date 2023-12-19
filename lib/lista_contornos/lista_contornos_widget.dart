@@ -237,15 +237,19 @@ class _ListaContornosWidgetState extends State<ListaContornosWidget> {
                                   mainAxisSize: MainAxisSize.max,
                                   crossAxisAlignment: CrossAxisAlignment.start,
                                   children: [
-                                    Padding(
-                                      padding: EdgeInsetsDirectional.fromSTEB(
-                                          22.0, 0.0, 0.0, 0.0),
-                                      child: Text(
-                                        'Contornos novos:',
-                                        style: FlutterFlowTheme.of(context)
-                                            .bodyMedium,
+                                    if (FFAppState()
+                                            .grupoContornoFazendas
+                                            .length >=
+                                        1)
+                                      Padding(
+                                        padding: EdgeInsetsDirectional.fromSTEB(
+                                            22.0, 0.0, 0.0, 0.0),
+                                        child: Text(
+                                          'Contornos novos:',
+                                          style: FlutterFlowTheme.of(context)
+                                              .bodyMedium,
+                                        ),
                                       ),
-                                    ),
                                     Builder(
                                       builder: (context) {
                                         final trGruposContornoFazenda = functions
@@ -537,8 +541,7 @@ class _ListaContornosWidgetState extends State<ListaContornosWidget> {
                                           .grupoContornoFazendasPosSincronizado
                                           .length >=
                                       1) &&
-                                  (FFAppState().grupoContornoFazendas.length ==
-                                      0))
+                                  true)
                                 Container(
                                   decoration: BoxDecoration(),
                                   child: Column(
