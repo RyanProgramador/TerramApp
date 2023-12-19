@@ -300,7 +300,7 @@ class _ContornoMapState extends State<ContornoMap> {
         FFAppState().contornoFazenda.toList().cast<dynamic>();
     FFAppState().grupoContornoFazendas =
         FFAppState().grupoContornoFazendas.toList().cast<dynamic>();
-
+//redireciona para a lista de contornos
     context.goNamed(
       'ListaContornos',
       queryParameters: {
