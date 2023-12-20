@@ -138,6 +138,7 @@ class _TestecontornoWidgetState extends State<TestecontornoWidget> {
                 setState(() {
                   _model.incial2 = currentUserLocationValue;
                 });
+                FFAppState().update(() {});
               },
               backgroundColor: FlutterFlowTheme.of(context).primary,
               elevation: 8.0,
@@ -213,27 +214,39 @@ class _TestecontornoWidgetState extends State<TestecontornoWidget> {
                       decoration: BoxDecoration(
                         color: FlutterFlowTheme.of(context).secondaryBackground,
                       ),
-                      child: FlutterFlowGoogleMap(
-                        controller: _model.googleMapsController,
-                        onCameraIdle: (latLng) =>
-                            _model.googleMapsCenter = latLng,
-                        initialLocation: _model.googleMapsCenter ??=
-                            _model.incial2 != null
-                                ? _model.incial2!
-                                : currentUserLocationValue!,
-                        markerColor: GoogleMarkerColor.violet,
-                        mapType: MapType.satellite,
-                        style: GoogleMapStyle.standard,
-                        initialZoom: 14.0,
-                        allowInteraction: false,
-                        allowZoom: false,
-                        showZoomControls: true,
-                        showLocation: false,
-                        showCompass: false,
-                        showMapToolbar: false,
-                        showTraffic: false,
-                        centerMapOnMarkerTap: true,
-                      ),
+                      child: Builder(builder: (context) {
+                        final _googleMapMarker = (_model.incial2 != null
+                            ? _model.incial2
+                            : currentUserLocationValue);
+                        return FlutterFlowGoogleMap(
+                          controller: _model.googleMapsController,
+                          onCameraIdle: (latLng) =>
+                              setState(() => _model.googleMapsCenter = latLng),
+                          initialLocation: _model.googleMapsCenter ??=
+                              _model.incial2 != null
+                                  ? _model.incial2!
+                                  : currentUserLocationValue!,
+                          markers: [
+                            if (_googleMapMarker != null)
+                              FlutterFlowMarker(
+                                _googleMapMarker.serialize(),
+                                _googleMapMarker,
+                              ),
+                          ],
+                          markerColor: GoogleMarkerColor.violet,
+                          mapType: MapType.satellite,
+                          style: GoogleMapStyle.standard,
+                          initialZoom: 14.0,
+                          allowInteraction: true,
+                          allowZoom: true,
+                          showZoomControls: true,
+                          showLocation: true,
+                          showCompass: false,
+                          showMapToolbar: true,
+                          showTraffic: false,
+                          centerMapOnMarkerTap: true,
+                        );
+                      }),
                     ),
                   ),
                 ],
