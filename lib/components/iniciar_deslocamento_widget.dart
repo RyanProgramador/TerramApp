@@ -1300,61 +1300,66 @@ class _IniciarDeslocamentoWidgetState extends State<IniciarDeslocamentoWidget> {
                                     borderRadius: BorderRadius.circular(50.0),
                                   ),
                                 ),
-                                FFButtonWidget(
-                                  onPressed: () async {
-                                    context.pushNamed(
-                                      'ListaContornos',
-                                      queryParameters: {
-                                        'nomeFazenda': serializeParam(
-                                          widget.fazendaNome,
-                                          ParamType.String,
-                                        ),
-                                        'oservID': serializeParam(
-                                          widget.servicoId,
-                                          ParamType.String,
-                                        ),
-                                        'fazid': serializeParam(
-                                          widget.fazid,
-                                          ParamType.String,
-                                        ),
-                                        'fazlatlng': serializeParam(
-                                          widget.latlngFaz,
-                                          ParamType.LatLng,
-                                        ),
-                                      }.withoutNulls,
-                                    );
-                                  },
-                                  text: widget.deslocamentoAtualFinzalizado! &&
-                                          (widget.etapade == 'Contorno')
-                                      ? 'Contornar'
-                                      : 'Ops!',
-                                  icon: FaIcon(
-                                    FontAwesomeIcons.route,
-                                    size: 18.0,
-                                  ),
-                                  options: FFButtonOptions(
-                                    width: 160.0,
-                                    height: 52.0,
-                                    padding: EdgeInsetsDirectional.fromSTEB(
-                                        17.0, 0.0, 17.0, 0.0),
-                                    iconPadding: EdgeInsetsDirectional.fromSTEB(
-                                        0.0, 0.0, 0.0, 0.0),
-                                    color: FlutterFlowTheme.of(context).primary,
-                                    textStyle: FlutterFlowTheme.of(context)
-                                        .bodyLarge
-                                        .override(
-                                          fontFamily: 'Readex Pro',
-                                          color: FlutterFlowTheme.of(context)
-                                              .alternate,
-                                        ),
-                                    elevation: 0.0,
-                                    borderSide: BorderSide(
-                                      color: Colors.transparent,
-                                      width: 1.0,
+                                if (widget.deslocamentoAtualFinzalizado! &&
+                                    (widget.etapade == 'Contorno'))
+                                  FFButtonWidget(
+                                    onPressed: () async {
+                                      context.pushNamed(
+                                        'ListaContornos',
+                                        queryParameters: {
+                                          'nomeFazenda': serializeParam(
+                                            widget.fazendaNome,
+                                            ParamType.String,
+                                          ),
+                                          'oservID': serializeParam(
+                                            widget.servicoId,
+                                            ParamType.String,
+                                          ),
+                                          'fazid': serializeParam(
+                                            widget.fazid,
+                                            ParamType.String,
+                                          ),
+                                          'fazlatlng': serializeParam(
+                                            widget.latlngFaz,
+                                            ParamType.LatLng,
+                                          ),
+                                        }.withoutNulls,
+                                      );
+                                    },
+                                    text:
+                                        widget.deslocamentoAtualFinzalizado! &&
+                                                (widget.etapade == 'Contorno')
+                                            ? 'Contornar'
+                                            : 'Ops!',
+                                    icon: FaIcon(
+                                      FontAwesomeIcons.route,
+                                      size: 18.0,
                                     ),
-                                    borderRadius: BorderRadius.circular(50.0),
+                                    options: FFButtonOptions(
+                                      width: 160.0,
+                                      height: 52.0,
+                                      padding: EdgeInsetsDirectional.fromSTEB(
+                                          17.0, 0.0, 17.0, 0.0),
+                                      iconPadding:
+                                          EdgeInsetsDirectional.fromSTEB(
+                                              0.0, 0.0, 0.0, 0.0),
+                                      color:
+                                          FlutterFlowTheme.of(context).primary,
+                                      textStyle: FlutterFlowTheme.of(context)
+                                          .bodyLarge
+                                          .override(
+                                            fontFamily: 'Readex Pro',
+                                            color: FlutterFlowTheme.of(context)
+                                                .alternate,
+                                          ),
+                                      elevation: 0.0,
+                                      borderSide: BorderSide(
+                                        color: Colors.transparent,
+                                        width: 1.0,
+                                      ),
+                                      borderRadius: BorderRadius.circular(50.0),
+                                    ),
                                   ),
-                                ),
                                 if (!widget.deslocamentoAtualFinzalizado!)
                                   Opacity(
                                     opacity: 0.0,
