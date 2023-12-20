@@ -610,7 +610,23 @@ class _ListaContornosWidgetState extends State<ListaContornosWidget> {
                                           .grupoContornoFazendasPosSincronizado
                                           .length >=
                                       1) &&
-                                  true)
+                                  (functions.sortListJson(
+                                              'oserv_id',
+                                              true,
+                                              FFAppState()
+                                                  .grupoContornoFazendasPosSincronizado
+                                                  .toList(),
+                                              widget.oservID) !=
+                                          null &&
+                                      functions
+                                          .sortListJson(
+                                              'oserv_id',
+                                              true,
+                                              FFAppState()
+                                                  .grupoContornoFazendasPosSincronizado
+                                                  .toList(),
+                                              widget.oservID)!
+                                          .isNotEmpty))
                                 Container(
                                   decoration: BoxDecoration(),
                                   child: Column(
