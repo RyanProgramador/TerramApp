@@ -10,9 +10,13 @@ import 'package:flutter/material.dart';
 // DO NOT REMOVE OR MODIFY THE CODE ABOVE!
 
 import 'dart:async';
+import 'package:flutter/gestures.dart';
 import 'package:google_maps_flutter/google_maps_flutter.dart' as google_maps;
 import 'package:geolocator/geolocator.dart';
 import 'package:http/http.dart' as http;
+import 'dart:ui';
+import 'package:background_location/background_location.dart'
+    as background_location;
 
 class Coleta extends StatefulWidget {
   final double? width;
@@ -37,7 +41,11 @@ class _ColetaState extends State<Coleta> {
   StreamSubscription<Position>? _positionStreamSubscription;
   double? _userZoom;
   double _currentZoom = 18.0; // Inicializa o zoom padrão
-
+//double tap no marcador
+  bool focoNoMarcador = false;
+  google_maps.LatLng? latlngMarcador;
+  Map<String, DateTime> lastTapTimestamps = {};
+//
   Map<String, bool> coletados = {};
   Map<String, google_maps.LatLng> markerPositions = {};
 // ICONE
@@ -170,15 +178,24 @@ class _ColetaState extends State<Coleta> {
   void _criaMarcadores() {
     for (var marcador in latLngListMarcadores) {
       var latlng = marcador["latlng_marcadores"]!.split(",");
+      var markerId = google_maps.MarkerId(marcador["marcador_nome"]!);
+
       var marker = google_maps.Marker(
-        markerId: google_maps.MarkerId(marcador["marcador_nome"]!),
+        markerId: markerId,
         position: google_maps.LatLng(
             double.parse(latlng[0]), double.parse(latlng[1])),
         icon: google_maps.BitmapDescriptor.defaultMarkerWithHue(
             google_maps.BitmapDescriptor.hueRed),
         onTap: () {
-          _showModalOptions(marcador["marcador_nome"]!);
+          focoNoMarcador = true;
+          latlngMarcador = google_maps.LatLng(
+              double.parse(latlng[0]), double.parse(latlng[1]));
+
+          _onMarkerTapped(markerId, marcador["marcador_nome"]!);
         },
+        infoWindow: google_maps.InfoWindow(
+          title: "PONTO : " + marcador["marcador_nome"]!,
+        ),
         draggable: false,
       );
 
@@ -186,6 +203,22 @@ class _ColetaState extends State<Coleta> {
         markers.add(marker);
       });
     }
+  }
+
+//double tap, ou seja, dois clicks no marker para abrir
+  void _onMarkerTapped(google_maps.MarkerId markerId, String markerName) {
+    DateTime now = DateTime.now();
+    String markerIdValue = markerId.value;
+
+    if (lastTapTimestamps.containsKey(markerIdValue) &&
+        now.difference(lastTapTimestamps[markerIdValue]!).inMilliseconds <
+            1800) {
+      // Considerado um toque duplo
+      _showModalOptions(markerName);
+    }
+
+    // Atualiza o timestamp do último toque
+    lastTapTimestamps[markerIdValue] = now;
   }
 
   Future<void> _loadCustomIcon() async {
@@ -210,6 +243,9 @@ class _ColetaState extends State<Coleta> {
     final userLocationMarker = google_maps.Marker(
       markerId: const google_maps.MarkerId('current_location'),
       position: position,
+      onTap: () {
+        focoNoMarcador = false;
+      },
       icon: customIconBytes == null
           ? google_maps.BitmapDescriptor.defaultMarkerWithHue(
               google_maps.BitmapDescriptor.hueBlue)
@@ -255,8 +291,11 @@ class _ColetaState extends State<Coleta> {
       _googleMapController!.animateCamera(
         google_maps.CameraUpdate.newCameraPosition(
           google_maps.CameraPosition(
-            target: google_maps.LatLng(
-                _currentPosition!.latitude, _currentPosition!.longitude),
+            target: focoNoMarcador == false
+                ? google_maps.LatLng(
+                    _currentPosition!.latitude, _currentPosition!.longitude)
+                : google_maps.LatLng(
+                    latlngMarcador!.latitude, latlngMarcador!.longitude),
             zoom: _currentZoom,
           ),
         ),
@@ -290,7 +329,7 @@ class _ColetaState extends State<Coleta> {
                 child: Text(
                   "Informar Inacessibilidade",
                   style: TextStyle(
-                    color: Colors.black, // Defina a cor do texto como preto
+                    color: Colors.black,
                   ),
                 ),
                 onPressed: () {
@@ -301,20 +340,6 @@ class _ColetaState extends State<Coleta> {
               ),
             ],
           ),
-          // actions: <Widget>[
-          //   Stack(
-          //     alignment: Alignment.topRight,
-          //     children: [
-          //       IconButton(
-          //         icon: Icon(Icons.close),
-          //         onPressed: () {
-          //           Navigator.of(context).pop();
-          //         },
-          //       ),
-          //       // Adicione outros widgets que deseja sobrepor aqui
-          //     ],
-          //   ),
-          // ],
         );
       },
     );
@@ -408,27 +433,54 @@ class _ColetaState extends State<Coleta> {
     });
   }
 
+//muda o foco
+  void mudaFoco() {
+    focoNoMarcador = false;
+  }
+
   @override
   Widget build(BuildContext context) {
-    return Container(
-      width: widget.width ?? double.infinity,
-      height: widget.height ?? double.infinity,
-      child: google_maps.GoogleMap(
-        initialCameraPosition: google_maps.CameraPosition(
-          target: google_maps.LatLng(-29.913558, -51.195563),
-          zoom: _currentZoom,
+    return Stack(
+      children: [
+        Container(
+          width: widget.width ?? double.infinity,
+          height: widget.height ?? double.infinity,
+          child: google_maps.GoogleMap(
+            initialCameraPosition: google_maps.CameraPosition(
+              target: google_maps.LatLng(-29.913558, -51.195563),
+              zoom: _currentZoom,
+            ),
+            onMapCreated: (controller) {
+              _googleMapController = controller;
+              _onMapCreated(controller);
+            },
+            onCameraMove: _onCameraMove,
+            polygons: polygons,
+            markers: markers,
+            mapType: google_maps.MapType.satellite,
+            mapToolbarEnabled: false,
+            zoomControlsEnabled: false,
+          ),
         ),
-        onMapCreated: (controller) {
-          _googleMapController = controller;
-          _onMapCreated(controller); // Passe os argumentos necessários aqui
-        },
-        onCameraMove: _onCameraMove,
-        polygons: polygons,
-        markers: markers,
-        mapType: google_maps.MapType.satellite,
-        mapToolbarEnabled: false,
-        zoomControlsEnabled: false,
-      ),
+        Positioned(
+          top: 62,
+          right: 16,
+          child: ElevatedButton(
+            onPressed: mudaFoco,
+            style: ElevatedButton.styleFrom(
+              shape: CircleBorder(),
+              backgroundColor: Color(0xFF00736D),
+            ),
+            child: Padding(
+                padding: const EdgeInsets.all(8.0),
+                child: Icon(
+                  Icons.center_focus_strong_sharp,
+                  size: 25.0,
+                  color: Colors.white,
+                )),
+          ),
+        ),
+      ],
     );
   }
 }
