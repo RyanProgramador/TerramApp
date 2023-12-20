@@ -165,41 +165,40 @@ class _ContornoMapState extends State<ContornoMap> {
         Position newLoc = await Geolocator.getCurrentPosition(
             desiredAccuracy: LocationAccuracy.best);
         // Se for a primeira vez ou se a distância entre a última posição e a nova for >= 1m
-        if (lastPosition == null ||
-            Geolocator.distanceBetween(
-                  lastPosition!.latitude,
-                  lastPosition!.longitude,
+        //  if (lastPosition == null ||
+        // Geolocator.distanceBetween(
+        //        lastPosition!.latitude,
+        //      lastPosition!.longitude,
+        //       newLoc.latitude,
+//newLoc.longitude,
+        //    ) >=
+        //    1) {
+        // Atualiza a última posição conhecida
+        lastPosition = newLoc;
+        double currentZoomLevel = await _googleMapController!.getZoomLevel();
+        if (_googleMapController != null) {
+          _googleMapController!.animateCamera(
+            google_maps.CameraUpdate.newCameraPosition(
+              google_maps.CameraPosition(
+                target: google_maps.LatLng(
                   newLoc.latitude,
                   newLoc.longitude,
-                ) >=
-                1) {
-          // Atualiza a última posição conhecida
-          lastPosition = newLoc;
-          double currentZoomLevel = await _googleMapController!.getZoomLevel();
-          if (_googleMapController != null) {
-            _googleMapController!.animateCamera(
-              google_maps.CameraUpdate.newCameraPosition(
-                google_maps.CameraPosition(
-                  target: google_maps.LatLng(
-                    newLoc.latitude,
-                    newLoc.longitude,
-                  ),
-                  zoom: currentZoomLevel,
                 ),
+                zoom: currentZoomLevel,
               ),
-            );
-          }
-          currentTarget = google_maps.LatLng(newLoc.latitude, newLoc.longitude);
-          currentZoom = 20;
-
-          setState(() {
-            position = newLoc;
-            _addUserMarker(
-                google_maps.LatLng(newLoc.latitude, newLoc.longitude));
-            _updatePolyline();
-          });
+            ),
+          );
         }
+        currentTarget = google_maps.LatLng(newLoc.latitude, newLoc.longitude);
+        currentZoom = 20;
+
+        setState(() {
+          position = newLoc;
+          _addUserMarker(google_maps.LatLng(newLoc.latitude, newLoc.longitude));
+          _updatePolyline();
+        });
       }
+      //}
     }
   }
 
@@ -459,9 +458,8 @@ class _ContornoMapState extends State<ContornoMap> {
     super.initState();
     _model = createModel(context, () => ContornoDaFazendaModel());
     _getCurrentLocation();
-    // Update location every 2 seconds
     Timer.periodic(
-        Duration(milliseconds: 500), (Timer t) => _getCurrentLocation());
+        Duration(milliseconds: 1000), (Timer t) => _getCurrentLocation());
   }
 
   @override

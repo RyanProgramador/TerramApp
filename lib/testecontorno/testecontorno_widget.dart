@@ -1,4 +1,5 @@
 import '/backend/api_requests/api_calls.dart';
+import '/flutter_flow/flutter_flow_google_map.dart';
 import '/flutter_flow/flutter_flow_theme.dart';
 import '/flutter_flow/flutter_flow_util.dart';
 import '/flutter_flow/flutter_flow_widgets.dart';
@@ -128,7 +129,24 @@ class _TestecontornoWidgetState extends State<TestecontornoWidget> {
               : FocusScope.of(context).unfocus(),
           child: Scaffold(
             key: scaffoldKey,
+            resizeToAvoidBottomInset: false,
             backgroundColor: FlutterFlowTheme.of(context).primaryBackground,
+            floatingActionButton: FloatingActionButton(
+              onPressed: () async {
+                currentUserLocationValue = await getCurrentUserLocation(
+                    defaultLocation: LatLng(0.0, 0.0));
+                setState(() {
+                  _model.incial2 = currentUserLocationValue;
+                });
+              },
+              backgroundColor: FlutterFlowTheme.of(context).primary,
+              elevation: 8.0,
+              child: Icon(
+                Icons.add,
+                color: FlutterFlowTheme.of(context).info,
+                size: 24.0,
+              ),
+            ),
             body: SafeArea(
               top: true,
               child: Column(
@@ -184,6 +202,35 @@ class _TestecontornoWidgetState extends State<TestecontornoWidget> {
                           width: double.infinity,
                           height: double.infinity,
                         ),
+                      ),
+                    ),
+                  ),
+                  Expanded(
+                    flex: 8,
+                    child: Container(
+                      width: double.infinity,
+                      height: 400.0,
+                      decoration: BoxDecoration(
+                        color: FlutterFlowTheme.of(context).secondaryBackground,
+                      ),
+                      child: FlutterFlowGoogleMap(
+                        controller: _model.googleMapsController,
+                        onCameraIdle: (latLng) =>
+                            _model.googleMapsCenter = latLng,
+                        initialLocation: _model.googleMapsCenter ??=
+                            _model.incial2!,
+                        markerColor: GoogleMarkerColor.violet,
+                        mapType: MapType.satellite,
+                        style: GoogleMapStyle.standard,
+                        initialZoom: 14.0,
+                        allowInteraction: false,
+                        allowZoom: false,
+                        showZoomControls: true,
+                        showLocation: false,
+                        showCompass: false,
+                        showMapToolbar: false,
+                        showTraffic: false,
+                        centerMapOnMarkerTap: true,
                       ),
                     ),
                   ),

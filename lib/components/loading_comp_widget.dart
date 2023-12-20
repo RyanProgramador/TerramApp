@@ -161,7 +161,7 @@ class _LoadingCompWidgetState extends State<LoadingCompWidget> {
                                       padding: EdgeInsetsDirectional.fromSTEB(
                                           0.0, 0.0, 0.0, 22.0),
                                       child: Text(
-                                        'Parece que não ha serviços para você!',
+                                        'Parece que não existe serviços para você!',
                                         style: FlutterFlowTheme.of(context)
                                             .headlineLarge
                                             .override(
