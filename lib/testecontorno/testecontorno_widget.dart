@@ -218,7 +218,9 @@ class _TestecontornoWidgetState extends State<TestecontornoWidget> {
                         onCameraIdle: (latLng) =>
                             _model.googleMapsCenter = latLng,
                         initialLocation: _model.googleMapsCenter ??=
-                            _model.incial2!,
+                            _model.incial2 != null
+                                ? _model.incial2!
+                                : currentUserLocationValue!,
                         markerColor: GoogleMarkerColor.violet,
                         mapType: MapType.satellite,
                         style: GoogleMapStyle.standard,
