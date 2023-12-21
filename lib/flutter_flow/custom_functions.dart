@@ -833,11 +833,23 @@ List<dynamic>? juntarDuasListasJson(
   List<dynamic>? lista1,
   List<dynamic>? lista2,
 ) {
-  if (lista1 == null) {
-    return lista2;
-  } else if (lista2 == null) {
-    return lista1;
-  } else {
-    return [...lista1, ...lista2];
+  // Cria um conjunto vazio para armazenar as strings JSON únicas
+  var uniqueJsonStrings = <String>{};
+
+  // Adiciona cada elemento de lista1 ao conjunto, após convertê-los para string JSON
+  if (lista1 != null) {
+    for (var item in lista1) {
+      uniqueJsonStrings.add(jsonEncode(item));
+    }
   }
+
+  // Faz o mesmo para lista2
+  if (lista2 != null) {
+    for (var item in lista2) {
+      uniqueJsonStrings.add(jsonEncode(item));
+    }
+  }
+
+  // Converte as strings JSON de volta para mapas e retorna a lista
+  return uniqueJsonStrings.map((s) => jsonDecode(s)).toList();
 }

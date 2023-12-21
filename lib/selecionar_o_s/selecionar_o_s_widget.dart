@@ -264,7 +264,7 @@ class _SelecionarOSWidgetState extends State<SelecionarOSWidget>
                 .cast<dynamic>();
             FFAppState().tempoEmSegundosPadraoDeCapturaDeLocal =
                 SincronizarGroup.trCFGCall.dadosCFG(
-              (_model.trCFG?.jsonBody ?? ''),
+              (_model.trCFG2?.jsonBody ?? ''),
             );
           });
         } else {
