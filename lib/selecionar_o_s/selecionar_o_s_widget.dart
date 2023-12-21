@@ -106,10 +106,15 @@ class _SelecionarOSWidgetState extends State<SelecionarOSWidget>
               r'''$.status''',
             )) {
           setState(() {
-            FFAppState().grupoContornoFazendasPosSincronizado =
-                FFAppState().grupoContornoFazendas.toList().cast<dynamic>();
-            FFAppState().contornoFazendaPosSincronizado = FFAppState()
-                .contornoFazendaPosSincronizado
+            FFAppState().grupoContornoFazendasPosSincronizado = functions
+                .juntarDuasListasJson(
+                    FFAppState().grupoContornoFazendas.toList(),
+                    FFAppState().grupoContornoFazendasPosSincronizado.toList())!
+                .toList()
+                .cast<dynamic>();
+            FFAppState().contornoFazendaPosSincronizado = functions
+                .juntarDuasListasJson(FFAppState().contornoFazenda.toList(),
+                    FFAppState().contornoFazendaPosSincronizado.toList())!
                 .toList()
                 .cast<dynamic>();
           });
@@ -153,6 +158,133 @@ class _SelecionarOSWidgetState extends State<SelecionarOSWidget>
         FFAppState().AtualLocalizcao = currentUserLocationValue!.toString();
       });
       if (FFAppState().trOsServicos.length != 0) {
+        _model.trOsTecnicosSincroniza2 =
+            await SincronizarGroup.trOsTecnicoCall.call(
+          urlapicall: FFAppState().urlapicall,
+        );
+        _model.sincOsRet2 = await SincronizarGroup.ordemDeServicoCall.call(
+          urlapicall: FFAppState().urlapicall,
+        );
+        _model.trFazendasSinc2 = await SincronizarGroup.trFazendasCall.call(
+          urlapicall: FFAppState().urlapicall,
+        );
+        _model.trServicosSinc2 = await SincronizarGroup.trServicosCall.call(
+          urlapicall: FFAppState().urlapicall,
+        );
+        _model.trOsServicosSinc2 = await SincronizarGroup.trOsServicosCall.call(
+          urlapicall: FFAppState().urlapicall,
+          tecId: FFAppState().tecID,
+        );
+        _model.trTecnicosSinc2 = await SincronizarGroup.trTecnicosCall.call(
+          urlapicall: FFAppState().urlapicall,
+        );
+        _model.trEmpresas2 = await SincronizarGroup.trEmpresasCall.call(
+          urlapicall: FFAppState().urlapicall,
+        );
+        _model.trCFG2 = await SincronizarGroup.trCFGCall.call(
+          urlapicall: FFAppState().urlapicall,
+        );
+        FFAppState().update(() {});
+        if ((_model.trTecnicosSinc2?.succeeded ?? true) &&
+            (_model.trOsServicosSinc2?.succeeded ?? true) &&
+            (_model.trServicosSinc2?.succeeded ?? true) &&
+            (_model.trFazendasSinc2?.succeeded ?? true) &&
+            (_model.sincOsRet2?.succeeded ?? true) &&
+            (_model.trOsTecnicosSincroniza2?.succeeded ?? true)) {
+          FFAppState().update(() {
+            FFAppState().trOrdemServicos = functions
+                .juntarDuasListasJson(
+                    SincronizarGroup.ordemDeServicoCall
+                        .ordemServicoDados(
+                          (_model.sincOsRet2?.jsonBody ?? ''),
+                        )
+                        ?.toList(),
+                    FFAppState().trOrdemServicos.toList())!
+                .toList()
+                .cast<dynamic>();
+            FFAppState().trFazendas = functions
+                .juntarDuasListasJson(
+                    SincronizarGroup.trFazendasCall
+                        .dadosTrFazendas(
+                          (_model.trFazendasSinc2?.jsonBody ?? ''),
+                        )
+                        ?.toList(),
+                    FFAppState().trFazendas.toList())!
+                .toList()
+                .cast<dynamic>();
+            FFAppState().trOsTecnicos = functions
+                .juntarDuasListasJson(
+                    SincronizarGroup.trOsTecnicoCall
+                        .dadosTrOsTecnico(
+                          (_model.trOsTecnicosSincroniza2?.jsonBody ?? ''),
+                        )
+                        ?.toList(),
+                    FFAppState().trOsTecnicos.toList())!
+                .toList()
+                .cast<dynamic>();
+            FFAppState().trOsServicos = functions
+                .juntarDuasListasJson(
+                    SincronizarGroup.trOsServicosCall
+                        .dadosTrOsServicos(
+                          (_model.trOsServicosSinc2?.jsonBody ?? ''),
+                        )
+                        ?.toList(),
+                    FFAppState().trOsServicos.toList())!
+                .toList()
+                .cast<dynamic>();
+            FFAppState().trServicos = functions
+                .juntarDuasListasJson(
+                    SincronizarGroup.trServicosCall
+                        .dadosTrServicos(
+                          (_model.trServicosSinc2?.jsonBody ?? ''),
+                        )
+                        ?.toList(),
+                    FFAppState().trServicos.toList())!
+                .toList()
+                .cast<dynamic>();
+            FFAppState().trTecnicos = functions
+                .juntarDuasListasJson(
+                    SincronizarGroup.trTecnicosCall
+                        .dadosTrTecnicos(
+                          (_model.trTecnicosSinc2?.jsonBody ?? ''),
+                        )
+                        ?.toList(),
+                    FFAppState().trTecnicos.toList())!
+                .toList()
+                .cast<dynamic>();
+            FFAppState().trEmpresas = functions
+                .juntarDuasListasJson(
+                    SincronizarGroup.trEmpresasCall
+                        .dadosTrEmpresas(
+                          (_model.trEmpresas2?.jsonBody ?? ''),
+                        )
+                        ?.toList(),
+                    FFAppState().trEmpresas.toList())!
+                .toList()
+                .cast<dynamic>();
+            FFAppState().tempoEmSegundosPadraoDeCapturaDeLocal =
+                SincronizarGroup.trCFGCall.dadosCFG(
+              (_model.trCFG?.jsonBody ?? ''),
+            );
+          });
+        } else {
+          await showDialog(
+            context: context,
+            builder: (alertDialogContext) {
+              return AlertDialog(
+                title: Text('Ops!'),
+                actions: [
+                  TextButton(
+                    onPressed: () => Navigator.pop(alertDialogContext),
+                    child: Text('Ok'),
+                  ),
+                ],
+              );
+            },
+          );
+          return;
+        }
+
         return;
       }
       _model.trOsTecnicosSincroniza =

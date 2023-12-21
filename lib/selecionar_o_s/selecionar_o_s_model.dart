@@ -39,6 +39,22 @@ class SelecionarOSModel extends FlutterFlowModel<SelecionarOSWidget> {
   // Stores action output result for [Backend Call - API (trSincronizaTalhaoContorno)] action in SelecionarOS widget.
   ApiCallResponse? trSincTalhao;
   // Stores action output result for [Backend Call - API (trOsTecnico)] action in SelecionarOS widget.
+  ApiCallResponse? trOsTecnicosSincroniza2;
+  // Stores action output result for [Backend Call - API (ordemDeServico)] action in SelecionarOS widget.
+  ApiCallResponse? sincOsRet2;
+  // Stores action output result for [Backend Call - API (trFazendas)] action in SelecionarOS widget.
+  ApiCallResponse? trFazendasSinc2;
+  // Stores action output result for [Backend Call - API (trServicos)] action in SelecionarOS widget.
+  ApiCallResponse? trServicosSinc2;
+  // Stores action output result for [Backend Call - API (trOsServicos)] action in SelecionarOS widget.
+  ApiCallResponse? trOsServicosSinc2;
+  // Stores action output result for [Backend Call - API (trTecnicos)] action in SelecionarOS widget.
+  ApiCallResponse? trTecnicosSinc2;
+  // Stores action output result for [Backend Call - API (trEmpresas)] action in SelecionarOS widget.
+  ApiCallResponse? trEmpresas2;
+  // Stores action output result for [Backend Call - API (trCFG)] action in SelecionarOS widget.
+  ApiCallResponse? trCFG2;
+  // Stores action output result for [Backend Call - API (trOsTecnico)] action in SelecionarOS widget.
   ApiCallResponse? trOsTecnicosSincroniza;
   // Stores action output result for [Backend Call - API (ordemDeServico)] action in SelecionarOS widget.
   ApiCallResponse? sincOsRet;
