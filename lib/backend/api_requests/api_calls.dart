@@ -1,5 +1,6 @@
 import 'dart:convert';
 import 'dart:typed_data';
+import '../schema/structs/index.dart';
 
 import '/flutter_flow/flutter_flow_util.dart';
 import 'api_manager.dart';
@@ -57,42 +58,54 @@ class OrdemDeServicoCall {
         true,
       ) as List?)
           ?.withoutNulls
-          .cast<String>();
+          .map((x) => castToType<String>(x))
+          .withoutNulls
+          .toList();
   List<String>? ordemServicoOsdthrAlt(dynamic response) => (getJsonField(
         response,
         r'''$.dados[:].os_dthr_alt''',
         true,
       ) as List?)
           ?.withoutNulls
-          .cast<String>();
+          .map((x) => castToType<String>(x))
+          .withoutNulls
+          .toList();
   List<String>? ordemServicoOsUsuCad(dynamic response) => (getJsonField(
         response,
         r'''$.dados[:].os_usu_cad''',
         true,
       ) as List?)
           ?.withoutNulls
-          .cast<String>();
+          .map((x) => castToType<String>(x))
+          .withoutNulls
+          .toList();
   List<String>? ordemServicoOsDthrCad(dynamic response) => (getJsonField(
         response,
         r'''$.dados[:].os_dthr_cad''',
         true,
       ) as List?)
           ?.withoutNulls
-          .cast<String>();
+          .map((x) => castToType<String>(x))
+          .withoutNulls
+          .toList();
   List<String>? ordemServicoOsStatus(dynamic response) => (getJsonField(
         response,
         r'''$.dados[:].os_status''',
         true,
       ) as List?)
           ?.withoutNulls
-          .cast<String>();
+          .map((x) => castToType<String>(x))
+          .withoutNulls
+          .toList();
   List<String>? ordemServicoOsObservacao(dynamic response) => (getJsonField(
         response,
         r'''$.dados[:].os_observacao''',
         true,
       ) as List?)
           ?.withoutNulls
-          .cast<String>();
+          .map((x) => castToType<String>(x))
+          .withoutNulls
+          .toList();
   List? ordemServicoOsDthrFinalizao(dynamic response) => getJsonField(
         response,
         r'''$.dados[:].os_dthr_finalizacao''',
@@ -105,37 +118,45 @@ class OrdemDeServicoCall {
         true,
       ) as List?)
           ?.withoutNulls
-          .cast<String>();
+          .map((x) => castToType<String>(x))
+          .withoutNulls
+          .toList();
   List<int>? ordemServicoOsIDFaz(dynamic response) => (getJsonField(
         response,
         r'''$.dados[:].os_id_faz''',
         true,
       ) as List?)
           ?.withoutNulls
-          .cast<int>();
+          .map((x) => castToType<int>(x))
+          .withoutNulls
+          .toList();
   List<int>? ordemServicoOsIDEmp(dynamic response) => (getJsonField(
         response,
         r'''$.dados[:].os_id_emp''',
         true,
       ) as List?)
           ?.withoutNulls
-          .cast<int>();
+          .map((x) => castToType<int>(x))
+          .withoutNulls
+          .toList();
   List<int>? ordemServicoOsID(dynamic response) => (getJsonField(
         response,
         r'''$.dados[:].os_id''',
         true,
       ) as List?)
           ?.withoutNulls
-          .cast<int>();
+          .map((x) => castToType<int>(x))
+          .withoutNulls
+          .toList();
   List? ordemServicoDados(dynamic response) => getJsonField(
         response,
         r'''$.dados''',
         true,
       ) as List?;
-  dynamic ordemServicoStatus(dynamic response) => getJsonField(
+  bool? ordemServicoStatus(dynamic response) => castToType<bool>(getJsonField(
         response,
         r'''$.status''',
-      );
+      ));
   dynamic itensNumOrdemServico(dynamic response) => getJsonField(
         response,
         r'''$.itens''',
@@ -172,7 +193,9 @@ class TrOsTecnicoCall {
         true,
       ) as List?)
           ?.withoutNulls
-          .cast<String>();
+          .map((x) => castToType<String>(x))
+          .withoutNulls
+          .toList();
   List? ostecdthraltTrOsTecnico(dynamic response) => getJsonField(
         response,
         r'''$.dados[:].ostec_dthr_alt''',
@@ -184,44 +207,54 @@ class TrOsTecnicoCall {
         true,
       ) as List?)
           ?.withoutNulls
-          .cast<String>();
+          .map((x) => castToType<String>(x))
+          .withoutNulls
+          .toList();
   List<String>? ostecdthrcadTrOsTecnico(dynamic response) => (getJsonField(
         response,
         r'''$.dados[:].ostec_dthr_cad''',
         true,
       ) as List?)
           ?.withoutNulls
-          .cast<String>();
+          .map((x) => castToType<String>(x))
+          .withoutNulls
+          .toList();
   List<int>? ostecidtecTrOsTecnico(dynamic response) => (getJsonField(
         response,
         r'''$.dados[:].ostec_id_tec''',
         true,
       ) as List?)
           ?.withoutNulls
-          .cast<int>();
+          .map((x) => castToType<int>(x))
+          .withoutNulls
+          .toList();
   List<int>? ostecidservTrOsTecnico(dynamic response) => (getJsonField(
         response,
         r'''$.dados[:].ostec_id_serv''',
         true,
       ) as List?)
           ?.withoutNulls
-          .cast<int>();
+          .map((x) => castToType<int>(x))
+          .withoutNulls
+          .toList();
   List<int>? ostecidTrOsTecnico(dynamic response) => (getJsonField(
         response,
         r'''$.dados[:].ostec_id''',
         true,
       ) as List?)
           ?.withoutNulls
-          .cast<int>();
+          .map((x) => castToType<int>(x))
+          .withoutNulls
+          .toList();
   List? dadosTrOsTecnico(dynamic response) => getJsonField(
         response,
         r'''$.dados''',
         true,
       ) as List?;
-  dynamic statusTrOsTecnico(dynamic response) => getJsonField(
+  bool? statusTrOsTecnico(dynamic response) => castToType<bool>(getJsonField(
         response,
         r'''$.status''',
-      );
+      ));
   dynamic itensTrOsTecnico(dynamic response) => getJsonField(
         response,
         r'''$.itens''',
@@ -258,100 +291,126 @@ class TrFazendasCall {
         true,
       ) as List?)
           ?.withoutNulls
-          .cast<String>();
+          .map((x) => castToType<String>(x))
+          .withoutNulls
+          .toList();
   List<String>? fazdthraltTrFazendas(dynamic response) => (getJsonField(
         response,
         r'''$.dados[:].faz_dthr_alt''',
         true,
       ) as List?)
           ?.withoutNulls
-          .cast<String>();
+          .map((x) => castToType<String>(x))
+          .withoutNulls
+          .toList();
   List<String>? fazusucadTrFazendas(dynamic response) => (getJsonField(
         response,
         r'''$.dados[:].faz_usu_cad''',
         true,
       ) as List?)
           ?.withoutNulls
-          .cast<String>();
+          .map((x) => castToType<String>(x))
+          .withoutNulls
+          .toList();
   List<String>? fazdthrcadTrFazendas(dynamic response) => (getJsonField(
         response,
         r'''$.dados[:].faz_dthr_cad''',
         true,
       ) as List?)
           ?.withoutNulls
-          .cast<String>();
+          .map((x) => castToType<String>(x))
+          .withoutNulls
+          .toList();
   List<String>? fazstatusTrFazendas(dynamic response) => (getJsonField(
         response,
         r'''$.dados[:].faz_status''',
         true,
       ) as List?)
           ?.withoutNulls
-          .cast<String>();
+          .map((x) => castToType<String>(x))
+          .withoutNulls
+          .toList();
   List<String>? fazestadoTrFazendas(dynamic response) => (getJsonField(
         response,
         r'''$.dados[:].faz_estado''',
         true,
       ) as List?)
           ?.withoutNulls
-          .cast<String>();
+          .map((x) => castToType<String>(x))
+          .withoutNulls
+          .toList();
   List<String>? fazpontorefTrFazendas(dynamic response) => (getJsonField(
         response,
         r'''$.dados[:].faz_ponto_ref''',
         true,
       ) as List?)
           ?.withoutNulls
-          .cast<String>();
+          .map((x) => castToType<String>(x))
+          .withoutNulls
+          .toList();
   List<String>? fazcidadeTrFazendas(dynamic response) => (getJsonField(
         response,
         r'''$.dados[:].faz_cidade''',
         true,
       ) as List?)
           ?.withoutNulls
-          .cast<String>();
+          .map((x) => castToType<String>(x))
+          .withoutNulls
+          .toList();
   List<String>? fazlongitudeTrFazendas(dynamic response) => (getJsonField(
         response,
         r'''$.dados[:].faz_longitude''',
         true,
       ) as List?)
           ?.withoutNulls
-          .cast<String>();
+          .map((x) => castToType<String>(x))
+          .withoutNulls
+          .toList();
   List<String>? fazlatitudeTrFazendas(dynamic response) => (getJsonField(
         response,
         r'''$.dados[:].faz_latitude''',
         true,
       ) as List?)
           ?.withoutNulls
-          .cast<String>();
+          .map((x) => castToType<String>(x))
+          .withoutNulls
+          .toList();
   List<String>? faznomeTrFazendas(dynamic response) => (getJsonField(
         response,
         r'''$.dados[:].faz_nome''',
         true,
       ) as List?)
           ?.withoutNulls
-          .cast<String>();
+          .map((x) => castToType<String>(x))
+          .withoutNulls
+          .toList();
   List<int>? fazidempTrFazendas(dynamic response) => (getJsonField(
         response,
         r'''$.dados[:].faz_id_emp''',
         true,
       ) as List?)
           ?.withoutNulls
-          .cast<int>();
+          .map((x) => castToType<int>(x))
+          .withoutNulls
+          .toList();
   List<int>? fazidTrFazendas(dynamic response) => (getJsonField(
         response,
         r'''$.dados[:].faz_id''',
         true,
       ) as List?)
           ?.withoutNulls
-          .cast<int>();
+          .map((x) => castToType<int>(x))
+          .withoutNulls
+          .toList();
   List? dadosTrFazendas(dynamic response) => getJsonField(
         response,
         r'''$.dados''',
         true,
       ) as List?;
-  dynamic statusTrFazendas(dynamic response) => getJsonField(
+  bool? statusTrFazendas(dynamic response) => castToType<bool>(getJsonField(
         response,
         r'''$.status''',
-      );
+      ));
   dynamic itensTrFazenda(dynamic response) => getJsonField(
         response,
         r'''$.itens''',
@@ -623,14 +682,15 @@ class TrSincronizaCelularComBDCall {
     );
   }
 
-  dynamic retornoSincComCelular(dynamic response) => getJsonField(
+  String? retornoSincComCelular(dynamic response) =>
+      castToType<String>(getJsonField(
         response,
         r'''$.message''',
-      );
-  dynamic statusSincComCelular(dynamic response) => getJsonField(
+      ));
+  bool? statusSincComCelular(dynamic response) => castToType<bool>(getJsonField(
         response,
         r'''$.status''',
-      );
+      ));
 }
 
 class TrEmpresasCall {
@@ -662,10 +722,10 @@ class TrEmpresasCall {
         r'''$.dados''',
         true,
       ) as List?;
-  dynamic statusTrEmpresas(dynamic response) => getJsonField(
+  bool? statusTrEmpresas(dynamic response) => castToType<bool>(getJsonField(
         response,
         r'''$.status''',
-      );
+      ));
 }
 
 class TrCFGCall {
@@ -771,22 +831,22 @@ class LoginsCall {
     );
   }
 
-  dynamic messageLogin(dynamic response) => getJsonField(
+  String? messageLogin(dynamic response) => castToType<String>(getJsonField(
         response,
         r'''$.message''',
-      );
-  dynamic statusLogin(dynamic response) => getJsonField(
+      ));
+  bool? statusLogin(dynamic response) => castToType<bool>(getJsonField(
         response,
         r'''$.status''',
-      );
-  dynamic nomeLogin(dynamic response) => getJsonField(
+      ));
+  String? nomeLogin(dynamic response) => castToType<String>(getJsonField(
         response,
         r'''$.nome''',
-      );
-  dynamic idLogin(dynamic response) => getJsonField(
+      ));
+  int? idLogin(dynamic response) => castToType<int>(getJsonField(
         response,
         r'''$.id''',
-      );
+      ));
 }
 
 class EsqueceuSenhaCall {
@@ -850,7 +910,7 @@ class ApiRotasDirectionsCall {
     );
   }
 
-  static dynamic tudo(dynamic response) => getJsonField(
+  static dynamic? tudo(dynamic response) => getJsonField(
         response,
         r'''$''',
       );
@@ -915,10 +975,11 @@ class ApiRotasPolylinesCall {
     );
   }
 
-  static dynamic criptografadapolyline(dynamic response) => getJsonField(
+  static String? criptografadapolyline(dynamic response) =>
+      castToType<String>(getJsonField(
         response,
         r'''$.routes[0].polyline.encodedPolyline''',
-      );
+      ));
 }
 
 class HttpsdemoconceittosistemascombrterramwsflutterflowindexphpCall {

@@ -66,10 +66,9 @@ class LocaisPercorridosStruct extends BaseStruct {
         localInicio: getDataList(data['localInicio']),
       );
 
-  static LocaisPercorridosStruct? maybeFromMap(dynamic data) =>
-      data is Map<String, dynamic>
-          ? LocaisPercorridosStruct.fromMap(data)
-          : null;
+  static LocaisPercorridosStruct? maybeFromMap(dynamic data) => data is Map
+      ? LocaisPercorridosStruct.fromMap(data.cast<String, dynamic>())
+      : null;
 
   Map<String, dynamic> toMap() => {
         'LocaisPercorridos': _locaisPercorridos,

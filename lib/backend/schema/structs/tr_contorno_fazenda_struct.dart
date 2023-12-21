@@ -48,10 +48,9 @@ class TrContornoFazendaStruct extends BaseStruct {
         latlng: data['latlng'] as String?,
       );
 
-  static TrContornoFazendaStruct? maybeFromMap(dynamic data) =>
-      data is Map<String, dynamic>
-          ? TrContornoFazendaStruct.fromMap(data)
-          : null;
+  static TrContornoFazendaStruct? maybeFromMap(dynamic data) => data is Map
+      ? TrContornoFazendaStruct.fromMap(data.cast<String, dynamic>())
+      : null;
 
   Map<String, dynamic> toMap() => {
         'contorno_grupo': _contornoGrupo,

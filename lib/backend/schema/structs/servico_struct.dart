@@ -31,7 +31,7 @@ class ServicoStruct extends BaseStruct {
       );
 
   static ServicoStruct? maybeFromMap(dynamic data) =>
-      data is Map<String, dynamic> ? ServicoStruct.fromMap(data) : null;
+      data is Map ? ServicoStruct.fromMap(data.cast<String, dynamic>()) : null;
 
   Map<String, dynamic> toMap() => {
         'Id_servico': _idServico,

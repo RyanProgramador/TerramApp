@@ -21,8 +21,9 @@ class TrTecnicosStruct extends BaseStruct {
         id: data['id'] as String?,
       );
 
-  static TrTecnicosStruct? maybeFromMap(dynamic data) =>
-      data is Map<String, dynamic> ? TrTecnicosStruct.fromMap(data) : null;
+  static TrTecnicosStruct? maybeFromMap(dynamic data) => data is Map
+      ? TrTecnicosStruct.fromMap(data.cast<String, dynamic>())
+      : null;
 
   Map<String, dynamic> toMap() => {
         'id': _id,

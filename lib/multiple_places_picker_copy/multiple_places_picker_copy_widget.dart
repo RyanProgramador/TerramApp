@@ -1639,9 +1639,9 @@ class _MultiplePlacesPickerCopyWidgetState
                                 FFAppState().trDeslocamentoGeoDataType =
                                     FFAppState()
                                         .trDeslocamentoGeo
-                                        .map((e) => e != null && e != ''
-                                            ? DeslocamentosGeoStruct.fromMap(e)
-                                            : null)
+                                        .map((e) =>
+                                            DeslocamentosGeoStruct.maybeFromMap(
+                                                e))
                                         .withoutNulls
                                         .toList()
                                         .cast<DeslocamentosGeoStruct>();
@@ -1743,8 +1743,8 @@ class _MultiplePlacesPickerCopyWidgetState
                       context: context,
                       builder: (alertDialogContext) {
                         return AlertDialog(
-                          title: Text(TrFazendasStruct.fromMap(
-                                  (_model.trFazendasSinc?.jsonBody ?? ''))
+                          title: Text(TrFazendasStruct.maybeFromMap(
+                                  (_model.trFazendasSinc?.jsonBody ?? ''))!
                               .fazNome),
                           actions: [
                             TextButton(

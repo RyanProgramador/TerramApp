@@ -100,7 +100,7 @@ class _SelecionarOSWidgetState extends State<SelecionarOSWidget>
         );
         if (SincronizarGroup.trSincronizaCelularComBDCall.statusSincComCelular(
               (_model.apiResultxxdOnLoadPage?.jsonBody ?? ''),
-            ) &&
+            )! &&
             getJsonField(
               (_model.trSincTalhao?.jsonBody ?? ''),
               r'''$.status''',

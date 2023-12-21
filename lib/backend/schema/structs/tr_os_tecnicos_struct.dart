@@ -75,8 +75,9 @@ class TrOsTecnicosStruct extends BaseStruct {
         ostecUsuAlt: data['ostec_usu_alt'] as String?,
       );
 
-  static TrOsTecnicosStruct? maybeFromMap(dynamic data) =>
-      data is Map<String, dynamic> ? TrOsTecnicosStruct.fromMap(data) : null;
+  static TrOsTecnicosStruct? maybeFromMap(dynamic data) => data is Map
+      ? TrOsTecnicosStruct.fromMap(data.cast<String, dynamic>())
+      : null;
 
   Map<String, dynamic> toMap() => {
         'ostec_id': _ostecId,

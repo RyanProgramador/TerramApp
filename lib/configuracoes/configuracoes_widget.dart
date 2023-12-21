@@ -208,7 +208,7 @@ class _ConfiguracoesWidgetState extends State<ConfiguracoesWidget> {
                                         .trSincronizaCelularComBDCall
                                         .statusSincComCelular(
                                       (_model.apiResultxxd?.jsonBody ?? ''),
-                                    ) &&
+                                    )! &&
                                     getJsonField(
                                       (_model.trSincTalhao?.jsonBody ?? ''),
                                       r'''$.status''',
@@ -223,7 +223,7 @@ class _ConfiguracoesWidgetState extends State<ConfiguracoesWidget> {
                                               (_model.apiResultxxd?.jsonBody ??
                                                   ''),
                                             )
-                                            .toString()),
+                                            .toString()!),
                                         actions: [
                                           TextButton(
                                             onPressed: () => Navigator.pop(

@@ -40,10 +40,9 @@ class DeslocamentosGeoStruct extends BaseStruct {
         longitude: data['longitude'] as String?,
       );
 
-  static DeslocamentosGeoStruct? maybeFromMap(dynamic data) =>
-      data is Map<String, dynamic>
-          ? DeslocamentosGeoStruct.fromMap(data)
-          : null;
+  static DeslocamentosGeoStruct? maybeFromMap(dynamic data) => data is Map
+      ? DeslocamentosGeoStruct.fromMap(data.cast<String, dynamic>())
+      : null;
 
   Map<String, dynamic> toMap() => {
         'osdes_id': _osdesId,

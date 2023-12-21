@@ -129,8 +129,9 @@ class TrFazendasStruct extends BaseStruct {
         fazUsuAlt: data['faz_usu_alt'] as String?,
       );
 
-  static TrFazendasStruct? maybeFromMap(dynamic data) =>
-      data is Map<String, dynamic> ? TrFazendasStruct.fromMap(data) : null;
+  static TrFazendasStruct? maybeFromMap(dynamic data) => data is Map
+      ? TrFazendasStruct.fromMap(data.cast<String, dynamic>())
+      : null;
 
   Map<String, dynamic> toMap() => {
         'faz_id': _fazId,

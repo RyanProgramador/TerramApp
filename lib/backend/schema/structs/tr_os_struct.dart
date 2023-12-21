@@ -111,7 +111,7 @@ class TrOsStruct extends BaseStruct {
       );
 
   static TrOsStruct? maybeFromMap(dynamic data) =>
-      data is Map<String, dynamic> ? TrOsStruct.fromMap(data) : null;
+      data is Map ? TrOsStruct.fromMap(data.cast<String, dynamic>()) : null;
 
   Map<String, dynamic> toMap() => {
         'os_id': _osId,

@@ -356,7 +356,7 @@ class _LoginWidgetState extends State<LoginWidget> {
                                               (_model.loginStatusOnSubmit
                                                       ?.jsonBody ??
                                                   ''),
-                                            )) {
+                                            )!) {
                                               FFAppState().update(() {
                                                 FFAppState().tecID =
                                                     ModuloSeguraGroup.loginsCall
@@ -365,6 +365,7 @@ class _LoginWidgetState extends State<LoginWidget> {
                                                                   ?.jsonBody ??
                                                               ''),
                                                         )
+                                                        .toString()!
                                                         .toString();
                                                 FFAppState().tecNome =
                                                     ModuloSeguraGroup.loginsCall
@@ -373,7 +374,7 @@ class _LoginWidgetState extends State<LoginWidget> {
                                                                   ?.jsonBody ??
                                                               ''),
                                                         )
-                                                        .toString();
+                                                        .toString()!;
                                                 FFAppState().userLogin = _model
                                                     .emailAddressLoginController
                                                     .text;
@@ -411,7 +412,7 @@ class _LoginWidgetState extends State<LoginWidget> {
                                                                       ?.jsonBody ??
                                                                   ''),
                                                             )
-                                                            .toString()),
+                                                            .toString()!),
                                                     actions: [
                                                       TextButton(
                                                         onPressed: () =>
@@ -692,7 +693,7 @@ class _LoginWidgetState extends State<LoginWidget> {
                                                         (_model.loginStatus
                                                                 ?.jsonBody ??
                                                             ''),
-                                                      )) {
+                                                      )!) {
                                                         FFAppState().update(() {
                                                           FFAppState().tecID =
                                                               ModuloSeguraGroup
@@ -702,6 +703,7 @@ class _LoginWidgetState extends State<LoginWidget> {
                                                                             ?.jsonBody ??
                                                                         ''),
                                                                   )
+                                                                  .toString()!
                                                                   .toString();
                                                           FFAppState().tecNome =
                                                               ModuloSeguraGroup
@@ -711,7 +713,7 @@ class _LoginWidgetState extends State<LoginWidget> {
                                                                             ?.jsonBody ??
                                                                         ''),
                                                                   )
-                                                                  .toString();
+                                                                  .toString()!;
                                                           FFAppState()
                                                                   .userLogin =
                                                               _model
@@ -758,7 +760,7 @@ class _LoginWidgetState extends State<LoginWidget> {
                                                                         (_model.loginStatus?.jsonBody ??
                                                                             ''),
                                                                       )
-                                                                      .toString()),
+                                                                      .toString()!),
                                                               actions: [
                                                                 TextButton(
                                                                   onPressed: () =>

@@ -31,7 +31,7 @@ class TecnicoStruct extends BaseStruct {
       );
 
   static TecnicoStruct? maybeFromMap(dynamic data) =>
-      data is Map<String, dynamic> ? TecnicoStruct.fromMap(data) : null;
+      data is Map ? TecnicoStruct.fromMap(data.cast<String, dynamic>()) : null;
 
   Map<String, dynamic> toMap() => {
         'Nome_tec': _nomeTec,
