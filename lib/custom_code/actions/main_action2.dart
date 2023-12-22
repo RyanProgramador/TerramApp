@@ -45,24 +45,11 @@ Future<void> mainAction2(
       handleLocationUpdate(locationData, osdesId);
     }
   });
+}
 
-  // Configura um timer para atualizar a localização em intervalos regulares
-  Timer.periodic(Duration(seconds: tempoEmSegundosDeAtualizacao ?? 10),
-      (Timer t) {
-    BackgroundLocation.getCurrentLocation().then((location) {
-      if (!pausado!) {
-        Map<String, dynamic> locationData = {
-          'latitude': location.latitude,
-          'longitude': location.longitude,
-          'timestamp': DateTime.now().toIso8601String(),
-          // Outros dados relevantes...
-        };
-
-        // Lógica para tratar a localização recebida
-        handleLocationUpdate(locationData, osdesId);
-      }
-    });
-  });
+void handleLocationUpdate(Map<String, dynamic> locationData, String? osdesId) {
+  // Implemente a lógica para enviar os dados para o servidor ou salvar localmente
+  print("Localização atualizada: $locationData");
 }
 
 // Função para solicitar as permissões necessárias
