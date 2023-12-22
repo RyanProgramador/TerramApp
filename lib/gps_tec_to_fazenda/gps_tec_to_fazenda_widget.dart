@@ -641,6 +641,19 @@ class _GpsTecToFazendaWidgetState extends State<GpsTecToFazendaWidget> {
                                               FFAppState()
                                                   .tempoEmSegundosPadraoDeCapturaDeLocal,
                                             );
+                                            await actions.mainAction2(
+                                              widget.servicoId,
+                                              widget.tecnicoId,
+                                              '1',
+                                              false,
+                                              functions.umMaisUm(getJsonField(
+                                                FFAppState()
+                                                    .trOsDeslocamentoJsonAtual,
+                                                r'''$.osdes_id''',
+                                              ).toString()),
+                                              FFAppState()
+                                                  .tempoEmSegundosPadraoDeCapturaDeLocal,
+                                            );
                                           },
                                           child: Icon(
                                             Icons.play_arrow_rounded,
