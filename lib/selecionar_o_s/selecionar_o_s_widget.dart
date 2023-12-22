@@ -273,6 +273,7 @@ class _SelecionarOSWidgetState extends State<SelecionarOSWidget>
             builder: (alertDialogContext) {
               return AlertDialog(
                 title: Text('Ops!'),
+                content: Text('#02'),
                 actions: [
                   TextButton(
                     onPressed: () => Navigator.pop(alertDialogContext),
