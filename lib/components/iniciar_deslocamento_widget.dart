@@ -479,10 +479,11 @@ class _IniciarDeslocamentoWidgetState extends State<IniciarDeslocamentoWidget> {
                                 width: double.infinity,
                                 decoration: BoxDecoration(),
                                 child: Container(
-                                  width: double.infinity,
+                                  width: MediaQuery.sizeOf(context).width * 1.0,
                                   height: 275.0,
                                   child: custom_widgets.MapsRoutes(
-                                    width: double.infinity,
+                                    width:
+                                        MediaQuery.sizeOf(context).width * 1.0,
                                     height: 275.0,
                                     json2: functions
                                         .jsonToStr(ApiRotasDirectionsCall.tudo(
