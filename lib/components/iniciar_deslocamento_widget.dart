@@ -460,7 +460,10 @@ class _IniciarDeslocamentoWidgetState extends State<IniciarDeslocamentoWidget> {
                                                 ),
                                           ),
                                           Text(
-                                            widget.observacao!,
+                                            valueOrDefault<String>(
+                                              widget.latlngFaz?.toString(),
+                                              '1',
+                                            ),
                                             style: FlutterFlowTheme.of(context)
                                                 .labelMedium
                                                 .override(
