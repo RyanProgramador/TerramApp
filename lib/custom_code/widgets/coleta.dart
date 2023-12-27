@@ -107,7 +107,8 @@ class _ColetaState extends State<Coleta> {
       "profundidades": [
         {"nome": "0-10", "icone": "location_dot", "cor": "#FFC0CB"},
         {"nome": "0-20", "icone": "flag", "cor": "#FF4500"},
-        {"nome": "0-25", "icone": "map_pin", "cor": "#0000CD"}
+        {"nome": "0-25", "icone": "map_pin", "cor": "#0000CD"},
+        {"nome": "0-35", "icone": "plane", "cor": "#0000CD"}
       ],
     },
     {
@@ -425,33 +426,77 @@ class _ColetaState extends State<Coleta> {
                 Text("Coletar profundidades para ${marcador["marcador_nome"]}"),
             content: SingleChildScrollView(
               child: ListBody(
-                children: marcador["profundidades"]
-                    .map<Widget>((profundidade) => Row(
-                          children: [
-                            Icon(
-                              getFontAwesomeIconByName(profundidade["icone"]),
-                              color: HexColor(profundidade["cor"]),
-                            ),
-                            SizedBox(width: 10),
-                            Text(profundidade["nome"]),
-                            Spacer(),
-                            ElevatedButton(
-                              child: Text("Coletar"),
-                              onPressed: () {
-                                Navigator.of(context).pop();
-                                _coletarProfundidade(marcador["marcador_nome"],
-                                    profundidade["nome"]);
-                              },
-                            ),
-                          ],
-                        ))
-                    .toList(),
+                children: marcador["profundidades"].map<Widget>((profundidade) {
+                  bool jaColetada = coletasPorMarcador[marcadorNome]
+                          ?.contains(profundidade["nome"]) ??
+                      false;
+                  return Row(
+                    children: [
+                      Icon(
+                        getFontAwesomeIconByName(profundidade["icone"]),
+                        color: HexColor(profundidade["cor"]),
+                      ),
+                      SizedBox(width: 10),
+                      Text(profundidade["nome"]),
+                      Spacer(),
+                      ElevatedButton(
+                        child: Text(jaColetada ? "Coletada" : "Coletar",
+                            style: TextStyle(
+                              color: Colors
+                                  .black, // Defina a cor do texto como preto
+                            )),
+                        style: ElevatedButton.styleFrom(
+                          primary: jaColetada ? Colors.red : Colors.green,
+                        ),
+                        onPressed: () {
+                          if (jaColetada) {
+                            _confirmarRecoleta(
+                                context, marcadorNome, profundidade["nome"]);
+                          } else {
+                            Navigator.of(context).pop();
+                            _coletarProfundidade(
+                                marcadorNome, profundidade["nome"]);
+                          }
+                        },
+                      ),
+                    ],
+                  );
+                }).toList(),
               ),
             ),
           );
         },
       );
     }
+  }
+
+  void _confirmarRecoleta(
+      BuildContext context, String marcadorNome, String profundidadeNome) {
+    showDialog(
+      context: context,
+      builder: (BuildContext context) {
+        return AlertDialog(
+          title: Text("Recoleta"),
+          content: Text("Deseja coletar essa profundidade novamente?"),
+          actions: <Widget>[
+            TextButton(
+              child: Text("Não"),
+              onPressed: () {
+                Navigator.of(context).pop(); // Fecha o diálogo
+              },
+            ),
+            TextButton(
+              child: Text("Sim"),
+              onPressed: () {
+                Navigator.of(context).pop(); // Fecha o diálogo
+                _coletarProfundidade(
+                    marcadorNome, profundidadeNome); // Realiza a coleta
+              },
+            ),
+          ],
+        );
+      },
+    );
   }
 
   void _coletarProfundidade(String marcadorNome, String profundidadeNome) {
