@@ -476,14 +476,18 @@ class _IniciarDeslocamentoWidgetState extends State<IniciarDeslocamentoWidget> {
                             if ((_model.temInternetOnLoadInicioOs == true) ||
                                 _model.temNet!)
                               Container(
-                                width: double.infinity,
+                                width: MediaQuery.sizeOf(context).width * 0.9,
+                                height: MediaQuery.sizeOf(context).height * 0.9,
                                 decoration: BoxDecoration(),
                                 child: Container(
-                                  width: double.infinity,
-                                  height: double.infinity,
+                                  width: MediaQuery.sizeOf(context).width * 0.9,
+                                  height:
+                                      MediaQuery.sizeOf(context).height * 0.9,
                                   child: custom_widgets.MapsRoutes(
-                                    width: double.infinity,
-                                    height: double.infinity,
+                                    width:
+                                        MediaQuery.sizeOf(context).width * 0.9,
+                                    height:
+                                        MediaQuery.sizeOf(context).height * 0.9,
                                     json2: functions
                                         .jsonToStr(ApiRotasDirectionsCall.tudo(
                                       cardActionsApiRotasDirectionsResponse
@@ -500,14 +504,18 @@ class _IniciarDeslocamentoWidgetState extends State<IniciarDeslocamentoWidget> {
                             if ((_model.temInternetOnLoadInicioOs == false) ||
                                 !_model.temNet!)
                               Container(
-                                width: double.infinity,
+                                width: MediaQuery.sizeOf(context).width * 0.9,
+                                height: MediaQuery.sizeOf(context).height * 0.9,
                                 decoration: BoxDecoration(),
                                 child: Container(
-                                  width: double.infinity,
-                                  height: double.infinity,
+                                  width: MediaQuery.sizeOf(context).width * 0.9,
+                                  height:
+                                      MediaQuery.sizeOf(context).height * 0.9,
                                   child: custom_widgets.MapsOffline(
-                                    width: double.infinity,
-                                    height: double.infinity,
+                                    width:
+                                        MediaQuery.sizeOf(context).width * 0.9,
+                                    height:
+                                        MediaQuery.sizeOf(context).height * 0.9,
                                     coordenadasIniciais:
                                         currentUserLocationValue,
                                     coordenadasFinais: widget.latlngFaz!,
