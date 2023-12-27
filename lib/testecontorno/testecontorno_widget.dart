@@ -3,7 +3,6 @@ import '/flutter_flow/flutter_flow_google_map.dart';
 import '/flutter_flow/flutter_flow_theme.dart';
 import '/flutter_flow/flutter_flow_util.dart';
 import '/flutter_flow/flutter_flow_widgets.dart';
-import '/flutter_flow/upload_data.dart';
 import '/custom_code/widgets/index.dart' as custom_widgets;
 import '/flutter_flow/custom_functions.dart' as functions;
 import 'package:flutter/material.dart';
@@ -133,38 +132,8 @@ class _TestecontornoWidgetState extends State<TestecontornoWidget> {
             resizeToAvoidBottomInset: false,
             backgroundColor: FlutterFlowTheme.of(context).primaryBackground,
             floatingActionButton: FloatingActionButton(
-              onPressed: () async {
-                final selectedMedia = await selectMedia(
-                  multiImage: false,
-                );
-                if (selectedMedia != null &&
-                    selectedMedia.every(
-                        (m) => validateFileFormat(m.storagePath, context))) {
-                  setState(() => _model.isDataUploading = true);
-                  var selectedUploadedFiles = <FFUploadedFile>[];
-
-                  try {
-                    selectedUploadedFiles = selectedMedia
-                        .map((m) => FFUploadedFile(
-                              name: m.storagePath.split('/').last,
-                              bytes: m.bytes,
-                              height: m.dimensions?.height,
-                              width: m.dimensions?.width,
-                              blurHash: m.blurHash,
-                            ))
-                        .toList();
-                  } finally {
-                    _model.isDataUploading = false;
-                  }
-                  if (selectedUploadedFiles.length == selectedMedia.length) {
-                    setState(() {
-                      _model.uploadedLocalFile = selectedUploadedFiles.first;
-                    });
-                  } else {
-                    setState(() {});
-                    return;
-                  }
-                }
+              onPressed: () {
+                print('FloatingActionButton pressed ...');
               },
               backgroundColor: FlutterFlowTheme.of(context).primary,
               elevation: 8.0,
