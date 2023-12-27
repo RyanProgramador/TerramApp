@@ -459,18 +459,6 @@ class _IniciarDeslocamentoWidgetState extends State<IniciarDeslocamentoWidget> {
                                                   fontWeight: FontWeight.w500,
                                                 ),
                                           ),
-                                          Text(
-                                            valueOrDefault<String>(
-                                              widget.latlngFaz?.toString(),
-                                              '1',
-                                            ),
-                                            style: FlutterFlowTheme.of(context)
-                                                .labelMedium
-                                                .override(
-                                                  fontFamily: 'Readex Pro',
-                                                  fontWeight: FontWeight.w500,
-                                                ),
-                                          ),
                                         ],
                                       ),
                                     ),
@@ -488,18 +476,15 @@ class _IniciarDeslocamentoWidgetState extends State<IniciarDeslocamentoWidget> {
                             if ((_model.temInternetOnLoadInicioOs == true) ||
                                 _model.temNet!)
                               Container(
-                                width: MediaQuery.sizeOf(context).width * 0.9,
-                                height: MediaQuery.sizeOf(context).height * 0.9,
+                                width: double.infinity,
+                                height: double.infinity,
                                 decoration: BoxDecoration(),
                                 child: Container(
-                                  width: MediaQuery.sizeOf(context).width * 0.9,
-                                  height:
-                                      MediaQuery.sizeOf(context).height * 0.9,
+                                  width: double.infinity,
+                                  height: double.infinity,
                                   child: custom_widgets.MapsRoutes(
-                                    width:
-                                        MediaQuery.sizeOf(context).width * 0.9,
-                                    height:
-                                        MediaQuery.sizeOf(context).height * 0.9,
+                                    width: double.infinity,
+                                    height: double.infinity,
                                     json2: functions
                                         .jsonToStr(ApiRotasDirectionsCall.tudo(
                                       cardActionsApiRotasDirectionsResponse
@@ -516,18 +501,15 @@ class _IniciarDeslocamentoWidgetState extends State<IniciarDeslocamentoWidget> {
                             if ((_model.temInternetOnLoadInicioOs == false) ||
                                 !_model.temNet!)
                               Container(
-                                width: MediaQuery.sizeOf(context).width * 0.9,
-                                height: MediaQuery.sizeOf(context).height * 0.9,
+                                width: double.infinity,
+                                height: double.infinity,
                                 decoration: BoxDecoration(),
                                 child: Container(
-                                  width: MediaQuery.sizeOf(context).width * 0.9,
-                                  height:
-                                      MediaQuery.sizeOf(context).height * 0.9,
+                                  width: double.infinity,
+                                  height: double.infinity,
                                   child: custom_widgets.MapsOffline(
-                                    width:
-                                        MediaQuery.sizeOf(context).width * 0.9,
-                                    height:
-                                        MediaQuery.sizeOf(context).height * 0.9,
+                                    width: double.infinity,
+                                    height: double.infinity,
                                     coordenadasIniciais:
                                         currentUserLocationValue,
                                     coordenadasFinais: widget.latlngFaz!,
