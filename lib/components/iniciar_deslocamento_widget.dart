@@ -459,6 +459,15 @@ class _IniciarDeslocamentoWidgetState extends State<IniciarDeslocamentoWidget> {
                                                   fontWeight: FontWeight.w500,
                                                 ),
                                           ),
+                                          Text(
+                                            widget.observacao!,
+                                            style: FlutterFlowTheme.of(context)
+                                                .labelMedium
+                                                .override(
+                                                  fontFamily: 'Readex Pro',
+                                                  fontWeight: FontWeight.w500,
+                                                ),
+                                          ),
                                         ],
                                       ),
                                     ),
