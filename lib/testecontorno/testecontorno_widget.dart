@@ -189,7 +189,7 @@ class _TestecontornoWidgetState extends State<TestecontornoWidget> {
                     ),
                   ),
                   Expanded(
-                    flex: 8,
+                    flex: 18,
                     child: Container(
                       width: double.infinity,
                       height: 400.0,

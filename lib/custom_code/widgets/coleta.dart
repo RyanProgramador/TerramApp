@@ -17,6 +17,7 @@ import 'package:http/http.dart' as http;
 import 'dart:ui';
 import 'package:background_location/background_location.dart'
     as background_location;
+import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 
 class Coleta extends StatefulWidget {
   final double? width;
@@ -29,6 +30,7 @@ class Coleta extends StatefulWidget {
   }) : super(key: key);
   final String customIconUrl =
       'https://cdn-icons-png.flaticon.com/128/3253/3253113.png';
+
   @override
   _ColetaState createState() => _ColetaState();
 }
@@ -46,24 +48,31 @@ class _ColetaState extends State<Coleta> {
   List<Map<String, String>> pontosMovidos = [];
   List<Map<String, String>> pontosColetados = [];
   List<Map<String, String>> pontosExcluidos = [];
+
+  Map<String, Set<String>> coletasPorMarcador = {};
+
   //
 
 //double tap no marcador
   bool focoNoMarcador = false;
   google_maps.LatLng? latlngMarcador;
   Map<String, DateTime> lastTapTimestamps = {};
+
 //
   Map<String, bool> coletados = {};
   Map<String, google_maps.LatLng> markerPositions = {};
+
 // ICONE
 
   Uint8List? customIconBytes;
+
   //IMPEDIR DE PEGAR NO MESMO LUGAR
   Position? lastPosition;
 
   Position? position;
   double currentZoom = 20.0;
   google_maps.LatLng? currentTarget;
+
   //
   dynamic listaDeLocais = [
     {"grupo": "2", "latlng": "-29.915044, -51.195798"},
@@ -71,23 +80,44 @@ class _ColetaState extends State<Coleta> {
     {"grupo": "2", "latlng": "-29.913644, -51.193930"},
     {"grupo": "2", "latlng": "-29.913558, -51.195563"},
   ];
+
   // Implementação de exemplo
-  List<Map<String, String>> latLngListMarcadores = [
+  List<Map<String, dynamic>> latLngListMarcadores = [
     {
       "marcador_nome": "A",
-      "latlng_marcadores": "-29.914939224621914, -51.195420011983714"
+      "latlng_marcadores": "-29.914939224621914, -51.195420011983714",
+      "profundidades": [
+        {"nome": "0-10", "icone": "location_dot", "cor": "#FFC0CB"},
+        {"nome": "0-20", "icone": "flag", "cor": "#FF4500"},
+        {"nome": "0-25", "icone": "map_pin", "cor": "#0000CD"}
+      ],
     },
     {
       "marcador_nome": "B",
-      "latlng_marcadores": "-29.91495486428177, -51.19437347868409"
+      "latlng_marcadores": "-29.91495486428177, -51.19437347868409",
+      "profundidades": [
+        {"nome": "0-10", "icone": "location_dot", "cor": "#FFC0CB"},
+        {"nome": "0-20", "icone": "flag", "cor": "#FF4500"},
+        {"nome": "0-25", "icone": "map_pin", "cor": "#0000CD"}
+      ],
     },
     {
       "marcador_nome": "C",
-      "latlng_marcadores": "-29.914305816333297, -51.19483359246237"
+      "latlng_marcadores": "-29.914305816333297, -51.19483359246237",
+      "profundidades": [
+        {"nome": "0-10", "icone": "location_dot", "cor": "#FFC0CB"},
+        {"nome": "0-20", "icone": "flag", "cor": "#FF4500"},
+        {"nome": "0-25", "icone": "map_pin", "cor": "#0000CD"}
+      ],
     },
     {
       "marcador_nome": "D",
-      "latlng_marcadores": "-29.91391738877275, -51.19420634010805"
+      "latlng_marcadores": "-29.91391738877275, -51.19420634010805",
+      "profundidades": [
+        {"nome": "0-10", "icone": "location_dot", "cor": "#FFC0CB"},
+        {"nome": "0-20", "icone": "flag", "cor": "#FF4500"},
+        {"nome": "0-25", "icone": "map_pi", "cor": "#0000CD"}
+      ],
     },
   ];
 
@@ -189,6 +219,11 @@ class _ColetaState extends State<Coleta> {
       var position =
           google_maps.LatLng(double.parse(latlng[0]), double.parse(latlng[1]));
 
+      // Coletar os nomes das profundidades em uma string
+      String nomesProfundidades = marcador["profundidades"]!
+          .map((profundidade) => profundidade["nome"]!)
+          .join(", "); // Junta os nomes com vírgula e espaço
+
       // Inicializar markerPositions com a posição original
       markerPositions[marcador["marcador_nome"]!] = position;
 
@@ -206,6 +241,7 @@ class _ColetaState extends State<Coleta> {
         },
         infoWindow: google_maps.InfoWindow(
           title: "PONTO : " + marcador["marcador_nome"]!,
+          snippet: "Lista de profundidades: " + nomesProfundidades,
         ),
         draggable: false,
       );
@@ -324,7 +360,7 @@ class _ColetaState extends State<Coleta> {
             children: <Widget>[
               ElevatedButton(
                 child: Text(
-                  "Coletar ponto",
+                  "Fazer uma coleta",
                   style: TextStyle(
                     color: Colors.black, // Defina a cor do texto como preto
                   ),
@@ -337,7 +373,7 @@ class _ColetaState extends State<Coleta> {
               ),
               ElevatedButton(
                 child: Text(
-                  "Informar Inacessibilidade",
+                  "Coleta inacessivel",
                   style: TextStyle(
                     color: Colors.black,
                   ),
@@ -356,40 +392,98 @@ class _ColetaState extends State<Coleta> {
   }
 
   void _ontapColetar(String marcadorNome) {
+    _showProfundidadesParaColeta(marcadorNome);
+  }
+
+  Map<String, IconData> faIcons = {
+    "location_dot": FontAwesomeIcons.locationDot,
+    "flag": FontAwesomeIcons.flag,
+    "map_pin": FontAwesomeIcons.mapPin,
+    "plane": FontAwesomeIcons.plane,
+    "campground": FontAwesomeIcons.campground,
+    "anchor": FontAwesomeIcons.anchor,
+    "land_mine_on": FontAwesomeIcons.landMineOn,
+  };
+
+  IconData getFontAwesomeIconByName(String iconName) {
+    return faIcons[iconName] ?? FontAwesomeIcons.questionCircle; // Ícone padrão
+  }
+
+  void _showProfundidadesParaColeta(String marcadorNome) {
+    // Encontra o marcador pelo nome
+    var marcador = latLngListMarcadores.firstWhere(
+      (m) => m["marcador_nome"] == marcadorNome,
+      orElse: () => {},
+    );
+
+    if (marcador.isNotEmpty) {
+      showDialog(
+        context: context,
+        builder: (BuildContext context) {
+          return AlertDialog(
+            title:
+                Text("Coletar profundidades para ${marcador["marcador_nome"]}"),
+            content: SingleChildScrollView(
+              child: ListBody(
+                children: marcador["profundidades"]
+                    .map<Widget>((profundidade) => Row(
+                          children: [
+                            Icon(
+                              getFontAwesomeIconByName(profundidade["icone"]),
+                              color: HexColor(profundidade["cor"]),
+                            ),
+                            SizedBox(width: 10),
+                            Text(profundidade["nome"]),
+                            Spacer(),
+                            ElevatedButton(
+                              child: Text("Coletar"),
+                              onPressed: () {
+                                Navigator.of(context).pop();
+                                _coletarProfundidade(marcador["marcador_nome"],
+                                    profundidade["nome"]);
+                              },
+                            ),
+                          ],
+                        ))
+                    .toList(),
+              ),
+            ),
+          );
+        },
+      );
+    }
+  }
+
+  void _coletarProfundidade(String marcadorNome, String profundidadeNome) {
     setState(() {
-      var markerPos = markerPositions[marcadorNome];
-      if (markerPos != null) {
-        var newMarker = google_maps.Marker(
-          markerId: google_maps.MarkerId(marcadorNome),
-          position: markerPos,
-          icon: google_maps.BitmapDescriptor.defaultMarkerWithHue(
-              google_maps.BitmapDescriptor.hueGreen),
-          onTap: () {
-            _showModalOptions(marcadorNome);
-          },
-          draggable: false,
-        );
-        markers.removeWhere((m) => m.markerId.value == marcadorNome);
-        markers.add(newMarker);
-      } else {
-        coletados[marcadorNome] = true;
+      pontosColetados.add({
+        "marcador_nome": marcadorNome,
+        "profundidade": profundidadeNome,
+      });
+      coletasPorMarcador.putIfAbsent(marcadorNome, () => {});
+      coletasPorMarcador[marcadorNome]!.add(profundidadeNome);
+
+      // Verifica se todas as profundidades foram coletadas
+      var todasProfundidades = latLngListMarcadores
+          .firstWhere(
+              (m) => m["marcador_nome"] == marcadorNome)["profundidades"]
+          .map((p) => p["nome"])
+          .toSet();
+
+      if (coletasPorMarcador[marcadorNome]!.containsAll(todasProfundidades)) {
+        // Todas as profundidades coletadas, mude a cor do marcador para verde
         _updateMarkerColor(marcadorNome, true);
       }
     });
-    var latLng = markerPositions[marcadorNome];
-
-    pontosColetados.add({
-      "marcador_nome": marcadorNome,
-      "latlng": "${latLng?.latitude}, ${latLng?.longitude}"
-    });
   }
 
-  void _updateMarkerColor(String marcadorNome, bool coletado) {
-    var newIcon = coletado
+  void _updateMarkerColor(String marcadorNome, bool todasColetadas) {
+    var newIcon = todasColetadas
         ? google_maps.BitmapDescriptor.defaultMarkerWithHue(
             google_maps.BitmapDescriptor.hueGreen)
         : google_maps.BitmapDescriptor.defaultMarkerWithHue(
             google_maps.BitmapDescriptor.hueBlue);
+
     setState(() {
       markers = markers.map((m) {
         if (m.markerId.value == marcadorNome) {
@@ -479,21 +573,21 @@ class _ColetaState extends State<Coleta> {
         Text(
           "Pontos Movidos: ${jsonEncode(pontosMovidos)}",
           style: TextStyle(
-            color: Colors.red, // Define a cor vermelha
+            color: Colors.yellow, // Define a cor vermelha
             fontSize: 12.0, // Define o tamanho da fonte como 8
           ),
         ),
         Text(
           "Pontos Coletados: ${jsonEncode(pontosColetados)}",
           style: TextStyle(
-            color: Colors.red, // Define a cor vermelha
+            color: Colors.yellow, // Define a cor vermelha
             fontSize: 12.0, // Define o tamanho da fonte como 8
           ),
         ),
         Text(
           "Pontos Excluídos: ${jsonEncode(pontosExcluidos)}",
           style: TextStyle(
-            color: Colors.red, // Define a cor vermelha
+            color: Colors.yellow, // Define a cor vermelha
             fontSize: 12.0, // Define o tamanho da fonte como 8
           ),
         ),
