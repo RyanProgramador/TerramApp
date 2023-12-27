@@ -945,7 +945,7 @@ class ApiRotasPolylinesCall {
   "travelMode": "DRIVE",
   "routingPreference": "TRAFFIC_AWARE",
   "polylineQuality": "OVERVIEW",
-  "departureTime": "2023-12-27T12:00:00Z",
+  "departureTime": "2024-12-27T12:00:00Z",
   "computeAlternativeRoutes": true,
   "routeModifiers": {
     "avoidTolls": false,
