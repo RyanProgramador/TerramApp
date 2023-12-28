@@ -1,5 +1,4 @@
 import '/backend/api_requests/api_calls.dart';
-import '/flutter_flow/flutter_flow_google_map.dart';
 import '/flutter_flow/flutter_flow_theme.dart';
 import '/flutter_flow/flutter_flow_util.dart';
 import '/flutter_flow/flutter_flow_widgets.dart';
@@ -27,9 +26,6 @@ class TestecontornoModel extends FlutterFlowModel<TestecontornoWidget> {
   final unfocusNode = FocusNode();
   // Stores action output result for [Backend Call - API (apiRotasPolylines)] action in testecontorno widget.
   ApiCallResponse? polyline1;
-  // State field(s) for GoogleMap widget.
-  LatLng? googleMapsCenter;
-  final googleMapsController = Completer<GoogleMapController>();
 
   /// Initialization and disposal methods.
 

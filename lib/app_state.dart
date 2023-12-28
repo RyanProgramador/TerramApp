@@ -364,6 +364,39 @@ class FFAppState extends ChangeNotifier {
       _contornoGrupoID =
           prefs.getString('ff_contornoGrupoID') ?? _contornoGrupoID;
     });
+    _safeInit(() {
+      _PontosMovidos = prefs.getStringList('ff_PontosMovidos')?.map((x) {
+            try {
+              return jsonDecode(x);
+            } catch (e) {
+              print("Can't decode persisted json. Error: $e.");
+              return {};
+            }
+          }).toList() ??
+          _PontosMovidos;
+    });
+    _safeInit(() {
+      _PontosColetados = prefs.getStringList('ff_PontosColetados')?.map((x) {
+            try {
+              return jsonDecode(x);
+            } catch (e) {
+              print("Can't decode persisted json. Error: $e.");
+              return {};
+            }
+          }).toList() ??
+          _PontosColetados;
+    });
+    _safeInit(() {
+      _PontosExcluidos = prefs.getStringList('ff_PontosExcluidos')?.map((x) {
+            try {
+              return jsonDecode(x);
+            } catch (e) {
+              print("Can't decode persisted json. Error: $e.");
+              return {};
+            }
+          }).toList() ??
+          _PontosExcluidos;
+    });
   }
 
   void update(VoidCallback callback) {
@@ -1515,6 +1548,129 @@ class FFAppState extends ChangeNotifier {
   set contornoGrupoID(String _value) {
     _contornoGrupoID = _value;
     prefs.setString('ff_contornoGrupoID', _value);
+  }
+
+  List<dynamic> _PontosMovidos = [];
+  List<dynamic> get PontosMovidos => _PontosMovidos;
+  set PontosMovidos(List<dynamic> _value) {
+    _PontosMovidos = _value;
+    prefs.setStringList(
+        'ff_PontosMovidos', _value.map((x) => jsonEncode(x)).toList());
+  }
+
+  void addToPontosMovidos(dynamic _value) {
+    _PontosMovidos.add(_value);
+    prefs.setStringList(
+        'ff_PontosMovidos', _PontosMovidos.map((x) => jsonEncode(x)).toList());
+  }
+
+  void removeFromPontosMovidos(dynamic _value) {
+    _PontosMovidos.remove(_value);
+    prefs.setStringList(
+        'ff_PontosMovidos', _PontosMovidos.map((x) => jsonEncode(x)).toList());
+  }
+
+  void removeAtIndexFromPontosMovidos(int _index) {
+    _PontosMovidos.removeAt(_index);
+    prefs.setStringList(
+        'ff_PontosMovidos', _PontosMovidos.map((x) => jsonEncode(x)).toList());
+  }
+
+  void updatePontosMovidosAtIndex(
+    int _index,
+    dynamic Function(dynamic) updateFn,
+  ) {
+    _PontosMovidos[_index] = updateFn(_PontosMovidos[_index]);
+    prefs.setStringList(
+        'ff_PontosMovidos', _PontosMovidos.map((x) => jsonEncode(x)).toList());
+  }
+
+  void insertAtIndexInPontosMovidos(int _index, dynamic _value) {
+    _PontosMovidos.insert(_index, _value);
+    prefs.setStringList(
+        'ff_PontosMovidos', _PontosMovidos.map((x) => jsonEncode(x)).toList());
+  }
+
+  List<dynamic> _PontosColetados = [];
+  List<dynamic> get PontosColetados => _PontosColetados;
+  set PontosColetados(List<dynamic> _value) {
+    _PontosColetados = _value;
+    prefs.setStringList(
+        'ff_PontosColetados', _value.map((x) => jsonEncode(x)).toList());
+  }
+
+  void addToPontosColetados(dynamic _value) {
+    _PontosColetados.add(_value);
+    prefs.setStringList('ff_PontosColetados',
+        _PontosColetados.map((x) => jsonEncode(x)).toList());
+  }
+
+  void removeFromPontosColetados(dynamic _value) {
+    _PontosColetados.remove(_value);
+    prefs.setStringList('ff_PontosColetados',
+        _PontosColetados.map((x) => jsonEncode(x)).toList());
+  }
+
+  void removeAtIndexFromPontosColetados(int _index) {
+    _PontosColetados.removeAt(_index);
+    prefs.setStringList('ff_PontosColetados',
+        _PontosColetados.map((x) => jsonEncode(x)).toList());
+  }
+
+  void updatePontosColetadosAtIndex(
+    int _index,
+    dynamic Function(dynamic) updateFn,
+  ) {
+    _PontosColetados[_index] = updateFn(_PontosColetados[_index]);
+    prefs.setStringList('ff_PontosColetados',
+        _PontosColetados.map((x) => jsonEncode(x)).toList());
+  }
+
+  void insertAtIndexInPontosColetados(int _index, dynamic _value) {
+    _PontosColetados.insert(_index, _value);
+    prefs.setStringList('ff_PontosColetados',
+        _PontosColetados.map((x) => jsonEncode(x)).toList());
+  }
+
+  List<dynamic> _PontosExcluidos = [];
+  List<dynamic> get PontosExcluidos => _PontosExcluidos;
+  set PontosExcluidos(List<dynamic> _value) {
+    _PontosExcluidos = _value;
+    prefs.setStringList(
+        'ff_PontosExcluidos', _value.map((x) => jsonEncode(x)).toList());
+  }
+
+  void addToPontosExcluidos(dynamic _value) {
+    _PontosExcluidos.add(_value);
+    prefs.setStringList('ff_PontosExcluidos',
+        _PontosExcluidos.map((x) => jsonEncode(x)).toList());
+  }
+
+  void removeFromPontosExcluidos(dynamic _value) {
+    _PontosExcluidos.remove(_value);
+    prefs.setStringList('ff_PontosExcluidos',
+        _PontosExcluidos.map((x) => jsonEncode(x)).toList());
+  }
+
+  void removeAtIndexFromPontosExcluidos(int _index) {
+    _PontosExcluidos.removeAt(_index);
+    prefs.setStringList('ff_PontosExcluidos',
+        _PontosExcluidos.map((x) => jsonEncode(x)).toList());
+  }
+
+  void updatePontosExcluidosAtIndex(
+    int _index,
+    dynamic Function(dynamic) updateFn,
+  ) {
+    _PontosExcluidos[_index] = updateFn(_PontosExcluidos[_index]);
+    prefs.setStringList('ff_PontosExcluidos',
+        _PontosExcluidos.map((x) => jsonEncode(x)).toList());
+  }
+
+  void insertAtIndexInPontosExcluidos(int _index, dynamic _value) {
+    _PontosExcluidos.insert(_index, _value);
+    prefs.setStringList('ff_PontosExcluidos',
+        _PontosExcluidos.map((x) => jsonEncode(x)).toList());
   }
 }
 

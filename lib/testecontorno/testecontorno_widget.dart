@@ -1,5 +1,4 @@
 import '/backend/api_requests/api_calls.dart';
-import '/flutter_flow/flutter_flow_google_map.dart';
 import '/flutter_flow/flutter_flow_theme.dart';
 import '/flutter_flow/flutter_flow_util.dart';
 import '/flutter_flow/flutter_flow_widgets.dart';
@@ -129,11 +128,23 @@ class _TestecontornoWidgetState extends State<TestecontornoWidget> {
               : FocusScope.of(context).unfocus(),
           child: Scaffold(
             key: scaffoldKey,
-            resizeToAvoidBottomInset: false,
             backgroundColor: FlutterFlowTheme.of(context).primaryBackground,
             floatingActionButton: FloatingActionButton(
-              onPressed: () {
-                print('FloatingActionButton pressed ...');
+              onPressed: () async {
+                setState(() {
+                  FFAppState().PontosMovidos = functions
+                      .juntarDuasListasJson(
+                          widget.contornoGrupo,
+                          ApiRotasDirectionsCall.tudo(
+                            testecontornoApiRotasDirectionsResponse.jsonBody,
+                          ))!
+                      .toList()
+                      .cast<dynamic>();
+                  FFAppState().PontosColetados =
+                      widget.contornoGrupo!.toList().cast<dynamic>();
+                  FFAppState().PontosExcluidos =
+                      widget.contornoGrupo!.toList().cast<dynamic>();
+                });
               },
               backgroundColor: FlutterFlowTheme.of(context).primary,
               elevation: 8.0,
@@ -209,39 +220,71 @@ class _TestecontornoWidgetState extends State<TestecontornoWidget> {
                       decoration: BoxDecoration(
                         color: FlutterFlowTheme.of(context).secondaryBackground,
                       ),
-                      child: Builder(builder: (context) {
-                        final _googleMapMarker = (_model.incial2 != null
-                            ? _model.incial2
-                            : currentUserLocationValue);
-                        return FlutterFlowGoogleMap(
-                          controller: _model.googleMapsController,
-                          onCameraIdle: (latLng) =>
-                              setState(() => _model.googleMapsCenter = latLng),
-                          initialLocation: _model.googleMapsCenter ??=
-                              _model.incial2 != null
-                                  ? _model.incial2!
-                                  : currentUserLocationValue!,
-                          markers: [
-                            if (_googleMapMarker != null)
-                              FlutterFlowMarker(
-                                _googleMapMarker.serialize(),
-                                _googleMapMarker,
-                              ),
+                      child: SingleChildScrollView(
+                        scrollDirection: Axis.horizontal,
+                        child: Row(
+                          mainAxisSize: MainAxisSize.max,
+                          mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                          children: [
+                            Builder(
+                              builder: (context) {
+                                final movidos =
+                                    FFAppState().PontosMovidos.toList();
+                                return Column(
+                                  mainAxisSize: MainAxisSize.max,
+                                  children: List.generate(movidos.length,
+                                      (movidosIndex) {
+                                    final movidosItem = movidos[movidosIndex];
+                                    return Text(
+                                      movidosItem.toString(),
+                                      style: FlutterFlowTheme.of(context)
+                                          .bodyMedium,
+                                    );
+                                  }),
+                                );
+                              },
+                            ),
+                            Builder(
+                              builder: (context) {
+                                final coletados =
+                                    FFAppState().PontosColetados.toList();
+                                return Column(
+                                  mainAxisSize: MainAxisSize.max,
+                                  children: List.generate(coletados.length,
+                                      (coletadosIndex) {
+                                    final coletadosItem =
+                                        coletados[coletadosIndex];
+                                    return Text(
+                                      coletadosItem.toString(),
+                                      style: FlutterFlowTheme.of(context)
+                                          .bodyMedium,
+                                    );
+                                  }),
+                                );
+                              },
+                            ),
+                            Builder(
+                              builder: (context) {
+                                final excluidos =
+                                    FFAppState().PontosExcluidos.toList();
+                                return Column(
+                                  mainAxisSize: MainAxisSize.max,
+                                  children: List.generate(excluidos.length,
+                                      (excluidosIndex) {
+                                    final excluidosItem =
+                                        excluidos[excluidosIndex];
+                                    return Text(
+                                      excluidosItem.toString(),
+                                      style: FlutterFlowTheme.of(context)
+                                          .bodyMedium,
+                                    );
+                                  }),
+                                );
+                              },
+                            ),
                           ],
-                          markerColor: GoogleMarkerColor.violet,
-                          mapType: MapType.satellite,
-                          style: GoogleMapStyle.standard,
-                          initialZoom: 14.0,
-                          allowInteraction: true,
-                          allowZoom: true,
-                          showZoomControls: true,
-                          showLocation: true,
-                          showCompass: false,
-                          showMapToolbar: true,
-                          showTraffic: false,
-                          centerMapOnMarkerTap: true,
-                        );
-                      }),
+                        ),
+                      ),
                     ),
                   ),
                 ],
