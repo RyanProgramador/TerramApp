@@ -60,7 +60,10 @@ class _NomeContornoWidgetState extends State<NomeContornoWidget> {
       );
     });
 
-    _model.textController ??= TextEditingController(text: widget.nomeVelho);
+    _model.textController ??= TextEditingController(
+        text: widget.nomeVelho != null && widget.nomeVelho != ''
+            ? widget.nomeVelho
+            : 'Contorno');
     _model.textFieldFocusNode ??= FocusNode();
   }
 
