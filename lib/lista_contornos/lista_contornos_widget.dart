@@ -1,5 +1,6 @@
 import '/components/maps_revisao_todos_widget.dart';
 import '/components/maps_revisao_widget.dart';
+import '/components/nome_contorno_widget.dart';
 import '/components/sem_contorno_no_momento_widget.dart';
 import '/flutter_flow/flutter_flow_theme.dart';
 import '/flutter_flow/flutter_flow_util.dart';
@@ -520,7 +521,7 @@ class _ListaContornosWidgetState extends State<ListaContornosWidget> {
                                                                                 MainAxisSize.max,
                                                                             children: [
                                                                               Text(
-                                                                                'Contorno: ${getJsonField(
+                                                                                '${getJsonField(
                                                                                   trGruposContornoFazendaItem,
                                                                                   r'''$.nome''',
                                                                                 ).toString()}'
@@ -582,17 +583,38 @@ class _ListaContornosWidgetState extends State<ListaContornosWidget> {
                                                                             .transparent,
                                                                     onTap:
                                                                         () async {
-                                                                      setState(
-                                                                          () {
-                                                                        FFAppState()
-                                                                            .updateGrupoContornoFazendasAtIndex(
-                                                                          trGruposContornoFazendaIndex,
-                                                                          (_) => functions.editaJson(
-                                                                              'nome',
-                                                                              'teste1',
-                                                                              trGruposContornoFazendaItem)!,
-                                                                        );
-                                                                      });
+                                                                      await showModalBottomSheet(
+                                                                        isScrollControlled:
+                                                                            true,
+                                                                        backgroundColor:
+                                                                            Colors.transparent,
+                                                                        enableDrag:
+                                                                            false,
+                                                                        context:
+                                                                            context,
+                                                                        builder:
+                                                                            (context) {
+                                                                          return GestureDetector(
+                                                                            onTap: () => _model.unfocusNode.canRequestFocus
+                                                                                ? FocusScope.of(context).requestFocus(_model.unfocusNode)
+                                                                                : FocusScope.of(context).unfocus(),
+                                                                            child:
+                                                                                Padding(
+                                                                              padding: MediaQuery.viewInsetsOf(context),
+                                                                              child: NomeContornoWidget(
+                                                                                nomeVelho: getJsonField(
+                                                                                  trGruposContornoFazendaItem,
+                                                                                  r'''$.nome''',
+                                                                                ).toString(),
+                                                                                indexinlist: trGruposContornoFazendaIndex,
+                                                                                json: trGruposContornoFazendaItem,
+                                                                              ),
+                                                                            ),
+                                                                          );
+                                                                        },
+                                                                      ).then((value) =>
+                                                                          safeSetState(
+                                                                              () {}));
                                                                     },
                                                                     child:
                                                                         FaIcon(

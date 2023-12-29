@@ -1,30 +1,29 @@
-import '/components/maps_revisao_todos_widget.dart';
-import '/components/maps_revisao_widget.dart';
-import '/components/nome_contorno_widget.dart';
-import '/components/sem_contorno_no_momento_widget.dart';
 import '/flutter_flow/flutter_flow_theme.dart';
 import '/flutter_flow/flutter_flow_util.dart';
 import '/flutter_flow/flutter_flow_widgets.dart';
 import '/flutter_flow/custom_functions.dart' as functions;
-import 'lista_contornos_widget.dart' show ListaContornosWidget;
+import 'nome_contorno_widget.dart' show NomeContornoWidget;
 import 'package:flutter/material.dart';
 import 'package:flutter/scheduler.dart';
 import 'package:flutter/services.dart';
-import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:provider/provider.dart';
 
-class ListaContornosModel extends FlutterFlowModel<ListaContornosWidget> {
-  ///  State fields for stateful widgets in this page.
+class NomeContornoModel extends FlutterFlowModel<NomeContornoWidget> {
+  ///  State fields for stateful widgets in this component.
 
-  final unfocusNode = FocusNode();
+  // State field(s) for TextField widget.
+  FocusNode? textFieldFocusNode;
+  TextEditingController? textController;
+  String? Function(BuildContext, String?)? textControllerValidator;
 
   /// Initialization and disposal methods.
 
   void initState(BuildContext context) {}
 
   void dispose() {
-    unfocusNode.dispose();
+    textFieldFocusNode?.dispose();
+    textController?.dispose();
   }
 
   /// Action blocks are added here.
