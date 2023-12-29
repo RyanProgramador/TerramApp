@@ -3,7 +3,6 @@ import '/flutter_flow/flutter_flow_util.dart';
 import '/flutter_flow/flutter_flow_widgets.dart';
 import '/flutter_flow/custom_functions.dart' as functions;
 import 'package:flutter/material.dart';
-import 'package:flutter/scheduler.dart';
 import 'package:flutter/services.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:provider/provider.dart';
@@ -39,26 +38,6 @@ class _NomeContornoWidgetState extends State<NomeContornoWidget> {
   void initState() {
     super.initState();
     _model = createModel(context, () => NomeContornoModel());
-
-    // On component load action.
-    SchedulerBinding.instance.addPostFrameCallback((_) async {
-      await showDialog(
-        context: context,
-        builder: (alertDialogContext) {
-          return AlertDialog(
-            title: Text('Atenção!'),
-            content: Text(
-                'O protocolo usado no momento é o \"http\" não sendo possível ainda alterar para o protocolo \"https\"!'),
-            actions: [
-              TextButton(
-                onPressed: () => Navigator.pop(alertDialogContext),
-                child: Text('Ok'),
-              ),
-            ],
-          );
-        },
-      );
-    });
 
     _model.textController ??= TextEditingController(
         text: widget.nomeVelho != null && widget.nomeVelho != ''
@@ -202,6 +181,7 @@ class _NomeContornoWidgetState extends State<NomeContornoWidget> {
                               'nome', _model.textController.text, widget.json)!,
                         );
                       });
+                      Navigator.pop(context);
                     },
                     text: 'Salvar',
                     options: FFButtonOptions(
