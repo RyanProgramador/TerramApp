@@ -929,7 +929,7 @@ class _ListaContornosWidgetState extends State<ListaContornosWidget> {
                                                                                   ),
                                                                             ),
                                                                             Text(
-                                                                              'Contorno${getJsonField(
+                                                                              '${getJsonField(
                                                                                 trGruposContornoFazenda2Item,
                                                                                 r'''$.nome''',
                                                                               ).toString()}'
