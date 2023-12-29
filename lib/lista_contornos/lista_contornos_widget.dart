@@ -515,15 +515,25 @@ class _ListaContornosWidgetState extends State<ListaContornosWidget> {
                                                                                   fontSize: 12.0,
                                                                                 ),
                                                                           ),
-                                                                          Text(
-                                                                            'Contorno'.maybeHandleOverflow(
-                                                                              maxChars: 20,
-                                                                              replacement: '…',
-                                                                            ),
-                                                                            style: FlutterFlowTheme.of(context).bodyLarge.override(
-                                                                                  fontFamily: 'Readex Pro',
-                                                                                  fontWeight: FontWeight.w500,
+                                                                          Row(
+                                                                            mainAxisSize:
+                                                                                MainAxisSize.max,
+                                                                            children: [
+                                                                              Text(
+                                                                                'Contorno: ${getJsonField(
+                                                                                  trGruposContornoFazendaItem,
+                                                                                  r'''$.nome''',
+                                                                                ).toString()}'
+                                                                                    .maybeHandleOverflow(
+                                                                                  maxChars: 20,
+                                                                                  replacement: '…',
                                                                                 ),
+                                                                                style: FlutterFlowTheme.of(context).bodyLarge.override(
+                                                                                      fontFamily: 'Readex Pro',
+                                                                                      fontWeight: FontWeight.w500,
+                                                                                    ),
+                                                                              ),
+                                                                            ],
                                                                           ),
                                                                           Text(
                                                                             '${functions.strToData(getJsonField(
@@ -541,6 +551,53 @@ class _ListaContornosWidgetState extends State<ListaContornosWidget> {
                                                                         ],
                                                                       ),
                                                                     ],
+                                                                  ),
+                                                                ),
+                                                              ),
+                                                              Align(
+                                                                alignment:
+                                                                    AlignmentDirectional(
+                                                                        0.76,
+                                                                        -0.93),
+                                                                child: Padding(
+                                                                  padding: EdgeInsetsDirectional
+                                                                      .fromSTEB(
+                                                                          0.0,
+                                                                          4.0,
+                                                                          8.0,
+                                                                          0.0),
+                                                                  child:
+                                                                      InkWell(
+                                                                    splashColor:
+                                                                        Colors
+                                                                            .transparent,
+                                                                    focusColor:
+                                                                        Colors
+                                                                            .transparent,
+                                                                    hoverColor:
+                                                                        Colors
+                                                                            .transparent,
+                                                                    highlightColor:
+                                                                        Colors
+                                                                            .transparent,
+                                                                    onTap:
+                                                                        () async {
+                                                                      setState(
+                                                                          () {
+                                                                        FFAppState()
+                                                                            .removeAtIndexFromGrupoContornoFazendas(trGruposContornoFazendaIndex);
+                                                                      });
+                                                                    },
+                                                                    child:
+                                                                        FaIcon(
+                                                                      FontAwesomeIcons
+                                                                          .edit,
+                                                                      color: FlutterFlowTheme.of(
+                                                                              context)
+                                                                          .primary,
+                                                                      size:
+                                                                          20.0,
+                                                                    ),
                                                                   ),
                                                                 ),
                                                               ),
