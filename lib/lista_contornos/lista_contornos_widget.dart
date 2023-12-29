@@ -929,7 +929,11 @@ class _ListaContornosWidgetState extends State<ListaContornosWidget> {
                                                                                   ),
                                                                             ),
                                                                             Text(
-                                                                              'Contorno'.maybeHandleOverflow(
+                                                                              'Contorno${getJsonField(
+                                                                                trGruposContornoFazenda2Item,
+                                                                                r'''$.nome''',
+                                                                              ).toString()}'
+                                                                                  .maybeHandleOverflow(
                                                                                 maxChars: 20,
                                                                                 replacement: '…',
                                                                               ),
