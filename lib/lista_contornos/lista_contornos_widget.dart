@@ -586,12 +586,11 @@ class _ListaContornosWidgetState extends State<ListaContornosWidget> {
                                                                           () {
                                                                         FFAppState()
                                                                             .updateGrupoContornoFazendasAtIndex(
-                                                                          getJsonField(
-                                                                            trGruposContornoFazendaItem,
-                                                                            r'''$.nome''',
-                                                                          ),
-                                                                          (_) =>
-                                                                              trGruposContornoFazendaItem,
+                                                                          trGruposContornoFazendaIndex,
+                                                                          (_) => functions.editaJson(
+                                                                              'nome',
+                                                                              'teste1',
+                                                                              trGruposContornoFazendaItem)!,
                                                                         );
                                                                       });
                                                                     },

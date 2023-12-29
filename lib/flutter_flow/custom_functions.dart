@@ -853,3 +853,40 @@ List<dynamic>? juntarDuasListasJson(
   // Converte as strings JSON de volta para mapas e retorna a lista
   return uniqueJsonStrings.map((s) => jsonDecode(s)).toList();
 }
+
+dynamic editaJson(
+  String? jsonPath,
+  String? novoValor,
+  dynamic jsonasereditado,
+) {
+  if (jsonPath == null || novoValor == null) {
+    return jsonasereditado;
+  }
+
+  // Split the jsonPath into parts
+  List<String> pathParts = jsonPath.split('.');
+
+  // Reference to the part of the JSON we are modifying
+  dynamic currentPart = jsonasereditado;
+
+  // Iterate over the path parts to find the correct place to insert novoValor
+  for (int i = 0; i < pathParts.length; i++) {
+    String part = pathParts[i];
+
+    // If we're at the last part, set the novoValor
+    if (i == pathParts.length - 1) {
+      currentPart[part] = novoValor;
+      break;
+    }
+
+    // If the next part of the path doesn't exist, create an empty map
+    if (currentPart[part] == null) {
+      currentPart[part] = {};
+    }
+
+    // Move to the next part of the path
+    currentPart = currentPart[part];
+  }
+
+  return jsonasereditado;
+}
