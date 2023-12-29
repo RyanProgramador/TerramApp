@@ -585,7 +585,14 @@ class _ListaContornosWidgetState extends State<ListaContornosWidget> {
                                                                       setState(
                                                                           () {
                                                                         FFAppState()
-                                                                            .removeAtIndexFromGrupoContornoFazendas(trGruposContornoFazendaIndex);
+                                                                            .updateGrupoContornoFazendasAtIndex(
+                                                                          getJsonField(
+                                                                            trGruposContornoFazendaItem,
+                                                                            r'''$.nome''',
+                                                                          ),
+                                                                          (_) =>
+                                                                              trGruposContornoFazendaItem,
+                                                                        );
                                                                       });
                                                                     },
                                                                     child:
