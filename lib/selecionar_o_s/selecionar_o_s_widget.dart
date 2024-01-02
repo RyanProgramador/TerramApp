@@ -1161,7 +1161,7 @@ class _SelecionarOSWidgetState extends State<SelecionarOSWidget>
                                                                             getJsonField(
                                                                               trOsServicosItem,
                                                                               r'''$.oserv_dthr_agendamento''',
-                                                                            ).toString(),
+                                                                            )?.toString(),
                                                                             '2099-01-01 00:00:00',
                                                                           ))!,
                                                                           hora:
@@ -1169,7 +1169,7 @@ class _SelecionarOSWidgetState extends State<SelecionarOSWidget>
                                                                             getJsonField(
                                                                               trOsServicosItem,
                                                                               r'''$.oserv_dthr_agendamento''',
-                                                                            ).toString(),
+                                                                            )?.toString(),
                                                                             '2099-01-01 00:00:00',
                                                                           ))!,
                                                                           jsonServico:
@@ -1460,7 +1460,7 @@ class _SelecionarOSWidgetState extends State<SelecionarOSWidget>
                                                                           getJsonField(
                                                                             trOsServicosItem,
                                                                             r'''$.oserv_dthr_agendamento''',
-                                                                          ).toString(),
+                                                                          )?.toString(),
                                                                           '2099-01-01 00:00:00',
                                                                         ))!,
                                                                         hora: functions
@@ -1468,7 +1468,7 @@ class _SelecionarOSWidgetState extends State<SelecionarOSWidget>
                                                                           getJsonField(
                                                                             trOsServicosItem,
                                                                             r'''$.oserv_dthr_agendamento''',
-                                                                          ).toString(),
+                                                                          )?.toString(),
                                                                           '2099-01-01 00:00:00',
                                                                         ))!,
                                                                         jsonServico:
@@ -2226,7 +2226,7 @@ class _SelecionarOSWidgetState extends State<SelecionarOSWidget>
                                                                           getJsonField(
                                                                             trOsServicosItem,
                                                                             r'''$.oserv_dthr_agendamento''',
-                                                                          ).toString(),
+                                                                          )?.toString(),
                                                                           '2099-01-01 00:00:00',
                                                                         ))!,
                                                                         hora: functions
@@ -2234,7 +2234,7 @@ class _SelecionarOSWidgetState extends State<SelecionarOSWidget>
                                                                           getJsonField(
                                                                             trOsServicosItem,
                                                                             r'''$.oserv_dthr_agendamento''',
-                                                                          ).toString(),
+                                                                          )?.toString(),
                                                                           '2099-01-01 00:00:00',
                                                                         ))!,
                                                                         jsonServico:
@@ -2536,7 +2536,7 @@ class _SelecionarOSWidgetState extends State<SelecionarOSWidget>
                                                                         getJsonField(
                                                                           trOsServicosItem,
                                                                           r'''$.oserv_dthr_agendamento''',
-                                                                        ).toString(),
+                                                                        )?.toString(),
                                                                         '2099-01-01 00:00:00',
                                                                       ))!,
                                                                       hora: functions
@@ -2545,7 +2545,7 @@ class _SelecionarOSWidgetState extends State<SelecionarOSWidget>
                                                                         getJsonField(
                                                                           trOsServicosItem,
                                                                           r'''$.oserv_dthr_agendamento''',
-                                                                        ).toString(),
+                                                                        )?.toString(),
                                                                         '2099-01-01 00:00:00',
                                                                       ))!,
                                                                       jsonServico:

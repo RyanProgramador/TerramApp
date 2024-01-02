@@ -157,8 +157,7 @@ class _NomeContornoWidgetState extends State<NomeContornoWidget> {
                           ),
                         ),
                         style: FlutterFlowTheme.of(context).bodyMedium,
-                        maxLines: 3,
-                        minLines: 2,
+                        minLines: 1,
                         validator:
                             _model.textControllerValidator.asValidator(context),
                       ),
