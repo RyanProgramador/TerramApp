@@ -9,6 +9,8 @@ import 'package:flutter/material.dart';
 // Begin custom widget code
 // DO NOT REMOVE OR MODIFY THE CODE ABOVE!
 
+import 'package:flutter/services.dart';
+
 import 'dart:async';
 import 'package:flutter/gestures.dart';
 import 'package:google_maps_flutter/google_maps_flutter.dart' as google_maps;
@@ -232,7 +234,7 @@ class _ColetaState extends State<Coleta> {
         markerId: markerId,
         position: position,
         icon: google_maps.BitmapDescriptor.defaultMarkerWithHue(
-            google_maps.BitmapDescriptor.hueBlue),
+            google_maps.BitmapDescriptor.hueRed),
         onTap: () {
           focoNoMarcador = true;
           latlngMarcador = google_maps.LatLng(
@@ -355,40 +357,78 @@ class _ColetaState extends State<Coleta> {
       context: context,
       builder: (BuildContext context) {
         return AlertDialog(
-          title: Text("Ponto: $idMarcador"),
-          content: Column(
-            mainAxisSize: MainAxisSize.min,
-            children: <Widget>[
-              ElevatedButton(
+          shape: RoundedRectangleBorder(
+            borderRadius: BorderRadius.circular(16),
+          ),
+          titlePadding: EdgeInsets.all(20),
+          title: Row(
+            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+            children: [
+              Expanded(
                 child: Text(
-                  "Fazer uma coleta",
-                  style: TextStyle(
-                    color: Colors.black, // Defina a cor do texto como preto
-                  ),
+                  "Ponto: $idMarcador",
+                  style: FlutterFlowTheme.of(context).bodyMedium.override(
+                        fontFamily: 'Outfit',
+                        fontSize: 18,
+                        fontWeight: FontWeight.bold,
+                      ),
                 ),
-                onPressed: () {
-                  Navigator.of(context).pop();
-                  _ontapColetar(idMarcador);
-                },
-                style: ElevatedButton.styleFrom(primary: Colors.green),
               ),
-              ElevatedButton(
-                child: Text(
-                  "Coleta inacessivel",
-                  style: TextStyle(
-                    color: Colors.black,
-                  ),
+              InkWell(
+                onTap: () => Navigator.of(context).pop(),
+                child: Icon(
+                  Icons.close,
+                  color: FlutterFlowTheme.of(context).secondaryText,
+                  size: 36,
                 ),
-                onPressed: () {
-                  Navigator.of(context).pop();
-                  _ontapInacessivel(idMarcador);
-                },
-                style: ElevatedButton.styleFrom(primary: Colors.yellow),
               ),
             ],
           ),
+          content: Padding(
+            padding: EdgeInsets.all(20),
+            child: Column(
+              mainAxisSize: MainAxisSize.min,
+              children: <Widget>[
+                _buildElevatedButton(
+                    context, "Fazer uma coleta", Color(0xFF00736D), () {
+                  Navigator.of(context).pop();
+                  _ontapColetar(idMarcador);
+                }),
+                SizedBox(height: 10),
+                _buildElevatedButton(
+                    context, "Coleta inacessível", Color(0xFF9D291C), () {
+                  Navigator.of(context).pop();
+                  _ontapInacessivel(idMarcador);
+                }),
+              ],
+            ),
+          ),
+          backgroundColor: FlutterFlowTheme.of(context).secondaryBackground,
+          elevation: 5,
         );
       },
+    );
+  }
+
+  Widget _buildElevatedButton(
+      BuildContext context, String text, Color color, VoidCallback onPressed) {
+    return ElevatedButton(
+      child: Text(
+        text,
+        style: FlutterFlowTheme.of(context).titleSmall.override(
+              fontFamily: 'Readex Pro',
+              color: Colors.white,
+            ),
+      ),
+      onPressed: onPressed,
+      style: ElevatedButton.styleFrom(
+        primary: color,
+        shape: RoundedRectangleBorder(
+          borderRadius: BorderRadius.circular(8),
+        ),
+        elevation: 3,
+        padding: EdgeInsets.symmetric(horizontal: 24, vertical: 10),
+      ),
     );
   }
 
@@ -422,8 +462,33 @@ class _ColetaState extends State<Coleta> {
         context: context,
         builder: (BuildContext context) {
           return AlertDialog(
-            title:
-                Text("Coletar profundidades para ${marcador["marcador_nome"]}"),
+            shape: RoundedRectangleBorder(
+              borderRadius: BorderRadius.circular(16),
+            ),
+            titlePadding: EdgeInsets.all(20),
+            title: Row(
+              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+              children: [
+                Expanded(
+                  child: Text(
+                    "Coletar profundidades para ${marcador["marcador_nome"]}",
+                    style: FlutterFlowTheme.of(context).bodyMedium.override(
+                          fontFamily: 'Outfit',
+                          fontSize: 18,
+                          fontWeight: FontWeight.bold,
+                        ),
+                  ),
+                ),
+                InkWell(
+                  onTap: () => Navigator.of(context).pop(),
+                  child: Icon(
+                    Icons.close,
+                    color: FlutterFlowTheme.of(context).secondaryText,
+                    size: 36,
+                  ),
+                ),
+              ],
+            ),
             content: SingleChildScrollView(
               child: ListBody(
                 children: marcador["profundidades"].map<Widget>((profundidade) {
@@ -439,16 +504,11 @@ class _ColetaState extends State<Coleta> {
                       SizedBox(width: 10),
                       Text(profundidade["nome"]),
                       Spacer(),
-                      ElevatedButton(
-                        child: Text(jaColetada ? "Coletada" : "Coletar",
-                            style: TextStyle(
-                              color: Colors
-                                  .black, // Defina a cor do texto como preto
-                            )),
-                        style: ElevatedButton.styleFrom(
-                          primary: jaColetada ? Colors.red : Colors.green,
-                        ),
-                        onPressed: () {
+                      _buildElevatedButton(
+                        context,
+                        jaColetada ? "Coletada" : "Coletar",
+                        jaColetada ? Color(0xFF9D291C) : Color(0xFF00736D),
+                        () {
                           if (jaColetada) {
                             _confirmarRecoleta(
                                 context, marcadorNome, profundidade["nome"]);
@@ -464,6 +524,8 @@ class _ColetaState extends State<Coleta> {
                 }).toList(),
               ),
             ),
+            backgroundColor: FlutterFlowTheme.of(context).secondaryBackground,
+            elevation: 5,
           );
         },
       );
@@ -527,7 +589,7 @@ class _ColetaState extends State<Coleta> {
         ? google_maps.BitmapDescriptor.defaultMarkerWithHue(
             google_maps.BitmapDescriptor.hueGreen)
         : google_maps.BitmapDescriptor.defaultMarkerWithHue(
-            google_maps.BitmapDescriptor.hueBlue);
+            google_maps.BitmapDescriptor.hueRed);
 
     setState(() {
       markers = markers.map((m) {
@@ -544,23 +606,53 @@ class _ColetaState extends State<Coleta> {
       context: context,
       builder: (BuildContext context) {
         return AlertDialog(
-          title: Text("Opções para o ponto $marcadorNome"),
-          actions: [
-            TextButton(
-              onPressed: () {
-                Navigator.of(context).pop();
-                _enableMarkerDrag(marcadorNome);
-              },
-              child: Text("Mover"),
+          shape: RoundedRectangleBorder(
+            borderRadius: BorderRadius.circular(16),
+          ),
+          titlePadding: EdgeInsets.all(20),
+          title: Row(
+            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+            children: [
+              Expanded(
+                child: Text(
+                  "Opções para o ponto $marcadorNome",
+                  style: FlutterFlowTheme.of(context).bodyMedium.override(
+                        fontFamily: 'Outfit',
+                        fontSize: 18,
+                        fontWeight: FontWeight.bold,
+                      ),
+                ),
+              ),
+              InkWell(
+                onTap: () => Navigator.of(context).pop(),
+                child: Icon(
+                  Icons.close,
+                  color: FlutterFlowTheme.of(context).secondaryText,
+                  size: 36,
+                ),
+              ),
+            ],
+          ),
+          content: Padding(
+            padding: EdgeInsets.all(20),
+            child: Column(
+              mainAxisSize: MainAxisSize.min,
+              children: <Widget>[
+                _buildElevatedButton(context, "Mover", Color(0xFF9D291C), () {
+                  Navigator.of(context).pop();
+                  _enableMarkerDrag(marcadorNome);
+                }),
+                SizedBox(height: 10),
+                _buildElevatedButton(
+                    context, "Excluir Ponto", Color(0xFF9D291C), () {
+                  Navigator.of(context).pop();
+                  _removeMarker(marcadorNome);
+                }),
+              ],
             ),
-            TextButton(
-              onPressed: () {
-                Navigator.of(context).pop();
-                _removeMarker(marcadorNome);
-              },
-              child: Text("Excluir Ponto"),
-            ),
-          ],
+          ),
+          backgroundColor: FlutterFlowTheme.of(context).secondaryBackground,
+          elevation: 5,
         );
       },
     );
