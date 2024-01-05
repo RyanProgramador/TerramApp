@@ -138,6 +138,12 @@ class _GpsTecToFazendaWidgetState extends State<GpsTecToFazendaWidget> {
                             stringDoRotas: widget.rotaInversa
                                 ? widget.rotaInversaString
                                 : widget.retornopolylines,
+                            toleranciaEmMetrosEntreUmaCapturaEOutra: FFAppState()
+                                        .distanciaEmMetrosDeToleranciaEntreUmaCapturaEOutra !=
+                                    null
+                                ? FFAppState()
+                                    .distanciaEmMetrosDeToleranciaEntreUmaCapturaEOutra
+                                : 1,
                           ),
                         ),
                       ),
