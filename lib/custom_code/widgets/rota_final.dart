@@ -30,6 +30,7 @@ class RotaFinal extends StatefulWidget {
     this.height,
     required this.coordenadasIniciais,
     required this.coordenadasFinais,
+    this.toleranciaEmMetrosEntreUmaCapturaEOutra,
     this.stringDoRotas,
   }) : super(key: key);
 
@@ -38,6 +39,7 @@ class RotaFinal extends StatefulWidget {
   final LatLng coordenadasIniciais;
   final LatLng coordenadasFinais;
   final String? stringDoRotas;
+  final int? toleranciaEmMetrosEntreUmaCapturaEOutra;
 
   final String customIconUrl =
       'https://cdn-icons-png.flaticon.com/128/3253/3253113.png';
@@ -53,6 +55,7 @@ extension BruteStringExtension on String {
 class _MapsRoutesState extends State<RotaFinal> {
   //position é a posição atual
   Position? position;
+  Position? lastPosition;
   //position para calclar o bearing
   Position? previousPosition;
   //esse é o formato do icone cara
@@ -233,77 +236,164 @@ class _MapsRoutesState extends State<RotaFinal> {
   }
 
 //atualiza a cada momento a posição atual do user
+//   void _getCurrentLocation() async {
+//     Geolocator.getPositionStream(
+//       locationSettings: LocationSettings(
+//         accuracy: LocationAccuracy.best,
+//       ),
+//     ).listen((Position newLoc) async {
+//       if (!modocarrobool) {
+//         //se o modo carro estiver desabilitado
+//         if (!estalivre) {
+//           if (_googleMapController != null) {
+//             double currentZoomLevel =
+//                 await _googleMapController!.getZoomLevel();
+//
+//             _googleMapController!.animateCamera(
+//               google_maps.CameraUpdate.newCameraPosition(
+//                 google_maps.CameraPosition(
+//                   target: google_maps.LatLng(
+//                     newLoc.latitude,
+//                     newLoc.longitude,
+//                   ),
+//                   zoom: currentZoomLevel ?? 14,
+//                   bearing: currentBearing,
+//                 ),
+//               ),
+//             );
+//           }
+//
+//           setState(() {
+//             position = newLoc;
+//           });
+//         }
+//       } else {
+//         //modo carro habilitado
+//         if (!estalivre) {
+//           if (_googleMapController != null) {
+//             double currentZoomLevel =
+//                 await _googleMapController!.getZoomLevel();
+//
+//             // Calcula o bearing (azimute) entre a posição anterior e a posição atual
+//             double bearing = 0.0;
+//             if (previousPosition != null) {
+//               bearing = _calculateBearing(
+//                 previousPosition!.latitude,
+//                 previousPosition!.longitude,
+//                 newLoc.latitude,
+//                 newLoc.longitude,
+//               );
+//             }
+//
+//             _googleMapController!.animateCamera(
+//               google_maps.CameraUpdate.newCameraPosition(
+//                 google_maps.CameraPosition(
+//                   target: google_maps.LatLng(
+//                     newLoc.latitude,
+//                     newLoc.longitude,
+//                   ),
+//                   zoom: currentZoomLevel ?? 20,
+//                   tilt: 90,
+//                   bearing: bearing,
+//                 ),
+//               ),
+//             );
+//           }
+//
+//           setState(() {
+//             position = newLoc;
+//           });
+//         }
+// // Atualiza a posição anterior
+//         previousPosition = newLoc;
+//       }
+//     });
+//   }
+
   void _getCurrentLocation() async {
     Geolocator.getPositionStream(
       locationSettings: LocationSettings(
         accuracy: LocationAccuracy.best,
-        distanceFilter: 30, // Minimum distance of 0 meters
       ),
     ).listen((Position newLoc) async {
-      if (!modocarrobool) {
-        //se o modo carro estiver desabilitado
-        if (!estalivre) {
-          if (_googleMapController != null) {
-            double currentZoomLevel =
-                await _googleMapController!.getZoomLevel();
-
-            _googleMapController!.animateCamera(
-              google_maps.CameraUpdate.newCameraPosition(
-                google_maps.CameraPosition(
-                  target: google_maps.LatLng(
-                    newLoc.latitude,
-                    newLoc.longitude,
-                  ),
-                  zoom: currentZoomLevel ?? 14,
-                  bearing: currentBearing,
-                ),
-              ),
-            );
-          }
-
-          setState(() {
-            position = newLoc;
-          });
-        }
-      } else {
-        //modo carro habilitado
-        if (!estalivre) {
-          if (_googleMapController != null) {
-            double currentZoomLevel =
-                await _googleMapController!.getZoomLevel();
-
-            // Calcula o bearing (azimute) entre a posição anterior e a posição atual
-            double bearing = 0.0;
-            if (previousPosition != null) {
-              bearing = _calculateBearing(
-                previousPosition!.latitude,
-                previousPosition!.longitude,
+      // Check if the new location is sufficiently far from the last recorded position
+      if (lastPosition == null ||
+          Geolocator.distanceBetween(
+                lastPosition!.latitude,
+                lastPosition!.longitude,
                 newLoc.latitude,
                 newLoc.longitude,
+              ) >=
+              (widget.toleranciaEmMetrosEntreUmaCapturaEOutra ?? 1)) {
+        // Update the lastPosition with the new location
+        lastPosition = newLoc;
+
+        if (!modocarrobool) {
+          //se o modo carro estiver desabilitado
+          if (!estalivre) {
+            if (_googleMapController != null) {
+              double currentZoomLevel =
+                  await _googleMapController!.getZoomLevel();
+
+              _googleMapController!.animateCamera(
+                google_maps.CameraUpdate.newCameraPosition(
+                  google_maps.CameraPosition(
+                    target: google_maps.LatLng(
+                      newLoc.latitude,
+                      newLoc.longitude,
+                    ),
+                    zoom: currentZoomLevel ?? 14,
+                    bearing: currentBearing,
+                  ),
+                ),
               );
             }
 
-            _googleMapController!.animateCamera(
-              google_maps.CameraUpdate.newCameraPosition(
-                google_maps.CameraPosition(
-                  target: google_maps.LatLng(
-                    newLoc.latitude,
-                    newLoc.longitude,
-                  ),
-                  zoom: currentZoomLevel ?? 20,
-                  tilt: 90,
-                  bearing: bearing,
-                ),
-              ),
-            );
+            setState(() {
+              position = newLoc;
+            });
           }
+        } else {
+          //modo carro habilitado
+          if (!estalivre) {
+            if (_googleMapController != null) {
+              double currentZoomLevel =
+                  await _googleMapController!.getZoomLevel();
 
-          setState(() {
-            position = newLoc;
-          });
+              // Calcula o bearing (azimute) entre a posição anterior e a posição atual
+              double bearing = 0.0;
+              if (previousPosition != null) {
+                bearing = _calculateBearing(
+                  previousPosition!.latitude,
+                  previousPosition!.longitude,
+                  newLoc.latitude,
+                  newLoc.longitude,
+                );
+              }
+
+              _googleMapController!.animateCamera(
+                google_maps.CameraUpdate.newCameraPosition(
+                  google_maps.CameraPosition(
+                    target: google_maps.LatLng(
+                      newLoc.latitude,
+                      newLoc.longitude,
+                    ),
+                    zoom: currentZoomLevel ?? 20,
+                    tilt: 90,
+                    bearing: bearing,
+                  ),
+                ),
+              );
+            }
+
+            setState(() {
+              position = newLoc;
+            });
+          }
         }
-// Atualiza a posição anterior
-        previousPosition = newLoc;
+
+        // Update the lastPosition with the new location
+        lastPosition = newLoc;
       }
     });
   }

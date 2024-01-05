@@ -174,7 +174,7 @@ class _ContornoMapState extends State<ContornoMap> {
                   newLoc.latitude,
                   newLoc.longitude,
                 ) >=
-                widget.toleranciaEmMetrosEntreUmaCapturaEOutra) {
+                (widget.toleranciaEmMetrosEntreUmaCapturaEOutra ?? 1)) {
           // Atualiza a última posição conhecida
           lastPosition = newLoc;
           double currentZoomLevel = await _googleMapController!.getZoomLevel();
