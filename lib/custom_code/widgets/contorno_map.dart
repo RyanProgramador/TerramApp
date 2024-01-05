@@ -42,7 +42,7 @@ class ContornoMap extends StatefulWidget {
   final String fazid;
   final String? fazNome;
   final LatLng? fazLatLng;
-  final int? toleranciaEmMetrosEntreUmaCapturaEOutra;
+  final int toleranciaEmMetrosEntreUmaCapturaEOutra;
   @override
   _ContornoMapState createState() => _ContornoMapState();
 }

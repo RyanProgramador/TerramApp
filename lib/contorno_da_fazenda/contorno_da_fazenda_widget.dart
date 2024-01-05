@@ -134,6 +134,12 @@ class _ContornoDaFazendaWidgetState extends State<ContornoDaFazendaWidget> {
                               fazid: widget.fazid!,
                               fazNome: widget.fazendaNome,
                               fazLatLng: widget.fazlatlng,
+                              toleranciaEmMetrosEntreUmaCapturaEOutra:
+                                  valueOrDefault<int>(
+                                FFAppState()
+                                    .distanciaEmMetrosDeToleranciaEntreUmaCapturaEOutra,
+                                1,
+                              ),
                             ),
                           ),
                         ),
