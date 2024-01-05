@@ -237,7 +237,7 @@ class _MapsRoutesState extends State<RotaFinal> {
     Geolocator.getPositionStream(
       locationSettings: LocationSettings(
         accuracy: LocationAccuracy.best,
-        distanceFilter: 0, // Minimum distance of 0 meters
+        distanceFilter: 30, // Minimum distance of 0 meters
       ),
     ).listen((Position newLoc) async {
       if (!modocarrobool) {
