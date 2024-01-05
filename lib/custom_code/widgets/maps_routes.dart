@@ -46,7 +46,7 @@ class MapsRoutes extends StatefulWidget {
 
 class _MapsRoutesState extends State<MapsRoutes> {
   Uint8List? customIconBytes;
-
+  bool? estiloMapa = false;
   //para polylines
   List<google_maps.LatLng> routePoints = [];
 
@@ -171,6 +171,16 @@ class _MapsRoutesState extends State<MapsRoutes> {
     return customMarkers;
   }
 
+  void mudaEstiloMapa() {
+    setState(() {
+      if (estiloMapa == true) {
+        estiloMapa = false;
+      } else {
+        estiloMapa = true;
+      }
+    });
+  }
+
   @override
   void initState() {
     super.initState();
@@ -234,32 +244,62 @@ class _MapsRoutesState extends State<MapsRoutes> {
     Set<google_maps.Marker> allMarkers =
         routeMarkers.union(_createCustomMarker());
 
-    return Container(
-      width: widget.width ?? 250.0,
-      height: widget.height ?? 250.0,
-      child: google_maps.GoogleMap(
-        initialCameraPosition: google_maps.CameraPosition(
-          target: google_maps.LatLng(
-            widget.coordenadasIniciais?.latitude ?? inidtialLatLng.latitude,
-            widget.coordenadasIniciais?.longitude ?? inidtialLatLng.longitude,
+    return Stack(
+      children: [
+        Container(
+          width: widget.width ?? 250.0,
+          height: widget.height ?? 250.0,
+          child: google_maps.GoogleMap(
+            initialCameraPosition: google_maps.CameraPosition(
+              target: google_maps.LatLng(
+                widget.coordenadasIniciais?.latitude ?? inidtialLatLng.latitude,
+                widget.coordenadasIniciais?.longitude ??
+                    inidtialLatLng.longitude,
+              ),
+              zoom: 13,
+            ),
+            markers: allMarkers,
+            mapType: estiloMapa == true
+                ? google_maps.MapType.satellite
+                : google_maps.MapType.normal,
+            polylines: {
+              google_maps.Polyline(
+                //polylineId: google_maps.PolylineId("PolylineID"),
+                //color: Colors.blue,
+                //points: routeMarkers
+                //    .map((marker) => marker.position)
+                //    .toList(), // Utilizando as posições dos marcadores para criar a polilinha
+                polylineId: google_maps.PolylineId("RedPolyline"),
+                color: Colors.blue,
+                points: routePoints ??
+                    routeMarkers.map((marker) => marker.position).toList(),
+              ),
+            },
           ),
-          zoom: 13,
         ),
-        markers: allMarkers,
-        polylines: {
-          google_maps.Polyline(
-            //polylineId: google_maps.PolylineId("PolylineID"),
-            //color: Colors.blue,
-            //points: routeMarkers
-            //    .map((marker) => marker.position)
-            //    .toList(), // Utilizando as posições dos marcadores para criar a polilinha
-            polylineId: google_maps.PolylineId("RedPolyline"),
-            color: Colors.blue,
-            points: routePoints ??
-                routeMarkers.map((marker) => marker.position).toList(),
+        Positioned(
+          top: MediaQuery.of(context).size.height / 8.65 -
+              28.0, // Adjust the top position as needed
+          right: 5, // Adjust the left position as needed
+          child: ElevatedButton(
+            onPressed: () {
+              mudaEstiloMapa();
+            },
+            style: ElevatedButton.styleFrom(
+              shape: CircleBorder(),
+              backgroundColor: Color(0xFF00736D),
+            ),
+            child: Transform.rotate(
+              angle: 0, // Your rotation angle here based on compass direction,
+              child: Icon(
+                Icons.satellite_alt_sharp, // or any other compass-related icon
+                size: 25.0,
+                color: Colors.white, // Adjust the size as needed
+              ),
+            ),
           ),
-        },
-      ),
+        ),
+      ],
     );
   }
 }

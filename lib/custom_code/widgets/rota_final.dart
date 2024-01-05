@@ -73,6 +73,9 @@ class _MapsRoutesState extends State<RotaFinal> {
     }
   }
 
+//estilo de mapa se pe satelite ou mapa normal
+  bool estiloMapa = false;
+
   //inporante para o controle do maps
   google_maps.GoogleMapController? _googleMapController;
 //modo pausado /modolivre
@@ -219,12 +222,14 @@ class _MapsRoutesState extends State<RotaFinal> {
     estalivre = false;
   } //RECENTRALIZAR COM UM BOTÃO
 
-  void modoCarro() async {
-    if (!modocarrobool) {
-      modocarrobool = true;
-    } else {
-      modocarrobool = false;
-    }
+  void modoCarro() {
+    setState(() {
+      if (!modocarrobool) {
+        modocarrobool = true;
+      } else {
+        modocarrobool = false;
+      }
+    });
   }
 
 //atualiza a cada momento a posição atual do user
@@ -303,6 +308,16 @@ class _MapsRoutesState extends State<RotaFinal> {
     });
   }
 
+  void mudaEstiloMapa() {
+    setState(() {
+      if (estiloMapa == true) {
+        estiloMapa = false;
+      } else {
+        estiloMapa = true;
+      }
+    });
+  }
+
   @override
   void initState() {
     super.initState();
@@ -356,6 +371,9 @@ class _MapsRoutesState extends State<RotaFinal> {
               currentBearing = position.bearing;
             },
             markers: allMarkers,
+            mapType: estiloMapa == true
+                ? google_maps.MapType.satellite
+                : google_maps.MapType.normal,
             polylines: {
               google_maps.Polyline(
                 //polylineId: google_maps.PolylineId("PolylineID"),
@@ -429,6 +447,28 @@ class _MapsRoutesState extends State<RotaFinal> {
               angle: 30, // Your rotation angle here based on compass direction,
               child: Icon(
                 Icons.explore, // or any other compass-related icon
+                size: 25.0,
+                color: Colors.white, // Adjust the size as needed
+              ),
+            ),
+          ),
+        ),
+        Positioned(
+          top: MediaQuery.of(context).size.height / 2.65 -
+              28.0, // Adjust the top position as needed
+          right: 5, // Adjust the left position as needed
+          child: ElevatedButton(
+            onPressed: () {
+              mudaEstiloMapa();
+            },
+            style: ElevatedButton.styleFrom(
+              shape: CircleBorder(),
+              backgroundColor: Color(0xFF00736D),
+            ),
+            child: Transform.rotate(
+              angle: 0, // Your rotation angle here based on compass direction,
+              child: Icon(
+                Icons.satellite_alt_sharp, // or any other compass-related icon
                 size: 25.0,
                 color: Colors.white, // Adjust the size as needed
               ),

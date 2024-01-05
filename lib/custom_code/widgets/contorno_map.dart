@@ -275,7 +275,7 @@ class _ContornoMapState extends State<ContornoMap> {
           "dthr_fim": formattedDataHora,
           "faz_id": widget.fazid,
           "cor": "$corAleatoria",
-          "nome": "Contorno"
+          "nome": "Talh_" + widget.idContorno.toString()
         };
         FFAppState().grupoContornoFazendas.add(grupocontorno);
 

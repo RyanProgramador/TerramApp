@@ -143,28 +143,28 @@ class _ConexaoWidgetState extends State<ConexaoWidget> {
                               color: FlutterFlowTheme.of(context).alternate,
                               width: 2.0,
                             ),
-                            borderRadius: BorderRadius.circular(0.0),
+                            borderRadius: BorderRadius.circular(8.0),
                           ),
                           focusedBorder: UnderlineInputBorder(
                             borderSide: BorderSide(
                               color: FlutterFlowTheme.of(context).primary,
                               width: 2.0,
                             ),
-                            borderRadius: BorderRadius.circular(0.0),
+                            borderRadius: BorderRadius.circular(8.0),
                           ),
                           errorBorder: UnderlineInputBorder(
                             borderSide: BorderSide(
                               color: FlutterFlowTheme.of(context).error,
                               width: 2.0,
                             ),
-                            borderRadius: BorderRadius.circular(0.0),
+                            borderRadius: BorderRadius.circular(8.0),
                           ),
                           focusedErrorBorder: UnderlineInputBorder(
                             borderSide: BorderSide(
                               color: FlutterFlowTheme.of(context).error,
                               width: 2.0,
                             ),
-                            borderRadius: BorderRadius.circular(0.0),
+                            borderRadius: BorderRadius.circular(8.0),
                           ),
                         ),
                         style: FlutterFlowTheme.of(context).bodyMedium,
