@@ -760,6 +760,10 @@ class TrCFGCall {
         response,
         r'''$.dados''',
       );
+  dynamic geoTolerancia(dynamic response) => getJsonField(
+        response,
+        r'''$.geo_tolerancia''',
+      );
 }
 
 class TrSincronizaTalhaoContornoCall {

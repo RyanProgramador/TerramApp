@@ -29,6 +29,7 @@ class ContornoMap extends StatefulWidget {
     this.idContorno,
     this.fazNome,
     this.fazLatLng,
+    this.toleranciaEmMetrosEntreUmaCapturaEOutra,
     required this.fazid,
   }) : super(key: key);
 
@@ -41,6 +42,7 @@ class ContornoMap extends StatefulWidget {
   final String fazid;
   final String? fazNome;
   final LatLng? fazLatLng;
+  final int? toleranciaEmMetrosEntreUmaCapturaEOutra;
   @override
   _ContornoMapState createState() => _ContornoMapState();
 }
@@ -165,40 +167,41 @@ class _ContornoMapState extends State<ContornoMap> {
         Position newLoc = await Geolocator.getCurrentPosition(
             desiredAccuracy: LocationAccuracy.best);
         // Se for a primeira vez ou se a distância entre a última posição e a nova for >= 1m
-        //  if (lastPosition == null ||
-        // Geolocator.distanceBetween(
-        //        lastPosition!.latitude,
-        //      lastPosition!.longitude,
-        //       newLoc.latitude,
-//newLoc.longitude,
-        //    ) >=
-        //    1) {
-        // Atualiza a última posição conhecida
-        lastPosition = newLoc;
-        double currentZoomLevel = await _googleMapController!.getZoomLevel();
-        if (_googleMapController != null) {
-          _googleMapController!.animateCamera(
-            google_maps.CameraUpdate.newCameraPosition(
-              google_maps.CameraPosition(
-                target: google_maps.LatLng(
+        if (lastPosition == null ||
+            Geolocator.distanceBetween(
+                  lastPosition!.latitude,
+                  lastPosition!.longitude,
                   newLoc.latitude,
                   newLoc.longitude,
+                ) >=
+                widget.toleranciaEmMetrosEntreUmaCapturaEOutra) {
+          // Atualiza a última posição conhecida
+          lastPosition = newLoc;
+          double currentZoomLevel = await _googleMapController!.getZoomLevel();
+          if (_googleMapController != null) {
+            _googleMapController!.animateCamera(
+              google_maps.CameraUpdate.newCameraPosition(
+                google_maps.CameraPosition(
+                  target: google_maps.LatLng(
+                    newLoc.latitude,
+                    newLoc.longitude,
+                  ),
+                  zoom: currentZoomLevel,
                 ),
-                zoom: currentZoomLevel,
               ),
-            ),
-          );
-        }
-        currentTarget = google_maps.LatLng(newLoc.latitude, newLoc.longitude);
-        currentZoom = 20;
+            );
+          }
+          currentTarget = google_maps.LatLng(newLoc.latitude, newLoc.longitude);
+          currentZoom = 20;
 
-        setState(() {
-          position = newLoc;
-          _addUserMarker(google_maps.LatLng(newLoc.latitude, newLoc.longitude));
-          _updatePolyline();
-        });
+          setState(() {
+            position = newLoc;
+            _addUserMarker(
+                google_maps.LatLng(newLoc.latitude, newLoc.longitude));
+            _updatePolyline();
+          });
+        }
       }
-      //}
     }
   }
 

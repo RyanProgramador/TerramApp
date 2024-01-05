@@ -397,6 +397,11 @@ class FFAppState extends ChangeNotifier {
           }).toList() ??
           _PontosExcluidos;
     });
+    _safeInit(() {
+      _distanciaEmMetrosDeToleranciaEntreUmaCapturaEOutra = prefs.getInt(
+              'ff_distanciaEmMetrosDeToleranciaEntreUmaCapturaEOutra') ??
+          _distanciaEmMetrosDeToleranciaEntreUmaCapturaEOutra;
+    });
   }
 
   void update(VoidCallback callback) {
@@ -1671,6 +1676,15 @@ class FFAppState extends ChangeNotifier {
     _PontosExcluidos.insert(_index, _value);
     prefs.setStringList('ff_PontosExcluidos',
         _PontosExcluidos.map((x) => jsonEncode(x)).toList());
+  }
+
+  int _distanciaEmMetrosDeToleranciaEntreUmaCapturaEOutra = 0;
+  int get distanciaEmMetrosDeToleranciaEntreUmaCapturaEOutra =>
+      _distanciaEmMetrosDeToleranciaEntreUmaCapturaEOutra;
+  set distanciaEmMetrosDeToleranciaEntreUmaCapturaEOutra(int _value) {
+    _distanciaEmMetrosDeToleranciaEntreUmaCapturaEOutra = _value;
+    prefs.setInt(
+        'ff_distanciaEmMetrosDeToleranciaEntreUmaCapturaEOutra', _value);
   }
 }
 

@@ -266,6 +266,10 @@ class _SelecionarOSWidgetState extends State<SelecionarOSWidget>
                 SincronizarGroup.trCFGCall.dadosCFG(
               (_model.trCFG2?.jsonBody ?? ''),
             );
+            FFAppState().distanciaEmMetrosDeToleranciaEntreUmaCapturaEOutra =
+                SincronizarGroup.trCFGCall.geoTolerancia(
+              (_model.trCFG2?.jsonBody ?? ''),
+            );
           });
         } else {
           await showDialog(
@@ -366,6 +370,10 @@ class _SelecionarOSWidgetState extends State<SelecionarOSWidget>
               .cast<dynamic>();
           FFAppState().tempoEmSegundosPadraoDeCapturaDeLocal =
               SincronizarGroup.trCFGCall.dadosCFG(
+            (_model.trCFG?.jsonBody ?? ''),
+          );
+          FFAppState().distanciaEmMetrosDeToleranciaEntreUmaCapturaEOutra =
+              SincronizarGroup.trCFGCall.geoTolerancia(
             (_model.trCFG?.jsonBody ?? ''),
           );
         });
