@@ -42,7 +42,7 @@ class ContornoMap extends StatefulWidget {
   final String fazid;
   final String? fazNome;
   final LatLng? fazLatLng;
-  final int toleranciaEmMetrosEntreUmaCapturaEOutra;
+  final int? toleranciaEmMetrosEntreUmaCapturaEOutra;
   @override
   _ContornoMapState createState() => _ContornoMapState();
 }
@@ -78,25 +78,25 @@ class _ContornoMapState extends State<ContornoMap> {
   late ContornoDaFazendaModel _model;
 //cores do contorno
   List<String> coresHex = [
-    "#FF0000", // Vermelho
+    // "#FF0000", // Vermelho
     "#FFA500", // Laranja
     "#FFFF00", // Amarelo
     "#FFC0CB", // Rosa
     "#FF69B4", // Rosa Choque
-    "#FF4500", // Vermelho Laranja
+    //"#FF4500", // Vermelho Laranja
     "#800080", // Roxo
     "#800000", // Marrom
-    "#A52A2A", // Marrom avermelhado
-    "#B22222", // Vermelho Fogo
-    "#CD5C5C", // Vermelho Indiana
+    //"#A52A2A", // Marrom avermelhado
+    // "#B22222", // Vermelho Fogo
+    //  "#CD5C5C", // Vermelho Indiana
     "#D2691E", // Marrom Queimado
-    "#8B0000", // Vermelho Escuro
+    // "#8B0000", // Vermelho Escuro
     "#DC143C", // Carmesim
     "#E9967A", // Tom de Salmão
     "#FF6347", // Tomate
     "#FF7F50", // Coral
-    "#F08080", // Vermelho Claro
-    "#FF4500", // Laranja Vermelho
+    //  "#F08080", // Vermelho Claro
+    // "#FF4500", // Laranja Vermelho
     "#FFD700", // Amarelo Ouro
     "#FFA07A", // Salmão
     "#FF8C00", // Laranja Escuro
@@ -113,25 +113,25 @@ class _ContornoMapState extends State<ContornoMap> {
     "#000080", // Azul Marinho
     "#0000CD", // Azul Médio
     "#0000FF" // Azul
-        "#FF0000", // Vermelho
-    "#FFA500", // Laranja
+        // "#FF0000", // Vermelho
+        "#FFA500", // Laranja
     "#FFFF00", // Amarelo
     "#FFC0CB", // Rosa
     "#FF69B4", // Rosa Choque
     "#FF4500", // Vermelho Laranja
     "#800080", // Roxo
     "#800000", // Marrom
-    "#A52A2A", // Marrom avermelhado
-    "#B22222", // Vermelho Fogo
-    "#CD5C5C", // Vermelho Indiana
+    // "#A52A2A", // Marrom avermelhado
+    //"#B22222", // Vermelho Fogo
+    //"#CD5C5C", // Vermelho Indiana
     "#D2691E", // Marrom Queimado
-    "#8B0000", // Vermelho Escuro
+    // "#8B0000", // Vermelho Escuro
     "#DC143C", // Carmesim
     "#E9967A", // Tom de Salmão
     "#FF6347", // Tomate
     "#FF7F50", // Coral
-    "#F08080", // Vermelho Claro
-    "#FF4500", // Laranja Vermelho
+    // "#F08080", // Vermelho Claro
+    //  "#FF4500", // Laranja Vermelho
     "#FFD700", // Amarelo Ouro
     "#FFA07A", // Salmão
     "#FF8C00", // Laranja Escuro
