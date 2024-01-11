@@ -45,6 +45,13 @@ class _ColetaState extends State<Coleta> {
   StreamSubscription<Position>? _positionStreamSubscription;
   double? _userZoom;
   double _currentZoom = 18.0; // Inicializa o zoom padrão
+// adiciona ponto novo na coleta
+  bool isAddingPoint = false;
+
+  //seleciona profundidade
+
+  Set<String> profundidadesSelecionadas = {};
+  final List<String> possiveisProfundidades = ['0-10', '10-20', '20-30'];
 
   // Listas para armazenar os dados
   List<Map<String, String>> pontosMovidos = [];
@@ -67,7 +74,7 @@ class _ColetaState extends State<Coleta> {
 // ICONE
 
   Uint8List? customIconBytes;
-
+//
   //IMPEDIR DE PEGAR NO MESMO LUGAR
   Position? lastPosition;
 
@@ -257,18 +264,58 @@ class _ColetaState extends State<Coleta> {
 
 //double tap, ou seja, dois clicks no marker para abrir
   void _onMarkerTapped(google_maps.MarkerId markerId, String markerName) {
+    print("Marker tapped: $markerName");
     DateTime now = DateTime.now();
     String markerIdValue = markerId.value;
 
+    // Retrieve the position of the tapped marker
+    google_maps.LatLng markerLatLng = markerPositions[markerIdValue]!;
+
+    // Calculate the distance between the user's current location and the marker
+    double distance = Geolocator.distanceBetween(
+      _currentPosition!.latitude,
+      _currentPosition!.longitude,
+      markerLatLng.latitude,
+      markerLatLng.longitude,
+    );
+
+    // Check if the last tap was within 1.8 seconds to consider it a double tap
     if (lastTapTimestamps.containsKey(markerIdValue) &&
         now.difference(lastTapTimestamps[markerIdValue]!).inMilliseconds <
             1800) {
-      // Considerado um toque duplo
-      _showModalOptions(markerName);
+      // Check if the distance is greater than 30 meters
+      if (distance > 900) {
+        //metros de distancia para coletar
+        // Show alert
+        _showDistanceAlert();
+      } else {
+        // Continue with the normal double tap logic
+        _showModalOptions(markerName);
+      }
     }
 
-    // Atualiza o timestamp do último toque
+    // Update the timestamp of the last tap
     lastTapTimestamps[markerIdValue] = now;
+  }
+
+  void _showDistanceAlert() {
+    showDialog(
+      context: context,
+      builder: (BuildContext context) {
+        return AlertDialog(
+          title: Text('Aproxime-se do ponto!'),
+          content: Text('Você está a mais de 30 metros do ponto de coleta.'),
+          actions: <Widget>[
+            TextButton(
+              child: Text('OK'),
+              onPressed: () {
+                Navigator.of(context).pop(); // Close the dialog
+              },
+            ),
+          ],
+        );
+      },
+    );
   }
 
   Future<void> _loadCustomIcon() async {
@@ -400,6 +447,13 @@ class _ColetaState extends State<Coleta> {
                   Navigator.of(context).pop();
                   _ontapInacessivel(idMarcador);
                 }),
+                SizedBox(height: 10),
+                _buildElevatedButton(context, "Criar Ponto", Colors.blue, () {
+                  Navigator.of(context).pop();
+                  // _adicionarNovoPonto();
+                  _showAdicionaProfundidades();
+                  _showTutorialModal();
+                }),
               ],
             ),
           ),
@@ -408,6 +462,126 @@ class _ColetaState extends State<Coleta> {
         );
       },
     );
+  }
+
+  void _showAdicionaProfundidades() {
+    showDialog(
+      context: context,
+      builder: (BuildContext context) {
+        return AlertDialog(
+          title: Text('Selecione as Profundidades'),
+          content: SingleChildScrollView(
+            child: ListBody(
+              children: possiveisProfundidades.map((String value) {
+                return CheckboxListTile(
+                  title: Text(value),
+                  value: profundidadesSelecionadas.contains(value),
+                  onChanged: (bool? selected) {
+                    setState(() {
+                      if (selected ?? false) {
+                        profundidadesSelecionadas.add(value);
+                      } else {
+                        profundidadesSelecionadas.remove(value);
+                      }
+                    });
+                  },
+                );
+              }).toList(),
+            ),
+          ),
+          actions: <Widget>[
+            TextButton(
+              child: Text('OK'),
+              onPressed: () {
+                Navigator.of(context).pop();
+                // Aqui você pode chamar um método para adicionar um novo ponto
+                // ou fazer outra ação com as profundidades selecionadas.
+              },
+            ),
+          ],
+        );
+      },
+    );
+  }
+
+  void _showTutorialModal() {
+    showDialog(
+      context: context,
+      builder: (BuildContext context) {
+        return AlertDialog(
+          title: Text('Tutorial'),
+          content:
+              Text('Clique 1 vez no local onde queira adicionar um novo ponto'),
+          actions: <Widget>[
+            TextButton(
+              child: Text('Ok'),
+              onPressed: () {
+                Navigator.of(context).pop();
+                setState(() {
+                  isAddingPoint = true; // Enable map tap for adding a new point
+                });
+              },
+            ),
+          ],
+        );
+      },
+    );
+  }
+
+  void _onMapTap(google_maps.LatLng position) {
+    if (isAddingPoint) {
+      _addNewPointAtPosition(position);
+      setState(() {
+        isAddingPoint = false; // Reset the flag
+      });
+    }
+  }
+
+  void _addNewPointAtPosition(google_maps.LatLng position) {
+    String novoNomeMarcador = _gerarNomeNovoMarcador();
+
+    Map<String, dynamic> novoPonto = {
+      "marcador_nome": novoNomeMarcador,
+      "latlng_marcadores": "${position.latitude}, ${position.longitude}",
+      "profundidades": [
+        {
+          "nome": profundidadesSelecionadas ?? '0-10',
+          "icone": "location_dot",
+          "cor": "#FFC0CB"
+        },
+        // Adicione outras opções aqui se necessário
+      ],
+    };
+
+    setState(() {
+      latLngListMarcadores.add(novoPonto);
+      markerPositions[novoNomeMarcador] = position; // Adicione esta linha
+
+      String nomesProfundidades = novoPonto["profundidades"]!
+          .map((profundidade) => profundidade["nome"]!)
+          .join(", "); // Junta os nomes com vírgula e espaço
+
+      var newMarker = google_maps.Marker(
+        markerId: google_maps.MarkerId(novoNomeMarcador),
+        position: position,
+        icon: google_maps.BitmapDescriptor.defaultMarkerWithHue(
+            google_maps.BitmapDescriptor.hueRed),
+        onTap: () {
+          focoNoMarcador = true;
+          latlngMarcador =
+              google_maps.LatLng(position.latitude, position.longitude);
+
+          _onMarkerTapped(google_maps.MarkerId(novoNomeMarcador),
+              novoPonto["marcador_nome"]!);
+        },
+        infoWindow: google_maps.InfoWindow(
+          title: "PONTO: $novoNomeMarcador",
+          snippet: "Lista de profundidades: " + nomesProfundidades,
+        ),
+      );
+
+      markers.add(newMarker);
+    });
   }
 
   Widget _buildElevatedButton(
@@ -449,6 +623,88 @@ class _ColetaState extends State<Coleta> {
   IconData getFontAwesomeIconByName(String iconName) {
     return faIcons[iconName] ?? FontAwesomeIcons.questionCircle; // Ícone padrão
   }
+
+  // void _showProfundidadesParaColeta(String marcadorNome) {
+  //   // Encontra o marcador pelo nome
+  //   var marcador = latLngListMarcadores.firstWhere(
+  //     (m) => m["marcador_nome"] == marcadorNome,
+  //     orElse: () => {},
+  //   );
+  //
+  //   if (marcador.isNotEmpty) {
+  //     showDialog(
+  //       context: context,
+  //       builder: (BuildContext context) {
+  //         return AlertDialog(
+  //           shape: RoundedRectangleBorder(
+  //             borderRadius: BorderRadius.circular(16),
+  //           ),
+  //           titlePadding: EdgeInsets.all(20),
+  //           title: Row(
+  //             mainAxisAlignment: MainAxisAlignment.spaceBetween,
+  //             children: [
+  //               Expanded(
+  //                 child: Text(
+  //                   "Coletar profundidades para ${marcador["marcador_nome"]}",
+  //                   style: FlutterFlowTheme.of(context).bodyMedium.override(
+  //                         fontFamily: 'Outfit',
+  //                         fontSize: 18,
+  //                         fontWeight: FontWeight.bold,
+  //                       ),
+  //                 ),
+  //               ),
+  //               InkWell(
+  //                 onTap: () => Navigator.of(context).pop(),
+  //                 child: Icon(
+  //                   Icons.close,
+  //                   color: FlutterFlowTheme.of(context).secondaryText,
+  //                   size: 36,
+  //                 ),
+  //               ),
+  //             ],
+  //           ),
+  //           content: SingleChildScrollView(
+  //             child: ListBody(
+  //               children: marcador["profundidades"].map<Widget>((profundidade) {
+  //                 bool jaColetada = coletasPorMarcador[marcadorNome]
+  //                         ?.contains(profundidade["nome"]) ??
+  //                     false;
+  //                 return Row(
+  //                   children: [
+  //                     Icon(
+  //                       getFontAwesomeIconByName(profundidade["icone"]),
+  //                       color: HexColor(profundidade["cor"]),
+  //                     ),
+  //                     SizedBox(width: 10),
+  //                     Text(profundidade["nome"]),
+  //                     Spacer(),
+  //                     _buildElevatedButton(
+  //                       context,
+  //                       jaColetada ? "Coletada" : "Coletar",
+  //                       jaColetada ? Color(0xFF9D291C) : Color(0xFF00736D),
+  //                       () {
+  //                         if (jaColetada) {
+  //                           _confirmarRecoleta(
+  //                               context, marcadorNome, profundidade["nome"]);
+  //                         } else {
+  //                           Navigator.of(context).pop();
+  //                           _coletarProfundidade(
+  //                               marcadorNome, profundidade["nome"]);
+  //                         }
+  //                       },
+  //                     ),
+  //                   ],
+  //                 );
+  //               }).toList(),
+  //             ),
+  //           ),
+  //           backgroundColor: FlutterFlowTheme.of(context).secondaryBackground,
+  //           elevation: 5,
+  //         );
+  //       },
+  //     );
+  //   }
+  // }
 
   void _showProfundidadesParaColeta(String marcadorNome) {
     // Encontra o marcador pelo nome
@@ -513,9 +769,8 @@ class _ColetaState extends State<Coleta> {
                             _confirmarRecoleta(
                                 context, marcadorNome, profundidade["nome"]);
                           } else {
-                            Navigator.of(context).pop();
-                            _coletarProfundidade(
-                                marcadorNome, profundidade["nome"]);
+                            _confirmarColeta(
+                                context, marcadorNome, profundidade["nome"]);
                           }
                         },
                       ),
@@ -531,6 +786,88 @@ class _ColetaState extends State<Coleta> {
       );
     }
   }
+
+  String _gerarNomeNovoMarcador() {
+    if (latLngListMarcadores.isEmpty) {
+      return "A";
+    }
+
+    // Converte todos os nomes de marcadores em uma lista de listas de inteiros (0-25)
+    List<List<int>> marcadoresNumericos =
+        latLngListMarcadores.map<List<int>>((marcador) {
+      String nomeMarcador = marcador["marcador_nome"]
+          as String; // Garante que o nome é uma String
+      return nomeMarcador.split('').map<int>((String char) {
+        return char.codeUnitAt(0) - 'A'.codeUnitAt(0); // Conversão para int
+      }).toList();
+    }).toList();
+
+    // Encontra o último nome de marcador e o converte para a representação numérica
+    List<int> ultimoMarcadorNumerico = marcadoresNumericos.last;
+
+    // Incrementa o último valor
+    int index = ultimoMarcadorNumerico.length - 1;
+    while (index >= 0) {
+      if (ultimoMarcadorNumerico[index] < 25) {
+        // Menor que 'Z'
+        ultimoMarcadorNumerico[index]++;
+        break;
+      } else {
+        ultimoMarcadorNumerico[index] =
+            0; // Reseta para 'A' e incrementa o próximo caractere
+        if (index == 0) {
+          ultimoMarcadorNumerico.insert(
+              0, 0); // Insere um novo 'A' se todos os caracteres forem 'Z'
+          break;
+        }
+        index--;
+      }
+    }
+
+    // Converte de volta para string
+    return String.fromCharCodes(
+      ultimoMarcadorNumerico.map((n) => n + 'A'.codeUnitAt(0)),
+    );
+  }
+
+  // void _adicionarNovoPonto() {
+  //   String novoNomeMarcador = _gerarNomeNovoMarcador();
+  //   String latlngString = "-29.915167902652954, -51.19608880066816";
+  //   List<String> latlngParts = latlngString.split(',');
+  //   google_maps.LatLng latlng = google_maps.LatLng(
+  //     double.parse(latlngParts[0].trim()),
+  //     double.parse(latlngParts[1].trim()),
+  //   );
+  //
+  //   Map<String, dynamic> novoPonto = {
+  //     "marcador_nome": novoNomeMarcador,
+  //     "latlng_marcadores": latlngString,
+  //     "profundidades": [
+  //       {"nome": "0-10", "icone": "location_dot", "cor": "#FFC0CB"},
+  //       {"nome": "0-20", "icone": "flag", "cor": "#FF4500"},
+  //       {"nome": "0-25", "icone": "map_pin", "cor": "#0000CD"}
+  //     ],
+  //   };
+  //
+  //   // Add new point to the list
+  //   setState(() {
+  //     latLngListMarcadores.add(novoPonto);
+  //
+  //     // Create and add a new marker for the new point
+  //     var newMarker = google_maps.Marker(
+  //       markerId: google_maps.MarkerId(novoNomeMarcador),
+  //       position: latlng,
+  //       icon: google_maps.BitmapDescriptor.defaultMarkerWithHue(
+  //           google_maps.BitmapDescriptor.hueRed),
+  //       infoWindow: google_maps.InfoWindow(
+  //         title: "PONTO: $novoNomeMarcador",
+  //         snippet: "Novo ponto adicionado",
+  //       ),
+  //     );
+  //
+  //     markers.add(newMarker);
+  //   });
+  // }
 
   void _confirmarRecoleta(
       BuildContext context, String marcadorNome, String profundidadeNome) {
@@ -561,6 +898,57 @@ class _ColetaState extends State<Coleta> {
     );
   }
 
+  // void _coletarProfundidade(String marcadorNome, String profundidadeNome) {
+  //   setState(() {
+  //     pontosColetados.add({
+  //       "marcador_nome": marcadorNome,
+  //       "profundidade": profundidadeNome,
+  //     });
+  //     coletasPorMarcador.putIfAbsent(marcadorNome, () => {});
+  //     coletasPorMarcador[marcadorNome]!.add(profundidadeNome);
+  //
+  //     // Verifica se todas as profundidades foram coletadas
+  //     var todasProfundidades = latLngListMarcadores
+  //         .firstWhere(
+  //             (m) => m["marcador_nome"] == marcadorNome)["profundidades"]
+  //         .map((p) => p["nome"])
+  //         .toSet();
+  //
+  //     if (coletasPorMarcador[marcadorNome]!.containsAll(todasProfundidades)) {
+  //       // Todas as profundidades coletadas, mude a cor do marcador para verde
+  //       _updateMarkerColor(marcadorNome, true);
+  //     }
+  //   });
+  // }
+
+  void _confirmarColeta(
+      BuildContext context, String marcadorNome, String profundidadeNome) {
+    showDialog(
+      context: context,
+      builder: (BuildContext context) {
+        return AlertDialog(
+          shape:
+              RoundedRectangleBorder(borderRadius: BorderRadius.circular(16)),
+          title: Text('Efetuar coleta'),
+          content: Text('Deseja realmente efetuar esta coleta?'),
+          actions: [
+            TextButton(
+              onPressed: () => Navigator.of(context).pop(),
+              child: Text('Não'),
+            ),
+            TextButton(
+              onPressed: () {
+                Navigator.of(context).pop();
+                _coletarProfundidade(marcadorNome, profundidadeNome);
+              },
+              child: Text('Sim'),
+            ),
+          ],
+        );
+      },
+    );
+  }
+
   void _coletarProfundidade(String marcadorNome, String profundidadeNome) {
     setState(() {
       pontosColetados.add({
@@ -582,6 +970,26 @@ class _ColetaState extends State<Coleta> {
         _updateMarkerColor(marcadorNome, true);
       }
     });
+    Navigator.of(context).pop(); // Fecha o modal atual
+    _mostrarModalSucesso(context, marcadorNome);
+  }
+
+  void _mostrarModalSucesso(BuildContext context, String marcadorNome) {
+    showDialog(
+      context: context,
+      builder: (BuildContext context) {
+        Future.delayed(Duration(seconds: 0, milliseconds: 940), () {
+          Navigator.of(context).pop(); // Fecha o modal de sucesso
+          _showProfundidadesParaColeta(
+              marcadorNome); // Reabre o modal de coletas
+        });
+
+        return AlertDialog(
+          title: Text('Sucesso'),
+          content: Text('Profundidade coletada!'),
+        );
+      },
+    );
   }
 
   void _updateMarkerColor(String marcadorNome, bool todasColetadas) {
@@ -707,6 +1115,13 @@ class _ColetaState extends State<Coleta> {
   Widget _exibirDados() {
     return Column(
       children: [
+        // Text(
+        //   "Pontos: ${jsonEncode(latLngListMarcadores)}",
+        //   style: TextStyle(
+        //     color: Colors.yellow, // Define a cor vermelha
+        //     fontSize: 12.0, // Define o tamanho da fonte como 8
+        //   ),
+        // ),
         Text(
           "Pontos Movidos: ${jsonEncode(pontosMovidos)}",
           style: TextStyle(
@@ -748,6 +1163,7 @@ class _ColetaState extends State<Coleta> {
               _googleMapController = controller;
               _onMapCreated(controller);
             },
+            onTap: _onMapTap,
             onCameraMove: _onCameraMove,
             polygons: polygons,
             markers: markers,
