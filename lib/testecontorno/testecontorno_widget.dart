@@ -173,17 +173,11 @@ class _TestecontornoWidgetState extends State<TestecontornoWidget> {
                           hoverColor: Colors.transparent,
                           highlightColor: Colors.transparent,
                           onTap: () async {
-                            context.goNamed(
-                              'testecontorno',
-                              extra: <String, dynamic>{
-                                kTransitionInfoKey: TransitionInfo(
-                                  hasTransition: true,
-                                  transitionType:
-                                      PageTransitionType.topToBottom,
-                                  duration: Duration(milliseconds: 600),
-                                ),
-                              },
-                            );
+                            setState(() {
+                              FFAppState().PontosMovidos = [];
+                              FFAppState().PontosExcluidos = [];
+                              FFAppState().PontosColetados = [];
+                            });
                           },
                           child: FaIcon(
                             FontAwesomeIcons.redo,
