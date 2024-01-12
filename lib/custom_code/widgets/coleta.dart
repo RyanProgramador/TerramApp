@@ -480,6 +480,25 @@ class _ColetaState extends State<Coleta> {
     );
   }
 
+  // void _tiraFoto() async {
+  //   final ImagePicker _picker = ImagePicker();
+  //   final XFile? image = await _picker.pickImage(source: ImageSource.camera);
+  //
+  //   if (image != null) {
+  //     final bytes = await image.readAsBytes();
+  //     String base64Image = base64Encode(bytes);
+  //     String nomeProfundidade = 'Nome da profundidade'; // Defina como desejar
+  //
+  //     setState(() {
+  //       latLngListMarcadores[0]["foto_de_cada_profundidade"].add({
+  //         "nome": nomeProfundidade,
+  //         // "foto": 'data:image/png;base64,$base64Image',
+  //         "foto": 'data:image/png;base64,base64Image',
+  //       });
+  //     });
+  //   }
+  // }
+
   void _tiraFoto(String nomeMarcadorAtual, String nomeProfundidade) async {
     final ImagePicker _picker = ImagePicker();
     final XFile? image = await _picker.pickImage(source: ImageSource.camera);
@@ -1012,6 +1031,7 @@ class _ColetaState extends State<Coleta> {
                     "latlng_movido_para":
                         "${newPosition.latitude}, ${newPosition.longitude}"
                   });
+                  FFAppState().PontosMovidos.add(jsonEncode(pontosMovidos));
                 }
               });
         }
@@ -1037,6 +1057,41 @@ class _ColetaState extends State<Coleta> {
   void mudaFoco() {
     focoNoMarcador = false;
   }
+
+  // Widget _exibirDados() {
+  //   return Column(
+  //     children: [
+  //       Text(
+  //         "Pontos: ${jsonEncode(latLngListMarcadores)}",
+  //         style: TextStyle(
+  //           color: Colors.yellow, // Define a cor vermelha
+  //           fontSize: 12.0, // Define o tamanho da fonte como 8
+  //         ),
+  //       ),
+  //       Text(
+  //         "Pontos Movidos: ${jsonEncode(pontosMovidos)}",
+  //         style: TextStyle(
+  //           color: Colors.yellow, // Define a cor vermelha
+  //           fontSize: 12.0, // Define o tamanho da fonte como 8
+  //         ),
+  //       ),
+  //       Text(
+  //         "Pontos Coletados: ${jsonEncode(pontosColetados)}",
+  //         style: TextStyle(
+  //           color: Colors.yellow, // Define a cor vermelha
+  //           fontSize: 12.0, // Define o tamanho da fonte como 8
+  //         ),
+  //       ),
+  //       Text(
+  //         "Pontos Excluídos: ${jsonEncode(pontosExcluidos)}",
+  //         style: TextStyle(
+  //           color: Colors.yellow, // Define a cor vermelha
+  //           fontSize: 12.0, // Define o tamanho da fonte como 8
+  //         ),
+  //       ),
+  //     ],
+  //   );
+  // }
 
   void _exibirDados() {
     showDialog(
