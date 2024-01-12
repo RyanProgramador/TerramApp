@@ -10,7 +10,9 @@ import 'package:flutter/material.dart';
 // DO NOT REMOVE OR MODIFY THE CODE ABOVE!
 
 import 'package:flutter/services.dart';
-
+import 'dart:convert';
+// import 'package:camera/camera.dart';
+import 'package:image_picker/image_picker.dart';
 import 'dart:async';
 import 'package:flutter/gestures.dart';
 import 'package:google_maps_flutter/google_maps_flutter.dart' as google_maps;
@@ -62,6 +64,11 @@ class _ColetaState extends State<Coleta> {
 
   //
 
+  //tira foto
+  bool podeTirarFoto = true;
+  int intervaloDeColetaParaProximaFoto = 3;
+  int vezAtualDoIntervaloDeColeta = 0;
+
 //double tap no marcador
   bool focoNoMarcador = false;
   google_maps.LatLng? latlngMarcador;
@@ -100,6 +107,7 @@ class _ColetaState extends State<Coleta> {
         {"nome": "0-20", "icone": "flag", "cor": "#FF4500"},
         {"nome": "0-25", "icone": "map_pin", "cor": "#0000CD"}
       ],
+      "foto_de_cada_profundidade": [],
     },
     {
       "marcador_nome": "B",
@@ -109,6 +117,7 @@ class _ColetaState extends State<Coleta> {
         {"nome": "0-20", "icone": "flag", "cor": "#FF4500"},
         {"nome": "0-25", "icone": "map_pin", "cor": "#0000CD"}
       ],
+      "foto_de_cada_profundidade": [],
     },
     {
       "marcador_nome": "C",
@@ -119,6 +128,7 @@ class _ColetaState extends State<Coleta> {
         {"nome": "0-25", "icone": "map_pin", "cor": "#0000CD"},
         {"nome": "0-35", "icone": "plane", "cor": "#0000CD"}
       ],
+      "foto_de_cada_profundidade": [],
     },
     {
       "marcador_nome": "D",
@@ -128,6 +138,7 @@ class _ColetaState extends State<Coleta> {
         {"nome": "0-20", "icone": "flag", "cor": "#FF4500"},
         {"nome": "0-25", "icone": "map_pi", "cor": "#0000CD"}
       ],
+      "foto_de_cada_profundidade": [],
     },
   ];
 
@@ -454,6 +465,11 @@ class _ColetaState extends State<Coleta> {
                   _showAdicionaProfundidades();
                   _showTutorialModal();
                 }),
+                // SizedBox(height: 10),
+                // _buildElevatedButton(context, "Tirar Foto", Colors.orange, () {
+                //   Navigator.of(context).pop();
+                //   _tiraFoto(idMarcador);
+                // }),
               ],
             ),
           ),
@@ -462,6 +478,42 @@ class _ColetaState extends State<Coleta> {
         );
       },
     );
+  }
+
+  void _tiraFoto(String nomeMarcadorAtual, String nomeProfundidade) async {
+    final ImagePicker _picker = ImagePicker();
+    final XFile? image = await _picker.pickImage(source: ImageSource.camera);
+
+    if (image != null) {
+      final bytes = await image.readAsBytes();
+      String base64Image = base64Encode(bytes);
+
+      setState(() {
+        // Encontra o marcador pelo nome
+        int indexMarcador = latLngListMarcadores.indexWhere(
+            (marcador) => marcador['marcador_nome'] == nomeMarcadorAtual);
+
+        if (indexMarcador != -1) {
+          latLngListMarcadores[indexMarcador]['foto_de_cada_profundidade'].add({
+            'nome': nomeProfundidade,
+            'foto': 'data:image/png;base64,base64Image',
+            // 'foto': 'data:image/png;base64,$base64Image',
+          });
+          pontosColetados.add({
+            "marcador_nome": nomeMarcadorAtual,
+            "profundidade": nomeProfundidade,
+            "foto": 'fotoBase64',
+          });
+        }
+      });
+      // setState(() {
+      //   pontosColetados.add({
+      //     "marcador_nome": nomeMarcadorAtual,
+      //     "profundidade": nomeProfundidade,
+      //     "foto": 'fotoBase64',
+      //   });
+      // });
+    }
   }
 
   void _showAdicionaProfundidades() {
@@ -624,88 +676,6 @@ class _ColetaState extends State<Coleta> {
     return faIcons[iconName] ?? FontAwesomeIcons.questionCircle; // Ícone padrão
   }
 
-  // void _showProfundidadesParaColeta(String marcadorNome) {
-  //   // Encontra o marcador pelo nome
-  //   var marcador = latLngListMarcadores.firstWhere(
-  //     (m) => m["marcador_nome"] == marcadorNome,
-  //     orElse: () => {},
-  //   );
-  //
-  //   if (marcador.isNotEmpty) {
-  //     showDialog(
-  //       context: context,
-  //       builder: (BuildContext context) {
-  //         return AlertDialog(
-  //           shape: RoundedRectangleBorder(
-  //             borderRadius: BorderRadius.circular(16),
-  //           ),
-  //           titlePadding: EdgeInsets.all(20),
-  //           title: Row(
-  //             mainAxisAlignment: MainAxisAlignment.spaceBetween,
-  //             children: [
-  //               Expanded(
-  //                 child: Text(
-  //                   "Coletar profundidades para ${marcador["marcador_nome"]}",
-  //                   style: FlutterFlowTheme.of(context).bodyMedium.override(
-  //                         fontFamily: 'Outfit',
-  //                         fontSize: 18,
-  //                         fontWeight: FontWeight.bold,
-  //                       ),
-  //                 ),
-  //               ),
-  //               InkWell(
-  //                 onTap: () => Navigator.of(context).pop(),
-  //                 child: Icon(
-  //                   Icons.close,
-  //                   color: FlutterFlowTheme.of(context).secondaryText,
-  //                   size: 36,
-  //                 ),
-  //               ),
-  //             ],
-  //           ),
-  //           content: SingleChildScrollView(
-  //             child: ListBody(
-  //               children: marcador["profundidades"].map<Widget>((profundidade) {
-  //                 bool jaColetada = coletasPorMarcador[marcadorNome]
-  //                         ?.contains(profundidade["nome"]) ??
-  //                     false;
-  //                 return Row(
-  //                   children: [
-  //                     Icon(
-  //                       getFontAwesomeIconByName(profundidade["icone"]),
-  //                       color: HexColor(profundidade["cor"]),
-  //                     ),
-  //                     SizedBox(width: 10),
-  //                     Text(profundidade["nome"]),
-  //                     Spacer(),
-  //                     _buildElevatedButton(
-  //                       context,
-  //                       jaColetada ? "Coletada" : "Coletar",
-  //                       jaColetada ? Color(0xFF9D291C) : Color(0xFF00736D),
-  //                       () {
-  //                         if (jaColetada) {
-  //                           _confirmarRecoleta(
-  //                               context, marcadorNome, profundidade["nome"]);
-  //                         } else {
-  //                           Navigator.of(context).pop();
-  //                           _coletarProfundidade(
-  //                               marcadorNome, profundidade["nome"]);
-  //                         }
-  //                       },
-  //                     ),
-  //                   ],
-  //                 );
-  //               }).toList(),
-  //             ),
-  //           ),
-  //           backgroundColor: FlutterFlowTheme.of(context).secondaryBackground,
-  //           elevation: 5,
-  //         );
-  //       },
-  //     );
-  //   }
-  // }
-
   void _showProfundidadesParaColeta(String marcadorNome) {
     // Encontra o marcador pelo nome
     var marcador = latLngListMarcadores.firstWhere(
@@ -830,45 +800,6 @@ class _ColetaState extends State<Coleta> {
     );
   }
 
-  // void _adicionarNovoPonto() {
-  //   String novoNomeMarcador = _gerarNomeNovoMarcador();
-  //   String latlngString = "-29.915167902652954, -51.19608880066816";
-  //   List<String> latlngParts = latlngString.split(',');
-  //   google_maps.LatLng latlng = google_maps.LatLng(
-  //     double.parse(latlngParts[0].trim()),
-  //     double.parse(latlngParts[1].trim()),
-  //   );
-  //
-  //   Map<String, dynamic> novoPonto = {
-  //     "marcador_nome": novoNomeMarcador,
-  //     "latlng_marcadores": latlngString,
-  //     "profundidades": [
-  //       {"nome": "0-10", "icone": "location_dot", "cor": "#FFC0CB"},
-  //       {"nome": "0-20", "icone": "flag", "cor": "#FF4500"},
-  //       {"nome": "0-25", "icone": "map_pin", "cor": "#0000CD"}
-  //     ],
-  //   };
-  //
-  //   // Add new point to the list
-  //   setState(() {
-  //     latLngListMarcadores.add(novoPonto);
-  //
-  //     // Create and add a new marker for the new point
-  //     var newMarker = google_maps.Marker(
-  //       markerId: google_maps.MarkerId(novoNomeMarcador),
-  //       position: latlng,
-  //       icon: google_maps.BitmapDescriptor.defaultMarkerWithHue(
-  //           google_maps.BitmapDescriptor.hueRed),
-  //       infoWindow: google_maps.InfoWindow(
-  //         title: "PONTO: $novoNomeMarcador",
-  //         snippet: "Novo ponto adicionado",
-  //       ),
-  //     );
-  //
-  //     markers.add(newMarker);
-  //   });
-  // }
-
   void _confirmarRecoleta(
       BuildContext context, String marcadorNome, String profundidadeNome) {
     showDialog(
@@ -888,6 +819,7 @@ class _ColetaState extends State<Coleta> {
               child: Text("Sim"),
               onPressed: () {
                 Navigator.of(context).pop(); // Fecha o diálogo
+                _tiraFoto(marcadorNome, profundidadeNome);
                 _coletarProfundidade(
                     marcadorNome, profundidadeNome); // Realiza a coleta
               },
@@ -897,29 +829,6 @@ class _ColetaState extends State<Coleta> {
       },
     );
   }
-
-  // void _coletarProfundidade(String marcadorNome, String profundidadeNome) {
-  //   setState(() {
-  //     pontosColetados.add({
-  //       "marcador_nome": marcadorNome,
-  //       "profundidade": profundidadeNome,
-  //     });
-  //     coletasPorMarcador.putIfAbsent(marcadorNome, () => {});
-  //     coletasPorMarcador[marcadorNome]!.add(profundidadeNome);
-  //
-  //     // Verifica se todas as profundidades foram coletadas
-  //     var todasProfundidades = latLngListMarcadores
-  //         .firstWhere(
-  //             (m) => m["marcador_nome"] == marcadorNome)["profundidades"]
-  //         .map((p) => p["nome"])
-  //         .toSet();
-  //
-  //     if (coletasPorMarcador[marcadorNome]!.containsAll(todasProfundidades)) {
-  //       // Todas as profundidades coletadas, mude a cor do marcador para verde
-  //       _updateMarkerColor(marcadorNome, true);
-  //     }
-  //   });
-  // }
 
   void _confirmarColeta(
       BuildContext context, String marcadorNome, String profundidadeNome) {
@@ -939,7 +848,24 @@ class _ColetaState extends State<Coleta> {
             TextButton(
               onPressed: () {
                 Navigator.of(context).pop();
-                _coletarProfundidade(marcadorNome, profundidadeNome);
+                if (podeTirarFoto) {
+                  if (vezAtualDoIntervaloDeColeta ==
+                          intervaloDeColetaParaProximaFoto ||
+                      vezAtualDoIntervaloDeColeta == 0) {
+                    _tiraFoto(marcadorNome, profundidadeNome);
+                    setState(() {
+                      vezAtualDoIntervaloDeColeta = 1;
+                    });
+                    _coletarProfundidade(marcadorNome, profundidadeNome);
+                  } else {
+                    setState(() {
+                      vezAtualDoIntervaloDeColeta += 1;
+                    });
+                    _coletarProfundidade(marcadorNome, profundidadeNome);
+                  }
+                } else {
+                  _coletarProfundidade(marcadorNome, profundidadeNome);
+                }
               },
               child: Text('Sim'),
             ),
@@ -1112,38 +1038,45 @@ class _ColetaState extends State<Coleta> {
     focoNoMarcador = false;
   }
 
-  Widget _exibirDados() {
-    return Column(
-      children: [
-        // Text(
-        //   "Pontos: ${jsonEncode(latLngListMarcadores)}",
-        //   style: TextStyle(
-        //     color: Colors.yellow, // Define a cor vermelha
-        //     fontSize: 12.0, // Define o tamanho da fonte como 8
-        //   ),
-        // ),
-        Text(
-          "Pontos Movidos: ${jsonEncode(pontosMovidos)}",
-          style: TextStyle(
-            color: Colors.yellow, // Define a cor vermelha
-            fontSize: 12.0, // Define o tamanho da fonte como 8
+  void _exibirDados() {
+    showDialog(
+      context: context,
+      builder: (BuildContext context) {
+        return AlertDialog(
+          scrollable: true,
+          title: Text('Dados da Coleta'),
+          content: SingleChildScrollView(
+            child: ListBody(
+              children: [
+                Text(
+                  "Pontos: ${jsonEncode(latLngListMarcadores)}",
+                  style: TextStyle(color: Colors.black, fontSize: 12.0),
+                ),
+                Text(
+                  "Pontos Movidos: ${jsonEncode(pontosMovidos)}",
+                  style: TextStyle(color: Colors.black, fontSize: 12.0),
+                ),
+                Text(
+                  "Pontos Coletados: ${jsonEncode(pontosColetados)}",
+                  style: TextStyle(color: Colors.black, fontSize: 12.0),
+                ),
+                Text(
+                  "Pontos Excluídos: ${jsonEncode(pontosExcluidos)}",
+                  style: TextStyle(color: Colors.black, fontSize: 12.0),
+                ),
+              ],
+            ),
           ),
-        ),
-        Text(
-          "Pontos Coletados: ${jsonEncode(pontosColetados)}",
-          style: TextStyle(
-            color: Colors.yellow, // Define a cor vermelha
-            fontSize: 12.0, // Define o tamanho da fonte como 8
-          ),
-        ),
-        Text(
-          "Pontos Excluídos: ${jsonEncode(pontosExcluidos)}",
-          style: TextStyle(
-            color: Colors.yellow, // Define a cor vermelha
-            fontSize: 12.0, // Define o tamanho da fonte como 8
-          ),
-        ),
-      ],
+          actions: <Widget>[
+            TextButton(
+              child: Text('Fechar'),
+              onPressed: () {
+                Navigator.of(context).pop();
+              },
+            ),
+          ],
+        );
+      },
     );
   }
 
@@ -1195,7 +1128,20 @@ class _ColetaState extends State<Coleta> {
           bottom: 10,
           left: 10,
           right: 10,
-          child: _exibirDados(),
+          child: ElevatedButton(
+            onPressed: _exibirDados,
+            style: ElevatedButton.styleFrom(
+              shape: CircleBorder(),
+              backgroundColor: Color(0xFF00736D),
+            ),
+            child: Padding(
+                padding: const EdgeInsets.all(8.0),
+                child: Icon(
+                  Icons.info,
+                  size: 25.0,
+                  color: Colors.white,
+                )),
+          ),
         ),
       ],
     );

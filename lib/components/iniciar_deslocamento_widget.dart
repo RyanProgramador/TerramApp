@@ -840,7 +840,7 @@ class _IniciarDeslocamentoWidgetState extends State<IniciarDeslocamentoWidget> {
                                                   (_model.porfavorFuncioneSemRota
                                                           ?.jsonBody ??
                                                       ''),
-                                                ).toString(),
+                                                ),
                                                 ParamType.String,
                                               ),
                                               'comRota': serializeParam(
@@ -919,7 +919,7 @@ class _IniciarDeslocamentoWidgetState extends State<IniciarDeslocamentoWidget> {
                                                 .criptografadapolyline(
                                               (_model.rotaInvertida?.jsonBody ??
                                                   ''),
-                                            ).toString(),
+                                            ),
                                           );
                                           _model.porfavorFuncioneTecAteFaz =
                                               await ApiRotasPolylinesCall.call(
@@ -993,7 +993,7 @@ class _IniciarDeslocamentoWidgetState extends State<IniciarDeslocamentoWidget> {
                                                   (_model.porfavorFuncioneTecAteFaz
                                                           ?.jsonBody ??
                                                       ''),
-                                                ).toString(),
+                                                ),
                                                 ParamType.String,
                                               ),
                                               'comRota': serializeParam(

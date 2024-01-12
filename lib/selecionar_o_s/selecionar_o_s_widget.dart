@@ -1491,7 +1491,7 @@ class _SelecionarOSWidgetState extends State<SelecionarOSWidget>
                                                                             ApiRotasPolylinesCall.criptografadapolyline(
                                                                           (_model.polyline1?.jsonBody ??
                                                                               ''),
-                                                                        ).toString(),
+                                                                        ),
                                                                         fazid: valueOrDefault<
                                                                             String>(
                                                                           functions.ligacaoEntreListas(
@@ -2259,7 +2259,7 @@ class _SelecionarOSWidgetState extends State<SelecionarOSWidget>
                                                                               .criptografadapolyline(
                                                                             (_model.polyline2?.jsonBody ??
                                                                                 ''),
-                                                                          ).toString(),
+                                                                          ),
                                                                           '.',
                                                                         ),
                                                                         fazid: functions.ligaoDeNome(
@@ -2572,7 +2572,7 @@ class _SelecionarOSWidgetState extends State<SelecionarOSWidget>
                                                                             .criptografadapolyline(
                                                                           (_model.polyline2?.jsonBody ??
                                                                               ''),
-                                                                        ).toString(),
+                                                                        ),
                                                                         '.',
                                                                       ),
                                                                       fazid: functions.ligaoDeNome(

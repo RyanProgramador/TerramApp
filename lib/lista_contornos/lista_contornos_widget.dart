@@ -703,14 +703,13 @@ class _ListaContornosWidgetState extends State<ListaContornosWidget> {
                                                   .toList(),
                                               widget.oservID) !=
                                           null &&
-                                      functions
-                                          .sortListJson(
+                                      (functions.sortListJson(
                                               'oserv_id',
                                               true,
                                               FFAppState()
                                                   .grupoContornoFazendasPosSincronizado
                                                   .toList(),
-                                              widget.oservID)!
+                                              widget.oservID))!
                                           .isNotEmpty))
                                 Container(
                                   decoration: BoxDecoration(),

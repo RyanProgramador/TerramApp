@@ -220,10 +220,8 @@ class _ConfiguracoesWidgetState extends State<ConfiguracoesWidget> {
                                         title: Text(SincronizarGroup
                                             .trSincronizaCelularComBDCall
                                             .retornoSincComCelular(
-                                              (_model.apiResultxxd?.jsonBody ??
-                                                  ''),
-                                            )
-                                            .toString()!),
+                                          (_model.apiResultxxd?.jsonBody ?? ''),
+                                        )!),
                                         actions: [
                                           TextButton(
                                             onPressed: () => Navigator.pop(
