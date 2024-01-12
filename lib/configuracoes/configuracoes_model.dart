@@ -9,9 +9,18 @@ import 'configuracoes_widget.dart' show ConfiguracoesWidget;
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:percent_indicator/percent_indicator.dart';
 import 'package:provider/provider.dart';
 
 class ConfiguracoesModel extends FlutterFlowModel<ConfiguracoesWidget> {
+  ///  Local state fields for this page.
+
+  bool estaCarregando = false;
+
+  double? porcentagemDeCarregamento = 0;
+
+  String porcentagemString = '0%';
+
   ///  State fields for stateful widgets in this page.
 
   // Stores action output result for [Backend Call - API (TrSincronizaCelularComBD)] action in materialList_Item_2 widget.

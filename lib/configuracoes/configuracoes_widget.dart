@@ -8,6 +8,7 @@ import '/flutter_flow/custom_functions.dart' as functions;
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:percent_indicator/percent_indicator.dart';
 import 'package:provider/provider.dart';
 import 'configuracoes_model.dart';
 export 'configuracoes_model.dart';
@@ -99,6 +100,27 @@ class _ConfiguracoesWidgetState extends State<ConfiguracoesWidget> {
                                 ),
                       ),
                     ),
+                    if (_model.estaCarregando)
+                      LinearPercentIndicator(
+                        percent: _model.porcentagemDeCarregamento!,
+                        lineHeight: 30.0,
+                        animation: true,
+                        animateFromLastPercent: true,
+                        progressColor: FlutterFlowTheme.of(context).primary,
+                        backgroundColor:
+                            FlutterFlowTheme.of(context).primaryBtnText,
+                        center: Text(
+                          _model.porcentagemString,
+                          style: FlutterFlowTheme.of(context)
+                              .headlineSmall
+                              .override(
+                                fontFamily: 'Outfit',
+                                fontSize: 16.0,
+                                fontWeight: FontWeight.bold,
+                              ),
+                        ),
+                        padding: EdgeInsets.zero,
+                      ),
                     Padding(
                       padding:
                           EdgeInsetsDirectional.fromSTEB(8.0, 0.0, 0.0, 0.0),
@@ -182,6 +204,11 @@ class _ConfiguracoesWidgetState extends State<ConfiguracoesWidget> {
                                   },
                                 ).then((value) => safeSetState(() {}));
 
+                                setState(() {
+                                  _model.estaCarregando = true;
+                                  _model.porcentagemDeCarregamento = 0.2;
+                                  _model.porcentagemString = '20%';
+                                });
                                 _model.apiResultxxd = await SincronizarGroup
                                     .trSincronizaCelularComBDCall
                                     .call(
@@ -193,6 +220,10 @@ class _ConfiguracoesWidgetState extends State<ConfiguracoesWidget> {
                                       FFAppState().trDeslocGeo2.toList()),
                                 );
                                 _shouldSetState = true;
+                                setState(() {
+                                  _model.porcentagemDeCarregamento = 0.4;
+                                  _model.porcentagemString = '40%';
+                                });
                                 _model.trSincTalhao = await SincronizarGroup
                                     .trSincronizaTalhaoContornoCall
                                     .call(
@@ -204,6 +235,10 @@ class _ConfiguracoesWidgetState extends State<ConfiguracoesWidget> {
                                   urlapicall: FFAppState().urlapicall,
                                 );
                                 _shouldSetState = true;
+                                setState(() {
+                                  _model.porcentagemDeCarregamento = 0.6;
+                                  _model.porcentagemString = '62%';
+                                });
                                 if (SincronizarGroup
                                         .trSincronizaCelularComBDCall
                                         .statusSincComCelular(
@@ -233,6 +268,10 @@ class _ConfiguracoesWidgetState extends State<ConfiguracoesWidget> {
                                     },
                                   );
                                   setState(() {
+                                    _model.porcentagemDeCarregamento = 0.7;
+                                    _model.porcentagemString = '72%';
+                                  });
+                                  setState(() {
                                     FFAppState()
                                             .grupoContornoFazendasPosSincronizado =
                                         functions
@@ -258,6 +297,11 @@ class _ConfiguracoesWidgetState extends State<ConfiguracoesWidget> {
                                             .toList()
                                             .cast<dynamic>();
                                   });
+                                  setState(() {
+                                    _model.estaCarregando = true;
+                                    _model.porcentagemDeCarregamento = 0.78;
+                                    _model.porcentagemString = '78%';
+                                  });
                                   FFAppState().update(() {
                                     FFAppState()
                                         .trOsDeslocamentosJsonFinalizados = [];
@@ -266,7 +310,18 @@ class _ConfiguracoesWidgetState extends State<ConfiguracoesWidget> {
                                     FFAppState().contornoFazenda = [];
                                     FFAppState().grupoContornoFazendas = [];
                                   });
+                                  setState(() {
+                                    _model.porcentagemDeCarregamento = 0.82;
+                                    _model.porcentagemString = '82%';
+                                  });
                                   Navigator.pop(context);
+                                  setState(() {
+                                    _model.porcentagemDeCarregamento = 0.99;
+                                    _model.porcentagemString = '99%';
+                                  });
+                                  setState(() {
+                                    _model.estaCarregando = false;
+                                  });
                                 } else {
                                   await showDialog(
                                     context: context,
@@ -286,6 +341,9 @@ class _ConfiguracoesWidgetState extends State<ConfiguracoesWidget> {
                                     },
                                   );
                                   Navigator.pop(context);
+                                  setState(() {
+                                    _model.estaCarregando = false;
+                                  });
                                   if (_shouldSetState) setState(() {});
                                   return;
                                 }

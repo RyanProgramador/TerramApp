@@ -523,6 +523,11 @@ class _ColetaState extends State<Coleta> {
             "profundidade": nomeProfundidade,
             "foto": 'fotoBase64',
           });
+          FFAppState().PontosColetados.add(jsonEncode({
+                "marcador_nome": nomeMarcadorAtual,
+                "profundidade": nomeProfundidade,
+                "foto": '$base64Image',
+              }));
         }
       });
       // setState(() {
@@ -900,6 +905,11 @@ class _ColetaState extends State<Coleta> {
         "marcador_nome": marcadorNome,
         "profundidade": profundidadeNome,
       });
+
+      FFAppState().PontosColetados.add(jsonEncode({
+            "marcador_nome": marcadorNome,
+            "profundidade": profundidadeNome,
+          }));
       coletasPorMarcador.putIfAbsent(marcadorNome, () => {});
       coletasPorMarcador[marcadorNome]!.add(profundidadeNome);
 
@@ -1047,6 +1057,10 @@ class _ColetaState extends State<Coleta> {
       "marcador_nome": marcadorNome,
       "latlng": "${latLng?.latitude}, ${latLng?.longitude}"
     });
+    FFAppState().PontosExcluidos.add(jsonEncode({
+          "marcador_nome": marcadorNome,
+          "latlng": "${latLng?.latitude}, ${latLng?.longitude}"
+        }));
     setState(() {
       markers.removeWhere((m) => m.markerId.value == marcadorNome);
       markerPositions.remove(marcadorNome);
