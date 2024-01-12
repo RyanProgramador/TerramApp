@@ -102,7 +102,10 @@ class _ConfiguracoesWidgetState extends State<ConfiguracoesWidget> {
                     ),
                     if (_model.estaCarregando)
                       LinearPercentIndicator(
-                        percent: _model.porcentagemDeCarregamento!,
+                        percent: valueOrDefault<double>(
+                          _model.porcentagemDeCarregamento,
+                          0.0,
+                        ),
                         lineHeight: 30.0,
                         animation: true,
                         animateFromLastPercent: true,
@@ -110,7 +113,10 @@ class _ConfiguracoesWidgetState extends State<ConfiguracoesWidget> {
                         backgroundColor:
                             FlutterFlowTheme.of(context).primaryBtnText,
                         center: Text(
-                          _model.porcentagemString,
+                          valueOrDefault<String>(
+                            _model.porcentagemString,
+                            '0%',
+                          ),
                           style: FlutterFlowTheme.of(context)
                               .headlineSmall
                               .override(
