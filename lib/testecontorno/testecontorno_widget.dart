@@ -291,32 +291,35 @@ class _TestecontornoWidgetState extends State<TestecontornoWidget> {
                               ],
                             ),
                           ),
-                          Row(
-                            mainAxisSize: MainAxisSize.max,
-                            children: [
-                              Builder(
-                                builder: (context) {
-                                  final trssfd = FFAppState()
-                                      .listaDeLocaisDeAreasParaColeta
-                                      .map((e) => e)
-                                      .toList();
-                                  return Column(
-                                    mainAxisSize: MainAxisSize.max,
-                                    crossAxisAlignment:
-                                        CrossAxisAlignment.start,
-                                    children: List.generate(trssfd.length,
-                                        (trssfdIndex) {
-                                      final trssfdItem = trssfd[trssfdIndex];
-                                      return Text(
-                                        trssfdItem,
-                                        style: FlutterFlowTheme.of(context)
-                                            .bodyMedium,
-                                      );
-                                    }),
-                                  );
-                                },
-                              ),
-                            ],
+                          SingleChildScrollView(
+                            scrollDirection: Axis.horizontal,
+                            child: Row(
+                              mainAxisSize: MainAxisSize.max,
+                              children: [
+                                Builder(
+                                  builder: (context) {
+                                    final trssfd = FFAppState()
+                                        .listaDeLocaisDeAreasParaColeta
+                                        .map((e) => e)
+                                        .toList();
+                                    return Column(
+                                      mainAxisSize: MainAxisSize.max,
+                                      crossAxisAlignment:
+                                          CrossAxisAlignment.start,
+                                      children: List.generate(trssfd.length,
+                                          (trssfdIndex) {
+                                        final trssfdItem = trssfd[trssfdIndex];
+                                        return Text(
+                                          trssfdItem,
+                                          style: FlutterFlowTheme.of(context)
+                                              .bodyMedium,
+                                        );
+                                      }),
+                                    );
+                                  },
+                                ),
+                              ],
+                            ),
                           ),
                         ],
                       ),
