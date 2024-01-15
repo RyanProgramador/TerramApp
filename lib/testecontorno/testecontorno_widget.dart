@@ -177,6 +177,7 @@ class _TestecontornoWidgetState extends State<TestecontornoWidget> {
                               FFAppState().PontosMovidos = [];
                               FFAppState().PontosExcluidos = [];
                               FFAppState().PontosColetados = [];
+                              FFAppState().listaDeLocaisDeAreasParaColeta = [];
                             });
                           },
                           child: FaIcon(
