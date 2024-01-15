@@ -26,11 +26,19 @@ import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 class Coleta extends StatefulWidget {
   final double? width;
   final double? height;
+  final List<String>? listaPontosComProfundidadeParaMedicao;
+  final int? intervaloDeColetaParaProximaFoto;
+  final List<String>? possiveisProfundidades;
+  final List<String>? listaDeLocaisDeContornoDeArea;
 
   const Coleta({
     Key? key,
     this.width,
     this.height,
+    this.listaPontosComProfundidadeParaMedicao,
+    this.intervaloDeColetaParaProximaFoto,
+    this.possiveisProfundidades,
+    this.listaDeLocaisDeContornoDeArea,
   }) : super(key: key);
   final String customIconUrl =
       'https://cdn-icons-png.flaticon.com/128/3253/3253113.png';
@@ -458,13 +466,13 @@ class _ColetaState extends State<Coleta> {
                   Navigator.of(context).pop();
                   _ontapInacessivel(idMarcador);
                 }),
-                SizedBox(height: 10),
-                _buildElevatedButton(context, "Criar Ponto", Colors.blue, () {
-                  Navigator.of(context).pop();
-                  // _adicionarNovoPonto();
-                  _showAdicionaProfundidades();
-                  _showTutorialModal();
-                }),
+                // SizedBox(height: 10),
+                // _buildElevatedButton(context, "Criar Ponto", Colors.blue, () {
+                //   Navigator.of(context).pop();
+                //   // _adicionarNovoPonto();
+                //   _showAdicionaProfundidades();
+                //   _showTutorialModal();
+                // }),
                 // SizedBox(height: 10),
                 // _buildElevatedButton(context, "Tirar Foto", Colors.orange, () {
                 //   Navigator.of(context).pop();
@@ -905,11 +913,6 @@ class _ColetaState extends State<Coleta> {
         "marcador_nome": marcadorNome,
         "profundidade": profundidadeNome,
       });
-
-      FFAppState().PontosColetados.add(jsonEncode({
-            "marcador_nome": marcadorNome,
-            "profundidade": profundidadeNome,
-          }));
       coletasPorMarcador.putIfAbsent(marcadorNome, () => {});
       coletasPorMarcador[marcadorNome]!.add(profundidadeNome);
 
@@ -1011,6 +1014,14 @@ class _ColetaState extends State<Coleta> {
                   Navigator.of(context).pop();
                   _removeMarker(marcadorNome);
                 }),
+                SizedBox(height: 10),
+                _buildElevatedButton(
+                    context, "Criar novo ponto", Color(0xFF9D291C), () {
+                  Navigator.of(context).pop();
+                  // _adicionarNovoPonto();
+                  _showAdicionaProfundidades();
+                  _showTutorialModal();
+                }),
               ],
             ),
           ),
@@ -1057,10 +1068,6 @@ class _ColetaState extends State<Coleta> {
       "marcador_nome": marcadorNome,
       "latlng": "${latLng?.latitude}, ${latLng?.longitude}"
     });
-    FFAppState().PontosExcluidos.add(jsonEncode({
-          "marcador_nome": marcadorNome,
-          "latlng": "${latLng?.latitude}, ${latLng?.longitude}"
-        }));
     setState(() {
       markers.removeWhere((m) => m.markerId.value == marcadorNome);
       markerPositions.remove(marcadorNome);
