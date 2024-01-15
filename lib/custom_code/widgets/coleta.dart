@@ -61,7 +61,7 @@ class _ColetaState extends State<Coleta> {
   //seleciona profundidade
 
   Set<String> profundidadesSelecionadas = {};
-  final List<String> possiveisProfundidades = ['0-10', '10-20', '20-30'];
+  List<String> possiveisProfundidades = ['0-10', '10-20', '20-30'];
 
   // Listas para armazenar os dados
   List<Map<String, String>> pontosMovidos = [];
@@ -153,6 +153,22 @@ class _ColetaState extends State<Coleta> {
   @override
   void initState() {
     super.initState();
+
+    intervaloDeColetaParaProximaFoto =
+        widget.intervaloDeColetaParaProximaFoto ??
+            intervaloDeColetaParaProximaFoto;
+    listaDeLocais = widget.listaDeLocaisDeContornoDeArea ?? listaDeLocais;
+
+    latLngListMarcadores = widget.listaPontosComProfundidadeParaMedicao
+            ?.cast<Map<String, dynamic>>() ??
+        latLngListMarcadores;
+
+// Atribuição condicional, garantindo que o parâmetro é uma lista de strings
+    if (widget.possiveisProfundidades != null) {
+      possiveisProfundidades =
+          List<String>.from(widget.possiveisProfundidades!);
+    }
+
     _initializePolygons();
     _criaMarcadores();
     _getCurrentLocation();
