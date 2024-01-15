@@ -1651,7 +1651,10 @@ class _SelecionarOSWidgetState extends State<SelecionarOSWidget>
                                                                           '#${getJsonField(
                                                                             trOsServicosItem,
                                                                             r'''$.oserv_id_os''',
-                                                                          ).toString()}',
+                                                                          ).toString()}${functions.ligaoDeNome(FFAppState().trServicos.toList(), 'serv_id', 'serv_nome', getJsonField(
+                                                                                trOsServicosItem,
+                                                                                r'''$.oserv_id_serv''',
+                                                                              ).toString())}',
                                                                           style: FlutterFlowTheme.of(context)
                                                                               .bodyLarge
                                                                               .override(
