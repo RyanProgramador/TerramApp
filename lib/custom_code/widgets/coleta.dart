@@ -30,7 +30,7 @@ class Coleta extends StatefulWidget {
   final int? intervaloDeColetaParaProximaFoto;
   final List<String>? possiveisProfundidades;
   final List<String>? listaDeLocaisDeContornoDeArea;
-  final List<dynamic>? pontosJaColetados;
+  final List<String>? pontosJaColetados;
 
   const Coleta({
     Key? key,
@@ -67,7 +67,7 @@ class _ColetaState extends State<Coleta> {
 
   // Listas para armazenar os dados
   List<Map<String, String>> pontosMovidos = [];
-  List<Map<String, dynamic>> pontosColetados = [];
+  List<Map<String, String>> pontosColetados = [];
   List<Map<String, String>> pontosExcluidos = [];
 
   Map<String, Set<String>> coletasPorMarcador = {};
@@ -156,7 +156,7 @@ class _ColetaState extends State<Coleta> {
     if (widget.pontosJaColetados != null &&
         widget.pontosJaColetados!.isNotEmpty) {
       for (var ponto in widget.pontosJaColetados!) {
-        if (ponto is Map<String, dynamic>) {
+        if (ponto is Map<String, String>) {
           pontosColetados.add(ponto);
         } else {
           // Se o ponto não for um Map<String, dynamic>, você pode decidir como lidar (por exemplo, ignorar ou logar um erro)

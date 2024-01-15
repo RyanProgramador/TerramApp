@@ -86,7 +86,10 @@ class _MedicaoColetaWidgetState extends State<MedicaoColetaWidget> {
                               FFAppState().possiveisProfuncidadesDeColeta,
                           listaDeLocaisDeContornoDeArea:
                               FFAppState().latLngListaMarcadoresArea,
-                          pontosJaColetados: FFAppState().PontosColetados,
+                          pontosJaColetados: FFAppState()
+                              .PontosColetados
+                              .map((e) => e.toString())
+                              .toList(),
                         ),
                       ),
                     ),
@@ -148,10 +151,7 @@ class _MedicaoColetaWidgetState extends State<MedicaoColetaWidget> {
                                   ),
                             ),
                             Text(
-                              valueOrDefault<String>(
-                                widget.fazNome,
-                                'Coleta',
-                              ),
+                              FFAppState().PontosColetados.first.toString(),
                               style: FlutterFlowTheme.of(context)
                                   .bodyMedium
                                   .override(
