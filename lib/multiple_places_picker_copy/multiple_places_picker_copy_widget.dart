@@ -1048,20 +1048,9 @@ class _MultiplePlacesPickerCopyWidgetState
                                           ),
                                           child: Builder(
                                             builder: (context) {
-                                              final teste = functions
-                                                      .acessarJsonListaDeterminadoValor(
-                                                          functions
-                                                              .sortListJson(
-                                                                  'contorno_grupo',
-                                                                  false,
-                                                                  FFAppState()
-                                                                      .contornoFazenda
-                                                                      .toList(),
-                                                                  '6')
-                                                              ?.toList(),
-                                                          'latlng')
-                                                      ?.toList() ??
-                                                  [];
+                                              final teste = FFAppState()
+                                                  .listaDeLocaisDeAreasParaColeta
+                                                  .toList();
                                               return SingleChildScrollView(
                                                 child: Column(
                                                   mainAxisSize:

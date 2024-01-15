@@ -223,6 +223,7 @@ class _TestecontornoWidgetState extends State<TestecontornoWidget> {
                       ),
                       child: Column(
                         mainAxisSize: MainAxisSize.max,
+                        crossAxisAlignment: CrossAxisAlignment.start,
                         children: [
                           SingleChildScrollView(
                             scrollDirection: Axis.horizontal,
@@ -297,9 +298,12 @@ class _TestecontornoWidgetState extends State<TestecontornoWidget> {
                                 builder: (context) {
                                   final trssfd = FFAppState()
                                       .listaDeLocaisDeAreasParaColeta
+                                      .map((e) => e)
                                       .toList();
                                   return Column(
                                     mainAxisSize: MainAxisSize.max,
+                                    crossAxisAlignment:
+                                        CrossAxisAlignment.start,
                                     children: List.generate(trssfd.length,
                                         (trssfdIndex) {
                                       final trssfdItem = trssfd[trssfdIndex];
