@@ -67,7 +67,7 @@ class _ColetaState extends State<Coleta> {
 
   // Listas para armazenar os dados
   List<Map<String, String>> pontosMovidos = [];
-  List<Map<String, String>> pontosColetados = [];
+  List<Map<String, dynamic>> pontosColetados = [];
   List<Map<String, String>> pontosExcluidos = [];
 
   Map<String, Set<String>> coletasPorMarcador = {};
@@ -151,6 +151,19 @@ class _ColetaState extends State<Coleta> {
   @override
   void initState() {
     super.initState();
+
+    // Verifica se a lista 'pontosJaColetados' contém dados e os adiciona à lista 'pontosColetados'
+    if (widget.pontosJaColetados != null &&
+        widget.pontosJaColetados!.isNotEmpty) {
+      for (var ponto in widget.pontosJaColetados!) {
+        if (ponto is Map<String, dynamic>) {
+          pontosColetados.add(ponto);
+        } else {
+          // Se o ponto não for um Map<String, dynamic>, você pode decidir como lidar (por exemplo, ignorar ou logar um erro)
+          print('Ponto inválido recebido: $ponto');
+        }
+      }
+    }
 
     intervaloDeColetaParaProximaFoto =
         widget.intervaloDeColetaParaProximaFoto ??
