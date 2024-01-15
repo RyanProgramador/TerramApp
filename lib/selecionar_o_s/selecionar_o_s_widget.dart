@@ -1600,6 +1600,39 @@ class _SelecionarOSWidgetState extends State<SelecionarOSWidget>
                                                                                   r'''$.oserv_id_serv''',
                                                                                 ).toString()) ==
                                                                             'Contorno') {
+                                                                          return true;
+                                                                        } else if (functions.ligaoDeNome(
+                                                                                FFAppState().trServicos.toList(),
+                                                                                'serv_id',
+                                                                                'serv_nome',
+                                                                                getJsonField(
+                                                                                  trOsServicosItem,
+                                                                                  r'''$.oserv_id_serv''',
+                                                                                ).toString()) ==
+                                                                            'Atualização de contorno') {
+                                                                          return false;
+                                                                        } else {
+                                                                          return false;
+                                                                        }
+                                                                      }())
+                                                                        FaIcon(
+                                                                          FontAwesomeIcons
+                                                                              .motorcycle,
+                                                                          color:
+                                                                              FlutterFlowTheme.of(context).secondaryText,
+                                                                          size:
+                                                                              24.0,
+                                                                        ),
+                                                                      if (() {
+                                                                        if (functions.ligaoDeNome(
+                                                                                FFAppState().trServicos.toList(),
+                                                                                'serv_id',
+                                                                                'serv_nome',
+                                                                                getJsonField(
+                                                                                  trOsServicosItem,
+                                                                                  r'''$.oserv_id_serv''',
+                                                                                ).toString()) ==
+                                                                            'Contorno') {
                                                                           return false;
                                                                         } else if (functions.ligaoDeNome(
                                                                                 FFAppState().trServicos.toList(),
@@ -1651,7 +1684,7 @@ class _SelecionarOSWidgetState extends State<SelecionarOSWidget>
                                                                           '#${getJsonField(
                                                                             trOsServicosItem,
                                                                             r'''$.oserv_id_os''',
-                                                                          ).toString()}${functions.ligaoDeNome(FFAppState().trServicos.toList(), 'serv_id', 'serv_nome', getJsonField(
+                                                                          ).toString()}   ${functions.ligaoDeNome(FFAppState().trServicos.toList(), 'serv_id', 'serv_nome', getJsonField(
                                                                                 trOsServicosItem,
                                                                                 r'''$.oserv_id_serv''',
                                                                               ).toString())}',

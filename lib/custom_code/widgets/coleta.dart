@@ -1218,7 +1218,7 @@ class _ColetaState extends State<Coleta> {
           ),
         ),
         Positioned(
-          top: 62,
+          top: 202,
           right: 16,
           child: ElevatedButton(
             onPressed: mudaFoco,

@@ -164,6 +164,13 @@ GoRouter createRouter(AppStateNotifier appStateNotifier) => GoRouter(
               name: 'blankRedirecona',
               path: 'blankRedirecona',
               builder: (context, params) => BlankRedireconaWidget(),
+            ),
+            FFRoute(
+              name: 'MedicaoColeta',
+              path: 'medicaoColeta',
+              builder: (context, params) => MedicaoColetaWidget(
+                fazNome: params.getParam('fazNome', ParamType.String),
+              ),
             )
           ].map((r) => r.toRoute(appStateNotifier)).toList(),
         ),

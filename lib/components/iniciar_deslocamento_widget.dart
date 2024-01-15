@@ -1362,6 +1362,54 @@ class _IniciarDeslocamentoWidgetState extends State<IniciarDeslocamentoWidget> {
                                       borderRadius: BorderRadius.circular(50.0),
                                     ),
                                   ),
+                                if (widget.deslocamentoAtualFinzalizado! &&
+                                    (widget.etapade == 'Coleta'))
+                                  FFButtonWidget(
+                                    onPressed: () async {
+                                      context.pushNamed(
+                                        'MedicaoColeta',
+                                        queryParameters: {
+                                          'fazNome': serializeParam(
+                                            widget.fazendaNome,
+                                            ParamType.String,
+                                          ),
+                                        }.withoutNulls,
+                                      );
+                                    },
+                                    text:
+                                        widget.deslocamentoAtualFinzalizado! &&
+                                                (widget.etapade == 'Coleta')
+                                            ? 'Coletar'
+                                            : 'Ops!',
+                                    icon: FaIcon(
+                                      FontAwesomeIcons.vials,
+                                      size: 18.0,
+                                    ),
+                                    options: FFButtonOptions(
+                                      width: 160.0,
+                                      height: 52.0,
+                                      padding: EdgeInsetsDirectional.fromSTEB(
+                                          17.0, 0.0, 17.0, 0.0),
+                                      iconPadding:
+                                          EdgeInsetsDirectional.fromSTEB(
+                                              0.0, 0.0, 0.0, 0.0),
+                                      color:
+                                          FlutterFlowTheme.of(context).primary,
+                                      textStyle: FlutterFlowTheme.of(context)
+                                          .bodyLarge
+                                          .override(
+                                            fontFamily: 'Readex Pro',
+                                            color: FlutterFlowTheme.of(context)
+                                                .alternate,
+                                          ),
+                                      elevation: 0.0,
+                                      borderSide: BorderSide(
+                                        color: Colors.transparent,
+                                        width: 1.0,
+                                      ),
+                                      borderRadius: BorderRadius.circular(50.0),
+                                    ),
+                                  ),
                                 if (!widget.deslocamentoAtualFinzalizado!)
                                   Opacity(
                                     opacity: 0.0,
