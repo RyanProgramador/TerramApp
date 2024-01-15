@@ -332,7 +332,7 @@ class _ColetaState extends State<Coleta> {
         now.difference(lastTapTimestamps[markerIdValue]!).inMilliseconds <
             1800) {
       // Check if the distance is greater than 30 meters
-      if (distance > 900) {
+      if (distance > 3100) {
         //metros de distancia para coletar
         // Show alert
         _showDistanceAlert();
@@ -668,6 +668,9 @@ class _ColetaState extends State<Coleta> {
 
     setState(() {
       latLngListMarcadores.add(novoPonto);
+      //converter para entrar no ffappstate
+      String pontoSerializado = json.encode(novoPonto);
+      FFAppState().listaDeLocaisDeAreasParaColeta.add(pontoSerializado);
       markerPositions[novoNomeMarcador] = position; // Adicione esta linha
 
       String nomesProfundidades = novoPonto["profundidades"]!

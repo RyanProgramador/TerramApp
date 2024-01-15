@@ -221,70 +221,100 @@ class _TestecontornoWidgetState extends State<TestecontornoWidget> {
                       decoration: BoxDecoration(
                         color: FlutterFlowTheme.of(context).secondaryBackground,
                       ),
-                      child: SingleChildScrollView(
-                        scrollDirection: Axis.horizontal,
-                        child: Row(
-                          mainAxisSize: MainAxisSize.max,
-                          mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                          children: [
-                            Builder(
-                              builder: (context) {
-                                final movidos =
-                                    FFAppState().PontosMovidos.toList();
-                                return Column(
-                                  mainAxisSize: MainAxisSize.max,
-                                  children: List.generate(movidos.length,
-                                      (movidosIndex) {
-                                    final movidosItem = movidos[movidosIndex];
-                                    return Text(
-                                      movidosItem.toString(),
-                                      style: FlutterFlowTheme.of(context)
-                                          .bodyMedium,
+                      child: Column(
+                        mainAxisSize: MainAxisSize.max,
+                        children: [
+                          SingleChildScrollView(
+                            scrollDirection: Axis.horizontal,
+                            child: Row(
+                              mainAxisSize: MainAxisSize.max,
+                              mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                              children: [
+                                Builder(
+                                  builder: (context) {
+                                    final movidos =
+                                        FFAppState().PontosMovidos.toList();
+                                    return Column(
+                                      mainAxisSize: MainAxisSize.max,
+                                      children: List.generate(movidos.length,
+                                          (movidosIndex) {
+                                        final movidosItem =
+                                            movidos[movidosIndex];
+                                        return Text(
+                                          movidosItem.toString(),
+                                          style: FlutterFlowTheme.of(context)
+                                              .bodyMedium,
+                                        );
+                                      }),
                                     );
-                                  }),
-                                );
-                              },
-                            ),
-                            Builder(
-                              builder: (context) {
-                                final coletados =
-                                    FFAppState().PontosColetados.toList();
-                                return Column(
-                                  mainAxisSize: MainAxisSize.max,
-                                  children: List.generate(coletados.length,
-                                      (coletadosIndex) {
-                                    final coletadosItem =
-                                        coletados[coletadosIndex];
-                                    return Text(
-                                      coletadosItem.toString(),
-                                      style: FlutterFlowTheme.of(context)
-                                          .bodyMedium,
+                                  },
+                                ),
+                                Builder(
+                                  builder: (context) {
+                                    final coletados =
+                                        FFAppState().PontosColetados.toList();
+                                    return Column(
+                                      mainAxisSize: MainAxisSize.max,
+                                      children: List.generate(coletados.length,
+                                          (coletadosIndex) {
+                                        final coletadosItem =
+                                            coletados[coletadosIndex];
+                                        return Text(
+                                          coletadosItem.toString(),
+                                          style: FlutterFlowTheme.of(context)
+                                              .bodyMedium,
+                                        );
+                                      }),
                                     );
-                                  }),
-                                );
-                              },
-                            ),
-                            Builder(
-                              builder: (context) {
-                                final excluidos =
-                                    FFAppState().PontosExcluidos.toList();
-                                return Column(
-                                  mainAxisSize: MainAxisSize.max,
-                                  children: List.generate(excluidos.length,
-                                      (excluidosIndex) {
-                                    final excluidosItem =
-                                        excluidos[excluidosIndex];
-                                    return Text(
-                                      excluidosItem.toString(),
-                                      style: FlutterFlowTheme.of(context)
-                                          .bodyMedium,
+                                  },
+                                ),
+                                Builder(
+                                  builder: (context) {
+                                    final excluidos =
+                                        FFAppState().PontosExcluidos.toList();
+                                    return Column(
+                                      mainAxisSize: MainAxisSize.max,
+                                      children: List.generate(excluidos.length,
+                                          (excluidosIndex) {
+                                        final excluidosItem =
+                                            excluidos[excluidosIndex];
+                                        return Text(
+                                          excluidosItem.toString(),
+                                          style: FlutterFlowTheme.of(context)
+                                              .bodyMedium,
+                                        );
+                                      }),
                                     );
-                                  }),
-                                );
-                              },
+                                  },
+                                ),
+                              ],
                             ),
-                          ],
-                        ),
+                          ),
+                          Row(
+                            mainAxisSize: MainAxisSize.max,
+                            children: [
+                              Builder(
+                                builder: (context) {
+                                  final trssfd = FFAppState()
+                                      .listaDeLocaisDeAreasParaColeta
+                                      .toList();
+                                  return Column(
+                                    mainAxisSize: MainAxisSize.max,
+                                    children: List.generate(trssfd.length,
+                                        (trssfdIndex) {
+                                      final trssfdItem = trssfd[trssfdIndex];
+                                      return Text(
+                                        trssfdItem,
+                                        style: FlutterFlowTheme.of(context)
+                                            .bodyMedium,
+                                      );
+                                    }),
+                                  );
+                                },
+                              ),
+                            ],
+                          ),
+                        ],
                       ),
                     ),
                   ),
