@@ -30,7 +30,7 @@ class Coleta extends StatefulWidget {
   final int? intervaloDeColetaParaProximaFoto;
   final List<String>? possiveisProfundidades;
   final List<String>? listaDeLocaisDeContornoDeArea;
-  final List<String>? pontosJaColetados;
+  final List<dynamic>? pontosJaColetados;
 
   const Coleta({
     Key? key,
