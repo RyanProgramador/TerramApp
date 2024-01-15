@@ -30,6 +30,7 @@ class Coleta extends StatefulWidget {
   final int? intervaloDeColetaParaProximaFoto;
   final List<String>? possiveisProfundidades;
   final List<String>? listaDeLocaisDeContornoDeArea;
+  final List<String>? pontosJaColetados;
 
   const Coleta({
     Key? key,
@@ -39,6 +40,7 @@ class Coleta extends StatefulWidget {
     this.intervaloDeColetaParaProximaFoto,
     this.possiveisProfundidades,
     this.listaDeLocaisDeContornoDeArea,
+    this.pontosJaColetados,
   }) : super(key: key);
   final String customIconUrl =
       'https://cdn-icons-png.flaticon.com/128/3253/3253113.png';
