@@ -654,23 +654,26 @@ class _ColetaState extends State<Coleta> {
     String novoNomeMarcador = _gerarNomeNovoMarcador();
 
     Map<String, dynamic> novoPonto = {
-      "marcador_nome": novoNomeMarcador,
+      "marcador_nome": "$novoNomeMarcador",
       "latlng_marcadores": "${position.latitude}, ${position.longitude}",
-      "profundidades": [
-        {
-          "nome": profundidadesSelecionadas ?? '0-10',
+      "profundidades": profundidadesSelecionadas.map((profundidade) {
+        return {
+          "nome": profundidade ?? '0-10',
           "icone": "location_dot",
           "cor": "#FFC0CB"
-        },
-        // Adicione outras opções aqui se necessário
-      ],
+        };
+      }).toList(),
     };
+
+    String pontoSerializado =
+        json.encode(novoPonto); // Converte o mapa para JSON
+    String pontoParaSalvar =
+        "$pontoSerializado"; // Adiciona aspas simples ao redor da string JSON
+    FFAppState().listaDeLocaisDeAreasParaColeta.add(pontoParaSalvar);
 
     setState(() {
       latLngListMarcadores.add(novoPonto);
       //converter para entrar no ffappstate
-      String pontoSerializado = json.encode(novoPonto);
-      FFAppState().listaDeLocaisDeAreasParaColeta.add(pontoSerializado);
       markerPositions[novoNomeMarcador] = position; // Adicione esta linha
 
       String nomesProfundidades = novoPonto["profundidades"]!
