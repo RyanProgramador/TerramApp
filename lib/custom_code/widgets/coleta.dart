@@ -98,7 +98,7 @@ class _ColetaState extends State<Coleta> {
   google_maps.LatLng? currentTarget;
 
   //
-  dynamic listaDeLocais = [
+  List<Map<String, dynamic>> listaDeLocais = [
     {"grupo": "2", "latlng": "-29.915044, -51.195798"},
     {"grupo": "2", "latlng": "-29.915091, -51.194011"},
     {"grupo": "2", "latlng": "-29.913644, -51.193930"},
@@ -157,11 +157,25 @@ class _ColetaState extends State<Coleta> {
     intervaloDeColetaParaProximaFoto =
         widget.intervaloDeColetaParaProximaFoto ??
             intervaloDeColetaParaProximaFoto;
-    listaDeLocais = widget.listaDeLocaisDeContornoDeArea ?? listaDeLocais;
 
-    latLngListMarcadores = widget.listaPontosComProfundidadeParaMedicao
-            ?.cast<Map<String, dynamic>>() ??
-        latLngListMarcadores;
+    if (widget.listaDeLocaisDeContornoDeArea != null) {
+      listaDeLocais = widget.listaDeLocaisDeContornoDeArea!
+          .map((e) {
+            try {
+              return json.decode(e) as Map<String, dynamic>;
+            } catch (error) {
+              print('Erro ao desserializar JSON: $error');
+              return null;
+            }
+          })
+          .where((element) => element != null)
+          .cast<Map<String, dynamic>>()
+          .toList();
+    }
+
+    // latLngListMarcadores = widget.listaPontosComProfundidadeParaMedicao
+    //         ?.cast<Map<String, dynamic>>() ??
+    //     latLngListMarcadores;
 
 // Atribuição condicional, garantindo que o parâmetro é uma lista de strings
     if (widget.possiveisProfundidades != null) {

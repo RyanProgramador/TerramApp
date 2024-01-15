@@ -203,16 +203,12 @@ class _TestecontornoWidgetState extends State<TestecontornoWidget> {
                           width: double.infinity,
                           height: double.infinity,
                           intervaloDeColetaParaProximaFoto: 3,
-                          listaPontosComProfundidadeParaMedicao: FFAppState()
-                              .listaDeLocaisDeAreasParaColeta
-                              .map((e) => e.toString())
-                              .toList(),
+                          listaPontosComProfundidadeParaMedicao:
+                              FFAppState().listaDeLocaisDeAreasParaColeta,
                           possiveisProfundidades:
                               FFAppState().possiveisProfuncidadesDeColeta,
-                          listaDeLocaisDeContornoDeArea: FFAppState()
-                              .latLngListaMarcadores
-                              .map((e) => e.toString())
-                              .toList(),
+                          listaDeLocaisDeContornoDeArea:
+                              FFAppState().latLngListaMarcadoresArea,
                         ),
                       ),
                     ),

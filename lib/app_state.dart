@@ -403,33 +403,19 @@ class FFAppState extends ChangeNotifier {
           _distanciaEmMetrosDeToleranciaEntreUmaCapturaEOutra;
     });
     _safeInit(() {
-      _latLngListaMarcadores =
-          prefs.getStringList('ff_latLngListaMarcadores')?.map((x) {
-                try {
-                  return jsonDecode(x);
-                } catch (e) {
-                  print("Can't decode persisted json. Error: $e.");
-                  return {};
-                }
-              }).toList() ??
-              _latLngListaMarcadores;
-    });
-    _safeInit(() {
-      _listaDeLocaisDeAreasParaColeta =
-          prefs.getStringList('ff_listaDeLocaisDeAreasParaColeta')?.map((x) {
-                try {
-                  return jsonDecode(x);
-                } catch (e) {
-                  print("Can't decode persisted json. Error: $e.");
-                  return {};
-                }
-              }).toList() ??
-              _listaDeLocaisDeAreasParaColeta;
-    });
-    _safeInit(() {
       _possiveisProfuncidadesDeColeta =
           prefs.getStringList('ff_possiveisProfuncidadesDeColeta') ??
               _possiveisProfuncidadesDeColeta;
+    });
+    _safeInit(() {
+      _listaDeLocaisDeAreasParaColeta =
+          prefs.getStringList('ff_listaDeLocaisDeAreasParaColeta') ??
+              _listaDeLocaisDeAreasParaColeta;
+    });
+    _safeInit(() {
+      _latLngListaMarcadoresArea =
+          prefs.getStringList('ff_latLngListaMarcadoresArea') ??
+              _latLngListaMarcadoresArea;
     });
   }
 
@@ -1716,100 +1702,6 @@ class FFAppState extends ChangeNotifier {
         'ff_distanciaEmMetrosDeToleranciaEntreUmaCapturaEOutra', _value);
   }
 
-  List<dynamic> _latLngListaMarcadores = [
-    jsonDecode('{\"grupo\":\"2\",\"latlng\":\"-29.915044, -51.195798\"}'),
-    jsonDecode('{\"grupo\":\"2\",\"latlng\":\"-29.915044, -51.195798\"}'),
-    jsonDecode('{\"grupo\":\"2\",\"latlng\":\"-29.915044, -51.195798\"}'),
-    jsonDecode('{\"grupo\":\"2\",\"latlng\":\"-29.915044, -51.195798\"}')
-  ];
-  List<dynamic> get latLngListaMarcadores => _latLngListaMarcadores;
-  set latLngListaMarcadores(List<dynamic> _value) {
-    _latLngListaMarcadores = _value;
-    prefs.setStringList(
-        'ff_latLngListaMarcadores', _value.map((x) => jsonEncode(x)).toList());
-  }
-
-  void addToLatLngListaMarcadores(dynamic _value) {
-    _latLngListaMarcadores.add(_value);
-    prefs.setStringList('ff_latLngListaMarcadores',
-        _latLngListaMarcadores.map((x) => jsonEncode(x)).toList());
-  }
-
-  void removeFromLatLngListaMarcadores(dynamic _value) {
-    _latLngListaMarcadores.remove(_value);
-    prefs.setStringList('ff_latLngListaMarcadores',
-        _latLngListaMarcadores.map((x) => jsonEncode(x)).toList());
-  }
-
-  void removeAtIndexFromLatLngListaMarcadores(int _index) {
-    _latLngListaMarcadores.removeAt(_index);
-    prefs.setStringList('ff_latLngListaMarcadores',
-        _latLngListaMarcadores.map((x) => jsonEncode(x)).toList());
-  }
-
-  void updateLatLngListaMarcadoresAtIndex(
-    int _index,
-    dynamic Function(dynamic) updateFn,
-  ) {
-    _latLngListaMarcadores[_index] = updateFn(_latLngListaMarcadores[_index]);
-    prefs.setStringList('ff_latLngListaMarcadores',
-        _latLngListaMarcadores.map((x) => jsonEncode(x)).toList());
-  }
-
-  void insertAtIndexInLatLngListaMarcadores(int _index, dynamic _value) {
-    _latLngListaMarcadores.insert(_index, _value);
-    prefs.setStringList('ff_latLngListaMarcadores',
-        _latLngListaMarcadores.map((x) => jsonEncode(x)).toList());
-  }
-
-  List<dynamic> _listaDeLocaisDeAreasParaColeta = [
-    jsonDecode(
-        '{\"marcador_nome\":\"B\",\"latlng_marcadores\":\"-29.91495486428177, -51.19437347868409\",\"profundidades\":[{\"nome\":\"0-10\",\"icone\":\"location_dot\",\"cor\":\"#FFC0CB\"},{\"nome\":\"0-20\",\"icone\":\"flag\",\"cor\":\"#FF4500\"},{\"nome\":\"0-25\",\"icone\":\"map_pin\",\"cor\":\"#0000CD\"}],\"foto_de_cada_profundidade\":[]}'),
-    jsonDecode('{}')
-  ];
-  List<dynamic> get listaDeLocaisDeAreasParaColeta =>
-      _listaDeLocaisDeAreasParaColeta;
-  set listaDeLocaisDeAreasParaColeta(List<dynamic> _value) {
-    _listaDeLocaisDeAreasParaColeta = _value;
-    prefs.setStringList('ff_listaDeLocaisDeAreasParaColeta',
-        _value.map((x) => jsonEncode(x)).toList());
-  }
-
-  void addToListaDeLocaisDeAreasParaColeta(dynamic _value) {
-    _listaDeLocaisDeAreasParaColeta.add(_value);
-    prefs.setStringList('ff_listaDeLocaisDeAreasParaColeta',
-        _listaDeLocaisDeAreasParaColeta.map((x) => jsonEncode(x)).toList());
-  }
-
-  void removeFromListaDeLocaisDeAreasParaColeta(dynamic _value) {
-    _listaDeLocaisDeAreasParaColeta.remove(_value);
-    prefs.setStringList('ff_listaDeLocaisDeAreasParaColeta',
-        _listaDeLocaisDeAreasParaColeta.map((x) => jsonEncode(x)).toList());
-  }
-
-  void removeAtIndexFromListaDeLocaisDeAreasParaColeta(int _index) {
-    _listaDeLocaisDeAreasParaColeta.removeAt(_index);
-    prefs.setStringList('ff_listaDeLocaisDeAreasParaColeta',
-        _listaDeLocaisDeAreasParaColeta.map((x) => jsonEncode(x)).toList());
-  }
-
-  void updateListaDeLocaisDeAreasParaColetaAtIndex(
-    int _index,
-    dynamic Function(dynamic) updateFn,
-  ) {
-    _listaDeLocaisDeAreasParaColeta[_index] =
-        updateFn(_listaDeLocaisDeAreasParaColeta[_index]);
-    prefs.setStringList('ff_listaDeLocaisDeAreasParaColeta',
-        _listaDeLocaisDeAreasParaColeta.map((x) => jsonEncode(x)).toList());
-  }
-
-  void insertAtIndexInListaDeLocaisDeAreasParaColeta(
-      int _index, dynamic _value) {
-    _listaDeLocaisDeAreasParaColeta.insert(_index, _value);
-    prefs.setStringList('ff_listaDeLocaisDeAreasParaColeta',
-        _listaDeLocaisDeAreasParaColeta.map((x) => jsonEncode(x)).toList());
-  }
-
   List<String> _possiveisProfuncidadesDeColeta = ['0-10', '10-20', '20-30'];
   List<String> get possiveisProfuncidadesDeColeta =>
       _possiveisProfuncidadesDeColeta;
@@ -1851,6 +1743,97 @@ class FFAppState extends ChangeNotifier {
     _possiveisProfuncidadesDeColeta.insert(_index, _value);
     prefs.setStringList(
         'ff_possiveisProfuncidadesDeColeta', _possiveisProfuncidadesDeColeta);
+  }
+
+  List<String> _listaDeLocaisDeAreasParaColeta = [
+    '{ \"marcador_nome\": \"A\", \"latlng_marcadores\": \"-29.914939224621914, -51.195420011983714\", \"profundidades\": [ {\"nome\": \"0-10\", \"icone\": \"location_dot\", \"cor\": \"#FFC0CB\"}, {\"nome\": \"0-20\", \"icone\": \"flag\", \"cor\": \"#FF4500\"}, {\"nome\": \"0-25\", \"icone\": \"map_pin\", \"cor\": \"#0000CD\"} ], \"foto_de_cada_profundidade\": [], }'
+  ];
+  List<String> get listaDeLocaisDeAreasParaColeta =>
+      _listaDeLocaisDeAreasParaColeta;
+  set listaDeLocaisDeAreasParaColeta(List<String> _value) {
+    _listaDeLocaisDeAreasParaColeta = _value;
+    prefs.setStringList('ff_listaDeLocaisDeAreasParaColeta', _value);
+  }
+
+  void addToListaDeLocaisDeAreasParaColeta(String _value) {
+    _listaDeLocaisDeAreasParaColeta.add(_value);
+    prefs.setStringList(
+        'ff_listaDeLocaisDeAreasParaColeta', _listaDeLocaisDeAreasParaColeta);
+  }
+
+  void removeFromListaDeLocaisDeAreasParaColeta(String _value) {
+    _listaDeLocaisDeAreasParaColeta.remove(_value);
+    prefs.setStringList(
+        'ff_listaDeLocaisDeAreasParaColeta', _listaDeLocaisDeAreasParaColeta);
+  }
+
+  void removeAtIndexFromListaDeLocaisDeAreasParaColeta(int _index) {
+    _listaDeLocaisDeAreasParaColeta.removeAt(_index);
+    prefs.setStringList(
+        'ff_listaDeLocaisDeAreasParaColeta', _listaDeLocaisDeAreasParaColeta);
+  }
+
+  void updateListaDeLocaisDeAreasParaColetaAtIndex(
+    int _index,
+    String Function(String) updateFn,
+  ) {
+    _listaDeLocaisDeAreasParaColeta[_index] =
+        updateFn(_listaDeLocaisDeAreasParaColeta[_index]);
+    prefs.setStringList(
+        'ff_listaDeLocaisDeAreasParaColeta', _listaDeLocaisDeAreasParaColeta);
+  }
+
+  void insertAtIndexInListaDeLocaisDeAreasParaColeta(
+      int _index, String _value) {
+    _listaDeLocaisDeAreasParaColeta.insert(_index, _value);
+    prefs.setStringList(
+        'ff_listaDeLocaisDeAreasParaColeta', _listaDeLocaisDeAreasParaColeta);
+  }
+
+  List<String> _latLngListaMarcadoresArea = [
+    '{\"grupo\": \"2\", \"latlng\": \"-29.915044, -51.195798\"}',
+    '{\"grupo\": \"2\", \"latlng\": \"-29.915091, -51.194011\"}',
+    '{\"grupo\": \"2\", \"latlng\": \"-29.913644, -51.193930\"}',
+    '{\"grupo\": \"2\", \"latlng\": \"-29.913558, -51.195563\"}'
+  ];
+  List<String> get latLngListaMarcadoresArea => _latLngListaMarcadoresArea;
+  set latLngListaMarcadoresArea(List<String> _value) {
+    _latLngListaMarcadoresArea = _value;
+    prefs.setStringList('ff_latLngListaMarcadoresArea', _value);
+  }
+
+  void addToLatLngListaMarcadoresArea(String _value) {
+    _latLngListaMarcadoresArea.add(_value);
+    prefs.setStringList(
+        'ff_latLngListaMarcadoresArea', _latLngListaMarcadoresArea);
+  }
+
+  void removeFromLatLngListaMarcadoresArea(String _value) {
+    _latLngListaMarcadoresArea.remove(_value);
+    prefs.setStringList(
+        'ff_latLngListaMarcadoresArea', _latLngListaMarcadoresArea);
+  }
+
+  void removeAtIndexFromLatLngListaMarcadoresArea(int _index) {
+    _latLngListaMarcadoresArea.removeAt(_index);
+    prefs.setStringList(
+        'ff_latLngListaMarcadoresArea', _latLngListaMarcadoresArea);
+  }
+
+  void updateLatLngListaMarcadoresAreaAtIndex(
+    int _index,
+    String Function(String) updateFn,
+  ) {
+    _latLngListaMarcadoresArea[_index] =
+        updateFn(_latLngListaMarcadoresArea[_index]);
+    prefs.setStringList(
+        'ff_latLngListaMarcadoresArea', _latLngListaMarcadoresArea);
+  }
+
+  void insertAtIndexInLatLngListaMarcadoresArea(int _index, String _value) {
+    _latLngListaMarcadoresArea.insert(_index, _value);
+    prefs.setStringList(
+        'ff_latLngListaMarcadoresArea', _latLngListaMarcadoresArea);
   }
 }
 
