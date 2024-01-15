@@ -1752,7 +1752,10 @@ class FFAppState extends ChangeNotifier {
         _latLngListaMarcadores.map((x) => jsonEncode(x)).toList());
   }
 
-  List<dynamic> _listaDeLocaisDeAreasParaColeta = [];
+  List<dynamic> _listaDeLocaisDeAreasParaColeta = [
+    jsonDecode('{}'),
+    jsonDecode('{}')
+  ];
   List<dynamic> get listaDeLocaisDeAreasParaColeta =>
       _listaDeLocaisDeAreasParaColeta;
   set listaDeLocaisDeAreasParaColeta(List<dynamic> _value) {
