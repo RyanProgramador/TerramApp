@@ -202,6 +202,17 @@ class _TestecontornoWidgetState extends State<TestecontornoWidget> {
                         child: custom_widgets.Coleta(
                           width: double.infinity,
                           height: double.infinity,
+                          intervaloDeColetaParaProximaFoto: 3,
+                          listaPontosComProfundidadeParaMedicao: FFAppState()
+                              .listaDeLocaisDeAreasParaColeta
+                              .map((e) => e.toString())
+                              .toList(),
+                          possiveisProfundidades:
+                              FFAppState().possiveisProfuncidadesDeColeta,
+                          listaDeLocaisDeContornoDeArea: FFAppState()
+                              .latLngListaMarcadores
+                              .map((e) => e.toString())
+                              .toList(),
                         ),
                       ),
                     ),

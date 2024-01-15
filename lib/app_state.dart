@@ -426,6 +426,11 @@ class FFAppState extends ChangeNotifier {
               }).toList() ??
               _listaDeLocaisDeAreasParaColeta;
     });
+    _safeInit(() {
+      _possiveisProfuncidadesDeColeta =
+          prefs.getStringList('ff_possiveisProfuncidadesDeColeta') ??
+              _possiveisProfuncidadesDeColeta;
+    });
   }
 
   void update(VoidCallback callback) {
@@ -1711,7 +1716,12 @@ class FFAppState extends ChangeNotifier {
         'ff_distanciaEmMetrosDeToleranciaEntreUmaCapturaEOutra', _value);
   }
 
-  List<dynamic> _latLngListaMarcadores = [];
+  List<dynamic> _latLngListaMarcadores = [
+    jsonDecode('{\"grupo\":\"2\",\"latlng\":\"-29.915044, -51.195798\"}'),
+    jsonDecode('{\"grupo\":\"2\",\"latlng\":\"-29.915044, -51.195798\"}'),
+    jsonDecode('{\"grupo\":\"2\",\"latlng\":\"-29.915044, -51.195798\"}'),
+    jsonDecode('{\"grupo\":\"2\",\"latlng\":\"-29.915044, -51.195798\"}')
+  ];
   List<dynamic> get latLngListaMarcadores => _latLngListaMarcadores;
   set latLngListaMarcadores(List<dynamic> _value) {
     _latLngListaMarcadores = _value;
@@ -1753,7 +1763,8 @@ class FFAppState extends ChangeNotifier {
   }
 
   List<dynamic> _listaDeLocaisDeAreasParaColeta = [
-    jsonDecode('{}'),
+    jsonDecode(
+        '{\"marcador_nome\":\"B\",\"latlng_marcadores\":\"-29.91495486428177, -51.19437347868409\",\"profundidades\":[{\"nome\":\"0-10\",\"icone\":\"location_dot\",\"cor\":\"#FFC0CB\"},{\"nome\":\"0-20\",\"icone\":\"flag\",\"cor\":\"#FF4500\"},{\"nome\":\"0-25\",\"icone\":\"map_pin\",\"cor\":\"#0000CD\"}],\"foto_de_cada_profundidade\":[]}'),
     jsonDecode('{}')
   ];
   List<dynamic> get listaDeLocaisDeAreasParaColeta =>
@@ -1797,6 +1808,49 @@ class FFAppState extends ChangeNotifier {
     _listaDeLocaisDeAreasParaColeta.insert(_index, _value);
     prefs.setStringList('ff_listaDeLocaisDeAreasParaColeta',
         _listaDeLocaisDeAreasParaColeta.map((x) => jsonEncode(x)).toList());
+  }
+
+  List<String> _possiveisProfuncidadesDeColeta = ['0-10', '10-20', '20-30'];
+  List<String> get possiveisProfuncidadesDeColeta =>
+      _possiveisProfuncidadesDeColeta;
+  set possiveisProfuncidadesDeColeta(List<String> _value) {
+    _possiveisProfuncidadesDeColeta = _value;
+    prefs.setStringList('ff_possiveisProfuncidadesDeColeta', _value);
+  }
+
+  void addToPossiveisProfuncidadesDeColeta(String _value) {
+    _possiveisProfuncidadesDeColeta.add(_value);
+    prefs.setStringList(
+        'ff_possiveisProfuncidadesDeColeta', _possiveisProfuncidadesDeColeta);
+  }
+
+  void removeFromPossiveisProfuncidadesDeColeta(String _value) {
+    _possiveisProfuncidadesDeColeta.remove(_value);
+    prefs.setStringList(
+        'ff_possiveisProfuncidadesDeColeta', _possiveisProfuncidadesDeColeta);
+  }
+
+  void removeAtIndexFromPossiveisProfuncidadesDeColeta(int _index) {
+    _possiveisProfuncidadesDeColeta.removeAt(_index);
+    prefs.setStringList(
+        'ff_possiveisProfuncidadesDeColeta', _possiveisProfuncidadesDeColeta);
+  }
+
+  void updatePossiveisProfuncidadesDeColetaAtIndex(
+    int _index,
+    String Function(String) updateFn,
+  ) {
+    _possiveisProfuncidadesDeColeta[_index] =
+        updateFn(_possiveisProfuncidadesDeColeta[_index]);
+    prefs.setStringList(
+        'ff_possiveisProfuncidadesDeColeta', _possiveisProfuncidadesDeColeta);
+  }
+
+  void insertAtIndexInPossiveisProfuncidadesDeColeta(
+      int _index, String _value) {
+    _possiveisProfuncidadesDeColeta.insert(_index, _value);
+    prefs.setStringList(
+        'ff_possiveisProfuncidadesDeColeta', _possiveisProfuncidadesDeColeta);
   }
 }
 
