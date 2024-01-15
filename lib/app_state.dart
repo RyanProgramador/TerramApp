@@ -1746,7 +1746,8 @@ class FFAppState extends ChangeNotifier {
   }
 
   List<String> _listaDeLocaisDeAreasParaColeta = [
-    '{ \"marcador_nome\": \"A\", \"latlng_marcadores\": \"-29.914939224621914, -51.195420011983714\", \"profundidades\": [ {\"nome\": \"0-10\", \"icone\": \"location_dot\", \"cor\": \"#FFC0CB\"}, {\"nome\": \"0-20\", \"icone\": \"flag\", \"cor\": \"#FF4500\"}, {\"nome\": \"0-25\", \"icone\": \"map_pin\", \"cor\": \"#0000CD\"} ], \"foto_de_cada_profundidade\": [], }'
+    '{ \"marcador_nome\": \"A\", \"latlng_marcadores\": \"-29.914939224621914, -51.195420011983714\", \"profundidades\": [ {\"nome\": \"0-10\", \"icone\": \"location_dot\", \"cor\": \"#FFC0CB\"}, {\"nome\": \"0-20\", \"icone\": \"flag\", \"cor\": \"#FF4500\"}, {\"nome\": \"0-25\", \"icone\": \"map_pin\", \"cor\": \"#0000CD\"} ], \"foto_de_cada_profundidade\": []}',
+    '{ \"marcador_nome\": \"B\", \"latlng_marcadores\": \"-29.91495486428177, -51.19437347868409\", \"profundidades\": [ {\"nome\": \"0-10\", \"icone\": \"location_dot\", \"cor\": \"#FFC0CB\"}, {\"nome\": \"0-20\", \"icone\": \"flag\", \"cor\": \"#FF4500\"}, {\"nome\": \"0-25\", \"icone\": \"map_pin\", \"cor\": \"#0000CD\"} ], \"foto_de_cada_profundidade\": []}'
   ];
   List<String> get listaDeLocaisDeAreasParaColeta =>
       _listaDeLocaisDeAreasParaColeta;

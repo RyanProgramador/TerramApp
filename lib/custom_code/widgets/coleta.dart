@@ -98,57 +98,53 @@ class _ColetaState extends State<Coleta> {
   google_maps.LatLng? currentTarget;
 
   //
-  List<Map<String, dynamic>> listaDeLocais = [
-    {"grupo": "2", "latlng": "-29.915044, -51.195798"},
-    {"grupo": "2", "latlng": "-29.915091, -51.194011"},
-    {"grupo": "2", "latlng": "-29.913644, -51.193930"},
-    {"grupo": "2", "latlng": "-29.913558, -51.195563"},
-  ];
+  List<Map<String, dynamic>> listaDeLocais = [];
 
   // Implementação de exemplo
-  List<Map<String, dynamic>> latLngListMarcadores = [
-    {
-      "marcador_nome": "A",
-      "latlng_marcadores": "-29.914939224621914, -51.195420011983714",
-      "profundidades": [
-        {"nome": "0-10", "icone": "location_dot", "cor": "#FFC0CB"},
-        {"nome": "0-20", "icone": "flag", "cor": "#FF4500"},
-        {"nome": "0-25", "icone": "map_pin", "cor": "#0000CD"}
-      ],
-      "foto_de_cada_profundidade": [],
-    },
-    {
-      "marcador_nome": "B",
-      "latlng_marcadores": "-29.91495486428177, -51.19437347868409",
-      "profundidades": [
-        {"nome": "0-10", "icone": "location_dot", "cor": "#FFC0CB"},
-        {"nome": "0-20", "icone": "flag", "cor": "#FF4500"},
-        {"nome": "0-25", "icone": "map_pin", "cor": "#0000CD"}
-      ],
-      "foto_de_cada_profundidade": [],
-    },
-    {
-      "marcador_nome": "C",
-      "latlng_marcadores": "-29.914305816333297, -51.19483359246237",
-      "profundidades": [
-        {"nome": "0-10", "icone": "location_dot", "cor": "#FFC0CB"},
-        {"nome": "0-20", "icone": "flag", "cor": "#FF4500"},
-        {"nome": "0-25", "icone": "map_pin", "cor": "#0000CD"},
-        {"nome": "0-35", "icone": "plane", "cor": "#0000CD"}
-      ],
-      "foto_de_cada_profundidade": [],
-    },
-    {
-      "marcador_nome": "D",
-      "latlng_marcadores": "-29.91391738877275, -51.19420634010805",
-      "profundidades": [
-        {"nome": "0-10", "icone": "location_dot", "cor": "#FFC0CB"},
-        {"nome": "0-20", "icone": "flag", "cor": "#FF4500"},
-        {"nome": "0-25", "icone": "map_pi", "cor": "#0000CD"}
-      ],
-      "foto_de_cada_profundidade": [],
-    },
-  ];
+  List<Map<String, dynamic>> latLngListMarcadores = [];
+  // List<Map<String, dynamic>> latLngListMarcadores = [
+  //   {
+  //     "marcador_nome": "A",
+  //     "latlng_marcadores": "-29.914939224621914, -51.195420011983714",
+  //     "profundidades": [
+  //       {"nome": "0-10", "icone": "location_dot", "cor": "#FFC0CB"},
+  //       {"nome": "0-20", "icone": "flag", "cor": "#FF4500"},
+  //       {"nome": "0-25", "icone": "map_pin", "cor": "#0000CD"}
+  //     ],
+  //     "foto_de_cada_profundidade": [],
+  //   },
+  //   {
+  //     "marcador_nome": "B",
+  //     "latlng_marcadores": "-29.91495486428177, -51.19437347868409",
+  //     "profundidades": [
+  //       {"nome": "0-10", "icone": "location_dot", "cor": "#FFC0CB"},
+  //       {"nome": "0-20", "icone": "flag", "cor": "#FF4500"},
+  //       {"nome": "0-25", "icone": "map_pin", "cor": "#0000CD"}
+  //     ],
+  //     "foto_de_cada_profundidade": [],
+  //   },
+  //   {
+  //     "marcador_nome": "C",
+  //     "latlng_marcadores": "-29.914305816333297, -51.19483359246237",
+  //     "profundidades": [
+  //       {"nome": "0-10", "icone": "location_dot", "cor": "#FFC0CB"},
+  //       {"nome": "0-20", "icone": "flag", "cor": "#FF4500"},
+  //       {"nome": "0-25", "icone": "map_pin", "cor": "#0000CD"},
+  //       {"nome": "0-35", "icone": "plane", "cor": "#0000CD"}
+  //     ],
+  //     "foto_de_cada_profundidade": [],
+  //   },
+  //   {
+  //     "marcador_nome": "D",
+  //     "latlng_marcadores": "-29.91391738877275, -51.19420634010805",
+  //     "profundidades": [
+  //       {"nome": "0-10", "icone": "location_dot", "cor": "#FFC0CB"},
+  //       {"nome": "0-20", "icone": "flag", "cor": "#FF4500"},
+  //       {"nome": "0-25", "icone": "map_pi", "cor": "#0000CD"}
+  //     ],
+  //     "foto_de_cada_profundidade": [],
+  //   },
+  // ];
 
   @override
   void initState() {
@@ -173,9 +169,12 @@ class _ColetaState extends State<Coleta> {
           .toList();
     }
 
-    // latLngListMarcadores = widget.listaPontosComProfundidadeParaMedicao
-    //         ?.cast<Map<String, dynamic>>() ??
-    //     latLngListMarcadores;
+    if (widget.listaPontosComProfundidadeParaMedicao != null) {
+      latLngListMarcadores = widget.listaPontosComProfundidadeParaMedicao!
+          .map((e) => json.decode(e))
+          .cast<Map<String, dynamic>>()
+          .toList();
+    }
 
 // Atribuição condicional, garantindo que o parâmetro é uma lista de strings
     if (widget.possiveisProfundidades != null) {

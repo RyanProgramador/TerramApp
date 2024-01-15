@@ -202,7 +202,7 @@ class _TestecontornoWidgetState extends State<TestecontornoWidget> {
                         child: custom_widgets.Coleta(
                           width: double.infinity,
                           height: double.infinity,
-                          intervaloDeColetaParaProximaFoto: 3,
+                          intervaloDeColetaParaProximaFoto: 2,
                           listaPontosComProfundidadeParaMedicao:
                               FFAppState().listaDeLocaisDeAreasParaColeta,
                           possiveisProfundidades:
