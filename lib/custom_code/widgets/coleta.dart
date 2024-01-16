@@ -1289,25 +1289,25 @@ class _ColetaState extends State<Coleta> {
                 )),
           ),
         ),
-        Positioned(
-          bottom: 10,
-          left: 10,
-          right: 10,
-          child: ElevatedButton(
-            onPressed: _exibirDados,
-            style: ElevatedButton.styleFrom(
-              shape: CircleBorder(),
-              backgroundColor: Color(0xFF00736D),
-            ),
-            child: Padding(
-                padding: const EdgeInsets.all(8.0),
-                child: Icon(
-                  Icons.info,
-                  size: 25.0,
-                  color: Colors.white,
-                )),
-          ),
-        ),
+        //Positioned(
+        //  bottom: 10,
+        //  left: 10,
+        //  right: 10,
+        //  child: ElevatedButton(
+        //    onPressed: _exibirDados,
+        //    style: ElevatedButton.styleFrom(
+        //      shape: CircleBorder(),
+        //      backgroundColor: Color(0xFF00736D),
+        //    ),
+        //    child: Padding(
+        //        padding: const EdgeInsets.all(8.0),
+        //        child: Icon(
+        //          Icons.info,
+        //          size: 25.0,
+        //          color: Colors.white,
+        //        )),
+        //  ),
+        //),
       ],
     );
   }
