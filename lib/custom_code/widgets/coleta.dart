@@ -353,7 +353,7 @@ class _ColetaState extends State<Coleta> {
         now.difference(lastTapTimestamps[markerIdValue]!).inMilliseconds <
             1800) {
       // Check if the distance is greater than 30 meters
-      if (distance > 3100) {
+      if (distance > 3000) {
         //metros de distancia para coletar
         // Show alert
         _showDistanceAlert();
@@ -827,21 +827,6 @@ class _ColetaState extends State<Coleta> {
                     });
                   }
 
-                  // // Verificação adicional para 'pontosJaColetados'
-                  // if (widget.pontosJaColetados != null) {
-                  //   jaColetada |= widget.pontosJaColetados!.any((dynamic ponto) {
-                  //     var pontoMap = (ponto as Map).cast<String, dynamic>();
-                  //     return pontoMap["marcador_nome"] == marcadorNome &&
-                  //         pontoMap["profundidade"] == profundidade["nome"];
-                  //   });
-                  // }
-                  //
-                  // // Verificação adicional para 'pontosColetados'
-                  // jaColetada |= pontosColetados.any((ponto) =>
-                  // ponto["marcador_nome"] == marcadorNome &&
-                  //     ponto["profundidade"] == profundidade["nome"]
-                  // );
-
                   return Row(
                     children: [
                       Icon(
@@ -1129,6 +1114,17 @@ class _ColetaState extends State<Coleta> {
               draggableParam: true,
               onDragEndParam: (newPosition) {
                 markerPositions[marcadorNome] = newPosition;
+                // Atualiza a nova posição no markerPositions
+                markerPositions[marcadorNome] = newPosition;
+                latlngMarcador = newPosition; // Atualiza latlngMarcador
+
+// Atualiza a posição do marcador na lista latLngListMarcadores
+                int indexLatlng = latLngListMarcadores.indexWhere(
+                    (marcador) => marcador["marcador_nome"] == marcadorNome);
+                if (indexLatlng != -1) {
+                  latLngListMarcadores[indexLatlng]["latlng_marcadores"] =
+                      "${newPosition.latitude}, ${newPosition.longitude}";
+                }
 
                 // Adiciona à lista de pontos movidos
                 var latLngOriginal = latLngListMarcadores.firstWhere((map) =>
@@ -1142,12 +1138,28 @@ class _ColetaState extends State<Coleta> {
                         "${newPosition.latitude}, ${newPosition.longitude}"
                   });
                   FFAppState().PontosMovidos.add(jsonEncode(pontosMovidos));
+
+                  // Atualiza a posição da câmera para a nova localização do marcador
+                  _updateMapLocationAfterMarkerMove(newPosition);
                 }
               });
         }
         return m;
       }).toSet();
     });
+  }
+
+  void _updateMapLocationAfterMarkerMove(google_maps.LatLng newPosition) {
+    if (_googleMapController != null) {
+      _googleMapController!.animateCamera(
+        google_maps.CameraUpdate.newCameraPosition(
+          google_maps.CameraPosition(
+            target: newPosition,
+            zoom: _currentZoom,
+          ),
+        ),
+      );
+    }
   }
 
   void _removeMarker(String marcadorNome) {

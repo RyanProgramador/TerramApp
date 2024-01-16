@@ -1746,8 +1746,13 @@ class FFAppState extends ChangeNotifier {
   }
 
   List<String> _listaDeLocaisDeAreasParaColeta = [
-    '{ \"marcador_nome\": \"A\", \"latlng_marcadores\": \"-29.914939224621914, -51.195420011983714\", \"profundidades\": [ {\"nome\": \"0-10\", \"icone\": \"location_dot\", \"cor\": \"#FFC0CB\"}, {\"nome\": \"0-20\", \"icone\": \"flag\", \"cor\": \"#FF4500\"}, {\"nome\": \"0-25\", \"icone\": \"map_pin\", \"cor\": \"#0000CD\"} ], \"foto_de_cada_profundidade\": []}',
-    '{ \"marcador_nome\": \"B\", \"latlng_marcadores\": \"-29.91495486428177, -51.19437347868409\", \"profundidades\": [ {\"nome\": \"0-10\", \"icone\": \"location_dot\", \"cor\": \"#FFC0CB\"}, {\"nome\": \"0-20\", \"icone\": \"flag\", \"cor\": \"#FF4500\"}, {\"nome\": \"0-25\", \"icone\": \"map_pin\", \"cor\": \"#0000CD\"} ], \"foto_de_cada_profundidade\": []}'
+    '{ \"marcador_nome\": \"A\", \"latlng_marcadores\": \"-27.706783747121428, -53.97061449732054\", \"profundidades\": [ {\"nome\": \"0-10\", \"icone\": \"location_dot\", \"cor\": \"#FFC0CB\"}, {\"nome\": \"0-20\", \"icone\": \"flag\", \"cor\": \"#FF4500\"}, {\"nome\": \"0-25\", \"icone\": \"map_pin\", \"cor\": \"#0000CD\"} ], \"foto_de_cada_profundidade\": []}',
+    '{ \"marcador_nome\": \"B\", \"latlng_marcadores\": \"-27.706031489643035, -53.96903651948588\", \"profundidades\": [ {\"nome\": \"0-10\", \"icone\": \"location_dot\", \"cor\": \"#FFC0CB\"}, {\"nome\": \"0-20\", \"icone\": \"flag\", \"cor\": \"#FF4500\"}, {\"nome\": \"0-25\", \"icone\": \"map_pin\", \"cor\": \"#0000CD\"} ], \"foto_de_cada_profundidade\": []}',
+    '{ \"marcador_nome\": \"C\", \"latlng_marcadores\": \"-27.70777779369088, -53.96396878297847\", \"profundidades\": [ {\"nome\": \"0-10\", \"icone\": \"location_dot\", \"cor\": \"#FFC0CB\"}, {\"nome\": \"0-20\", \"icone\": \"flag\", \"cor\": \"#FF4500\"}, {\"nome\": \"0-25\", \"icone\": \"map_pin\", \"cor\": \"#0000CD\"} ], \"foto_de_cada_profundidade\": []}',
+    '{ \"marcador_nome\": \"D\", \"latlng_marcadores\": \"-27.70580064743025, -53.97000578020788\", \"profundidades\": [ {\"nome\": \"0-10\", \"icone\": \"location_dot\", \"cor\": \"#FFC0CB\"}, {\"nome\": \"0-20\", \"icone\": \"flag\", \"cor\": \"#FF4500\"}, {\"nome\": \"0-25\", \"icone\": \"map_pin\", \"cor\": \"#0000CD\"} ], \"foto_de_cada_profundidade\": []}',
+    '{ \"marcador_nome\": \"E\", \"latlng_marcadores\": \"-27.705597319839914, -53.96913818134725\", \"profundidades\": [ {\"nome\": \"0-10\", \"icone\": \"location_dot\", \"cor\": \"#FFC0CB\"}, {\"nome\": \"0-20\", \"icone\": \"flag\", \"cor\": \"#FF4500\"}, {\"nome\": \"0-25\", \"icone\": \"map_pin\", \"cor\": \"#0000CD\"} ], \"foto_de_cada_profundidade\": []}',
+    '{ \"marcador_nome\": \"F\", \"latlng_marcadores\": \"-27.70577805549449, -53.968155753225645\", \"profundidades\": [ {\"nome\": \"0-10\", \"icone\": \"location_dot\", \"cor\": \"#FFC0CB\"}, {\"nome\": \"0-20\", \"icone\": \"flag\", \"cor\": \"#FF4500\"}, {\"nome\": \"0-25\", \"icone\": \"map_pin\", \"cor\": \"#0000CD\"} ], \"foto_de_cada_profundidade\": []}',
+    '{ \"marcador_nome\": \"G\", \"latlng_marcadores\": \"-27.706139525905435, -53.96682883732114\", \"profundidades\": [ {\"nome\": \"0-10\", \"icone\": \"location_dot\", \"cor\": \"#FFC0CB\"}, {\"nome\": \"0-20\", \"icone\": \"flag\", \"cor\": \"#FF4500\"}, {\"nome\": \"0-25\", \"icone\": \"map_pin\", \"cor\": \"#0000CD\"} ], \"foto_de_cada_profundidade\": []}'
   ];
   List<String> get listaDeLocaisDeAreasParaColeta =>
       _listaDeLocaisDeAreasParaColeta;
@@ -1792,10 +1797,10 @@ class FFAppState extends ChangeNotifier {
   }
 
   List<String> _latLngListaMarcadoresArea = [
-    '{\"grupo\": \"2\", \"latlng\": \"-29.915044, -51.195798\"}',
-    '{\"grupo\": \"2\", \"latlng\": \"-29.915091, -51.194011\"}',
-    '{\"grupo\": \"2\", \"latlng\": \"-29.913644, -51.193930\"}',
-    '{\"grupo\": \"2\", \"latlng\": \"-29.913558, -51.195563\"}'
+    '{\"grupo\": \"2\", \"latlng\": \"-27.712049404233902, -53.97082691741366\"}',
+    '{\"grupo\": \"2\", \"latlng\": \"-27.705682225479258, -53.974438058996796\"}',
+    '{\"grupo\": \"2\", \"latlng\": \"-27.706085222492074, -53.958870700743454\"}',
+    '{\"grupo\": \"2\", \"latlng\": \"-27.71392993446014, -53.95704995708809\"}'
   ];
   List<String> get latLngListaMarcadoresArea => _latLngListaMarcadoresArea;
   set latLngListaMarcadoresArea(List<String> _value) {
