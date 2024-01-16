@@ -811,14 +811,36 @@ class _ColetaState extends State<Coleta> {
                       false;
 
                   // Verificação adicional para 'pontosJaColetados'
-                  if (widget.pontosJaColetados != null) {
-                    jaColetada |=
-                        widget.pontosJaColetados!.any((dynamic ponto) {
-                      var pontoMap = (ponto as Map).cast<dynamic, dynamic>();
-                      return pontoMap["marcador_nome"] == marcadorNome &&
-                          pontoMap["profundidade"] == profundidade["nome"];
+                  if (!jaColetada && widget.pontosJaColetados != null) {
+                    jaColetada = widget.pontosJaColetados!.any((pontoString) {
+                      try {
+                        var pontoMap =
+                            json.decode(pontoString) as Map<dynamic, dynamic>;
+                        return pontoMap["marcador_nome"].toString() ==
+                                marcadorNome &&
+                            pontoMap["profundidade"].toString() ==
+                                profundidade["nome"].toString();
+                      } catch (e) {
+                        print("Erro ao decodificar ponto: $e");
+                        return false;
+                      }
                     });
                   }
+
+                  // // Verificação adicional para 'pontosJaColetados'
+                  // if (widget.pontosJaColetados != null) {
+                  //   jaColetada |= widget.pontosJaColetados!.any((dynamic ponto) {
+                  //     var pontoMap = (ponto as Map).cast<String, dynamic>();
+                  //     return pontoMap["marcador_nome"] == marcadorNome &&
+                  //         pontoMap["profundidade"] == profundidade["nome"];
+                  //   });
+                  // }
+                  //
+                  // // Verificação adicional para 'pontosColetados'
+                  // jaColetada |= pontosColetados.any((ponto) =>
+                  // ponto["marcador_nome"] == marcadorNome &&
+                  //     ponto["profundidade"] == profundidade["nome"]
+                  // );
 
                   return Row(
                     children: [

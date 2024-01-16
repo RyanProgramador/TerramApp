@@ -147,17 +147,6 @@ class _MedicaoColetaWidgetState extends State<MedicaoColetaWidget> {
                                     fontWeight: FontWeight.bold,
                                   ),
                             ),
-                            Text(
-                              FFAppState().PontosColetados.first.toString(),
-                              style: FlutterFlowTheme.of(context)
-                                  .bodyMedium
-                                  .override(
-                                    fontFamily: 'Readex Pro',
-                                    color: Color(0xFFF8F8F8),
-                                    fontSize: 24.0,
-                                    fontWeight: FontWeight.bold,
-                                  ),
-                            ),
                           ],
                         ),
                       ),
