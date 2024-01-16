@@ -86,10 +86,7 @@ class _MedicaoColetaWidgetState extends State<MedicaoColetaWidget> {
                               FFAppState().possiveisProfuncidadesDeColeta,
                           listaDeLocaisDeContornoDeArea:
                               FFAppState().latLngListaMarcadoresArea,
-                          pontosJaColetados: FFAppState()
-                              .PontosColetados
-                              .map((e) => e.toString())
-                              .toList(),
+                          pontosJaColetados: FFAppState().PontosColetados,
                         ),
                       ),
                     ),

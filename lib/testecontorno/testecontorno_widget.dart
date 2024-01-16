@@ -210,6 +210,7 @@ class _TestecontornoWidgetState extends State<TestecontornoWidget> {
                               FFAppState().possiveisProfuncidadesDeColeta,
                           listaDeLocaisDeContornoDeArea:
                               FFAppState().latLngListaMarcadoresArea,
+                          pontosJaColetados: FFAppState().PontosColetados,
                         ),
                       ),
                     ),
@@ -238,6 +239,8 @@ class _TestecontornoWidgetState extends State<TestecontornoWidget> {
                                         FFAppState().PontosMovidos.toList();
                                     return Column(
                                       mainAxisSize: MainAxisSize.max,
+                                      crossAxisAlignment:
+                                          CrossAxisAlignment.start,
                                       children: List.generate(movidos.length,
                                           (movidosIndex) {
                                         final movidosItem =
@@ -257,6 +260,8 @@ class _TestecontornoWidgetState extends State<TestecontornoWidget> {
                                         FFAppState().PontosColetados.toList();
                                     return Column(
                                       mainAxisSize: MainAxisSize.max,
+                                      crossAxisAlignment:
+                                          CrossAxisAlignment.start,
                                       children: List.generate(coletados.length,
                                           (coletadosIndex) {
                                         final coletadosItem =

@@ -30,7 +30,7 @@ class Coleta extends StatefulWidget {
   final int? intervaloDeColetaParaProximaFoto;
   final List<String>? possiveisProfundidades;
   final List<String>? listaDeLocaisDeContornoDeArea;
-  final List<String>? pontosJaColetados;
+  final List<dynamic>? pontosJaColetados;
 
   const Coleta({
     Key? key,
@@ -152,18 +152,24 @@ class _ColetaState extends State<Coleta> {
   void initState() {
     super.initState();
 
-    // Verifica se a lista 'pontosJaColetados' contém dados e os adiciona à lista 'pontosColetados'
-    if (widget.pontosJaColetados != null &&
-        widget.pontosJaColetados!.isNotEmpty) {
-      for (var ponto in widget.pontosJaColetados!) {
-        if (ponto is Map<String, String>) {
-          pontosColetados.add(ponto);
-        } else {
-          // Se o ponto não for um Map<String, dynamic>, você pode decidir como lidar (por exemplo, ignorar ou logar um erro)
-          print('Ponto inválido recebido: $ponto');
-        }
-      }
-    }
+    // if (widget.pontosJaColetados != null && widget.pontosJaColetados!.isNotEmpty) {
+    //   for (var ponto in widget.pontosJaColetados!) {
+    //     if (ponto is String) {
+    //       try {
+    //         Map<String, dynamic> pontoMap = json.decode(ponto);
+    //         // Convertendo para Map<String, String>
+    //         Map<String, String> pontoMapString = pontoMap.map((key, value) {
+    //           return MapEntry(key, value.toString());
+    //         });
+    //         pontosColetados.add(pontoMapString);
+    //       } catch (e) {
+    //         print('Erro ao desserializar ponto: $e');
+    //       }
+    //     } else {
+    //       print('Ponto inválido recebido (não é uma string): $ponto');
+    //     }
+    //   }
+    // }
 
     intervaloDeColetaParaProximaFoto =
         widget.intervaloDeColetaParaProximaFoto ??
@@ -803,6 +809,17 @@ class _ColetaState extends State<Coleta> {
                   bool jaColetada = coletasPorMarcador[marcadorNome]
                           ?.contains(profundidade["nome"]) ??
                       false;
+
+                  // Verificação adicional para 'pontosJaColetados'
+                  if (widget.pontosJaColetados != null) {
+                    jaColetada |=
+                        widget.pontosJaColetados!.any((dynamic ponto) {
+                      var pontoMap = (ponto as Map).cast<dynamic, dynamic>();
+                      return pontoMap["marcador_nome"] == marcadorNome &&
+                          pontoMap["profundidade"] == profundidade["nome"];
+                    });
+                  }
+
                   return Row(
                     children: [
                       Icon(
