@@ -29,24 +29,6 @@ class ContornoMapRevisaoCorte extends StatefulWidget {
   _ContornoMapRevisaoState createState() => _ContornoMapRevisaoState();
 }
 
-class HexColor extends Color {
-  HexColor(final String hexColor) : super(_getColorFromHex(hexColor));
-
-  static int _getColorFromHex(String hexColor) {
-    hexColor = _extractHexCode(hexColor);
-    if (hexColor.length == 6) {
-      hexColor = 'FF' + hexColor;
-    }
-    return int.parse('0x$hexColor');
-  }
-
-  static String _extractHexCode(String input) {
-    RegExp regex = RegExp(r'([0-9A-Fa-f]{6}|[0-9A-Fa-f]{8})');
-    Match match = regex.firstMatch(input)!;
-    return match.group(0)!;
-  }
-}
-
 class _ContornoMapRevisaoState extends State<ContornoMapRevisao> {
   google_maps.GoogleMapController? _googleMapController;
   Set<google_maps.Polygon> polygons = Set();
@@ -116,5 +98,23 @@ class _ContornoMapRevisaoState extends State<ContornoMapRevisao> {
         zoomControlsEnabled: false,
       ),
     );
+  }
+}
+
+class HexColor extends Color {
+  HexColor(final String hexColor) : super(_getColorFromHex(hexColor));
+
+  static int _getColorFromHex(String hexColor) {
+    hexColor = _extractHexCode(hexColor);
+    if (hexColor.length == 6) {
+      hexColor = 'FF' + hexColor;
+    }
+    return int.parse('0x$hexColor');
+  }
+
+  static String _extractHexCode(String input) {
+    RegExp regex = RegExp(r'([0-9A-Fa-f]{6}|[0-9A-Fa-f]{8})');
+    Match match = regex.firstMatch(input)!;
+    return match.group(0)!;
   }
 }
