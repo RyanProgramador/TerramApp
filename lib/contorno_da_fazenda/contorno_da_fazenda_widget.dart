@@ -154,7 +154,7 @@ class _ContornoDaFazendaWidgetState extends State<ContornoDaFazendaWidget> {
                             EdgeInsetsDirectional.fromSTEB(0.0, 90.0, 0.0, 0.0),
                         child: Container(
                           width: MediaQuery.sizeOf(context).width * 1.0,
-                          height: MediaQuery.sizeOf(context).height * 0.5,
+                          height: MediaQuery.sizeOf(context).height * 1.0,
                           decoration: BoxDecoration(
                             color: FlutterFlowTheme.of(context)
                                 .secondaryBackground,
@@ -162,10 +162,10 @@ class _ContornoDaFazendaWidgetState extends State<ContornoDaFazendaWidget> {
                           alignment: AlignmentDirectional(0.0, 1.0),
                           child: Container(
                             width: double.infinity,
-                            height: MediaQuery.sizeOf(context).height * 0.5,
+                            height: MediaQuery.sizeOf(context).height * 1.0,
                             child: custom_widgets.ContornoMapCorte(
                               width: double.infinity,
-                              height: MediaQuery.sizeOf(context).height * 0.5,
+                              height: MediaQuery.sizeOf(context).height * 1.0,
                               ativoOuNao: _model.ativo,
                               oservid: valueOrDefault<String>(
                                 widget.oservID,
