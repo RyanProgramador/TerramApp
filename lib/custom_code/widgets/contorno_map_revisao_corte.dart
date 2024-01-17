@@ -16,23 +16,25 @@ class ContornoMapRevisaoCorte extends StatefulWidget {
     Key? key,
     this.width,
     this.height,
-    this.listaDeLatLng,
-    this.cor,
+    //this.listaDeLatLng,
+    //this.cor,
   }) : super(key: key);
 
   final double? width;
   final double? height;
-  final List<String>? listaDeLatLng;
-  final String? cor;
+  //final List<String>? listaDeLatLng;
+  //final String? cor;
 
   @override
   _ContornoMapRevisaoState createState() => _ContornoMapRevisaoState();
 }
 
-class _ContornoMapRevisaoState extends State<ContornoMapRevisao> {
+class _ContornoMapRevisaoState extends State<ContornoMapRevisaoCorte> {
   google_maps.GoogleMapController? _googleMapController;
   Set<google_maps.Polygon> polygons = Set();
   List<google_maps.LatLng> latLngList = [];
+  List<String> listaDeLatLng = [];
+  String? cor = '#fffffff';
 
   @override
   void initState() {

@@ -186,35 +186,70 @@ class _TestecontornoWidgetState extends State<TestecontornoWidget> {
                             size: 24.0,
                           ),
                         ),
+                        Switch.adaptive(
+                          value: _model.switchValue ??= true,
+                          onChanged: (newValue) async {
+                            setState(() => _model.switchValue = newValue!);
+                          },
+                          activeColor: FlutterFlowTheme.of(context).primary,
+                          activeTrackColor:
+                              FlutterFlowTheme.of(context).accent1,
+                          inactiveTrackColor:
+                              FlutterFlowTheme.of(context).alternate,
+                          inactiveThumbColor:
+                              FlutterFlowTheme.of(context).secondaryText,
+                        ),
                       ],
                     ),
                   ),
-                  Expanded(
-                    flex: 18,
-                    child: Container(
-                      width: double.infinity,
-                      height: 400.0,
-                      decoration: BoxDecoration(
-                        color: FlutterFlowTheme.of(context).secondaryBackground,
-                      ),
+                  if (_model.switchValue ?? true)
+                    Expanded(
+                      flex: 18,
                       child: Container(
                         width: double.infinity,
-                        height: double.infinity,
-                        child: custom_widgets.Coleta(
+                        height: 400.0,
+                        decoration: BoxDecoration(
+                          color:
+                              FlutterFlowTheme.of(context).secondaryBackground,
+                        ),
+                        child: Container(
                           width: double.infinity,
                           height: double.infinity,
-                          intervaloDeColetaParaProximaFoto: 3,
-                          listaPontosComProfundidadeParaMedicao:
-                              FFAppState().listaDeLocaisDeAreasParaColeta,
-                          possiveisProfundidades:
-                              FFAppState().possiveisProfuncidadesDeColeta,
-                          listaDeLocaisDeContornoDeArea:
-                              FFAppState().latLngListaMarcadoresArea,
-                          pontosJaColetados: FFAppState().PontosColetados,
+                          child: custom_widgets.Coleta(
+                            width: double.infinity,
+                            height: double.infinity,
+                            intervaloDeColetaParaProximaFoto: 3,
+                            listaPontosComProfundidadeParaMedicao:
+                                FFAppState().listaDeLocaisDeAreasParaColeta,
+                            possiveisProfundidades:
+                                FFAppState().possiveisProfuncidadesDeColeta,
+                            listaDeLocaisDeContornoDeArea:
+                                FFAppState().latLngListaMarcadoresArea,
+                            pontosJaColetados: FFAppState().PontosColetados,
+                          ),
                         ),
                       ),
                     ),
-                  ),
+                  if (!_model.switchValue!)
+                    Expanded(
+                      flex: 18,
+                      child: Container(
+                        width: double.infinity,
+                        height: 400.0,
+                        decoration: BoxDecoration(
+                          color:
+                              FlutterFlowTheme.of(context).secondaryBackground,
+                        ),
+                        child: Container(
+                          width: double.infinity,
+                          height: double.infinity,
+                          child: custom_widgets.ContornoMapRevisaoCorte(
+                            width: double.infinity,
+                            height: double.infinity,
+                          ),
+                        ),
+                      ),
+                    ),
                   Expanded(
                     flex: 8,
                     child: Container(
