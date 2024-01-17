@@ -110,7 +110,7 @@ class _ContornoDaFazendaWidgetState extends State<ContornoDaFazendaWidget> {
                           EdgeInsetsDirectional.fromSTEB(0.0, 90.0, 0.0, 0.0),
                       child: Container(
                         width: MediaQuery.sizeOf(context).width * 1.0,
-                        height: MediaQuery.sizeOf(context).height * 1.0,
+                        height: MediaQuery.sizeOf(context).height * 0.5,
                         decoration: BoxDecoration(
                           color:
                               FlutterFlowTheme.of(context).secondaryBackground,
@@ -140,6 +140,46 @@ class _ContornoDaFazendaWidgetState extends State<ContornoDaFazendaWidget> {
                                   ? FFAppState()
                                       .distanciaEmMetrosDeToleranciaEntreUmaCapturaEOutra
                                   : 1,
+                            ),
+                          ),
+                        ),
+                      ),
+                    ),
+                    Align(
+                      alignment: AlignmentDirectional(0.0, 1.0),
+                      child: Padding(
+                        padding:
+                            EdgeInsetsDirectional.fromSTEB(0.0, 90.0, 0.0, 0.0),
+                        child: Container(
+                          width: MediaQuery.sizeOf(context).width * 1.0,
+                          height: MediaQuery.sizeOf(context).height * 0.5,
+                          decoration: BoxDecoration(
+                            color: FlutterFlowTheme.of(context)
+                                .secondaryBackground,
+                          ),
+                          alignment: AlignmentDirectional(0.0, 1.0),
+                          child: Container(
+                            width: double.infinity,
+                            height: MediaQuery.sizeOf(context).height * 0.5,
+                            child: custom_widgets.ContornoMapCorte(
+                              width: double.infinity,
+                              height: MediaQuery.sizeOf(context).height * 0.5,
+                              ativoOuNao: true,
+                              oservid: valueOrDefault<String>(
+                                widget.oservID,
+                                '1',
+                              ),
+                              idContorno: widget.idDoContorno,
+                              fazNome: widget.fazendaNome,
+                              toleranciaEmMetrosEntreUmaCapturaEOutra: FFAppState()
+                                          .distanciaEmMetrosDeToleranciaEntreUmaCapturaEOutra !=
+                                      null
+                                  ? FFAppState()
+                                      .distanciaEmMetrosDeToleranciaEntreUmaCapturaEOutra
+                                  : 1,
+                              fazid: widget.fazid!,
+                              localAtual: currentUserLocationValue,
+                              fazLatLng: widget.fazlatlng,
                             ),
                           ),
                         ),

@@ -187,7 +187,7 @@ class _TestecontornoWidgetState extends State<TestecontornoWidget> {
                           ),
                         ),
                         Switch.adaptive(
-                          value: _model.switchValue ??= true,
+                          value: _model.switchValue ??= false,
                           onChanged: (newValue) async {
                             setState(() => _model.switchValue = newValue!);
                           },
@@ -243,9 +243,15 @@ class _TestecontornoWidgetState extends State<TestecontornoWidget> {
                         child: Container(
                           width: double.infinity,
                           height: double.infinity,
-                          child: custom_widgets.ContornoMapRevisaoCorte(
+                          child: custom_widgets.ContornoMapCorte(
                             width: double.infinity,
                             height: double.infinity,
+                            ativoOuNao: true,
+                            fazNome: 'Fazenda do Ryan',
+                            toleranciaEmMetrosEntreUmaCapturaEOutra: 1,
+                            fazid: '22',
+                            localAtual: currentUserLocationValue,
+                            fazLatLng: FFAppState().excluirLocal,
                           ),
                         ),
                       ),
