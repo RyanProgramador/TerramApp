@@ -109,6 +109,23 @@ class _MapsRevisaoWidgetState extends State<MapsRevisaoWidget> {
                 ),
               ),
             ),
+            Builder(
+              builder: (context) {
+                final dfdfsdf = widget.listaLatLngEmString!.toList();
+                return SingleChildScrollView(
+                  child: Column(
+                    mainAxisSize: MainAxisSize.max,
+                    children: List.generate(dfdfsdf.length, (dfdfsdfIndex) {
+                      final dfdfsdfItem = dfdfsdf[dfdfsdfIndex];
+                      return Text(
+                        dfdfsdfItem,
+                        style: FlutterFlowTheme.of(context).bodyMedium,
+                      );
+                    }),
+                  ),
+                );
+              },
+            ),
           ],
         ),
       ),
