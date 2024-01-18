@@ -118,15 +118,15 @@ class _ContornoMapRevisaoState extends State<ContornoMapRevisao> {
       'ContornoRecorteDaFazenda',
       queryParameters: {
         'listaLatLngTalh': serializeParam(
-          listaLatLngString,
+          widget.listaDeLatLng,
           ParamType.String,
         ),
         'fazNome': serializeParam(
-          'Fazenda teste fixo',
+          widget.fazNome,
           ParamType.String,
         ),
         'fazid': serializeParam(
-          '22',
+          widget.fazid,
           ParamType.String,
         ),
         'fazLatLng': serializeParam(
