@@ -13,10 +13,20 @@ class MapsRevisaoWidget extends StatefulWidget {
     Key? key,
     required this.listaLatLngEmString,
     this.cor,
+    required this.fazendaNome,
+    required this.oservID,
+    required this.idDoContorno,
+    required this.fazid,
+    required this.fazlatlng,
   }) : super(key: key);
 
   final List<String>? listaLatLngEmString;
   final String? cor;
+  final String? fazendaNome;
+  final String? oservID;
+  final String? idDoContorno;
+  final String? fazid;
+  final LatLng? fazlatlng;
 
   @override
   _MapsRevisaoWidgetState createState() => _MapsRevisaoWidgetState();
@@ -71,6 +81,11 @@ class _MapsRevisaoWidgetState extends State<MapsRevisaoWidget> {
                     widget.cor,
                     '#ffffff',
                   ),
+                  fazid: widget.fazid,
+                  oservid: widget.oservID,
+                  idContorno: widget.idDoContorno,
+                  fazNome: widget.fazendaNome,
+                  fazLatLng: widget.fazlatlng,
                 ),
               ),
             ),

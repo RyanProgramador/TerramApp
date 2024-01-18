@@ -21,6 +21,16 @@ class MapsRevisaoModel extends FlutterFlowModel<MapsRevisaoWidget> {
 
   Color? cor;
 
+  String fazendaNome = '';
+
+  String oservID = '';
+
+  String idDoContorno = '';
+
+  String fazid = '';
+
+  LatLng? fazlatlng;
+
   /// Initialization and disposal methods.
 
   void initState(BuildContext context) {}

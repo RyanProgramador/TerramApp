@@ -18,12 +18,23 @@ class ContornoMapRevisao extends StatefulWidget {
     this.height,
     this.listaDeLatLng,
     this.cor,
+    this.fazid,
+    this.oservid,
+    this.idContorno,
+    this.fazNome,
+    this.fazLatLng,
   }) : super(key: key);
 
   final double? width;
   final double? height;
   final List<String>? listaDeLatLng;
   final String? cor;
+
+  final String? oservid;
+  final String? idContorno;
+  final String? fazid;
+  final String? fazNome;
+  final LatLng? fazLatLng;
 
   @override
   _ContornoMapRevisaoState createState() => _ContornoMapRevisaoState();

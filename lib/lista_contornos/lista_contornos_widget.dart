@@ -435,6 +435,30 @@ class _ListaContornosWidgetState extends State<ListaContornosWidget> {
                                                                     trGruposContornoFazendaItem,
                                                                     r'''$.cor''',
                                                                   ).toString(),
+                                                                  fazendaNome:
+                                                                      widget
+                                                                          .nomeFazenda!,
+                                                                  oservID: widget
+                                                                      .oservID!,
+                                                                  idDoContorno:
+                                                                      valueOrDefault<
+                                                                          String>(
+                                                                    FFAppState().contornoGrupoID !=
+                                                                                null &&
+                                                                            FFAppState().contornoGrupoID !=
+                                                                                ''
+                                                                        ? valueOrDefault<
+                                                                            String>(
+                                                                            FFAppState().contornoGrupoID,
+                                                                            '1',
+                                                                          )
+                                                                        : '1',
+                                                                    '1',
+                                                                  ),
+                                                                  fazid: widget
+                                                                      .fazid,
+                                                                  fazlatlng: widget
+                                                                      .fazlatlng!,
                                                                 ),
                                                               ),
                                                             ),
@@ -846,6 +870,30 @@ class _ListaContornosWidgetState extends State<ListaContornosWidget> {
                                                                       trGruposContornoFazenda2Item,
                                                                       r'''$.cor''',
                                                                     ).toString(),
+                                                                    fazendaNome:
+                                                                        widget
+                                                                            .nomeFazenda!,
+                                                                    oservID: widget
+                                                                        .oservID!,
+                                                                    idDoContorno:
+                                                                        valueOrDefault<
+                                                                            String>(
+                                                                      FFAppState().contornoGrupoID != null &&
+                                                                              FFAppState().contornoGrupoID !=
+                                                                                  ''
+                                                                          ? valueOrDefault<
+                                                                              String>(
+                                                                              FFAppState().contornoGrupoID,
+                                                                              '1',
+                                                                            )
+                                                                          : '1',
+                                                                      '1',
+                                                                    ),
+                                                                    fazid: widget
+                                                                        .fazid,
+                                                                    fazlatlng:
+                                                                        widget
+                                                                            .fazlatlng!,
                                                                   ),
                                                                 ),
                                                               ),
