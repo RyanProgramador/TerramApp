@@ -83,10 +83,10 @@ class _ContornoMapCorteState extends State<ContornoMapCorte> {
     "#000000" //preto
   ];
   List<google_maps.LatLng> fixedPolygonCoordinates = [
-    google_maps.LatLng(-29.91541825768134, -51.19612947790546),
-    google_maps.LatLng(-29.915492652480637, -51.19359747287395),
-    google_maps.LatLng(-29.913111991335484, -51.19323269248806),
-    google_maps.LatLng(-29.912944598957193, -51.1966230043099),
+    // google_maps.LatLng(-29.91541825768134, -51.19612947790546),
+    // google_maps.LatLng(-29.915492652480637, -51.19359747287395),
+    // google_maps.LatLng(-29.913111991335484, -51.19323269248806),
+    // google_maps.LatLng(-29.912944598957193, -51.1966230043099),
   ];
 
   //
@@ -96,12 +96,22 @@ class _ContornoMapCorteState extends State<ContornoMapCorte> {
   void initState() {
     super.initState();
 
+    // Filtra os dados com base no 'contorno_grupo'
+    var filtrado = FFAppState()
+        .contornoFazenda
+        .where((item) => item['contorno_grupo'] == widget.idContorno)
+        .map((item) => item['latlng'] as String)
+        .toList();
+
     _model = createModel(context, () => ContornoDaFazendaModel());
     _getCurrentLocation();
-    if (widget.listaLatLngTalhao != null) {
-      fixedPolygonCoordinates = toLatLng(widget.listaLatLngTalhao!);
+
+    // Verifica se a lista está disponível e não vazia
+    if (filtrado.isNotEmpty) {
+      fixedPolygonCoordinates = toLatLng(filtrado);
       _initializePolygons();
     }
+
     Timer.periodic(
         Duration(milliseconds: 1000), (Timer t) => _getCurrentLocation());
   }
@@ -576,21 +586,6 @@ class _ContornoMapCorteState extends State<ContornoMapCorte> {
             mainAxisAlignment: MainAxisAlignment.spaceEvenly,
             children: [
               ElevatedButton(
-                onPressed: tesouraRecorte,
-                style: ElevatedButton.styleFrom(
-                  shape: CircleBorder(),
-                  backgroundColor: Color(0xFFFFCD00),
-                ),
-                child: Padding(
-                  padding: const EdgeInsets.all(16.0),
-                  child: Icon(
-                    Icons.cut,
-                    size: 35.0,
-                    color: Colors.white,
-                  ),
-                ),
-              ),
-              ElevatedButton(
                 onPressed: () => _showVariablesAlert(context),
                 style: ElevatedButton.styleFrom(
                   shape: CircleBorder(),
@@ -613,6 +608,12 @@ class _ContornoMapCorteState extends State<ContornoMapCorte> {
   }
 
   void _showVariablesAlert(BuildContext context) {
+    var filtrado = FFAppState()
+        .contornoFazenda
+        .where((item) => item['contorno_grupo'] == widget.idContorno)
+        .map((item) => item['latlng'])
+        .toList();
+
     showDialog(
       context: context,
       builder: (BuildContext context) {
@@ -623,8 +624,7 @@ class _ContornoMapCorteState extends State<ContornoMapCorte> {
               children: [
                 Text('Width: ${widget.width}'),
                 Text('Height: ${widget.height}'),
-                Text('Lista de LatLng: ${widget.listaDeLatLng}'),
-                Text('Cor: ${widget.cor}'),
+                Text('Lista de LatLng: $filtrado'),
                 Text('Local Atual: ${widget.localAtual}'),
                 Text('OSERVID: ${widget.oservid}'),
                 Text('ID do Contorno: ${widget.idContorno}'),

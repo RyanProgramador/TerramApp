@@ -445,20 +445,10 @@ class _ListaContornosWidgetState extends State<ListaContornosWidget> {
                                                                   oservID: widget
                                                                       .oservID!,
                                                                   idDoContorno:
-                                                                      valueOrDefault<
-                                                                          String>(
-                                                                    FFAppState().contornoGrupoID !=
-                                                                                null &&
-                                                                            FFAppState().contornoGrupoID !=
-                                                                                ''
-                                                                        ? valueOrDefault<
-                                                                            String>(
-                                                                            FFAppState().contornoGrupoID,
-                                                                            '1',
-                                                                          )
-                                                                        : '1',
-                                                                    '1',
-                                                                  ),
+                                                                      getJsonField(
+                                                                    trGruposContornoFazendaItem,
+                                                                    r'''$.contorno_grupo''',
+                                                                  ).toString(),
                                                                   fazid: widget
                                                                       .fazid,
                                                                   fazlatlng: widget
