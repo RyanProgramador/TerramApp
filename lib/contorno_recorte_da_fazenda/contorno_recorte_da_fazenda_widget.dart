@@ -108,48 +108,6 @@ class _ContornoRecorteDaFazendaWidgetState
               Expanded(
                 child: Stack(
                   children: [
-                    if (true == false)
-                      Padding(
-                        padding:
-                            EdgeInsetsDirectional.fromSTEB(0.0, 90.0, 0.0, 0.0),
-                        child: Container(
-                          width: MediaQuery.sizeOf(context).width * 1.0,
-                          height: MediaQuery.sizeOf(context).height * 0.377,
-                          decoration: BoxDecoration(
-                            color: FlutterFlowTheme.of(context)
-                                .secondaryBackground,
-                          ),
-                          alignment: AlignmentDirectional(0.0, 1.0),
-                          child: Align(
-                            alignment: AlignmentDirectional(0.0, 0.0),
-                            child: Container(
-                              width: MediaQuery.sizeOf(context).width * 0.99,
-                              height: MediaQuery.sizeOf(context).height * 0.99,
-                              child: custom_widgets.ContornoMap(
-                                width: MediaQuery.sizeOf(context).width * 0.99,
-                                height:
-                                    MediaQuery.sizeOf(context).height * 0.99,
-                                ativoOuNao: _model.ativo,
-                                localAtual: currentUserLocationValue,
-                                oservid: valueOrDefault<String>(
-                                  widget.oservID,
-                                  '1',
-                                ),
-                                idContorno: widget.idDoContorno,
-                                fazid: widget.fazid!,
-                                fazNome: widget.fazendaNome,
-                                fazLatLng: widget.fazlatlng,
-                                toleranciaEmMetrosEntreUmaCapturaEOutra: FFAppState()
-                                            .distanciaEmMetrosDeToleranciaEntreUmaCapturaEOutra !=
-                                        null
-                                    ? FFAppState()
-                                        .distanciaEmMetrosDeToleranciaEntreUmaCapturaEOutra
-                                    : 1,
-                              ),
-                            ),
-                          ),
-                        ),
-                      ),
                     Align(
                       alignment: AlignmentDirectional(0.0, 1.0),
                       child: Padding(
@@ -242,7 +200,10 @@ class _ContornoRecorteDaFazendaWidgetState
                                       'ListaContornos',
                                       queryParameters: {
                                         'nomeFazenda': serializeParam(
-                                          widget.fazendaNome,
+                                          valueOrDefault<String>(
+                                            widget.fazendaNome,
+                                            'Fazenda sem nome',
+                                          ),
                                           ParamType.String,
                                         ),
                                         'oservID': serializeParam(
