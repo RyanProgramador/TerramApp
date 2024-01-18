@@ -557,7 +557,7 @@ class _ConfiguracoesWidgetState extends State<ConfiguracoesWidget> {
                                 padding: EdgeInsetsDirectional.fromSTEB(
                                     0.0, 4.0, 0.0, 0.0),
                                 child: Text(
-                                  'v1.9.52',
+                                  'v1.9.521',
                                   style: FlutterFlowTheme.of(context)
                                       .labelMedium
                                       .override(
