@@ -7,17 +7,18 @@ import 'package:flutter/scheduler.dart';
 import 'package:flutter/services.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:provider/provider.dart';
-import 'contorno_da_fazenda_model.dart';
-export 'contorno_da_fazenda_model.dart';
+import 'contorno_recorte_da_fazenda_model.dart';
+export 'contorno_recorte_da_fazenda_model.dart';
 
-class ContornoDaFazendaWidget extends StatefulWidget {
-  const ContornoDaFazendaWidget({
+class ContornoRecorteDaFazendaWidget extends StatefulWidget {
+  const ContornoRecorteDaFazendaWidget({
     Key? key,
     required this.fazendaNome,
     required this.oservID,
     String? idDoContorno,
     required this.fazid,
     this.fazlatlng,
+    required this.listaLatLngTalhao,
   })  : this.idDoContorno = idDoContorno ?? '1',
         super(key: key);
 
@@ -26,14 +27,16 @@ class ContornoDaFazendaWidget extends StatefulWidget {
   final String idDoContorno;
   final String? fazid;
   final LatLng? fazlatlng;
+  final List<String>? listaLatLngTalhao;
 
   @override
-  _ContornoDaFazendaWidgetState createState() =>
-      _ContornoDaFazendaWidgetState();
+  _ContornoRecorteDaFazendaWidgetState createState() =>
+      _ContornoRecorteDaFazendaWidgetState();
 }
 
-class _ContornoDaFazendaWidgetState extends State<ContornoDaFazendaWidget> {
-  late ContornoDaFazendaModel _model;
+class _ContornoRecorteDaFazendaWidgetState
+    extends State<ContornoRecorteDaFazendaWidget> {
+  late ContornoRecorteDaFazendaModel _model;
 
   final scaffoldKey = GlobalKey<ScaffoldState>();
   LatLng? currentUserLocationValue;
@@ -41,7 +44,7 @@ class _ContornoDaFazendaWidgetState extends State<ContornoDaFazendaWidget> {
   @override
   void initState() {
     super.initState();
-    _model = createModel(context, () => ContornoDaFazendaModel());
+    _model = createModel(context, () => ContornoRecorteDaFazendaModel());
 
     // On page load action.
     SchedulerBinding.instance.addPostFrameCallback((_) async {
@@ -105,87 +108,89 @@ class _ContornoDaFazendaWidgetState extends State<ContornoDaFazendaWidget> {
               Expanded(
                 child: Stack(
                   children: [
-                    Padding(
-                      padding:
-                          EdgeInsetsDirectional.fromSTEB(0.0, 90.0, 0.0, 0.0),
-                      child: Container(
-                        width: MediaQuery.sizeOf(context).width * 1.0,
-                        height: MediaQuery.sizeOf(context).height * 1.0,
-                        decoration: BoxDecoration(
-                          color:
-                              FlutterFlowTheme.of(context).secondaryBackground,
-                        ),
-                        alignment: AlignmentDirectional(0.0, 1.0),
-                        child: Align(
-                          alignment: AlignmentDirectional(0.0, 0.0),
-                          child: Container(
-                            width: MediaQuery.sizeOf(context).width * 0.99,
-                            height: MediaQuery.sizeOf(context).height * 0.99,
-                            child: custom_widgets.ContornoMap(
+                    if (true == false)
+                      Padding(
+                        padding:
+                            EdgeInsetsDirectional.fromSTEB(0.0, 90.0, 0.0, 0.0),
+                        child: Container(
+                          width: MediaQuery.sizeOf(context).width * 1.0,
+                          height: MediaQuery.sizeOf(context).height * 0.377,
+                          decoration: BoxDecoration(
+                            color: FlutterFlowTheme.of(context)
+                                .secondaryBackground,
+                          ),
+                          alignment: AlignmentDirectional(0.0, 1.0),
+                          child: Align(
+                            alignment: AlignmentDirectional(0.0, 0.0),
+                            child: Container(
                               width: MediaQuery.sizeOf(context).width * 0.99,
                               height: MediaQuery.sizeOf(context).height * 0.99,
-                              ativoOuNao: _model.ativo,
-                              localAtual: currentUserLocationValue,
-                              oservid: valueOrDefault<String>(
-                                widget.oservID,
-                                '1',
-                              ),
-                              idContorno: widget.idDoContorno,
-                              fazid: widget.fazid!,
-                              fazNome: widget.fazendaNome,
-                              fazLatLng: widget.fazlatlng,
-                              toleranciaEmMetrosEntreUmaCapturaEOutra: FFAppState()
-                                          .distanciaEmMetrosDeToleranciaEntreUmaCapturaEOutra !=
-                                      null
-                                  ? FFAppState()
-                                      .distanciaEmMetrosDeToleranciaEntreUmaCapturaEOutra
-                                  : 1,
-                            ),
-                          ),
-                        ),
-                      ),
-                    ),
-                    if (true == false)
-                      Align(
-                        alignment: AlignmentDirectional(0.0, 1.0),
-                        child: Padding(
-                          padding: EdgeInsetsDirectional.fromSTEB(
-                              0.0, 90.0, 0.0, 0.0),
-                          child: Container(
-                            width: MediaQuery.sizeOf(context).width * 1.0,
-                            height: MediaQuery.sizeOf(context).height * 1.0,
-                            decoration: BoxDecoration(
-                              color: FlutterFlowTheme.of(context)
-                                  .secondaryBackground,
-                            ),
-                            alignment: AlignmentDirectional(0.0, 1.0),
-                            child: Container(
-                              width: double.infinity,
-                              height: MediaQuery.sizeOf(context).height * 1.0,
-                              child: custom_widgets.ContornoMapCorte(
-                                width: double.infinity,
-                                height: MediaQuery.sizeOf(context).height * 1.0,
+                              child: custom_widgets.ContornoMap(
+                                width: MediaQuery.sizeOf(context).width * 0.99,
+                                height:
+                                    MediaQuery.sizeOf(context).height * 0.99,
                                 ativoOuNao: _model.ativo,
+                                localAtual: currentUserLocationValue,
                                 oservid: valueOrDefault<String>(
                                   widget.oservID,
                                   '1',
                                 ),
                                 idContorno: widget.idDoContorno,
+                                fazid: widget.fazid!,
                                 fazNome: widget.fazendaNome,
+                                fazLatLng: widget.fazlatlng,
                                 toleranciaEmMetrosEntreUmaCapturaEOutra: FFAppState()
                                             .distanciaEmMetrosDeToleranciaEntreUmaCapturaEOutra !=
                                         null
                                     ? FFAppState()
                                         .distanciaEmMetrosDeToleranciaEntreUmaCapturaEOutra
                                     : 1,
-                                fazid: widget.fazid!,
-                                localAtual: currentUserLocationValue,
-                                fazLatLng: widget.fazlatlng,
                               ),
                             ),
                           ),
                         ),
                       ),
+                    Align(
+                      alignment: AlignmentDirectional(0.0, 1.0),
+                      child: Padding(
+                        padding:
+                            EdgeInsetsDirectional.fromSTEB(0.0, 90.0, 0.0, 0.0),
+                        child: Container(
+                          width: MediaQuery.sizeOf(context).width * 1.0,
+                          height: MediaQuery.sizeOf(context).height * 1.0,
+                          decoration: BoxDecoration(
+                            color: FlutterFlowTheme.of(context)
+                                .secondaryBackground,
+                          ),
+                          alignment: AlignmentDirectional(0.0, 1.0),
+                          child: Container(
+                            width: double.infinity,
+                            height: MediaQuery.sizeOf(context).height * 1.0,
+                            child: custom_widgets.ContornoMapCorte(
+                              width: double.infinity,
+                              height: MediaQuery.sizeOf(context).height * 1.0,
+                              ativoOuNao: _model.ativo,
+                              oservid: valueOrDefault<String>(
+                                widget.oservID,
+                                '1',
+                              ),
+                              idContorno: widget.idDoContorno,
+                              fazNome: widget.fazendaNome,
+                              toleranciaEmMetrosEntreUmaCapturaEOutra: FFAppState()
+                                          .distanciaEmMetrosDeToleranciaEntreUmaCapturaEOutra !=
+                                      null
+                                  ? FFAppState()
+                                      .distanciaEmMetrosDeToleranciaEntreUmaCapturaEOutra
+                                  : 1,
+                              fazid: widget.fazid!,
+                              localAtual: currentUserLocationValue,
+                              fazLatLng: widget.fazlatlng,
+                              listaLatLngTalh: widget.listaLatLngTalhao!,
+                            ),
+                          ),
+                        ),
+                      ),
+                    ),
                     ClipRRect(
                       borderRadius: BorderRadius.only(
                         bottomLeft: Radius.circular(60.0),
@@ -286,7 +291,7 @@ class _ContornoDaFazendaWidgetState extends State<ContornoDaFazendaWidget> {
                                   ),
                             ),
                             Text(
-                              _model.textoInicioEFimDeContorno,
+                              'Recorte o talhão!',
                               style: FlutterFlowTheme.of(context)
                                   .bodyMedium
                                   .override(

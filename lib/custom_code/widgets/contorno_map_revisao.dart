@@ -96,25 +96,49 @@ class _ContornoMapRevisaoState extends State<ContornoMapRevisao> {
     }
   }
 
+  void tesouraRecorte() {}
   @override
   Widget build(BuildContext context) {
     final initialTarget =
         latLngList.isNotEmpty ? latLngList.first : google_maps.LatLng(0.0, 0.0);
 
-    return Container(
-      width: widget.width ?? double.infinity,
-      height: widget.height ?? double.infinity,
-      child: google_maps.GoogleMap(
-        initialCameraPosition: google_maps.CameraPosition(
-          target: initialTarget,
-          zoom: 15,
+    return Stack(
+      children: [
+        Container(
+          width: widget.width ?? double.infinity,
+          height: widget.height ?? double.infinity,
+          child: google_maps.GoogleMap(
+            initialCameraPosition: google_maps.CameraPosition(
+              target: initialTarget,
+              zoom: 15,
+            ),
+            onMapCreated: (controller) => _googleMapController = controller,
+            polygons: polygons,
+            mapType: google_maps.MapType.satellite,
+            mapToolbarEnabled: false,
+            zoomControlsEnabled: false,
+          ),
         ),
-        onMapCreated: (controller) => _googleMapController = controller,
-        polygons: polygons,
-        mapType: google_maps.MapType.satellite,
-        mapToolbarEnabled: false,
-        zoomControlsEnabled: false,
-      ),
+        Positioned(
+          bottom: 10,
+          left: 10,
+          right: 10,
+          child: ElevatedButton(
+            onPressed: tesouraRecorte,
+            style: ElevatedButton.styleFrom(
+              shape: CircleBorder(),
+              backgroundColor: Color(0xFFFFCD00),
+            ),
+            child: Padding(
+                padding: const EdgeInsets.all(16.0),
+                child: Icon(
+                  Icons.cut,
+                  size: 35.0,
+                  color: Colors.white,
+                )),
+          ),
+        ),
+      ],
     );
   }
 }

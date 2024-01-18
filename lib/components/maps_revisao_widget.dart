@@ -100,7 +100,7 @@ class _MapsRevisaoWidgetState extends State<MapsRevisaoWidget> {
                         ),
                         child: Icon(
                           Icons.close,
-                          color: FlutterFlowTheme.of(context).secondary,
+                          color: FlutterFlowTheme.of(context).primary,
                           size: 32.0,
                         ),
                       ),

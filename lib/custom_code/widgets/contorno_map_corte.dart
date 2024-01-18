@@ -30,6 +30,7 @@ class ContornoMapCorte extends StatefulWidget {
     this.fazNome,
     this.fazLatLng,
     this.toleranciaEmMetrosEntreUmaCapturaEOutra,
+    this.listaLatLngTalh,
     required this.fazid,
   }) : super(key: key);
 
@@ -43,6 +44,7 @@ class ContornoMapCorte extends StatefulWidget {
   final String? fazNome;
   final LatLng? fazLatLng;
   final int? toleranciaEmMetrosEntreUmaCapturaEOutra;
+  final List<String> listaLatLngTalh;
   @override
   _ContornoMapCorteState createState() => _ContornoMapCorteState();
 }
@@ -78,11 +80,62 @@ class _ContornoMapCorteState extends State<ContornoMapCorte> {
   late ContornoDaFazendaModel _model;
 //cores do contorno
   List<String> coresHex = [
-    "#FFFFFF" //preto
+    "#000000" //preto
+  ];
+  List<google_maps.LatLng> fixedPolygonCoordinates = [
+    // google_maps.LatLng(-29.91541825768134, -51.19612947790546),
+    // google_maps.LatLng(-29.915492652480637, -51.19359747287395),
+    // google_maps.LatLng(-29.913111991335484, -51.19323269248806),
+    // google_maps.LatLng(-29.912944598957193, -51.1966230043099),
   ];
 
   //
   List<Map<String, dynamic>> dados = []; // Variável para armazenar dados
+
+  @override
+  void initState() {
+    super.initState();
+    _model = createModel(context, () => ContornoDaFazendaModel());
+    _getCurrentLocation();
+    if (widget.listaLatLngTalh != null) {
+      fixedPolygonCoordinates = toLatLng(widget.listaLatLngTalh!);
+      _initializePolygons();
+    }
+    Timer.periodic(
+        Duration(milliseconds: 1000), (Timer t) => _getCurrentLocation());
+  }
+
+  List<google_maps.LatLng> toLatLng(List<String> latLngStrings) {
+    List<google_maps.LatLng> latLngList = [];
+    for (String latLngString in latLngStrings) {
+      final latLngSplit = latLngString.split(',').map((s) => s.trim()).toList();
+      if (latLngSplit.length == 2) {
+        try {
+          final lat = double.parse(latLngSplit[0]);
+          final lng = double.parse(latLngSplit[1]);
+          latLngList.add(google_maps.LatLng(lat, lng));
+        } catch (e) {
+          // Handle parsing error if any.
+        }
+      }
+    }
+    return latLngList;
+  }
+
+  void _initializePolygons() {
+    // Polígono fixo
+    var fixedPolygon = google_maps.Polygon(
+      polygonId: google_maps.PolygonId('FixedAreaPolygon'),
+      points: fixedPolygonCoordinates,
+      fillColor: Colors.black.withOpacity(0.2),
+      strokeColor: Colors.black,
+      strokeWidth: 3,
+    );
+
+    setState(() {
+      polygons.add(fixedPolygon);
+    });
+  }
 
   void _onMapCreated(google_maps.GoogleMapController controller) {
     _googleMapController = controller;
@@ -168,54 +221,70 @@ class _ContornoMapCorteState extends State<ContornoMapCorte> {
       final Random random = Random();
       final String corAleatoria = coresHex[random.nextInt(coresHex.length)];
 
+      // setState(() {
+
+      // Polígono criado pelo usuário
+      var userCreatedPolygon = google_maps.Polygon(
+        polygonId: google_maps.PolygonId('UserCreatedAreaPolygon'),
+        points: List<google_maps.LatLng>.from(
+            markers.map((marker) => marker.position)),
+        fillColor: Colors.red.withOpacity(0.2),
+        strokeColor: Colors.red,
+        strokeWidth: 3,
+      );
+
       setState(() {
-        // Transformar a linha em um polígono fechado
-        var polygonCoordinates = List<google_maps.LatLng>.from(
-            markers.map((marker) => marker.position));
-        polygonCoordinates.add(markers.first.position); // Fechar o polígono
-        polygons.clear();
         polygons.add(
-          google_maps.Polygon(
-            polygonId: google_maps.PolygonId('AreaPolygon'),
-            points: polygonCoordinates,
-            fillColor: HexColor("#DB2400").withOpacity(0.2),
-            strokeColor: HexColor("#DB2400"),
-            strokeWidth: 3,
-          ),
-        );
-
-        // Salvar dados
-        int markerId = 1;
-        for (var coord in polygonCoordinates) {
-          Map<String, dynamic> contorno = {
-            "contorno_grupo": widget.idContorno,
-            "marker_id": markerId++,
-            "oserv_id": widget.oservid,
-            "latlng": "${coord.latitude}, ${coord.longitude}",
-          };
-          FFAppState().contornoFazenda.add(contorno);
-        }
-        DateTime dataHoraAtual = DateTime.now();
-        String formattedDataHora = dataHoraAtual
-            .toLocal()
-            .toString(); // Obtém a data e hora atual como uma string
-
-        Map<String, dynamic> grupocontorno = {
-          "contorno_grupo": widget.idContorno,
-          "oserv_id": widget.oservid,
-          "dthr_fim": formattedDataHora,
-          "faz_id": widget.fazid,
-          "cor": "$corAleatoria",
-          "nome": "Talh_" + widget.idContorno.toString()
-        };
-        FFAppState().grupoContornoFazendas.add(grupocontorno);
-
-        FFAppState().contornoGrupoID =
-            (int.parse(widget.idContorno ?? '123') + 1).toString();
-
-        isVisivel = false;
-        isLocationPaused = true;
+            userCreatedPolygon); // Adiciona o novo polígono sem remover o existente
       });
+
+      // Transformar a linha em um polígono fechado
+      var polygonCoordinates = List<google_maps.LatLng>.from(
+          markers.map((marker) => marker.position));
+      polygonCoordinates.add(markers.first.position); // Fechar o polígono
+      // polygons.clear();//limpar poligonos, remover isso após testes
+      polygons.add(
+        google_maps.Polygon(
+          polygonId: google_maps.PolygonId('AreaPolygon'),
+          points: polygonCoordinates,
+          fillColor: HexColor("#DB2400").withOpacity(0.2),
+          strokeColor: HexColor("#DB2400"),
+          strokeWidth: 3,
+        ),
+      );
+
+      // Salvar dados
+      int markerId = 1;
+      for (var coord in polygonCoordinates) {
+        Map<String, dynamic> contorno = {
+          "contorno_grupo": widget.idContorno,
+          "marker_id": markerId++,
+          "oserv_id": widget.oservid,
+          "latlng": "${coord.latitude}, ${coord.longitude}",
+        };
+        FFAppState().contornoFazenda.add(contorno);
+      }
+      DateTime dataHoraAtual = DateTime.now();
+      String formattedDataHora = dataHoraAtual
+          .toLocal()
+          .toString(); // Obtém a data e hora atual como uma string
+
+      Map<String, dynamic> grupocontorno = {
+        "contorno_grupo": widget.idContorno,
+        "oserv_id": widget.oservid,
+        "dthr_fim": formattedDataHora,
+        "faz_id": widget.fazid,
+        "cor": "$corAleatoria",
+        "nome": "Talh_" + widget.idContorno.toString()
+      };
+      FFAppState().grupoContornoFazendas.add(grupocontorno);
+
+      FFAppState().contornoGrupoID =
+          (int.parse(widget.idContorno ?? '123') + 1).toString();
+
+      isVisivel = false;
+      isLocationPaused = true;
+      // });
     }
     _updatePolyline();
   }
@@ -233,34 +302,34 @@ class _ContornoMapCorteState extends State<ContornoMapCorte> {
     FFAppState().grupoContornoFazendas =
         FFAppState().grupoContornoFazendas.toList().cast<dynamic>();
 //redireciona para a lista de contornos
-    context.goNamed(
-      'ListaContornos',
-      queryParameters: {
-        'nomeFazenda': serializeParam(
-          widget.fazNome,
-          ParamType.String,
-        ),
-        'oservID': serializeParam(
-          widget.oservid,
-          ParamType.String,
-        ),
-        'fazid': serializeParam(
-          widget.fazid,
-          ParamType.String,
-        ),
-        'fazlatlng': serializeParam(
-          widget.fazLatLng,
-          ParamType.LatLng,
-        ),
-      }.withoutNulls,
-      extra: <String, dynamic>{
-        kTransitionInfoKey: TransitionInfo(
-          hasTransition: true,
-          transitionType: PageTransitionType.fade,
-          duration: Duration(milliseconds: 0),
-        ),
-      },
-    );
+//     context.goNamed(
+//       'ListaContornos',
+//       queryParameters: {
+//         'nomeFazenda': serializeParam(
+//           widget.fazNome,
+//           ParamType.String,
+//         ),
+//         'oservID': serializeParam(
+//           widget.oservid,
+//           ParamType.String,
+//         ),
+//         'fazid': serializeParam(
+//           widget.fazid,
+//           ParamType.String,
+//         ),
+//         'fazlatlng': serializeParam(
+//           widget.fazLatLng,
+//           ParamType.LatLng,
+//         ),
+//       }.withoutNulls,
+//       extra: <String, dynamic>{
+//         kTransitionInfoKey: TransitionInfo(
+//           hasTransition: true,
+//           transitionType: PageTransitionType.fade,
+//           duration: Duration(milliseconds: 0),
+//         ),
+//       },
+//     );
   }
 
   double _distanceToStart() {
@@ -383,15 +452,6 @@ class _ContornoMapCorteState extends State<ContornoMapCorte> {
         );
       },
     );
-  }
-
-  @override
-  void initState() {
-    super.initState();
-    _model = createModel(context, () => ContornoDaFazendaModel());
-    _getCurrentLocation();
-    Timer.periodic(
-        Duration(milliseconds: 1000), (Timer t) => _getCurrentLocation());
   }
 
   @override

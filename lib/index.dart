@@ -17,3 +17,5 @@ export '/lista_contornos/lista_contornos_widget.dart' show ListaContornosWidget;
 export '/blank_redirecona/blank_redirecona_widget.dart'
     show BlankRedireconaWidget;
 export '/medicao_coleta/medicao_coleta_widget.dart' show MedicaoColetaWidget;
+export '/contorno_recorte_da_fazenda/contorno_recorte_da_fazenda_widget.dart'
+    show ContornoRecorteDaFazendaWidget;
