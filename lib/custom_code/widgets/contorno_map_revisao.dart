@@ -23,6 +23,7 @@ class ContornoMapRevisao extends StatefulWidget {
     this.idContorno,
     this.fazNome,
     this.fazLatLng,
+    this.localAtual,
   }) : super(key: key);
 
   final double? width;
@@ -30,6 +31,7 @@ class ContornoMapRevisao extends StatefulWidget {
   final List<String>? listaDeLatLng;
   final String? cor;
 
+  final LatLng? localAtual;
   final String? oservid;
   final String? idContorno;
   final String? fazid;
