@@ -27,7 +27,7 @@ class ContornoRecorteDaFazendaWidget extends StatefulWidget {
   final String idDoContorno;
   final String? fazid;
   final LatLng? fazlatlng;
-  final String? listaLatLngTalhao;
+  final List<String>? listaLatLngTalhao;
 
   @override
   _ContornoRecorteDaFazendaWidgetState createState() =>
@@ -145,7 +145,6 @@ class _ContornoRecorteDaFazendaWidgetState
                                 fazid: widget.fazid,
                                 localAtual: currentUserLocationValue,
                                 fazLatLng: widget.fazlatlng,
-                                listaLatLngTalh: widget.listaLatLngTalhao,
                               ),
                             ),
                           ),

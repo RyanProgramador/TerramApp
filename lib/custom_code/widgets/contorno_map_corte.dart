@@ -30,7 +30,7 @@ class ContornoMapCorte extends StatefulWidget {
     this.fazNome,
     this.fazLatLng,
     this.toleranciaEmMetrosEntreUmaCapturaEOutra,
-    this.listaLatLngTalh,
+    this.listaLatLngTalhao,
     this.fazid,
   }) : super(key: key);
 
@@ -44,7 +44,7 @@ class ContornoMapCorte extends StatefulWidget {
   final String? fazNome;
   final LatLng? fazLatLng;
   final int? toleranciaEmMetrosEntreUmaCapturaEOutra;
-  final String? listaLatLngTalh;
+  final List<String>? listaLatLngTalhao;
   @override
   _ContornoMapCorteState createState() => _ContornoMapCorteState();
 }
@@ -71,9 +71,9 @@ class _ContornoMapCorteState extends State<ContornoMapCorte> {
   bool isVisivel = true;
   double currentZoom = 20.0;
   google_maps.LatLng? currentTarget;
-  late String oservid = '22';
-  late String idContorno = '4';
-  late String fazid = '18';
+  late String oservid;
+  late String idContorno;
+  late String fazid;
   //IMPEDIR DE PEGAR NO MESMO LUGAR
   Position? lastPosition;
 //isso é para mudar o estado de fora do widget custom
@@ -98,8 +98,8 @@ class _ContornoMapCorteState extends State<ContornoMapCorte> {
 
     _model = createModel(context, () => ContornoDaFazendaModel());
     _getCurrentLocation();
-    if (widget.listaLatLngTalh != null) {
-      fixedPolygonCoordinates = toLatLng(widget.listaLatLngTalh!);
+    if (widget.listaLatLngTalhao != null) {
+      fixedPolygonCoordinates = toLatLng(widget.listaLatLngTalhao!);
       _initializePolygons();
     }
     Timer.periodic(
