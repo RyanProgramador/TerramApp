@@ -30,7 +30,7 @@ class ContornoMapCorte extends StatefulWidget {
     this.fazNome,
     this.fazLatLng,
     this.toleranciaEmMetrosEntreUmaCapturaEOutra,
-    this.listaLatLngTalh,
+    required this.listaLatLngTalh,
     required this.fazid,
   }) : super(key: key);
 

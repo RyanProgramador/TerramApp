@@ -96,7 +96,38 @@ class _ContornoMapRevisaoState extends State<ContornoMapRevisao> {
     }
   }
 
-  void tesouraRecorte() {}
+  void tesouraRecorte() {
+    //redireciona para a lista de contornos
+    context.goNamed(
+      'ContornoRecorteDaFazenda',
+      queryParameters: {
+        'listaLatLngTalhao': serializeParam(
+          widget.listaDeLatLng,
+          ParamType.String,
+        ),
+        'fazendaNome': serializeParam(
+          'Fazenda teste fixo',
+          ParamType.String,
+        ),
+        'fazid': serializeParam(
+          '22',
+          ParamType.String,
+        ),
+        'fazlatlng': serializeParam(
+          widget.listaDeLatLng,
+          ParamType.LatLng,
+        ),
+      }.withoutNulls,
+      extra: <String, dynamic>{
+        kTransitionInfoKey: TransitionInfo(
+          hasTransition: true,
+          transitionType: PageTransitionType.fade,
+          duration: Duration(milliseconds: 0),
+        ),
+      },
+    );
+  }
+
   @override
   Widget build(BuildContext context) {
     final initialTarget =
