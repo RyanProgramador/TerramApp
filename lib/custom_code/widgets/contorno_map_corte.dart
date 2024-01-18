@@ -568,7 +568,83 @@ class _ContornoMapCorteState extends State<ContornoMapCorte> {
             ),
           ),
         ),
+        Positioned(
+          bottom: 10,
+          left: 10,
+          right: 10,
+          child: Row(
+            mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+            children: [
+              ElevatedButton(
+                onPressed: tesouraRecorte,
+                style: ElevatedButton.styleFrom(
+                  shape: CircleBorder(),
+                  backgroundColor: Color(0xFFFFCD00),
+                ),
+                child: Padding(
+                  padding: const EdgeInsets.all(16.0),
+                  child: Icon(
+                    Icons.cut,
+                    size: 35.0,
+                    color: Colors.white,
+                  ),
+                ),
+              ),
+              ElevatedButton(
+                onPressed: () => _showVariablesAlert(context),
+                style: ElevatedButton.styleFrom(
+                  shape: CircleBorder(),
+                  backgroundColor: Color(0xFF00736D),
+                ),
+                child: Padding(
+                  padding: const EdgeInsets.all(16.0),
+                  child: Icon(
+                    Icons.info_outline,
+                    size: 35.0,
+                    color: Colors.white,
+                  ),
+                ),
+              ),
+            ],
+          ),
+        ),
       ],
+    );
+  }
+
+  void _showVariablesAlert(BuildContext context) {
+    showDialog(
+      context: context,
+      builder: (BuildContext context) {
+        return AlertDialog(
+          title: Text('Variáveis e Valores'),
+          content: SingleChildScrollView(
+            child: ListBody(
+              children: [
+                Text('Width: ${widget.width}'),
+                Text('Height: ${widget.height}'),
+                Text('Lista de LatLng: ${widget.listaDeLatLng}'),
+                Text('Cor: ${widget.cor}'),
+                Text('Local Atual: ${widget.localAtual}'),
+                Text('OSERVID: ${widget.oservid}'),
+                Text('ID do Contorno: ${widget.idContorno}'),
+                Text('ID da Fazenda: ${widget.fazid}'),
+                Text('Nome da Fazenda: ${widget.fazNome}'),
+                Text('LatLng da Fazenda: ${widget.fazLatLng}'),
+                // Adicione outras variáveis conforme necessário
+              ],
+            ),
+          ),
+          actions: <Widget>[
+            TextButton(
+              child: Text('Fechar'),
+              onPressed: () {
+                Navigator.of(context).pop();
+              },
+            ),
+          ],
+        );
+      },
     );
   }
 }
