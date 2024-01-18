@@ -117,11 +117,11 @@ class _ContornoMapRevisaoState extends State<ContornoMapRevisao> {
     context.goNamed(
       'ContornoRecorteDaFazenda',
       queryParameters: {
-        'listaLatLngTalh': serializeParam(
-          widget.listaDeLatLng,
+        'listaLatLngTalhao': serializeParam(
+          listaLatLngString,
           ParamType.String,
         ),
-        'fazNome': serializeParam(
+        'fazendaNome': serializeParam(
           widget.fazNome,
           ParamType.String,
         ),
@@ -129,11 +129,11 @@ class _ContornoMapRevisaoState extends State<ContornoMapRevisao> {
           widget.fazid,
           ParamType.String,
         ),
-        'fazLatLng': serializeParam(
+        'fazlatlng': serializeParam(
           widget.fazLatLng,
           ParamType.LatLng,
         ),
-        'idContorno': serializeParam(
+        'idDoContorno': serializeParam(
           widget.idContorno,
           ParamType.LatLng,
         ),
@@ -141,7 +141,7 @@ class _ContornoMapRevisaoState extends State<ContornoMapRevisao> {
           widget.localAtual,
           ParamType.LatLng,
         ),
-        'oservid': serializeParam(
+        'oservID': serializeParam(
           widget.oservid,
           ParamType.LatLng,
         ),
@@ -200,21 +200,21 @@ class _ContornoMapRevisaoState extends State<ContornoMapRevisao> {
                   ),
                 ),
               ),
-              ElevatedButton(
-                onPressed: () => _showVariablesAlert(context),
-                style: ElevatedButton.styleFrom(
-                  shape: CircleBorder(),
-                  backgroundColor: Color(0xFF00736D),
-                ),
-                child: Padding(
-                  padding: const EdgeInsets.all(16.0),
-                  child: Icon(
-                    Icons.info_outline,
-                    size: 35.0,
-                    color: Colors.white,
-                  ),
-                ),
-              ),
+              // ElevatedButton(
+              //   onPressed: () => _showVariablesAlert(context),
+              //   style: ElevatedButton.styleFrom(
+              //     shape: CircleBorder(),
+              //     backgroundColor: Color(0xFF00736D),
+              //   ),
+              //   child: Padding(
+              //     padding: const EdgeInsets.all(16.0),
+              //     child: Icon(
+              //       Icons.info_outline,
+              //       size: 35.0,
+              //       color: Colors.white,
+              //     ),
+              //   ),
+              // ),
             ],
           ),
         ),
