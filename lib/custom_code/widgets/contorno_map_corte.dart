@@ -44,7 +44,7 @@ class ContornoMapCorte extends StatefulWidget {
   final String? fazNome;
   final LatLng? fazLatLng;
   final int? toleranciaEmMetrosEntreUmaCapturaEOutra;
-  final List<String>? listaLatLngTalh;
+  final String? listaLatLngTalh;
   @override
   _ContornoMapCorteState createState() => _ContornoMapCorteState();
 }
@@ -98,10 +98,10 @@ class _ContornoMapCorteState extends State<ContornoMapCorte> {
 
     _model = createModel(context, () => ContornoDaFazendaModel());
     _getCurrentLocation();
-    // if (widget.listaLatLngTalh != null) {
-    // fixedPolygonCoordinates = toLatLng(widget.listaLatLngTalh!);
-    _initializePolygons();
-    // }
+    if (widget.listaLatLngTalh != null) {
+      fixedPolygonCoordinates = toLatLng(widget.listaLatLngTalh!);
+      _initializePolygons();
+    }
     Timer.periodic(
         Duration(milliseconds: 1000), (Timer t) => _getCurrentLocation());
   }

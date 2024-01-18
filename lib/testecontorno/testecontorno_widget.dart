@@ -252,7 +252,7 @@ class _TestecontornoWidgetState extends State<TestecontornoWidget> {
                             fazid: '22',
                             localAtual: currentUserLocationValue,
                             fazLatLng: FFAppState().excluirLocal,
-                            listaLatLngTalh: widget.contornoGrupo,
+                            listaLatLngTalh: widget.contornoGrupo?.toString(),
                           ),
                         ),
                       ),

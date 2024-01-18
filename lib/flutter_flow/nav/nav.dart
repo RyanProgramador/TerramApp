@@ -181,8 +181,8 @@ GoRouter createRouter(AppStateNotifier appStateNotifier) => GoRouter(
                 idDoContorno: params.getParam('idDoContorno', ParamType.String),
                 fazid: params.getParam('fazid', ParamType.String),
                 fazlatlng: params.getParam('fazlatlng', ParamType.LatLng),
-                listaLatLngTalhao: params.getParam<String>(
-                    'listaLatLngTalhao', ParamType.String, true),
+                listaLatLngTalhao:
+                    params.getParam('listaLatLngTalhao', ParamType.String),
               ),
             )
           ].map((r) => r.toRoute(appStateNotifier)).toList(),
