@@ -35,6 +35,8 @@ class MapsRevisaoWidget extends StatefulWidget {
 class _MapsRevisaoWidgetState extends State<MapsRevisaoWidget> {
   late MapsRevisaoModel _model;
 
+  LatLng? currentUserLocationValue;
+
   @override
   void setState(VoidCallback callback) {
     super.setState(callback);
@@ -45,6 +47,9 @@ class _MapsRevisaoWidgetState extends State<MapsRevisaoWidget> {
   void initState() {
     super.initState();
     _model = createModel(context, () => MapsRevisaoModel());
+
+    getCurrentUserLocation(defaultLocation: LatLng(0.0, 0.0), cached: true)
+        .then((loc) => setState(() => currentUserLocationValue = loc));
   }
 
   @override
@@ -57,6 +62,22 @@ class _MapsRevisaoWidgetState extends State<MapsRevisaoWidget> {
   @override
   Widget build(BuildContext context) {
     context.watch<FFAppState>();
+    if (currentUserLocationValue == null) {
+      return Container(
+        color: FlutterFlowTheme.of(context).primaryBackground,
+        child: Center(
+          child: SizedBox(
+            width: 50.0,
+            height: 50.0,
+            child: CircularProgressIndicator(
+              valueColor: AlwaysStoppedAnimation<Color>(
+                FlutterFlowTheme.of(context).primary,
+              ),
+            ),
+          ),
+        ),
+      );
+    }
 
     return Container(
       width: double.infinity,
@@ -81,7 +102,7 @@ class _MapsRevisaoWidgetState extends State<MapsRevisaoWidget> {
                     widget.cor,
                     '#ffffff',
                   ),
-                  localAtual: widget.fazid,
+                  localAtual: currentUserLocationValue,
                   fazid: widget.fazid,
                   oservid: widget.oservID,
                   idContorno: widget.idDoContorno,
