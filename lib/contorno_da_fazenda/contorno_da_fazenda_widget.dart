@@ -159,30 +159,6 @@ class _ContornoDaFazendaWidgetState extends State<ContornoDaFazendaWidget> {
                                   .secondaryBackground,
                             ),
                             alignment: AlignmentDirectional(0.0, 1.0),
-                            child: Container(
-                              width: double.infinity,
-                              height: MediaQuery.sizeOf(context).height * 1.0,
-                              child: custom_widgets.ContornoMapCorte(
-                                width: double.infinity,
-                                height: MediaQuery.sizeOf(context).height * 1.0,
-                                ativoOuNao: _model.ativo,
-                                oservid: valueOrDefault<String>(
-                                  widget.oservID,
-                                  '1',
-                                ),
-                                idContorno: widget.idDoContorno,
-                                fazNome: widget.fazendaNome,
-                                toleranciaEmMetrosEntreUmaCapturaEOutra: FFAppState()
-                                            .distanciaEmMetrosDeToleranciaEntreUmaCapturaEOutra !=
-                                        null
-                                    ? FFAppState()
-                                        .distanciaEmMetrosDeToleranciaEntreUmaCapturaEOutra
-                                    : 1,
-                                fazid: widget.fazid!,
-                                localAtual: currentUserLocationValue,
-                                fazLatLng: widget.fazlatlng,
-                              ),
-                            ),
                           ),
                         ),
                       ),
