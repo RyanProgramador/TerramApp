@@ -107,6 +107,7 @@ class _MapsRevisaoWidgetState extends State<MapsRevisaoWidget> {
                   idContorno: widget.idDoContorno,
                   fazNome: widget.fazendaNome,
                   fazLatLng: widget.fazlatlng,
+                  localAtual: currentUserLocationValue,
                 ),
               ),
             ),
