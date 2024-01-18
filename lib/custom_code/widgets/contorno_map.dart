@@ -78,7 +78,7 @@ class _ContornoMapState extends State<ContornoMap> {
   late ContornoDaFazendaModel _model;
 //cores do contorno
   List<String> coresHex = [
-    "#FFFFFF" //preto
+    "#000000" //preto
   ];
 
   //

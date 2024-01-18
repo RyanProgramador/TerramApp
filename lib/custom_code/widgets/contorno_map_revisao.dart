@@ -111,14 +111,17 @@ class _ContornoMapRevisaoState extends State<ContornoMapRevisao> {
 
   void tesouraRecorte() {
     //redireciona para a lista de contornos
+
+    final listaLatLngString = widget.listaDeLatLng?.join(",") ?? '';
+
     context.goNamed(
       'ContornoRecorteDaFazenda',
       queryParameters: {
-        'listaLatLngTalhao': serializeParam(
-          widget.listaDeLatLng,
+        'listaLatLngTalh': serializeParam(
+          listaLatLngString,
           ParamType.String,
         ),
-        'fazendaNome': serializeParam(
+        'fazNome': serializeParam(
           'Fazenda teste fixo',
           ParamType.String,
         ),
@@ -126,8 +129,20 @@ class _ContornoMapRevisaoState extends State<ContornoMapRevisao> {
           '22',
           ParamType.String,
         ),
-        'fazlatlng': serializeParam(
-          widget.listaDeLatLng,
+        'fazLatLng': serializeParam(
+          widget.fazLatLng,
+          ParamType.LatLng,
+        ),
+        'idContorno': serializeParam(
+          widget.idContorno,
+          ParamType.LatLng,
+        ),
+        'localAtual': serializeParam(
+          widget.localAtual,
+          ParamType.LatLng,
+        ),
+        'oservid': serializeParam(
+          widget.oservid,
           ParamType.LatLng,
         ),
       }.withoutNulls,
@@ -167,22 +182,76 @@ class _ContornoMapRevisaoState extends State<ContornoMapRevisao> {
           bottom: 10,
           left: 10,
           right: 10,
-          child: ElevatedButton(
-            onPressed: tesouraRecorte,
-            style: ElevatedButton.styleFrom(
-              shape: CircleBorder(),
-              backgroundColor: Color(0xFFFFCD00),
-            ),
-            child: Padding(
-                padding: const EdgeInsets.all(16.0),
-                child: Icon(
-                  Icons.cut,
-                  size: 35.0,
-                  color: Colors.white,
-                )),
+          child: Row(
+            mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+            children: [
+              ElevatedButton(
+                onPressed: tesouraRecorte,
+                style: ElevatedButton.styleFrom(
+                  shape: CircleBorder(),
+                  backgroundColor: Color(0xFFFFCD00),
+                ),
+                child: Padding(
+                  padding: const EdgeInsets.all(16.0),
+                  child: Icon(
+                    Icons.cut,
+                    size: 35.0,
+                    color: Colors.white,
+                  ),
+                ),
+              ),
+              ElevatedButton(
+                onPressed: () => _showVariablesAlert(context),
+                style: ElevatedButton.styleFrom(
+                  shape: CircleBorder(),
+                  backgroundColor: Color(0xFF00736D),
+                ),
+                child: Padding(
+                  padding: const EdgeInsets.all(16.0),
+                  child: Icon(
+                    Icons.info_outline,
+                    size: 35.0,
+                    color: Colors.white,
+                  ),
+                ),
+              ),
+            ],
           ),
         ),
       ],
+    );
+  }
+
+  void _showVariablesAlert(BuildContext context) {
+    showDialog(
+      context: context,
+      builder: (BuildContext context) {
+        return AlertDialog(
+          title: Text('Variáveis e Valores'),
+          content: SingleChildScrollView(
+            child: ListBody(
+              children: [
+                Text('Lista de LatLng: ${widget.listaDeLatLng}'),
+                Text('Cor: ${widget.cor}'),
+                Text('Local Atual: ${widget.localAtual}'),
+                Text('OSERVID: ${widget.oservid}'),
+                Text('ID do Contorno: ${widget.idContorno}'),
+                Text('ID da Fazenda: ${widget.fazid}'),
+                Text('Nome da Fazenda: ${widget.fazNome}'),
+                Text('LatLng da Fazenda: ${widget.fazLatLng}'),
+              ],
+            ),
+          ),
+          actions: <Widget>[
+            TextButton(
+              child: Text('Fechar'),
+              onPressed: () {
+                Navigator.of(context).pop();
+              },
+            ),
+          ],
+        );
+      },
     );
   }
 }

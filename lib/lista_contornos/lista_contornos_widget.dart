@@ -436,8 +436,12 @@ class _ListaContornosWidgetState extends State<ListaContornosWidget> {
                                                                     r'''$.cor''',
                                                                   ).toString(),
                                                                   fazendaNome:
-                                                                      widget
-                                                                          .nomeFazenda!,
+                                                                      valueOrDefault<
+                                                                          String>(
+                                                                    widget
+                                                                        .nomeFazenda,
+                                                                    'teste',
+                                                                  ),
                                                                   oservID: widget
                                                                       .oservID!,
                                                                   idDoContorno:

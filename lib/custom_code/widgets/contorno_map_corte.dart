@@ -30,8 +30,8 @@ class ContornoMapCorte extends StatefulWidget {
     this.fazNome,
     this.fazLatLng,
     this.toleranciaEmMetrosEntreUmaCapturaEOutra,
-    required this.listaLatLngTalh,
-    required this.fazid,
+    this.listaLatLngTalh,
+    this.fazid,
   }) : super(key: key);
 
   final double? width;
@@ -40,11 +40,11 @@ class ContornoMapCorte extends StatefulWidget {
   final LatLng? localAtual;
   final String? oservid;
   final String? idContorno;
-  final String fazid;
+  final String? fazid;
   final String? fazNome;
   final LatLng? fazLatLng;
   final int? toleranciaEmMetrosEntreUmaCapturaEOutra;
-  final List<String> listaLatLngTalh;
+  final List<String>? listaLatLngTalh;
   @override
   _ContornoMapCorteState createState() => _ContornoMapCorteState();
 }
@@ -71,9 +71,9 @@ class _ContornoMapCorteState extends State<ContornoMapCorte> {
   bool isVisivel = true;
   double currentZoom = 20.0;
   google_maps.LatLng? currentTarget;
-  late String oservid;
-  late String idContorno;
-  late String fazid;
+  late String oservid = '22';
+  late String idContorno = '4';
+  late String fazid = '18';
   //IMPEDIR DE PEGAR NO MESMO LUGAR
   Position? lastPosition;
 //isso é para mudar o estado de fora do widget custom
@@ -83,10 +83,10 @@ class _ContornoMapCorteState extends State<ContornoMapCorte> {
     "#000000" //preto
   ];
   List<google_maps.LatLng> fixedPolygonCoordinates = [
-    // google_maps.LatLng(-29.91541825768134, -51.19612947790546),
-    // google_maps.LatLng(-29.915492652480637, -51.19359747287395),
-    // google_maps.LatLng(-29.913111991335484, -51.19323269248806),
-    // google_maps.LatLng(-29.912944598957193, -51.1966230043099),
+    google_maps.LatLng(-29.91541825768134, -51.19612947790546),
+    google_maps.LatLng(-29.915492652480637, -51.19359747287395),
+    google_maps.LatLng(-29.913111991335484, -51.19323269248806),
+    google_maps.LatLng(-29.912944598957193, -51.1966230043099),
   ];
 
   //
@@ -95,12 +95,13 @@ class _ContornoMapCorteState extends State<ContornoMapCorte> {
   @override
   void initState() {
     super.initState();
+
     _model = createModel(context, () => ContornoDaFazendaModel());
     _getCurrentLocation();
-    if (widget.listaLatLngTalh != null) {
-      fixedPolygonCoordinates = toLatLng(widget.listaLatLngTalh!);
-      _initializePolygons();
-    }
+    // if (widget.listaLatLngTalh != null) {
+    // fixedPolygonCoordinates = toLatLng(widget.listaLatLngTalh!);
+    _initializePolygons();
+    // }
     Timer.periodic(
         Duration(milliseconds: 1000), (Timer t) => _getCurrentLocation());
   }
