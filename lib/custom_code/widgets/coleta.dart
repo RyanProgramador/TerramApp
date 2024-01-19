@@ -339,6 +339,7 @@ class _ColetaState extends State<Coleta> {
 
     // Retrieve the position of the tapped marker
     google_maps.LatLng markerLatLng = markerPositions[markerIdValue]!;
+    latlngMarcador = markerPositions[markerIdValue]!;
 
     // Calculate the distance between the user's current location and the marker
     double distance = Geolocator.distanceBetween(
@@ -1113,7 +1114,6 @@ class _ColetaState extends State<Coleta> {
           return m.copyWith(
               draggableParam: true,
               onDragEndParam: (newPosition) {
-                markerPositions[marcadorNome] = newPosition;
                 // Atualiza a nova posição no markerPositions
                 markerPositions[marcadorNome] = newPosition;
                 latlngMarcador = newPosition; // Atualiza latlngMarcador
@@ -1142,6 +1142,21 @@ class _ColetaState extends State<Coleta> {
                   // Atualiza a posição da câmera para a nova localização do marcador
                   _updateMapLocationAfterMarkerMove(newPosition);
                 }
+              });
+        }
+        return m;
+      }).toSet();
+    });
+    setState(() {
+      markers = markers.map((m) {
+        if (m.markerId.value == marcadorNome) {
+          return m.copyWith(
+              draggableParam: true,
+              onDragEndParam: (newPosition) {
+                // Atualizar a posição em markerPositions e latLngListMarcadores
+                markerPositions[marcadorNome] = newPosition;
+                latlngMarcador = newPosition; // Atualiza latlngMarcador
+                // Restante do código...
               });
         }
         return m;

@@ -178,46 +178,46 @@ class _ContornoMapRevisaoState extends State<ContornoMapRevisao> {
             zoomControlsEnabled: false,
           ),
         ),
-        Positioned(
-          bottom: 10,
-          left: 10,
-          right: 10,
-          child: Row(
-            mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-            children: [
-              ElevatedButton(
-                onPressed: tesouraRecorte,
-                style: ElevatedButton.styleFrom(
-                  shape: CircleBorder(),
-                  backgroundColor: Color(0xFFFFCD00),
-                ),
-                child: Padding(
-                  padding: const EdgeInsets.all(16.0),
-                  child: Icon(
-                    Icons.cut,
-                    size: 35.0,
-                    color: Colors.white,
-                  ),
-                ),
-              ),
-              // ElevatedButton(
-              //   onPressed: () => _showVariablesAlert(context),
-              //   style: ElevatedButton.styleFrom(
-              //     shape: CircleBorder(),
-              //     backgroundColor: Color(0xFF00736D),
-              //   ),
-              //   child: Padding(
-              //     padding: const EdgeInsets.all(16.0),
-              //     child: Icon(
-              //       Icons.info_outline,
-              //       size: 35.0,
-              //       color: Colors.white,
-              //     ),
-              //   ),
-              // ),
-            ],
-          ),
-        ),
+        //Positioned(
+        //  bottom: 10,
+        //  left: 10,
+        //  right: 10,
+        //  child: Row(
+        //    mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+        //    children: [
+        //      ElevatedButton(
+        //        onPressed: tesouraRecorte,
+        //        style: ElevatedButton.styleFrom(
+        //          shape: CircleBorder(),
+        //          backgroundColor: Color(0xFFFFCD00),
+        //        ),
+        //        child: Padding(
+        //          padding: const EdgeInsets.all(16.0),
+        //          child: Icon(
+        //            Icons.cut,
+        //            size: 35.0,
+        //            color: Colors.white,
+        //          ),
+        //        ),
+        //      ),
+        //      // ElevatedButton(
+        //      //   onPressed: () => _showVariablesAlert(context),
+        //      //   style: ElevatedButton.styleFrom(
+        //      //     shape: CircleBorder(),
+        //      //     backgroundColor: Color(0xFF00736D),
+        //      //   ),
+        //      //   child: Padding(
+        //      //     padding: const EdgeInsets.all(16.0),
+        //      //     child: Icon(
+        //      //       Icons.info_outline,
+        //      //       size: 35.0,
+        //      //       color: Colors.white,
+        //      //     ),
+        //      //   ),
+        //      // ),
+        //    ],
+        //  ),
+        //),
       ],
     );
   }
