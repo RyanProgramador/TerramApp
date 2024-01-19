@@ -445,10 +445,14 @@ class _ListaContornosWidgetState extends State<ListaContornosWidget> {
                                                                   oservID: widget
                                                                       .oservID!,
                                                                   idDoContorno:
-                                                                      getJsonField(
-                                                                    trGruposContornoFazendaItem,
-                                                                    r'''$.contorno_grupo''',
-                                                                  ).toString(),
+                                                                      valueOrDefault<
+                                                                          String>(
+                                                                    getJsonField(
+                                                                      trGruposContornoFazendaItem,
+                                                                      r'''$.contorno_grupo''',
+                                                                    )?.toString(),
+                                                                    '44',
+                                                                  ),
                                                                   fazid: widget
                                                                       .fazid,
                                                                   fazlatlng: widget

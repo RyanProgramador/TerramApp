@@ -135,7 +135,7 @@ class _ContornoMapRevisaoState extends State<ContornoMapRevisao> {
         ),
         'idDoContorno': serializeParam(
           widget.idContorno,
-          ParamType.LatLng,
+          ParamType.String,
         ),
         'localAtual': serializeParam(
           widget.localAtual,
@@ -143,7 +143,7 @@ class _ContornoMapRevisaoState extends State<ContornoMapRevisao> {
         ),
         'oservID': serializeParam(
           widget.oservid,
-          ParamType.LatLng,
+          ParamType.String,
         ),
       }.withoutNulls,
       extra: <String, dynamic>{

@@ -151,6 +151,39 @@ class _MedicaoColetaWidgetState extends State<MedicaoColetaWidget> {
                         ),
                       ),
                     ),
+                    Align(
+                      alignment: AlignmentDirectional(0.88, -0.43),
+                      child: FFButtonWidget(
+                        onPressed: () async {
+                          setState(() {});
+                        },
+                        text: '',
+                        icon: Icon(
+                          Icons.refresh_sharp,
+                          size: 15.0,
+                        ),
+                        options: FFButtonOptions(
+                          width: 40.0,
+                          height: 40.0,
+                          padding: EdgeInsetsDirectional.fromSTEB(
+                              6.9, 0.0, 0.0, 0.0),
+                          iconPadding: EdgeInsetsDirectional.fromSTEB(
+                              0.0, 0.0, 0.0, 0.0),
+                          color: FlutterFlowTheme.of(context).primary,
+                          textStyle:
+                              FlutterFlowTheme.of(context).titleSmall.override(
+                                    fontFamily: 'Readex Pro',
+                                    color: Colors.white,
+                                  ),
+                          elevation: 3.0,
+                          borderSide: BorderSide(
+                            color: Colors.transparent,
+                            width: 1.0,
+                          ),
+                          borderRadius: BorderRadius.circular(24.0),
+                        ),
+                      ),
+                    ),
                   ],
                 ),
               ),

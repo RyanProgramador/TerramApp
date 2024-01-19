@@ -71,9 +71,9 @@ class _ContornoMapCorteState extends State<ContornoMapCorte> {
   bool isVisivel = true;
   double currentZoom = 20.0;
   google_maps.LatLng? currentTarget;
-  late String oservid;
-  late String idContorno;
-  late String fazid;
+  // late String oservid;
+  // late String idContorno;
+  // late String fazid;
   //IMPEDIR DE PEGAR NO MESMO LUGAR
   Position? lastPosition;
 //isso é para mudar o estado de fora do widget custom
@@ -266,32 +266,32 @@ class _ContornoMapCorteState extends State<ContornoMapCorte> {
 
       // Salvar dados
       int markerId = 1;
-      for (var coord in polygonCoordinates) {
-        Map<String, dynamic> contorno = {
-          "contorno_grupo": widget.idContorno,
-          "marker_id": markerId++,
-          "oserv_id": widget.oservid,
-          "latlng": "${coord.latitude}, ${coord.longitude}",
-        };
-        FFAppState().contornoFazenda.add(contorno);
-      }
+      // for (var coord in polygonCoordinates) {
+      //   Map<String, dynamic> contorno = {
+      //     "contorno_grupo": widget.idContorno,
+      //     "marker_id": markerId++,
+      //     "oserv_id": widget.oservid,
+      //     "latlng": "${coord.latitude}, ${coord.longitude}",
+      //   };
+      //   FFAppState().contornoFazenda.add(contorno);
+      // }
       DateTime dataHoraAtual = DateTime.now();
       String formattedDataHora = dataHoraAtual
           .toLocal()
           .toString(); // Obtém a data e hora atual como uma string
 
-      Map<String, dynamic> grupocontorno = {
-        "contorno_grupo": widget.idContorno,
-        "oserv_id": widget.oservid,
-        "dthr_fim": formattedDataHora,
-        "faz_id": widget.fazid,
-        "cor": "$corAleatoria",
-        "nome": "Talh_" + widget.idContorno.toString()
-      };
-      FFAppState().grupoContornoFazendas.add(grupocontorno);
-
-      FFAppState().contornoGrupoID =
-          (int.parse(widget.idContorno ?? '123') + 1).toString();
+      // Map<String, dynamic> grupocontorno = {
+      //   "contorno_grupo": widget.idContorno,
+      //   "oserv_id": widget.oservid,
+      //   "dthr_fim": formattedDataHora,
+      //   "faz_id": widget.fazid,
+      //   "cor": "$corAleatoria",
+      //   "nome": "Talh_" + widget.idContorno.toString()
+      // };
+      // FFAppState().grupoContornoFazendas.add(grupocontorno);
+      //
+      // FFAppState().contornoGrupoID =
+      //     (int.parse(widget.idContorno ?? '123') + 1).toString();
 
       isVisivel = false;
       isLocationPaused = true;
@@ -585,21 +585,21 @@ class _ContornoMapCorteState extends State<ContornoMapCorte> {
           child: Row(
             mainAxisAlignment: MainAxisAlignment.spaceEvenly,
             children: [
-              ElevatedButton(
-                onPressed: () => _showVariablesAlert(context),
-                style: ElevatedButton.styleFrom(
-                  shape: CircleBorder(),
-                  backgroundColor: Color(0xFF00736D),
-                ),
-                child: Padding(
-                  padding: const EdgeInsets.all(16.0),
-                  child: Icon(
-                    Icons.info_outline,
-                    size: 35.0,
-                    color: Colors.white,
-                  ),
-                ),
-              ),
+              // ElevatedButton(
+              //   onPressed: () => _showVariablesAlert(context),
+              //   style: ElevatedButton.styleFrom(
+              //     shape: CircleBorder(),
+              //     backgroundColor: Color(0xFF00736D),
+              //   ),
+              //   child: Padding(
+              //     padding: const EdgeInsets.all(16.0),
+              //     child: Icon(
+              //       Icons.info_outline,
+              //       size: 35.0,
+              //       color: Colors.white,
+              //     ),
+              //   ),
+              // ),
             ],
           ),
         ),

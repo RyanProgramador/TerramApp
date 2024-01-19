@@ -990,12 +990,6 @@ class _ColetaState extends State<Coleta> {
       coletasPorMarcador.putIfAbsent(marcadorNome, () => {});
       coletasPorMarcador[marcadorNome]!.add(profundidadeNome);
 
-      FFAppState().PontosColetados.add(jsonEncode({
-            "marcador_nome": marcadorNome,
-            "profundidade": profundidadeNome,
-            "foto": 'base64Image',
-          }));
-
       // Verifica se todas as profundidades foram coletadas
       var todasProfundidades = latLngListMarcadores
           .firstWhere(
@@ -1247,10 +1241,6 @@ class _ColetaState extends State<Coleta> {
                   "Pontos Excluídos: ${jsonEncode(pontosExcluidos)}",
                   style: TextStyle(color: Colors.black, fontSize: 12.0),
                 ),
-                Text(
-                  "PontosJaColetados: ${jsonEncode(widget.pontosJaColetados)}",
-                  style: TextStyle(color: Colors.black, fontSize: 12.0),
-                ),
               ],
             ),
           ),
@@ -1311,25 +1301,25 @@ class _ColetaState extends State<Coleta> {
                 )),
           ),
         ),
-        Positioned(
-          bottom: 10,
-          left: 10,
-          right: 10,
-          child: ElevatedButton(
-            onPressed: _exibirDados,
-            style: ElevatedButton.styleFrom(
-              shape: CircleBorder(),
-              backgroundColor: Color(0xFF00736D),
-            ),
-            child: Padding(
-                padding: const EdgeInsets.all(8.0),
-                child: Icon(
-                  Icons.info,
-                  size: 25.0,
-                  color: Colors.white,
-                )),
-          ),
-        ),
+        //Positioned(
+        //  bottom: 10,
+        //  left: 10,
+        //  right: 10,
+        //  child: ElevatedButton(
+        //    onPressed: _exibirDados,
+        //    style: ElevatedButton.styleFrom(
+        //      shape: CircleBorder(),
+        //      backgroundColor: Color(0xFF00736D),
+        //    ),
+        //    child: Padding(
+        //        padding: const EdgeInsets.all(8.0),
+        //        child: Icon(
+        //          Icons.info,
+        //          size: 25.0,
+        //          color: Colors.white,
+        //        )),
+        //  ),
+        //),
       ],
     );
   }
