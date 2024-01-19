@@ -152,10 +152,10 @@ class _MedicaoColetaWidgetState extends State<MedicaoColetaWidget> {
                       ),
                     ),
                     Align(
-                      alignment: AlignmentDirectional(0.88, -0.43),
+                      alignment: AlignmentDirectional(0.74, -0.23),
                       child: FFButtonWidget(
                         onPressed: () async {
-                          setState(() {});
+                          FFAppState().update(() {});
                         },
                         text: '',
                         icon: Icon(
