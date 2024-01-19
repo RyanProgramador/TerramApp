@@ -329,6 +329,7 @@ class _ContornoMapCorteState extends State<ContornoMapCorte> {
           "fazid": widget.fazid,
           "listaLatLngRecorte": polygonPoints
         });
+// FFAppState().latlngRecorteTalhao.add(latlngRecorte);
       });
 
       // Outras ações de finalização
