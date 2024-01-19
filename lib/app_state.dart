@@ -417,6 +417,10 @@ class FFAppState extends ChangeNotifier {
           prefs.getStringList('ff_latLngListaMarcadoresArea') ??
               _latLngListaMarcadoresArea;
     });
+    _safeInit(() {
+      _latlngRecorteTalhao =
+          prefs.getStringList('ff_latlngRecorteTalhao') ?? _latlngRecorteTalhao;
+    });
   }
 
   void update(VoidCallback callback) {
@@ -1840,6 +1844,41 @@ class FFAppState extends ChangeNotifier {
     _latLngListaMarcadoresArea.insert(_index, _value);
     prefs.setStringList(
         'ff_latLngListaMarcadoresArea', _latLngListaMarcadoresArea);
+  }
+
+  List<String> _latlngRecorteTalhao = [];
+  List<String> get latlngRecorteTalhao => _latlngRecorteTalhao;
+  set latlngRecorteTalhao(List<String> _value) {
+    _latlngRecorteTalhao = _value;
+    prefs.setStringList('ff_latlngRecorteTalhao', _value);
+  }
+
+  void addToLatlngRecorteTalhao(String _value) {
+    _latlngRecorteTalhao.add(_value);
+    prefs.setStringList('ff_latlngRecorteTalhao', _latlngRecorteTalhao);
+  }
+
+  void removeFromLatlngRecorteTalhao(String _value) {
+    _latlngRecorteTalhao.remove(_value);
+    prefs.setStringList('ff_latlngRecorteTalhao', _latlngRecorteTalhao);
+  }
+
+  void removeAtIndexFromLatlngRecorteTalhao(int _index) {
+    _latlngRecorteTalhao.removeAt(_index);
+    prefs.setStringList('ff_latlngRecorteTalhao', _latlngRecorteTalhao);
+  }
+
+  void updateLatlngRecorteTalhaoAtIndex(
+    int _index,
+    String Function(String) updateFn,
+  ) {
+    _latlngRecorteTalhao[_index] = updateFn(_latlngRecorteTalhao[_index]);
+    prefs.setStringList('ff_latlngRecorteTalhao', _latlngRecorteTalhao);
+  }
+
+  void insertAtIndexInLatlngRecorteTalhao(int _index, String _value) {
+    _latlngRecorteTalhao.insert(_index, _value);
+    prefs.setStringList('ff_latlngRecorteTalhao', _latlngRecorteTalhao);
   }
 }
 

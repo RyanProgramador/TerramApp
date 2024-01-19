@@ -91,6 +91,8 @@ class _ContornoMapCorteState extends State<ContornoMapCorte> {
 
   //
   List<Map<String, dynamic>> dados = []; // Variável para armazenar dados
+  List<Map<String, dynamic>> latlngRecorte =
+      []; // Variável para armazenar dados
 
   @override
   void initState() {
@@ -138,7 +140,7 @@ class _ContornoMapCorteState extends State<ContornoMapCorte> {
     var fixedPolygon = google_maps.Polygon(
       polygonId: google_maps.PolygonId('FixedAreaPolygon'),
       points: fixedPolygonCoordinates,
-      fillColor: Colors.black.withOpacity(0.2),
+      fillColor: Colors.black.withOpacity(0.4),
       strokeColor: Colors.black,
       strokeWidth: 3,
     );
@@ -280,18 +282,15 @@ class _ContornoMapCorteState extends State<ContornoMapCorte> {
           .toLocal()
           .toString(); // Obtém a data e hora atual como uma string
 
-      // Map<String, dynamic> grupocontorno = {
-      //   "contorno_grupo": widget.idContorno,
-      //   "oserv_id": widget.oservid,
-      //   "dthr_fim": formattedDataHora,
-      //   "faz_id": widget.fazid,
-      //   "cor": "$corAleatoria",
-      //   "nome": "Talh_" + widget.idContorno.toString()
-      // };
-      // FFAppState().grupoContornoFazendas.add(grupocontorno);
-      //
-      // FFAppState().contornoGrupoID =
-      //     (int.parse(widget.idContorno ?? '123') + 1).toString();
+      Map<String, dynamic> grupocontorno = {
+        "contorno_grupo": widget.idContorno,
+        "oserv_id": widget.oservid,
+        "dthr_fim": formattedDataHora,
+        "faz_id": widget.fazid,
+        "cor": "$corAleatoria",
+        "nome": "Talh_" + widget.idContorno.toString()
+      };
+      // FFAppState().latlngRecorteTalhao.add(grupocontorno);
 
       isVisivel = false;
       isLocationPaused = true;
@@ -301,17 +300,47 @@ class _ContornoMapCorteState extends State<ContornoMapCorte> {
   }
 
   void _setFinalizou() {
-    setState(() {
-      FFAppState().contornoFazenda =
-          FFAppState().contornoFazenda.toList().cast<dynamic>();
-      FFAppState().grupoContornoFazendas =
-          FFAppState().grupoContornoFazendas.toList().cast<dynamic>();
-    });
+    if (markers.isNotEmpty && _distanceToStart() <= 50) {
+      final String corAleatoria = coresHex[Random().nextInt(coresHex.length)];
 
-    FFAppState().contornoFazenda =
-        FFAppState().contornoFazenda.toList().cast<dynamic>();
-    FFAppState().grupoContornoFazendas =
-        FFAppState().grupoContornoFazendas.toList().cast<dynamic>();
+      // Polígono criado pelo usuário
+      var userCreatedPolygon = google_maps.Polygon(
+        polygonId: google_maps.PolygonId('UserCreatedAreaPolygon'),
+        points: List<google_maps.LatLng>.from(
+            markers.map((marker) => marker.position)),
+        fillColor: Colors.red.withOpacity(0.2),
+        strokeColor: Colors.red,
+        strokeWidth: 3,
+      );
+
+      setState(() {
+        polygons.add(userCreatedPolygon); // Adiciona o novo polígono
+      });
+
+      // Capturar os pontos do polígono
+      List<String> polygonPoints = userCreatedPolygon.points
+          .map((p) => "${p.latitude}, ${p.longitude}")
+          .toList();
+
+      // Armazenar no latlngRecorte
+      setState(() {
+        latlngRecorte.add({
+          "idContorno": widget.idContorno,
+          "fazid": widget.fazid,
+          "listaLatLngRecorte": polygonPoints
+        });
+      });
+
+      // Outras ações de finalização
+      isVisivel = false;
+      isLocationPaused = true;
+    }
+    _updatePolyline();
+    //
+    // FFAppState().contornoFazenda =
+    //     FFAppState().contornoFazenda.toList().cast<dynamic>();
+    // FFAppState().grupoContornoFazendas =
+    //     FFAppState().grupoContornoFazendas.toList().cast<dynamic>();
 //redireciona para a lista de contornos
 //     context.goNamed(
 //       'ListaContornos',
@@ -585,21 +614,21 @@ class _ContornoMapCorteState extends State<ContornoMapCorte> {
           child: Row(
             mainAxisAlignment: MainAxisAlignment.spaceEvenly,
             children: [
-              // ElevatedButton(
-              //   onPressed: () => _showVariablesAlert(context),
-              //   style: ElevatedButton.styleFrom(
-              //     shape: CircleBorder(),
-              //     backgroundColor: Color(0xFF00736D),
-              //   ),
-              //   child: Padding(
-              //     padding: const EdgeInsets.all(16.0),
-              //     child: Icon(
-              //       Icons.info_outline,
-              //       size: 35.0,
-              //       color: Colors.white,
-              //     ),
-              //   ),
-              // ),
+              ElevatedButton(
+                onPressed: () => _showVariablesAlert(context),
+                style: ElevatedButton.styleFrom(
+                  shape: CircleBorder(),
+                  backgroundColor: Color(0xFF00736D),
+                ),
+                child: Padding(
+                  padding: const EdgeInsets.all(16.0),
+                  child: Icon(
+                    Icons.info_outline,
+                    size: 35.0,
+                    color: Colors.white,
+                  ),
+                ),
+              ),
             ],
           ),
         ),
@@ -631,7 +660,7 @@ class _ContornoMapCorteState extends State<ContornoMapCorte> {
                 Text('ID da Fazenda: ${widget.fazid}'),
                 Text('Nome da Fazenda: ${widget.fazNome}'),
                 Text('LatLng da Fazenda: ${widget.fazLatLng}'),
-                // Adicione outras variáveis conforme necessário
+                Text('lista de latlng do cont: $latlngRecorte'),
               ],
             ),
           ),
