@@ -156,6 +156,23 @@ class _MedicaoColetaWidgetState extends State<MedicaoColetaWidget> {
                       child: FFButtonWidget(
                         onPressed: () async {
                           FFAppState().update(() {});
+
+                          context.goNamed(
+                            'MedicaoColeta',
+                            queryParameters: {
+                              'fazNome': serializeParam(
+                                widget.fazNome,
+                                ParamType.String,
+                              ),
+                            }.withoutNulls,
+                            extra: <String, dynamic>{
+                              kTransitionInfoKey: TransitionInfo(
+                                hasTransition: true,
+                                transitionType: PageTransitionType.fade,
+                                duration: Duration(milliseconds: 0),
+                              ),
+                            },
+                          );
                         },
                         text: '',
                         icon: Icon(
