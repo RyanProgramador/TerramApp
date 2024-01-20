@@ -613,15 +613,10 @@ class _ContornoMapCorteState extends State<ContornoMapCorte> {
         .map((item) => item['latlng'])
         .toList();
 
-    // Decodificar a lista JSON em uma lista de objetos
-    var latlngRecorteJson = FFAppState()
-        .latlngRecorteTalhao
-        .map((stringItem) => jsonDecode(stringItem) as Map<String, dynamic>)
-        .toList();
-
     // Filtrar os recortes do contorno correto
-    var filtradoRecorte = latlngRecorteJson
-        .where((item) => item['contorno_grupo'].toString() == widget.idContorno)
+    var filtradoRecorte = FFAppState()
+        .latlngRecorteTalhao
+        .where((item) => item['idContorno'] == widget.idContorno)
         .map((item) => item['listaLatLngRecorte'])
         .toList();
 
@@ -643,7 +638,7 @@ class _ContornoMapCorteState extends State<ContornoMapCorte> {
                 Text('Nome da Fazenda: ${widget.fazNome}'),
                 Text('LatLng da Fazenda: ${widget.fazLatLng}'),
                 // Text('lista de latlng do cont: $latlngRecorte'),
-                // Text('apenas as latlng do contorno correto: $filtradoRecorte'),
+                Text('apenas as latlng do contorno correto: $filtradoRecorte'),
               ],
             ),
           ),
