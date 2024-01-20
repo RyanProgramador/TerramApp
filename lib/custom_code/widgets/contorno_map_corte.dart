@@ -330,8 +330,8 @@ class _ContornoMapCorteState extends State<ContornoMapCorte> {
           "listaLatLngRecorte": polygonPoints
         });
         // Converter latlngRecorte em JSON e adicionar ao FFAppState
-        String latlngRecorteJson = jsonEncode(latlngRecorte);
-        FFAppState().latlngRecorteTalhao.add(latlngRecorteJson);
+        // String latlngRecorteJson = jsonEncode(latlngRecorte);
+        FFAppState().latlngRecorteTalhao.add(jsonEncode(latlngRecorte));
       });
 
       // Outras ações de finalização
@@ -613,12 +613,15 @@ class _ContornoMapCorteState extends State<ContornoMapCorte> {
         .map((item) => item['latlng'])
         .toList();
 
-    // Filtrar os recortes do contorno correto
     var filtradoRecorte = FFAppState()
         .latlngRecorteTalhao
-        .where((item) => item['idContorno'] == widget.idContorno)
+        .where((item) =>
+            item['idContorno'].toString() == widget.idContorno.toString())
         .map((item) => item['listaLatLngRecorte'])
         .toList();
+
+    // Convertendo a lista para JSON
+    // String filtradoRecorteString = jsonEncode(filtradoRecorte);
 
     showDialog(
       context: context,
