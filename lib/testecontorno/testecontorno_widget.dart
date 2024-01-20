@@ -131,19 +131,8 @@ class _TestecontornoWidgetState extends State<TestecontornoWidget> {
             backgroundColor: FlutterFlowTheme.of(context).primaryBackground,
             floatingActionButton: FloatingActionButton(
               onPressed: () async {
-                setState(() {
-                  FFAppState().PontosMovidos = functions
-                      .juntarDuasListasJson(
-                          widget.contornoGrupo,
-                          ApiRotasDirectionsCall.tudo(
-                            testecontornoApiRotasDirectionsResponse.jsonBody,
-                          ))!
-                      .toList()
-                      .cast<dynamic>();
-                  FFAppState().PontosColetados =
-                      widget.contornoGrupo!.toList().cast<dynamic>();
-                  FFAppState().PontosExcluidos =
-                      widget.contornoGrupo!.toList().cast<dynamic>();
+                FFAppState().update(() {
+                  FFAppState().latlngRecorteTalhao = [];
                 });
               },
               backgroundColor: FlutterFlowTheme.of(context).primary,
