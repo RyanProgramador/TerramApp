@@ -17,6 +17,7 @@ class ContornoMapRevisao extends StatefulWidget {
     this.width,
     this.height,
     this.listaDeLatLng,
+    this.listaDeLatLngRecorte,
     this.cor,
     this.fazid,
     this.oservid,
@@ -29,6 +30,7 @@ class ContornoMapRevisao extends StatefulWidget {
   final double? width;
   final double? height;
   final List<String>? listaDeLatLng;
+  final List<String>? listaDeLatLngRecorte;
   final String? cor;
 
   final LatLng? localAtual;
@@ -64,6 +66,7 @@ class _ContornoMapRevisaoState extends State<ContornoMapRevisao> {
   google_maps.GoogleMapController? _googleMapController;
   Set<google_maps.Polygon> polygons = Set();
   List<google_maps.LatLng> latLngList = [];
+  List<google_maps.LatLng> latLngListRecorte = [];
 
   @override
   void initState() {
@@ -71,6 +74,14 @@ class _ContornoMapRevisaoState extends State<ContornoMapRevisao> {
     if (widget.listaDeLatLng != null) {
       latLngList = toLatLng(widget.listaDeLatLng!);
       _initializePolygons();
+    }
+    var filtradoRecorte = FFAppState()
+        .latlngRecorteTalhao
+        .where((item) => item['idContorno'] == widget.idContorno)
+        .map((item) => item['listaLatLngRecorte'])
+        .toList();
+    if (filtradoRecorte != null) {
+      _createRecortePolygons();
     }
   }
 
@@ -105,6 +116,29 @@ class _ContornoMapRevisaoState extends State<ContornoMapRevisao> {
 
       setState(() {
         polygons.add(polygon);
+      });
+    }
+  }
+
+  void _createRecortePolygons() {
+    var filtradoRecorte = FFAppState()
+        .latlngRecorteTalhao
+        .where((item) => item['idContorno'] == widget.idContorno)
+        .map((item) => item['listaLatLngRecorte'])
+        .toList();
+
+    for (var recorteList in filtradoRecorte) {
+      var recorteLatLngList = toLatLng(recorteList);
+      var recortePolygon = google_maps.Polygon(
+        polygonId: google_maps.PolygonId('Recorte_${recorteList.hashCode}'),
+        points: recorteLatLngList,
+        fillColor: Colors.red.withOpacity(0.4),
+        strokeColor: Colors.red,
+        strokeWidth: 3,
+      );
+
+      setState(() {
+        polygons.add(recortePolygon);
       });
     }
   }

@@ -91,8 +91,7 @@ class _ContornoMapCorteState extends State<ContornoMapCorte> {
 
   //
   List<Map<String, dynamic>> dados = []; // Variável para armazenar dados
-  List<Map<String, dynamic>> latlngRecorte =
-      []; // Variável para armazenar dados
+  // Map<String, dynamic> latlngRecorte; // Variável para armazenar dados
 
   @override
   void initState() {
@@ -112,6 +111,14 @@ class _ContornoMapCorteState extends State<ContornoMapCorte> {
     if (filtrado.isNotEmpty) {
       fixedPolygonCoordinates = toLatLng(filtrado);
       _initializePolygons();
+    }
+    var filtradoRecorte = FFAppState()
+        .latlngRecorteTalhao
+        .where((item) => item['idContorno'] == widget.idContorno)
+        .map((item) => item['listaLatLngRecorte'])
+        .toList();
+    if (filtradoRecorte != null) {
+      _createRecortePolygons();
     }
 
     Timer.periodic(
@@ -148,6 +155,29 @@ class _ContornoMapCorteState extends State<ContornoMapCorte> {
     setState(() {
       polygons.add(fixedPolygon);
     });
+  }
+
+  void _createRecortePolygons() {
+    var filtradoRecorte = FFAppState()
+        .latlngRecorteTalhao
+        .where((item) => item['idContorno'] == widget.idContorno)
+        .map((item) => item['listaLatLngRecorte'])
+        .toList();
+
+    for (var recorteList in filtradoRecorte) {
+      var recorteLatLngList = toLatLng(recorteList);
+      var recortePolygon = google_maps.Polygon(
+        polygonId: google_maps.PolygonId('Recorte_${recorteList.hashCode}'),
+        points: recorteLatLngList,
+        fillColor: Colors.red.withOpacity(0.4),
+        strokeColor: Colors.red,
+        strokeWidth: 3,
+      );
+
+      setState(() {
+        polygons.add(recortePolygon);
+      });
+    }
   }
 
   void _onMapCreated(google_maps.GoogleMapController controller) {
@@ -324,14 +354,14 @@ class _ContornoMapCorteState extends State<ContornoMapCorte> {
 
       // Armazenar no latlngRecorte
       setState(() {
-        latlngRecorte.add({
+        Map<String, dynamic> latlngRecorte = {
           "idContorno": widget.idContorno,
           "fazid": widget.fazid,
           "listaLatLngRecorte": polygonPoints
-        });
+        };
         // Converter latlngRecorte em JSON e adicionar ao FFAppState
         // String latlngRecorteJson = jsonEncode(latlngRecorte);
-        FFAppState().latlngRecorteTalhao.add(jsonEncode(latlngRecorte));
+        FFAppState().latlngRecorteTalhao.add(latlngRecorte);
       });
 
       // Outras ações de finalização
@@ -615,8 +645,7 @@ class _ContornoMapCorteState extends State<ContornoMapCorte> {
 
     var filtradoRecorte = FFAppState()
         .latlngRecorteTalhao
-        .where((item) =>
-            item['idContorno'].toString() == widget.idContorno.toString())
+        .where((item) => item['idContorno'] == widget.idContorno)
         .map((item) => item['listaLatLngRecorte'])
         .toList();
 
