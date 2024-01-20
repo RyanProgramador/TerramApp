@@ -419,7 +419,15 @@ class FFAppState extends ChangeNotifier {
     });
     _safeInit(() {
       _latlngRecorteTalhao =
-          prefs.getStringList('ff_latlngRecorteTalhao') ?? _latlngRecorteTalhao;
+          prefs.getStringList('ff_latlngRecorteTalhao')?.map((x) {
+                try {
+                  return jsonDecode(x);
+                } catch (e) {
+                  print("Can't decode persisted json. Error: $e.");
+                  return {};
+                }
+              }).toList() ??
+              _latlngRecorteTalhao;
     });
   }
 
@@ -1846,39 +1854,45 @@ class FFAppState extends ChangeNotifier {
         'ff_latLngListaMarcadoresArea', _latLngListaMarcadoresArea);
   }
 
-  List<String> _latlngRecorteTalhao = [];
-  List<String> get latlngRecorteTalhao => _latlngRecorteTalhao;
-  set latlngRecorteTalhao(List<String> _value) {
+  List<dynamic> _latlngRecorteTalhao = [];
+  List<dynamic> get latlngRecorteTalhao => _latlngRecorteTalhao;
+  set latlngRecorteTalhao(List<dynamic> _value) {
     _latlngRecorteTalhao = _value;
-    prefs.setStringList('ff_latlngRecorteTalhao', _value);
+    prefs.setStringList(
+        'ff_latlngRecorteTalhao', _value.map((x) => jsonEncode(x)).toList());
   }
 
-  void addToLatlngRecorteTalhao(String _value) {
+  void addToLatlngRecorteTalhao(dynamic _value) {
     _latlngRecorteTalhao.add(_value);
-    prefs.setStringList('ff_latlngRecorteTalhao', _latlngRecorteTalhao);
+    prefs.setStringList('ff_latlngRecorteTalhao',
+        _latlngRecorteTalhao.map((x) => jsonEncode(x)).toList());
   }
 
-  void removeFromLatlngRecorteTalhao(String _value) {
+  void removeFromLatlngRecorteTalhao(dynamic _value) {
     _latlngRecorteTalhao.remove(_value);
-    prefs.setStringList('ff_latlngRecorteTalhao', _latlngRecorteTalhao);
+    prefs.setStringList('ff_latlngRecorteTalhao',
+        _latlngRecorteTalhao.map((x) => jsonEncode(x)).toList());
   }
 
   void removeAtIndexFromLatlngRecorteTalhao(int _index) {
     _latlngRecorteTalhao.removeAt(_index);
-    prefs.setStringList('ff_latlngRecorteTalhao', _latlngRecorteTalhao);
+    prefs.setStringList('ff_latlngRecorteTalhao',
+        _latlngRecorteTalhao.map((x) => jsonEncode(x)).toList());
   }
 
   void updateLatlngRecorteTalhaoAtIndex(
     int _index,
-    String Function(String) updateFn,
+    dynamic Function(dynamic) updateFn,
   ) {
     _latlngRecorteTalhao[_index] = updateFn(_latlngRecorteTalhao[_index]);
-    prefs.setStringList('ff_latlngRecorteTalhao', _latlngRecorteTalhao);
+    prefs.setStringList('ff_latlngRecorteTalhao',
+        _latlngRecorteTalhao.map((x) => jsonEncode(x)).toList());
   }
 
-  void insertAtIndexInLatlngRecorteTalhao(int _index, String _value) {
+  void insertAtIndexInLatlngRecorteTalhao(int _index, dynamic _value) {
     _latlngRecorteTalhao.insert(_index, _value);
-    prefs.setStringList('ff_latlngRecorteTalhao', _latlngRecorteTalhao);
+    prefs.setStringList('ff_latlngRecorteTalhao',
+        _latlngRecorteTalhao.map((x) => jsonEncode(x)).toList());
   }
 }
 

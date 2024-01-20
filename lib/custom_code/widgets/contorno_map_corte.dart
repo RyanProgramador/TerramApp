@@ -329,7 +329,9 @@ class _ContornoMapCorteState extends State<ContornoMapCorte> {
           "fazid": widget.fazid,
           "listaLatLngRecorte": polygonPoints
         });
-// FFAppState().latlngRecorteTalhao.add(latlngRecorte);
+        // Converter latlngRecorte em JSON e adicionar ao FFAppState
+        String latlngRecorteJson = jsonEncode(latlngRecorte);
+        FFAppState().latlngRecorteTalhao.add(latlngRecorteJson);
       });
 
       // Outras ações de finalização
@@ -337,40 +339,6 @@ class _ContornoMapCorteState extends State<ContornoMapCorte> {
       isLocationPaused = true;
     }
     _updatePolyline();
-    //
-    // FFAppState().contornoFazenda =
-    //     FFAppState().contornoFazenda.toList().cast<dynamic>();
-    // FFAppState().grupoContornoFazendas =
-    //     FFAppState().grupoContornoFazendas.toList().cast<dynamic>();
-//redireciona para a lista de contornos
-//     context.goNamed(
-//       'ListaContornos',
-//       queryParameters: {
-//         'nomeFazenda': serializeParam(
-//           widget.fazNome,
-//           ParamType.String,
-//         ),
-//         'oservID': serializeParam(
-//           widget.oservid,
-//           ParamType.String,
-//         ),
-//         'fazid': serializeParam(
-//           widget.fazid,
-//           ParamType.String,
-//         ),
-//         'fazlatlng': serializeParam(
-//           widget.fazLatLng,
-//           ParamType.LatLng,
-//         ),
-//       }.withoutNulls,
-//       extra: <String, dynamic>{
-//         kTransitionInfoKey: TransitionInfo(
-//           hasTransition: true,
-//           transitionType: PageTransitionType.fade,
-//           duration: Duration(milliseconds: 0),
-//         ),
-//       },
-//     );
   }
 
   double _distanceToStart() {
@@ -516,6 +484,7 @@ class _ContornoMapCorteState extends State<ContornoMapCorte> {
             polylines: {...polylines}.toSet(),
             mapType: google_maps.MapType.satellite,
             mapToolbarEnabled: false,
+            myLocationEnabled: true,
             zoomControlsEnabled: false,
           ),
         ),
@@ -644,6 +613,18 @@ class _ContornoMapCorteState extends State<ContornoMapCorte> {
         .map((item) => item['latlng'])
         .toList();
 
+    // Decodificar a lista JSON em uma lista de objetos
+    var latlngRecorteJson = FFAppState()
+        .latlngRecorteTalhao
+        .map((stringItem) => jsonDecode(stringItem) as Map<String, dynamic>)
+        .toList();
+
+    // Filtrar os recortes do contorno correto
+    var filtradoRecorte = latlngRecorteJson
+        .where((item) => item['contorno_grupo'].toString() == widget.idContorno)
+        .map((item) => item['listaLatLngRecorte'])
+        .toList();
+
     showDialog(
       context: context,
       builder: (BuildContext context) {
@@ -661,7 +642,8 @@ class _ContornoMapCorteState extends State<ContornoMapCorte> {
                 Text('ID da Fazenda: ${widget.fazid}'),
                 Text('Nome da Fazenda: ${widget.fazNome}'),
                 Text('LatLng da Fazenda: ${widget.fazLatLng}'),
-                Text('lista de latlng do cont: $latlngRecorte'),
+                // Text('lista de latlng do cont: $latlngRecorte'),
+                // Text('apenas as latlng do contorno correto: $filtradoRecorte'),
               ],
             ),
           ),
