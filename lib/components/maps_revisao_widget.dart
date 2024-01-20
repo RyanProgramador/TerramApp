@@ -102,7 +102,10 @@ class _MapsRevisaoWidgetState extends State<MapsRevisaoWidget> {
                     widget.cor,
                     '#ffffff',
                   ),
-                  listaDeLatLngRecorte: currentUserLocationValue,
+                  listaDeLatLngRecorte: FFAppState()
+                      .latlngRecorteTalhao
+                      .map((e) => e.toString())
+                      .toList(),
                   fazid: widget.fazid,
                   oservid: widget.oservID,
                   idContorno: widget.idDoContorno,
