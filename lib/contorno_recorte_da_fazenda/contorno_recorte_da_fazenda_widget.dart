@@ -185,6 +185,14 @@ class _ContornoRecorteDaFazendaWidgetState
                                   hoverColor: Colors.transparent,
                                   highlightColor: Colors.transparent,
                                   onTap: () async {
+                                    FFAppState().update(() {
+                                      FFAppState().latlngRecorteTalhao =
+                                          FFAppState()
+                                              .latlngRecorteTalhao
+                                              .toList()
+                                              .cast<dynamic>();
+                                    });
+
                                     context.goNamed(
                                       'ListaContornos',
                                       queryParameters: {
