@@ -1285,8 +1285,13 @@ class _MultiplePlacesPickerCopyWidgetState
                                                               trGrupocontornoFazIndex];
                                                       return SelectionArea(
                                                           child: Text(
-                                                        trGrupocontornoFazItem
-                                                            .toString(),
+                                                        valueOrDefault<String>(
+                                                          functions.jsonListToStr(
+                                                              FFAppState()
+                                                                  .grupoContornoFazendas
+                                                                  .toList()),
+                                                          '123',
+                                                        ),
                                                         style: FlutterFlowTheme
                                                                 .of(context)
                                                             .bodyMedium
