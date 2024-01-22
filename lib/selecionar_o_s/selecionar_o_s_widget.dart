@@ -97,6 +97,8 @@ class _SelecionarOSWidgetState extends State<SelecionarOSWidget>
           contorno:
               functions.jsonListToStr(FFAppState().contornoFazenda.toList()),
           urlapicall: FFAppState().urlapicall,
+          recorte: functions
+              .jsonListToStr(FFAppState().latlngRecorteTalhao.toList()),
         );
         if (SincronizarGroup.trSincronizaCelularComBDCall.statusSincComCelular(
               (_model.apiResultxxdOnLoadPage?.jsonBody ?? ''),

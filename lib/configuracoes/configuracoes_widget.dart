@@ -239,6 +239,9 @@ class _ConfiguracoesWidgetState extends State<ConfiguracoesWidget> {
                                   contorno: functions.jsonListToStr(
                                       FFAppState().contornoFazenda.toList()),
                                   urlapicall: FFAppState().urlapicall,
+                                  recorte: functions.jsonListToStr(FFAppState()
+                                      .latlngRecorteTalhao
+                                      .toList()),
                                 );
                                 _shouldSetState = true;
                                 setState(() {

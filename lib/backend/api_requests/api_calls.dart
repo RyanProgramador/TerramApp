@@ -770,13 +770,15 @@ class TrSincronizaTalhaoContornoCall {
   Future<ApiCallResponse> call({
     String? talhao = '',
     String? contorno = '',
+    String? recorte = '',
     String? urlapicall = '',
   }) async {
     final ffApiRequestBody = '''
 {
   "tipo": "apk_sinc_talhao_contornos",
   "talhao": "${talhao}",
-  "contorno": "${contorno}"
+  "contorno": "${contorno}",
+"recorte":"${recorte}"
 }''';
     return ApiManager.instance.makeApiCall(
       callName: 'trSincronizaTalhaoContorno',
