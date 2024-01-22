@@ -296,17 +296,20 @@ class _ContornoMapCorteState extends State<ContornoMapCorte> {
         ),
       );
 
-      // Salvar dados
       int markerId = 1;
-      // for (var coord in polygonCoordinates) {
-      //   Map<String, dynamic> contorno = {
-      //     "contorno_grupo": widget.idContorno,
-      //     "marker_id": markerId++,
-      //     "oserv_id": widget.oservid,
-      //     "latlng": "${coord.latitude}, ${coord.longitude}",
-      //   };
-      //   FFAppState().contornoFazenda.add(contorno);
-      // }
+      userCreatedPolygon.points.forEach((point) {
+        Map<String, dynamic> latlngRecorte = {
+          "idContorno": widget.idContorno,
+          "marker_id": markerId.toString(),
+          "fazid": widget.fazid,
+          "listaLatLngRecorte": "${point.latitude},${point.longitude}",
+        };
+
+        // Adiciona diretamente ao FFAppState().latlngRecorteTalhao
+        FFAppState().latlngRecorteTalhao.add(latlngRecorte);
+        markerId++;
+      });
+
       DateTime dataHoraAtual = DateTime.now();
       String formattedDataHora = dataHoraAtual
           .toLocal()
@@ -352,17 +355,17 @@ class _ContornoMapCorteState extends State<ContornoMapCorte> {
           .map((p) => "${p.latitude}, ${p.longitude}")
           .toList();
 
-      // Armazenar no latlngRecorte
-      setState(() {
-        Map<String, dynamic> latlngRecorte = {
-          "idContorno": widget.idContorno,
-          "fazid": widget.fazid,
-          "listaLatLngRecorte": polygonPoints
-        };
-        // Converter latlngRecorte em JSON e adicionar ao FFAppState
-        // String latlngRecorteJson = jsonEncode(latlngRecorte);
-        FFAppState().latlngRecorteTalhao.add(latlngRecorte);
-      });
+      // // Armazenar no latlngRecorte
+      // setState(() {
+      //   Map<String, dynamic> latlngRecorte = {
+      //     "idContorno": widget.idContorno,
+      //     "fazid": widget.fazid,
+      //     "listaLatLngRecorte": for coord in polygonPoints {}
+      //   };
+      //   // Converter latlngRecorte em JSON e adicionar ao FFAppState
+      //   // String latlngRecorteJson = jsonEncode(latlngRecorte);
+      //   FFAppState().latlngRecorteTalhao.add(latlngRecorte);
+      // });
 
       // Outras ações de finalização
       isVisivel = false;
