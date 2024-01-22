@@ -977,8 +977,11 @@ class _MultiplePlacesPickerCopyWidgetState
                                                               trcontornoFazIndex];
                                                       return SelectionArea(
                                                           child: Text(
-                                                        trcontornoFazItem
-                                                            .toString(),
+                                                        valueOrDefault<String>(
+                                                          functions.jsonListToStr(
+                                                              trcontornoFazItem),
+                                                          '123',
+                                                        ),
                                                         style: FlutterFlowTheme
                                                                 .of(context)
                                                             .bodyMedium
