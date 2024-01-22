@@ -49,6 +49,8 @@ class _ListaContornosWidgetState extends State<ListaContornosWidget> {
       FFAppState().update(() {
         FFAppState().contornoFazenda =
             FFAppState().contornoFazenda.toList().cast<dynamic>();
+        FFAppState().latlngRecorteTalhao =
+            FFAppState().latlngRecorteTalhao.toList().cast<dynamic>();
       });
       setState(() {
         FFAppState().contornoFazenda =
@@ -56,7 +58,10 @@ class _ListaContornosWidgetState extends State<ListaContornosWidget> {
         FFAppState().grupoContornoFazendas =
             FFAppState().grupoContornoFazendas.toList().cast<dynamic>();
       });
-      setState(() {});
+      setState(() {
+        FFAppState().latlngRecorteTalhao =
+            FFAppState().latlngRecorteTalhao.toList().cast<dynamic>();
+      });
     });
   }
 

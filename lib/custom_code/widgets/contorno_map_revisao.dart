@@ -85,17 +85,25 @@ class _ContornoMapRevisaoState extends State<ContornoMapRevisao> {
     }
   }
 
-  List<google_maps.LatLng> toLatLng(List<String> latLngStrings) {
+  List<google_maps.LatLng> toLatLng(dynamic latLngData) {
     List<google_maps.LatLng> latLngList = [];
-    for (String latLngString in latLngStrings) {
-      final latLngSplit = latLngString.split(',').map((s) => s.trim()).toList();
-      if (latLngSplit.length == 2) {
-        try {
-          final lat = double.parse(latLngSplit[0]);
-          final lng = double.parse(latLngSplit[1]);
-          latLngList.add(google_maps.LatLng(lat, lng));
-        } catch (e) {
-          // Handle parsing error if any.
+    if (latLngData is List) {
+      for (var latLngString in latLngData) {
+        if (latLngString is String) {
+          final latLngSplit =
+              latLngString.split(',').map((s) => s.trim()).toList();
+          if (latLngSplit.length == 2) {
+            try {
+              final lat = double.parse(latLngSplit[0]);
+              final lng = double.parse(latLngSplit[1]);
+              latLngList.add(google_maps.LatLng(lat, lng));
+            } catch (e) {
+              // Handle parsing error if any.
+            }
+          }
+        } else if (latLngString is List) {
+          // Se for uma lista aninhada, chama a mesma função recursivamente
+          latLngList.addAll(toLatLng(latLngString));
         }
       }
     }
@@ -121,16 +129,17 @@ class _ContornoMapRevisaoState extends State<ContornoMapRevisao> {
   }
 
   void _createRecortePolygons() {
+    // Supondo que filtradoRecorte seja uma lista de objetos JSON, onde cada objeto contém uma lista aninhada representando os pontos do polígono
     var filtradoRecorte = FFAppState()
         .latlngRecorteTalhao
         .where((item) => item['idContorno'] == widget.idContorno)
-        .map((item) => item['listaLatLngRecorte'])
         .toList();
 
-    for (var recorteList in filtradoRecorte) {
-      var recorteLatLngList = toLatLng(recorteList);
+    for (var item in filtradoRecorte) {
+      // Aqui, assumimos que `item` é um Map<String, dynamic> e que `item['listaLatLngRecorte']` é uma lista aninhada de strings
+      var recorteLatLngList = toLatLng(item['listaLatLngRecorte']);
       var recortePolygon = google_maps.Polygon(
-        polygonId: google_maps.PolygonId('Recorte_${recorteList.hashCode}'),
+        polygonId: google_maps.PolygonId('Recorte_${item.hashCode}'),
         points: recorteLatLngList,
         fillColor: Colors.red.withOpacity(0.4),
         strokeColor: Colors.red,
