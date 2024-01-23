@@ -1049,43 +1049,30 @@ class _MultiplePlacesPickerCopyWidgetState
                                             color: FlutterFlowTheme.of(context)
                                                 .secondaryBackground,
                                           ),
-                                          child: Builder(
-                                            builder: (context) {
-                                              final rotas = FFAppState()
-                                                  .rotainversa
-                                                  .toList();
-                                              return SingleChildScrollView(
-                                                child: Column(
-                                                  mainAxisSize:
-                                                      MainAxisSize.max,
-                                                  children: List.generate(
-                                                      rotas.length,
-                                                      (rotasIndex) {
-                                                    final rotasItem =
-                                                        rotas[rotasIndex];
-                                                    return SelectionArea(
-                                                        child: Text(
-                                                      valueOrDefault<String>(
-                                                        functions.jsonListToStr(
-                                                            FFAppState()
-                                                                .latlngRecorteTalhao
-                                                                .toList()),
-                                                        '123',
+                                          child: SingleChildScrollView(
+                                            child: Column(
+                                              mainAxisSize: MainAxisSize.max,
+                                              children: [
+                                                SelectionArea(
+                                                    child: Text(
+                                                  valueOrDefault<String>(
+                                                    functions.jsonListToStr(
+                                                        FFAppState()
+                                                            .latlngRecorteTalhao
+                                                            .toList()),
+                                                    '123',
+                                                  ),
+                                                  style: FlutterFlowTheme.of(
+                                                          context)
+                                                      .bodyMedium
+                                                      .override(
+                                                        fontFamily:
+                                                            'Readex Pro',
+                                                        fontSize: 10.0,
                                                       ),
-                                                      style:
-                                                          FlutterFlowTheme.of(
-                                                                  context)
-                                                              .bodyMedium
-                                                              .override(
-                                                                fontFamily:
-                                                                    'Readex Pro',
-                                                                fontSize: 10.0,
-                                                              ),
-                                                    ));
-                                                  }),
-                                                ),
-                                              );
-                                            },
+                                                )),
+                                              ],
+                                            ),
                                           ),
                                         ),
                                       ),
@@ -1206,37 +1193,30 @@ class _MultiplePlacesPickerCopyWidgetState
                                             color: FlutterFlowTheme.of(context)
                                                 .secondaryBackground,
                                           ),
-                                          child: Builder(
-                                            builder: (context) {
-                                              final teste = FFAppState()
-                                                  .listaDeLocaisDeAreasParaColeta
-                                                  .toList();
-                                              return SingleChildScrollView(
-                                                child: Column(
-                                                  mainAxisSize:
-                                                      MainAxisSize.max,
-                                                  children: List.generate(
-                                                      teste.length,
-                                                      (testeIndex) {
-                                                    final testeItem =
-                                                        teste[testeIndex];
-                                                    return SelectionArea(
-                                                        child: Text(
-                                                      testeItem,
-                                                      style:
-                                                          FlutterFlowTheme.of(
-                                                                  context)
-                                                              .bodyMedium
-                                                              .override(
-                                                                fontFamily:
-                                                                    'Readex Pro',
-                                                                fontSize: 10.0,
-                                                              ),
-                                                    ));
-                                                  }),
-                                                ),
-                                              );
-                                            },
+                                          child: SingleChildScrollView(
+                                            child: Column(
+                                              mainAxisSize: MainAxisSize.max,
+                                              children: [
+                                                SelectionArea(
+                                                    child: Text(
+                                                  valueOrDefault<String>(
+                                                    functions.jsonListToStr(
+                                                        FFAppState()
+                                                            .contornoFazenda
+                                                            .toList()),
+                                                    '123',
+                                                  ),
+                                                  style: FlutterFlowTheme.of(
+                                                          context)
+                                                      .bodyMedium
+                                                      .override(
+                                                        fontFamily:
+                                                            'Readex Pro',
+                                                        fontSize: 10.0,
+                                                      ),
+                                                )),
+                                              ],
+                                            ),
                                           ),
                                         ),
                                       ),
