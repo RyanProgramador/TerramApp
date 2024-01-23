@@ -30,7 +30,7 @@ class ContornoMapCorte extends StatefulWidget {
     this.fazNome,
     this.fazLatLng,
     this.toleranciaEmMetrosEntreUmaCapturaEOutra,
-    this.listaLatLngTalhao,
+    //this.listaLatLngTalhao,
     this.fazid,
   }) : super(key: key);
 
@@ -44,7 +44,7 @@ class ContornoMapCorte extends StatefulWidget {
   final String? fazNome;
   final LatLng? fazLatLng;
   final int? toleranciaEmMetrosEntreUmaCapturaEOutra;
-  final List<String>? listaLatLngTalhao;
+  //final List<String>? listaLatLngTalhao;
   @override
   _ContornoMapCorteState createState() => _ContornoMapCorteState();
 }
@@ -298,16 +298,16 @@ class _ContornoMapCorteState extends State<ContornoMapCorte> {
 
       int markerId = 1;
       userCreatedPolygon.points.forEach((point) {
+        // Cria um Map para cada ponto ao invés de uma lista de Maps
         Map<String, dynamic> latlngRecorte = {
           "idContorno": widget.idContorno,
-          "marker_id": markerId.toString(),
+          "marker_id": markerId++,
           "fazid": widget.fazid,
           "listaLatLngRecorte": "${point.latitude},${point.longitude}",
         };
 
-        // Adiciona diretamente ao FFAppState().latlngRecorteTalhao
+        // Adiciona o Map diretamente ao FFAppState().latlngRecorteTalhao
         FFAppState().latlngRecorteTalhao.add(latlngRecorte);
-        markerId++;
       });
 
       DateTime dataHoraAtual = DateTime.now();

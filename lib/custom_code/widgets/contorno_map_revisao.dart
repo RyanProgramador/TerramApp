@@ -77,36 +77,60 @@ class _ContornoMapRevisaoState extends State<ContornoMapRevisao> {
     }
     var filtradoRecorte = FFAppState()
         .latlngRecorteTalhao
-        .where((item) => item['idContorno'] == widget.idContorno)
-        .map((item) => item['listaLatLngRecorte'])
+        .where((item) =>
+            item['idContorno'].toString() == widget.idContorno.toString())
         .toList();
+
     if (filtradoRecorte != null) {
       _createRecortePolygons();
     }
   }
 
+  // List<google_maps.LatLng> toLatLng(dynamic latLngData) {
+  //   List<google_maps.LatLng> latLngList = [];
+  //   if (latLngData is List) {
+  //     for (var latLngString in latLngData) {
+  //       if (latLngString is String) {
+  //         final latLngSplit =
+  //             latLngString.split(',').map((s) => s.trim()).toList();
+  //         if (latLngSplit.length == 2) {
+  //           try {
+  //             final lat = double.parse(latLngSplit[0]);
+  //             final lng = double.parse(latLngSplit[1]);
+  //             latLngList.add(google_maps.LatLng(lat, lng));
+  //           } catch (e) {
+  //             // Handle parsing error if any.
+  //           }
+  //         }
+  //       } else if (latLngString is List) {
+  //         // Se for uma lista aninhada, chama a mesma função recursivamente
+  //         latLngList.addAll(toLatLng(latLngString));
+  //       }
+  //     }
+  //   }
+  //   return latLngList;
+  // }
+
   List<google_maps.LatLng> toLatLng(dynamic latLngData) {
     List<google_maps.LatLng> latLngList = [];
-    if (latLngData is List) {
-      for (var latLngString in latLngData) {
-        if (latLngString is String) {
-          final latLngSplit =
-              latLngString.split(',').map((s) => s.trim()).toList();
-          if (latLngSplit.length == 2) {
-            try {
-              final lat = double.parse(latLngSplit[0]);
-              final lng = double.parse(latLngSplit[1]);
-              latLngList.add(google_maps.LatLng(lat, lng));
-            } catch (e) {
-              // Handle parsing error if any.
-            }
-          }
-        } else if (latLngString is List) {
-          // Se for uma lista aninhada, chama a mesma função recursivamente
-          latLngList.addAll(toLatLng(latLngString));
+
+    if (latLngData is String) {
+      final splits = latLngData.split(',');
+      if (splits.length == 2) {
+        try {
+          final lat = double.parse(splits[0].trim());
+          final lng = double.parse(splits[1].trim());
+          latLngList.add(google_maps.LatLng(lat, lng));
+        } catch (e) {
+          print("Erro ao converter latLngData: $e");
         }
       }
+    } else if (latLngData is List) {
+      for (var item in latLngData) {
+        latLngList.addAll(toLatLng(item));
+      }
     }
+
     return latLngList;
   }
 
@@ -128,18 +152,45 @@ class _ContornoMapRevisaoState extends State<ContornoMapRevisao> {
     }
   }
 
+  // void _createRecortePolygons() {
+  //   // Supondo que filtradoRecorte seja uma lista de objetos JSON, onde cada objeto contém uma lista aninhada representando os pontos do polígono
+  //   var filtradoRecorte = FFAppState()
+  //       .latlngRecorteTalhao
+  //       .where((item) => item['idContorno'] == widget.idContorno)
+  //       .toList();
+  //
+  //   for (var item in filtradoRecorte) {
+  //     // Aqui, assumimos que `item` é um Map<String, dynamic> e que `item['listaLatLngRecorte']` é uma lista aninhada de strings
+  //     var recorteLatLngList = toLatLng(item['listaLatLngRecorte']);
+  //     var recortePolygon = google_maps.Polygon(
+  //       polygonId: google_maps.PolygonId('Recorte_${item.hashCode}'),
+  //       points: recorteLatLngList,
+  //       fillColor: Colors.red.withOpacity(0.4),
+  //       strokeColor: Colors.red,
+  //       strokeWidth: 3,
+  //     );
+  //
+  //     setState(() {
+  //       polygons.add(recortePolygon);
+  //     });
+  //   }
+  // }
   void _createRecortePolygons() {
-    // Supondo que filtradoRecorte seja uma lista de objetos JSON, onde cada objeto contém uma lista aninhada representando os pontos do polígono
     var filtradoRecorte = FFAppState()
         .latlngRecorteTalhao
-        .where((item) => item['idContorno'] == widget.idContorno)
+        .where((item) =>
+            item['idContorno'].toString() == widget.idContorno.toString())
         .toList();
 
     for (var item in filtradoRecorte) {
-      // Aqui, assumimos que `item` é um Map<String, dynamic> e que `item['listaLatLngRecorte']` é uma lista aninhada de strings
-      var recorteLatLngList = toLatLng(item['listaLatLngRecorte']);
+      // Assumindo que cada item é um mapa com a chave 'listaLatLngRecorte' contendo a string da localização
+      var latLngString = item['listaLatLngRecorte'].toString();
+      // Convertendo a string para uma lista de objetos LatLng
+      var recorteLatLngList = _stringToListLatLng(latLngString);
+
+      // Criando e adicionando o polígono de recorte
       var recortePolygon = google_maps.Polygon(
-        polygonId: google_maps.PolygonId('Recorte_${item.hashCode}'),
+        polygonId: google_maps.PolygonId('Recorte_${item['marker_id']}'),
         points: recorteLatLngList,
         fillColor: Colors.red.withOpacity(0.4),
         strokeColor: Colors.red,
@@ -150,6 +201,20 @@ class _ContornoMapRevisaoState extends State<ContornoMapRevisao> {
         polygons.add(recortePolygon);
       });
     }
+  }
+
+// Função auxiliar para converter uma string "lat,lng" para um objeto LatLng
+  List<google_maps.LatLng> _stringToListLatLng(String latLngString) {
+    List<google_maps.LatLng> latLngList = [];
+    var splits = latLngString.split(',');
+    for (var i = 0; i < splits.length; i += 2) {
+      var lat = double.tryParse(splits[i]);
+      var lng = double.tryParse(splits[i + 1]);
+      if (lat != null && lng != null) {
+        latLngList.add(google_maps.LatLng(lat, lng));
+      }
+    }
+    return latLngList;
   }
 
   void tesouraRecorte() {

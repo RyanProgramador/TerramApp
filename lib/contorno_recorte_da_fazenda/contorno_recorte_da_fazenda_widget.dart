@@ -145,7 +145,6 @@ class _ContornoRecorteDaFazendaWidgetState
                                 fazid: widget.fazid,
                                 localAtual: currentUserLocationValue,
                                 fazLatLng: widget.fazlatlng,
-                                listaLatLngTalhao: widget.listaLatLngTalhao,
                               ),
                             ),
                           ),
