@@ -305,6 +305,12 @@ class _ConfiguracoesWidgetState extends State<ConfiguracoesWidget> {
                                                     .toList())!
                                             .toList()
                                             .cast<dynamic>();
+                                    FFAppState()
+                                            .latlngRecorteTalhaoPosSincronizado =
+                                        FFAppState()
+                                            .latlngRecorteTalhao
+                                            .toList()
+                                            .cast<dynamic>();
                                   });
                                   setState(() {
                                     _model.estaCarregando = true;
@@ -318,6 +324,7 @@ class _ConfiguracoesWidgetState extends State<ConfiguracoesWidget> {
                                     FFAppState().trDeslocGeo2 = [];
                                     FFAppState().contornoFazenda = [];
                                     FFAppState().grupoContornoFazendas = [];
+                                    FFAppState().latlngRecorteTalhao = [];
                                   });
                                   setState(() {
                                     _model.porcentagemDeCarregamento = 0.82;

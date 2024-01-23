@@ -429,6 +429,19 @@ class FFAppState extends ChangeNotifier {
               }).toList() ??
               _latlngRecorteTalhao;
     });
+    _safeInit(() {
+      _latlngRecorteTalhaoPosSincronizado = prefs
+              .getStringList('ff_latlngRecorteTalhaoPosSincronizado')
+              ?.map((x) {
+            try {
+              return jsonDecode(x);
+            } catch (e) {
+              print("Can't decode persisted json. Error: $e.");
+              return {};
+            }
+          }).toList() ??
+          _latlngRecorteTalhaoPosSincronizado;
+    });
   }
 
   void update(VoidCallback callback) {
@@ -1893,6 +1906,50 @@ class FFAppState extends ChangeNotifier {
     _latlngRecorteTalhao.insert(_index, _value);
     prefs.setStringList('ff_latlngRecorteTalhao',
         _latlngRecorteTalhao.map((x) => jsonEncode(x)).toList());
+  }
+
+  List<dynamic> _latlngRecorteTalhaoPosSincronizado = [];
+  List<dynamic> get latlngRecorteTalhaoPosSincronizado =>
+      _latlngRecorteTalhaoPosSincronizado;
+  set latlngRecorteTalhaoPosSincronizado(List<dynamic> _value) {
+    _latlngRecorteTalhaoPosSincronizado = _value;
+    prefs.setStringList('ff_latlngRecorteTalhaoPosSincronizado',
+        _value.map((x) => jsonEncode(x)).toList());
+  }
+
+  void addToLatlngRecorteTalhaoPosSincronizado(dynamic _value) {
+    _latlngRecorteTalhaoPosSincronizado.add(_value);
+    prefs.setStringList('ff_latlngRecorteTalhaoPosSincronizado',
+        _latlngRecorteTalhaoPosSincronizado.map((x) => jsonEncode(x)).toList());
+  }
+
+  void removeFromLatlngRecorteTalhaoPosSincronizado(dynamic _value) {
+    _latlngRecorteTalhaoPosSincronizado.remove(_value);
+    prefs.setStringList('ff_latlngRecorteTalhaoPosSincronizado',
+        _latlngRecorteTalhaoPosSincronizado.map((x) => jsonEncode(x)).toList());
+  }
+
+  void removeAtIndexFromLatlngRecorteTalhaoPosSincronizado(int _index) {
+    _latlngRecorteTalhaoPosSincronizado.removeAt(_index);
+    prefs.setStringList('ff_latlngRecorteTalhaoPosSincronizado',
+        _latlngRecorteTalhaoPosSincronizado.map((x) => jsonEncode(x)).toList());
+  }
+
+  void updateLatlngRecorteTalhaoPosSincronizadoAtIndex(
+    int _index,
+    dynamic Function(dynamic) updateFn,
+  ) {
+    _latlngRecorteTalhaoPosSincronizado[_index] =
+        updateFn(_latlngRecorteTalhaoPosSincronizado[_index]);
+    prefs.setStringList('ff_latlngRecorteTalhaoPosSincronizado',
+        _latlngRecorteTalhaoPosSincronizado.map((x) => jsonEncode(x)).toList());
+  }
+
+  void insertAtIndexInLatlngRecorteTalhaoPosSincronizado(
+      int _index, dynamic _value) {
+    _latlngRecorteTalhaoPosSincronizado.insert(_index, _value);
+    prefs.setStringList('ff_latlngRecorteTalhaoPosSincronizado',
+        _latlngRecorteTalhaoPosSincronizado.map((x) => jsonEncode(x)).toList());
   }
 }
 
