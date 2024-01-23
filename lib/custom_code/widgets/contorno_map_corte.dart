@@ -161,23 +161,93 @@ class _ContornoMapCorteState extends State<ContornoMapCorte> {
     var filtradoRecorte = FFAppState()
         .latlngRecorteTalhao
         .where((item) => item['idContorno'] == widget.idContorno)
-        .map((item) => item['listaLatLngRecorte'])
+        // .map((item) => item['listaLatLngRecorte'])
         .toList();
 
-    for (var recorteList in filtradoRecorte) {
-      var recorteLatLngList = toLatLng(recorteList);
-      var recortePolygon = google_maps.Polygon(
-        polygonId: google_maps.PolygonId('Recorte_${recorteList.hashCode}'),
-        points: recorteLatLngList,
-        fillColor: Colors.red.withOpacity(0.4),
-        strokeColor: Colors.red,
-        strokeWidth: 3,
-      );
+    // List<google_maps.LatLng> recorteLatLngList = [];
 
-      setState(() {
-        polygons.add(recortePolygon);
-      });
+    // for (var recorteList in filtradoRecorte) {
+    //   var recorteLatLngList = toLatLng(recorteList);
+    //   var recortePolygon = google_maps.Polygon(
+    //     polygonId: google_maps.PolygonId('Recorte_${recorteList.hashCode}'),
+    //     points: recorteLatLngList,
+    //     fillColor: Colors.red.withOpacity(0.4),
+    //     strokeColor: Colors.red,
+    //     strokeWidth: 3,
+    //   );
+    //
+    //   setState(() {
+    //     polygons.add(recortePolygon);
+    //   });
+    // }
+    // Iterar pela lista filtradoRecorte
+    //   for (var latLngString in filtradoRecorte) {
+    //     // Supondo que cada item é uma string contendo lat e lng separados por vírgula
+    //     var parts = latLngString.split(',');
+    //     if (parts.length == 2) {
+    //       try {
+    //         double lat = double.parse(parts[0].trim());
+    //         double lng = double.parse(parts[1].trim());
+    //         recorteLatLngList.add(google_maps.LatLng(lat, lng));
+    //       } catch (e) {
+    //         // Pode lançar uma exceção se a conversão falhar
+    //         print("Erro ao converter String para double: $e");
+    //       }
+    //     }
+    //   }
+    //
+    //   // Verifica se a lista tem elementos suficientes para formar um polígono
+    //   if (recorteLatLngList.isNotEmpty) {
+    //     // Criar e adicionar o polígono de recorte
+    //     var recortePolygon = google_maps.Polygon(
+    //       polygonId: google_maps.PolygonId('RecortePolygon'),
+    //       points: recorteLatLngList,
+    //       fillColor: Colors.red.withOpacity(0.4),
+    //       strokeColor: Colors.red,
+    //       strokeWidth: 3,
+    //     );
+    //
+    //     setState(() {
+    //       polygons.add(recortePolygon);
+    //     });
+    //   } else {
+    //     // Tratar caso onde recorteLatLngList é vazia ou dados não são válidos
+    //     print("Lista de coordenadas para recorte está vazia ou contém dados inválidos.");
+    //   }
+    // }
+// Agrupar por grupoDeRecorte
+    var gruposDeRecorte = <int, List<dynamic>>{};
+    for (var item in filtradoRecorte) {
+      int grupoId = item['grupoDeRecorte'];
+      if (!gruposDeRecorte.containsKey(grupoId)) {
+        gruposDeRecorte[grupoId] = [];
+      }
+      gruposDeRecorte[grupoId]!.add(item);
     }
+
+    // Criar um polígono para cada grupo
+    gruposDeRecorte.forEach((grupoId, itens) {
+      List<google_maps.LatLng> recorteLatLngList = itens.map((item) {
+        var parts = item['listaLatLngRecorte'].split(',');
+        return google_maps.LatLng(
+            double.parse(parts[0].trim()), double.parse(parts[1].trim()));
+      }).toList();
+
+      if (recorteLatLngList.isNotEmpty) {
+        // Criar e adicionar o polígono de recorte
+        var recortePolygon = google_maps.Polygon(
+          polygonId: google_maps.PolygonId('Recorte_$grupoId'),
+          points: recorteLatLngList,
+          fillColor: Colors.red.withOpacity(0.4),
+          strokeColor: Colors.red,
+          strokeWidth: 3,
+        );
+
+        setState(() {
+          polygons.add(recortePolygon);
+        });
+      }
+    });
   }
 
   void _onMapCreated(google_maps.GoogleMapController controller) {
@@ -296,6 +366,22 @@ class _ContornoMapCorteState extends State<ContornoMapCorte> {
         ),
       );
 
+      var grupoDeRecorte = FFAppState()
+          .latlngRecorteTalhao
+          .where((item) => item['idContorno'] == widget.idContorno)
+          .map((item) => item['grupoDeRecorte']
+              as int) // Assegure-se de que está mapeando para int.
+          .toList();
+
+      int maiorNumero;
+      if (grupoDeRecorte.isNotEmpty) {
+        maiorNumero = grupoDeRecorte.reduce((a, b) => a > b ? a : b) +
+            1; // Incrementa o maior número encontrado.
+        print("O maior número é: $maiorNumero");
+      } else {
+        maiorNumero = 1; // Começa de 1 se a lista estiver vazia.
+      }
+
       int markerId = 1;
       userCreatedPolygon.points.forEach((point) {
         // Cria um Map para cada ponto ao invés de uma lista de Maps
@@ -304,6 +390,7 @@ class _ContornoMapCorteState extends State<ContornoMapCorte> {
           "marker_id": markerId++,
           "fazid": widget.fazid,
           "listaLatLngRecorte": "${point.latitude},${point.longitude}",
+          "grupoDeRecorte": maiorNumero,
         };
 
         // Adiciona o Map diretamente ao FFAppState().latlngRecorteTalhao
@@ -610,31 +697,31 @@ class _ContornoMapCorteState extends State<ContornoMapCorte> {
             ),
           ),
         ),
-        Positioned(
-          bottom: 10,
-          left: 10,
-          right: 10,
-          child: Row(
-            mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-            children: [
-              ElevatedButton(
-                onPressed: () => _showVariablesAlert(context),
-                style: ElevatedButton.styleFrom(
-                  shape: CircleBorder(),
-                  backgroundColor: Color(0xFF00736D),
-                ),
-                child: Padding(
-                  padding: const EdgeInsets.all(16.0),
-                  child: Icon(
-                    Icons.info_outline,
-                    size: 35.0,
-                    color: Colors.white,
-                  ),
-                ),
-              ),
-            ],
-          ),
-        ),
+        // Positioned(
+        //   bottom: 10,
+        //   left: 10,
+        //   right: 10,
+        //   child: Row(
+        //     mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+        //     children: [
+        //       ElevatedButton(
+        //         onPressed: () => _showVariablesAlert(context),
+        //         style: ElevatedButton.styleFrom(
+        //           shape: CircleBorder(),
+        //           backgroundColor: Color(0xFF00736D),
+        //         ),
+        //         child: Padding(
+        //           padding: const EdgeInsets.all(16.0),
+        //           child: Icon(
+        //             Icons.info_outline,
+        //             size: 35.0,
+        //             color: Colors.white,
+        //           ),
+        //         ),
+        //       ),
+        //     ],
+        //   ),
+        // ),
       ],
     );
   }

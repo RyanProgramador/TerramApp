@@ -1065,7 +1065,13 @@ class _MultiplePlacesPickerCopyWidgetState
                                                         rotas[rotasIndex];
                                                     return SelectionArea(
                                                         child: Text(
-                                                      'Hello World',
+                                                      valueOrDefault<String>(
+                                                        functions.jsonListToStr(
+                                                            FFAppState()
+                                                                .latlngRecorteTalhao
+                                                                .toList()),
+                                                        '123',
+                                                      ),
                                                       style:
                                                           FlutterFlowTheme.of(
                                                                   context)

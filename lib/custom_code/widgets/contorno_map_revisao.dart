@@ -178,44 +178,90 @@ class _ContornoMapRevisaoState extends State<ContornoMapRevisao> {
   void _createRecortePolygons() {
     var filtradoRecorte = FFAppState()
         .latlngRecorteTalhao
-        .where((item) =>
-            item['idContorno'].toString() == widget.idContorno.toString())
+        .where((item) => item['idContorno'] == widget.idContorno)
+        // .map((item) => item['listaLatLngRecorte'])
         .toList();
 
+    //   List<google_maps.LatLng> recorteLatLngList = [];
+    //
+    //   // Iterar pela lista filtradoRecorte
+    //   for (var latLngString in filtradoRecorte) {
+    //     // Supondo que cada item é uma string contendo lat e lng separados por vírgula
+    //     var parts = latLngString.split(',');
+    //     if (parts.length == 2) {
+    //       try {
+    //         double lat = double.parse(parts[0].trim());
+    //         double lng = double.parse(parts[1].trim());
+    //         recorteLatLngList.add(google_maps.LatLng(lat, lng));
+    //       } catch (e) {
+    //         // Pode lançar uma exceção se a conversão falhar
+    //         print("Erro ao converter String para double: $e");
+    //       }
+    //     }
+    //   }
+    //
+    //   // Verifica se a lista tem elementos suficientes para formar um polígono
+    //   if (recorteLatLngList.isNotEmpty) {
+    //     // Criar e adicionar o polígono de recorte
+    //     var recortePolygon = google_maps.Polygon(
+    //       polygonId: google_maps.PolygonId('RecortePolygon'),
+    //       points: recorteLatLngList,
+    //       fillColor: Colors.red.withOpacity(0.4),
+    //       strokeColor: Colors.red,
+    //       strokeWidth: 3,
+    //     );
+    //
+    //     setState(() {
+    //       polygons.add(recortePolygon);
+    //     });
+    //   } else {
+    //     // Tratar caso onde recorteLatLngList é vazia ou dados não são válidos
+    //     print("Lista de coordenadas para recorte está vazia ou contém dados inválidos.");
+    //   }
+    // }
+
+    // Agrupar por grupoDeRecorte
+    var gruposDeRecorte = <int, List<dynamic>>{};
     for (var item in filtradoRecorte) {
-      // Assumindo que cada item é um mapa com a chave 'listaLatLngRecorte' contendo a string da localização
-      var latLngString = item['listaLatLngRecorte'].toString();
-      // Convertendo a string para uma lista de objetos LatLng
-      var recorteLatLngList = _stringToListLatLng(latLngString);
-
-      // Criando e adicionando o polígono de recorte
-      var recortePolygon = google_maps.Polygon(
-        polygonId: google_maps.PolygonId('Recorte_${item['marker_id']}'),
-        points: recorteLatLngList,
-        fillColor: Colors.red.withOpacity(0.4),
-        strokeColor: Colors.red,
-        strokeWidth: 3,
-      );
-
-      setState(() {
-        polygons.add(recortePolygon);
-      });
-    }
-  }
-
-// Função auxiliar para converter uma string "lat,lng" para um objeto LatLng
-  List<google_maps.LatLng> _stringToListLatLng(String latLngString) {
-    List<google_maps.LatLng> latLngList = [];
-    var splits = latLngString.split(',');
-    for (var i = 0; i < splits.length; i += 2) {
-      var lat = double.tryParse(splits[i]);
-      var lng = double.tryParse(splits[i + 1]);
-      if (lat != null && lng != null) {
-        latLngList.add(google_maps.LatLng(lat, lng));
+      int grupoId = item['grupoDeRecorte'];
+      if (!gruposDeRecorte.containsKey(grupoId)) {
+        gruposDeRecorte[grupoId] = [];
       }
+      gruposDeRecorte[grupoId]!.add(item);
     }
-    return latLngList;
+
+    // Criar um polígono para cada grupo
+    gruposDeRecorte.forEach((grupoId, itens) {
+      List<google_maps.LatLng> recorteLatLngList = itens.map((item) {
+        var parts = item['listaLatLngRecorte'].split(',');
+        return google_maps.LatLng(
+            double.parse(parts[0].trim()), double.parse(parts[1].trim()));
+      }).toList();
+
+      if (recorteLatLngList.isNotEmpty) {
+        // Criar e adicionar o polígono de recorte
+        var recortePolygon = google_maps.Polygon(
+          polygonId: google_maps.PolygonId('Recorte_$grupoId'),
+          points: recorteLatLngList,
+          fillColor: Colors.red.withOpacity(0.4),
+          strokeColor: Colors.red,
+          strokeWidth: 3,
+        );
+
+        setState(() {
+          polygons.add(recortePolygon);
+        });
+      }
+    });
   }
+  // // Função para converter a lista linear de coordenadas em uma lista de LatLng
+  // List<google_maps.LatLng> _convertToLatLngList(List<double> flatList) {
+  //   List<google_maps.LatLng> latLngList = [];
+  //   for (int i = 0; i < flatList.length; i += 2) {
+  //     latLngList.add(google_maps.LatLng(flatList[i], flatList[i + 1]));
+  //   }
+  //   return latLngList;
+  // }
 
   void tesouraRecorte() {
     //redireciona para a lista de contornos
@@ -331,6 +377,12 @@ class _ContornoMapRevisaoState extends State<ContornoMapRevisao> {
   }
 
   void _showVariablesAlert(BuildContext context) {
+    var filtradoRecorte = FFAppState()
+        .latlngRecorteTalhao
+        .where((item) => item['idContorno'] == widget.idContorno)
+        // .map((item) => item['listaLatLngRecorte'])
+        .toList();
+
     showDialog(
       context: context,
       builder: (BuildContext context) {
@@ -347,6 +399,7 @@ class _ContornoMapRevisaoState extends State<ContornoMapRevisao> {
                 Text('ID da Fazenda: ${widget.fazid}'),
                 Text('Nome da Fazenda: ${widget.fazNome}'),
                 Text('LatLng da Fazenda: ${widget.fazLatLng}'),
+                Text('apenas as latlng do contorno correto: $filtradoRecorte'),
               ],
             ),
           ),
