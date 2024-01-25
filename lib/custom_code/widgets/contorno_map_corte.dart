@@ -417,6 +417,34 @@ class _ContornoMapCorteState extends State<ContornoMapCorte> {
       // });
     }
     _updatePolyline();
+    context.goNamed(
+      'ListaContornos',
+      queryParameters: {
+        'nomeFazenda': serializeParam(
+          widget.fazNome,
+          ParamType.String,
+        ),
+        'oservID': serializeParam(
+          widget.oservid,
+          ParamType.String,
+        ),
+        'fazid': serializeParam(
+          widget.fazid,
+          ParamType.String,
+        ),
+        'fazlatlng': serializeParam(
+          widget.fazLatLng,
+          ParamType.LatLng,
+        ),
+      }.withoutNulls,
+      extra: <String, dynamic>{
+        kTransitionInfoKey: TransitionInfo(
+          hasTransition: true,
+          transitionType: PageTransitionType.fade,
+          duration: Duration(milliseconds: 0),
+        ),
+      },
+    );
   }
 
   void _setFinalizou() {
