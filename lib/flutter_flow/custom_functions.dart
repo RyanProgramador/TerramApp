@@ -504,63 +504,54 @@ List<dynamic>? sortListJson(
     return null;
   }
 
+  // Função auxiliar para obter valor e convertê-lo para String
+  String getValueAsString(Map<String, dynamic> map, List<String> keys) {
+    dynamic value = map;
+    for (String key in keys) {
+      if (value is Map<String, dynamic> && value.containsKey(key)) {
+        value = value[key];
+      } else {
+        return "";
+      }
+    }
+    return value?.toString() ??
+        ""; // Converte o valor para String e trata nulos
+  }
+
+  // Se termoPesquisa for fornecido, filtra a lista antes de ordenar
   if (termoPesquisa != null) {
     List<String> keys = sortPath.split('.');
-
-    dynamic getValue(Map<String, dynamic> map, List<String> keys) {
-      dynamic value = map;
-      for (String key in keys) {
-        if (value is Map<String, dynamic> && value.containsKey(key)) {
-          value = value[key];
-        } else {
-          return null;
-        }
-      }
-      return value;
-    }
-
     String searchTerm = termoPesquisa.toString();
 
     List<dynamic>? filteredList = listaJson.where((item) {
-      dynamic value = getValue(item, keys);
-
-      String stringValue = value?.toString() ?? "";
-
+      String stringValue = getValueAsString(item, keys);
       return stringValue.contains(searchTerm);
     }).toList();
 
+    // Ordenação com conversão para String
     if (crescente) {
       filteredList?.sort((a, b) {
-        dynamic aValue = getValue(a, keys);
-        dynamic bValue = getValue(b, keys);
-
-        if (aValue is Comparable && bValue is Comparable) {
-          return Comparable.compare(aValue, bValue);
-        } else {
-          return 0;
-        }
+        String aValueStr = getValueAsString(a, keys);
+        String bValueStr = getValueAsString(b, keys);
+        return aValueStr.compareTo(bValueStr);
+      });
+    } else {
+      filteredList?.sort((a, b) {
+        String aValueStr = getValueAsString(a, keys);
+        String bValueStr = getValueAsString(b, keys);
+        return bValueStr.compareTo(aValueStr);
       });
     }
 
     return filteredList;
   } else {
+    // Ordenação com conversão para String
     listaJson.sort((a, b) {
-      dynamic aValue = a[sortPath];
-      dynamic bValue = b[sortPath];
-
-      if (aValue is Comparable && bValue is Comparable) {
-        if (aValue is String && bValue is String) {
-          return crescente
-              ? aValue.compareTo(bValue)
-              : bValue.compareTo(aValue);
-        } else {
-          return crescente
-              ? Comparable.compare(aValue, bValue)
-              : Comparable.compare(bValue, aValue);
-        }
-      } else {
-        return 0;
-      }
+      String aValueStr = getValueAsString(a, sortPath.split('.'));
+      String bValueStr = getValueAsString(b, sortPath.split('.'));
+      return crescente
+          ? aValueStr.compareTo(bValueStr)
+          : bValueStr.compareTo(aValueStr);
     });
 
     return listaJson;
