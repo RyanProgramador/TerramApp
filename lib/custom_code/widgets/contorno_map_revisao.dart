@@ -111,9 +111,33 @@ class _ContornoMapRevisaoState extends State<ContornoMapRevisao> {
   //   return latLngList;
   // }
 
+  // List<google_maps.LatLng> toLatLng(dynamic latLngData) {
+  //   List<google_maps.LatLng> latLngList = [];
+  //
+  //   if (latLngData is String) {
+  //     final splits = latLngData.split(',');
+  //     if (splits.length == 2) {
+  //       try {
+  //         final lat = double.parse(splits[0].trim());
+  //         final lng = double.parse(splits[1].trim());
+  //         latLngList.add(google_maps.LatLng(lat, lng));
+  //       } catch (e) {
+  //         print("Erro ao converter latLngData: $e");
+  //       }
+  //     }
+  //   } else if (latLngData is List) {
+  //     for (var item in latLngData) {
+  //       latLngList.addAll(toLatLng(item));
+  //     }
+  //   }
+  //
+  //   return latLngList;
+  // }
+
   List<google_maps.LatLng> toLatLng(dynamic latLngData) {
     List<google_maps.LatLng> latLngList = [];
 
+    // Se latLngData é uma string, converte diretamente para LatLng
     if (latLngData is String) {
       final splits = latLngData.split(',');
       if (splits.length == 2) {
@@ -125,21 +149,60 @@ class _ContornoMapRevisaoState extends State<ContornoMapRevisao> {
           print("Erro ao converter latLngData: $e");
         }
       }
-    } else if (latLngData is List) {
+    }
+    // Se latLngData é uma lista, processa cada item individualmente
+    else if (latLngData is List) {
       for (var item in latLngData) {
-        latLngList.addAll(toLatLng(item));
+        if (item is String) {
+          latLngList.addAll(toLatLng(item));
+        }
       }
     }
 
     return latLngList;
   }
 
+  int? toInt(String? str) {
+    if (str == null) {
+      // Retorna null se a string for null
+      return null;
+    }
+
+    // Tenta converter a string para um inteiro
+    return int.tryParse(str);
+  }
+
   void _initializePolygons() {
     var corSTR = widget.cor.toString();
-    if (latLngList.isNotEmpty) {
+    var filtradoRecorte = FFAppState()
+        .contornoFazendaPosSincronizado
+        .where((item) => item['contorno_grupo'] == toInt(widget.idContorno))
+        .map((item) => item['latlng'])
+        .toList();
+
+    if (filtradoRecorte.isNotEmpty) {
       final polygon = google_maps.Polygon(
         polygonId: const google_maps.PolygonId('AreaPolygon'),
-        points: latLngList,
+        points: toLatLng(filtradoRecorte),
+        fillColor: HexColor("$corSTR").withOpacity(0.3) ??
+            Colors.blue.withOpacity(0.2),
+        strokeColor: HexColor("$corSTR") ?? Colors.blue,
+        strokeWidth: 3,
+      );
+
+      setState(() {
+        polygons.add(polygon);
+      });
+    } else {
+      var filtradoRecorte2 = FFAppState()
+          .contornoFazenda
+          .where((item) => item['contorno_grupo'] == widget.idContorno)
+          .map((item) => item['latlng'])
+          .toList();
+
+      final polygon = google_maps.Polygon(
+        polygonId: const google_maps.PolygonId('AreaPolygon'),
+        points: toLatLng(filtradoRecorte2),
         fillColor: HexColor("$corSTR").withOpacity(0.3) ??
             Colors.blue.withOpacity(0.2),
         strokeColor: HexColor("$corSTR") ?? Colors.blue,
@@ -354,21 +417,21 @@ class _ContornoMapRevisaoState extends State<ContornoMapRevisao> {
                   ),
                 ),
               ),
-              // ElevatedButton(
-              //   onPressed: () => _showVariablesAlert(context),
-              //   style: ElevatedButton.styleFrom(
-              //     shape: CircleBorder(),
-              //     backgroundColor: Color(0xFF00736D),
-              //   ),
-              //   child: Padding(
-              //     padding: const EdgeInsets.all(16.0),
-              //     child: Icon(
-              //       Icons.info_outline,
-              //       size: 35.0,
-              //       color: Colors.white,
-              //     ),
-              //   ),
-              // ),
+              ElevatedButton(
+                onPressed: () => _showVariablesAlert(context),
+                style: ElevatedButton.styleFrom(
+                  shape: CircleBorder(),
+                  backgroundColor: Color(0xFF00736D),
+                ),
+                child: Padding(
+                  padding: const EdgeInsets.all(16.0),
+                  child: Icon(
+                    Icons.info_outline,
+                    size: 35.0,
+                    color: Colors.white,
+                  ),
+                ),
+              ),
             ],
           ),
         ),
@@ -378,9 +441,9 @@ class _ContornoMapRevisaoState extends State<ContornoMapRevisao> {
 
   void _showVariablesAlert(BuildContext context) {
     var filtradoRecorte = FFAppState()
-        .latlngRecorteTalhao
-        .where((item) => item['idContorno'] == widget.idContorno)
-        // .map((item) => item['listaLatLngRecorte'])
+        .contornoFazenda
+        .where((item) => item['contorno_grupo'] == '16')
+        .map((item) => item['latlng'])
         .toList();
 
     showDialog(
@@ -391,7 +454,7 @@ class _ContornoMapRevisaoState extends State<ContornoMapRevisao> {
           content: SingleChildScrollView(
             child: ListBody(
               children: [
-                Text('Lista de LatLng: ${widget.listaDeLatLng}'),
+                Text('Lista de LatLng: ${latLngList}'),
                 Text('Cor: ${widget.cor}'),
                 Text('Local Atual: ${widget.localAtual}'),
                 Text('OSERVID: ${widget.oservid}'),
@@ -415,4 +478,9 @@ class _ContornoMapRevisaoState extends State<ContornoMapRevisao> {
       },
     );
   }
+}
+
+List<Map<String, dynamic>> convertToMapList(List<dynamic>? dynamicList) {
+  return dynamicList?.map((item) => item as Map<String, dynamic>).toList() ??
+      [];
 }

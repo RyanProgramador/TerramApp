@@ -173,6 +173,7 @@ class _ContornoMapState extends State<ContornoMap> {
         var polygonCoordinates = List<google_maps.LatLng>.from(
             markers.map((marker) => marker.position));
         polygonCoordinates.add(markers.first.position); // Fechar o polígono
+
         polygons.clear();
         polygons.add(
           google_maps.Polygon(
@@ -185,15 +186,18 @@ class _ContornoMapState extends State<ContornoMap> {
         );
 
         // Salvar dados
-        int markerId = 1;
+        int markerId = 0;
         for (var coord in polygonCoordinates) {
           Map<String, dynamic> contorno = {
             "contorno_grupo": widget.idContorno,
-            "marker_id": markerId++,
+            "marker_id": markerId.toString(),
             "oserv_id": widget.oservid,
             "latlng": "${coord.latitude}, ${coord.longitude}",
           };
-          FFAppState().contornoFazenda.add(contorno);
+          FFAppState()
+              .contornoFazenda
+              .add(contorno); // Adiciona o mapa diretamente
+          markerId++;
         }
         DateTime dataHoraAtual = DateTime.now();
         String formattedDataHora = dataHoraAtual
