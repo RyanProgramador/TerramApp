@@ -284,38 +284,6 @@ class _ConfiguracoesWidgetState extends State<ConfiguracoesWidget> {
                                     FFAppState()
                                             .grupoContornoFazendasPosSincronizado =
                                         functions
-                                            .juntarDuasListasJson(
-                                                FFAppState()
-                                                    .grupoContornoFazendas
-                                                    .toList(),
-                                                FFAppState()
-                                                    .grupoContornoFazendasPosSincronizado
-                                                    .toList())!
-                                            .toList()
-                                            .cast<dynamic>();
-                                    FFAppState()
-                                            .contornoFazendaPosSincronizado =
-                                        functions
-                                            .juntarDuasListasJson(
-                                                FFAppState()
-                                                    .contornoFazenda
-                                                    .toList(),
-                                                FFAppState()
-                                                    .contornoFazendaPosSincronizado
-                                                    .toList())!
-                                            .toList()
-                                            .cast<dynamic>();
-                                    FFAppState()
-                                            .latlngRecorteTalhaoPosSincronizado =
-                                        FFAppState()
-                                            .latlngRecorteTalhao
-                                            .toList()
-                                            .cast<dynamic>();
-                                  });
-                                  setState(() {
-                                    FFAppState()
-                                            .grupoContornoFazendasPosSincronizado =
-                                        functions
                                             .juntarDuasListasJsonignoraDuplicados(
                                                 FFAppState()
                                                     .grupoContornoFazendasPosSincronizado
@@ -345,6 +313,18 @@ class _ConfiguracoesWidgetState extends State<ConfiguracoesWidget> {
                                                           ''),
                                                     )
                                                     ?.toList())!
+                                            .toList()
+                                            .cast<dynamic>();
+                                    FFAppState()
+                                            .latlngRecorteTalhaoPosSincronizado =
+                                        functions
+                                            .juntarDuasListasJsonignoraDuplicados(
+                                                FFAppState()
+                                                    .latlngRecorteTalhao
+                                                    .toList(),
+                                                FFAppState()
+                                                    .latlngRecorteTalhaoPosSincronizado
+                                                    .toList())!
                                             .toList()
                                             .cast<dynamic>();
                                   });
