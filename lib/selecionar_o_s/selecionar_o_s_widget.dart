@@ -1184,10 +1184,10 @@ class _SelecionarOSWidgetState extends State<SelecionarOSWidget>
                                                                             '404',
                                                                           ),
                                                                           servicoId:
-                                                                              getJsonField(
+                                                                              functions.intToSring(getJsonField(
                                                                             trOsServicosItem,
                                                                             r'''$.oserv_id''',
-                                                                          ).toString(),
+                                                                          ))!,
                                                                           data:
                                                                               functions.strToData(valueOrDefault<String>(
                                                                             getJsonField(
@@ -1483,10 +1483,10 @@ class _SelecionarOSWidgetState extends State<SelecionarOSWidget>
                                                                           '404',
                                                                         ),
                                                                         servicoId:
-                                                                            getJsonField(
+                                                                            functions.intToSring(getJsonField(
                                                                           trOsServicosItem,
                                                                           r'''$.oserv_id''',
-                                                                        ).toString(),
+                                                                        ))!,
                                                                         data: functions
                                                                             .strToData(valueOrDefault<String>(
                                                                           getJsonField(
@@ -2249,10 +2249,10 @@ class _SelecionarOSWidgetState extends State<SelecionarOSWidget>
                                                                           '404',
                                                                         ),
                                                                         servicoId:
-                                                                            getJsonField(
+                                                                            functions.intToSring(getJsonField(
                                                                           trOsServicosItem,
                                                                           r'''$.oserv_id''',
-                                                                        ).toString(),
+                                                                        ))!,
                                                                         data: functions
                                                                             .strToData(valueOrDefault<String>(
                                                                           getJsonField(
@@ -2558,10 +2558,11 @@ class _SelecionarOSWidgetState extends State<SelecionarOSWidget>
                                                                         '404',
                                                                       ),
                                                                       servicoId:
-                                                                          getJsonField(
+                                                                          functions
+                                                                              .intToSring(getJsonField(
                                                                         trOsServicosItem,
                                                                         r'''$.oserv_id''',
-                                                                      ).toString(),
+                                                                      ))!,
                                                                       data: functions
                                                                           .strToData(
                                                                               valueOrDefault<String>(

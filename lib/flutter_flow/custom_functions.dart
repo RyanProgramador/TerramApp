@@ -923,3 +923,7 @@ dynamic editaJson(
 
   return jsonasereditado;
 }
+
+String? intToSring(int? intToString) {
+  return intToString?.toString();
+}
