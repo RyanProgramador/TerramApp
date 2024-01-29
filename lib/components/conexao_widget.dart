@@ -11,10 +11,10 @@ import 'conexao_model.dart';
 export 'conexao_model.dart';
 
 class ConexaoWidget extends StatefulWidget {
-  const ConexaoWidget({Key? key}) : super(key: key);
+  const ConexaoWidget({super.key});
 
   @override
-  _ConexaoWidgetState createState() => _ConexaoWidgetState();
+  State<ConexaoWidget> createState() => _ConexaoWidgetState();
 }
 
 class _ConexaoWidgetState extends State<ConexaoWidget> {

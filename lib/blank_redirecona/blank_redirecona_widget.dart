@@ -10,10 +10,10 @@ import 'blank_redirecona_model.dart';
 export 'blank_redirecona_model.dart';
 
 class BlankRedireconaWidget extends StatefulWidget {
-  const BlankRedireconaWidget({Key? key}) : super(key: key);
+  const BlankRedireconaWidget({super.key});
 
   @override
-  _BlankRedireconaWidgetState createState() => _BlankRedireconaWidgetState();
+  State<BlankRedireconaWidget> createState() => _BlankRedireconaWidgetState();
 }
 
 class _BlankRedireconaWidgetState extends State<BlankRedireconaWidget> {

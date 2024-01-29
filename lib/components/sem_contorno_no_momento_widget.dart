@@ -8,10 +8,10 @@ import 'sem_contorno_no_momento_model.dart';
 export 'sem_contorno_no_momento_model.dart';
 
 class SemContornoNoMomentoWidget extends StatefulWidget {
-  const SemContornoNoMomentoWidget({Key? key}) : super(key: key);
+  const SemContornoNoMomentoWidget({super.key});
 
   @override
-  _SemContornoNoMomentoWidgetState createState() =>
+  State<SemContornoNoMomentoWidget> createState() =>
       _SemContornoNoMomentoWidgetState();
 }
 

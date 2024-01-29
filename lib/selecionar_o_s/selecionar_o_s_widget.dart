@@ -24,10 +24,10 @@ import 'selecionar_o_s_model.dart';
 export 'selecionar_o_s_model.dart';
 
 class SelecionarOSWidget extends StatefulWidget {
-  const SelecionarOSWidget({Key? key}) : super(key: key);
+  const SelecionarOSWidget({super.key});
 
   @override
-  _SelecionarOSWidgetState createState() => _SelecionarOSWidgetState();
+  State<SelecionarOSWidget> createState() => _SelecionarOSWidgetState();
 }
 
 class _SelecionarOSWidgetState extends State<SelecionarOSWidget>
@@ -186,6 +186,10 @@ class _SelecionarOSWidgetState extends State<SelecionarOSWidget>
         _model.trCFG2 = await SincronizarGroup.trCFGCall.call(
           urlapicall: FFAppState().urlapicall,
         );
+        _model.trContornosERecortesDaWeb =
+            await SincronizarGroup.trSincronizaTalhaoContornoCall.call(
+          urlapicall: FFAppState().urlapicall,
+        );
         FFAppState().update(() {});
         if ((_model.trTecnicosSinc2?.succeeded ?? true) &&
             (_model.trOsServicosSinc2?.succeeded ?? true) &&
@@ -272,6 +276,14 @@ class _SelecionarOSWidgetState extends State<SelecionarOSWidget>
                 SincronizarGroup.trCFGCall.geoTolerancia(
               (_model.trCFG2?.jsonBody ?? ''),
             );
+            FFAppState().addToGrupoContornoFazendasPosSincronizado(getJsonField(
+              (_model.trContornosERecortesDaWeb?.jsonBody ?? ''),
+              r'''$.dados''',
+            ));
+            FFAppState().addToContornoFazendaPosSincronizado(getJsonField(
+              (_model.trContornosERecortesDaWeb?.jsonBody ?? ''),
+              r'''$.dados_cont_e_rec''',
+            ));
           });
         } else {
           await showDialog(
@@ -318,6 +330,10 @@ class _SelecionarOSWidgetState extends State<SelecionarOSWidget>
         urlapicall: FFAppState().urlapicall,
       );
       _model.trCFG = await SincronizarGroup.trCFGCall.call(
+        urlapicall: FFAppState().urlapicall,
+      );
+      _model.trContornosERecortesDaWeb2 =
+          await SincronizarGroup.trSincronizaTalhaoContornoCall.call(
         urlapicall: FFAppState().urlapicall,
       );
       FFAppState().update(() {});
@@ -378,6 +394,14 @@ class _SelecionarOSWidgetState extends State<SelecionarOSWidget>
               SincronizarGroup.trCFGCall.geoTolerancia(
             (_model.trCFG?.jsonBody ?? ''),
           );
+          FFAppState().addToGrupoContornoFazendasPosSincronizado(getJsonField(
+            (_model.trContornosERecortesDaWeb2?.jsonBody ?? ''),
+            r'''$.dados''',
+          ));
+          FFAppState().addToContornoFazendaPosSincronizado(getJsonField(
+            (_model.trContornosERecortesDaWeb2?.jsonBody ?? ''),
+            r'''$.dados_cont_e_rec''',
+          ));
         });
       } else {
         await showDialog(

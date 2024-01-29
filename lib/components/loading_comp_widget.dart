@@ -13,10 +13,10 @@ import 'loading_comp_model.dart';
 export 'loading_comp_model.dart';
 
 class LoadingCompWidget extends StatefulWidget {
-  const LoadingCompWidget({Key? key}) : super(key: key);
+  const LoadingCompWidget({super.key});
 
   @override
-  _LoadingCompWidgetState createState() => _LoadingCompWidgetState();
+  State<LoadingCompWidget> createState() => _LoadingCompWidgetState();
 }
 
 class _LoadingCompWidgetState extends State<LoadingCompWidget> {

@@ -14,10 +14,10 @@ import 'configuracoes_model.dart';
 export 'configuracoes_model.dart';
 
 class ConfiguracoesWidget extends StatefulWidget {
-  const ConfiguracoesWidget({Key? key}) : super(key: key);
+  const ConfiguracoesWidget({super.key});
 
   @override
-  _ConfiguracoesWidgetState createState() => _ConfiguracoesWidgetState();
+  State<ConfiguracoesWidget> createState() => _ConfiguracoesWidgetState();
 }
 
 class _ConfiguracoesWidgetState extends State<ConfiguracoesWidget> {

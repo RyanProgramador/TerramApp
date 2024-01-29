@@ -12,15 +12,14 @@ export 'contorno_recorte_da_fazenda_model.dart';
 
 class ContornoRecorteDaFazendaWidget extends StatefulWidget {
   const ContornoRecorteDaFazendaWidget({
-    Key? key,
+    super.key,
     required this.fazendaNome,
     required this.oservID,
     String? idDoContorno,
     required this.fazid,
     this.fazlatlng,
     required this.listaLatLngTalhao,
-  })  : this.idDoContorno = idDoContorno ?? '1',
-        super(key: key);
+  }) : this.idDoContorno = idDoContorno ?? '1';
 
   final String? fazendaNome;
   final String? oservID;
@@ -30,7 +29,7 @@ class ContornoRecorteDaFazendaWidget extends StatefulWidget {
   final List<String>? listaLatLngTalhao;
 
   @override
-  _ContornoRecorteDaFazendaWidgetState createState() =>
+  State<ContornoRecorteDaFazendaWidget> createState() =>
       _ContornoRecorteDaFazendaWidgetState();
 }
 

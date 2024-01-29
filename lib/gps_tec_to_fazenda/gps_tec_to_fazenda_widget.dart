@@ -15,7 +15,7 @@ export 'gps_tec_to_fazenda_model.dart';
 
 class GpsTecToFazendaWidget extends StatefulWidget {
   const GpsTecToFazendaWidget({
-    Key? key,
+    super.key,
     required this.jsonServico,
     required this.tecnicoId,
     required this.servicoId,
@@ -27,8 +27,7 @@ class GpsTecToFazendaWidget extends StatefulWidget {
     bool? rotaInversa,
     this.rotaInversaString,
   })  : this.comRota = comRota ?? false,
-        this.rotaInversa = rotaInversa ?? false,
-        super(key: key);
+        this.rotaInversa = rotaInversa ?? false;
 
   final dynamic jsonServico;
   final String? tecnicoId;
@@ -42,7 +41,7 @@ class GpsTecToFazendaWidget extends StatefulWidget {
   final String? rotaInversaString;
 
   @override
-  _GpsTecToFazendaWidgetState createState() => _GpsTecToFazendaWidgetState();
+  State<GpsTecToFazendaWidget> createState() => _GpsTecToFazendaWidgetState();
 }
 
 class _GpsTecToFazendaWidgetState extends State<GpsTecToFazendaWidget> {

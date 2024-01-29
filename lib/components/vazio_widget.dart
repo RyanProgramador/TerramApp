@@ -8,10 +8,10 @@ import 'vazio_model.dart';
 export 'vazio_model.dart';
 
 class VazioWidget extends StatefulWidget {
-  const VazioWidget({Key? key}) : super(key: key);
+  const VazioWidget({super.key});
 
   @override
-  _VazioWidgetState createState() => _VazioWidgetState();
+  State<VazioWidget> createState() => _VazioWidgetState();
 }
 
 class _VazioWidgetState extends State<VazioWidget> {

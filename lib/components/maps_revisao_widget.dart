@@ -10,7 +10,7 @@ export 'maps_revisao_model.dart';
 
 class MapsRevisaoWidget extends StatefulWidget {
   const MapsRevisaoWidget({
-    Key? key,
+    super.key,
     required this.listaLatLngEmString,
     this.cor,
     required this.fazendaNome,
@@ -18,7 +18,7 @@ class MapsRevisaoWidget extends StatefulWidget {
     required this.idDoContorno,
     required this.fazid,
     required this.fazlatlng,
-  }) : super(key: key);
+  });
 
   final List<String>? listaLatLngEmString;
   final String? cor;
@@ -29,7 +29,7 @@ class MapsRevisaoWidget extends StatefulWidget {
   final LatLng? fazlatlng;
 
   @override
-  _MapsRevisaoWidgetState createState() => _MapsRevisaoWidgetState();
+  State<MapsRevisaoWidget> createState() => _MapsRevisaoWidgetState();
 }
 
 class _MapsRevisaoWidgetState extends State<MapsRevisaoWidget> {

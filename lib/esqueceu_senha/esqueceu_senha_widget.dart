@@ -15,10 +15,10 @@ import 'esqueceu_senha_model.dart';
 export 'esqueceu_senha_model.dart';
 
 class EsqueceuSenhaWidget extends StatefulWidget {
-  const EsqueceuSenhaWidget({Key? key}) : super(key: key);
+  const EsqueceuSenhaWidget({super.key});
 
   @override
-  _EsqueceuSenhaWidgetState createState() => _EsqueceuSenhaWidgetState();
+  State<EsqueceuSenhaWidget> createState() => _EsqueceuSenhaWidgetState();
 }
 
 class _EsqueceuSenhaWidgetState extends State<EsqueceuSenhaWidget>

@@ -8,10 +8,10 @@ import 'pesquisa_avanadabtn_model.dart';
 export 'pesquisa_avanadabtn_model.dart';
 
 class PesquisaAvanadabtnWidget extends StatefulWidget {
-  const PesquisaAvanadabtnWidget({Key? key}) : super(key: key);
+  const PesquisaAvanadabtnWidget({super.key});
 
   @override
-  _PesquisaAvanadabtnWidgetState createState() =>
+  State<PesquisaAvanadabtnWidget> createState() =>
       _PesquisaAvanadabtnWidgetState();
 }
 

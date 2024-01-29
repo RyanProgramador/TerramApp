@@ -19,7 +19,7 @@ export 'iniciar_deslocamento_model.dart';
 
 class IniciarDeslocamentoWidget extends StatefulWidget {
   const IniciarDeslocamentoWidget({
-    Key? key,
+    super.key,
     required this.etapade,
     required this.fazendaNome,
     required this.latlngFaz,
@@ -34,8 +34,7 @@ class IniciarDeslocamentoWidget extends StatefulWidget {
     required this.deslocamentoAtualFinzalizado,
     this.polylinhaQueVemDoMenuInicial,
     String? fazid,
-  })  : this.fazid = fazid ?? '1',
-        super(key: key);
+  }) : this.fazid = fazid ?? '1';
 
   final String? etapade;
   final String? fazendaNome;
@@ -53,7 +52,7 @@ class IniciarDeslocamentoWidget extends StatefulWidget {
   final String fazid;
 
   @override
-  _IniciarDeslocamentoWidgetState createState() =>
+  State<IniciarDeslocamentoWidget> createState() =>
       _IniciarDeslocamentoWidgetState();
 }
 

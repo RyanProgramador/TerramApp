@@ -11,18 +11,18 @@ export 'nome_contorno_model.dart';
 
 class NomeContornoWidget extends StatefulWidget {
   const NomeContornoWidget({
-    Key? key,
+    super.key,
     required this.nomeVelho,
     required this.indexinlist,
     required this.json,
-  }) : super(key: key);
+  });
 
   final String? nomeVelho;
   final int? indexinlist;
   final dynamic json;
 
   @override
-  _NomeContornoWidgetState createState() => _NomeContornoWidgetState();
+  State<NomeContornoWidget> createState() => _NomeContornoWidgetState();
 }
 
 class _NomeContornoWidgetState extends State<NomeContornoWidget> {

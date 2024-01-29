@@ -17,7 +17,7 @@ class ConfiguracoesModel extends FlutterFlowModel<ConfiguracoesWidget> {
 
   bool estaCarregando = false;
 
-  double? porcentagemDeCarregamento = 0;
+  double? porcentagemDeCarregamento = 0.0;
 
   String porcentagemString = '0%';
 

@@ -10,18 +10,18 @@ export 'maps_revisao_todos_model.dart';
 
 class MapsRevisaoTodosWidget extends StatefulWidget {
   const MapsRevisaoTodosWidget({
-    Key? key,
+    super.key,
     this.listagrupoTodos,
     this.listaContornoTodos,
     this.fazlatlng,
-  }) : super(key: key);
+  });
 
   final List<dynamic>? listagrupoTodos;
   final List<dynamic>? listaContornoTodos;
   final LatLng? fazlatlng;
 
   @override
-  _MapsRevisaoTodosWidgetState createState() => _MapsRevisaoTodosWidgetState();
+  State<MapsRevisaoTodosWidget> createState() => _MapsRevisaoTodosWidgetState();
 }
 
 class _MapsRevisaoTodosWidgetState extends State<MapsRevisaoTodosWidget> {

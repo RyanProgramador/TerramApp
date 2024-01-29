@@ -14,10 +14,10 @@ import 'multiple_places_picker_model.dart';
 export 'multiple_places_picker_model.dart';
 
 class MultiplePlacesPickerWidget extends StatefulWidget {
-  const MultiplePlacesPickerWidget({Key? key}) : super(key: key);
+  const MultiplePlacesPickerWidget({super.key});
 
   @override
-  _MultiplePlacesPickerWidgetState createState() =>
+  State<MultiplePlacesPickerWidget> createState() =>
       _MultiplePlacesPickerWidgetState();
 }
 

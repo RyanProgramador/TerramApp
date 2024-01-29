@@ -11,14 +11,14 @@ export 'medicao_coleta_model.dart';
 
 class MedicaoColetaWidget extends StatefulWidget {
   const MedicaoColetaWidget({
-    Key? key,
+    super.key,
     this.fazNome,
-  }) : super(key: key);
+  });
 
   final String? fazNome;
 
   @override
-  _MedicaoColetaWidgetState createState() => _MedicaoColetaWidgetState();
+  State<MedicaoColetaWidget> createState() => _MedicaoColetaWidgetState();
 }
 
 class _MedicaoColetaWidgetState extends State<MedicaoColetaWidget> {

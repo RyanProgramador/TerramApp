@@ -11,10 +11,10 @@ import 'pesquisa_avanada_model.dart';
 export 'pesquisa_avanada_model.dart';
 
 class PesquisaAvanadaWidget extends StatefulWidget {
-  const PesquisaAvanadaWidget({Key? key}) : super(key: key);
+  const PesquisaAvanadaWidget({super.key});
 
   @override
-  _PesquisaAvanadaWidgetState createState() => _PesquisaAvanadaWidgetState();
+  State<PesquisaAvanadaWidget> createState() => _PesquisaAvanadaWidgetState();
 }
 
 class _PesquisaAvanadaWidgetState extends State<PesquisaAvanadaWidget> {

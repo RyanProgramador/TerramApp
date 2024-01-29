@@ -21,10 +21,10 @@ import 'multiple_places_picker_copy_model.dart';
 export 'multiple_places_picker_copy_model.dart';
 
 class MultiplePlacesPickerCopyWidget extends StatefulWidget {
-  const MultiplePlacesPickerCopyWidget({Key? key}) : super(key: key);
+  const MultiplePlacesPickerCopyWidget({super.key});
 
   @override
-  _MultiplePlacesPickerCopyWidgetState createState() =>
+  State<MultiplePlacesPickerCopyWidget> createState() =>
       _MultiplePlacesPickerCopyWidgetState();
 }
 

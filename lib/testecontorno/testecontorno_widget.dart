@@ -15,14 +15,14 @@ export 'testecontorno_model.dart';
 
 class TestecontornoWidget extends StatefulWidget {
   const TestecontornoWidget({
-    Key? key,
+    super.key,
     this.contornoGrupo,
-  }) : super(key: key);
+  });
 
   final dynamic contornoGrupo;
 
   @override
-  _TestecontornoWidgetState createState() => _TestecontornoWidgetState();
+  State<TestecontornoWidget> createState() => _TestecontornoWidgetState();
 }
 
 class _TestecontornoWidgetState extends State<TestecontornoWidget> {

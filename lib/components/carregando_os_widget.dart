@@ -9,10 +9,10 @@ import 'carregando_os_model.dart';
 export 'carregando_os_model.dart';
 
 class CarregandoOsWidget extends StatefulWidget {
-  const CarregandoOsWidget({Key? key}) : super(key: key);
+  const CarregandoOsWidget({super.key});
 
   @override
-  _CarregandoOsWidgetState createState() => _CarregandoOsWidgetState();
+  State<CarregandoOsWidget> createState() => _CarregandoOsWidgetState();
 }
 
 class _CarregandoOsWidgetState extends State<CarregandoOsWidget> {

@@ -795,6 +795,17 @@ class TrSincronizaTalhaoContornoCall {
       alwaysAllowBody: false,
     );
   }
+
+  List? dadosGrupoContornoSincDoWeb(dynamic response) => getJsonField(
+        response,
+        r'''$.dados''',
+        true,
+      ) as List?;
+  List? dadosContornosSincDaWeb(dynamic response) => getJsonField(
+        response,
+        r'''$.dados_cont_e_rec''',
+        true,
+      ) as List?;
 }
 
 /// End Sincronizar Group Code

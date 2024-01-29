@@ -17,13 +17,12 @@ export 'lista_contornos_model.dart';
 
 class ListaContornosWidget extends StatefulWidget {
   const ListaContornosWidget({
-    Key? key,
+    super.key,
     required this.nomeFazenda,
     required this.oservID,
     String? fazid,
     this.fazlatlng,
-  })  : this.fazid = fazid ?? '1',
-        super(key: key);
+  }) : this.fazid = fazid ?? '1';
 
   final String? nomeFazenda;
   final String? oservID;
@@ -31,7 +30,7 @@ class ListaContornosWidget extends StatefulWidget {
   final LatLng? fazlatlng;
 
   @override
-  _ListaContornosWidgetState createState() => _ListaContornosWidgetState();
+  State<ListaContornosWidget> createState() => _ListaContornosWidgetState();
 }
 
 class _ListaContornosWidgetState extends State<ListaContornosWidget> {

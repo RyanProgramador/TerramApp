@@ -11,14 +11,14 @@ export 'maps_rota_em_andamento_model.dart';
 
 class MapsRotaEmAndamentoWidget extends StatefulWidget {
   const MapsRotaEmAndamentoWidget({
-    Key? key,
+    super.key,
     required this.fazlatlong,
-  }) : super(key: key);
+  });
 
   final LatLng? fazlatlong;
 
   @override
-  _MapsRotaEmAndamentoWidgetState createState() =>
+  State<MapsRotaEmAndamentoWidget> createState() =>
       _MapsRotaEmAndamentoWidgetState();
 }
 

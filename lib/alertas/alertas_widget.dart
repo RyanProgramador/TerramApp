@@ -10,10 +10,10 @@ import 'alertas_model.dart';
 export 'alertas_model.dart';
 
 class AlertasWidget extends StatefulWidget {
-  const AlertasWidget({Key? key}) : super(key: key);
+  const AlertasWidget({super.key});
 
   @override
-  _AlertasWidgetState createState() => _AlertasWidgetState();
+  State<AlertasWidget> createState() => _AlertasWidgetState();
 }
 
 class _AlertasWidgetState extends State<AlertasWidget> {
