@@ -276,14 +276,20 @@ class _SelecionarOSWidgetState extends State<SelecionarOSWidget>
                 SincronizarGroup.trCFGCall.geoTolerancia(
               (_model.trCFG2?.jsonBody ?? ''),
             );
-            FFAppState().addToGrupoContornoFazendasPosSincronizado(getJsonField(
-              (_model.trContornosERecortesDaWeb?.jsonBody ?? ''),
-              r'''$.dados''',
-            ));
-            FFAppState().addToContornoFazendaPosSincronizado(getJsonField(
-              (_model.trContornosERecortesDaWeb?.jsonBody ?? ''),
-              r'''$.dados_cont_e_rec''',
-            ));
+            FFAppState().grupoContornoFazendasPosSincronizado =
+                SincronizarGroup.trSincronizaTalhaoContornoCall
+                    .dadosGrupoContornoSincDoWeb(
+                      (_model.trContornosERecortesDaWeb?.jsonBody ?? ''),
+                    )!
+                    .toList()
+                    .cast<dynamic>();
+            FFAppState().contornoFazendaPosSincronizado =
+                SincronizarGroup.trSincronizaTalhaoContornoCall
+                    .dadosContornosSincDaWeb(
+                      (_model.trContornosERecortesDaWeb?.jsonBody ?? ''),
+                    )!
+                    .toList()
+                    .cast<dynamic>();
           });
         } else {
           await showDialog(
@@ -394,14 +400,20 @@ class _SelecionarOSWidgetState extends State<SelecionarOSWidget>
               SincronizarGroup.trCFGCall.geoTolerancia(
             (_model.trCFG?.jsonBody ?? ''),
           );
-          FFAppState().addToGrupoContornoFazendasPosSincronizado(getJsonField(
-            (_model.trContornosERecortesDaWeb2?.jsonBody ?? ''),
-            r'''$.dados''',
-          ));
-          FFAppState().addToContornoFazendaPosSincronizado(getJsonField(
-            (_model.trContornosERecortesDaWeb2?.jsonBody ?? ''),
-            r'''$.dados_cont_e_rec''',
-          ));
+          FFAppState().grupoContornoFazendasPosSincronizado =
+              SincronizarGroup.trSincronizaTalhaoContornoCall
+                  .dadosGrupoContornoSincDoWeb(
+                    (_model.trContornosERecortesDaWeb2?.jsonBody ?? ''),
+                  )!
+                  .toList()
+                  .cast<dynamic>();
+          FFAppState().contornoFazendaPosSincronizado =
+              SincronizarGroup.trSincronizaTalhaoContornoCall
+                  .dadosContornosSincDaWeb(
+                    (_model.trContornosERecortesDaWeb2?.jsonBody ?? ''),
+                  )!
+                  .toList()
+                  .cast<dynamic>();
         });
       } else {
         await showDialog(
