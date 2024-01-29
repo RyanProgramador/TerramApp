@@ -1455,15 +1455,61 @@ class _MultiplePlacesPickerCopyWidgetState
                         Padding(
                           padding: EdgeInsetsDirectional.fromSTEB(
                               10.0, 10.0, 10.0, 0.0),
-                          child: Row(
-                            mainAxisSize: MainAxisSize.max,
-                            mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                            children: [
-                              Text(
-                                'sincRecortes',
-                                style: FlutterFlowTheme.of(context).bodyMedium,
-                              ),
-                            ],
+                          child: FutureBuilder<ApiCallResponse>(
+                            future: SincronizarGroup
+                                .trSincronizaTalhaoContornoCall
+                                .call(
+                              urlapicall: FFAppState().urlapicall,
+                            ),
+                            builder: (context, snapshot) {
+                              // Customize what your widget looks like when it's loading.
+                              if (!snapshot.hasData) {
+                                return Center(
+                                  child: SizedBox(
+                                    width: 50.0,
+                                    height: 50.0,
+                                    child: CircularProgressIndicator(
+                                      valueColor: AlwaysStoppedAnimation<Color>(
+                                        FlutterFlowTheme.of(context).primary,
+                                      ),
+                                    ),
+                                  ),
+                                );
+                              }
+                              final rowTrSincronizaTalhaoContornoResponse =
+                                  snapshot.data!;
+                              return InkWell(
+                                splashColor: Colors.transparent,
+                                focusColor: Colors.transparent,
+                                hoverColor: Colors.transparent,
+                                highlightColor: Colors.transparent,
+                                onTap: () async {
+                                  setState(() {
+                                    FFAppState().testegrupocontornosPosSinc =
+                                        SincronizarGroup
+                                            .trSincronizaTalhaoContornoCall
+                                            .dadosGrupoContornoSincDoWeb(
+                                              rowTrSincronizaTalhaoContornoResponse
+                                                  .jsonBody,
+                                            )!
+                                            .toList()
+                                            .cast<dynamic>();
+                                  });
+                                },
+                                child: Row(
+                                  mainAxisSize: MainAxisSize.max,
+                                  mainAxisAlignment:
+                                      MainAxisAlignment.spaceBetween,
+                                  children: [
+                                    Text(
+                                      'sincRecortes',
+                                      style: FlutterFlowTheme.of(context)
+                                          .bodyMedium,
+                                    ),
+                                  ],
+                                ),
+                              );
+                            },
                           ),
                         ),
                       ],
