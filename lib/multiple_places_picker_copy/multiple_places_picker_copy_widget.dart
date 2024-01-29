@@ -1484,7 +1484,12 @@ class _MultiplePlacesPickerCopyWidgetState
                                 hoverColor: Colors.transparent,
                                 highlightColor: Colors.transparent,
                                 onTap: () async {
-                                  setState(() {});
+                                  setState(() {
+                                    FFAppState()
+                                        .grupoContornoFazendasPosSincronizado = [];
+                                    FFAppState()
+                                        .contornoFazendaPosSincronizado = [];
+                                  });
                                 },
                                 child: Row(
                                   mainAxisSize: MainAxisSize.max,
