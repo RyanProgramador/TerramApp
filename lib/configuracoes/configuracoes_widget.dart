@@ -313,6 +313,42 @@ class _ConfiguracoesWidgetState extends State<ConfiguracoesWidget> {
                                             .cast<dynamic>();
                                   });
                                   setState(() {
+                                    FFAppState()
+                                            .grupoContornoFazendasPosSincronizado =
+                                        functions
+                                            .juntarDuasListasJson(
+                                                FFAppState()
+                                                    .grupoContornoFazendasPosSincronizado
+                                                    .toList(),
+                                                SincronizarGroup
+                                                    .trSincronizaTalhaoContornoCall
+                                                    .dadosGrupoContornoSincDoWeb(
+                                                      (_model.trSincTalhao
+                                                              ?.jsonBody ??
+                                                          ''),
+                                                    )
+                                                    ?.toList())!
+                                            .toList()
+                                            .cast<dynamic>();
+                                    FFAppState()
+                                            .contornoFazendaPosSincronizado =
+                                        functions
+                                            .juntarDuasListasJson(
+                                                FFAppState()
+                                                    .contornoFazendaPosSincronizado
+                                                    .toList(),
+                                                SincronizarGroup
+                                                    .trSincronizaTalhaoContornoCall
+                                                    .dadosContornosSincDaWeb(
+                                                      (_model.trSincTalhao
+                                                              ?.jsonBody ??
+                                                          ''),
+                                                    )
+                                                    ?.toList())!
+                                            .toList()
+                                            .cast<dynamic>();
+                                  });
+                                  setState(() {
                                     _model.estaCarregando = true;
                                     _model.porcentagemDeCarregamento = 0.78;
                                     _model.porcentagemString = '78%';
