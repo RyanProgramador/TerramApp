@@ -290,6 +290,13 @@ class _SelecionarOSWidgetState extends State<SelecionarOSWidget>
                     )!
                     .toList()
                     .cast<dynamic>();
+            FFAppState().testegrupocontornosPosSinc =
+                SincronizarGroup.trSincronizaTalhaoContornoCall
+                    .dadosGrupoContornoSincDoWeb(
+                      (_model.trContornosERecortesDaWeb?.jsonBody ?? ''),
+                    )!
+                    .toList()
+                    .cast<dynamic>();
           });
         } else {
           await showDialog(
@@ -412,6 +419,10 @@ class _SelecionarOSWidgetState extends State<SelecionarOSWidget>
                   .dadosContornosSincDaWeb(
                     (_model.trContornosERecortesDaWeb2?.jsonBody ?? ''),
                   )!
+                  .toList()
+                  .cast<dynamic>();
+          FFAppState().testegrupocontornosPosSinc =
+              (_model.trContornosERecortesDaWeb2?.jsonBody ?? '')
                   .toList()
                   .cast<dynamic>();
         });

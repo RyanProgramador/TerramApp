@@ -442,6 +442,18 @@ class FFAppState extends ChangeNotifier {
           }).toList() ??
           _latlngRecorteTalhaoPosSincronizado;
     });
+    _safeInit(() {
+      _testegrupocontornosPosSinc =
+          prefs.getStringList('ff_testegrupocontornosPosSinc')?.map((x) {
+                try {
+                  return jsonDecode(x);
+                } catch (e) {
+                  print("Can't decode persisted json. Error: $e.");
+                  return {};
+                }
+              }).toList() ??
+              _testegrupocontornosPosSinc;
+    });
   }
 
   void update(VoidCallback callback) {
@@ -1950,6 +1962,48 @@ class FFAppState extends ChangeNotifier {
     _latlngRecorteTalhaoPosSincronizado.insert(_index, _value);
     prefs.setStringList('ff_latlngRecorteTalhaoPosSincronizado',
         _latlngRecorteTalhaoPosSincronizado.map((x) => jsonEncode(x)).toList());
+  }
+
+  List<dynamic> _testegrupocontornosPosSinc = [];
+  List<dynamic> get testegrupocontornosPosSinc => _testegrupocontornosPosSinc;
+  set testegrupocontornosPosSinc(List<dynamic> _value) {
+    _testegrupocontornosPosSinc = _value;
+    prefs.setStringList('ff_testegrupocontornosPosSinc',
+        _value.map((x) => jsonEncode(x)).toList());
+  }
+
+  void addToTestegrupocontornosPosSinc(dynamic _value) {
+    _testegrupocontornosPosSinc.add(_value);
+    prefs.setStringList('ff_testegrupocontornosPosSinc',
+        _testegrupocontornosPosSinc.map((x) => jsonEncode(x)).toList());
+  }
+
+  void removeFromTestegrupocontornosPosSinc(dynamic _value) {
+    _testegrupocontornosPosSinc.remove(_value);
+    prefs.setStringList('ff_testegrupocontornosPosSinc',
+        _testegrupocontornosPosSinc.map((x) => jsonEncode(x)).toList());
+  }
+
+  void removeAtIndexFromTestegrupocontornosPosSinc(int _index) {
+    _testegrupocontornosPosSinc.removeAt(_index);
+    prefs.setStringList('ff_testegrupocontornosPosSinc',
+        _testegrupocontornosPosSinc.map((x) => jsonEncode(x)).toList());
+  }
+
+  void updateTestegrupocontornosPosSincAtIndex(
+    int _index,
+    dynamic Function(dynamic) updateFn,
+  ) {
+    _testegrupocontornosPosSinc[_index] =
+        updateFn(_testegrupocontornosPosSinc[_index]);
+    prefs.setStringList('ff_testegrupocontornosPosSinc',
+        _testegrupocontornosPosSinc.map((x) => jsonEncode(x)).toList());
+  }
+
+  void insertAtIndexInTestegrupocontornosPosSinc(int _index, dynamic _value) {
+    _testegrupocontornosPosSinc.insert(_index, _value);
+    prefs.setStringList('ff_testegrupocontornosPosSinc',
+        _testegrupocontornosPosSinc.map((x) => jsonEncode(x)).toList());
   }
 }
 

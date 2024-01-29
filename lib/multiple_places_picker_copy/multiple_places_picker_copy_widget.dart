@@ -1460,7 +1460,7 @@ class _MultiplePlacesPickerCopyWidgetState
                             mainAxisAlignment: MainAxisAlignment.spaceBetween,
                             children: [
                               Text(
-                                'Técnicos',
+                                'sincRecortes',
                                 style: FlutterFlowTheme.of(context).bodyMedium,
                               ),
                             ],
@@ -1488,8 +1488,9 @@ class _MultiplePlacesPickerCopyWidgetState
                                   ),
                                   child: Builder(
                                     builder: (context) {
-                                      final trOsTecnicos =
-                                          FFAppState().trOsTecnicos.toList();
+                                      final trOsTecnicos = FFAppState()
+                                          .testegrupocontornosPosSinc
+                                          .toList();
                                       return SingleChildScrollView(
                                         child: Column(
                                           mainAxisSize: MainAxisSize.max,
