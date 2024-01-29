@@ -1033,7 +1033,10 @@ class _ListaContornosWidgetState extends State<ListaContornosWidget> {
                                                                         setState(
                                                                             () {
                                                                           FFAppState()
-                                                                              .removeAtIndexFromGrupoContornoFazendasPosSincronizado(trGruposContornoFazenda2Index);
+                                                                              .removeAtIndexFromGrupoContornoFazendasPosSincronizado(getJsonField(
+                                                                            trGruposContornoFazenda2Item,
+                                                                            r'''$.contorno_grupo''',
+                                                                          ));
                                                                         });
                                                                       },
                                                                       child:

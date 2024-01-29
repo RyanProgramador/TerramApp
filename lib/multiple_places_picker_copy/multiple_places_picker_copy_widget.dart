@@ -1484,17 +1484,7 @@ class _MultiplePlacesPickerCopyWidgetState
                                 hoverColor: Colors.transparent,
                                 highlightColor: Colors.transparent,
                                 onTap: () async {
-                                  setState(() {
-                                    FFAppState().testegrupocontornosPosSinc =
-                                        SincronizarGroup
-                                            .trSincronizaTalhaoContornoCall
-                                            .dadosGrupoContornoSincDoWeb(
-                                              rowTrSincronizaTalhaoContornoResponse
-                                                  .jsonBody,
-                                            )!
-                                            .toList()
-                                            .cast<dynamic>();
-                                  });
+                                  setState(() {});
                                 },
                                 child: Row(
                                   mainAxisSize: MainAxisSize.max,
@@ -1534,19 +1524,16 @@ class _MultiplePlacesPickerCopyWidgetState
                                   ),
                                   child: Builder(
                                     builder: (context) {
-                                      final trOsTecnicos = FFAppState()
-                                          .testegrupocontornosPosSinc
-                                          .toList();
+                                      final tec =
+                                          FFAppState().trTecnicos.toList();
                                       return SingleChildScrollView(
                                         child: Column(
                                           mainAxisSize: MainAxisSize.max,
-                                          children:
-                                              List.generate(trOsTecnicos.length,
-                                                  (trOsTecnicosIndex) {
-                                            final trOsTecnicosItem =
-                                                trOsTecnicos[trOsTecnicosIndex];
+                                          children: List.generate(tec.length,
+                                              (tecIndex) {
+                                            final tecItem = tec[tecIndex];
                                             return Text(
-                                              trOsTecnicosItem.toString(),
+                                              tecItem.toString(),
                                               style:
                                                   FlutterFlowTheme.of(context)
                                                       .bodyMedium
