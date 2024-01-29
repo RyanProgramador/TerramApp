@@ -272,6 +272,39 @@ List<LatLng>? listaStrToListaLatLng(
   return result;
 }
 
+List<dynamic>? juntarDuasListasJsonignoraDuplicados(
+  List<dynamic>? lista1,
+  List<dynamic>? lista2,
+) {
+  // Cria uma lista para armazenar os elementos únicos
+  var elementosUnicos = <dynamic>[];
+
+  // Função para adicionar elementos únicos à lista
+  void adicionarSeNaoExistir(List<dynamic>? lista) {
+    if (lista != null) {
+      for (var item in lista) {
+        var itemJson = jsonEncode(item);
+
+        // Verifica se o item já existe na lista de elementos únicos
+        bool jaExiste = elementosUnicos.any((elementoExistente) {
+          return jsonEncode(elementoExistente) == itemJson;
+        });
+
+        // Adiciona o item à lista se ele não existir
+        if (!jaExiste) {
+          elementosUnicos.add(item);
+        }
+      }
+    }
+  }
+
+  // Adiciona itens de ambas as listas
+  adicionarSeNaoExistir(lista1);
+  adicionarSeNaoExistir(lista2);
+
+  return elementosUnicos;
+}
+
 String? strToData(String? str) {
   if (str == null) {
     return ""; // or handle the null case as needed

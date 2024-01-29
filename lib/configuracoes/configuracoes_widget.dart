@@ -316,7 +316,7 @@ class _ConfiguracoesWidgetState extends State<ConfiguracoesWidget> {
                                     FFAppState()
                                             .grupoContornoFazendasPosSincronizado =
                                         functions
-                                            .juntarDuasListasJson(
+                                            .juntarDuasListasJsonignoraDuplicados(
                                                 FFAppState()
                                                     .grupoContornoFazendasPosSincronizado
                                                     .toList(),
@@ -333,7 +333,7 @@ class _ConfiguracoesWidgetState extends State<ConfiguracoesWidget> {
                                     FFAppState()
                                             .contornoFazendaPosSincronizado =
                                         functions
-                                            .juntarDuasListasJson(
+                                            .juntarDuasListasJsonignoraDuplicados(
                                                 FFAppState()
                                                     .contornoFazendaPosSincronizado
                                                     .toList(),
