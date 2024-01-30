@@ -217,7 +217,7 @@ class _ContornoMapCorteState extends State<ContornoMapCorte> {
                   newLoc.latitude,
                   newLoc.longitude,
                 ) >=
-                (widget.toleranciaEmMetrosEntreUmaCapturaEOutra ?? 2)) {
+                (widget.toleranciaEmMetrosEntreUmaCapturaEOutra ?? 5)) {
           // Atualiza a última posição conhecida
           lastPosition = newLoc;
           double currentZoomLevel = await _googleMapController!.getZoomLevel();
@@ -292,26 +292,26 @@ class _ContornoMapCorteState extends State<ContornoMapCorte> {
         strokeColor: Colors.red,
         strokeWidth: 3,
       );
-
+      polygons.clear();
       setState(() {
         polygons.add(
             userCreatedPolygon); // Adiciona o novo polígono sem remover o existente
       });
 
-      // Transformar a linha em um polígono fechado
-      var polygonCoordinates = List<google_maps.LatLng>.from(
-          markers.map((marker) => marker.position));
-      polygonCoordinates.add(markers.first.position); // Fechar o polígono
-      // polygons.clear();//limpar poligonos, remover isso após testes
-      polygons.add(
-        google_maps.Polygon(
-          polygonId: google_maps.PolygonId('AreaPolygon'),
-          points: polygonCoordinates,
-          fillColor: HexColor("#DB2400").withOpacity(0.2),
-          strokeColor: HexColor("#DB2400"),
-          strokeWidth: 3,
-        ),
-      );
+      // // Transformar a linha em um polígono fechado
+      // var polygonCoordinates = List<google_maps.LatLng>.from(
+      //     markers.map((marker) => marker.position));
+      // polygonCoordinates.add(markers.first.position); // Fechar o polígono
+      // // polygons.clear();//limpar poligonos, remover isso após testes
+      // polygons.add(
+      //   google_maps.Polygon(
+      //     polygonId: google_maps.PolygonId('AreaPolygon'),
+      //     points: polygonCoordinates,
+      //     fillColor: HexColor("#DB2400").withOpacity(0.2),
+      //     strokeColor: HexColor("#DB2400"),
+      //     strokeWidth: 3,
+      //   ),
+      // );
 
       var grupoDeRecorte = FFAppState()
           .latlngRecorteTalhao
@@ -397,6 +397,42 @@ class _ContornoMapCorteState extends State<ContornoMapCorte> {
       // });
     }
     _updatePolyline();
+  }
+
+  double _calculaDistance(google_maps.LatLng start, google_maps.LatLng end) {
+    return Geolocator.distanceBetween(
+        start.latitude, start.longitude, end.latitude, end.longitude);
+  }
+
+  void _setFinalizou() {
+    if (markers.isNotEmpty && _distanceToStart() <= 50) {
+      // final String corAleatoria = coresHex[Random().nextInt(coresHex.length)];
+      //
+      // // Polígono criado pelo usuário
+      // var userCreatedPolygon = google_maps.Polygon(
+      //   polygonId: google_maps.PolygonId('UserCreatedAreaPolygon'),
+      //   points: List<google_maps.LatLng>.from(
+      //       markers.map((marker) => marker.position)),
+      //   fillColor: Colors.red.withOpacity(0.2),
+      //   strokeColor: Colors.red,
+      //   strokeWidth: 3,
+      // );
+      //
+      // setState(() {
+      //   polygons.add(userCreatedPolygon); // Adiciona o novo polígono
+      // });
+      //
+      // // Capturar os pontos do polígono
+      // List<String> polygonPoints = userCreatedPolygon.points
+      //     .map((p) => "${p.latitude}, ${p.longitude}")
+      //     .toList();
+
+      // Outras ações de finalização
+      // isVisivel = false;
+      // isLocationPaused = true;
+    }
+    // _updatePolyline();
+
     context.goNamed(
       'ListaContornos',
       queryParameters: {
@@ -425,41 +461,6 @@ class _ContornoMapCorteState extends State<ContornoMapCorte> {
         ),
       },
     );
-  }
-
-  double _calculaDistance(google_maps.LatLng start, google_maps.LatLng end) {
-    return Geolocator.distanceBetween(
-        start.latitude, start.longitude, end.latitude, end.longitude);
-  }
-
-  void _setFinalizou() {
-    if (markers.isNotEmpty && _distanceToStart() <= 50) {
-      final String corAleatoria = coresHex[Random().nextInt(coresHex.length)];
-
-      // Polígono criado pelo usuário
-      var userCreatedPolygon = google_maps.Polygon(
-        polygonId: google_maps.PolygonId('UserCreatedAreaPolygon'),
-        points: List<google_maps.LatLng>.from(
-            markers.map((marker) => marker.position)),
-        fillColor: Colors.red.withOpacity(0.2),
-        strokeColor: Colors.red,
-        strokeWidth: 3,
-      );
-
-      setState(() {
-        polygons.add(userCreatedPolygon); // Adiciona o novo polígono
-      });
-
-      // Capturar os pontos do polígono
-      List<String> polygonPoints = userCreatedPolygon.points
-          .map((p) => "${p.latitude}, ${p.longitude}")
-          .toList();
-
-      // Outras ações de finalização
-      isVisivel = false;
-      isLocationPaused = true;
-    }
-    _updatePolyline();
   }
 
   double _distanceToStart() {
@@ -605,7 +606,6 @@ class _ContornoMapCorteState extends State<ContornoMapCorte> {
             polylines: {...polylines}.toSet(),
             mapType: google_maps.MapType.satellite,
             mapToolbarEnabled: false,
-            // myLocationEnabled: true,
             zoomControlsEnabled: false,
           ),
         ),
