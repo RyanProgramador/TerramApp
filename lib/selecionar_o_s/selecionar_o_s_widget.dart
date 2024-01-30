@@ -122,7 +122,7 @@ class _SelecionarOSWidgetState extends State<SelecionarOSWidget>
           });
           setState(() {
             FFAppState().grupoContornoFazendasPosSincronizado = functions
-                .juntarDuasListasJson(
+                .juntarDuasListasJsonignoraDuplicados(
                     FFAppState().grupoContornoFazendasPosSincronizado.toList(),
                     SincronizarGroup.trSincronizaTalhaoContornoCall
                         .dadosGrupoContornoSincDoWeb(
@@ -132,13 +132,19 @@ class _SelecionarOSWidgetState extends State<SelecionarOSWidget>
                 .toList()
                 .cast<dynamic>();
             FFAppState().contornoFazendaPosSincronizado = functions
-                .juntarDuasListasJson(
+                .juntarDuasListasJsonignoraDuplicados(
                     FFAppState().contornoFazendaPosSincronizado.toList(),
                     SincronizarGroup.trSincronizaTalhaoContornoCall
                         .dadosContornosSincDaWeb(
                           (_model.trSincTalhao?.jsonBody ?? ''),
                         )
                         ?.toList())!
+                .toList()
+                .cast<dynamic>();
+            FFAppState().latlngRecorteTalhaoPosSincronizado = functions
+                .juntarDuasListasJsonignoraDuplicados(
+                    FFAppState().latlngRecorteTalhao.toList(),
+                    FFAppState().latlngRecorteTalhaoPosSincronizado.toList())!
                 .toList()
                 .cast<dynamic>();
           });
