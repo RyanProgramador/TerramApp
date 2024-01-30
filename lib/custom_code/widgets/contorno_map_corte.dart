@@ -329,14 +329,37 @@ class _ContornoMapCorteState extends State<ContornoMapCorte> {
         maiorNumero = 1; // Começa de 1 se a lista estiver vazia.
       }
 
+      // int markerId = 1;
+      // google_maps.LatLng? lastCoord;
+      //
+      // userCreatedPolygon.points.forEach((point) {
+      //   // Verifica se a coordenada atual é diferente da última coordenada processada
+      //   if (lastCoord == null ||
+      //       (lastCoord?.latitude != point.latitude &&
+      //           lastCoord?.longitude != point.longitude)) {
+      //     Map<String, dynamic> latlngRecorte = {
+      //       "idContorno": widget.idContorno,
+      //       "marker_id": markerId.toString(),
+      //       "fazid": widget.fazid,
+      //       "listaLatLngRecorte": "${point.latitude},${point.longitude}",
+      //       "grupoDeRecorte": maiorNumero,
+      //     };
+      //
+      //     // Adiciona o Map diretamente ao FFAppState().latlngRecorteTalhao
+      //     FFAppState().latlngRecorteTalhao.add(latlngRecorte);
+      //     markerId++;
+      //     lastCoord = point; // Atualiza a última coordenada processada
+      //   }
+      // });
+
       int markerId = 1;
       google_maps.LatLng? lastCoord;
 
-      userCreatedPolygon.points.forEach((point) {
+      for (var point in userCreatedPolygon.points) {
         // Verifica se a coordenada atual é diferente da última coordenada processada
         if (lastCoord == null ||
-            (lastCoord?.latitude != point.latitude &&
-                lastCoord?.longitude != point.longitude)) {
+            (lastCoord.latitude != point.latitude &&
+                lastCoord.longitude != point.longitude)) {
           Map<String, dynamic> latlngRecorte = {
             "idContorno": widget.idContorno,
             "marker_id": markerId.toString(),
@@ -347,10 +370,11 @@ class _ContornoMapCorteState extends State<ContornoMapCorte> {
 
           // Adiciona o Map diretamente ao FFAppState().latlngRecorteTalhao
           FFAppState().latlngRecorteTalhao.add(latlngRecorte);
-          markerId++;
           lastCoord = point; // Atualiza a última coordenada processada
         }
-      });
+
+        markerId++;
+      }
 
       DateTime dataHoraAtual = DateTime.now();
       String formattedDataHora = dataHoraAtual
