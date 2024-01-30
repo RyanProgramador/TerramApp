@@ -359,7 +359,8 @@ class _ContornoMapCorteState extends State<ContornoMapCorte> {
         // Verifica se a coordenada atual é diferente da última coordenada processada
         if (lastCoord == null ||
             (lastCoord.latitude != point.latitude &&
-                lastCoord.longitude != point.longitude)) {
+                lastCoord.longitude != point.longitude) ||
+            (_calculaDistance(lastCoord, point) >= 2.0)) {
           Map<String, dynamic> latlngRecorte = {
             "idContorno": widget.idContorno,
             "marker_id": markerId.toString(),
@@ -424,6 +425,11 @@ class _ContornoMapCorteState extends State<ContornoMapCorte> {
         ),
       },
     );
+  }
+
+  double _calculaDistance(google_maps.LatLng start, google_maps.LatLng end) {
+    return Geolocator.distanceBetween(
+        start.latitude, start.longitude, end.latitude, end.longitude);
   }
 
   void _setFinalizou() {

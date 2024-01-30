@@ -84,6 +84,15 @@ class _ContornoMapState extends State<ContornoMap> {
   //
   List<Map<String, dynamic>> dados = []; // Variável para armazenar dados
 
+  @override
+  void initState() {
+    super.initState();
+    _model = createModel(context, () => ContornoDaFazendaModel());
+    _getCurrentLocation();
+    Timer.periodic(
+        Duration(milliseconds: 1000), (Timer t) => _getCurrentLocation());
+  }
+
   void _onMapCreated(google_maps.GoogleMapController controller) {
     _googleMapController = controller;
     _getCurrentLocation(); // Inicializar a posição atual ao criar o mapa
@@ -102,7 +111,7 @@ class _ContornoMapState extends State<ContornoMap> {
                   newLoc.latitude,
                   newLoc.longitude,
                 ) >=
-                (widget.toleranciaEmMetrosEntreUmaCapturaEOutra ?? 1)) {
+                (widget.toleranciaEmMetrosEntreUmaCapturaEOutra ?? 2)) {
           // Atualiza a última posição conhecida
           lastPosition = newLoc;
           double currentZoomLevel = await _googleMapController!.getZoomLevel();
@@ -228,6 +237,11 @@ class _ContornoMapState extends State<ContornoMap> {
       });
     }
     _updatePolyline();
+  }
+
+  double _calculaDistance(google_maps.LatLng start, google_maps.LatLng end) {
+    return Geolocator.distanceBetween(
+        start.latitude, start.longitude, end.latitude, end.longitude);
   }
 
   void _setFinalizou() {
@@ -393,15 +407,6 @@ class _ContornoMapState extends State<ContornoMap> {
         );
       },
     );
-  }
-
-  @override
-  void initState() {
-    super.initState();
-    _model = createModel(context, () => ContornoDaFazendaModel());
-    _getCurrentLocation();
-    Timer.periodic(
-        Duration(milliseconds: 1000), (Timer t) => _getCurrentLocation());
   }
 
   @override
