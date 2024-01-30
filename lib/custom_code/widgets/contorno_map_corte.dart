@@ -164,57 +164,6 @@ class _ContornoMapCorteState extends State<ContornoMapCorte> {
         // .map((item) => item['listaLatLngRecorte'])
         .toList();
 
-    // List<google_maps.LatLng> recorteLatLngList = [];
-
-    // for (var recorteList in filtradoRecorte) {
-    //   var recorteLatLngList = toLatLng(recorteList);
-    //   var recortePolygon = google_maps.Polygon(
-    //     polygonId: google_maps.PolygonId('Recorte_${recorteList.hashCode}'),
-    //     points: recorteLatLngList,
-    //     fillColor: Colors.red.withOpacity(0.4),
-    //     strokeColor: Colors.red,
-    //     strokeWidth: 3,
-    //   );
-    //
-    //   setState(() {
-    //     polygons.add(recortePolygon);
-    //   });
-    // }
-    // Iterar pela lista filtradoRecorte
-    //   for (var latLngString in filtradoRecorte) {
-    //     // Supondo que cada item é uma string contendo lat e lng separados por vírgula
-    //     var parts = latLngString.split(',');
-    //     if (parts.length == 2) {
-    //       try {
-    //         double lat = double.parse(parts[0].trim());
-    //         double lng = double.parse(parts[1].trim());
-    //         recorteLatLngList.add(google_maps.LatLng(lat, lng));
-    //       } catch (e) {
-    //         // Pode lançar uma exceção se a conversão falhar
-    //         print("Erro ao converter String para double: $e");
-    //       }
-    //     }
-    //   }
-    //
-    //   // Verifica se a lista tem elementos suficientes para formar um polígono
-    //   if (recorteLatLngList.isNotEmpty) {
-    //     // Criar e adicionar o polígono de recorte
-    //     var recortePolygon = google_maps.Polygon(
-    //       polygonId: google_maps.PolygonId('RecortePolygon'),
-    //       points: recorteLatLngList,
-    //       fillColor: Colors.red.withOpacity(0.4),
-    //       strokeColor: Colors.red,
-    //       strokeWidth: 3,
-    //     );
-    //
-    //     setState(() {
-    //       polygons.add(recortePolygon);
-    //     });
-    //   } else {
-    //     // Tratar caso onde recorteLatLngList é vazia ou dados não são válidos
-    //     print("Lista de coordenadas para recorte está vazia ou contém dados inválidos.");
-    //   }
-    // }
 // Agrupar por grupoDeRecorte
     var gruposDeRecorte = <int, List<dynamic>>{};
     for (var item in filtradoRecorte) {
@@ -268,7 +217,7 @@ class _ContornoMapCorteState extends State<ContornoMapCorte> {
                   newLoc.latitude,
                   newLoc.longitude,
                 ) >=
-                (widget.toleranciaEmMetrosEntreUmaCapturaEOutra ?? 1)) {
+                (widget.toleranciaEmMetrosEntreUmaCapturaEOutra ?? 2)) {
           // Atualiza a última posição conhecida
           lastPosition = newLoc;
           double currentZoomLevel = await _googleMapController!.getZoomLevel();
@@ -333,8 +282,6 @@ class _ContornoMapCorteState extends State<ContornoMapCorte> {
     if (markers.isNotEmpty && _distanceToStart() <= 50) {
       final Random random = Random();
       final String corAleatoria = coresHex[random.nextInt(coresHex.length)];
-
-      // setState(() {
 
       // Polígono criado pelo usuário
       var userCreatedPolygon = google_maps.Polygon(
@@ -477,18 +424,6 @@ class _ContornoMapCorteState extends State<ContornoMapCorte> {
       List<String> polygonPoints = userCreatedPolygon.points
           .map((p) => "${p.latitude}, ${p.longitude}")
           .toList();
-
-      // // Armazenar no latlngRecorte
-      // setState(() {
-      //   Map<String, dynamic> latlngRecorte = {
-      //     "idContorno": widget.idContorno,
-      //     "fazid": widget.fazid,
-      //     "listaLatLngRecorte": for coord in polygonPoints {}
-      //   };
-      //   // Converter latlngRecorte em JSON e adicionar ao FFAppState
-      //   // String latlngRecorteJson = jsonEncode(latlngRecorte);
-      //   FFAppState().latlngRecorteTalhao.add(latlngRecorte);
-      // });
 
       // Outras ações de finalização
       isVisivel = false;
@@ -640,7 +575,7 @@ class _ContornoMapCorteState extends State<ContornoMapCorte> {
             polylines: {...polylines}.toSet(),
             mapType: google_maps.MapType.satellite,
             mapToolbarEnabled: false,
-            myLocationEnabled: true,
+            // myLocationEnabled: true,
             zoomControlsEnabled: false,
           ),
         ),
@@ -763,17 +698,17 @@ class _ContornoMapCorteState extends State<ContornoMapCorte> {
   }
 
   void _showVariablesAlert(BuildContext context) {
-    var filtrado = FFAppState()
-        .contornoFazenda
-        .where((item) => item['contorno_grupo'] == widget.idContorno)
-        .map((item) => item['latlng'])
-        .toList();
-
-    var filtradoRecorte = FFAppState()
-        .latlngRecorteTalhao
-        .where((item) => item['idContorno'] == widget.idContorno)
-        .map((item) => item['listaLatLngRecorte'])
-        .toList();
+    // var filtrado = FFAppState()
+    //     .contornoFazenda
+    //     .where((item) => item['contorno_grupo'] == widget.idContorno)
+    //     .map((item) => item['latlng'])
+    //     .toList();
+    //
+    // var filtradoRecorte = FFAppState()
+    //     .latlngRecorteTalhao
+    //     .where((item) => item['idContorno'] == widget.idContorno)
+    //     .map((item) => item['listaLatLngRecorte'])
+    //     .toList();
 
     // Convertendo a lista para JSON
     // String filtradoRecorteString = jsonEncode(filtradoRecorte);
@@ -788,7 +723,7 @@ class _ContornoMapCorteState extends State<ContornoMapCorte> {
               children: [
                 Text('Width: ${widget.width}'),
                 Text('Height: ${widget.height}'),
-                Text('Lista de LatLng: $filtrado'),
+                // Text('Lista de LatLng: $filtrado'),
                 Text('Local Atual: ${widget.localAtual}'),
                 Text('OSERVID: ${widget.oservid}'),
                 Text('ID do Contorno: ${widget.idContorno}'),
@@ -796,7 +731,7 @@ class _ContornoMapCorteState extends State<ContornoMapCorte> {
                 Text('Nome da Fazenda: ${widget.fazNome}'),
                 Text('LatLng da Fazenda: ${widget.fazLatLng}'),
                 // Text('lista de latlng do cont: $latlngRecorte'),
-                Text('apenas as latlng do contorno correto: $filtradoRecorte'),
+                // Text('apenas as latlng do contorno correto: $filtradoRecorte'),
               ],
             ),
           ),

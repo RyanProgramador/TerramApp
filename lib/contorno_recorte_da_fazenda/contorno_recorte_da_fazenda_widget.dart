@@ -140,7 +140,7 @@ class _ContornoRecorteDaFazendaWidgetState
                                         null
                                     ? FFAppState()
                                         .distanciaEmMetrosDeToleranciaEntreUmaCapturaEOutra
-                                    : 1,
+                                    : 2,
                                 fazid: widget.fazid,
                                 localAtual: currentUserLocationValue,
                                 fazLatLng: widget.fazlatlng,

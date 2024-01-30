@@ -138,7 +138,7 @@ class _ContornoDaFazendaWidgetState extends State<ContornoDaFazendaWidget> {
                                       null
                                   ? FFAppState()
                                       .distanciaEmMetrosDeToleranciaEntreUmaCapturaEOutra
-                                  : 1,
+                                  : 2,
                             ),
                           ),
                         ),
