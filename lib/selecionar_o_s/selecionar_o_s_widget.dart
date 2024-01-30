@@ -173,6 +173,34 @@ class _SelecionarOSWidgetState extends State<SelecionarOSWidget>
               );
             },
           );
+          setState(() {
+            FFAppState().grupoContornoFazendasPosSincronizado = functions
+                .juntarDuasListasJsonignoraDuplicados(
+                    FFAppState().grupoContornoFazendasPosSincronizado.toList(),
+                    SincronizarGroup.trSincronizaTalhaoContornoCall
+                        .dadosGrupoContornoSincDoWeb(
+                          (_model.trSincTalhao?.jsonBody ?? ''),
+                        )
+                        ?.toList())!
+                .toList()
+                .cast<dynamic>();
+            FFAppState().contornoFazendaPosSincronizado = functions
+                .juntarDuasListasJsonignoraDuplicados(
+                    FFAppState().contornoFazendaPosSincronizado.toList(),
+                    SincronizarGroup.trSincronizaTalhaoContornoCall
+                        .dadosContornosSincDaWeb(
+                          (_model.trSincTalhao?.jsonBody ?? ''),
+                        )
+                        ?.toList())!
+                .toList()
+                .cast<dynamic>();
+            FFAppState().latlngRecorteTalhaoPosSincronizado = functions
+                .juntarDuasListasJsonignoraDuplicados(
+                    FFAppState().latlngRecorteTalhao.toList(),
+                    FFAppState().latlngRecorteTalhaoPosSincronizado.toList())!
+                .toList()
+                .cast<dynamic>();
+          });
         }
       } else if ((FFAppState().sincronizcaoAutomatica == false) &&
           (FFAppState().servicosFinalizadosComSucesso.length != 0)) {
