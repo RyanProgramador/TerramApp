@@ -383,18 +383,26 @@ class _ContornoMapCorteState extends State<ContornoMapCorte> {
       }
 
       int markerId = 1;
-      userCreatedPolygon.points.forEach((point) {
-        // Cria um Map para cada ponto ao invés de uma lista de Maps
-        Map<String, dynamic> latlngRecorte = {
-          "idContorno": widget.idContorno,
-          "marker_id": markerId++,
-          "fazid": widget.fazid,
-          "listaLatLngRecorte": "${point.latitude},${point.longitude}",
-          "grupoDeRecorte": maiorNumero,
-        };
+      google_maps.LatLng? lastCoord;
 
-        // Adiciona o Map diretamente ao FFAppState().latlngRecorteTalhao
-        FFAppState().latlngRecorteTalhao.add(latlngRecorte);
+      userCreatedPolygon.points.forEach((point) {
+        // Verifica se a coordenada atual é diferente da última coordenada processada
+        if (lastCoord == null ||
+            (lastCoord?.latitude != point.latitude &&
+                lastCoord?.longitude != point.longitude)) {
+          Map<String, dynamic> latlngRecorte = {
+            "idContorno": widget.idContorno,
+            "marker_id": markerId.toString(),
+            "fazid": widget.fazid,
+            "listaLatLngRecorte": "${point.latitude},${point.longitude}",
+            "grupoDeRecorte": maiorNumero,
+          };
+
+          // Adiciona o Map diretamente ao FFAppState().latlngRecorteTalhao
+          FFAppState().latlngRecorteTalhao.add(latlngRecorte);
+          markerId++;
+          lastCoord = point; // Atualiza a última coordenada processada
+        }
       });
 
       DateTime dataHoraAtual = DateTime.now();

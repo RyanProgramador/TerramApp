@@ -187,17 +187,23 @@ class _ContornoMapState extends State<ContornoMap> {
 
         // Salvar dados
         int markerId = 0;
+        google_maps.LatLng? lastCoord;
+
         for (var coord in polygonCoordinates) {
-          Map<String, dynamic> contorno = {
-            "contorno_grupo": widget.idContorno,
-            "marker_id": markerId.toString(),
-            "oserv_id": widget.oservid,
-            "latlng": "${coord.latitude}, ${coord.longitude}",
-          };
-          FFAppState()
-              .contornoFazenda
-              .add(contorno); // Adiciona o mapa diretamente
-          markerId++;
+          // Verifica se a coordenada atual é diferente da última coordenada processada
+          if (lastCoord == null ||
+              (lastCoord.latitude != coord.latitude &&
+                  lastCoord.longitude != coord.longitude)) {
+            Map<String, dynamic> contorno = {
+              "contorno_grupo": widget.idContorno,
+              "marker_id": markerId.toString(),
+              "oserv_id": widget.oservid,
+              "latlng": "${coord.latitude}, ${coord.longitude}",
+            };
+            FFAppState().contornoFazenda.add(contorno);
+            markerId++;
+            lastCoord = coord; // Atualiza a última coordenada processada
+          }
         }
         DateTime dataHoraAtual = DateTime.now();
         String formattedDataHora = dataHoraAtual

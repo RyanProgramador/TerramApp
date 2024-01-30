@@ -317,6 +317,7 @@ class _ContornoMapRevisaoState extends State<ContornoMapRevisao> {
       }
     });
   }
+
   // // Função para converter a lista linear de coordenadas em uma lista de LatLng
   // List<google_maps.LatLng> _convertToLatLngList(List<double> flatList) {
   //   List<google_maps.LatLng> latLngList = [];
@@ -417,21 +418,21 @@ class _ContornoMapRevisaoState extends State<ContornoMapRevisao> {
                   ),
                 ),
               ),
-              ElevatedButton(
-                onPressed: () => _showVariablesAlert(context),
-                style: ElevatedButton.styleFrom(
-                  shape: CircleBorder(),
-                  backgroundColor: Color(0xFF00736D),
-                ),
-                child: Padding(
-                  padding: const EdgeInsets.all(16.0),
-                  child: Icon(
-                    Icons.info_outline,
-                    size: 35.0,
-                    color: Colors.white,
-                  ),
-                ),
-              ),
+              // ElevatedButton(
+              //   onPressed: () => _showVariablesAlert(context),
+              //   style: ElevatedButton.styleFrom(
+              //     shape: CircleBorder(),
+              //     backgroundColor: Color(0xFF00736D),
+              //   ),
+              //   child: Padding(
+              //     padding: const EdgeInsets.all(16.0),
+              //     child: Icon(
+              //       Icons.info_outline,
+              //       size: 35.0,
+              //       color: Colors.white,
+              //     ),
+              //   ),
+              // ),
             ],
           ),
         ),
@@ -441,9 +442,9 @@ class _ContornoMapRevisaoState extends State<ContornoMapRevisao> {
 
   void _showVariablesAlert(BuildContext context) {
     var filtradoRecorte = FFAppState()
-        .contornoFazenda
-        .where((item) => item['contorno_grupo'] == '16')
-        .map((item) => item['latlng'])
+        .contornoFazendaPosSincronizado
+        .where((item) => item['contorno_grupo'] == 502)
+        // .map((item) => item['latlng'])
         .toList();
 
     showDialog(
