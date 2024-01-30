@@ -1036,7 +1036,7 @@ class _ListaContornosWidgetState extends State<ListaContornosWidget> {
                                                                           FFAppState().grupoContornoFazendasPosSincronizado = functions
                                                                               .deletaDaLista(
                                                                                   FFAppState().grupoContornoFazendasPosSincronizado.toList(),
-                                                                                  '\$.contorno_grupo',
+                                                                                  'contorno_grupo',
                                                                                   getJsonField(
                                                                                     trGruposContornoFazenda2Item,
                                                                                     r'''$.contorno_grupo''',
