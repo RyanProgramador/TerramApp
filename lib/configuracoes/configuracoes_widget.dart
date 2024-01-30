@@ -248,6 +248,10 @@ class _ConfiguracoesWidgetState extends State<ConfiguracoesWidget> {
                                   _model.porcentagemDeCarregamento = 0.6;
                                   _model.porcentagemString = '62%';
                                 });
+                                setState(() {
+                                  _model.porcentagemDeCarregamento = 0.63;
+                                  _model.porcentagemString = '66%';
+                                });
                                 if (SincronizarGroup
                                         .trSincronizaCelularComBDCall
                                         .statusSincComCelular(
