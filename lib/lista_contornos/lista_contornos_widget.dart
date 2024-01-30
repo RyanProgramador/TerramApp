@@ -683,8 +683,9 @@ class _ListaContornosWidgetState extends State<ListaContornosWidget> {
                                                                             .transparent,
                                                                     onTap:
                                                                         () async {
-                                                                      setState(
-                                                                          () {
+                                                                      FFAppState()
+                                                                          .update(
+                                                                              () {
                                                                         FFAppState()
                                                                             .removeAtIndexFromGrupoContornoFazendas(trGruposContornoFazendaIndex);
                                                                       });
@@ -1030,10 +1031,10 @@ class _ListaContornosWidgetState extends State<ListaContornosWidget> {
                                                                               .transparent,
                                                                       onTap:
                                                                           () async {
-                                                                        setState(
-                                                                            () {
+                                                                        FFAppState()
+                                                                            .update(() {
                                                                           FFAppState()
-                                                                              .removeAtIndexFromGrupoContornoFazendasPosSincronizado(trGruposContornoFazenda2Index);
+                                                                              .removeAtIndexFromGrupoContornoFazendasPosSincronizado(trGruposContornoFazenda2Item);
                                                                         });
                                                                       },
                                                                       child:

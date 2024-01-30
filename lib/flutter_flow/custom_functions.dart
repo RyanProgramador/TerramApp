@@ -918,3 +918,21 @@ dynamic editaJson(
 String? intToSring(int? intToString) {
   return intToString?.toString();
 }
+
+List<dynamic>? deletaDaLista(
+  List<dynamic> listaASerEditada,
+  String? path,
+  String? valorDeProcuraParaSerExcluido,
+) {
+  if (path == null || valorDeProcuraParaSerExcluido == null)
+    return listaASerEditada;
+
+  listaASerEditada.removeWhere((item) {
+    if (item is Map<String, dynamic>) {
+      return item[path] == valorDeProcuraParaSerExcluido;
+    }
+    return false;
+  });
+
+  return listaASerEditada;
+}
