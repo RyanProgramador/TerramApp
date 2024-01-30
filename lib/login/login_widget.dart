@@ -33,6 +33,12 @@ class _LoginWidgetState extends State<LoginWidget> {
 
     // On page load action.
     SchedulerBinding.instance.addPostFrameCallback((_) async {
+      if (FFAppState().Desenvolvimento == true) {
+        FFAppState().update(() {
+          FFAppState().urlapicall =
+              's://dev.conceittosistemas.com.br/scriptcase/app/Terram/ws_flutterflow/index.php';
+        });
+      }
       _model.temOuNao = await actions.temInternet();
       if (!(FFAppState().psdwLogin != null && FFAppState().psdwLogin != '')) {
         return;
