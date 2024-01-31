@@ -205,7 +205,7 @@ class _ListaContornosWidgetState extends State<ListaContornosWidget> {
                                         listaContornoTodos: FFAppState()
                                             .contornoFazendaPosSincronizado,
                                         fazlatlng: widget.fazlatlng,
-                                        sincOuNovo: 'Sinc',
+                                        sincOuNovo: 'sinc',
                                       ),
                                     ),
                                   ),
