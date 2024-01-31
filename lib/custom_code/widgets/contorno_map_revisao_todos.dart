@@ -58,43 +58,45 @@ class _ContornoMapRevisaoTodosState extends State<ContornoMapRevisaoTodos> {
       var corGrupo = HexColor(grupo['cor']);
       var grupoId = grupo['contorno_grupo'];
 
-      var filtradoRecorte = FFAppState().latlngRecorteTalhao.toList();
+      if (widget.sincOuNovo != 'sinc') {
+        var filtradoRecorte = FFAppState().latlngRecorteTalhao.toList();
 
-      // Agrupar por grupoDeRecorte e idContorno
-      var gruposDeRecorte = <String, List<dynamic>>{};
-      for (var item in filtradoRecorte) {
-        int grupoId = item['grupoDeRecorte'];
-        String idContorno = item['idContorno'].toString();
-        String chave = '$grupoId-$idContorno'; // Combina grupoId e idContorno
+        // Agrupar por grupoDeRecorte e idContorno
+        var gruposDeRecorte = <String, List<dynamic>>{};
+        for (var item in filtradoRecorte) {
+          int grupoId = item['grupoDeRecorte'];
+          String idContorno = item['idContorno'].toString();
+          String chave = '$grupoId-$idContorno'; // Combina grupoId e idContorno
 
-        if (!gruposDeRecorte.containsKey(chave)) {
-          gruposDeRecorte[chave] = [];
+          if (!gruposDeRecorte.containsKey(chave)) {
+            gruposDeRecorte[chave] = [];
+          }
+          gruposDeRecorte[chave]!.add(item);
         }
-        gruposDeRecorte[chave]!.add(item);
+
+        // Criar um polígono para cada grupo
+        gruposDeRecorte.forEach((chave, itens) {
+          List<google_maps.LatLng> recorteLatLngList = itens.map((item) {
+            var parts = item['listaLatLngRecorte'].split(',');
+            return google_maps.LatLng(
+                double.parse(parts[0].trim()), double.parse(parts[1].trim()));
+          }).toList();
+
+          if (recorteLatLngList.isNotEmpty) {
+            var recortePolygon = google_maps.Polygon(
+              polygonId: google_maps.PolygonId('Recorte_$chave'),
+              points: recorteLatLngList,
+              fillColor: Colors.red.withOpacity(0.4),
+              strokeColor: Colors.red,
+              strokeWidth: 3,
+            );
+
+            setState(() {
+              polygons.add(recortePolygon);
+            });
+          }
+        });
       }
-
-      // Criar um polígono para cada grupo
-      gruposDeRecorte.forEach((chave, itens) {
-        List<google_maps.LatLng> recorteLatLngList = itens.map((item) {
-          var parts = item['listaLatLngRecorte'].split(',');
-          return google_maps.LatLng(
-              double.parse(parts[0].trim()), double.parse(parts[1].trim()));
-        }).toList();
-
-        if (recorteLatLngList.isNotEmpty) {
-          var recortePolygon = google_maps.Polygon(
-            polygonId: google_maps.PolygonId('Recorte_$chave'),
-            points: recorteLatLngList,
-            fillColor: Colors.red.withOpacity(0.4),
-            strokeColor: Colors.red,
-            strokeWidth: 3,
-          );
-
-          setState(() {
-            polygons.add(recortePolygon);
-          });
-        }
-      });
 
       var pontosGrupo = convertedContornos
           .where((contorno) => contorno['contorno_grupo'] == grupoId)
