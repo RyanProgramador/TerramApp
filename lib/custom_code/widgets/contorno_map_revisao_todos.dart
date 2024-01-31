@@ -155,21 +155,21 @@ class _ContornoMapRevisaoTodosState extends State<ContornoMapRevisaoTodos> {
           child: Row(
             mainAxisAlignment: MainAxisAlignment.spaceEvenly,
             children: [
-              ElevatedButton(
-                onPressed: () => _showVariablesAlert(context),
-                style: ElevatedButton.styleFrom(
-                  shape: CircleBorder(),
-                  backgroundColor: Color(0xFF00736D),
-                ),
-                child: Padding(
-                  padding: const EdgeInsets.all(16.0),
-                  child: Icon(
-                    Icons.info_outline,
-                    size: 35.0,
-                    color: Colors.white,
-                  ),
-                ),
-              ),
+              // ElevatedButton(
+              //   onPressed: () => _showVariablesAlert(context),
+              //   style: ElevatedButton.styleFrom(
+              //     shape: CircleBorder(),
+              //     backgroundColor: Color(0xFF00736D),
+              //   ),
+              //   child: Padding(
+              //     padding: const EdgeInsets.all(16.0),
+              //     child: Icon(
+              //       Icons.info_outline,
+              //       size: 35.0,
+              //       color: Colors.white,
+              //     ),
+              //   ),
+              // ),
             ],
           ),
         ),
