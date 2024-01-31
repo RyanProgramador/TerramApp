@@ -22,12 +22,14 @@ class ContornoMapRevisaoTodos extends StatefulWidget {
     this.listaDeGrupos,
     this.listaDeContornos,
     this.fazlatlng,
+    this.sincOuNovo,
   }) : super(key: key);
 
   final double? width;
   final double? height;
   final List<dynamic>? listaDeGrupos;
   final List<dynamic>? listaDeContornos;
+  final String? sincOuNovo;
   //final google_maps.LatLng? fazlatlng;
 
   final ff_lat_lng.LatLng? fazlatlng;
@@ -55,6 +57,44 @@ class _ContornoMapRevisaoTodosState extends State<ContornoMapRevisaoTodos> {
     for (var grupo in convertedGrupos) {
       var corGrupo = HexColor(grupo['cor']);
       var grupoId = grupo['contorno_grupo'];
+
+      var filtradoRecorte = FFAppState().latlngRecorteTalhao.toList();
+
+      // Agrupar por grupoDeRecorte e idContorno
+      var gruposDeRecorte = <String, List<dynamic>>{};
+      for (var item in filtradoRecorte) {
+        int grupoId = item['grupoDeRecorte'];
+        String idContorno = item['idContorno'].toString();
+        String chave = '$grupoId-$idContorno'; // Combina grupoId e idContorno
+
+        if (!gruposDeRecorte.containsKey(chave)) {
+          gruposDeRecorte[chave] = [];
+        }
+        gruposDeRecorte[chave]!.add(item);
+      }
+
+      // Criar um polígono para cada grupo
+      gruposDeRecorte.forEach((chave, itens) {
+        List<google_maps.LatLng> recorteLatLngList = itens.map((item) {
+          var parts = item['listaLatLngRecorte'].split(',');
+          return google_maps.LatLng(
+              double.parse(parts[0].trim()), double.parse(parts[1].trim()));
+        }).toList();
+
+        if (recorteLatLngList.isNotEmpty) {
+          var recortePolygon = google_maps.Polygon(
+            polygonId: google_maps.PolygonId('Recorte_$chave'),
+            points: recorteLatLngList,
+            fillColor: Colors.red.withOpacity(0.4),
+            strokeColor: Colors.red,
+            strokeWidth: 3,
+          );
+
+          setState(() {
+            polygons.add(recortePolygon);
+          });
+        }
+      });
 
       var pontosGrupo = convertedContornos
           .where((contorno) => contorno['contorno_grupo'] == grupoId)
@@ -89,20 +129,49 @@ class _ContornoMapRevisaoTodosState extends State<ContornoMapRevisaoTodos> {
     final initialTarget = _convertToGoogleLatLng(widget.fazlatlng) ??
         google_maps.LatLng(0.0, 0.0);
 
-    return Container(
-      width: widget.width ?? double.infinity,
-      height: widget.height ?? double.infinity,
-      child: google_maps.GoogleMap(
-        initialCameraPosition: google_maps.CameraPosition(
-          target: initialTarget,
-          zoom: 15,
+    return Stack(
+      children: [
+        Container(
+          width: widget.width ?? double.infinity,
+          height: widget.height ?? double.infinity,
+          child: google_maps.GoogleMap(
+            initialCameraPosition: google_maps.CameraPosition(
+              target: initialTarget,
+              zoom: 15,
+            ),
+            onMapCreated: (controller) => _googleMapController = controller,
+            polygons: polygons,
+            mapType: google_maps.MapType.satellite,
+            mapToolbarEnabled: false,
+            zoomControlsEnabled: false,
+          ),
         ),
-        onMapCreated: (controller) => _googleMapController = controller,
-        polygons: polygons,
-        mapType: google_maps.MapType.satellite,
-        mapToolbarEnabled: false,
-        zoomControlsEnabled: false,
-      ),
+        Positioned(
+          bottom: 10,
+          left: 10,
+          right: 10,
+          child: Row(
+            mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+            children: [
+              ElevatedButton(
+                onPressed: () => _showVariablesAlert(context),
+                style: ElevatedButton.styleFrom(
+                  shape: CircleBorder(),
+                  backgroundColor: Color(0xFF00736D),
+                ),
+                child: Padding(
+                  padding: const EdgeInsets.all(16.0),
+                  child: Icon(
+                    Icons.info_outline,
+                    size: 35.0,
+                    color: Colors.white,
+                  ),
+                ),
+              ),
+            ],
+          ),
+        ),
+      ],
     );
   }
 }
@@ -129,4 +198,39 @@ class HexColor extends Color {
 List<Map<String, dynamic>> convertToMapList(List<dynamic>? dynamicList) {
   return dynamicList?.map((item) => item as Map<String, dynamic>).toList() ??
       [];
+}
+
+void _showVariablesAlert(BuildContext context) {
+  var filtradoRecorte = FFAppState()
+      .latlngRecorteTalhao
+      // .where((item) => item['contorno_grupo'] == widget.idContorno)
+      .where(
+          (item) => item['listaLatLngRecorte'] != null) // Adiciona esta linha
+      .map((item) => item['listaLatLngRecorte'])
+      .toList();
+
+  showDialog(
+    context: context,
+    builder: (BuildContext context) {
+      return AlertDialog(
+        title: Text('Variáveis e Valores'),
+        content: SingleChildScrollView(
+          child: ListBody(
+            children: [
+              // Text('Lista de LatLng: ${latLngList}'),
+              Text('apenas as latlng do contorno correto: $filtradoRecorte'),
+            ],
+          ),
+        ),
+        actions: <Widget>[
+          TextButton(
+            child: Text('Fechar'),
+            onPressed: () {
+              Navigator.of(context).pop();
+            },
+          ),
+        ],
+      );
+    },
+  );
 }

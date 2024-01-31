@@ -14,11 +14,13 @@ class MapsRevisaoTodosWidget extends StatefulWidget {
     this.listagrupoTodos,
     this.listaContornoTodos,
     this.fazlatlng,
+    required this.sincOuNovo,
   });
 
   final List<dynamic>? listagrupoTodos;
   final List<dynamic>? listaContornoTodos;
   final LatLng? fazlatlng;
+  final String? sincOuNovo;
 
   @override
   State<MapsRevisaoTodosWidget> createState() => _MapsRevisaoTodosWidgetState();
@@ -71,6 +73,7 @@ class _MapsRevisaoTodosWidgetState extends State<MapsRevisaoTodosWidget> {
                   listaDeGrupos: widget.listagrupoTodos,
                   listaDeContornos: widget.listaContornoTodos,
                   fazlatlng: widget.fazlatlng,
+                  sincOuNovo: widget.sincOuNovo,
                 ),
               ),
             ),
