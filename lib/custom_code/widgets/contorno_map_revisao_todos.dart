@@ -176,6 +176,42 @@ class _ContornoMapRevisaoTodosState extends State<ContornoMapRevisaoTodos> {
       ],
     );
   }
+
+  void _showVariablesAlert(BuildContext context) {
+    var filtradoRecorte = FFAppState()
+        .latlngRecorteTalhao
+        // .where((item) => item['contorno_grupo'] == widget.idContorno)
+        // .where(
+        //     (item) => item['listaLatLngRecorte'] != null) // Adiciona esta linha
+        // .map((item) => item['listaLatLngRecorte'])
+        .toList();
+
+    showDialog(
+      context: context,
+      builder: (BuildContext context) {
+        return AlertDialog(
+          title: Text('Variáveis e Valores'),
+          content: SingleChildScrollView(
+            child: ListBody(
+              children: [
+                // Text('Lista de LatLng: ${latLngList}'),
+                Text(
+                    'apenas as latlng do contorno correto: ${widget.listaDeGrupos}'),
+              ],
+            ),
+          ),
+          actions: <Widget>[
+            TextButton(
+              child: Text('Fechar'),
+              onPressed: () {
+                Navigator.of(context).pop();
+              },
+            ),
+          ],
+        );
+      },
+    );
+  }
 }
 
 google_maps.LatLng? _convertToGoogleLatLng(ff_lat_lng.LatLng? latLng) {
@@ -200,39 +236,4 @@ class HexColor extends Color {
 List<Map<String, dynamic>> convertToMapList(List<dynamic>? dynamicList) {
   return dynamicList?.map((item) => item as Map<String, dynamic>).toList() ??
       [];
-}
-
-void _showVariablesAlert(BuildContext context) {
-  var filtradoRecorte = FFAppState()
-      .latlngRecorteTalhao
-      // .where((item) => item['contorno_grupo'] == widget.idContorno)
-      .where(
-          (item) => item['listaLatLngRecorte'] != null) // Adiciona esta linha
-      .map((item) => item['listaLatLngRecorte'])
-      .toList();
-
-  showDialog(
-    context: context,
-    builder: (BuildContext context) {
-      return AlertDialog(
-        title: Text('Variáveis e Valores'),
-        content: SingleChildScrollView(
-          child: ListBody(
-            children: [
-              // Text('Lista de LatLng: ${latLngList}'),
-              Text('apenas as latlng do contorno correto: $filtradoRecorte'),
-            ],
-          ),
-        ),
-        actions: <Widget>[
-          TextButton(
-            child: Text('Fechar'),
-            onPressed: () {
-              Navigator.of(context).pop();
-            },
-          ),
-        ],
-      );
-    },
-  );
 }
