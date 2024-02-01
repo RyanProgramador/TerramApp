@@ -1,5 +1,4 @@
 import '/backend/api_requests/api_calls.dart';
-import '/components/loading_comp_widget.dart';
 import '/flutter_flow/flutter_flow_animations.dart';
 import '/flutter_flow/flutter_flow_theme.dart';
 import '/flutter_flow/flutter_flow_util.dart';
@@ -333,133 +332,143 @@ class _EsqueceuSenhaWidgetState extends State<EsqueceuSenhaWidget>
                                           ),
                                         ),
                                       ),
-                                      InkWell(
-                                        splashColor: Colors.transparent,
-                                        focusColor: Colors.transparent,
-                                        hoverColor: Colors.transparent,
-                                        highlightColor: Colors.transparent,
-                                        onTap: () async {
-                                          ScaffoldMessenger.of(context)
-                                              .showSnackBar(
-                                            SnackBar(
-                                              content: Text(
-                                                'Aguarde...',
-                                                style: TextStyle(
+                                      FutureBuilder<ApiCallResponse>(
+                                        future: ModuloSeguraGroup
+                                            .esqueceuSenhaCall
+                                            .call(
+                                          login: '123',
+                                          urlapicall: '123',
+                                          protocolo: '123',
+                                        ),
+                                        builder: (context, snapshot) {
+                                          // Customize what your widget looks like when it's loading.
+                                          if (!snapshot.hasData) {
+                                            return Center(
+                                              child: SizedBox(
+                                                width: 50.0,
+                                                height: 50.0,
+                                                child:
+                                                    CircularProgressIndicator(
+                                                  valueColor:
+                                                      AlwaysStoppedAnimation<
+                                                          Color>(
+                                                    FlutterFlowTheme.of(context)
+                                                        .primary,
+                                                  ),
+                                                ),
+                                              ),
+                                            );
+                                          }
+                                          final containerEsqueceuSenhaResponse =
+                                              snapshot.data!;
+                                          return InkWell(
+                                            splashColor: Colors.transparent,
+                                            focusColor: Colors.transparent,
+                                            hoverColor: Colors.transparent,
+                                            highlightColor: Colors.transparent,
+                                            onTap: () async {
+                                              ScaffoldMessenger.of(context)
+                                                  .showSnackBar(
+                                                SnackBar(
+                                                  content: Text(
+                                                    'Aguarde...',
+                                                    style: TextStyle(
+                                                      color: Colors.white,
+                                                    ),
+                                                  ),
+                                                  duration: Duration(
+                                                      milliseconds: 950),
+                                                  backgroundColor:
+                                                      FlutterFlowTheme.of(
+                                                              context)
+                                                          .primary,
+                                                ),
+                                              );
+                                              _model.esqueceuSenhaStatus =
+                                                  await ModuloSeguraGroup
+                                                      .esqueceuSenhaCall
+                                                      .call(
+                                                login: _model
+                                                    .emailAddressLoginController
+                                                    .text,
+                                                urlapicall:
+                                                    FFAppState().urlapicall,
+                                              );
+                                              if (ModuloSeguraGroup
+                                                  .esqueceuSenhaCall
+                                                  .statusEsqueceuSenha(
+                                                (_model.esqueceuSenhaStatus
+                                                        ?.jsonBody ??
+                                                    ''),
+                                              )) {
+                                                Navigator.pop(context);
+
+                                                context.goNamed(
+                                                  'Login',
+                                                  extra: <String, dynamic>{
+                                                    kTransitionInfoKey:
+                                                        TransitionInfo(
+                                                      hasTransition: true,
+                                                      transitionType:
+                                                          PageTransitionType
+                                                              .fade,
+                                                      duration: Duration(
+                                                          milliseconds: 600),
+                                                    ),
+                                                  },
+                                                );
+                                              } else {
+                                                Navigator.pop(context);
+                                                await showDialog(
+                                                  context: context,
+                                                  builder:
+                                                      (alertDialogContext) {
+                                                    return AlertDialog(
+                                                      content: Text(
+                                                          ModuloSeguraGroup
+                                                              .esqueceuSenhaCall
+                                                              .messageEsqueceuSenha(
+                                                                (_model.esqueceuSenhaStatus
+                                                                        ?.jsonBody ??
+                                                                    ''),
+                                                              )
+                                                              .toString()),
+                                                      actions: [
+                                                        TextButton(
+                                                          onPressed: () =>
+                                                              Navigator.pop(
+                                                                  alertDialogContext),
+                                                          child: Text('Ok'),
+                                                        ),
+                                                      ],
+                                                    );
+                                                  },
+                                                );
+                                              }
+
+                                              setState(() {});
+                                            },
+                                            child: Container(
+                                              width: 70.0,
+                                              height: 70.0,
+                                              decoration: BoxDecoration(
+                                                shape: BoxShape.circle,
+                                                border: Border.all(
                                                   color: Colors.white,
                                                 ),
                                               ),
-                                              duration:
-                                                  Duration(milliseconds: 950),
-                                              backgroundColor:
-                                                  FlutterFlowTheme.of(context)
-                                                      .primary,
+                                              child: Align(
+                                                alignment: AlignmentDirectional(
+                                                    0.0, 0.0),
+                                                child: FaIcon(
+                                                  FontAwesomeIcons.arrowRight,
+                                                  color: Colors.white,
+                                                  size: 24.0,
+                                                ),
+                                              ),
                                             ),
                                           );
-                                          await showModalBottomSheet(
-                                            isScrollControlled: true,
-                                            backgroundColor: Colors.transparent,
-                                            enableDrag: false,
-                                            context: context,
-                                            builder: (context) {
-                                              return GestureDetector(
-                                                onTap: () => _model.unfocusNode
-                                                        .canRequestFocus
-                                                    ? FocusScope.of(context)
-                                                        .requestFocus(
-                                                            _model.unfocusNode)
-                                                    : FocusScope.of(context)
-                                                        .unfocus(),
-                                                child: Padding(
-                                                  padding:
-                                                      MediaQuery.viewInsetsOf(
-                                                          context),
-                                                  child: LoadingCompWidget(),
-                                                ),
-                                              );
-                                            },
-                                          ).then(
-                                              (value) => safeSetState(() {}));
-
-                                          _model.esqueceuSenhaStatus =
-                                              await ModuloSeguraGroup
-                                                  .esqueceuSenhaCall
-                                                  .call(
-                                            login: _model
-                                                .emailAddressLoginController
-                                                .text,
-                                            urlapicall: FFAppState().urlapicall,
-                                          );
-                                          if (ModuloSeguraGroup
-                                              .esqueceuSenhaCall
-                                              .statusEsqueceuSenha(
-                                            (_model.esqueceuSenhaStatus
-                                                    ?.jsonBody ??
-                                                ''),
-                                          )) {
-                                            Navigator.pop(context);
-
-                                            context.goNamed(
-                                              'Login',
-                                              extra: <String, dynamic>{
-                                                kTransitionInfoKey:
-                                                    TransitionInfo(
-                                                  hasTransition: true,
-                                                  transitionType:
-                                                      PageTransitionType.fade,
-                                                  duration: Duration(
-                                                      milliseconds: 600),
-                                                ),
-                                              },
-                                            );
-                                          } else {
-                                            Navigator.pop(context);
-                                            await showDialog(
-                                              context: context,
-                                              builder: (alertDialogContext) {
-                                                return AlertDialog(
-                                                  content: Text(
-                                                      ModuloSeguraGroup
-                                                          .esqueceuSenhaCall
-                                                          .messageEsqueceuSenha(
-                                                            (_model.esqueceuSenhaStatus
-                                                                    ?.jsonBody ??
-                                                                ''),
-                                                          )
-                                                          .toString()),
-                                                  actions: [
-                                                    TextButton(
-                                                      onPressed: () =>
-                                                          Navigator.pop(
-                                                              alertDialogContext),
-                                                      child: Text('Ok'),
-                                                    ),
-                                                  ],
-                                                );
-                                              },
-                                            );
-                                          }
-
-                                          setState(() {});
                                         },
-                                        child: Container(
-                                          width: 70.0,
-                                          height: 70.0,
-                                          decoration: BoxDecoration(
-                                            shape: BoxShape.circle,
-                                            border: Border.all(
-                                              color: Colors.white,
-                                            ),
-                                          ),
-                                          child: Align(
-                                            alignment:
-                                                AlignmentDirectional(0.0, 0.0),
-                                            child: FaIcon(
-                                              FontAwesomeIcons.arrowRight,
-                                              color: Colors.white,
-                                              size: 24.0,
-                                            ),
-                                          ),
-                                        ),
                                       ),
                                     ],
                                   ),
