@@ -26,6 +26,8 @@ class SincronizarGroup {
   static TrCFGCall trCFGCall = TrCFGCall();
   static TrSincronizaTalhaoContornoCall trSincronizaTalhaoContornoCall =
       TrSincronizaTalhaoContornoCall();
+  static TrSincronizaPontosMedicaoCall trSincronizaPontosMedicaoCall =
+      TrSincronizaPontosMedicaoCall();
 }
 
 class OrdemDeServicoCall {
@@ -811,6 +813,31 @@ class TrSincronizaTalhaoContornoCall {
         r'''$.recortes''',
         true,
       ) as List?;
+}
+
+class TrSincronizaPontosMedicaoCall {
+  Future<ApiCallResponse> call({
+    String? urlapicall = '',
+  }) async {
+    final ffApiRequestBody = '''
+{ 
+    "tipo":"apk_sinc_pontos_medicao"
+}''';
+    return ApiManager.instance.makeApiCall(
+      callName: 'trSincronizaPontosMedicao',
+      apiUrl: '${SincronizarGroup.baseUrl}${urlapicall}',
+      callType: ApiCallType.POST,
+      headers: {},
+      params: {},
+      body: ffApiRequestBody,
+      bodyType: BodyType.JSON,
+      returnBody: true,
+      encodeBodyUtf8: false,
+      decodeUtf8: false,
+      cache: false,
+      alwaysAllowBody: false,
+    );
+  }
 }
 
 /// End Sincronizar Group Code

@@ -442,6 +442,51 @@ class FFAppState extends ChangeNotifier {
           }).toList() ??
           _latlngRecorteTalhaoPosSincronizado;
     });
+    _safeInit(() {
+      _perfis = prefs.getStringList('ff_perfis')?.map((x) {
+            try {
+              return jsonDecode(x);
+            } catch (e) {
+              print("Can't decode persisted json. Error: $e.");
+              return {};
+            }
+          }).toList() ??
+          _perfis;
+    });
+    _safeInit(() {
+      _profundidades = prefs.getStringList('ff_profundidades')?.map((x) {
+            try {
+              return jsonDecode(x);
+            } catch (e) {
+              print("Can't decode persisted json. Error: $e.");
+              return {};
+            }
+          }).toList() ??
+          _profundidades;
+    });
+    _safeInit(() {
+      _perfilprofundidades =
+          prefs.getStringList('ff_perfilprofundidades')?.map((x) {
+                try {
+                  return jsonDecode(x);
+                } catch (e) {
+                  print("Can't decode persisted json. Error: $e.");
+                  return {};
+                }
+              }).toList() ??
+              _perfilprofundidades;
+    });
+    _safeInit(() {
+      _pontosDeColeta = prefs.getStringList('ff_pontosDeColeta')?.map((x) {
+            try {
+              return jsonDecode(x);
+            } catch (e) {
+              print("Can't decode persisted json. Error: $e.");
+              return {};
+            }
+          }).toList() ??
+          _pontosDeColeta;
+    });
   }
 
   void update(VoidCallback callback) {
@@ -1949,6 +1994,169 @@ class FFAppState extends ChangeNotifier {
     _latlngRecorteTalhaoPosSincronizado.insert(_index, _value);
     prefs.setStringList('ff_latlngRecorteTalhaoPosSincronizado',
         _latlngRecorteTalhaoPosSincronizado.map((x) => jsonEncode(x)).toList());
+  }
+
+  List<dynamic> _perfis = [];
+  List<dynamic> get perfis => _perfis;
+  set perfis(List<dynamic> _value) {
+    _perfis = _value;
+    prefs.setStringList('ff_perfis', _value.map((x) => jsonEncode(x)).toList());
+  }
+
+  void addToPerfis(dynamic _value) {
+    _perfis.add(_value);
+    prefs.setStringList(
+        'ff_perfis', _perfis.map((x) => jsonEncode(x)).toList());
+  }
+
+  void removeFromPerfis(dynamic _value) {
+    _perfis.remove(_value);
+    prefs.setStringList(
+        'ff_perfis', _perfis.map((x) => jsonEncode(x)).toList());
+  }
+
+  void removeAtIndexFromPerfis(int _index) {
+    _perfis.removeAt(_index);
+    prefs.setStringList(
+        'ff_perfis', _perfis.map((x) => jsonEncode(x)).toList());
+  }
+
+  void updatePerfisAtIndex(
+    int _index,
+    dynamic Function(dynamic) updateFn,
+  ) {
+    _perfis[_index] = updateFn(_perfis[_index]);
+    prefs.setStringList(
+        'ff_perfis', _perfis.map((x) => jsonEncode(x)).toList());
+  }
+
+  void insertAtIndexInPerfis(int _index, dynamic _value) {
+    _perfis.insert(_index, _value);
+    prefs.setStringList(
+        'ff_perfis', _perfis.map((x) => jsonEncode(x)).toList());
+  }
+
+  List<dynamic> _profundidades = [];
+  List<dynamic> get profundidades => _profundidades;
+  set profundidades(List<dynamic> _value) {
+    _profundidades = _value;
+    prefs.setStringList(
+        'ff_profundidades', _value.map((x) => jsonEncode(x)).toList());
+  }
+
+  void addToProfundidades(dynamic _value) {
+    _profundidades.add(_value);
+    prefs.setStringList(
+        'ff_profundidades', _profundidades.map((x) => jsonEncode(x)).toList());
+  }
+
+  void removeFromProfundidades(dynamic _value) {
+    _profundidades.remove(_value);
+    prefs.setStringList(
+        'ff_profundidades', _profundidades.map((x) => jsonEncode(x)).toList());
+  }
+
+  void removeAtIndexFromProfundidades(int _index) {
+    _profundidades.removeAt(_index);
+    prefs.setStringList(
+        'ff_profundidades', _profundidades.map((x) => jsonEncode(x)).toList());
+  }
+
+  void updateProfundidadesAtIndex(
+    int _index,
+    dynamic Function(dynamic) updateFn,
+  ) {
+    _profundidades[_index] = updateFn(_profundidades[_index]);
+    prefs.setStringList(
+        'ff_profundidades', _profundidades.map((x) => jsonEncode(x)).toList());
+  }
+
+  void insertAtIndexInProfundidades(int _index, dynamic _value) {
+    _profundidades.insert(_index, _value);
+    prefs.setStringList(
+        'ff_profundidades', _profundidades.map((x) => jsonEncode(x)).toList());
+  }
+
+  List<dynamic> _perfilprofundidades = [];
+  List<dynamic> get perfilprofundidades => _perfilprofundidades;
+  set perfilprofundidades(List<dynamic> _value) {
+    _perfilprofundidades = _value;
+    prefs.setStringList(
+        'ff_perfilprofundidades', _value.map((x) => jsonEncode(x)).toList());
+  }
+
+  void addToPerfilprofundidades(dynamic _value) {
+    _perfilprofundidades.add(_value);
+    prefs.setStringList('ff_perfilprofundidades',
+        _perfilprofundidades.map((x) => jsonEncode(x)).toList());
+  }
+
+  void removeFromPerfilprofundidades(dynamic _value) {
+    _perfilprofundidades.remove(_value);
+    prefs.setStringList('ff_perfilprofundidades',
+        _perfilprofundidades.map((x) => jsonEncode(x)).toList());
+  }
+
+  void removeAtIndexFromPerfilprofundidades(int _index) {
+    _perfilprofundidades.removeAt(_index);
+    prefs.setStringList('ff_perfilprofundidades',
+        _perfilprofundidades.map((x) => jsonEncode(x)).toList());
+  }
+
+  void updatePerfilprofundidadesAtIndex(
+    int _index,
+    dynamic Function(dynamic) updateFn,
+  ) {
+    _perfilprofundidades[_index] = updateFn(_perfilprofundidades[_index]);
+    prefs.setStringList('ff_perfilprofundidades',
+        _perfilprofundidades.map((x) => jsonEncode(x)).toList());
+  }
+
+  void insertAtIndexInPerfilprofundidades(int _index, dynamic _value) {
+    _perfilprofundidades.insert(_index, _value);
+    prefs.setStringList('ff_perfilprofundidades',
+        _perfilprofundidades.map((x) => jsonEncode(x)).toList());
+  }
+
+  List<dynamic> _pontosDeColeta = [];
+  List<dynamic> get pontosDeColeta => _pontosDeColeta;
+  set pontosDeColeta(List<dynamic> _value) {
+    _pontosDeColeta = _value;
+    prefs.setStringList(
+        'ff_pontosDeColeta', _value.map((x) => jsonEncode(x)).toList());
+  }
+
+  void addToPontosDeColeta(dynamic _value) {
+    _pontosDeColeta.add(_value);
+    prefs.setStringList('ff_pontosDeColeta',
+        _pontosDeColeta.map((x) => jsonEncode(x)).toList());
+  }
+
+  void removeFromPontosDeColeta(dynamic _value) {
+    _pontosDeColeta.remove(_value);
+    prefs.setStringList('ff_pontosDeColeta',
+        _pontosDeColeta.map((x) => jsonEncode(x)).toList());
+  }
+
+  void removeAtIndexFromPontosDeColeta(int _index) {
+    _pontosDeColeta.removeAt(_index);
+    prefs.setStringList('ff_pontosDeColeta',
+        _pontosDeColeta.map((x) => jsonEncode(x)).toList());
+  }
+
+  void updatePontosDeColetaAtIndex(
+    int _index,
+    dynamic Function(dynamic) updateFn,
+  ) {
+    _pontosDeColeta[_index] = updateFn(_pontosDeColeta[_index]);
+    prefs.setStringList('ff_pontosDeColeta',
+        _pontosDeColeta.map((x) => jsonEncode(x)).toList());
+  }
+
+  void insertAtIndexInPontosDeColeta(int _index, dynamic _value) {
+    _pontosDeColeta.insert(_index, _value);
+    prefs.setStringList('ff_pontosDeColeta',
+        _pontosDeColeta.map((x) => jsonEncode(x)).toList());
   }
 }
 

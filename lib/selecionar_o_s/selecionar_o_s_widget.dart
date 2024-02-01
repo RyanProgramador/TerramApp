@@ -242,6 +242,10 @@ class _SelecionarOSWidgetState extends State<SelecionarOSWidget>
         _model.trCFG2 = await SincronizarGroup.trCFGCall.call(
           urlapicall: FFAppState().urlapicall,
         );
+        _model.sincPontosMedicaoEPerfilEProfundida =
+            await SincronizarGroup.trSincronizaPontosMedicaoCall.call(
+          urlapicall: FFAppState().urlapicall,
+        );
         FFAppState().update(() {});
         if ((_model.trTecnicosSinc2?.succeeded ?? true) &&
             (_model.trOsServicosSinc2?.succeeded ?? true) &&
@@ -328,6 +332,34 @@ class _SelecionarOSWidgetState extends State<SelecionarOSWidget>
                 SincronizarGroup.trCFGCall.geoTolerancia(
               (_model.trCFG2?.jsonBody ?? ''),
             );
+            FFAppState().pontosDeColeta = getJsonField(
+              (_model.sincPontosMedicaoEPerfilEProfundida?.jsonBody ?? ''),
+              r'''$.pontos_de_coleta[:]''',
+              true,
+            )!
+                .toList()
+                .cast<dynamic>();
+            FFAppState().perfilprofundidades = getJsonField(
+              (_model.sincPontosMedicaoEPerfilEProfundida?.jsonBody ?? ''),
+              r'''$.perfil_profundidades[:]''',
+              true,
+            )!
+                .toList()
+                .cast<dynamic>();
+            FFAppState().profundidades = getJsonField(
+              (_model.sincPontosMedicaoEPerfilEProfundida?.jsonBody ?? ''),
+              r'''$.profundidades[:]''',
+              true,
+            )!
+                .toList()
+                .cast<dynamic>();
+            FFAppState().perfis = getJsonField(
+              (_model.sincPontosMedicaoEPerfilEProfundida?.jsonBody ?? ''),
+              r'''$.perfis[:]''',
+              true,
+            )!
+                .toList()
+                .cast<dynamic>();
           });
         } else {
           await showDialog(
@@ -374,6 +406,10 @@ class _SelecionarOSWidgetState extends State<SelecionarOSWidget>
         urlapicall: FFAppState().urlapicall,
       );
       _model.trCFG = await SincronizarGroup.trCFGCall.call(
+        urlapicall: FFAppState().urlapicall,
+      );
+      _model.sincPontosMedicaoEPerfilEProfundida2 =
+          await SincronizarGroup.trSincronizaPontosMedicaoCall.call(
         urlapicall: FFAppState().urlapicall,
       );
       FFAppState().update(() {});
@@ -434,6 +470,34 @@ class _SelecionarOSWidgetState extends State<SelecionarOSWidget>
               SincronizarGroup.trCFGCall.geoTolerancia(
             (_model.trCFG?.jsonBody ?? ''),
           );
+          FFAppState().pontosDeColeta = getJsonField(
+            (_model.sincPontosMedicaoEPerfilEProfundida2?.jsonBody ?? ''),
+            r'''$.pontos_de_coleta[:]''',
+            true,
+          )!
+              .toList()
+              .cast<dynamic>();
+          FFAppState().perfilprofundidades = getJsonField(
+            (_model.sincPontosMedicaoEPerfilEProfundida2?.jsonBody ?? ''),
+            r'''$.perfil_profundidades[:]''',
+            true,
+          )!
+              .toList()
+              .cast<dynamic>();
+          FFAppState().profundidades = getJsonField(
+            (_model.sincPontosMedicaoEPerfilEProfundida2?.jsonBody ?? ''),
+            r'''$.profundidades[:]''',
+            true,
+          )!
+              .toList()
+              .cast<dynamic>();
+          FFAppState().perfis = getJsonField(
+            (_model.sincPontosMedicaoEPerfilEProfundida2?.jsonBody ?? ''),
+            r'''$.perfis[:]''',
+            true,
+          )!
+              .toList()
+              .cast<dynamic>();
         });
       } else {
         await showDialog(
