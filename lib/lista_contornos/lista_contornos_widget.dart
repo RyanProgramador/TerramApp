@@ -1082,79 +1082,89 @@ class _ListaContornosWidgetState extends State<ListaContornosWidget> {
                                   mainAxisAlignment: MainAxisAlignment.center,
                                   crossAxisAlignment: CrossAxisAlignment.end,
                                   children: [
-                                    FFButtonWidget(
-                                      onPressed: () async {
-                                        context.goNamed(
-                                          'ContornoDaFazenda',
-                                          queryParameters: {
-                                            'fazendaNome': serializeParam(
-                                              widget.nomeFazenda,
-                                              ParamType.String,
-                                            ),
-                                            'oservID': serializeParam(
-                                              widget.oservID,
-                                              ParamType.String,
-                                            ),
-                                            'idDoContorno': serializeParam(
-                                              valueOrDefault<String>(
-                                                FFAppState().contornoGrupoID !=
-                                                            null &&
-                                                        FFAppState()
-                                                                .contornoGrupoID !=
-                                                            ''
-                                                    ? valueOrDefault<String>(
-                                                        FFAppState()
-                                                            .contornoGrupoID,
-                                                        '1',
-                                                      )
-                                                    : '1',
-                                                '1',
-                                              ),
-                                              ParamType.String,
-                                            ),
-                                            'fazid': serializeParam(
-                                              widget.fazid,
-                                              ParamType.String,
-                                            ),
-                                            'fazlatlng': serializeParam(
-                                              widget.fazlatlng,
-                                              ParamType.LatLng,
-                                            ),
-                                          }.withoutNulls,
-                                          extra: <String, dynamic>{
-                                            kTransitionInfoKey: TransitionInfo(
-                                              hasTransition: true,
-                                              transitionType:
-                                                  PageTransitionType.fade,
-                                              duration:
-                                                  Duration(milliseconds: 0),
-                                            ),
+                                    Align(
+                                      alignment: AlignmentDirectional(0.0, 1.0),
+                                      child: Padding(
+                                        padding: EdgeInsetsDirectional.fromSTEB(
+                                            0.0, 0.0, 0.0, 25.0),
+                                        child: FFButtonWidget(
+                                          onPressed: () async {
+                                            context.goNamed(
+                                              'ContornoDaFazenda',
+                                              queryParameters: {
+                                                'fazendaNome': serializeParam(
+                                                  widget.nomeFazenda,
+                                                  ParamType.String,
+                                                ),
+                                                'oservID': serializeParam(
+                                                  widget.oservID,
+                                                  ParamType.String,
+                                                ),
+                                                'idDoContorno': serializeParam(
+                                                  valueOrDefault<String>(
+                                                    FFAppState().contornoGrupoID !=
+                                                                null &&
+                                                            FFAppState()
+                                                                    .contornoGrupoID !=
+                                                                ''
+                                                        ? valueOrDefault<
+                                                            String>(
+                                                            FFAppState()
+                                                                .contornoGrupoID,
+                                                            '1',
+                                                          )
+                                                        : '1',
+                                                    '1',
+                                                  ),
+                                                  ParamType.String,
+                                                ),
+                                                'fazid': serializeParam(
+                                                  widget.fazid,
+                                                  ParamType.String,
+                                                ),
+                                                'fazlatlng': serializeParam(
+                                                  widget.fazlatlng,
+                                                  ParamType.LatLng,
+                                                ),
+                                              }.withoutNulls,
+                                              extra: <String, dynamic>{
+                                                kTransitionInfoKey:
+                                                    TransitionInfo(
+                                                  hasTransition: true,
+                                                  transitionType:
+                                                      PageTransitionType.fade,
+                                                  duration:
+                                                      Duration(milliseconds: 0),
+                                                ),
+                                              },
+                                            );
                                           },
-                                        );
-                                      },
-                                      text: 'Iniciar contorno',
-                                      options: FFButtonOptions(
-                                        width: 200.0,
-                                        height: 50.0,
-                                        padding: EdgeInsets.all(0.0),
-                                        iconPadding:
-                                            EdgeInsetsDirectional.fromSTEB(
-                                                0.0, 0.0, 0.0, 0.0),
-                                        color: FlutterFlowTheme.of(context)
-                                            .primary,
-                                        textStyle: FlutterFlowTheme.of(context)
-                                            .titleSmall
-                                            .override(
-                                              fontFamily: 'Readex Pro',
-                                              color: Colors.white,
+                                          text: 'Iniciar contorno',
+                                          options: FFButtonOptions(
+                                            width: 200.0,
+                                            height: 50.0,
+                                            padding: EdgeInsets.all(0.0),
+                                            iconPadding:
+                                                EdgeInsetsDirectional.fromSTEB(
+                                                    0.0, 0.0, 0.0, 0.0),
+                                            color: FlutterFlowTheme.of(context)
+                                                .primary,
+                                            textStyle:
+                                                FlutterFlowTheme.of(context)
+                                                    .titleSmall
+                                                    .override(
+                                                      fontFamily: 'Readex Pro',
+                                                      color: Colors.white,
+                                                    ),
+                                            elevation: 3.0,
+                                            borderSide: BorderSide(
+                                              color: Colors.transparent,
+                                              width: 1.0,
                                             ),
-                                        elevation: 3.0,
-                                        borderSide: BorderSide(
-                                          color: Colors.transparent,
-                                          width: 1.0,
+                                            borderRadius:
+                                                BorderRadius.circular(100.0),
+                                          ),
                                         ),
-                                        borderRadius:
-                                            BorderRadius.circular(100.0),
                                       ),
                                     ),
                                   ],

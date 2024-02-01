@@ -66,7 +66,7 @@ class _ContornoMapState extends State<ContornoMap> {
   List<google_maps.Polygon> polygons = [];
   List<google_maps.Polyline> polylines = [];
   bool isLocationPaused = false;
-  bool isVisivel = true;
+  bool isVisivel = false;
   double currentZoom = 20.0;
   google_maps.LatLng? currentTarget;
   late String oservid;
@@ -100,6 +100,7 @@ class _ContornoMapState extends State<ContornoMap> {
 
   void _getCurrentLocation() async {
     if (widget.ativoOuNao == true) {
+      isVisivel = true;
       if (!isLocationPaused) {
         Position newLoc = await Geolocator.getCurrentPosition(
             desiredAccuracy: LocationAccuracy.best);
@@ -173,7 +174,7 @@ class _ContornoMapState extends State<ContornoMap> {
   }
 
   void _finalizeArea() {
-    if (markers.isNotEmpty && _distanceToStart() <= 50) {
+    if (markers.isNotEmpty /* && _distanceToStart() <= 50 */) {
       final Random random = Random();
       final String corAleatoria = coresHex[random.nextInt(coresHex.length)];
 
@@ -509,7 +510,7 @@ class _ContornoMapState extends State<ContornoMap> {
           top: topPosition,
           right: -8,
           child: Visibility(
-            visible: _distanceToStart() <= 50 && isVisivel == true,
+            visible: /* _distanceToStart() <= 50 && */ isVisivel == true,
             child: ElevatedButton(
               onPressed: () {
                 _mensagemDeConfimacaoDeFinalizacao(context);

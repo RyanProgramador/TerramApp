@@ -291,11 +291,13 @@ class _ContornoDaFazendaWidgetState extends State<ContornoDaFazendaWidget> {
                             ),
                             child: FFButtonWidget(
                               onPressed: () async {
+                                FFAppState().update(() {});
                                 setState(() {
                                   _model.ativo = !_model.ativo;
                                   _model.textoInicioEFimDeContorno =
                                       'Contorno em andamento.';
                                 });
+                                FFAppState().update(() {});
                               },
                               text: '',
                               icon: Icon(

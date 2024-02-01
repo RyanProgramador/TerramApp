@@ -441,6 +441,18 @@ class _ContornoMapRevisaoState extends State<ContornoMapRevisao> {
   }
 
   void _showVariablesAlert(BuildContext context) {
+    // var filtradoRecorte = FFAppState()
+    //     .contornoFazendaPosSincronizado
+    //     .where((item) => item['contorno_grupo'] == 502)
+    //     // .map((item) => item['latlng'])
+    //     .toList();
+
+    var filtroTalhId = FFAppState()
+        .grupoContornoFazendasPosSincronizado
+        .where((item) => item['contorno_grupo'] == toInt(widget.idContorno))
+        .map((item) => item['id'])
+        .toList();
+    var teste = jsonListToStr(filtroTalhId);
     var filtradoRecorte = FFAppState()
         .contornoFazendaPosSincronizado
         .where((item) => item['contorno_grupo'] == 502)
@@ -462,7 +474,7 @@ class _ContornoMapRevisaoState extends State<ContornoMapRevisao> {
                 Text('ID do Contorno: ${widget.idContorno}'),
                 Text('ID da Fazenda: ${widget.fazid}'),
                 Text('Nome da Fazenda: ${widget.fazNome}'),
-                Text('LatLng da Fazenda: ${widget.fazLatLng}'),
+                Text('id de busca: $teste'),
                 Text('apenas as latlng do contorno correto: $filtradoRecorte'),
               ],
             ),
