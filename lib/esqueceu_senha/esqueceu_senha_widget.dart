@@ -1,4 +1,3 @@
-import '/backend/api_requests/api_calls.dart';
 import '/flutter_flow/flutter_flow_animations.dart';
 import '/flutter_flow/flutter_flow_theme.dart';
 import '/flutter_flow/flutter_flow_util.dart';
@@ -338,63 +337,22 @@ class _EsqueceuSenhaWidgetState extends State<EsqueceuSenhaWidget>
                                         hoverColor: Colors.transparent,
                                         highlightColor: Colors.transparent,
                                         onTap: () async {
-                                          _model.esqueceuSenhaStatus =
-                                              await ModuloSeguraGroup
-                                                  .esqueceuSenhaCall
-                                                  .call(
-                                            login: _model
-                                                .emailAddressLoginController
-                                                .text,
-                                            urlapicall: FFAppState().urlapicall,
-                                          );
-                                          if (ModuloSeguraGroup
-                                              .esqueceuSenhaCall
-                                              .statusEsqueceuSenha(
-                                            (_model.esqueceuSenhaStatus
-                                                    ?.jsonBody ??
-                                                ''),
-                                          )) {
-                                            context.goNamed(
-                                              'Login',
-                                              extra: <String, dynamic>{
-                                                kTransitionInfoKey:
-                                                    TransitionInfo(
-                                                  hasTransition: true,
-                                                  transitionType:
-                                                      PageTransitionType.fade,
-                                                  duration: Duration(
-                                                      milliseconds: 600),
+                                          ScaffoldMessenger.of(context)
+                                              .showSnackBar(
+                                            SnackBar(
+                                              content: Text(
+                                                'Aguarde...',
+                                                style: TextStyle(
+                                                  color: Colors.white,
                                                 ),
-                                              },
-                                            );
-                                          } else {
-                                            await showDialog(
-                                              context: context,
-                                              builder: (alertDialogContext) {
-                                                return AlertDialog(
-                                                  content: Text(
-                                                      ModuloSeguraGroup
-                                                          .esqueceuSenhaCall
-                                                          .messageEsqueceuSenha(
-                                                            (_model.esqueceuSenhaStatus
-                                                                    ?.jsonBody ??
-                                                                ''),
-                                                          )
-                                                          .toString()),
-                                                  actions: [
-                                                    TextButton(
-                                                      onPressed: () =>
-                                                          Navigator.pop(
-                                                              alertDialogContext),
-                                                      child: Text('Ok'),
-                                                    ),
-                                                  ],
-                                                );
-                                              },
-                                            );
-                                          }
-
-                                          setState(() {});
+                                              ),
+                                              duration:
+                                                  Duration(milliseconds: 950),
+                                              backgroundColor:
+                                                  FlutterFlowTheme.of(context)
+                                                      .primary,
+                                            ),
+                                          );
                                         },
                                         child: Container(
                                           width: 70.0,
