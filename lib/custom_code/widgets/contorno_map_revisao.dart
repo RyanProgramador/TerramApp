@@ -450,7 +450,7 @@ class _ContornoMapRevisaoState extends State<ContornoMapRevisao> {
     var filtroTalhId = FFAppState()
         .grupoContornoFazendasPosSincronizado
         .where((item) => item['contorno_grupo'] == toInt(widget.idContorno))
-        .map((item) => item['id'])
+        // .map((item) => item['id'])
         .toList();
     var teste = jsonListToStr(filtroTalhId);
     var filtradoRecorte = FFAppState()
