@@ -401,7 +401,32 @@ class _EsqueceuSenhaWidgetState extends State<EsqueceuSenhaWidget>
                                                         ?.jsonBody ??
                                                     ''),
                                               )) {
-                                                Navigator.pop(context);
+                                                await showDialog(
+                                                  context: context,
+                                                  builder:
+                                                      (alertDialogContext) {
+                                                    return AlertDialog(
+                                                      title: Text('Sucesso!'),
+                                                      content: Text(
+                                                          ModuloSeguraGroup
+                                                              .esqueceuSenhaCall
+                                                              .messageEsqueceuSenha(
+                                                                (_model.esqueceuSenhaStatus
+                                                                        ?.jsonBody ??
+                                                                    ''),
+                                                              )
+                                                              .toString()),
+                                                      actions: [
+                                                        TextButton(
+                                                          onPressed: () =>
+                                                              Navigator.pop(
+                                                                  alertDialogContext),
+                                                          child: Text('Ok'),
+                                                        ),
+                                                      ],
+                                                    );
+                                                  },
+                                                );
 
                                                 context.goNamed(
                                                   'Login',
@@ -418,12 +443,12 @@ class _EsqueceuSenhaWidgetState extends State<EsqueceuSenhaWidget>
                                                   },
                                                 );
                                               } else {
-                                                Navigator.pop(context);
                                                 await showDialog(
                                                   context: context,
                                                   builder:
                                                       (alertDialogContext) {
                                                     return AlertDialog(
+                                                      title: Text('Ops!'),
                                                       content: Text(
                                                           ModuloSeguraGroup
                                                               .esqueceuSenhaCall
