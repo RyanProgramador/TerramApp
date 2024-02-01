@@ -1050,6 +1050,12 @@ class _MultiplePlacesPickerCopyWidgetState
 
                                   setState(() {});
                                 },
+                                onLongPress: () async {
+                                  setState(() {
+                                    FFAppState()
+                                        .latlngRecorteTalhaoPosSincronizado = [];
+                                  });
+                                },
                                 child: Text(
                                   'recorte',
                                   style:
