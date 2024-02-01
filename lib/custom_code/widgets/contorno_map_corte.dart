@@ -587,6 +587,13 @@ class _ContornoMapCorteState extends State<ContornoMapCorte> {
 
   @override
   Widget build(BuildContext context) {
+    // Obtém o tamanho da tela
+    Size screenSize = MediaQuery.of(context).size;
+
+    // Calcula a posição do botão com base no tamanho da tela
+    double topPosition = screenSize.height * 0.59; // 90% da altura da tela
+    double rightPosition = screenSize.width * 0.05; // 5% da largura da tela
+
     return Stack(
       children: [
         Container(
@@ -675,7 +682,7 @@ class _ContornoMapCorteState extends State<ContornoMapCorte> {
           ),
         ),
         Positioned(
-          top: 552,
+          top: topPosition,
           right: -8,
           child: Visibility(
             visible: _distanceToStart() <= 50 && isVisivel == true,
