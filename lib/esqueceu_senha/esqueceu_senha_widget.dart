@@ -1,4 +1,5 @@
 import '/backend/api_requests/api_calls.dart';
+import '/components/loading_comp_widget.dart';
 import '/flutter_flow/flutter_flow_animations.dart';
 import '/flutter_flow/flutter_flow_theme.dart';
 import '/flutter_flow/flutter_flow_util.dart';
@@ -354,6 +355,31 @@ class _EsqueceuSenhaWidgetState extends State<EsqueceuSenhaWidget>
                                                       .primary,
                                             ),
                                           );
+                                          await showModalBottomSheet(
+                                            isScrollControlled: true,
+                                            backgroundColor: Colors.transparent,
+                                            enableDrag: false,
+                                            context: context,
+                                            builder: (context) {
+                                              return GestureDetector(
+                                                onTap: () => _model.unfocusNode
+                                                        .canRequestFocus
+                                                    ? FocusScope.of(context)
+                                                        .requestFocus(
+                                                            _model.unfocusNode)
+                                                    : FocusScope.of(context)
+                                                        .unfocus(),
+                                                child: Padding(
+                                                  padding:
+                                                      MediaQuery.viewInsetsOf(
+                                                          context),
+                                                  child: LoadingCompWidget(),
+                                                ),
+                                              );
+                                            },
+                                          ).then(
+                                              (value) => safeSetState(() {}));
+
                                           _model.esqueceuSenhaStatus =
                                               await ModuloSeguraGroup
                                                   .esqueceuSenhaCall
@@ -370,6 +396,8 @@ class _EsqueceuSenhaWidgetState extends State<EsqueceuSenhaWidget>
                                                     ?.jsonBody ??
                                                 ''),
                                           )) {
+                                            Navigator.pop(context);
+
                                             context.goNamed(
                                               'Login',
                                               extra: <String, dynamic>{
@@ -384,6 +412,7 @@ class _EsqueceuSenhaWidgetState extends State<EsqueceuSenhaWidget>
                                               },
                                             );
                                           } else {
+                                            Navigator.pop(context);
                                             await showDialog(
                                               context: context,
                                               builder: (alertDialogContext) {
