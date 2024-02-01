@@ -1,3 +1,4 @@
+import '/backend/api_requests/api_calls.dart';
 import '/flutter_flow/flutter_flow_animations.dart';
 import '/flutter_flow/flutter_flow_theme.dart';
 import '/flutter_flow/flutter_flow_util.dart';
@@ -353,6 +354,63 @@ class _EsqueceuSenhaWidgetState extends State<EsqueceuSenhaWidget>
                                                       .primary,
                                             ),
                                           );
+                                          _model.esqueceuSenhaStatus =
+                                              await ModuloSeguraGroup
+                                                  .esqueceuSenhaCall
+                                                  .call(
+                                            login: _model
+                                                .emailAddressLoginController
+                                                .text,
+                                            urlapicall: FFAppState().urlapicall,
+                                          );
+                                          if (ModuloSeguraGroup
+                                              .esqueceuSenhaCall
+                                              .statusEsqueceuSenha(
+                                            (_model.esqueceuSenhaStatus
+                                                    ?.jsonBody ??
+                                                ''),
+                                          )) {
+                                            context.goNamed(
+                                              'Login',
+                                              extra: <String, dynamic>{
+                                                kTransitionInfoKey:
+                                                    TransitionInfo(
+                                                  hasTransition: true,
+                                                  transitionType:
+                                                      PageTransitionType.fade,
+                                                  duration: Duration(
+                                                      milliseconds: 600),
+                                                ),
+                                              },
+                                            );
+                                          } else {
+                                            await showDialog(
+                                              context: context,
+                                              builder: (alertDialogContext) {
+                                                return AlertDialog(
+                                                  content: Text(
+                                                      ModuloSeguraGroup
+                                                          .esqueceuSenhaCall
+                                                          .messageEsqueceuSenha(
+                                                            (_model.esqueceuSenhaStatus
+                                                                    ?.jsonBody ??
+                                                                ''),
+                                                          )
+                                                          .toString()),
+                                                  actions: [
+                                                    TextButton(
+                                                      onPressed: () =>
+                                                          Navigator.pop(
+                                                              alertDialogContext),
+                                                      child: Text('Ok'),
+                                                    ),
+                                                  ],
+                                                );
+                                              },
+                                            );
+                                          }
+
+                                          setState(() {});
                                         },
                                         child: Container(
                                           width: 70.0,

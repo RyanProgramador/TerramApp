@@ -1,3 +1,4 @@
+import '/backend/api_requests/api_calls.dart';
 import '/flutter_flow/flutter_flow_animations.dart';
 import '/flutter_flow/flutter_flow_theme.dart';
 import '/flutter_flow/flutter_flow_util.dart';
@@ -21,6 +22,8 @@ class EsqueceuSenhaModel extends FlutterFlowModel<EsqueceuSenhaWidget> {
   TextEditingController? emailAddressLoginController;
   final emailAddressLoginMask = MaskTextInputFormatter(mask: '###.###.###-##');
   String? Function(BuildContext, String?)? emailAddressLoginControllerValidator;
+  // Stores action output result for [Backend Call - API (EsqueceuSenha)] action in Container widget.
+  ApiCallResponse? esqueceuSenhaStatus;
 
   /// Initialization and disposal methods.
 
