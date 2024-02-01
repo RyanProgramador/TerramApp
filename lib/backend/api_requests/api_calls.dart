@@ -806,6 +806,11 @@ class TrSincronizaTalhaoContornoCall {
         r'''$.dados_cont_e_rec''',
         true,
       ) as List?;
+  List? dadosRecortes(dynamic response) => getJsonField(
+        response,
+        r'''$.recortes''',
+        true,
+      ) as List?;
 }
 
 /// End Sincronizar Group Code

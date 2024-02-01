@@ -1017,9 +1017,44 @@ class _MultiplePlacesPickerCopyWidgetState
                                 '.....',
                                 style: FlutterFlowTheme.of(context).bodyMedium,
                               ),
-                              Text(
-                                'recorte',
-                                style: FlutterFlowTheme.of(context).bodyMedium,
+                              InkWell(
+                                splashColor: Colors.transparent,
+                                focusColor: Colors.transparent,
+                                hoverColor: Colors.transparent,
+                                highlightColor: Colors.transparent,
+                                onTap: () async {
+                                  _model.recortes = await SincronizarGroup
+                                      .trSincronizaTalhaoContornoCall
+                                      .call(
+                                    urlapicall: FFAppState().urlapicall,
+                                  );
+                                  setState(() {
+                                    FFAppState()
+                                            .latlngRecorteTalhaoPosSincronizado =
+                                        functions
+                                            .juntarDuasListasJsonignoraDuplicados(
+                                                FFAppState()
+                                                    .latlngRecorteTalhao
+                                                    .toList(),
+                                                SincronizarGroup
+                                                    .trSincronizaTalhaoContornoCall
+                                                    .dadosRecortes(
+                                                      (_model.recortes
+                                                              ?.jsonBody ??
+                                                          ''),
+                                                    )
+                                                    ?.toList())!
+                                            .toList()
+                                            .cast<dynamic>();
+                                  });
+
+                                  setState(() {});
+                                },
+                                child: Text(
+                                  'recorte',
+                                  style:
+                                      FlutterFlowTheme.of(context).bodyMedium,
+                                ),
                               ),
                             ],
                           ),

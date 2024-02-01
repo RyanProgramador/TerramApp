@@ -55,6 +55,8 @@ class MultiplePlacesPickerCopyModel
   FocusNode? textFieldFocusNode;
   TextEditingController? textController;
   String? Function(BuildContext, String?)? textControllerValidator;
+  // Stores action output result for [Backend Call - API (trSincronizaTalhaoContorno)] action in Text widget.
+  ApiCallResponse? recortes;
 
   /// Initialization and disposal methods.
 
