@@ -199,7 +199,7 @@ class _ConfiguracoesWidgetState extends State<ConfiguracoesWidget> {
                                 highlightColor: Colors.transparent,
                                 onTap: () async {
                                   var _shouldSetState = false;
-                                  await showModalBottomSheet(
+                                  showModalBottomSheet(
                                     isScrollControlled: true,
                                     backgroundColor: Colors.transparent,
                                     isDismissible: false,
