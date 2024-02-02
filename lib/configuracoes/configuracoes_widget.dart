@@ -396,16 +396,6 @@ class _ConfiguracoesWidgetState extends State<ConfiguracoesWidget> {
                                       )!
                                               .toList()
                                               .cast<dynamic>();
-                                      FFAppState().listaRecorteContornoColeta =
-                                          getJsonField(
-                                        (_model.sincPontosMedicaoEPerfilEProfundidaAPI
-                                                ?.jsonBody ??
-                                            ''),
-                                        r'''$.recortes[:]''',
-                                        true,
-                                      )!
-                                              .toList()
-                                              .cast<dynamic>();
                                     });
                                     setState(() {
                                       _model.estaCarregando = true;
