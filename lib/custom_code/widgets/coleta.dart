@@ -745,12 +745,12 @@ class _ColetaState extends State<Coleta> {
             "profundidade": nomeProfundidade,
             "foto": 'base64Image',
           });
-          FFAppState().PontosColetados.add(jsonEncode({
-                "marcador_nome": nomeMarcadorAtual,
-                "profundidade": nomeProfundidade,
-                // "foto": '$base64Image',
-                "foto": '$base64Image',
-              }));
+          FFAppState().PontosColetados.add({
+            "marcador_nome": nomeMarcadorAtual,
+            "profundidade": nomeProfundidade,
+            // "foto": '$base64Image',
+            "foto": '$base64Image',
+          });
         }
       });
       // setState(() {
