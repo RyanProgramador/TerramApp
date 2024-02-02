@@ -814,21 +814,21 @@ class _ColetaState extends State<Coleta> {
                       false;
 
                   // Verificação adicional para 'pontosJaColetados'
-                  if (!jaColetada && widget.pontosJaColetados != null) {
-                    jaColetada = widget.pontosJaColetados!.any((pontoString) {
-                      try {
-                        var pontoMap =
-                            json.decode(pontoString) as Map<dynamic, dynamic>;
-                        return pontoMap["marcador_nome"].toString() ==
-                                marcadorNome &&
-                            pontoMap["profundidade"].toString() ==
-                                profundidade["nome"].toString();
-                      } catch (e) {
-                        print("Erro ao decodificar ponto: $e");
-                        return false;
-                      }
-                    });
-                  }
+                  // if (!jaColetada && widget.pontosJaColetados != null) {
+                  //   jaColetada = widget.pontosJaColetados!.any((pontoString) {
+                  //     try {
+                  //       var pontoMap =
+                  //           json.decode(pontoString) as Map<dynamic, dynamic>;
+                  //       return pontoMap["marcador_nome"].toString() ==
+                  //               marcadorNome &&
+                  //           pontoMap["profundidade"].toString() ==
+                  //               profundidade["nome"].toString();
+                  //     } catch (e) {
+                  //       print("Erro ao decodificar ponto: $e");
+                  //       return false;
+                  //     }
+                  //   });
+                  // }
 
                   return Row(
                     children: [
@@ -1232,48 +1232,6 @@ class _ColetaState extends State<Coleta> {
   //   );
   // }
 
-  void _exibirDados() {
-    showDialog(
-      context: context,
-      builder: (BuildContext context) {
-        return AlertDialog(
-          scrollable: true,
-          title: Text('Dados da Coleta'),
-          content: SingleChildScrollView(
-            child: ListBody(
-              children: [
-                Text(
-                  "Pontos: ${jsonEncode(latLngListMarcadores)}",
-                  style: TextStyle(color: Colors.black, fontSize: 12.0),
-                ),
-                Text(
-                  "Pontos Movidos: ${jsonEncode(pontosMovidos)}",
-                  style: TextStyle(color: Colors.black, fontSize: 12.0),
-                ),
-                Text(
-                  "Pontos Coletados: ${jsonEncode(pontosColetados)}",
-                  style: TextStyle(color: Colors.black, fontSize: 12.0),
-                ),
-                Text(
-                  "Pontos Excluídos: ${jsonEncode(pontosExcluidos)}",
-                  style: TextStyle(color: Colors.black, fontSize: 12.0),
-                ),
-              ],
-            ),
-          ),
-          actions: <Widget>[
-            TextButton(
-              child: Text('Fechar'),
-              onPressed: () {
-                Navigator.of(context).pop();
-              },
-            ),
-          ],
-        );
-      },
-    );
-  }
-
   @override
   Widget build(BuildContext context) {
     return Stack(
@@ -1318,26 +1276,68 @@ class _ColetaState extends State<Coleta> {
                 )),
           ),
         ),
-        //Positioned(
-        //  bottom: 10,
-        //  left: 10,
-        //  right: 10,
-        //  child: ElevatedButton(
-        //    onPressed: _exibirDados,
-        //    style: ElevatedButton.styleFrom(
-        //      shape: CircleBorder(),
-        //      backgroundColor: Color(0xFF00736D),
-        //    ),
-        //    child: Padding(
-        //        padding: const EdgeInsets.all(8.0),
-        //        child: Icon(
-        //          Icons.info,
-        //          size: 25.0,
-        //          color: Colors.white,
-        //        )),
-        //  ),
-        //),
+        Positioned(
+          bottom: 10,
+          left: 10,
+          right: 10,
+          child: ElevatedButton(
+            onPressed: _exibirDados,
+            style: ElevatedButton.styleFrom(
+              shape: CircleBorder(),
+              backgroundColor: Color(0xFF00736D),
+            ),
+            child: Padding(
+                padding: const EdgeInsets.all(8.0),
+                child: Icon(
+                  Icons.info,
+                  size: 25.0,
+                  color: Colors.white,
+                )),
+          ),
+        ),
       ],
+    );
+  }
+
+  void _exibirDados() {
+    showDialog(
+      context: context,
+      builder: (BuildContext context) {
+        return AlertDialog(
+          scrollable: true,
+          title: Text('Dados da Coleta'),
+          content: SingleChildScrollView(
+            child: ListBody(
+              children: [
+                Text(
+                  "Pontos: ${jsonEncode(latLngListMarcadores)}",
+                  style: TextStyle(color: Colors.black, fontSize: 12.0),
+                ),
+                // Text(
+                //   "Pontos Movidos: ${jsonEncode(pontosMovidos)}",
+                //   style: TextStyle(color: Colors.black, fontSize: 12.0),
+                // ),
+                // Text(
+                //   "Pontos Coletados: ${jsonEncode(pontosColetados)}",
+                //   style: TextStyle(color: Colors.black, fontSize: 12.0),
+                // ),
+                // Text(
+                //   "Pontos Excluídos: ${jsonEncode(pontosExcluidos)}",
+                //   style: TextStyle(color: Colors.black, fontSize: 12.0),
+                // ),
+              ],
+            ),
+          ),
+          actions: <Widget>[
+            TextButton(
+              child: Text('Fechar'),
+              onPressed: () {
+                Navigator.of(context).pop();
+              },
+            ),
+          ],
+        );
+      },
     );
   }
 }
