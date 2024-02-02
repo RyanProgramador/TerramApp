@@ -22,6 +22,7 @@ import 'dart:ui';
 import 'package:background_location/background_location.dart'
     as background_location;
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
+import 'package:image/image.dart' as img;
 
 class Coleta extends StatefulWidget {
   final double? width;
@@ -31,7 +32,7 @@ class Coleta extends StatefulWidget {
   final String? idContorno;
   //final List<String>? possiveisProfundidades;
   //final List<String>? listaDeLocaisDeContornoDeArea;
-  //final List<dynamic>? pontosJaColetados;
+  final List<dynamic>? pontosJaColetados;
 
   const Coleta({
     Key? key,
@@ -42,7 +43,7 @@ class Coleta extends StatefulWidget {
     this.idContorno,
     //this.possiveisProfundidades,
     //this.listaDeLocaisDeContornoDeArea,
-    //this.pontosJaColetados,
+    this.pontosJaColetados,
   }) : super(key: key);
   final String customIconUrl =
       'https://cdn-icons-png.flaticon.com/128/3253/3253113.png';
@@ -106,9 +107,11 @@ class _ColetaState extends State<Coleta> {
 
   // Implementação de exemplo
   List<Map<String, dynamic>> latLngListMarcadores = [];
+
   // List<Map<String, dynamic>> latLngListMarcadores = [
   //   {
   //     "marcador_nome": "A",
+  //     "icone": "exemplo"
   //     "latlng_marcadores": "-29.914939224621914, -51.195420011983714",
   //     "profundidades": [
   //       {"nome": "0-10", "icone": "location_dot", "cor": "#FFC0CB"},
@@ -150,28 +153,141 @@ class _ColetaState extends State<Coleta> {
   //   },
   // ];
 
+  // void _inicializaDados() {
+  //   var filtroPontosColeta = FFAppState().pontosDeColeta
+  //       .where((item) => item['oserv_id'] == 38)
+  //       .toList();
+  //
+  //
+  //   // Transforma os itens filtrados em uma lista de mapas com a estrutura desejada
+  //   latLngListMarcadores = filtroPontosColeta.map((item) {
+  //     return {
+  //       "marcador_nome": "${item['artp_id']}",
+  //       "icone" : "${}",
+  //       "latlng_marcadores": "${item['artp_latitude_longitude']}",
+  //       "profundidades": "${item['artp_id_perfil_prof']}",
+  //       "foto_de_cada_profundidade": [],
+  //     };
+  //   }).toList();
+  //
+  //   // Se você precisar atualizar a interface do usuário baseada nesses dados,
+  //   // chame setState para reconstruir o widget com os novos dados.
+  //   setState(() {});
+  // }
+
+  void _inicializaDados() {
+    // var filtroPontosColeta = FFAppState().pontosDeColeta
+    //     .where((item) => item['oserv_id'] == 38)
+    //     .toList();
+    //
+    // latLngListMarcadores = filtroPontosColeta.map((item) {
+    //   // Encontra o perfil de profundidade correspondente ao ponto de coleta
+    //   var perfilProfundidade = FFAppState().perfilprofundidades
+    //       .firstWhere((perfil) => perfil['pprof_id'] == item['artp_id_perfil_prof'], orElse: () => null);
+    //
+    //   // Se encontrou o perfil, busca a informação de profundidade correspondente
+    //   var imagemProfundidade = '';
+    //   if (perfilProfundidade != null) {
+    //     var profundidade = FFAppState().profundidades
+    //         .firstWhere((prof) => prof['prof_id'] == perfilProfundidade['pprof_prof_id'], orElse: () => null);
+    //
+    //     // Se encontrou a profundidade, pega a imagem
+    //     if (profundidade != null) {
+    //       imagemProfundidade = profundidade['prof_imagem'];
+    //     }
+    //   }
+    //   var profundidadesLista = List{$prof['prof_id'],$prof['prof_nome'],$prof_id['prof_icone']}
+    //
+    //   // Retorna o mapa com as informações, incluindo a imagem de profundidade
+    //   return {
+    //     "marcador_nome": "${item['artp_id']}",
+    //     "icone": imagemProfundidade,
+    //     "latlng_marcadores": "${item['artp_latitude_longitude']}",
+    //     "profundidades": profundidadesLista,
+    //     "foto_de_cada_profundidade": [],
+    //   };
+    // }).toList();
+    //
+    // setState(() {});
+
+    var filtroPontosColeta = FFAppState()
+        .pontosDeColeta
+        .where((item) => item['oserv_id'] == 38)
+        .toList();
+
+    latLngListMarcadores = filtroPontosColeta.map((item) {
+      var profundidadesLista = FFAppState()
+          .perfilprofundidades
+          .where((perfil) => perfil['pprof_id'] == item['artp_id_perfil_prof'])
+          .map((perfilProfundidade) {
+            var profundidade = FFAppState().profundidades.firstWhere(
+                (prof) =>
+                    prof['prof_id'] == perfilProfundidade['pprof_prof_id'],
+                orElse: () => null);
+
+            return profundidade != null
+                ? {
+                    "nome": profundidade['prof_nome'],
+                    "icone": profundidade['prof_icone'],
+                    "cor": profundidade['prof_cor'] ?? "#FFFFFF",
+                  }
+                : null;
+          })
+          .whereType<
+              Map<String, dynamic>>() // Remove nulos e assegura o tipo correto
+          .toList();
+
+      var perfilProfundidade = FFAppState().perfilprofundidades.firstWhere(
+          (perfil) => perfil['pprof_id'] == item['artp_id_perfil_prof'],
+          orElse: () => null);
+
+      var imagemProfundidade = '';
+      if (perfilProfundidade != null) {
+        var profundidade = FFAppState().profundidades.firstWhere(
+            (prof) => prof['prof_id'] == perfilProfundidade['pprof_prof_id'],
+            orElse: () => null);
+
+        // Se encontrou a profundidade, pega a imagem
+        if (profundidade != null) {
+          imagemProfundidade = profundidade['prof_imagem'];
+        }
+      }
+      return {
+        "marcador_nome": "${item['artp_id']}",
+        "icone":
+            imagemProfundidade, // Certifique-se de que 'imagemProfundidade' é definida corretamente
+        "latlng_marcadores": "${item['artp_latitude_longitude']}",
+        "profundidades": profundidadesLista,
+        "foto_de_cada_profundidade": [],
+      };
+    }).toList();
+
+    setState(() {});
+  }
+
   @override
   void initState() {
     super.initState();
 
-    // if (widget.pontosJaColetados != null && widget.pontosJaColetados!.isNotEmpty) {
-    //   for (var ponto in widget.pontosJaColetados!) {
-    //     if (ponto is String) {
-    //       try {
-    //         Map<String, dynamic> pontoMap = json.decode(ponto);
-    //         // Convertendo para Map<String, String>
-    //         Map<String, String> pontoMapString = pontoMap.map((key, value) {
-    //           return MapEntry(key, value.toString());
-    //         });
-    //         pontosColetados.add(pontoMapString);
-    //       } catch (e) {
-    //         print('Erro ao desserializar ponto: $e');
-    //       }
-    //     } else {
-    //       print('Ponto inválido recebido (não é uma string): $ponto');
-    //     }
-    //   }
-    // }
+    var pontosJaColetados = FFAppState().PontosColetados.toList();
+    if (pontosJaColetados != null && pontosJaColetados!.isNotEmpty) {
+      for (var ponto in pontosJaColetados!) {
+        if (ponto is String) {
+          try {
+            Map<String, dynamic> pontoMap = json.decode(ponto);
+            // Convertendo para Map<String, String>
+            Map<String, String> pontoMapString = pontoMap.map((key, value) {
+              return MapEntry(key, value.toString());
+            });
+            pontosColetados.add(pontoMapString);
+          } catch (e) {
+            print('Erro ao desserializar ponto: $e');
+          }
+        } else {
+          print('Ponto inválido recebido (não é uma string): $ponto');
+        }
+      }
+    }
 
     intervaloDeColetaParaProximaFoto =
         widget.intervaloDeColetaParaProximaFoto ??
@@ -204,7 +320,7 @@ class _ColetaState extends State<Coleta> {
     //   possiveisProfundidades =
     //       List<String>.from(widget.possiveisProfundidades!);
     // }
-
+    _inicializaDados();
     _initializePolygons();
     _criaMarcadores();
     _getCurrentLocation();
@@ -275,30 +391,135 @@ class _ColetaState extends State<Coleta> {
   }
 
   void _initializePolygons() {
-    // Implementação de exemplo
-    List<google_maps.LatLng> latLngList =
-        _transformaJsonEmLatLng(listaDeLocais);
-    String cor = "#000000";
+    // var filtroPontosLatLngDeContorno = FFAppState().listaContornoColeta
+    //     .where((item) => item['talcot_id_pai'] == null && item['oserv_id'] == 38)
+    //     .map((item) => item['talcot_latitude_longitude'])
+    //     .toList();
+    //
+    // // Implementação de exemplo
+    // // var contornoListaLatLng = FFAppState().
+    // //
+    // foreach ( item['talcot_talh_id'] in filtroPontosLatLngDeContorno){
+    // final polygon = google_maps.Polygon(
+    //   polygonId: const google_maps.PolygonId('AreaPolygon'),
+    //   points: toLatLng(filtroPontosLatLngDeContorno),
+    //   fillColor: Colors.black.withOpacity(0.2),
+    //   strokeColor: Colors.black,
+    //   strokeWidth: 3,
+    // );
+    //
+    // setState(() {
+    //   polygons.add(polygon);
+    // });
+    // }
+    var pontosDeContorno = FFAppState()
+        .listaContornoColeta
+        .where(
+            (item) => item['talcot_id_pai'] == null && item['oserv_id'] == 38)
+        .toList();
 
-    final polygon = google_maps.Polygon(
-      polygonId: const google_maps.PolygonId('AreaPolygon'),
-      points: latLngList,
-      fillColor: HexColor(cor).withOpacity(0.2),
-      strokeColor: HexColor(cor),
-      strokeWidth: 3,
-    );
+    var gruposDeContorno = <String, List<dynamic>>{};
 
-    setState(() {
-      polygons.add(polygon);
+    for (var item in pontosDeContorno) {
+      String talcotTalhId = item['talcot_talh_id'].toString();
+      String oservId = item['oserv_id'].toString();
+      String chave =
+          '$talcotTalhId-$oservId'; // Combina talcot_talh_id e oserv_id para criar uma chave única
+      String cor = item['talh_cor'].toString();
+
+      gruposDeContorno.putIfAbsent(chave, () => []);
+      gruposDeContorno[chave]!.add(item);
+    }
+
+    // Itera sobre os grupos para criar polígonos
+    gruposDeContorno.forEach((chave, grupo) {
+      // Assumindo que `toLatLng` é uma função que converte uma string ou um objeto
+      // no formato 'latitude,longitude' para um objeto LatLng.
+      List<google_maps.LatLng> pontosLatLng =
+          grupo.map<google_maps.LatLng>((item) {
+        return toLatLng(item['talcot_latitude_longitude']);
+      }).toList();
+
+      // Cria um polígono para cada grupo
+      final polygon = google_maps.Polygon(
+        polygonId: google_maps.PolygonId(
+            'AreaPolygon_$chave'), // Usa a chave para criar um ID único
+        points: pontosLatLng,
+        fillColor: Colors.black.withOpacity(0.2),
+        strokeColor: Colors.black,
+        strokeWidth: 3,
+      );
+
+      setState(() {
+        polygons.add(polygon);
+      });
     });
   }
 
+  google_maps.LatLng toLatLng(String latLngStr) {
+    var parts = latLngStr.split(',');
+    if (parts.length != 2) {
+      throw FormatException(
+          "Input does not contain a valid latitude,longitude format");
+    }
+    var latitude = double.parse(parts[0].trim());
+    var longitude = double.parse(parts[1].trim());
+    return google_maps.LatLng(latitude, longitude);
+  }
+
+  Uint8List resizeImage(String base64Str, int width, int height) {
+    // Decodifica a string base64 para uma imagem
+    Uint8List decodedBytes = base64Decode(base64Str);
+    // Decodifica a imagem para um objeto de imagem
+    img.Image? image = img.decodeImage(decodedBytes);
+
+    // Redimensiona a imagem
+    img.Image resized = img.copyResize(image!, width: width, height: height);
+
+    // Codifica a imagem redimensionada de volta para Uint8List
+    return Uint8List.fromList(img.encodePng(resized));
+  }
+
+  // List<google_maps.LatLng> toLatLng(dynamic latLngData) {
+  //   List<google_maps.LatLng> latLngList = [];
+  //
+  //   // Se latLngData é uma string, converte diretamente para LatLng
+  //   if (latLngData is String) {
+  //     final splits = latLngData.split(',');
+  //     if (splits.length == 2) {
+  //       try {
+  //         final lat = double.parse(splits[0].trim());
+  //         final lng = double.parse(splits[1].trim());
+  //         latLngList.add(google_maps.LatLng(lat, lng));
+  //       } catch (e) {
+  //         print("Erro ao converter latLngData: $e");
+  //       }
+  //     }
+  //   }
+  //   // Se latLngData é uma lista, processa cada item individualmente
+  //   else if (latLngData is List) {
+  //     for (var item in latLngData) {
+  //       if (item is String) {
+  //         latLngList.addAll(toLatLng(item));
+  //       }
+  //     }
+  //   }
+  //
+  //   return latLngList;
+  // }
   void _criaMarcadores() {
     for (var marcador in latLngListMarcadores) {
       var latlng = marcador["latlng_marcadores"]!.split(",");
       var markerId = google_maps.MarkerId(marcador["marcador_nome"]!);
       var position =
           google_maps.LatLng(double.parse(latlng[0]), double.parse(latlng[1]));
+
+      String base64Icon = marcador["icone"];
+      // Uint8List iconBytes = base64Decode(base64Icon);
+      var iconBytes = resizeImage(base64Icon, 50, 50);
+
+      google_maps.BitmapDescriptor icon =
+          google_maps.BitmapDescriptor.fromBytes(iconBytes);
 
       // Coletar os nomes das profundidades em uma string
       String nomesProfundidades = marcador["profundidades"]!
@@ -311,8 +532,7 @@ class _ColetaState extends State<Coleta> {
       var marker = google_maps.Marker(
         markerId: markerId,
         position: position,
-        icon: google_maps.BitmapDescriptor.defaultMarkerWithHue(
-            google_maps.BitmapDescriptor.hueRed),
+        icon: icon,
         onTap: () {
           focoNoMarcador = true;
           latlngMarcador = google_maps.LatLng(
@@ -322,7 +542,7 @@ class _ColetaState extends State<Coleta> {
         },
         infoWindow: google_maps.InfoWindow(
           title: "PONTO : " + marcador["marcador_nome"]!,
-          snippet: "Lista de profundidades: " + nomesProfundidades,
+          snippet: "Profundidades de coleta: " + nomesProfundidades,
         ),
         draggable: false,
       );
@@ -356,7 +576,7 @@ class _ColetaState extends State<Coleta> {
         now.difference(lastTapTimestamps[markerIdValue]!).inMilliseconds <
             1800) {
       // Check if the distance is greater than 30 meters
-      if (distance > 999999) {
+      if (distance > 3500) {
         //metros de distancia para coletar
         // Show alert
         _showDistanceAlert();
@@ -390,23 +610,6 @@ class _ColetaState extends State<Coleta> {
     );
   }
 
-  Future<void> _loadCustomIcon() async {
-    final String customIconUrl = 'htt-128.png';
-    try {
-      final response = await http.get(Uri.parse(customIconUrl));
-      if (response.statusCode == 200) {
-        setState(() {
-          customIconBytes = response.bodyBytes;
-        });
-      } else {
-        print(
-            "Failed to load custom icon. Status code: ${response.statusCode}");
-      }
-    } catch (e) {
-      print("Error loading custom icon: $e");
-    }
-  }
-
   void _addUserMarker(google_maps.LatLng position) {
     final userLocationMarker = google_maps.Marker(
       markerId: const google_maps.MarkerId('current_location'),
@@ -415,10 +618,6 @@ class _ColetaState extends State<Coleta> {
         focoNoMarcador = false;
       },
       alpha: 0.0,
-      // icon: customIconBytes == null
-      //     ? google_maps.BitmapDescriptor.defaultMarkerWithHue(
-      //         google_maps.BitmapDescriptor.hueBlue)
-      //     : google_maps.BitmapDescriptor.fromBytes(customIconBytes!),
     );
 
     setState(() {
@@ -541,32 +740,28 @@ class _ColetaState extends State<Coleta> {
     );
   }
 
-  // void _tiraFoto() async {
-  //   final ImagePicker _picker = ImagePicker();
-  //   final XFile? image = await _picker.pickImage(source: ImageSource.camera);
-  //
-  //   if (image != null) {
-  //     final bytes = await image.readAsBytes();
-  //     String base64Image = base64Encode(bytes);
-  //     String nomeProfundidade = 'Nome da profundidade'; // Defina como desejar
-  //
-  //     setState(() {
-  //       latLngListMarcadores[0]["foto_de_cada_profundidade"].add({
-  //         "nome": nomeProfundidade,
-  //         // "foto": 'data:image/png;base64,$base64Image',
-  //         "foto": 'data:image/png;base64,base64Image',
-  //       });
-  //     });
-  //   }
-  // }
-
   void _tiraFoto(String nomeMarcadorAtual, String nomeProfundidade) async {
     final ImagePicker _picker = ImagePicker();
     final XFile? image = await _picker.pickImage(source: ImageSource.camera);
 
     if (image != null) {
-      final bytes = await image.readAsBytes();
-      String base64Image = base64Encode(bytes);
+      // final bytes = await image.readAsBytes();
+      Uint8List bytes = await image.readAsBytes();
+
+      // Decodifica a imagem
+      img.Image imagem = img.decodeImage(bytes)!;
+
+      // Ajusta a qualidade da imagem (50% neste exemplo)
+      img.Image imagemComQualidadeReduzida = img.copyResize(imagem,
+          width: (imagem.width ~/ 20), height: (imagem.height ~/ 20));
+
+      // Recodifica a imagem para PNG com qualidade reduzida
+      List<int> bytesComQualidadeReduzida =
+          img.encodePng(imagemComQualidadeReduzida, level: 6); // level: 0-9
+
+      // Converte os bytes modificados para base64
+      String base64Image =
+          base64Encode(Uint8List.fromList(bytesComQualidadeReduzida));
 
       setState(() {
         // Encontra o marcador pelo nome
@@ -582,12 +777,13 @@ class _ColetaState extends State<Coleta> {
           pontosColetados.add({
             "marcador_nome": nomeMarcadorAtual,
             "profundidade": nomeProfundidade,
-            "foto": 'fotoBase64',
+            "foto": 'base64Image',
           });
           FFAppState().PontosColetados.add(jsonEncode({
                 "marcador_nome": nomeMarcadorAtual,
                 "profundidade": nomeProfundidade,
-                "foto": '$base64Image',
+                // "foto": '$base64Image',
+                "foto": 'base64Image',
               }));
         }
       });
@@ -771,13 +967,22 @@ class _ColetaState extends State<Coleta> {
     // Encontra o marcador pelo nome
     var marcador = latLngListMarcadores.firstWhere(
       (m) => m["marcador_nome"] == marcadorNome,
-      orElse: () => {},
+      orElse: () =>
+          <String, Object>{}, // Correção aqui para alinhar com o tipo esperado
     );
 
     if (marcador.isNotEmpty) {
       showDialog(
         context: context,
         builder: (BuildContext context) {
+          var profundidades = marcador["profundidades"] as List<dynamic>? ?? [];
+          String base64Icon = marcador["icone"];
+          // Uint8List iconBytes = base64Decode(base64Icon);
+          var iconBytes = resizeImage(base64Icon, 50, 50);
+
+          google_maps.BitmapDescriptor icon =
+              google_maps.BitmapDescriptor.fromBytes(iconBytes);
+
           return AlertDialog(
             shape: RoundedRectangleBorder(
               borderRadius: BorderRadius.circular(16),
@@ -808,34 +1013,31 @@ class _ColetaState extends State<Coleta> {
             ),
             content: SingleChildScrollView(
               child: ListBody(
-                children: marcador["profundidades"].map<Widget>((profundidade) {
+                children: profundidades.map<Widget>((profundidade) {
                   bool jaColetada = coletasPorMarcador[marcadorNome]
                           ?.contains(profundidade["nome"]) ??
                       false;
 
                   // Verificação adicional para 'pontosJaColetados'
-                  // if (!jaColetada && widget.pontosJaColetados != null) {
-                  //   jaColetada = widget.pontosJaColetados!.any((pontoString) {
-                  //     try {
-                  //       var pontoMap =
-                  //           json.decode(pontoString) as Map<dynamic, dynamic>;
-                  //       return pontoMap["marcador_nome"].toString() ==
-                  //               marcadorNome &&
-                  //           pontoMap["profundidade"].toString() ==
-                  //               profundidade["nome"].toString();
-                  //     } catch (e) {
-                  //       print("Erro ao decodificar ponto: $e");
-                  //       return false;
-                  //     }
-                  //   });
-                  // }
+                  if (!jaColetada && widget.pontosJaColetados != null) {
+                    jaColetada = widget.pontosJaColetados!.any((pontoString) {
+                      try {
+                        var pontoMap =
+                            json.decode(pontoString) as Map<dynamic, dynamic>;
+                        return pontoMap["marcador_nome"].toString() ==
+                                marcadorNome &&
+                            pontoMap["profundidade"].toString() ==
+                                profundidade["nome"].toString();
+                      } catch (e) {
+                        print("Erro ao decodificar ponto: $e");
+                        return false;
+                      }
+                    });
+                  }
 
                   return Row(
                     children: [
-                      Icon(
-                        getFontAwesomeIconByName(profundidade["icone"]),
-                        color: HexColor(profundidade["cor"]),
-                      ),
+                      Image.memory(iconBytes, width: 20, height: 50),
                       SizedBox(width: 10),
                       Text(profundidade["nome"]),
                       Spacer(),
@@ -967,9 +1169,6 @@ class _ColetaState extends State<Coleta> {
                     });
                     _coletarProfundidade(marcadorNome, profundidadeNome);
                   } else {
-                    setState(() {
-                      vezAtualDoIntervaloDeColeta += 1;
-                    });
                     _coletarProfundidade(marcadorNome, profundidadeNome);
                   }
                 } else {
@@ -1003,6 +1202,9 @@ class _ColetaState extends State<Coleta> {
       if (coletasPorMarcador[marcadorNome]!.containsAll(todasProfundidades)) {
         // Todas as profundidades coletadas, mude a cor do marcador para verde
         _updateMarkerColor(marcadorNome, true);
+        setState(() {
+          vezAtualDoIntervaloDeColeta += 1;
+        });
       }
     });
     Navigator.of(context).pop(); // Fecha o modal atual
@@ -1300,6 +1502,63 @@ class _ColetaState extends State<Coleta> {
   }
 
   void _exibirDados() {
+    var filtroPontosLatLngDeContorno = FFAppState()
+        .listaContornoColeta
+        .where((item) => item['oserv_id'] == 38)
+        .map((item) => item['talcot_latitude_longitude'])
+        .toList();
+    var filtroPontosColeta = FFAppState()
+        .pontosDeColeta
+        .where((item) => item['oserv_id'] == 38)
+        .toList();
+
+    latLngListMarcadores = filtroPontosColeta.map((item) {
+      var profundidadesLista = FFAppState()
+          .perfilprofundidades
+          .where((perfil) => perfil['pprof_id'] == item['artp_id_perfil_prof'])
+          .map((perfilProfundidade) {
+            var profundidade = FFAppState().profundidades.firstWhere(
+                (prof) =>
+                    prof['prof_id'] == perfilProfundidade['pprof_prof_id'],
+                orElse: () => null);
+
+            return profundidade != null
+                ? {
+                    "nome": profundidade['prof_nome'],
+                    "icone": profundidade['prof_icone'],
+                    "cor": profundidade['prof_cor'] ?? "#FFFFFF",
+                  }
+                : null;
+          })
+          .whereType<
+              Map<String, dynamic>>() // Remove nulos e assegura o tipo correto
+          .toList();
+
+      var perfilProfundidade = FFAppState().perfilprofundidades.firstWhere(
+          (perfil) => perfil['pprof_id'] == item['artp_id_perfil_prof'],
+          orElse: () => null);
+
+      var imagemProfundidade = '';
+      if (perfilProfundidade != null) {
+        var profundidade = FFAppState().profundidades.firstWhere(
+            (prof) => prof['prof_id'] == perfilProfundidade['pprof_prof_id'],
+            orElse: () => null);
+
+        // Se encontrou a profundidade, pega a imagem
+        if (profundidade != null) {
+          imagemProfundidade = profundidade['prof_imagem'];
+        }
+      }
+      return {
+        "marcador_nome": "${item['artp_id']}",
+        "icone":
+            imagemProfundidade, // Certifique-se de que 'imagemProfundidade' é definida corretamente
+        "latlng_marcadores": "${item['artp_latitude_longitude']}",
+        "profundidades": profundidadesLista,
+        "foto_de_cada_profundidade": [],
+      };
+    }).toList();
+
     showDialog(
       context: context,
       builder: (BuildContext context) {
@@ -1314,17 +1573,17 @@ class _ColetaState extends State<Coleta> {
                   style: TextStyle(color: Colors.black, fontSize: 12.0),
                 ),
                 // Text(
-                //   "Pontos Movidos: ${jsonEncode(pontosMovidos)}",
+                //   "Pontos: $icone",
                 //   style: TextStyle(color: Colors.black, fontSize: 12.0),
                 // ),
-                // Text(
-                //   "Pontos Coletados: ${jsonEncode(pontosColetados)}",
-                //   style: TextStyle(color: Colors.black, fontSize: 12.0),
-                // ),
-                // Text(
-                //   "Pontos Excluídos: ${jsonEncode(pontosExcluidos)}",
-                //   style: TextStyle(color: Colors.black, fontSize: 12.0),
-                // ),
+                Text(
+                  "Pontos de Coleta: ${FFAppState().PontosColetados}",
+                  style: TextStyle(color: Colors.black, fontSize: 12.0),
+                ),
+                Text(
+                  "Pontos Coletados: ${jsonEncode(pontosColetados)}",
+                  style: TextStyle(color: Colors.black, fontSize: 12.0),
+                ),
               ],
             ),
           ),
