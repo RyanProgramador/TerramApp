@@ -83,7 +83,6 @@ class _MedicaoColetaWidgetState extends State<MedicaoColetaWidget> {
                           height: double.infinity,
                           intervaloDeColetaParaProximaFoto: 3,
                           idContorno: widget.idContorno,
-                          pontosJaColetados: FFAppState().PontosColetados,
                         ),
                       ),
                     ),

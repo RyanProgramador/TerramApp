@@ -250,8 +250,6 @@ class _MultiplePlacesPickerWidgetState
                                   child: custom_widgets.Coleta(
                                     width: double.infinity,
                                     height: double.infinity,
-                                    pontosJaColetados:
-                                        FFAppState().PontosColetados,
                                   ),
                                 ),
                               ),

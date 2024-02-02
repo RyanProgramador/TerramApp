@@ -1201,7 +1201,7 @@ class _ColetaState extends State<Coleta> {
 
       if (coletasPorMarcador[marcadorNome]!.containsAll(todasProfundidades)) {
         // Todas as profundidades coletadas, mude a cor do marcador para verde
-        _updateMarkerColor(marcadorNome, true);
+        //_updateMarkerColor(marcadorNome, true);
         setState(() {
           vezAtualDoIntervaloDeColeta += 1;
         });

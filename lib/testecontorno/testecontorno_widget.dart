@@ -133,6 +133,8 @@ class _TestecontornoWidgetState extends State<TestecontornoWidget> {
               onPressed: () async {
                 FFAppState().update(() {
                   FFAppState().PontosColetados = [];
+                  FFAppState().pontosDeColeta = [];
+                  FFAppState().listaContornoColeta = [];
                 });
               },
               backgroundColor: FlutterFlowTheme.of(context).primary,
