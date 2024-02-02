@@ -936,3 +936,16 @@ List<dynamic>? deletaDaLista(
 
   return listaASerEditada;
 }
+
+int? strToInt(String? valor) {
+  if (valor == null) {
+    return null;
+  }
+  try {
+    // Tenta converter a string para um inteiro e retorna o resultado
+    return int.parse(valor);
+  } catch (e) {
+    // Em caso de exceção (string em formato inválido), retorna nulo
+    return null;
+  }
+}

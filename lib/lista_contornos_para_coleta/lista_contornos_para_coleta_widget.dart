@@ -1,6 +1,5 @@
 import '/components/maps_revisao_todos_widget.dart';
 import '/components/maps_revisao_widget.dart';
-import '/components/nome_contorno_widget.dart';
 import '/components/sem_contorno_no_momento_widget.dart';
 import '/flutter_flow/flutter_flow_theme.dart';
 import '/flutter_flow/flutter_flow_util.dart';
@@ -351,7 +350,10 @@ class _ListaContornosParaColetaWidgetState
                                                     FFAppState()
                                                         .pontosDeColeta
                                                         .toList(),
-                                                    widget.oservID)
+                                                    functions
+                                                        .strToInt(
+                                                            widget.oservID)
+                                                        ?.toString())
                                                 ?.toList() ??
                                             [];
                                         if (trColetas.isEmpty) {
@@ -509,18 +511,8 @@ class _ListaContornosParaColetaWidgetState
                                                                 FaIcon(
                                                                   FontAwesomeIcons
                                                                       .route,
-                                                                  color:
-                                                                      valueOrDefault<
-                                                                          Color>(
-                                                                    functions
-                                                                        .transformaStringEmCor(
-                                                                            getJsonField(
-                                                                      trColetasItem,
-                                                                      r'''$.cor''',
-                                                                    ).toString()),
-                                                                    Colors
-                                                                        .black,
-                                                                  ),
+                                                                  color: Colors
+                                                                      .black,
                                                                   size: 32.0,
                                                                 ),
                                                               ],
@@ -550,10 +542,7 @@ class _ListaContornosParaColetaWidgetState
                                                                             CrossAxisAlignment.start,
                                                                         children: [
                                                                           Text(
-                                                                            '# ${getJsonField(
-                                                                              trColetasItem,
-                                                                              r'''$.contorno_grupo''',
-                                                                            ).toString()}',
+                                                                            '# ',
                                                                             style: FlutterFlowTheme.of(context).bodyLarge.override(
                                                                                   fontFamily: 'Readex Pro',
                                                                                   fontSize: 12.0,
@@ -564,11 +553,7 @@ class _ListaContornosParaColetaWidgetState
                                                                                 MainAxisSize.max,
                                                                             children: [
                                                                               Text(
-                                                                                '${getJsonField(
-                                                                                  trColetasItem,
-                                                                                  r'''$.nome''',
-                                                                                ).toString()}'
-                                                                                    .maybeHandleOverflow(
+                                                                                'Nome'.maybeHandleOverflow(
                                                                                   maxChars: 20,
                                                                                   replacement: '…',
                                                                                 ),
@@ -580,13 +565,7 @@ class _ListaContornosParaColetaWidgetState
                                                                             ],
                                                                           ),
                                                                           Text(
-                                                                            '${functions.strToData(getJsonField(
-                                                                              trColetasItem,
-                                                                              r'''$.dthr_fim''',
-                                                                            ).toString())} ás ${functions.strToHORA(getJsonField(
-                                                                              trColetasItem,
-                                                                              r'''$.dthr_fim''',
-                                                                            ).toString())}',
+                                                                            ' ás ',
                                                                             style: FlutterFlowTheme.of(context).bodyLarge.override(
                                                                                   fontFamily: 'Readex Pro',
                                                                                   fontSize: 12.0,
@@ -595,80 +574,6 @@ class _ListaContornosParaColetaWidgetState
                                                                         ],
                                                                       ),
                                                                     ],
-                                                                  ),
-                                                                ),
-                                                              ),
-                                                              Align(
-                                                                alignment:
-                                                                    AlignmentDirectional(
-                                                                        0.76,
-                                                                        -0.93),
-                                                                child: Padding(
-                                                                  padding: EdgeInsetsDirectional
-                                                                      .fromSTEB(
-                                                                          0.0,
-                                                                          4.0,
-                                                                          8.0,
-                                                                          0.0),
-                                                                  child:
-                                                                      InkWell(
-                                                                    splashColor:
-                                                                        Colors
-                                                                            .transparent,
-                                                                    focusColor:
-                                                                        Colors
-                                                                            .transparent,
-                                                                    hoverColor:
-                                                                        Colors
-                                                                            .transparent,
-                                                                    highlightColor:
-                                                                        Colors
-                                                                            .transparent,
-                                                                    onTap:
-                                                                        () async {
-                                                                      await showModalBottomSheet(
-                                                                        isScrollControlled:
-                                                                            true,
-                                                                        backgroundColor:
-                                                                            Colors.transparent,
-                                                                        enableDrag:
-                                                                            false,
-                                                                        context:
-                                                                            context,
-                                                                        builder:
-                                                                            (context) {
-                                                                          return GestureDetector(
-                                                                            onTap: () => _model.unfocusNode.canRequestFocus
-                                                                                ? FocusScope.of(context).requestFocus(_model.unfocusNode)
-                                                                                : FocusScope.of(context).unfocus(),
-                                                                            child:
-                                                                                Padding(
-                                                                              padding: MediaQuery.viewInsetsOf(context),
-                                                                              child: NomeContornoWidget(
-                                                                                nomeVelho: getJsonField(
-                                                                                  trColetasItem,
-                                                                                  r'''$.nome''',
-                                                                                ).toString(),
-                                                                                indexinlist: trColetasIndex,
-                                                                                json: trColetasItem,
-                                                                              ),
-                                                                            ),
-                                                                          );
-                                                                        },
-                                                                      ).then((value) =>
-                                                                          safeSetState(
-                                                                              () {}));
-                                                                    },
-                                                                    child:
-                                                                        FaIcon(
-                                                                      FontAwesomeIcons
-                                                                          .edit,
-                                                                      color: FlutterFlowTheme.of(
-                                                                              context)
-                                                                          .primary,
-                                                                      size:
-                                                                          20.0,
-                                                                    ),
                                                                   ),
                                                                 ),
                                                               ),
@@ -702,10 +607,7 @@ class _ListaContornosParaColetaWidgetState
                                                                         () async {
                                                                       FFAppState()
                                                                           .update(
-                                                                              () {
-                                                                        FFAppState()
-                                                                            .removeAtIndexFromGrupoContornoFazendas(trColetasIndex);
-                                                                      });
+                                                                              () {});
                                                                     },
                                                                     child: Icon(
                                                                       Icons
