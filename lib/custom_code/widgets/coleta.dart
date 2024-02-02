@@ -37,12 +37,12 @@ class Coleta extends StatefulWidget {
     Key? key,
     this.width,
     this.height,
-    // this.listaPontosComProfundidadeParaMedicao,
+    //this.listaPontosComProfundidadeParaMedicao,
     this.intervaloDeColetaParaProximaFoto,
     this.idContorno,
     //this.possiveisProfundidades,
-    // this.listaDeLocaisDeContornoDeArea,
-    // this.pontosJaColetados,
+    //this.listaDeLocaisDeContornoDeArea,
+    //this.pontosJaColetados,
   }) : super(key: key);
   final String customIconUrl =
       'https://cdn-icons-png.flaticon.com/128/3253/3253113.png';

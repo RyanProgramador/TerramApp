@@ -487,6 +487,30 @@ class FFAppState extends ChangeNotifier {
           }).toList() ??
           _pontosDeColeta;
     });
+    _safeInit(() {
+      _listaContornoColeta =
+          prefs.getStringList('ff_listaContornoColeta')?.map((x) {
+                try {
+                  return jsonDecode(x);
+                } catch (e) {
+                  print("Can't decode persisted json. Error: $e.");
+                  return {};
+                }
+              }).toList() ??
+              _listaContornoColeta;
+    });
+    _safeInit(() {
+      _listaRecorteContornoColeta =
+          prefs.getStringList('ff_listaRecorteContornoColeta')?.map((x) {
+                try {
+                  return jsonDecode(x);
+                } catch (e) {
+                  print("Can't decode persisted json. Error: $e.");
+                  return {};
+                }
+              }).toList() ??
+              _listaRecorteContornoColeta;
+    });
   }
 
   void update(VoidCallback callback) {
@@ -2157,6 +2181,89 @@ class FFAppState extends ChangeNotifier {
     _pontosDeColeta.insert(_index, _value);
     prefs.setStringList('ff_pontosDeColeta',
         _pontosDeColeta.map((x) => jsonEncode(x)).toList());
+  }
+
+  List<dynamic> _listaContornoColeta = [];
+  List<dynamic> get listaContornoColeta => _listaContornoColeta;
+  set listaContornoColeta(List<dynamic> _value) {
+    _listaContornoColeta = _value;
+    prefs.setStringList(
+        'ff_listaContornoColeta', _value.map((x) => jsonEncode(x)).toList());
+  }
+
+  void addToListaContornoColeta(dynamic _value) {
+    _listaContornoColeta.add(_value);
+    prefs.setStringList('ff_listaContornoColeta',
+        _listaContornoColeta.map((x) => jsonEncode(x)).toList());
+  }
+
+  void removeFromListaContornoColeta(dynamic _value) {
+    _listaContornoColeta.remove(_value);
+    prefs.setStringList('ff_listaContornoColeta',
+        _listaContornoColeta.map((x) => jsonEncode(x)).toList());
+  }
+
+  void removeAtIndexFromListaContornoColeta(int _index) {
+    _listaContornoColeta.removeAt(_index);
+    prefs.setStringList('ff_listaContornoColeta',
+        _listaContornoColeta.map((x) => jsonEncode(x)).toList());
+  }
+
+  void updateListaContornoColetaAtIndex(
+    int _index,
+    dynamic Function(dynamic) updateFn,
+  ) {
+    _listaContornoColeta[_index] = updateFn(_listaContornoColeta[_index]);
+    prefs.setStringList('ff_listaContornoColeta',
+        _listaContornoColeta.map((x) => jsonEncode(x)).toList());
+  }
+
+  void insertAtIndexInListaContornoColeta(int _index, dynamic _value) {
+    _listaContornoColeta.insert(_index, _value);
+    prefs.setStringList('ff_listaContornoColeta',
+        _listaContornoColeta.map((x) => jsonEncode(x)).toList());
+  }
+
+  List<dynamic> _listaRecorteContornoColeta = [];
+  List<dynamic> get listaRecorteContornoColeta => _listaRecorteContornoColeta;
+  set listaRecorteContornoColeta(List<dynamic> _value) {
+    _listaRecorteContornoColeta = _value;
+    prefs.setStringList('ff_listaRecorteContornoColeta',
+        _value.map((x) => jsonEncode(x)).toList());
+  }
+
+  void addToListaRecorteContornoColeta(dynamic _value) {
+    _listaRecorteContornoColeta.add(_value);
+    prefs.setStringList('ff_listaRecorteContornoColeta',
+        _listaRecorteContornoColeta.map((x) => jsonEncode(x)).toList());
+  }
+
+  void removeFromListaRecorteContornoColeta(dynamic _value) {
+    _listaRecorteContornoColeta.remove(_value);
+    prefs.setStringList('ff_listaRecorteContornoColeta',
+        _listaRecorteContornoColeta.map((x) => jsonEncode(x)).toList());
+  }
+
+  void removeAtIndexFromListaRecorteContornoColeta(int _index) {
+    _listaRecorteContornoColeta.removeAt(_index);
+    prefs.setStringList('ff_listaRecorteContornoColeta',
+        _listaRecorteContornoColeta.map((x) => jsonEncode(x)).toList());
+  }
+
+  void updateListaRecorteContornoColetaAtIndex(
+    int _index,
+    dynamic Function(dynamic) updateFn,
+  ) {
+    _listaRecorteContornoColeta[_index] =
+        updateFn(_listaRecorteContornoColeta[_index]);
+    prefs.setStringList('ff_listaRecorteContornoColeta',
+        _listaRecorteContornoColeta.map((x) => jsonEncode(x)).toList());
+  }
+
+  void insertAtIndexInListaRecorteContornoColeta(int _index, dynamic _value) {
+    _listaRecorteContornoColeta.insert(_index, _value);
+    prefs.setStringList('ff_listaRecorteContornoColeta',
+        _listaRecorteContornoColeta.map((x) => jsonEncode(x)).toList());
   }
 }
 
