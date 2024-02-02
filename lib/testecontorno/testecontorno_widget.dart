@@ -132,7 +132,7 @@ class _TestecontornoWidgetState extends State<TestecontornoWidget> {
             floatingActionButton: FloatingActionButton(
               onPressed: () async {
                 FFAppState().update(() {
-                  FFAppState().latlngRecorteTalhao = [];
+                  FFAppState().PontosColetados = [];
                 });
               },
               backgroundColor: FlutterFlowTheme.of(context).primary,
