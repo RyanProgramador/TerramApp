@@ -82,6 +82,7 @@ class _MedicaoColetaWidgetState extends State<MedicaoColetaWidget> {
                           width: double.infinity,
                           height: double.infinity,
                           intervaloDeColetaParaProximaFoto: 3,
+                          idContorno: widget.idContorno,
                         ),
                       ),
                     ),
