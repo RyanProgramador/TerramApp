@@ -176,40 +176,6 @@ class _ColetaState extends State<Coleta> {
   // }
 
   void _inicializaDados() {
-    // var filtroPontosColeta = FFAppState().pontosDeColeta
-    //     .where((item) => item['oserv_id'] == 38)
-    //     .toList();
-    //
-    // latLngListMarcadores = filtroPontosColeta.map((item) {
-    //   // Encontra o perfil de profundidade correspondente ao ponto de coleta
-    //   var perfilProfundidade = FFAppState().perfilprofundidades
-    //       .firstWhere((perfil) => perfil['pprof_id'] == item['artp_id_perfil_prof'], orElse: () => null);
-    //
-    //   // Se encontrou o perfil, busca a informação de profundidade correspondente
-    //   var imagemProfundidade = '';
-    //   if (perfilProfundidade != null) {
-    //     var profundidade = FFAppState().profundidades
-    //         .firstWhere((prof) => prof['prof_id'] == perfilProfundidade['pprof_prof_id'], orElse: () => null);
-    //
-    //     // Se encontrou a profundidade, pega a imagem
-    //     if (profundidade != null) {
-    //       imagemProfundidade = profundidade['prof_imagem'];
-    //     }
-    //   }
-    //   var profundidadesLista = List{$prof['prof_id'],$prof['prof_nome'],$prof_id['prof_icone']}
-    //
-    //   // Retorna o mapa com as informações, incluindo a imagem de profundidade
-    //   return {
-    //     "marcador_nome": "${item['artp_id']}",
-    //     "icone": imagemProfundidade,
-    //     "latlng_marcadores": "${item['artp_latitude_longitude']}",
-    //     "profundidades": profundidadesLista,
-    //     "foto_de_cada_profundidade": [],
-    //   };
-    // }).toList();
-    //
-    // setState(() {});
-
     var filtroPontosColeta = FFAppState()
         .pontosDeColeta
         .where((item) => item['oserv_id'] == 38)
@@ -576,7 +542,7 @@ class _ColetaState extends State<Coleta> {
         now.difference(lastTapTimestamps[markerIdValue]!).inMilliseconds <
             1800) {
       // Check if the distance is greater than 30 meters
-      if (distance > 3500) {
+      if (distance > 35) {
         //metros de distancia para coletar
         // Show alert
         _showDistanceAlert();
@@ -753,7 +719,7 @@ class _ColetaState extends State<Coleta> {
 
       // Ajusta a qualidade da imagem (50% neste exemplo)
       img.Image imagemComQualidadeReduzida = img.copyResize(imagem,
-          width: (imagem.width ~/ 20), height: (imagem.height ~/ 20));
+          width: (imagem.width ~/ 3), height: (imagem.height ~/ 3));
 
       // Recodifica a imagem para PNG com qualidade reduzida
       List<int> bytesComQualidadeReduzida =
@@ -783,7 +749,7 @@ class _ColetaState extends State<Coleta> {
                 "marcador_nome": nomeMarcadorAtual,
                 "profundidade": nomeProfundidade,
                 // "foto": '$base64Image',
-                "foto": 'base64Image',
+                "foto": '$base64Image',
               }));
         }
       });
@@ -1478,25 +1444,25 @@ class _ColetaState extends State<Coleta> {
                 )),
           ),
         ),
-        Positioned(
-          bottom: 10,
-          left: 10,
-          right: 10,
-          child: ElevatedButton(
-            onPressed: _exibirDados,
-            style: ElevatedButton.styleFrom(
-              shape: CircleBorder(),
-              backgroundColor: Color(0xFF00736D),
-            ),
-            child: Padding(
-                padding: const EdgeInsets.all(8.0),
-                child: Icon(
-                  Icons.info,
-                  size: 25.0,
-                  color: Colors.white,
-                )),
-          ),
-        ),
+        // Positioned(
+        //   bottom: 10,
+        //   left: 10,
+        //   right: 10,
+        //   child: ElevatedButton(
+        //     onPressed: _exibirDados,
+        //     style: ElevatedButton.styleFrom(
+        //       shape: CircleBorder(),
+        //       backgroundColor: Color(0xFF00736D),
+        //     ),
+        //     child: Padding(
+        //         padding: const EdgeInsets.all(8.0),
+        //         child: Icon(
+        //           Icons.info,
+        //           size: 25.0,
+        //           color: Colors.white,
+        //         )),
+        //   ),
+        // ),
       ],
     );
   }
