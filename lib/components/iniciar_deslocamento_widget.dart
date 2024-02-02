@@ -1366,13 +1366,13 @@ class _IniciarDeslocamentoWidgetState extends State<IniciarDeslocamentoWidget> {
                                   FFButtonWidget(
                                     onPressed: () async {
                                       context.pushNamed(
-                                        'ListaContornosParaColeta',
+                                        'MedicaoColeta',
                                         queryParameters: {
-                                          'nomeFazenda': serializeParam(
+                                          'fazNome': serializeParam(
                                             widget.fazendaNome,
                                             ParamType.String,
                                           ),
-                                          'oservID': serializeParam(
+                                          'idContorno': serializeParam(
                                             widget.servicoId,
                                             ParamType.String,
                                           ),
