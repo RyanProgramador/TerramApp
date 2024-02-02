@@ -1682,7 +1682,13 @@ class _MultiplePlacesPickerCopyWidgetState
                                               children: [
                                                 SelectionArea(
                                                     child: Text(
-                                                  'Hello World',
+                                                  valueOrDefault<String>(
+                                                    functions.jsonListToStr(
+                                                        FFAppState()
+                                                            .PontosColetados
+                                                            .toList()),
+                                                    '123',
+                                                  ),
                                                   style: FlutterFlowTheme.of(
                                                           context)
                                                       .bodyMedium
