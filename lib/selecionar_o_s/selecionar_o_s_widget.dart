@@ -100,6 +100,10 @@ class _SelecionarOSWidgetState extends State<SelecionarOSWidget>
           recorte: functions
               .jsonListToStr(FFAppState().latlngRecorteTalhao.toList()),
         );
+        _model.sincPontosMedicaoEPerfilEProfundidaAPI =
+            await SincronizarGroup.trSincronizaPontosMedicaoCall.call(
+          urlapicall: FFAppState().urlapicall,
+        );
         if (SincronizarGroup.trSincronizaCelularComBDCall.statusSincComCelular(
               (_model.apiResultxxdOnLoadPage?.jsonBody ?? ''),
             )! &&
@@ -145,6 +149,34 @@ class _SelecionarOSWidgetState extends State<SelecionarOSWidget>
                 .juntarDuasListasJsonignoraDuplicados(
                     FFAppState().latlngRecorteTalhao.toList(),
                     FFAppState().latlngRecorteTalhaoPosSincronizado.toList())!
+                .toList()
+                .cast<dynamic>();
+            FFAppState().pontosDeColeta = getJsonField(
+              (_model.sincPontosMedicaoEPerfilEProfundidaAPI?.jsonBody ?? ''),
+              r'''$.pontos_de_coleta[:]''',
+              true,
+            )!
+                .toList()
+                .cast<dynamic>();
+            FFAppState().perfilprofundidades = getJsonField(
+              (_model.sincPontosMedicaoEPerfilEProfundidaAPI?.jsonBody ?? ''),
+              r'''$.perfil_profundidades[:]''',
+              true,
+            )!
+                .toList()
+                .cast<dynamic>();
+            FFAppState().profundidades = getJsonField(
+              (_model.sincPontosMedicaoEPerfilEProfundidaAPI?.jsonBody ?? ''),
+              r'''$.profundidades[:]''',
+              true,
+            )!
+                .toList()
+                .cast<dynamic>();
+            FFAppState().perfis = getJsonField(
+              (_model.sincPontosMedicaoEPerfilEProfundidaAPI?.jsonBody ?? ''),
+              r'''$.perfis[:]''',
+              true,
+            )!
                 .toList()
                 .cast<dynamic>();
           });

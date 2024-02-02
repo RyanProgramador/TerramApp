@@ -13,9 +13,11 @@ class MedicaoColetaWidget extends StatefulWidget {
   const MedicaoColetaWidget({
     super.key,
     this.fazNome,
+    required this.idContorno,
   });
 
   final String? fazNome;
+  final String? idContorno;
 
   @override
   State<MedicaoColetaWidget> createState() => _MedicaoColetaWidgetState();

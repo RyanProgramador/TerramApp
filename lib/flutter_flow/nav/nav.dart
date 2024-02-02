@@ -170,6 +170,7 @@ GoRouter createRouter(AppStateNotifier appStateNotifier) => GoRouter(
               path: 'medicaoColeta',
               builder: (context, params) => MedicaoColetaWidget(
                 fazNome: params.getParam('fazNome', ParamType.String),
+                idContorno: params.getParam('idContorno', ParamType.String),
               ),
             ),
             FFRoute(
@@ -183,6 +184,16 @@ GoRouter createRouter(AppStateNotifier appStateNotifier) => GoRouter(
                 fazlatlng: params.getParam('fazlatlng', ParamType.LatLng),
                 listaLatLngTalhao: params.getParam<String>(
                     'listaLatLngTalhao', ParamType.String, true),
+              ),
+            ),
+            FFRoute(
+              name: 'ListaContornosParaColeta',
+              path: 'listaContornosParaColeta',
+              builder: (context, params) => ListaContornosParaColetaWidget(
+                nomeFazenda: params.getParam('nomeFazenda', ParamType.String),
+                oservID: params.getParam('oservID', ParamType.String),
+                fazid: params.getParam('fazid', ParamType.String),
+                fazlatlng: params.getParam('fazlatlng', ParamType.LatLng),
               ),
             )
           ].map((r) => r.toRoute(appStateNotifier)).toList(),
