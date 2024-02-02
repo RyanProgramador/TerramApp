@@ -80,13 +80,6 @@ class _MedicaoColetaWidgetState extends State<MedicaoColetaWidget> {
                           width: double.infinity,
                           height: double.infinity,
                           intervaloDeColetaParaProximaFoto: 3,
-                          listaPontosComProfundidadeParaMedicao:
-                              FFAppState().listaDeLocaisDeAreasParaColeta,
-                          possiveisProfundidades:
-                              FFAppState().possiveisProfuncidadesDeColeta,
-                          listaDeLocaisDeContornoDeArea:
-                              FFAppState().latLngListaMarcadoresArea,
-                          pontosJaColetados: FFAppState().PontosColetados,
                         ),
                       ),
                     ),

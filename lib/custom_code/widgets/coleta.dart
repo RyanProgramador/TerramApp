@@ -26,21 +26,23 @@ import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 class Coleta extends StatefulWidget {
   final double? width;
   final double? height;
-  final List<String>? listaPontosComProfundidadeParaMedicao;
+  //final List<String>? listaPontosComProfundidadeParaMedicao;
   final int? intervaloDeColetaParaProximaFoto;
-  final List<String>? possiveisProfundidades;
-  final List<String>? listaDeLocaisDeContornoDeArea;
-  final List<dynamic>? pontosJaColetados;
+  final String? idContorno;
+  //final List<String>? possiveisProfundidades;
+  //final List<String>? listaDeLocaisDeContornoDeArea;
+  //final List<dynamic>? pontosJaColetados;
 
   const Coleta({
     Key? key,
     this.width,
     this.height,
-    this.listaPontosComProfundidadeParaMedicao,
+    // this.listaPontosComProfundidadeParaMedicao,
     this.intervaloDeColetaParaProximaFoto,
-    this.possiveisProfundidades,
-    this.listaDeLocaisDeContornoDeArea,
-    this.pontosJaColetados,
+    this.idContorno,
+    //this.possiveisProfundidades,
+    // this.listaDeLocaisDeContornoDeArea,
+    // this.pontosJaColetados,
   }) : super(key: key);
   final String customIconUrl =
       'https://cdn-icons-png.flaticon.com/128/3253/3253113.png';
@@ -175,33 +177,33 @@ class _ColetaState extends State<Coleta> {
         widget.intervaloDeColetaParaProximaFoto ??
             intervaloDeColetaParaProximaFoto;
 
-    if (widget.listaDeLocaisDeContornoDeArea != null) {
-      listaDeLocais = widget.listaDeLocaisDeContornoDeArea!
-          .map((e) {
-            try {
-              return json.decode(e) as Map<String, dynamic>;
-            } catch (error) {
-              print('Erro ao desserializar JSON: $error');
-              return null;
-            }
-          })
-          .where((element) => element != null)
-          .cast<Map<String, dynamic>>()
-          .toList();
-    }
-
-    if (widget.listaPontosComProfundidadeParaMedicao != null) {
-      latLngListMarcadores = widget.listaPontosComProfundidadeParaMedicao!
-          .map((e) => json.decode(e))
-          .cast<Map<String, dynamic>>()
-          .toList();
-    }
+    // if (widget.listaDeLocaisDeContornoDeArea != null) {
+    //   listaDeLocais = widget.listaDeLocaisDeContornoDeArea!
+    //       .map((e) {
+    //         try {
+    //           return json.decode(e) as Map<String, dynamic>;
+    //         } catch (error) {
+    //           print('Erro ao desserializar JSON: $error');
+    //           return null;
+    //         }
+    //       })
+    //       .where((element) => element != null)
+    //       .cast<Map<String, dynamic>>()
+    //       .toList();
+    // }
+//
+    // if (widget.listaPontosComProfundidadeParaMedicao != null) {
+    //   latLngListMarcadores = widget.listaPontosComProfundidadeParaMedicao!
+    //       .map((e) => json.decode(e))
+    //       .cast<Map<String, dynamic>>()
+    //       .toList();
+    // }
 
 // Atribuição condicional, garantindo que o parâmetro é uma lista de strings
-    if (widget.possiveisProfundidades != null) {
-      possiveisProfundidades =
-          List<String>.from(widget.possiveisProfundidades!);
-    }
+    // if (widget.possiveisProfundidades != null) {
+    //   possiveisProfundidades =
+    //       List<String>.from(widget.possiveisProfundidades!);
+    // }
 
     _initializePolygons();
     _criaMarcadores();
