@@ -287,8 +287,6 @@ class _ConfiguracoesWidgetState extends State<ConfiguracoesWidget> {
                                             (_model.sincCelComBD?.jsonBody ??
                                                 ''),
                                           )!),
-                                          content: Text(
-                                              '${(_model.trSincTalhao?.jsonBody ?? '').toString()}${(_model.sincCelComBD?.jsonBody ?? '').toString()}${(_model.sincPontosMedicaoEPerfilEProfundidaAPI?.jsonBody ?? '').toString()}'),
                                           actions: [
                                             TextButton(
                                               onPressed: () => Navigator.pop(
