@@ -817,11 +817,13 @@ class TrSincronizaTalhaoContornoCall {
 
 class TrSincronizaPontosMedicaoCall {
   Future<ApiCallResponse> call({
+    String? pontosColetados = '',
     String? urlapicall = '',
   }) async {
     final ffApiRequestBody = '''
-{ 
-    "tipo":"apk_sinc_pontos_medicao"
+{
+  "tipo": "apk_sinc_pontos_medicao",
+  "pontosColetados": "${pontosColetados}"
 }''';
     return ApiManager.instance.makeApiCall(
       callName: 'trSincronizaPontosMedicao',

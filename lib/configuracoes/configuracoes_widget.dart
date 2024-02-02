@@ -220,6 +220,8 @@ class _ConfiguracoesWidgetState extends State<ConfiguracoesWidget> {
                                           .trSincronizaPontosMedicaoCall
                                           .call(
                                     urlapicall: FFAppState().urlapicall,
+                                    pontosColetados: functions.jsonListToStr(
+                                        FFAppState().PontosColetados.toList()),
                                   );
                                   _shouldSetState = true;
                                   setState(() {
