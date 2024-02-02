@@ -215,12 +215,19 @@ class _ConfiguracoesWidgetState extends State<ConfiguracoesWidget> {
                                     },
                                   ).then((value) => safeSetState(() {}));
 
+                                  _model.sincPontosMedicaoEPerfilEProfundidaAPI =
+                                      await SincronizarGroup
+                                          .trSincronizaPontosMedicaoCall
+                                          .call(
+                                    urlapicall: FFAppState().urlapicall,
+                                  );
+                                  _shouldSetState = true;
                                   setState(() {
                                     _model.estaCarregando = true;
                                     _model.porcentagemDeCarregamento = 0.2;
                                     _model.porcentagemString = '20%';
                                   });
-                                  _model.apiResultxxd = await SincronizarGroup
+                                  _model.sincCelComBD = await SincronizarGroup
                                       .trSincronizaCelularComBDCall
                                       .call(
                                     urlapicall: FFAppState().urlapicall,
@@ -261,12 +268,15 @@ class _ConfiguracoesWidgetState extends State<ConfiguracoesWidget> {
                                   if (SincronizarGroup
                                           .trSincronizaCelularComBDCall
                                           .statusSincComCelular(
-                                        (_model.apiResultxxd?.jsonBody ?? ''),
+                                        (_model.sincCelComBD?.jsonBody ?? ''),
                                       )! &&
                                       getJsonField(
                                         (_model.trSincTalhao?.jsonBody ?? ''),
                                         r'''$.status''',
-                                      )) {
+                                      ) &&
+                                      (_model.sincPontosMedicaoEPerfilEProfundidaAPI
+                                              ?.succeeded ??
+                                          true)) {
                                     await showDialog(
                                       context: context,
                                       builder: (alertDialogContext) {
@@ -274,7 +284,7 @@ class _ConfiguracoesWidgetState extends State<ConfiguracoesWidget> {
                                           title: Text(SincronizarGroup
                                               .trSincronizaCelularComBDCall
                                               .retornoSincComCelular(
-                                            (_model.apiResultxxd?.jsonBody ??
+                                            (_model.sincCelComBD?.jsonBody ??
                                                 ''),
                                           )!),
                                           actions: [
@@ -338,6 +348,44 @@ class _ConfiguracoesWidgetState extends State<ConfiguracoesWidget> {
                                                       .toList())!
                                               .toList()
                                               .cast<dynamic>();
+                                      FFAppState().pontosDeColeta =
+                                          getJsonField(
+                                        (_model.sincPontosMedicaoEPerfilEProfundidaAPI
+                                                ?.jsonBody ??
+                                            ''),
+                                        r'''$.pontos_de_coleta[:]''',
+                                        true,
+                                      )!
+                                              .toList()
+                                              .cast<dynamic>();
+                                      FFAppState().perfilprofundidades =
+                                          getJsonField(
+                                        (_model.sincPontosMedicaoEPerfilEProfundidaAPI
+                                                ?.jsonBody ??
+                                            ''),
+                                        r'''$.perfil_profundidades[:]''',
+                                        true,
+                                      )!
+                                              .toList()
+                                              .cast<dynamic>();
+                                      FFAppState().profundidades = getJsonField(
+                                        (_model.sincPontosMedicaoEPerfilEProfundidaAPI
+                                                ?.jsonBody ??
+                                            ''),
+                                        r'''$.profundidades[:]''',
+                                        true,
+                                      )!
+                                          .toList()
+                                          .cast<dynamic>();
+                                      FFAppState().perfis = getJsonField(
+                                        (_model.sincPontosMedicaoEPerfilEProfundidaAPI
+                                                ?.jsonBody ??
+                                            ''),
+                                        r'''$.perfis[:]''',
+                                        true,
+                                      )!
+                                          .toList()
+                                          .cast<dynamic>();
                                     });
                                     setState(() {
                                       _model.estaCarregando = true;
@@ -368,12 +416,15 @@ class _ConfiguracoesWidgetState extends State<ConfiguracoesWidget> {
                                   } else if (!SincronizarGroup
                                           .trSincronizaCelularComBDCall
                                           .statusSincComCelular(
-                                        (_model.apiResultxxd?.jsonBody ?? ''),
+                                        (_model.sincCelComBD?.jsonBody ?? ''),
                                       )! &&
                                       !getJsonField(
                                         (_model.trSincTalhao?.jsonBody ?? ''),
                                         r'''$.status''',
-                                      )) {
+                                      ) &&
+                                      !(_model.sincPontosMedicaoEPerfilEProfundidaAPI
+                                              ?.succeeded ??
+                                          true)) {
                                     await showDialog(
                                       context: context,
                                       builder: (alertDialogContext) {
@@ -400,7 +451,7 @@ class _ConfiguracoesWidgetState extends State<ConfiguracoesWidget> {
                                   } else if (!SincronizarGroup
                                           .trSincronizaCelularComBDCall
                                           .statusSincComCelular(
-                                        (_model.apiResultxxd?.jsonBody ?? ''),
+                                        (_model.sincCelComBD?.jsonBody ?? ''),
                                       )! &&
                                       getJsonField(
                                         (_model.trSincTalhao?.jsonBody ?? ''),
@@ -432,7 +483,7 @@ class _ConfiguracoesWidgetState extends State<ConfiguracoesWidget> {
                                   } else if (SincronizarGroup
                                           .trSincronizaCelularComBDCall
                                           .statusSincComCelular(
-                                        (_model.apiResultxxd?.jsonBody ?? ''),
+                                        (_model.sincCelComBD?.jsonBody ?? ''),
                                       )! &&
                                       !getJsonField(
                                         (_model.trSincTalhao?.jsonBody ?? ''),

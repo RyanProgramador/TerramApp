@@ -23,8 +23,10 @@ class ConfiguracoesModel extends FlutterFlowModel<ConfiguracoesWidget> {
 
   ///  State fields for stateful widgets in this page.
 
+  // Stores action output result for [Backend Call - API (trSincronizaPontosMedicao)] action in materialList_Item_2 widget.
+  ApiCallResponse? sincPontosMedicaoEPerfilEProfundidaAPI;
   // Stores action output result for [Backend Call - API (TrSincronizaCelularComBD)] action in materialList_Item_2 widget.
-  ApiCallResponse? apiResultxxd;
+  ApiCallResponse? sincCelComBD;
   // Stores action output result for [Backend Call - API (trSincronizaTalhaoContorno)] action in materialList_Item_2 widget.
   ApiCallResponse? trSincTalhao;
   // State field(s) for Switch widget.
