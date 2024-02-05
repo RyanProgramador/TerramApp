@@ -199,6 +199,11 @@ class _ConfiguracoesWidgetState extends State<ConfiguracoesWidget> {
                                 highlightColor: Colors.transparent,
                                 onTap: () async {
                                   var _shouldSetState = false;
+                                  setState(() {
+                                    _model.estaCarregando = true;
+                                    _model.porcentagemDeCarregamento = 0.1;
+                                    _model.porcentagemString = '12%';
+                                  });
                                   showModalBottomSheet(
                                     isScrollControlled: true,
                                     backgroundColor: Colors.transparent,
