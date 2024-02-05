@@ -398,6 +398,16 @@ class _ConfiguracoesWidgetState extends State<ConfiguracoesWidget> {
                                       )!
                                               .toList()
                                               .cast<dynamic>();
+                                      FFAppState().profundidadesPonto =
+                                          getJsonField(
+                                        (_model.sincPontosMedicaoEPerfilEProfundidaAPI
+                                                ?.jsonBody ??
+                                            ''),
+                                        r'''$.pontos_profundidades[:]''',
+                                        true,
+                                      )!
+                                              .toList()
+                                              .cast<dynamic>();
                                     });
                                     setState(() {
                                       _model.estaCarregando = true;

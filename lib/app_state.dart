@@ -511,6 +511,18 @@ class FFAppState extends ChangeNotifier {
               }).toList() ??
               _listaRecorteContornoColeta;
     });
+    _safeInit(() {
+      _profundidadesPonto =
+          prefs.getStringList('ff_profundidadesPonto')?.map((x) {
+                try {
+                  return jsonDecode(x);
+                } catch (e) {
+                  print("Can't decode persisted json. Error: $e.");
+                  return {};
+                }
+              }).toList() ??
+              _profundidadesPonto;
+    });
   }
 
   void update(VoidCallback callback) {
@@ -2264,6 +2276,47 @@ class FFAppState extends ChangeNotifier {
     _listaRecorteContornoColeta.insert(_index, _value);
     prefs.setStringList('ff_listaRecorteContornoColeta',
         _listaRecorteContornoColeta.map((x) => jsonEncode(x)).toList());
+  }
+
+  List<dynamic> _profundidadesPonto = [];
+  List<dynamic> get profundidadesPonto => _profundidadesPonto;
+  set profundidadesPonto(List<dynamic> _value) {
+    _profundidadesPonto = _value;
+    prefs.setStringList(
+        'ff_profundidadesPonto', _value.map((x) => jsonEncode(x)).toList());
+  }
+
+  void addToProfundidadesPonto(dynamic _value) {
+    _profundidadesPonto.add(_value);
+    prefs.setStringList('ff_profundidadesPonto',
+        _profundidadesPonto.map((x) => jsonEncode(x)).toList());
+  }
+
+  void removeFromProfundidadesPonto(dynamic _value) {
+    _profundidadesPonto.remove(_value);
+    prefs.setStringList('ff_profundidadesPonto',
+        _profundidadesPonto.map((x) => jsonEncode(x)).toList());
+  }
+
+  void removeAtIndexFromProfundidadesPonto(int _index) {
+    _profundidadesPonto.removeAt(_index);
+    prefs.setStringList('ff_profundidadesPonto',
+        _profundidadesPonto.map((x) => jsonEncode(x)).toList());
+  }
+
+  void updateProfundidadesPontoAtIndex(
+    int _index,
+    dynamic Function(dynamic) updateFn,
+  ) {
+    _profundidadesPonto[_index] = updateFn(_profundidadesPonto[_index]);
+    prefs.setStringList('ff_profundidadesPonto',
+        _profundidadesPonto.map((x) => jsonEncode(x)).toList());
+  }
+
+  void insertAtIndexInProfundidadesPonto(int _index, dynamic _value) {
+    _profundidadesPonto.insert(_index, _value);
+    prefs.setStringList('ff_profundidadesPonto',
+        _profundidadesPonto.map((x) => jsonEncode(x)).toList());
   }
 }
 
