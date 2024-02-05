@@ -178,7 +178,7 @@ class _ColetaState extends State<Coleta> {
   void _inicializaDados() {
     var filtroPontosColeta = FFAppState()
         .pontosDeColeta
-        .where((item) => item['oserv_id'] == 38)
+        .where((item) => item['oserv_id'] == int.parse(widget.idContorno!))
         .toList();
 
     latLngListMarcadores = filtroPontosColeta.map((item) {
@@ -380,8 +380,9 @@ class _ColetaState extends State<Coleta> {
     // }
     var pontosDeContorno = FFAppState()
         .listaContornoColeta
-        .where(
-            (item) => item['talcot_id_pai'] == null && item['oserv_id'] == 38)
+        .where((item) =>
+            item['talcot_id_pai'] == null &&
+            item['oserv_id'] == int.parse(widget.idContorno!))
         .toList();
 
     var gruposDeContorno = <String, List<dynamic>>{};
