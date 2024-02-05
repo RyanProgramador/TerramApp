@@ -79,7 +79,7 @@ class _ColetaState extends State<Coleta> {
 
   //tira foto
   bool podeTirarFoto = true;
-  int intervaloDeColetaParaProximaFoto = 3;
+  int intervaloDeColetaParaProximaFoto = 4;
   int vezAtualDoIntervaloDeColeta = 0;
 
 //double tap no marcador
@@ -175,62 +175,6 @@ class _ColetaState extends State<Coleta> {
   //   setState(() {});
   // }
 
-  void _inicializaDados() {
-    var filtroPontosColeta = FFAppState()
-        .pontosDeColeta
-        .where((item) => item['oserv_id'] == int.parse(widget.idContorno!))
-        .toList();
-
-    latLngListMarcadores = filtroPontosColeta.map((item) {
-      var profundidadesLista = FFAppState()
-          .perfilprofundidades
-          .where((perfil) => perfil['pprof_id'] == item['artp_id_perfil_prof'])
-          .map((perfilProfundidade) {
-            var profundidade = FFAppState().profundidades.firstWhere(
-                (prof) =>
-                    prof['prof_id'] == perfilProfundidade['pprof_prof_id'],
-                orElse: () => null);
-
-            return profundidade != null
-                ? {
-                    "nome": profundidade['prof_nome'],
-                    "icone": profundidade['prof_icone'],
-                    "cor": profundidade['prof_cor'] ?? "#FFFFFF",
-                  }
-                : null;
-          })
-          .whereType<
-              Map<String, dynamic>>() // Remove nulos e assegura o tipo correto
-          .toList();
-
-      var perfilProfundidade = FFAppState().perfilprofundidades.firstWhere(
-          (perfil) => perfil['pprof_id'] == item['artp_id_perfil_prof'],
-          orElse: () => null);
-
-      var imagemProfundidade = '';
-      if (perfilProfundidade != null) {
-        var profundidade = FFAppState().profundidades.firstWhere(
-            (prof) => prof['prof_id'] == perfilProfundidade['pprof_prof_id'],
-            orElse: () => null);
-
-        // Se encontrou a profundidade, pega a imagem
-        if (profundidade != null) {
-          imagemProfundidade = profundidade['prof_imagem'];
-        }
-      }
-      return {
-        "marcador_nome": "${item['artp_id']}",
-        "icone":
-            imagemProfundidade, // Certifique-se de que 'imagemProfundidade' é definida corretamente
-        "latlng_marcadores": "${item['artp_latitude_longitude']}",
-        "profundidades": profundidadesLista,
-        "foto_de_cada_profundidade": [],
-      };
-    }).toList();
-
-    setState(() {});
-  }
-
   @override
   void initState() {
     super.initState();
@@ -254,10 +198,10 @@ class _ColetaState extends State<Coleta> {
         }
       }
     }
-
-    intervaloDeColetaParaProximaFoto =
-        widget.intervaloDeColetaParaProximaFoto ??
-            intervaloDeColetaParaProximaFoto;
+    // intervaloDeColetaParaProximaFoto = 1;
+    // intervaloDeColetaParaProximaFoto =
+    //     widget.intervaloDeColetaParaProximaFoto ??
+    //         intervaloDeColetaParaProximaFoto;
 
     // if (widget.listaDeLocaisDeContornoDeArea != null) {
     //   listaDeLocais = widget.listaDeLocaisDeContornoDeArea!
@@ -293,6 +237,124 @@ class _ColetaState extends State<Coleta> {
     // _loadCustomIcon();
     _trackUserLocation();
   }
+
+  void _inicializaDados() {
+    var filtroPontosColeta = FFAppState()
+        .pontosDeColeta
+        .where((item) => item['oserv_id'] == int.parse(widget.idContorno!))
+        .toList();
+
+    latLngListMarcadores = filtroPontosColeta.map((item) {
+      // Busca por profundidadesPontos relacionadas ao ponto de coleta atual
+      var profundidadesPontosProfIds = FFAppState()
+          .profundidadesPonto
+          .where((coleta) => coleta['trpp_artp_id'] == item['artp_id'])
+          .map((e) => e['trpp_prof_id']);
+
+      // Para cada profundidadePontosProfId, encontra as informações correspondentes em profundidades
+      var profundidadesLista = profundidadesPontosProfIds
+          .map((profId) {
+            var profundidade = FFAppState().profundidades.firstWhere(
+                (prof) => prof['prof_id'] == profId,
+                orElse: () => null);
+
+            return profundidade != null
+                ? {
+                    "nome": profundidade['prof_nome'],
+                    "icone": profundidade['prof_imagem'],
+                    "cor": profundidade['prof_cor'] ?? "#FFFFFF",
+                    "prof_id": profundidade['prof_id'],
+                  }
+                : null;
+          })
+          .where((element) => element != null)
+          .toList();
+
+      var perfilProfundidade = FFAppState().perfilprofundidades.firstWhere(
+          (perfil) => perfil['pprof_id'] == item['artp_id_perfil_prof'],
+          orElse: () => null);
+
+      var imagemProfundidade = '';
+      if (perfilProfundidade != null) {
+        var profundidade = FFAppState().profundidades.firstWhere(
+            (prof) => prof['prof_id'] == perfilProfundidade['pprof_prof_id'],
+            orElse: () => null);
+
+        if (profundidade != null) {
+          imagemProfundidade = profundidade['prof_imagem'];
+        }
+      }
+
+      // Retorna o mapa com as informações do ponto de coleta e as profundidades associadas
+      return {
+        "marcador_nome": "${item['artp_id']}",
+        "icone": imagemProfundidade, // A imagem de profundidade
+        "latlng_marcadores": "${item['artp_latitude_longitude']}",
+        "profundidades": profundidadesLista, // Lista de profundidades
+        "foto_de_cada_profundidade": [],
+      };
+    }).toList();
+
+    setState(() {});
+  }
+
+  // void _inicializaDados() {
+  //
+  //
+  //   var filtroPontosColeta = FFAppState()
+  //       .pontosDeColeta
+  //       .where((item) => item['oserv_id'] == int.parse(widget.idContorno!))
+  //       .toList();
+  //
+  //   latLngListMarcadores = filtroPontosColeta.map((item) {
+  //     var profundidadesLista = FFAppState()
+  //         .perfilprofundidades
+  //         .where((perfil) => perfil['pprof_id'] == item['artp_id_perfil_prof'])
+  //         .map((perfilProfundidade) {
+  //       var profundidade = FFAppState().profundidades.firstWhere(
+  //               (prof) =>
+  //           prof['prof_id'] == perfilProfundidade['pprof_prof_id'],
+  //           orElse: () => null);
+  //
+  //       return profundidade != null
+  //           ? {
+  //         "nome": profundidade['prof_nome'],
+  //         "icone": profundidade['prof_icone'],
+  //         "cor": profundidade['prof_cor'] ?? "#FFFFFF",
+  //       }
+  //           : null;
+  //     })
+  //         .whereType<
+  //         Map<String, dynamic>>() // Remove nulos e assegura o tipo correto
+  //         .toList();
+  //
+  //     var perfilProfundidade = FFAppState().perfilprofundidades.firstWhere(
+  //             (perfil) => perfil['pprof_id'] == item['artp_id_perfil_prof'],
+  //         orElse: () => null);
+  //
+  //     var imagemProfundidade = '';
+  //     if (perfilProfundidade != null) {
+  //       var profundidade = FFAppState().profundidades.firstWhere(
+  //               (prof) => prof['prof_id'] == perfilProfundidade['pprof_prof_id'],
+  //           orElse: () => null);
+  //
+  //       // Se encontrou a profundidade, pega a imagem
+  //       if (profundidade != null) {
+  //         imagemProfundidade = profundidade['prof_imagem'];
+  //       }
+  //     }
+  //     return {
+  //       "marcador_nome": "${item['artp_id']}",
+  //       "icone":
+  //       imagemProfundidade, // Certifique-se de que 'imagemProfundidade' é definida corretamente
+  //       "latlng_marcadores": "${item['artp_latitude_longitude']}",
+  //       "profundidades": profundidadesLista,
+  //       "foto_de_cada_profundidade": [],
+  //     };
+  //   }).toList();
+  //
+  //   setState(() {});
+  // }
 
   @override
   void dispose() {
@@ -357,27 +419,6 @@ class _ColetaState extends State<Coleta> {
   }
 
   void _initializePolygons() {
-    // var filtroPontosLatLngDeContorno = FFAppState().listaContornoColeta
-    //     .where((item) => item['talcot_id_pai'] == null && item['oserv_id'] == 38)
-    //     .map((item) => item['talcot_latitude_longitude'])
-    //     .toList();
-    //
-    // // Implementação de exemplo
-    // // var contornoListaLatLng = FFAppState().
-    // //
-    // foreach ( item['talcot_talh_id'] in filtroPontosLatLngDeContorno){
-    // final polygon = google_maps.Polygon(
-    //   polygonId: const google_maps.PolygonId('AreaPolygon'),
-    //   points: toLatLng(filtroPontosLatLngDeContorno),
-    //   fillColor: Colors.black.withOpacity(0.2),
-    //   strokeColor: Colors.black,
-    //   strokeWidth: 3,
-    // );
-    //
-    // setState(() {
-    //   polygons.add(polygon);
-    // });
-    // }
     var pontosDeContorno = FFAppState()
         .listaContornoColeta
         .where((item) =>
@@ -490,9 +531,10 @@ class _ColetaState extends State<Coleta> {
 
       // Coletar os nomes das profundidades em uma string
       String nomesProfundidades = marcador["profundidades"]!
-          .map((profundidade) => profundidade["nome"]!)
+          .map((profundidade) => profundidade["nome"]!.toString())
           .join(", "); // Junta os nomes com vírgula e espaço
 
+      // String nomesProfundidades = latLngListMarcadores.firstWhere((element) => element['marcador_nome'] == marcador["marcador_nome"])['profundidades'].map((profundidade) => profundidade["nome"]!).join(", ");
       // Inicializar markerPositions com a posição original
       markerPositions[marcador["marcador_nome"]!] = position;
 
@@ -543,7 +585,7 @@ class _ColetaState extends State<Coleta> {
     //     now.difference(lastTapTimestamps[markerIdValue]!).inMilliseconds <
     //         1800) {
     // Check if the distance is greater than 30 meters
-    if (distance > 35) {
+    if (distance > 3500) {
       //metros de distancia para coletar
       // Show alert
 
@@ -708,8 +750,8 @@ class _ColetaState extends State<Coleta> {
     );
   }
 
-  void _tiraFoto(
-      String nomeMarcadorAtual, String nomeProfundidade, String latlng) async {
+  void _tiraFoto(String nomeMarcadorAtual, String nomeProfundidade,
+      String latlng, String referencialProfundidadePontoId) async {
     final ImagePicker _picker = ImagePicker();
     final XFile? image = await _picker.pickImage(source: ImageSource.camera);
 
@@ -754,7 +796,8 @@ class _ColetaState extends State<Coleta> {
             "profundidade": nomeProfundidade,
             // "foto": '$base64Image',
             "foto": '$base64Image',
-            "latlng": '$latlng'
+            "latlng": '$latlng',
+            "id_ref": referencialProfundidadePontoId
           });
         }
       });
@@ -947,13 +990,19 @@ class _ColetaState extends State<Coleta> {
         context: context,
         builder: (BuildContext context) {
           var profundidades = marcador["profundidades"] as List<dynamic>? ?? [];
-          String base64Icon = marcador["icone"];
+
+          // var img =
+          // String base64Icon = FFAppState().profundidades.where((element) => element['prof_icone'] == marcador['profundidades']['icone']).map((e) => e['prof_imagem']).toString();
+          // String base64Icon = marcador["profundidades"]["icone"].toString();
+          // String base64Icon = profundidade["icnone"];
+
+          // marcador["profundidades"]["icone"];
           // Uint8List iconBytes = base64Decode(base64Icon);
-          var iconBytes = resizeImage(base64Icon, 50, 50);
+          // var iconBytes = resizeImage(base64Icon, 50, 50);
           var latlng = marcador["latlng_marcadores"];
 
-          google_maps.BitmapDescriptor icon =
-              google_maps.BitmapDescriptor.fromBytes(iconBytes);
+          // google_maps.BitmapDescriptor icon =
+          //     google_maps.BitmapDescriptor.fromBytes(iconBytes);
 
           return AlertDialog(
             shape: RoundedRectangleBorder(
@@ -986,6 +1035,16 @@ class _ColetaState extends State<Coleta> {
             content: SingleChildScrollView(
               child: ListBody(
                 children: profundidades.map<Widget>((profundidade) {
+                  var iconBytes = resizeImage(profundidade["icone"], 50, 50);
+                  var referencialProfundidadePontoId = FFAppState()
+                      .profundidadesPonto
+                      .where((element) =>
+                          element["trpp_prof_id"] == profundidade["prof_id"] &&
+                          element["trpp_artp_id"] == int.parse(marcadorNome))
+                      .map((e) => e['trpp_id'])
+                      .toString();
+
+                  // profundidade["prof_id"].toString();
                   bool jaColetada = coletasPorMarcador[marcadorNome]
                           ?.contains(profundidade["nome"]) ??
                       false;
@@ -1019,11 +1078,19 @@ class _ColetaState extends State<Coleta> {
                         jaColetada ? Color(0xFF9D291C) : Color(0xFF00736D),
                         () {
                           if (jaColetada) {
-                            _confirmarRecoleta(context, marcadorNome,
-                                profundidade["nome"], latlng);
+                            _confirmarRecoleta(
+                                context,
+                                marcadorNome,
+                                profundidade["nome"],
+                                latlng,
+                                referencialProfundidadePontoId);
                           } else {
-                            _confirmarColeta(context, marcadorNome,
-                                profundidade["nome"], latlng);
+                            _confirmarColeta(
+                                context,
+                                marcadorNome,
+                                profundidade["nome"],
+                                latlng,
+                                referencialProfundidadePontoId);
                           }
                         },
                       ),
@@ -1083,8 +1150,12 @@ class _ColetaState extends State<Coleta> {
     );
   }
 
-  void _confirmarRecoleta(BuildContext context, String marcadorNome,
-      String profundidadeNome, String latlng) {
+  void _confirmarRecoleta(
+      BuildContext context,
+      String marcadorNome,
+      String profundidadeNome,
+      String latlng,
+      String referencialProfundidadePontoId) {
     showDialog(
       context: context,
       builder: (BuildContext context) {
@@ -1102,9 +1173,10 @@ class _ColetaState extends State<Coleta> {
               child: Text("Sim"),
               onPressed: () {
                 Navigator.of(context).pop(); // Fecha o diálogo
-                _tiraFoto(marcadorNome, profundidadeNome, latlng);
-                _coletarProfundidade(
-                    marcadorNome, profundidadeNome, latlng); // Realiza a coleta
+                _tiraFoto(marcadorNome, profundidadeNome, latlng,
+                    referencialProfundidadePontoId);
+                _coletarProfundidade(marcadorNome, profundidadeNome, latlng,
+                    referencialProfundidadePontoId); // Realiza a coleta
               },
             ),
           ],
@@ -1113,8 +1185,12 @@ class _ColetaState extends State<Coleta> {
     );
   }
 
-  void _confirmarColeta(BuildContext context, String marcadorNome,
-      String profundidadeNome, String latlng) {
+  void _confirmarColeta(
+      BuildContext context,
+      String marcadorNome,
+      String profundidadeNome,
+      String latlng,
+      String referencialProfundidadePontoId) {
     showDialog(
       context: context,
       builder: (BuildContext context) {
@@ -1132,21 +1208,23 @@ class _ColetaState extends State<Coleta> {
               onPressed: () {
                 Navigator.of(context).pop();
                 if (podeTirarFoto) {
-                  if (vezAtualDoIntervaloDeColeta ==
+                  if (vezAtualDoIntervaloDeColeta >=
                           intervaloDeColetaParaProximaFoto ||
                       vezAtualDoIntervaloDeColeta == 0) {
-                    _tiraFoto(marcadorNome, profundidadeNome, latlng);
+                    _tiraFoto(marcadorNome, profundidadeNome, latlng,
+                        referencialProfundidadePontoId);
                     setState(() {
-                      vezAtualDoIntervaloDeColeta = 1;
+                      vezAtualDoIntervaloDeColeta = 0;
                     });
-                    _coletarProfundidade(
-                        marcadorNome, profundidadeNome, latlng);
+                    _coletarProfundidade(marcadorNome, profundidadeNome, latlng,
+                        referencialProfundidadePontoId);
                   } else {
-                    _coletarProfundidade(
-                        marcadorNome, profundidadeNome, latlng);
+                    _coletarProfundidade(marcadorNome, profundidadeNome, latlng,
+                        referencialProfundidadePontoId);
                   }
                 } else {
-                  _coletarProfundidade(marcadorNome, profundidadeNome, latlng);
+                  _coletarProfundidade(marcadorNome, profundidadeNome, latlng,
+                      referencialProfundidadePontoId);
                 }
               },
               child: Text('Sim'),
@@ -1157,20 +1235,22 @@ class _ColetaState extends State<Coleta> {
     );
   }
 
-  void _coletarProfundidade(
-      String marcadorNome, String profundidadeNome, String latlng) {
+  void _coletarProfundidade(String marcadorNome, String profundidadeNome,
+      String latlng, String referencialProfundidadePontoId) {
     setState(() {
       pontosColetados.add({
         "marcador_nome": marcadorNome,
         "profundidade": profundidadeNome,
-        "latlng": latlng
+        "latlng": latlng,
+        "id_ref": '$referencialProfundidadePontoId'
       });
       FFAppState().PontosColetados.add({
         "marcador_nome": marcadorNome,
         "profundidade": profundidadeNome,
         // "foto": '$base64Image',
         // "foto": '$base64Image',
-        "latlng": latlng
+        "latlng": latlng,
+        "id_ref": '$referencialProfundidadePontoId'
       });
 
       coletasPorMarcador.putIfAbsent(marcadorNome, () => {});
@@ -1182,13 +1262,12 @@ class _ColetaState extends State<Coleta> {
               (m) => m["marcador_nome"] == marcadorNome)["profundidades"]
           .map((p) => p["nome"])
           .toSet();
-
+      setState(() {
+        vezAtualDoIntervaloDeColeta += 1;
+      });
       if (coletasPorMarcador[marcadorNome]!.containsAll(todasProfundidades)) {
         // Todas as profundidades coletadas, mude a cor do marcador para verde
         //_updateMarkerColor(marcadorNome, true);
-        setState(() {
-          vezAtualDoIntervaloDeColeta += 1;
-        });
       }
     });
     Navigator.of(context).pop(); // Fecha o modal atual
@@ -1467,25 +1546,25 @@ class _ColetaState extends State<Coleta> {
                 )),
           ),
         ),
-        // Positioned(
-        //   bottom: 10,
-        //   left: 10,
-        //   right: 10,
-        //   child: ElevatedButton(
-        //     onPressed: _exibirDados,
-        //     style: ElevatedButton.styleFrom(
-        //       shape: CircleBorder(),
-        //       backgroundColor: Color(0xFF00736D),
-        //     ),
-        //     child: Padding(
-        //         padding: const EdgeInsets.all(8.0),
-        //         child: Icon(
-        //           Icons.info,
-        //           size: 25.0,
-        //           color: Colors.white,
-        //         )),
-        //   ),
-        // )
+        Positioned(
+          bottom: 10,
+          left: 10,
+          right: 10,
+          child: ElevatedButton(
+            onPressed: _exibirDados,
+            style: ElevatedButton.styleFrom(
+              shape: CircleBorder(),
+              backgroundColor: Color(0xFF00736D),
+            ),
+            child: Padding(
+                padding: const EdgeInsets.all(8.0),
+                child: Icon(
+                  Icons.info,
+                  size: 25.0,
+                  color: Colors.white,
+                )),
+          ),
+        )
       ],
     );
   }
@@ -1502,13 +1581,17 @@ class _ColetaState extends State<Coleta> {
         .toList();
 
     latLngListMarcadores = filtroPontosColeta.map((item) {
-      var profundidadesLista = FFAppState()
-          .perfilprofundidades
-          .where((perfil) => perfil['pprof_id'] == item['artp_id_perfil_prof'])
-          .map((perfilProfundidade) {
+      // Busca por profundidadesPontos relacionadas ao ponto de coleta atual
+      var profundidadesPontosProfIds = FFAppState()
+          .profundidadesPonto
+          .where((coleta) => coleta['trpp_artp_id'] == item['artp_id'])
+          .map((e) => e['trpp_prof_id']);
+
+      // Para cada profundidadePontosProfId, encontra as informações correspondentes em profundidades
+      var profundidadesLista = profundidadesPontosProfIds
+          .map((profId) {
             var profundidade = FFAppState().profundidades.firstWhere(
-                (prof) =>
-                    prof['prof_id'] == perfilProfundidade['pprof_prof_id'],
+                (prof) => prof['prof_id'] == profId,
                 orElse: () => null);
 
             return profundidade != null
@@ -1519,8 +1602,7 @@ class _ColetaState extends State<Coleta> {
                   }
                 : null;
           })
-          .whereType<
-              Map<String, dynamic>>() // Remove nulos e assegura o tipo correto
+          .where((element) => element != null)
           .toList();
 
       var perfilProfundidade = FFAppState().perfilprofundidades.firstWhere(
@@ -1533,20 +1615,21 @@ class _ColetaState extends State<Coleta> {
             (prof) => prof['prof_id'] == perfilProfundidade['pprof_prof_id'],
             orElse: () => null);
 
-        // Se encontrou a profundidade, pega a imagem
         if (profundidade != null) {
           imagemProfundidade = profundidade['prof_imagem'];
         }
       }
+
+      // Retorna o mapa com as informações do ponto de coleta e as profundidades associadas
       return {
         "marcador_nome": "${item['artp_id']}",
-        "icone":
-            imagemProfundidade, // Certifique-se de que 'imagemProfundidade' é definida corretamente
+        "icone": imagemProfundidade, // A imagem de profundidade
         "latlng_marcadores": "${item['artp_latitude_longitude']}",
-        "profundidades": profundidadesLista,
+        "profundidades": profundidadesLista, // Lista de profundidades
         "foto_de_cada_profundidade": [],
       };
     }).toList();
+
     //
     // var lat = latLngListMarcadores.where((e) => e['marcador_nome'] == 4120)
     //     .map((e) => e['latlng_marcadores'] = '-29.91494505823483, -51.19616432043194');
@@ -1554,6 +1637,43 @@ class _ColetaState extends State<Coleta> {
     //   var lng = FFAppState().pontosDeColeta.where((e) => e['artp_id'] == 4120)
     //       .map((e) => e['artp_latitude_longitude'] = '-29.91494505823483, -51.19616432043194');
     //       // .toList();
+
+    var profundidadesPontos = FFAppState()
+        .profundidadesPonto
+        .where((coleta) => coleta['trpp_artp_id'] == 7365)
+        .map((e) => e['trpp_prof_id']);
+
+    var perfilProfundidade = FFAppState()
+        .perfilprofundidades
+        .where((perfil) => perfil['pprof_id'] == 7);
+
+    var profundidadesInfo = profundidadesPontos
+        .map((profId) {
+          var profundidade = FFAppState().profundidades.firstWhere(
+              (prof) => prof['prof_id'] == profId,
+              orElse: () =>
+                  null); // Retorna null se não encontrar correspondência
+
+          // Se encontrou a profundidade, retorna um mapa com as informações necessárias
+          // Caso contrário, retorna null (que será filtrado depois)
+          return profundidade != null
+              ? {
+                  "nome": profundidade['prof_nome'],
+                  "icone": profundidade['prof_icone'],
+                  "cor": "#FFFFFF", // Usa get com valor padrão para 'prof_cor'
+                }
+              : null;
+        })
+        .where((element) => element != null) // Filtra elementos nulos
+        .toList();
+    // var img = FFAppState().PontosColetados.map((e) => e['id_ref']);
+    var img = FFAppState().profundidadesPonto.where((element) =>
+        element["trpp_prof_id"] == 79 && element["trpp_artp_id"] == 7407);
+    // .map((e) => e['trpp_id']);
+    // var img = FFAppState().profundidadesPonto
+    //     .where((element) => element["trpp_prof_id"] == 78
+    //     && element["trpp_artp_id"] == 7283);
+    // .map((e) => e['trpp_id']).toString();
 
     showDialog(
       context: context,
@@ -1564,22 +1684,22 @@ class _ColetaState extends State<Coleta> {
           content: SingleChildScrollView(
             child: ListBody(
               children: [
+                // Text(
+                //   "Pontos: ${profundidadesPontos}",
+                //   style: TextStyle(color: Colors.black, fontSize: 12.0),
+                // ),
                 Text(
-                  "Pontos: ${FFAppState().pontosDeColeta.where((e) => e['artp_id'] == 4120)}",
+                  "Pontos: $img",
                   style: TextStyle(color: Colors.black, fontSize: 12.0),
                 ),
-                Text(
-                  "Pontos: ${latLngListMarcadores.where((e) => e['marcador_nome'] == '4120')}",
-                  style: TextStyle(color: Colors.black, fontSize: 12.0),
-                ),
-                Text(
-                  "Pontos de Coleta: ${FFAppState().PontosColetados}",
-                  style: TextStyle(color: Colors.black, fontSize: 12.0),
-                ),
-                Text(
-                  "Pontos Coletados: ${jsonEncode(pontosColetados)}",
-                  style: TextStyle(color: Colors.black, fontSize: 12.0),
-                ),
+                // Text(
+                //   "Pontos de Coleta: ${FFAppState().PontosColetados}",
+                //   style: TextStyle(color: Colors.black, fontSize: 12.0),
+                // ),
+                // Text(
+                //   "Pontos Coletados: ${jsonEncode(pontosColetados)}",
+                //   style: TextStyle(color: Colors.black, fontSize: 12.0),
+                // ),
               ],
             ),
           ),
