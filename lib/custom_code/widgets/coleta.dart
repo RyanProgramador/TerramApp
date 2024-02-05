@@ -79,7 +79,7 @@ class _ColetaState extends State<Coleta> {
 
   //tira foto
   bool podeTirarFoto = true;
-  int intervaloDeColetaParaProximaFoto = 4;
+  int intervaloDeColetaParaProximaFoto = 30;
   int vezAtualDoIntervaloDeColeta = 0;
 
 //double tap no marcador
@@ -263,7 +263,7 @@ class _ColetaState extends State<Coleta> {
                     "nome": profundidade['prof_nome'],
                     "icone": profundidade['prof_imagem'],
                     "cor": profundidade['prof_cor'] ?? "#FFFFFF",
-                    "prof_id": profundidade['prof_id'],
+                    "prof_id": profId,
                   }
                 : null;
           })
@@ -789,7 +789,8 @@ class _ColetaState extends State<Coleta> {
             "marcador_nome": nomeMarcadorAtual,
             "profundidade": nomeProfundidade,
             "foto": 'base64Image',
-            "latlng": '$latlng'
+            "latlng": '$latlng',
+            "id_ref": referencialProfundidadePontoId
           });
           FFAppState().PontosColetados.add({
             "marcador_nome": nomeMarcadorAtual,
@@ -1597,8 +1598,9 @@ class _ColetaState extends State<Coleta> {
             return profundidade != null
                 ? {
                     "nome": profundidade['prof_nome'],
-                    "icone": profundidade['prof_icone'],
+                    "icone": profundidade['prof_imagem'],
                     "cor": profundidade['prof_cor'] ?? "#FFFFFF",
+                    "prof_id": profId,
                   }
                 : null;
           })
@@ -1666,9 +1668,14 @@ class _ColetaState extends State<Coleta> {
         })
         .where((element) => element != null) // Filtra elementos nulos
         .toList();
-    // var img = FFAppState().PontosColetados.map((e) => e['id_ref']);
-    var img = FFAppState().profundidadesPonto.where((element) =>
-        element["trpp_prof_id"] == 79 && element["trpp_artp_id"] == 7407);
+    var img = FFAppState().PontosColetados.map((e) => e['id_ref']).toString();
+    // var img = FFAppState()
+    //     .profundidadesPonto
+    //     .where((coleta) => coleta['trpp_artp_id'] != 7377)
+    //     .map((e) => e['trpp_prof_id']);
+
+    // var img = FFAppState().profundidadesPonto.where((element) =>
+    //     element["trpp_prof_id"] == 79 && element["trpp_artp_id"] == 7407);
     // .map((e) => e['trpp_id']);
     // var img = FFAppState().profundidadesPonto
     //     .where((element) => element["trpp_prof_id"] == 78
@@ -1685,7 +1692,8 @@ class _ColetaState extends State<Coleta> {
             child: ListBody(
               children: [
                 // Text(
-                //   "Pontos: ${profundidadesPontos}",
+                //   "Pontos: ${latLngListMarcadores.map((e) => e['profundidades']).first}",
+                //
                 //   style: TextStyle(color: Colors.black, fontSize: 12.0),
                 // ),
                 Text(

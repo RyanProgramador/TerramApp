@@ -422,6 +422,7 @@ class _ConfiguracoesWidgetState extends State<ConfiguracoesWidget> {
                                       FFAppState().contornoFazenda = [];
                                       FFAppState().grupoContornoFazendas = [];
                                       FFAppState().latlngRecorteTalhao = [];
+                                      FFAppState().PontosColetados = [];
                                     });
                                     setState(() {
                                       _model.porcentagemDeCarregamento = 0.82;
