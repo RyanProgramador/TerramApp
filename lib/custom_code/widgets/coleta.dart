@@ -483,7 +483,7 @@ class _ColetaState extends State<Coleta> {
 
       String base64Icon = marcador["icone"];
       // Uint8List iconBytes = base64Decode(base64Icon);
-      var iconBytes = resizeImage(base64Icon, 50, 50);
+      var iconBytes = resizeImage(base64Icon, 66, 66);
 
       google_maps.BitmapDescriptor icon =
           google_maps.BitmapDescriptor.fromBytes(iconBytes);
@@ -539,19 +539,20 @@ class _ColetaState extends State<Coleta> {
     );
 
     // Check if the last tap was within 1.8 seconds to consider it a double tap
-    if (lastTapTimestamps.containsKey(markerIdValue) &&
-        now.difference(lastTapTimestamps[markerIdValue]!).inMilliseconds <
-            1800) {
-      // Check if the distance is greater than 30 meters
-      if (distance > 35) {
-        //metros de distancia para coletar
-        // Show alert
-        _showDistanceAlert();
-      } else {
-        // Continue with the normal double tap logic
-        _showModalOptions(markerName);
-      }
+    // if (lastTapTimestamps.containsKey(markerIdValue) &&
+    //     now.difference(lastTapTimestamps[markerIdValue]!).inMilliseconds <
+    //         1800) {
+    // Check if the distance is greater than 30 meters
+    if (distance > 3500) {
+      //metros de distancia para coletar
+      // Show alert
+
+      _showDistanceAlert();
+    } else {
+      // Continue with the normal double tap logic
+      _showModalOptions(markerName);
     }
+    // }
 
     // Update the timestamp of the last tap
     lastTapTimestamps[markerIdValue] = now;
@@ -707,7 +708,8 @@ class _ColetaState extends State<Coleta> {
     );
   }
 
-  void _tiraFoto(String nomeMarcadorAtual, String nomeProfundidade) async {
+  void _tiraFoto(
+      String nomeMarcadorAtual, String nomeProfundidade, String latlng) async {
     final ImagePicker _picker = ImagePicker();
     final XFile? image = await _picker.pickImage(source: ImageSource.camera);
 
@@ -745,12 +747,14 @@ class _ColetaState extends State<Coleta> {
             "marcador_nome": nomeMarcadorAtual,
             "profundidade": nomeProfundidade,
             "foto": 'base64Image',
+            "latlng": '$latlng'
           });
           FFAppState().PontosColetados.add({
             "marcador_nome": nomeMarcadorAtual,
             "profundidade": nomeProfundidade,
             // "foto": '$base64Image',
             "foto": '$base64Image',
+            "latlng": '$latlng'
           });
         }
       });
@@ -946,6 +950,7 @@ class _ColetaState extends State<Coleta> {
           String base64Icon = marcador["icone"];
           // Uint8List iconBytes = base64Decode(base64Icon);
           var iconBytes = resizeImage(base64Icon, 50, 50);
+          var latlng = marcador["latlng_marcadores"];
 
           google_maps.BitmapDescriptor icon =
               google_maps.BitmapDescriptor.fromBytes(iconBytes);
@@ -1014,11 +1019,11 @@ class _ColetaState extends State<Coleta> {
                         jaColetada ? Color(0xFF9D291C) : Color(0xFF00736D),
                         () {
                           if (jaColetada) {
-                            _confirmarRecoleta(
-                                context, marcadorNome, profundidade["nome"]);
+                            _confirmarRecoleta(context, marcadorNome,
+                                profundidade["nome"], latlng);
                           } else {
-                            _confirmarColeta(
-                                context, marcadorNome, profundidade["nome"]);
+                            _confirmarColeta(context, marcadorNome,
+                                profundidade["nome"], latlng);
                           }
                         },
                       ),
@@ -1078,8 +1083,8 @@ class _ColetaState extends State<Coleta> {
     );
   }
 
-  void _confirmarRecoleta(
-      BuildContext context, String marcadorNome, String profundidadeNome) {
+  void _confirmarRecoleta(BuildContext context, String marcadorNome,
+      String profundidadeNome, String latlng) {
     showDialog(
       context: context,
       builder: (BuildContext context) {
@@ -1097,9 +1102,9 @@ class _ColetaState extends State<Coleta> {
               child: Text("Sim"),
               onPressed: () {
                 Navigator.of(context).pop(); // Fecha o diálogo
-                _tiraFoto(marcadorNome, profundidadeNome);
+                _tiraFoto(marcadorNome, profundidadeNome, latlng);
                 _coletarProfundidade(
-                    marcadorNome, profundidadeNome); // Realiza a coleta
+                    marcadorNome, profundidadeNome, latlng); // Realiza a coleta
               },
             ),
           ],
@@ -1108,8 +1113,8 @@ class _ColetaState extends State<Coleta> {
     );
   }
 
-  void _confirmarColeta(
-      BuildContext context, String marcadorNome, String profundidadeNome) {
+  void _confirmarColeta(BuildContext context, String marcadorNome,
+      String profundidadeNome, String latlng) {
     showDialog(
       context: context,
       builder: (BuildContext context) {
@@ -1130,16 +1135,18 @@ class _ColetaState extends State<Coleta> {
                   if (vezAtualDoIntervaloDeColeta ==
                           intervaloDeColetaParaProximaFoto ||
                       vezAtualDoIntervaloDeColeta == 0) {
-                    _tiraFoto(marcadorNome, profundidadeNome);
+                    _tiraFoto(marcadorNome, profundidadeNome, latlng);
                     setState(() {
                       vezAtualDoIntervaloDeColeta = 1;
                     });
-                    _coletarProfundidade(marcadorNome, profundidadeNome);
+                    _coletarProfundidade(
+                        marcadorNome, profundidadeNome, latlng);
                   } else {
-                    _coletarProfundidade(marcadorNome, profundidadeNome);
+                    _coletarProfundidade(
+                        marcadorNome, profundidadeNome, latlng);
                   }
                 } else {
-                  _coletarProfundidade(marcadorNome, profundidadeNome);
+                  _coletarProfundidade(marcadorNome, profundidadeNome, latlng);
                 }
               },
               child: Text('Sim'),
@@ -1150,12 +1157,22 @@ class _ColetaState extends State<Coleta> {
     );
   }
 
-  void _coletarProfundidade(String marcadorNome, String profundidadeNome) {
+  void _coletarProfundidade(
+      String marcadorNome, String profundidadeNome, String latlng) {
     setState(() {
       pontosColetados.add({
         "marcador_nome": marcadorNome,
         "profundidade": profundidadeNome,
+        "latlng": latlng
       });
+      FFAppState().PontosColetados.add({
+        "marcador_nome": marcadorNome,
+        "profundidade": profundidadeNome,
+        // "foto": '$base64Image',
+        // "foto": '$base64Image',
+        "latlng": latlng
+      });
+
       coletasPorMarcador.putIfAbsent(marcadorNome, () => {});
       coletasPorMarcador[marcadorNome]!.add(profundidadeNome);
 
@@ -1260,14 +1277,14 @@ class _ColetaState extends State<Coleta> {
                   Navigator.of(context).pop();
                   _removeMarker(marcadorNome);
                 }),
-                SizedBox(height: 10),
-                _buildElevatedButton(
-                    context, "Criar novo ponto", Color(0xFF9D291C), () {
-                  Navigator.of(context).pop();
-                  // _adicionarNovoPonto();
-                  _showAdicionaProfundidades();
-                  _showTutorialModal();
-                }),
+                // SizedBox(height: 10),
+                // _buildElevatedButton(
+                //     context, "Criar novo ponto", Color(0xFF9D291C), () {
+                //   Navigator.of(context).pop();
+                //   // _adicionarNovoPonto();
+                //   _showAdicionaProfundidades();
+                //   _showTutorialModal();
+                // }),
               ],
             ),
           ),
@@ -1285,11 +1302,26 @@ class _ColetaState extends State<Coleta> {
           return m.copyWith(
               draggableParam: true,
               onDragEndParam: (newPosition) {
-                // Atualiza a nova posição no markerPositions
+                // Atualiza a posição no markerPositions e atualiza a posição geral
                 markerPositions[marcadorNome] = newPosition;
                 latlngMarcador = newPosition; // Atualiza latlngMarcador
+                // //atualiza geral
+                //   FFAppState().pontosDeColeta.where((e) => e['artp_id'] == int.parse(marcadorNome))
+                //       .map((e) => e['artp_latitude_longitude'] = '${newPosition.latitude}, ${newPosition.longitude}');
+                //   latLngListMarcadores.where((e) => e['marcador_nome'] == marcadorNome)
+                //       .map((e) => e['latlng_marcadores'] = '${newPosition.latitude}, ${newPosition.longitude}');
 
-// Atualiza a posição do marcador na lista latLngListMarcadores
+                // Encontra e atualiza o ponto correspondente em FFAppState().pontosDeColeta
+                // Atualiza diretamente FFAppState().pontosDeColeta
+                for (var ponto in FFAppState().pontosDeColeta) {
+                  if (ponto['artp_id'].toString() == marcadorNome) {
+                    ponto['artp_latitude_longitude'] =
+                        "${newPosition.latitude}, ${newPosition.longitude}";
+                    // break; // Assumindo que só há um ponto com esse 'artp_id'
+                  }
+                }
+
+                // Atualiza a posição do marcador na lista latLngListMarcadores
                 int indexLatlng = latLngListMarcadores.indexWhere(
                     (marcador) => marcador["marcador_nome"] == marcadorNome);
                 if (indexLatlng != -1) {
@@ -1300,7 +1332,6 @@ class _ColetaState extends State<Coleta> {
                 // Adiciona à lista de pontos movidos
                 var latLngOriginal = latLngListMarcadores.firstWhere((map) =>
                     map["marcador_nome"] == marcadorNome)["latlng_marcadores"];
-
                 if (latLngOriginal != null) {
                   pontosMovidos.add({
                     "marcador_nome": marcadorNome,
@@ -1308,26 +1339,10 @@ class _ColetaState extends State<Coleta> {
                     "latlng_movido_para":
                         "${newPosition.latitude}, ${newPosition.longitude}"
                   });
-                  FFAppState().PontosMovidos.add(jsonEncode(pontosMovidos));
-
-                  // Atualiza a posição da câmera para a nova localização do marcador
-                  _updateMapLocationAfterMarkerMove(newPosition);
                 }
-              });
-        }
-        return m;
-      }).toSet();
-    });
-    setState(() {
-      markers = markers.map((m) {
-        if (m.markerId.value == marcadorNome) {
-          return m.copyWith(
-              draggableParam: true,
-              onDragEndParam: (newPosition) {
-                // Atualizar a posição em markerPositions e latLngListMarcadores
-                markerPositions[marcadorNome] = newPosition;
-                latlngMarcador = newPosition; // Atualiza latlngMarcador
-                // Restante do código...
+
+                // Atualiza a posição da câmera para a nova localização do marcador
+                _updateMapLocationAfterMarkerMove(newPosition, marcadorNome);
               });
         }
         return m;
@@ -1335,7 +1350,8 @@ class _ColetaState extends State<Coleta> {
     });
   }
 
-  void _updateMapLocationAfterMarkerMove(google_maps.LatLng newPosition) {
+  void _updateMapLocationAfterMarkerMove(
+      google_maps.LatLng newPosition, String marcadorNome) {
     if (_googleMapController != null) {
       _googleMapController!.animateCamera(
         google_maps.CameraUpdate.newCameraPosition(
@@ -1346,6 +1362,12 @@ class _ColetaState extends State<Coleta> {
         ),
       );
     }
+
+    // //atualiza geral
+    // FFAppState().pontosDeColeta.where((e) => e['artp_id'] == int.parse(marcadorNome))
+    //     .map((e) => e['artp_latitude_longitude'] = '${newPosition.latitude}, ${newPosition.longitude}');
+    // latLngListMarcadores.where((e) => e['marcador_nome'] == int.parse(marcadorNome))
+    //     .map((e) => e['latlng_marcadores'] = '${newPosition.latitude}, ${newPosition.longitude}');
   }
 
   void _removeMarker(String marcadorNome) {
@@ -1463,7 +1485,7 @@ class _ColetaState extends State<Coleta> {
         //           color: Colors.white,
         //         )),
         //   ),
-        // ),
+        // )
       ],
     );
   }
@@ -1476,7 +1498,7 @@ class _ColetaState extends State<Coleta> {
         .toList();
     var filtroPontosColeta = FFAppState()
         .pontosDeColeta
-        .where((item) => item['oserv_id'] == 38)
+        .where((item) => item['oserv_id'] == int.parse(widget.idContorno!))
         .toList();
 
     latLngListMarcadores = filtroPontosColeta.map((item) {
@@ -1525,6 +1547,13 @@ class _ColetaState extends State<Coleta> {
         "foto_de_cada_profundidade": [],
       };
     }).toList();
+    //
+    // var lat = latLngListMarcadores.where((e) => e['marcador_nome'] == 4120)
+    //     .map((e) => e['latlng_marcadores'] = '-29.91494505823483, -51.19616432043194');
+    //     // .toList();
+    //   var lng = FFAppState().pontosDeColeta.where((e) => e['artp_id'] == 4120)
+    //       .map((e) => e['artp_latitude_longitude'] = '-29.91494505823483, -51.19616432043194');
+    //       // .toList();
 
     showDialog(
       context: context,
@@ -1536,13 +1565,13 @@ class _ColetaState extends State<Coleta> {
             child: ListBody(
               children: [
                 Text(
-                  "Pontos: ${jsonEncode(latLngListMarcadores)}",
+                  "Pontos: ${FFAppState().pontosDeColeta.where((e) => e['artp_id'] == 4120)}",
                   style: TextStyle(color: Colors.black, fontSize: 12.0),
                 ),
-                // Text(
-                //   "Pontos: $icone",
-                //   style: TextStyle(color: Colors.black, fontSize: 12.0),
-                // ),
+                Text(
+                  "Pontos: ${latLngListMarcadores.where((e) => e['marcador_nome'] == '4120')}",
+                  style: TextStyle(color: Colors.black, fontSize: 12.0),
+                ),
                 Text(
                   "Pontos de Coleta: ${FFAppState().PontosColetados}",
                   style: TextStyle(color: Colors.black, fontSize: 12.0),
