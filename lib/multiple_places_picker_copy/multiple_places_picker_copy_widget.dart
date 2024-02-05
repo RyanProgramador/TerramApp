@@ -2064,7 +2064,7 @@ class _MultiplePlacesPickerCopyWidgetState
                             mainAxisAlignment: MainAxisAlignment.spaceBetween,
                             children: [
                               Text(
-                                'perfi profun',
+                                'perfi pontos',
                                 style: FlutterFlowTheme.of(context).bodyMedium,
                               ),
                               Text(
@@ -2099,24 +2099,37 @@ class _MultiplePlacesPickerCopyWidgetState
                                             color: FlutterFlowTheme.of(context)
                                                 .secondaryBackground,
                                           ),
-                                          child: SingleChildScrollView(
-                                            child: Column(
-                                              mainAxisSize: MainAxisSize.max,
-                                              children: [
-                                                SelectionArea(
-                                                    child: Text(
-                                                  'Hello World',
-                                                  style: FlutterFlowTheme.of(
-                                                          context)
-                                                      .bodyMedium
-                                                      .override(
-                                                        fontFamily:
-                                                            'Readex Pro',
-                                                        fontSize: 10.0,
-                                                      ),
-                                                )),
-                                              ],
-                                            ),
+                                          child: Builder(
+                                            builder: (context) {
+                                              final itens = FFAppState()
+                                                  .profundidadesPonto
+                                                  .toList();
+                                              return SingleChildScrollView(
+                                                child: Column(
+                                                  mainAxisSize:
+                                                      MainAxisSize.max,
+                                                  children: List.generate(
+                                                      itens.length,
+                                                      (itensIndex) {
+                                                    final itensItem =
+                                                        itens[itensIndex];
+                                                    return SelectionArea(
+                                                        child: Text(
+                                                      itensItem.toString(),
+                                                      style:
+                                                          FlutterFlowTheme.of(
+                                                                  context)
+                                                              .bodyMedium
+                                                              .override(
+                                                                fontFamily:
+                                                                    'Readex Pro',
+                                                                fontSize: 10.0,
+                                                              ),
+                                                    ));
+                                                  }),
+                                                ),
+                                              );
+                                            },
                                           ),
                                         ),
                                       ),
