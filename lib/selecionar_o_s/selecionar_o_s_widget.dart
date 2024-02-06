@@ -293,6 +293,8 @@ class _SelecionarOSWidgetState extends State<SelecionarOSWidget>
         _model.sincPontosMedicaoEPerfilEProfundida =
             await SincronizarGroup.trSincronizaPontosMedicaoCall.call(
           urlapicall: FFAppState().urlapicall,
+          pontosColetados:
+              functions.jsonListToStr(FFAppState().PontosColetados.toList()),
         );
         FFAppState().update(() {});
         if ((_model.trTecnicosSinc2?.succeeded ?? true) &&
@@ -408,6 +410,20 @@ class _SelecionarOSWidgetState extends State<SelecionarOSWidget>
             )!
                 .toList()
                 .cast<dynamic>();
+            FFAppState().listaContornoColeta = getJsonField(
+              (_model.sincPontosMedicaoEPerfilEProfundida?.jsonBody ?? ''),
+              r'''$.contornos[:]''',
+              true,
+            )!
+                .toList()
+                .cast<dynamic>();
+            FFAppState().profundidadesPonto = getJsonField(
+              (_model.sincPontosMedicaoEPerfilEProfundida?.jsonBody ?? ''),
+              r'''$.pontos_profundidades[:]''',
+              true,
+            )!
+                .toList()
+                .cast<dynamic>();
           });
         } else {
           await showDialog(
@@ -459,6 +475,8 @@ class _SelecionarOSWidgetState extends State<SelecionarOSWidget>
       _model.sincPontosMedicaoEPerfilEProfundida2 =
           await SincronizarGroup.trSincronizaPontosMedicaoCall.call(
         urlapicall: FFAppState().urlapicall,
+        pontosColetados:
+            functions.jsonListToStr(FFAppState().PontosColetados.toList()),
       );
       FFAppState().update(() {});
       if ((_model.trTecnicosSinc?.succeeded ?? true) &&
@@ -542,6 +560,20 @@ class _SelecionarOSWidgetState extends State<SelecionarOSWidget>
           FFAppState().perfis = getJsonField(
             (_model.sincPontosMedicaoEPerfilEProfundida2?.jsonBody ?? ''),
             r'''$.perfis[:]''',
+            true,
+          )!
+              .toList()
+              .cast<dynamic>();
+          FFAppState().listaContornoColeta = getJsonField(
+            (_model.sincPontosMedicaoEPerfilEProfundida2?.jsonBody ?? ''),
+            r'''$.contornos[:]''',
+            true,
+          )!
+              .toList()
+              .cast<dynamic>();
+          FFAppState().profundidadesPonto = getJsonField(
+            (_model.sincPontosMedicaoEPerfilEProfundida2?.jsonBody ?? ''),
+            r'''$.pontos_profundidades[:]''',
             true,
           )!
               .toList()
