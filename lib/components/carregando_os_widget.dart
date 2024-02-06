@@ -2,6 +2,7 @@ import '/flutter_flow/flutter_flow_theme.dart';
 import '/flutter_flow/flutter_flow_util.dart';
 import '/custom_code/widgets/index.dart' as custom_widgets;
 import 'package:flutter/material.dart';
+import 'package:flutter/scheduler.dart';
 import 'package:flutter/services.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:provider/provider.dart';
@@ -28,6 +29,19 @@ class _CarregandoOsWidgetState extends State<CarregandoOsWidget> {
   void initState() {
     super.initState();
     _model = createModel(context, () => CarregandoOsModel());
+
+    // On component load action.
+    SchedulerBinding.instance.addPostFrameCallback((_) async {
+      while (_model.teste != 3) {
+        setState(() {
+          _model.teste = _model.teste + 1;
+        });
+        await Future.delayed(const Duration(milliseconds: 3000));
+      }
+      setState(() {
+        _model.teste = 1;
+      });
+    });
   }
 
   @override
@@ -67,6 +81,21 @@ class _CarregandoOsWidgetState extends State<CarregandoOsWidget> {
               ),
             ),
           ),
+          if (_model.teste == 1)
+            Text(
+              'Aguarde um pouco!',
+              style: FlutterFlowTheme.of(context).bodyMedium,
+            ),
+          if (_model.teste == 2)
+            Text(
+              'Isso pode demorar alguns instantes!',
+              style: FlutterFlowTheme.of(context).bodyMedium,
+            ),
+          if (_model.teste == 3)
+            Text(
+              'Sincronizando imagens',
+              style: FlutterFlowTheme.of(context).bodyMedium,
+            ),
         ],
       ),
     );

@@ -284,26 +284,6 @@ class _ConfiguracoesWidgetState extends State<ConfiguracoesWidget> {
                                       (_model.sincPontosMedicaoEPerfilEProfundidaAPI
                                               ?.succeeded ??
                                           true)) {
-                                    await showDialog(
-                                      context: context,
-                                      builder: (alertDialogContext) {
-                                        return AlertDialog(
-                                          title: Text(SincronizarGroup
-                                              .trSincronizaCelularComBDCall
-                                              .retornoSincComCelular(
-                                            (_model.sincCelComBD?.jsonBody ??
-                                                ''),
-                                          )!),
-                                          actions: [
-                                            TextButton(
-                                              onPressed: () => Navigator.pop(
-                                                  alertDialogContext),
-                                              child: Text('Ok'),
-                                            ),
-                                          ],
-                                        );
-                                      },
-                                    );
                                     setState(() {
                                       _model.porcentagemDeCarregamento = 0.7;
                                       _model.porcentagemString = '72%';
@@ -414,6 +394,26 @@ class _ConfiguracoesWidgetState extends State<ConfiguracoesWidget> {
                                               .toList()
                                               .cast<dynamic>();
                                     });
+                                    await showDialog(
+                                      context: context,
+                                      builder: (alertDialogContext) {
+                                        return AlertDialog(
+                                          title: Text(SincronizarGroup
+                                              .trSincronizaCelularComBDCall
+                                              .retornoSincComCelular(
+                                            (_model.sincCelComBD?.jsonBody ??
+                                                ''),
+                                          )!),
+                                          actions: [
+                                            TextButton(
+                                              onPressed: () => Navigator.pop(
+                                                  alertDialogContext),
+                                              child: Text('Ok'),
+                                            ),
+                                          ],
+                                        );
+                                      },
+                                    );
                                     setState(() {
                                       _model.estaCarregando = true;
                                       _model.porcentagemDeCarregamento = 0.78;
