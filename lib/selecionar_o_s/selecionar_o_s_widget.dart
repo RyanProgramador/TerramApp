@@ -316,6 +316,10 @@ class _SelecionarOSWidgetState extends State<SelecionarOSWidget>
         FFAppState().AtualLocalizcao = currentUserLocationValue!.toString();
       });
       if (FFAppState().trOsServicos.length != 0) {
+        _model.temInternetOsLoad01 = await actions.temInternet();
+        if (!_model.temInternetOsLoad01!) {
+          return;
+        }
         _model.trOsTecnicosSincroniza2 =
             await SincronizarGroup.trOsTecnicoCall.call(
           urlapicall: FFAppState().urlapicall,
@@ -482,8 +486,8 @@ class _SelecionarOSWidgetState extends State<SelecionarOSWidget>
             context: context,
             builder: (alertDialogContext) {
               return AlertDialog(
-                title: Text('Ops!'),
-                content: Text('#02'),
+                title: Text('Ops! Um erro inesperado aconteceu '),
+                content: Text('Codigo #02'),
                 actions: [
                   TextButton(
                     onPressed: () => Navigator.pop(alertDialogContext),
