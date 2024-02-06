@@ -529,6 +529,12 @@ class _SelecionarOSWidgetState extends State<SelecionarOSWidget>
       _model.trFazendasSinc = await SincronizarGroup.trFazendasCall.call(
         urlapicall: FFAppState().urlapicall,
       );
+      _model.sincPontosMedicaoEPerfilEProfundida2 =
+          await SincronizarGroup.trSincronizaPontosMedicaoCall.call(
+        urlapicall: FFAppState().urlapicall,
+        pontosColetados:
+            functions.jsonListToStr(FFAppState().PontosColetados.toList()),
+      );
       _model.trServicosSinc = await SincronizarGroup.trServicosCall.call(
         urlapicall: FFAppState().urlapicall,
       );
@@ -545,12 +551,6 @@ class _SelecionarOSWidgetState extends State<SelecionarOSWidget>
       _model.trCFG = await SincronizarGroup.trCFGCall.call(
         urlapicall: FFAppState().urlapicall,
       );
-      _model.sincPontosMedicaoEPerfilEProfundida2 =
-          await SincronizarGroup.trSincronizaPontosMedicaoCall.call(
-        urlapicall: FFAppState().urlapicall,
-        pontosColetados:
-            functions.jsonListToStr(FFAppState().PontosColetados.toList()),
-      );
       await showDialog(
         context: context,
         builder: (alertDialogContext) {
@@ -565,7 +565,6 @@ class _SelecionarOSWidgetState extends State<SelecionarOSWidget>
           );
         },
       );
-      FFAppState().update(() {});
       if ((_model.trTecnicosSinc?.succeeded ?? true) &&
           (_model.trOsServicosSinc?.succeeded ?? true) &&
           (_model.trServicosSinc?.succeeded ?? true) &&
@@ -666,6 +665,7 @@ class _SelecionarOSWidgetState extends State<SelecionarOSWidget>
               .toList()
               .cast<dynamic>();
         });
+        FFAppState().update(() {});
       } else {
         await showDialog(
           context: context,
