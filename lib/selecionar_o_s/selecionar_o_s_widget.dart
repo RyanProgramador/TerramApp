@@ -250,68 +250,61 @@ class _SelecionarOSWidgetState extends State<SelecionarOSWidget>
                 .cast<dynamic>();
           });
         }
-
-        await showDialog(
-          context: context,
-          builder: (alertDialogContext) {
-            return AlertDialog(
-              title: Text('Codigo #04'),
-              actions: [
-                TextButton(
-                  onPressed: () => Navigator.pop(alertDialogContext),
-                  child: Text('Ok'),
-                ),
-              ],
-            );
-          },
-        );
       } else if ((FFAppState().sincronizcaoAutomatica == false) &&
           (FFAppState().servicosFinalizadosComSucesso.length != 0)) {
-        await showDialog(
-          context: context,
-          builder: (alertDialogContext) {
-            return AlertDialog(
-              title: Text('Codigo #01'),
-              actions: [
-                TextButton(
-                  onPressed: () => Navigator.pop(alertDialogContext),
-                  child: Text('Ok'),
-                ),
-              ],
-            );
-          },
-        );
       } else if ((FFAppState().trOrdemServicos.length <= 0) &&
           _model.foiAtualizado) {
-        await showDialog(
-          context: context,
-          builder: (alertDialogContext) {
-            return AlertDialog(
-              title: Text('Codigo #02'),
-              actions: [
-                TextButton(
-                  onPressed: () => Navigator.pop(alertDialogContext),
-                  child: Text('Ok'),
-                ),
-              ],
-            );
-          },
-        );
       } else {
-        await showDialog(
-          context: context,
-          builder: (alertDialogContext) {
-            return AlertDialog(
-              title: Text('Codigo #03'),
-              actions: [
-                TextButton(
-                  onPressed: () => Navigator.pop(alertDialogContext),
-                  child: Text('Ok'),
-                ),
-              ],
-            );
-          },
+        _model.sincPontosMedicaoPontosAPI =
+            await SincronizarGroup.trSincronizaPontosMedicaoCall.call(
+          urlapicall: FFAppState().urlapicall,
+          pontosColetados:
+              functions.jsonListToStr(FFAppState().PontosColetados.toList()),
         );
+        setState(() {
+          FFAppState().pontosDeColeta = getJsonField(
+            (_model.sincPontosMedicaoPontosAPI?.jsonBody ?? ''),
+            r'''$.pontos_de_coleta[:]''',
+            true,
+          )!
+              .toList()
+              .cast<dynamic>();
+          FFAppState().perfilprofundidades = getJsonField(
+            (_model.sincPontosMedicaoPontosAPI?.jsonBody ?? ''),
+            r'''$.perfil_profundidades[:]''',
+            true,
+          )!
+              .toList()
+              .cast<dynamic>();
+          FFAppState().profundidades = getJsonField(
+            (_model.sincPontosMedicaoPontosAPI?.jsonBody ?? ''),
+            r'''$.profundidades[:]''',
+            true,
+          )!
+              .toList()
+              .cast<dynamic>();
+          FFAppState().perfis = getJsonField(
+            (_model.sincPontosMedicaoPontosAPI?.jsonBody ?? ''),
+            r'''$.perfis[:]''',
+            true,
+          )!
+              .toList()
+              .cast<dynamic>();
+          FFAppState().profundidadesPonto = getJsonField(
+            (_model.sincPontosMedicaoPontosAPI?.jsonBody ?? ''),
+            r'''$.pontos_profundidades[:]''',
+            true,
+          )!
+              .toList()
+              .cast<dynamic>();
+          FFAppState().listaContornoColeta = getJsonField(
+            (_model.sincPontosMedicaoPontosAPI?.jsonBody ?? ''),
+            r'''$.contornos[:]''',
+            true,
+          )!
+              .toList()
+              .cast<dynamic>();
+        });
       }
 
       setState(() {
@@ -354,20 +347,6 @@ class _SelecionarOSWidgetState extends State<SelecionarOSWidget>
           urlapicall: FFAppState().urlapicall,
           pontosColetados:
               functions.jsonListToStr(FFAppState().PontosColetados.toList()),
-        );
-        await showDialog(
-          context: context,
-          builder: (alertDialogContext) {
-            return AlertDialog(
-              title: Text('Codigo #05'),
-              actions: [
-                TextButton(
-                  onPressed: () => Navigator.pop(alertDialogContext),
-                  child: Text('Ok'),
-                ),
-              ],
-            );
-          },
         );
         FFAppState().update(() {});
         if ((_model.trTecnicosSinc2?.succeeded ?? true) &&
@@ -550,20 +529,6 @@ class _SelecionarOSWidgetState extends State<SelecionarOSWidget>
       );
       _model.trCFG = await SincronizarGroup.trCFGCall.call(
         urlapicall: FFAppState().urlapicall,
-      );
-      await showDialog(
-        context: context,
-        builder: (alertDialogContext) {
-          return AlertDialog(
-            title: Text('Codigo #06'),
-            actions: [
-              TextButton(
-                onPressed: () => Navigator.pop(alertDialogContext),
-                child: Text('Ok'),
-              ),
-            ],
-          );
-        },
       );
       if ((_model.trTecnicosSinc?.succeeded ?? true) &&
           (_model.trOsServicosSinc?.succeeded ?? true) &&
