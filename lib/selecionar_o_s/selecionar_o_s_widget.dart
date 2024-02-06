@@ -103,6 +103,8 @@ class _SelecionarOSWidgetState extends State<SelecionarOSWidget>
         _model.sincPontosMedicaoEPerfilEProfundidaAPI =
             await SincronizarGroup.trSincronizaPontosMedicaoCall.call(
           urlapicall: FFAppState().urlapicall,
+          pontosColetados:
+              functions.jsonListToStr(FFAppState().PontosColetados.toList()),
         );
         if (SincronizarGroup.trSincronizaCelularComBDCall.statusSincComCelular(
               (_model.apiResultxxdOnLoadPage?.jsonBody ?? ''),
@@ -175,6 +177,20 @@ class _SelecionarOSWidgetState extends State<SelecionarOSWidget>
             FFAppState().perfis = getJsonField(
               (_model.sincPontosMedicaoEPerfilEProfundidaAPI?.jsonBody ?? ''),
               r'''$.perfis[:]''',
+              true,
+            )!
+                .toList()
+                .cast<dynamic>();
+            FFAppState().profundidadesPonto = getJsonField(
+              (_model.sincPontosMedicaoEPerfilEProfundidaAPI?.jsonBody ?? ''),
+              r'''$.pontos_profundidades[:]''',
+              true,
+            )!
+                .toList()
+                .cast<dynamic>();
+            FFAppState().listaContornoColeta = getJsonField(
+              (_model.sincPontosMedicaoEPerfilEProfundidaAPI?.jsonBody ?? ''),
+              r'''$.contornos[:]''',
               true,
             )!
                 .toList()
