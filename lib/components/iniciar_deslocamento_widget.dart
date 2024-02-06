@@ -1403,6 +1403,16 @@ class _IniciarDeslocamentoWidgetState extends State<IniciarDeslocamentoWidget> {
                                             widget.servicoId,
                                             ParamType.String,
                                           ),
+                                          'autoAuditoria': serializeParam(
+                                            widget.autoAuditoria,
+                                            ParamType.bool,
+                                          ),
+                                          'quantosPontosAutoAuditoria':
+                                              serializeParam(
+                                            widget
+                                                .autoAuditoriaQuantidadePontos,
+                                            ParamType.int,
+                                          ),
                                         }.withoutNulls,
                                       );
                                     },
