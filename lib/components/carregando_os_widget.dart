@@ -36,7 +36,7 @@ class _CarregandoOsWidgetState extends State<CarregandoOsWidget> {
         setState(() {
           _model.teste = _model.teste + 1;
         });
-        await Future.delayed(const Duration(milliseconds: 3000));
+        await Future.delayed(const Duration(milliseconds: 1000));
       }
       setState(() {
         _model.teste = 1;
