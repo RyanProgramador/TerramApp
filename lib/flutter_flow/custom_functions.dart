@@ -950,12 +950,16 @@ int? strToInt(String? valor) {
   }
 }
 
-bool? strToBool(String str) {
-  if (str.toLowerCase() == 'true') {
-    return true;
-  } else if (str.toLowerCase() == 'false') {
-    return false;
+bool? strToBool(String? str) {
+  if (str != null) {
+    if (str.toLowerCase() == 'true') {
+      return true;
+    } else if (str.toLowerCase() == 'false') {
+      return false;
+    } else {
+      return false;
+    }
   } else {
-    return null;
+    return false;
   }
 }
