@@ -261,7 +261,7 @@ class _SelecionarOSWidgetState extends State<SelecionarOSWidget>
           pontosColetados:
               functions.jsonListToStr(FFAppState().PontosColetados.toList()),
         );
-        setState(() {
+        FFAppState().update(() {
           FFAppState().pontosDeColeta = getJsonField(
             (_model.sincPontosMedicaoPontosAPI?.jsonBody ?? ''),
             r'''$.pontos_de_coleta[:]''',
@@ -530,12 +530,14 @@ class _SelecionarOSWidgetState extends State<SelecionarOSWidget>
       _model.trCFG = await SincronizarGroup.trCFGCall.call(
         urlapicall: FFAppState().urlapicall,
       );
+      FFAppState().update(() {});
       if ((_model.trTecnicosSinc?.succeeded ?? true) &&
           (_model.trOsServicosSinc?.succeeded ?? true) &&
           (_model.trServicosSinc?.succeeded ?? true) &&
           (_model.trFazendasSinc?.succeeded ?? true) &&
           (_model.sincOsRet?.succeeded ?? true) &&
           (_model.trOsTecnicosSincroniza?.succeeded ?? true)) {
+        FFAppState().update(() {});
         FFAppState().update(() {
           FFAppState().trOrdemServicos = SincronizarGroup.ordemDeServicoCall
               .ordemServicoDados(
@@ -630,7 +632,6 @@ class _SelecionarOSWidgetState extends State<SelecionarOSWidget>
               .toList()
               .cast<dynamic>();
         });
-        FFAppState().update(() {});
       } else {
         await showDialog(
           context: context,
