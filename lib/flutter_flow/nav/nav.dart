@@ -171,6 +171,9 @@ GoRouter createRouter(AppStateNotifier appStateNotifier) => GoRouter(
               builder: (context, params) => MedicaoColetaWidget(
                 fazNome: params.getParam('fazNome', ParamType.String),
                 idContorno: params.getParam('idContorno', ParamType.String),
+                autoAuditoria: params.getParam('autoAuditoria', ParamType.bool),
+                quantosPontosAutoAuditoria: params.getParam(
+                    'quantosPontosAutoAuditoria', ParamType.int),
               ),
             ),
             FFRoute(

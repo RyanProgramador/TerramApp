@@ -14,10 +14,15 @@ class MedicaoColetaWidget extends StatefulWidget {
     super.key,
     this.fazNome,
     required this.idContorno,
-  });
+    bool? autoAuditoria,
+    int? quantosPontosAutoAuditoria,
+  })  : this.autoAuditoria = autoAuditoria ?? false,
+        this.quantosPontosAutoAuditoria = quantosPontosAutoAuditoria ?? 0;
 
   final String? fazNome;
   final String? idContorno;
+  final bool autoAuditoria;
+  final int quantosPontosAutoAuditoria;
 
   @override
   State<MedicaoColetaWidget> createState() => _MedicaoColetaWidgetState();
@@ -81,9 +86,11 @@ class _MedicaoColetaWidgetState extends State<MedicaoColetaWidget> {
                         child: custom_widgets.Coleta(
                           width: double.infinity,
                           height: double.infinity,
-                          intervaloDeColetaParaProximaFoto: 3,
+                          intervaloDeColetaParaProximaFoto:
+                              widget.quantosPontosAutoAuditoria,
                           idContorno: widget.idContorno,
                           pontosJaColetados: FFAppState().PontosColetados,
+                          autoAuditoria: widget.autoAuditoria,
                         ),
                       ),
                     ),

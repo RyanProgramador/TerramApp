@@ -535,55 +535,103 @@ class TrOsServicosCall {
         r'''$.dados[:].oserv_dthr_cad''',
         true,
       ) as List?;
-  List? oservstatusTrOsServicos(dynamic response) => getJsonField(
+  List<String>? oservstatusTrOsServicos(dynamic response) => (getJsonField(
         response,
         r'''$.dados[:].oserv_status''',
         true,
-      ) as List?;
-  List? oservobservacaoTrOsServicos(dynamic response) => getJsonField(
+      ) as List?)
+          ?.withoutNulls
+          .map((x) => castToType<String>(x))
+          .withoutNulls
+          .toList();
+  List<String>? oservobservacaoTrOsServicos(dynamic response) => (getJsonField(
         response,
         r'''$.dados[:].oserv_observacao''',
         true,
-      ) as List?;
-  List? oservdthrexecucaoTrOsServicos(dynamic response) => getJsonField(
+      ) as List?)
+          ?.withoutNulls
+          .map((x) => castToType<String>(x))
+          .withoutNulls
+          .toList();
+  List<String>? oservdthrexecucaoTrOsServicos(dynamic response) =>
+      (getJsonField(
         response,
         r'''$.dados[:].oserv_dthr_execucao''',
         true,
-      ) as List?;
+      ) as List?)
+          ?.withoutNulls
+          .map((x) => castToType<String>(x))
+          .withoutNulls
+          .toList();
   List? oservgeoTrOsServicos(dynamic response) => getJsonField(
         response,
         r'''$.dados[:].oserv_geo''',
         true,
       ) as List?;
-  List? oservidservTrOsServicos(dynamic response) => getJsonField(
+  List<int>? oservidservTrOsServicos(dynamic response) => (getJsonField(
         response,
         r'''$.dados[:].oserv_id_serv''',
         true,
-      ) as List?;
-  List? oservidTrOsServicos(dynamic response) => getJsonField(
+      ) as List?)
+          ?.withoutNulls
+          .map((x) => castToType<int>(x))
+          .withoutNulls
+          .toList();
+  List<int>? oservidTrOsServicos(dynamic response) => (getJsonField(
         response,
         r'''$.dados[:].oserv_id''',
         true,
-      ) as List?;
+      ) as List?)
+          ?.withoutNulls
+          .map((x) => castToType<int>(x))
+          .withoutNulls
+          .toList();
   List? dadosTrOsServicos(dynamic response) => getJsonField(
         response,
         r'''$.dados''',
         true,
       ) as List?;
-  dynamic statusTrOsServicos(dynamic response) => getJsonField(
+  bool? statusTrOsServicos(dynamic response) => castToType<bool>(getJsonField(
         response,
         r'''$.status''',
-      );
-  List? oservidosTrOsServicos(dynamic response) => getJsonField(
+      ));
+  List<int>? oservidosTrOsServicos(dynamic response) => (getJsonField(
         response,
         r'''$.dados[:].oserv_id_os''',
         true,
-      ) as List?;
-  List? oservdthragendamentoTrOsServicos(dynamic response) => getJsonField(
+      ) as List?)
+          ?.withoutNulls
+          .map((x) => castToType<int>(x))
+          .withoutNulls
+          .toList();
+  List<String>? oservdthragendamentoTrOsServicos(dynamic response) =>
+      (getJsonField(
         response,
         r'''$.dados[:].oserv_dthr_agendamento''',
         true,
-      ) as List?;
+      ) as List?)
+          ?.withoutNulls
+          .map((x) => castToType<String>(x))
+          .withoutNulls
+          .toList();
+  List<int>? oservQuantosPontos(dynamic response) => (getJsonField(
+        response,
+        r'''$.dados[:].oserv_quantos_pontos''',
+        true,
+      ) as List?)
+          ?.withoutNulls
+          .map((x) => castToType<int>(x))
+          .withoutNulls
+          .toList();
+  List<bool>? oservAutoAuditoria(dynamic response) => (getJsonField(
+        response,
+        r'''$.dados[:].oserv_auto_auditoria''',
+        true,
+      ) as List?)
+          ?.withoutNulls
+          .map((x) => castToType<bool>(x))
+          .withoutNulls
+          .toList();
 }
 
 class TrTecnicosCall {

@@ -1404,6 +1404,14 @@ class _SelecionarOSWidgetState extends State<SelecionarOSWidget>
                                                                                     'os_id_faz'),
                                                                                 '404',
                                                                               ),
+                                                                              autoAuditoriaQuantidadePontos: getJsonField(
+                                                                                trOsServicosItem,
+                                                                                r'''$.oserv_quantos_pontos ''',
+                                                                              ),
+                                                                              autoAuditoria: getJsonField(
+                                                                                trOsServicosItem,
+                                                                                r'''$.oserv_auto_auditoria ''',
+                                                                              ),
                                                                             ),
                                                                           ),
                                                                         ),
@@ -1700,6 +1708,16 @@ class _SelecionarOSWidgetState extends State<SelecionarOSWidget>
                                                                                   'os_id_faz'),
                                                                               '404',
                                                                             ),
+                                                                            autoAuditoria:
+                                                                                getJsonField(
+                                                                              trOsServicosItem,
+                                                                              r'''$.oserv_auto_auditoria ''',
+                                                                            ),
+                                                                            autoAuditoriaQuantidadePontos:
+                                                                                getJsonField(
+                                                                              trOsServicosItem,
+                                                                              r'''$.oserv_quantos_pontos ''',
+                                                                            ),
                                                                           ),
                                                                         ),
                                                                       ),
@@ -1862,53 +1880,32 @@ class _SelecionarOSWidgetState extends State<SelecionarOSWidget>
                                                                                     fontWeight: FontWeight.w500,
                                                                                   ),
                                                                             ),
-                                                                            if (true ==
-                                                                                false)
-                                                                              Text(
-                                                                                '${functions.ligaoDeNome(FFAppState().trFazendas.toList(), 'faz_id', 'faz_cidade', valueOrDefault<String>(
-                                                                                      functions.ligacaoEntreListas(
-                                                                                          getJsonField(
-                                                                                            trOsServicosItem,
-                                                                                            r'''$''',
-                                                                                            true,
-                                                                                          ),
-                                                                                          FFAppState().trOrdemServicos.toList(),
-                                                                                          'oserv_id_os',
-                                                                                          'os_id',
-                                                                                          'os_id_faz'),
-                                                                                      '404',
-                                                                                    ))}, ${functions.ligaoDeNome(FFAppState().trFazendas.toList(), 'faz_id', 'faz_estado', valueOrDefault<String>(
-                                                                                      functions.ligacaoEntreListas(
-                                                                                          getJsonField(
-                                                                                            trOsServicosItem,
-                                                                                            r'''$''',
-                                                                                            true,
-                                                                                          ),
-                                                                                          FFAppState().trOrdemServicos.toList(),
-                                                                                          'oserv_id_os',
-                                                                                          'os_id',
-                                                                                          'os_id_faz'),
-                                                                                      '404',
-                                                                                    ))}',
-                                                                                style: FlutterFlowTheme.of(context).bodyLarge.override(
-                                                                                      fontFamily: 'Readex Pro',
-                                                                                      fontSize: 12.0,
-                                                                                    ),
-                                                                              ),
                                                                             Text(
-                                                                              'Auto Audi:${valueOrDefault<String>(
-                                                                                getJsonField(
-                                                                                  trOsServicosItem,
-                                                                                  r'''$.oserv_auto_auditoria''',
-                                                                                )?.toString(),
-                                                                                'Error',
-                                                                              )}${valueOrDefault<String>(
-                                                                                getJsonField(
-                                                                                  trOsServicosItem,
-                                                                                  r'''$.oserv_quantos_pontos''',
-                                                                                )?.toString(),
-                                                                                'error',
-                                                                              )}',
+                                                                              '${functions.ligaoDeNome(FFAppState().trFazendas.toList(), 'faz_id', 'faz_cidade', valueOrDefault<String>(
+                                                                                    functions.ligacaoEntreListas(
+                                                                                        getJsonField(
+                                                                                          trOsServicosItem,
+                                                                                          r'''$''',
+                                                                                          true,
+                                                                                        ),
+                                                                                        FFAppState().trOrdemServicos.toList(),
+                                                                                        'oserv_id_os',
+                                                                                        'os_id',
+                                                                                        'os_id_faz'),
+                                                                                    '404',
+                                                                                  ))}, ${functions.ligaoDeNome(FFAppState().trFazendas.toList(), 'faz_id', 'faz_estado', valueOrDefault<String>(
+                                                                                    functions.ligacaoEntreListas(
+                                                                                        getJsonField(
+                                                                                          trOsServicosItem,
+                                                                                          r'''$''',
+                                                                                          true,
+                                                                                        ),
+                                                                                        FFAppState().trOrdemServicos.toList(),
+                                                                                        'oserv_id_os',
+                                                                                        'os_id',
+                                                                                        'os_id_faz'),
+                                                                                    '404',
+                                                                                  ))}',
                                                                               style: FlutterFlowTheme.of(context).bodyLarge.override(
                                                                                     fontFamily: 'Readex Pro',
                                                                                     fontSize: 12.0,
@@ -2507,6 +2504,16 @@ class _SelecionarOSWidgetState extends State<SelecionarOSWidget>
                                                                                       'os_id_faz'),
                                                                                   '404',
                                                                                 ))!,
+                                                                            autoAuditoria:
+                                                                                getJsonField(
+                                                                              trOsServicosItem,
+                                                                              r'''$.oserv_auto_auditoria''',
+                                                                            ),
+                                                                            autoAuditoriaQuantidadePontos:
+                                                                                getJsonField(
+                                                                              trOsServicosItem,
+                                                                              r'''$.oserv_quantos_pontos''',
+                                                                            ),
                                                                           ),
                                                                         ),
                                                                       ),
@@ -2814,6 +2821,16 @@ class _SelecionarOSWidgetState extends State<SelecionarOSWidget>
                                                                                     'os_id_faz'),
                                                                                 '404',
                                                                               ))!,
+                                                                          autoAuditoria:
+                                                                              getJsonField(
+                                                                            trOsServicosItem,
+                                                                            r'''$.oserv_auto_auditoria''',
+                                                                          ),
+                                                                          autoAuditoriaQuantidadePontos:
+                                                                              getJsonField(
+                                                                            trOsServicosItem,
+                                                                            r'''$.oserv_quantos_pontos''',
+                                                                          ),
                                                                         ),
                                                                       ),
                                                                     ),

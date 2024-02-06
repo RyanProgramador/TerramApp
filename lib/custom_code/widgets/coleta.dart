@@ -29,6 +29,7 @@ class Coleta extends StatefulWidget {
   final double? height;
   //final List<String>? listaPontosComProfundidadeParaMedicao;
   final int? intervaloDeColetaParaProximaFoto;
+  final bool? autoAuditoria;
   final String? idContorno;
   //final List<String>? possiveisProfundidades;
   //final List<String>? listaDeLocaisDeContornoDeArea;
@@ -44,6 +45,7 @@ class Coleta extends StatefulWidget {
     //this.possiveisProfundidades,
     //this.listaDeLocaisDeContornoDeArea,
     this.pontosJaColetados,
+    this.autoAuditoria,
   }) : super(key: key);
   final String customIconUrl =
       'https://cdn-icons-png.flaticon.com/128/3253/3253113.png';
@@ -78,7 +80,7 @@ class _ColetaState extends State<Coleta> {
   //
 
   //tira foto
-  bool podeTirarFoto = true;
+  bool podeTirarFoto = widget.autoAuditoria ?? false;
   int intervaloDeColetaParaProximaFoto = 30;
   int vezAtualDoIntervaloDeColeta = 0;
 

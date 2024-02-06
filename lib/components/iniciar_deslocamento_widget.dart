@@ -34,7 +34,10 @@ class IniciarDeslocamentoWidget extends StatefulWidget {
     required this.deslocamentoAtualFinzalizado,
     this.polylinhaQueVemDoMenuInicial,
     String? fazid,
-  }) : this.fazid = fazid ?? '1';
+    bool? autoAuditoria,
+    required this.autoAuditoriaQuantidadePontos,
+  })  : this.fazid = fazid ?? '1',
+        this.autoAuditoria = autoAuditoria ?? false;
 
   final String? etapade;
   final String? fazendaNome;
@@ -50,6 +53,8 @@ class IniciarDeslocamentoWidget extends StatefulWidget {
   final bool? deslocamentoAtualFinzalizado;
   final String? polylinhaQueVemDoMenuInicial;
   final String fazid;
+  final bool autoAuditoria;
+  final int? autoAuditoriaQuantidadePontos;
 
   @override
   State<IniciarDeslocamentoWidget> createState() =>
