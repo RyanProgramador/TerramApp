@@ -246,8 +246,6 @@ class _IniciarDeslocamentoWidgetState extends State<IniciarDeslocamentoWidget> {
                                             ),
                                           },
                                         );
-
-                                        Navigator.pop(context);
                                       },
                                       child: Icon(
                                         Icons.arrow_back_outlined,
