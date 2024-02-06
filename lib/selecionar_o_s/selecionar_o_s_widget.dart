@@ -1862,37 +1862,39 @@ class _SelecionarOSWidgetState extends State<SelecionarOSWidget>
                                                                                     fontWeight: FontWeight.w500,
                                                                                   ),
                                                                             ),
-                                                                            Text(
-                                                                              '${functions.ligaoDeNome(FFAppState().trFazendas.toList(), 'faz_id', 'faz_cidade', valueOrDefault<String>(
-                                                                                    functions.ligacaoEntreListas(
-                                                                                        getJsonField(
-                                                                                          trOsServicosItem,
-                                                                                          r'''$''',
-                                                                                          true,
-                                                                                        ),
-                                                                                        FFAppState().trOrdemServicos.toList(),
-                                                                                        'oserv_id_os',
-                                                                                        'os_id',
-                                                                                        'os_id_faz'),
-                                                                                    '404',
-                                                                                  ))}, ${functions.ligaoDeNome(FFAppState().trFazendas.toList(), 'faz_id', 'faz_estado', valueOrDefault<String>(
-                                                                                    functions.ligacaoEntreListas(
-                                                                                        getJsonField(
-                                                                                          trOsServicosItem,
-                                                                                          r'''$''',
-                                                                                          true,
-                                                                                        ),
-                                                                                        FFAppState().trOrdemServicos.toList(),
-                                                                                        'oserv_id_os',
-                                                                                        'os_id',
-                                                                                        'os_id_faz'),
-                                                                                    '404',
-                                                                                  ))}',
-                                                                              style: FlutterFlowTheme.of(context).bodyLarge.override(
-                                                                                    fontFamily: 'Readex Pro',
-                                                                                    fontSize: 12.0,
-                                                                                  ),
-                                                                            ),
+                                                                            if (true ==
+                                                                                false)
+                                                                              Text(
+                                                                                '${functions.ligaoDeNome(FFAppState().trFazendas.toList(), 'faz_id', 'faz_cidade', valueOrDefault<String>(
+                                                                                      functions.ligacaoEntreListas(
+                                                                                          getJsonField(
+                                                                                            trOsServicosItem,
+                                                                                            r'''$''',
+                                                                                            true,
+                                                                                          ),
+                                                                                          FFAppState().trOrdemServicos.toList(),
+                                                                                          'oserv_id_os',
+                                                                                          'os_id',
+                                                                                          'os_id_faz'),
+                                                                                      '404',
+                                                                                    ))}, ${functions.ligaoDeNome(FFAppState().trFazendas.toList(), 'faz_id', 'faz_estado', valueOrDefault<String>(
+                                                                                      functions.ligacaoEntreListas(
+                                                                                          getJsonField(
+                                                                                            trOsServicosItem,
+                                                                                            r'''$''',
+                                                                                            true,
+                                                                                          ),
+                                                                                          FFAppState().trOrdemServicos.toList(),
+                                                                                          'oserv_id_os',
+                                                                                          'os_id',
+                                                                                          'os_id_faz'),
+                                                                                      '404',
+                                                                                    ))}',
+                                                                                style: FlutterFlowTheme.of(context).bodyLarge.override(
+                                                                                      fontFamily: 'Readex Pro',
+                                                                                      fontSize: 12.0,
+                                                                                    ),
+                                                                              ),
                                                                             Text(
                                                                               'Auto Audi:${valueOrDefault<String>(
                                                                                 getJsonField(
