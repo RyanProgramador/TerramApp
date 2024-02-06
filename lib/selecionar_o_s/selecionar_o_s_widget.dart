@@ -1893,6 +1893,25 @@ class _SelecionarOSWidgetState extends State<SelecionarOSWidget>
                                                                                     fontSize: 12.0,
                                                                                   ),
                                                                             ),
+                                                                            Text(
+                                                                              'Auto Audi:${valueOrDefault<String>(
+                                                                                getJsonField(
+                                                                                  trOsServicosItem,
+                                                                                  r'''$.oserv_auto_auditoria''',
+                                                                                )?.toString(),
+                                                                                'Error',
+                                                                              )}${valueOrDefault<String>(
+                                                                                getJsonField(
+                                                                                  trOsServicosItem,
+                                                                                  r'''$.oserv_quantos_pontos''',
+                                                                                )?.toString(),
+                                                                                'error',
+                                                                              )}',
+                                                                              style: FlutterFlowTheme.of(context).bodyLarge.override(
+                                                                                    fontFamily: 'Readex Pro',
+                                                                                    fontSize: 12.0,
+                                                                                  ),
+                                                                            ),
                                                                           ],
                                                                         ),
                                                                       ),
