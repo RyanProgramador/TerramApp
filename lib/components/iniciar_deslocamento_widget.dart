@@ -235,7 +235,7 @@ class _IniciarDeslocamentoWidgetState extends State<IniciarDeslocamentoWidget> {
                                       highlightColor: Colors.transparent,
                                       onTap: () async {
                                         context.goNamed(
-                                          'SelecionarOS',
+                                          'blankRedirecona',
                                           extra: <String, dynamic>{
                                             kTransitionInfoKey: TransitionInfo(
                                               hasTransition: true,

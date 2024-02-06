@@ -86,7 +86,7 @@ class _CarregandoOsWidgetState extends State<CarregandoOsWidget> {
               'Aguarde um pouco!',
               style: FlutterFlowTheme.of(context).bodyMedium.override(
                     fontFamily: 'Readex Pro',
-                    color: FlutterFlowTheme.of(context).secondaryBackground,
+                    color: Color(0x9DFFFFFF),
                   ),
             ),
           if (_model.teste == 2)
@@ -94,7 +94,7 @@ class _CarregandoOsWidgetState extends State<CarregandoOsWidget> {
               'Isso pode demorar alguns instantes!',
               style: FlutterFlowTheme.of(context).bodyMedium.override(
                     fontFamily: 'Readex Pro',
-                    color: FlutterFlowTheme.of(context).secondaryBackground,
+                    color: Color(0x9DFFFFFF),
                   ),
             ),
           if (_model.teste == 3)
@@ -102,7 +102,7 @@ class _CarregandoOsWidgetState extends State<CarregandoOsWidget> {
               'Sincronizando imagens',
               style: FlutterFlowTheme.of(context).bodyMedium.override(
                     fontFamily: 'Readex Pro',
-                    color: FlutterFlowTheme.of(context).secondaryBackground,
+                    color: Color(0x9DFFFFFF),
                   ),
             ),
         ],

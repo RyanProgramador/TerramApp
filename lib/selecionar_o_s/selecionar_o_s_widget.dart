@@ -594,7 +594,6 @@ class _SelecionarOSWidgetState extends State<SelecionarOSWidget>
           (_model.trFazendasSinc?.succeeded ?? true) &&
           (_model.sincOsRet?.succeeded ?? true) &&
           (_model.trOsTecnicosSincroniza?.succeeded ?? true)) {
-        FFAppState().update(() {});
         FFAppState().update(() {
           FFAppState().trOrdemServicos = SincronizarGroup.ordemDeServicoCall
               .ordemServicoDados(
@@ -689,6 +688,7 @@ class _SelecionarOSWidgetState extends State<SelecionarOSWidget>
               .toList()
               .cast<dynamic>();
         });
+        FFAppState().update(() {});
       } else {
         await showDialog(
           context: context,
