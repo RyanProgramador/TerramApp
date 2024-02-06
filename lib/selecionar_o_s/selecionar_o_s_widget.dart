@@ -1408,10 +1408,10 @@ class _SelecionarOSWidgetState extends State<SelecionarOSWidget>
                                                                                 trOsServicosItem,
                                                                                 r'''$.oserv_quantos_pontos ''',
                                                                               ),
-                                                                              autoAuditoria: getJsonField(
+                                                                              autoAuditoria: functions.strToBool(getJsonField(
                                                                                 trOsServicosItem,
                                                                                 r'''$.oserv_auto_auditoria ''',
-                                                                              ),
+                                                                              ).toString())!,
                                                                             ),
                                                                           ),
                                                                         ),
@@ -1709,10 +1709,10 @@ class _SelecionarOSWidgetState extends State<SelecionarOSWidget>
                                                                               '404',
                                                                             ),
                                                                             autoAuditoria:
-                                                                                getJsonField(
+                                                                                functions.strToBool(getJsonField(
                                                                               trOsServicosItem,
                                                                               r'''$.oserv_auto_auditoria ''',
-                                                                            ),
+                                                                            ).toString())!,
                                                                             autoAuditoriaQuantidadePontos:
                                                                                 getJsonField(
                                                                               trOsServicosItem,
@@ -2505,10 +2505,10 @@ class _SelecionarOSWidgetState extends State<SelecionarOSWidget>
                                                                                   '404',
                                                                                 ))!,
                                                                             autoAuditoria:
-                                                                                getJsonField(
+                                                                                functions.strToBool(getJsonField(
                                                                               trOsServicosItem,
                                                                               r'''$.oserv_auto_auditoria''',
-                                                                            ),
+                                                                            ).toString())!,
                                                                             autoAuditoriaQuantidadePontos:
                                                                                 getJsonField(
                                                                               trOsServicosItem,
@@ -2822,10 +2822,10 @@ class _SelecionarOSWidgetState extends State<SelecionarOSWidget>
                                                                                 '404',
                                                                               ))!,
                                                                           autoAuditoria:
-                                                                              getJsonField(
+                                                                              functions.strToBool(getJsonField(
                                                                             trOsServicosItem,
                                                                             r'''$.oserv_auto_auditoria''',
-                                                                          ),
+                                                                          ).toString())!,
                                                                           autoAuditoriaQuantidadePontos:
                                                                               getJsonField(
                                                                             trOsServicosItem,
