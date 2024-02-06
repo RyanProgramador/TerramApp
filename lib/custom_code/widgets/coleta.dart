@@ -80,8 +80,8 @@ class _ColetaState extends State<Coleta> {
   //
 
   //tira foto
-  bool podeTirarFoto = widget.autoAuditoria ?? false;
-  int intervaloDeColetaParaProximaFoto = 30;
+  bool podeTirarFoto = false;
+  int intervaloDeColetaParaProximaFoto = 3000;
   int vezAtualDoIntervaloDeColeta = 0;
 
 //double tap no marcador
@@ -201,9 +201,17 @@ class _ColetaState extends State<Coleta> {
       }
     }
     // intervaloDeColetaParaProximaFoto = 1;
-    // intervaloDeColetaParaProximaFoto =
-    //     widget.intervaloDeColetaParaProximaFoto ??
-    //         intervaloDeColetaParaProximaFoto;
+    intervaloDeColetaParaProximaFoto =
+        widget.intervaloDeColetaParaProximaFoto ?? 0;
+
+    if (intervaloDeColetaParaProximaFoto == 0) {
+      podeTirarFoto = false;
+    } else {
+      intervaloDeColetaParaProximaFoto++;
+      if (widget.autoAuditoria == true) {
+        podeTirarFoto = true;
+      }
+    }
 
     // if (widget.listaDeLocaisDeContornoDeArea != null) {
     //   listaDeLocais = widget.listaDeLocaisDeContornoDeArea!
@@ -1265,12 +1273,13 @@ class _ColetaState extends State<Coleta> {
               (m) => m["marcador_nome"] == marcadorNome)["profundidades"]
           .map((p) => p["nome"])
           .toSet();
-      setState(() {
-        vezAtualDoIntervaloDeColeta += 1;
-      });
+
       if (coletasPorMarcador[marcadorNome]!.containsAll(todasProfundidades)) {
         // Todas as profundidades coletadas, mude a cor do marcador para verde
         //_updateMarkerColor(marcadorNome, true);
+        setState(() {
+          vezAtualDoIntervaloDeColeta += 1;
+        });
       }
     });
     Navigator.of(context).pop(); // Fecha o modal atual
