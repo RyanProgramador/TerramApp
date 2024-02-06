@@ -250,10 +250,69 @@ class _SelecionarOSWidgetState extends State<SelecionarOSWidget>
                 .cast<dynamic>();
           });
         }
+
+        await showDialog(
+          context: context,
+          builder: (alertDialogContext) {
+            return AlertDialog(
+              title: Text('Codigo #04'),
+              actions: [
+                TextButton(
+                  onPressed: () => Navigator.pop(alertDialogContext),
+                  child: Text('Ok'),
+                ),
+              ],
+            );
+          },
+        );
       } else if ((FFAppState().sincronizcaoAutomatica == false) &&
           (FFAppState().servicosFinalizadosComSucesso.length != 0)) {
+        await showDialog(
+          context: context,
+          builder: (alertDialogContext) {
+            return AlertDialog(
+              title: Text('Codigo #01'),
+              actions: [
+                TextButton(
+                  onPressed: () => Navigator.pop(alertDialogContext),
+                  child: Text('Ok'),
+                ),
+              ],
+            );
+          },
+        );
       } else if ((FFAppState().trOrdemServicos.length <= 0) &&
-          _model.foiAtualizado) {}
+          _model.foiAtualizado) {
+        await showDialog(
+          context: context,
+          builder: (alertDialogContext) {
+            return AlertDialog(
+              title: Text('Codigo #02'),
+              actions: [
+                TextButton(
+                  onPressed: () => Navigator.pop(alertDialogContext),
+                  child: Text('Ok'),
+                ),
+              ],
+            );
+          },
+        );
+      } else {
+        await showDialog(
+          context: context,
+          builder: (alertDialogContext) {
+            return AlertDialog(
+              title: Text('Codigo #03'),
+              actions: [
+                TextButton(
+                  onPressed: () => Navigator.pop(alertDialogContext),
+                  child: Text('Ok'),
+                ),
+              ],
+            );
+          },
+        );
+      }
 
       setState(() {
         FFAppState().AtualLocalizcao = currentUserLocationValue!.toString();
@@ -295,6 +354,20 @@ class _SelecionarOSWidgetState extends State<SelecionarOSWidget>
           urlapicall: FFAppState().urlapicall,
           pontosColetados:
               functions.jsonListToStr(FFAppState().PontosColetados.toList()),
+        );
+        await showDialog(
+          context: context,
+          builder: (alertDialogContext) {
+            return AlertDialog(
+              title: Text('Codigo #05'),
+              actions: [
+                TextButton(
+                  onPressed: () => Navigator.pop(alertDialogContext),
+                  child: Text('Ok'),
+                ),
+              ],
+            );
+          },
         );
         FFAppState().update(() {});
         if ((_model.trTecnicosSinc2?.succeeded ?? true) &&
@@ -477,6 +550,20 @@ class _SelecionarOSWidgetState extends State<SelecionarOSWidget>
         urlapicall: FFAppState().urlapicall,
         pontosColetados:
             functions.jsonListToStr(FFAppState().PontosColetados.toList()),
+      );
+      await showDialog(
+        context: context,
+        builder: (alertDialogContext) {
+          return AlertDialog(
+            title: Text('Codigo #06'),
+            actions: [
+              TextButton(
+                onPressed: () => Navigator.pop(alertDialogContext),
+                child: Text('Ok'),
+              ),
+            ],
+          );
+        },
       );
       FFAppState().update(() {});
       if ((_model.trTecnicosSinc?.succeeded ?? true) &&
