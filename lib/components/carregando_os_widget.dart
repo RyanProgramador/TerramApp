@@ -36,7 +36,7 @@ class _CarregandoOsWidgetState extends State<CarregandoOsWidget> {
         setState(() {
           _model.teste = _model.teste + 1;
         });
-        await Future.delayed(const Duration(milliseconds: 1000));
+        await Future.delayed(const Duration(milliseconds: 3000));
       }
       setState(() {
         _model.teste = 1;
@@ -84,17 +84,26 @@ class _CarregandoOsWidgetState extends State<CarregandoOsWidget> {
           if (_model.teste == 1)
             Text(
               'Aguarde um pouco!',
-              style: FlutterFlowTheme.of(context).bodyMedium,
+              style: FlutterFlowTheme.of(context).bodyMedium.override(
+                    fontFamily: 'Readex Pro',
+                    color: FlutterFlowTheme.of(context).primary,
+                  ),
             ),
           if (_model.teste == 2)
             Text(
               'Isso pode demorar alguns instantes!',
-              style: FlutterFlowTheme.of(context).bodyMedium,
+              style: FlutterFlowTheme.of(context).bodyMedium.override(
+                    fontFamily: 'Readex Pro',
+                    color: FlutterFlowTheme.of(context).primary,
+                  ),
             ),
           if (_model.teste == 3)
             Text(
               'Sincronizando imagens',
-              style: FlutterFlowTheme.of(context).bodyMedium,
+              style: FlutterFlowTheme.of(context).bodyMedium.override(
+                    fontFamily: 'Readex Pro',
+                    color: FlutterFlowTheme.of(context).primary,
+                  ),
             ),
         ],
       ),
