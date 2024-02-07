@@ -1304,8 +1304,6 @@ class _SelecionarOSWidgetState extends State<SelecionarOSWidget>
                                                                 );
                                                                 Navigator.pop(
                                                                     context);
-                                                                Navigator.pop(
-                                                                    context);
                                                                 await showModalBottomSheet(
                                                                   isScrollControlled:
                                                                       true,
@@ -1511,6 +1509,8 @@ class _SelecionarOSWidgetState extends State<SelecionarOSWidget>
                                                                     safeSetState(
                                                                         () {}));
 
+                                                                Navigator.pop(
+                                                                    context);
                                                                 if (_shouldSetState)
                                                                   setState(
                                                                       () {});
