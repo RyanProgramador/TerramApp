@@ -36,11 +36,22 @@ class _CarregandoOsWidgetState extends State<CarregandoOsWidget> {
         setState(() {
           _model.teste = _model.teste + 1;
         });
+        setState(() {
+          _model.contagem = _model.contagem! + 1;
+        });
+        if (_model.contagem == 10) {
+          break;
+        }
         await Future.delayed(const Duration(milliseconds: 3000));
+        setState(() {
+          _model.teste = _model.teste + 1;
+        });
+        await Future.delayed(const Duration(milliseconds: 3000));
+        setState(() {
+          _model.teste = 1;
+        });
       }
-      setState(() {
-        _model.teste = 1;
-      });
+      Navigator.pop(context);
     });
   }
 

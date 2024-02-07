@@ -13,6 +13,8 @@ class CarregandoOsModel extends FlutterFlowModel<CarregandoOsWidget> {
 
   int teste = 1;
 
+  int? contagem = 0;
+
   /// Initialization and disposal methods.
 
   void initState(BuildContext context) {}
