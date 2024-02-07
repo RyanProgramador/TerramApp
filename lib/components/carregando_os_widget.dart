@@ -32,7 +32,7 @@ class _CarregandoOsWidgetState extends State<CarregandoOsWidget> {
 
     // On component load action.
     SchedulerBinding.instance.addPostFrameCallback((_) async {
-      while (_model.teste != 3) {
+      while (_model.teste != 4) {
         setState(() {
           _model.teste = _model.teste + 1;
         });
@@ -42,6 +42,10 @@ class _CarregandoOsWidgetState extends State<CarregandoOsWidget> {
         if (_model.contagem == 8) {
           break;
         }
+        await Future.delayed(const Duration(milliseconds: 3000));
+        setState(() {
+          _model.teste = _model.teste + 1;
+        });
         await Future.delayed(const Duration(milliseconds: 3000));
         setState(() {
           _model.teste = _model.teste + 1;
