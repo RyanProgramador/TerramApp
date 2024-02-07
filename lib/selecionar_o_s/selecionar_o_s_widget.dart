@@ -1215,6 +1215,8 @@ class _SelecionarOSWidgetState extends State<SelecionarOSWidget>
                                                                               0.0));
                                                               var _shouldSetState =
                                                                   false;
+                                                              Navigator.pop(
+                                                                  context);
                                                               ScaffoldMessenger
                                                                       .of(context)
                                                                   .showSnackBar(
@@ -1509,8 +1511,6 @@ class _SelecionarOSWidgetState extends State<SelecionarOSWidget>
                                                                     safeSetState(
                                                                         () {}));
 
-                                                                Navigator.pop(
-                                                                    context);
                                                                 if (_shouldSetState)
                                                                   setState(
                                                                       () {});
@@ -1821,8 +1821,6 @@ class _SelecionarOSWidgetState extends State<SelecionarOSWidget>
                                                                   safeSetState(
                                                                       () {}));
 
-                                                              Navigator.pop(
-                                                                  context);
                                                               if (_shouldSetState)
                                                                 setState(() {});
                                                             },
