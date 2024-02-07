@@ -39,7 +39,7 @@ class _CarregandoOsWidgetState extends State<CarregandoOsWidget> {
         setState(() {
           _model.contagem = _model.contagem! + 1;
         });
-        if (_model.contagem == 8) {
+        if (_model.contagem == 4) {
           break;
         }
         await Future.delayed(const Duration(milliseconds: 3000));

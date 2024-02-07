@@ -203,6 +203,7 @@ class _SelecionarOSWidgetState extends State<SelecionarOSWidget>
             FFAppState().contornoGrupoID = '';
             FFAppState().grupoContornoFazendas = [];
             FFAppState().contornoFazenda = [];
+            FFAppState().PontosColetados = [];
           });
         } else {
           await showDialog(
