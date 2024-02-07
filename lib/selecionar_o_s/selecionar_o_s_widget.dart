@@ -259,8 +259,6 @@ class _SelecionarOSWidgetState extends State<SelecionarOSWidget>
         _model.sincPontosMedicaoPontosAPI =
             await SincronizarGroup.trSincronizaPontosMedicaoCall.call(
           urlapicall: FFAppState().urlapicall,
-          pontosColetados:
-              functions.jsonListToStr(FFAppState().PontosColetados.toList()),
         );
         FFAppState().update(() {
           FFAppState().pontosDeColeta = getJsonField(
@@ -305,7 +303,6 @@ class _SelecionarOSWidgetState extends State<SelecionarOSWidget>
           )!
               .toList()
               .cast<dynamic>();
-          FFAppState().PontosColetados = [];
         });
       }
 
