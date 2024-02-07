@@ -305,6 +305,7 @@ class _SelecionarOSWidgetState extends State<SelecionarOSWidget>
           )!
               .toList()
               .cast<dynamic>();
+          FFAppState().PontosColetados = [];
         });
       }
 
