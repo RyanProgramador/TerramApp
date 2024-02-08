@@ -1243,7 +1243,8 @@ class _SelecionarOSWidgetState extends State<SelecionarOSWidget>
                                                                   },
                                                                 );
 
-                                                                context.goNamed(
+                                                                context
+                                                                    .pushNamed(
                                                                   'IniciarDeslocamentoTela',
                                                                   queryParameters:
                                                                       {
@@ -1611,7 +1612,7 @@ class _SelecionarOSWidgetState extends State<SelecionarOSWidget>
                                                               _shouldSetState =
                                                                   true;
 
-                                                              context.goNamed(
+                                                              context.pushNamed(
                                                                 'IniciarDeslocamentoTela',
                                                                 queryParameters:
                                                                     {
