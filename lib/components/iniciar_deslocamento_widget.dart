@@ -241,7 +241,7 @@ class _IniciarDeslocamentoWidgetState extends State<IniciarDeslocamentoWidget> {
                                                       (alertDialogContext) {
                                                     return AlertDialog(
                                                       title: Text(
-                                                          'Deseja realmente voltar para a tela inicial?'),
+                                                          'Você quer sair do serviço e voltar à tela inicial?'),
                                                       actions: [
                                                         TextButton(
                                                           onPressed: () =>
