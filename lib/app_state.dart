@@ -38,13 +38,6 @@ class FFAppState extends ChangeNotifier {
               _Erro;
     });
     _safeInit(() {
-      _locaisPercorridos2 = prefs
-              .getStringList('ff_locaisPercorridos2')
-              ?.map(_latLngFromString)
-              .withoutNulls ??
-          _locaisPercorridos2;
-    });
-    _safeInit(() {
       _trEmpresas = prefs.getStringList('ff_trEmpresas')?.map((x) {
             try {
               return jsonDecode(x);
@@ -200,15 +193,6 @@ class FFAppState extends ChangeNotifier {
       _trOsDeslocamentoListaFinalizados =
           prefs.getStringList('ff_trOsDeslocamentoListaFinalizados') ??
               _trOsDeslocamentoListaFinalizados;
-    });
-    _safeInit(() {
-      if (prefs.containsKey('ff_teste')) {
-        try {
-          _teste = jsonDecode(prefs.getString('ff_teste') ?? '');
-        } catch (e) {
-          print("Can't decode persisted json. Error: $e.");
-        }
-      }
     });
     _safeInit(() {
       if (prefs.containsKey('ff_trOsServicoEmAndamento')) {
@@ -597,47 +581,6 @@ class FFAppState extends ChangeNotifier {
   void insertAtIndexInErro(int _index, LatLng _value) {
     _Erro.insert(_index, _value);
     prefs.setStringList('ff_Erro', _Erro.map((x) => x.serialize()).toList());
-  }
-
-  List<LatLng> _locaisPercorridos2 = [LatLng(-29.9077898, -51.1847036)];
-  List<LatLng> get locaisPercorridos2 => _locaisPercorridos2;
-  set locaisPercorridos2(List<LatLng> _value) {
-    _locaisPercorridos2 = _value;
-    prefs.setStringList(
-        'ff_locaisPercorridos2', _value.map((x) => x.serialize()).toList());
-  }
-
-  void addToLocaisPercorridos2(LatLng _value) {
-    _locaisPercorridos2.add(_value);
-    prefs.setStringList('ff_locaisPercorridos2',
-        _locaisPercorridos2.map((x) => x.serialize()).toList());
-  }
-
-  void removeFromLocaisPercorridos2(LatLng _value) {
-    _locaisPercorridos2.remove(_value);
-    prefs.setStringList('ff_locaisPercorridos2',
-        _locaisPercorridos2.map((x) => x.serialize()).toList());
-  }
-
-  void removeAtIndexFromLocaisPercorridos2(int _index) {
-    _locaisPercorridos2.removeAt(_index);
-    prefs.setStringList('ff_locaisPercorridos2',
-        _locaisPercorridos2.map((x) => x.serialize()).toList());
-  }
-
-  void updateLocaisPercorridos2AtIndex(
-    int _index,
-    LatLng Function(LatLng) updateFn,
-  ) {
-    _locaisPercorridos2[_index] = updateFn(_locaisPercorridos2[_index]);
-    prefs.setStringList('ff_locaisPercorridos2',
-        _locaisPercorridos2.map((x) => x.serialize()).toList());
-  }
-
-  void insertAtIndexInLocaisPercorridos2(int _index, LatLng _value) {
-    _locaisPercorridos2.insert(_index, _value);
-    prefs.setStringList('ff_locaisPercorridos2',
-        _locaisPercorridos2.map((x) => x.serialize()).toList());
   }
 
   List<dynamic> _trEmpresas = [];
@@ -1229,14 +1172,6 @@ class FFAppState extends ChangeNotifier {
     _trOsDeslocamentoListaFinalizados.insert(_index, _value);
     prefs.setStringList('ff_trOsDeslocamentoListaFinalizados',
         _trOsDeslocamentoListaFinalizados);
-  }
-
-  dynamic _teste = jsonDecode(
-      '{\"osdes_id\":\"0\",\"osdes_id_oserv\":\"22\",\"osdes_id_tec\":\"7\",\"osdes_ponto_informacao\":\"1\",\"osdes_latitude\":\"-29.914965290989\",\"osdes_longitude\":\"-51.1969985858828\",\"osdes_dthr_cad\":\"\",\"osdes_usu_cad\":\"null\",\"osdes_dthr_alt\":\"null\",\"osdes_usu_alt\":\"null\"}');
-  dynamic get teste => _teste;
-  set teste(dynamic _value) {
-    _teste = _value;
-    prefs.setString('ff_teste', jsonEncode(_value));
   }
 
   dynamic _trOsServicoEmAndamento;

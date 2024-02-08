@@ -595,7 +595,7 @@ class _ColetaState extends State<Coleta> {
     //     now.difference(lastTapTimestamps[markerIdValue]!).inMilliseconds <
     //         1800) {
     // Check if the distance is greater than 30 meters
-    if (distance > 35) {
+    if (distance > 3500) {
       //metros de distancia para coletar
       // Show alert
 
@@ -800,18 +800,44 @@ class _ColetaState extends State<Coleta> {
             "profundidade": nomeProfundidade,
             "foto": 'base64Image',
             "latlng": '$latlng',
-            "id_ref": referencialProfundidadePontoId
+            "id_ref": referencialProfundidadePontoId,
+            "obs": ""
           });
           FFAppState().PontosColetados.add({
             "marcador_nome": nomeMarcadorAtual,
             "profundidade": nomeProfundidade,
-            // "foto": '$base64Image',
+            "foto": 'base64Image',
             "foto": '$base64Image',
             "latlng": '$latlng',
-            "id_ref": referencialProfundidadePontoId
+            "id_ref": referencialProfundidadePontoId,
+            "obs": ""
           });
+
+          coletasPorMarcador.putIfAbsent(nomeMarcadorAtual, () => {});
+          coletasPorMarcador[nomeMarcadorAtual]!.add(nomeProfundidade);
+
+          // Verifica se todas as profundidades foram coletadas
+          var todasProfundidades = latLngListMarcadores
+              .firstWhere((m) => m["marcador_nome"] == nomeMarcadorAtual)[
+                  "profundidades"]
+              .map((p) => p["nome"])
+              .toSet();
+
+          if (coletasPorMarcador[nomeMarcadorAtual]!
+              .containsAll(todasProfundidades)) {
+            // Todas as profundidades coletadas, mude a cor do marcador para verde
+            //_updateMarkerColor(marcadorNome, true);
+            setState(() {
+              vezAtualDoIntervaloDeColeta += 1;
+            });
+          }
+          ;
+
+          // Navigator.of(context).pop(); // Fecha o modal atual
+          // _mostrarModalSucesso(context, nomeMarcadorAtual);
         }
       });
+
       // setState(() {
       //   pontosColetados.add({
       //     "marcador_nome": nomeMarcadorAtual,
@@ -820,6 +846,71 @@ class _ColetaState extends State<Coleta> {
       //   });
       // });
     }
+    Navigator.of(context).pop(); // Fecha o modal atual
+    _showModalObservacoes(
+        nomeMarcadorAtual, referencialProfundidadePontoId, nomeProfundidade);
+    // Navigator.of(context).pop(); // Fecha o modal atual
+  }
+
+  void _showModalObservacoes(String marcadorNome,
+      String referencialProfundidadePontoId, String nomeProfundidade) {
+    TextEditingController _observacaoController = TextEditingController();
+    showDialog(
+      context: context,
+      builder: (BuildContext context) {
+        return AlertDialog(
+          shape: RoundedRectangleBorder(
+            borderRadius: BorderRadius.circular(16),
+          ),
+          title: Text(
+            "Deseja adicionar observação?",
+            style: TextStyle(
+              fontSize: 18,
+              fontWeight: FontWeight.bold,
+            ),
+          ),
+          content: TextField(
+            controller: _observacaoController,
+            decoration: InputDecoration(
+              hintText: "Digite sua observação aqui...",
+            ),
+          ),
+          actions: <Widget>[
+            TextButton(
+              onPressed: () {
+                // Ação para "Não"
+
+                Navigator.of(context).pop();
+                _mostrarModalSucesso(context, marcadorNome);
+              },
+              child: Text("Não"),
+            ),
+            TextButton(
+              onPressed: () {
+                var pontoColetado = FFAppState().PontosColetados.firstWhere(
+                      (element) =>
+                          element['marcador_nome'] == marcadorNome &&
+                          element['profundidade'] == nomeProfundidade &&
+                          element['id_ref'] == referencialProfundidadePontoId,
+                      orElse: () => null,
+                    );
+
+                if (pontoColetado != null) {
+                  pontoColetado['obs'] = _observacaoController.text;
+                }
+
+                print("Observação adicionada: ${_observacaoController.text}");
+
+                // Fechando o modal
+                Navigator.of(context).pop();
+                _mostrarModalSucesso(context, marcadorNome);
+              },
+              child: Text("Sim"),
+            ),
+          ],
+        );
+      },
+    );
   }
 
   void _showAdicionaProfundidades() {
@@ -1227,8 +1318,8 @@ class _ColetaState extends State<Coleta> {
                     setState(() {
                       vezAtualDoIntervaloDeColeta = 0;
                     });
-                    _coletarProfundidade(marcadorNome, profundidadeNome, latlng,
-                        referencialProfundidadePontoId);
+                    // _coletarProfundidade(marcadorNome, profundidadeNome, latlng,
+                    //     referencialProfundidadePontoId);
                   } else {
                     _coletarProfundidade(marcadorNome, profundidadeNome, latlng,
                         referencialProfundidadePontoId);
@@ -1252,16 +1343,19 @@ class _ColetaState extends State<Coleta> {
       pontosColetados.add({
         "marcador_nome": marcadorNome,
         "profundidade": profundidadeNome,
+        "foto": '',
         "latlng": latlng,
-        "id_ref": '$referencialProfundidadePontoId'
+        "id_ref": '$referencialProfundidadePontoId',
+        "obs": ""
       });
       FFAppState().PontosColetados.add({
         "marcador_nome": marcadorNome,
         "profundidade": profundidadeNome,
         // "foto": '$base64Image',
-        // "foto": '$base64Image',
+        "foto": '',
         "latlng": latlng,
-        "id_ref": '$referencialProfundidadePontoId'
+        "id_ref": '$referencialProfundidadePontoId',
+        "obs": ""
       });
 
       coletasPorMarcador.putIfAbsent(marcadorNome, () => {});
@@ -1558,25 +1652,25 @@ class _ColetaState extends State<Coleta> {
                 )),
           ),
         ),
-        // Positioned(
-        //   bottom: 10,
-        //   left: 10,
-        //   right: 10,
-        //   child: ElevatedButton(
-        //     onPressed: _exibirDados,
-        //     style: ElevatedButton.styleFrom(
-        //       shape: CircleBorder(),
-        //       backgroundColor: Color(0xFF00736D),
-        //     ),
-        //     child: Padding(
-        //         padding: const EdgeInsets.all(8.0),
-        //         child: Icon(
-        //           Icons.info,
-        //           size: 25.0,
-        //           color: Colors.white,
-        //         )),
-        //   ),
-        // )
+        Positioned(
+          bottom: 10,
+          left: 10,
+          right: 10,
+          child: ElevatedButton(
+            onPressed: _exibirDados,
+            style: ElevatedButton.styleFrom(
+              shape: CircleBorder(),
+              backgroundColor: Color(0xFF00736D),
+            ),
+            child: Padding(
+                padding: const EdgeInsets.all(8.0),
+                child: Icon(
+                  Icons.info,
+                  size: 25.0,
+                  color: Colors.white,
+                )),
+          ),
+        )
       ],
     );
   }
@@ -1679,7 +1773,7 @@ class _ColetaState extends State<Coleta> {
         })
         .where((element) => element != null) // Filtra elementos nulos
         .toList();
-    var img = FFAppState().PontosColetados.map((e) => e['id_ref']).toString();
+    var img = FFAppState().PontosColetados.toList().map((e) => e['obs']);
     // var img = FFAppState()
     //     .profundidadesPonto
     //     .where((coleta) => coleta['trpp_artp_id'] != 7377)

@@ -303,70 +303,50 @@ class _MultiplePlacesPickerWidgetState
                                 mainAxisSize: MainAxisSize.max,
                                 children: [
                                   Expanded(
-                                    child: Builder(
-                                      builder: (context) {
-                                        final listaPercorrida2 = FFAppState()
-                                            .locaisPercorridos2
-                                            .toList();
-                                        return SingleChildScrollView(
-                                          child: Column(
-                                            mainAxisSize: MainAxisSize.max,
-                                            crossAxisAlignment:
-                                                CrossAxisAlignment.start,
-                                            children: List.generate(
-                                                listaPercorrida2.length,
-                                                (listaPercorrida2Index) {
-                                              final listaPercorrida2Item =
-                                                  listaPercorrida2[
-                                                      listaPercorrida2Index];
-                                              return Padding(
-                                                padding: EdgeInsetsDirectional
-                                                    .fromSTEB(
-                                                        0.0, 0.0, 0.0, 2.0),
-                                                child: Row(
-                                                  mainAxisSize:
-                                                      MainAxisSize.max,
-                                                  mainAxisAlignment:
-                                                      MainAxisAlignment.start,
-                                                  children: [
-                                                    Icon(
-                                                      Icons.place,
-                                                      color:
-                                                          FlutterFlowTheme.of(
-                                                                  context)
-                                                              .primary,
-                                                      size: 24.0,
-                                                    ),
-                                                    Padding(
-                                                      padding:
-                                                          EdgeInsetsDirectional
-                                                              .fromSTEB(
-                                                                  10.0,
-                                                                  0.0,
-                                                                  0.0,
-                                                                  0.0),
-                                                      child: Text(
-                                                        listaPercorrida2Item
-                                                            .toString(),
-                                                        textAlign:
-                                                            TextAlign.start,
-                                                        style: FlutterFlowTheme
-                                                                .of(context)
-                                                            .bodyMedium
-                                                            .override(
-                                                              fontFamily:
-                                                                  'Readex Pro',
-                                                              fontSize: 10.0,
-                                                            ),
-                                                      ),
-                                                    ),
-                                                  ],
+                                    child: SingleChildScrollView(
+                                      child: Column(
+                                        mainAxisSize: MainAxisSize.max,
+                                        crossAxisAlignment:
+                                            CrossAxisAlignment.start,
+                                        children: [
+                                          Padding(
+                                            padding:
+                                                EdgeInsetsDirectional.fromSTEB(
+                                                    0.0, 0.0, 0.0, 2.0),
+                                            child: Row(
+                                              mainAxisSize: MainAxisSize.max,
+                                              mainAxisAlignment:
+                                                  MainAxisAlignment.start,
+                                              children: [
+                                                Icon(
+                                                  Icons.place,
+                                                  color: FlutterFlowTheme.of(
+                                                          context)
+                                                      .primary,
+                                                  size: 24.0,
                                                 ),
-                                              );
-                                            }),
+                                                Padding(
+                                                  padding: EdgeInsetsDirectional
+                                                      .fromSTEB(
+                                                          10.0, 0.0, 0.0, 0.0),
+                                                  child: Text(
+                                                    'Hello World',
+                                                    textAlign: TextAlign.start,
+                                                    style: FlutterFlowTheme.of(
+                                                            context)
+                                                        .bodyMedium
+                                                        .override(
+                                                          fontFamily:
+                                                              'Readex Pro',
+                                                          fontSize: 10.0,
+                                                        ),
+                                                  ),
+                                                ),
+                                              ],
+                                            ),
                                           ),
-                                        );
-                                      },
+                                        ],
+                                      ),
                                     ),
                                   ),
                                 ],
@@ -490,13 +470,8 @@ class _MultiplePlacesPickerWidgetState
                               FFAppState().addToErro(currentUserLocationValue!);
                             });
                             setState(() {});
-                            setState(() {
-                              FFAppState().locaisPercorridos2 = [];
-                            });
-                            setState(() {
-                              FFAppState().locaisPercorridos2 =
-                                  FFAppState().Erro.toList().cast<LatLng>();
-                            });
+                            setState(() {});
+                            setState(() {});
                           },
                           text: 'Sincronizar',
                           options: FFButtonOptions(

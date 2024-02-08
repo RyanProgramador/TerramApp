@@ -21,3 +21,5 @@ export '/contorno_recorte_da_fazenda/contorno_recorte_da_fazenda_widget.dart'
     show ContornoRecorteDaFazendaWidget;
 export '/lista_contornos_para_coleta/lista_contornos_para_coleta_widget.dart'
     show ListaContornosParaColetaWidget;
+export '/iniciar_deslocamento_tela/iniciar_deslocamento_tela_widget.dart'
+    show IniciarDeslocamentoTelaWidget;

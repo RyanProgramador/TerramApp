@@ -198,6 +198,11 @@ GoRouter createRouter(AppStateNotifier appStateNotifier) => GoRouter(
                 fazid: params.getParam('fazid', ParamType.String),
                 fazlatlng: params.getParam('fazlatlng', ParamType.LatLng),
               ),
+            ),
+            FFRoute(
+              name: 'IniciarDeslocamentoTela',
+              path: 'iniciarDeslocamentoTela',
+              builder: (context, params) => IniciarDeslocamentoTelaWidget(),
             )
           ].map((r) => r.toRoute(appStateNotifier)).toList(),
         ),
