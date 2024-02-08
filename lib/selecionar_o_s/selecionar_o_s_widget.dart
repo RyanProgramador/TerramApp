@@ -1214,27 +1214,6 @@ class _SelecionarOSWidgetState extends State<SelecionarOSWidget>
                                                                               0.0));
                                                               var _shouldSetState =
                                                                   false;
-                                                              ScaffoldMessenger
-                                                                      .of(context)
-                                                                  .showSnackBar(
-                                                                SnackBar(
-                                                                  content: Text(
-                                                                    'Aguarde...',
-                                                                    style:
-                                                                        TextStyle(
-                                                                      color: Colors
-                                                                          .white,
-                                                                    ),
-                                                                  ),
-                                                                  duration: Duration(
-                                                                      milliseconds:
-                                                                          950),
-                                                                  backgroundColor:
-                                                                      FlutterFlowTheme.of(
-                                                                              context)
-                                                                          .primary,
-                                                                ),
-                                                              );
                                                               showModalBottomSheet(
                                                                 isScrollControlled:
                                                                     true,
@@ -1273,6 +1252,27 @@ class _SelecionarOSWidgetState extends State<SelecionarOSWidget>
                                                                   safeSetState(
                                                                       () {}));
 
+                                                              ScaffoldMessenger
+                                                                      .of(context)
+                                                                  .showSnackBar(
+                                                                SnackBar(
+                                                                  content: Text(
+                                                                    'Aguarde...',
+                                                                    style:
+                                                                        TextStyle(
+                                                                      color: Colors
+                                                                          .white,
+                                                                    ),
+                                                                  ),
+                                                                  duration: Duration(
+                                                                      milliseconds:
+                                                                          950),
+                                                                  backgroundColor:
+                                                                      FlutterFlowTheme.of(
+                                                                              context)
+                                                                          .primary,
+                                                                ),
+                                                              );
                                                               _model.temNetNoServico =
                                                                   await actions
                                                                       .temInternet();
@@ -1301,8 +1301,6 @@ class _SelecionarOSWidgetState extends State<SelecionarOSWidget>
                                                                     );
                                                                   },
                                                                 );
-                                                                Navigator.pop(
-                                                                    context);
 
                                                                 context.goNamed(
                                                                   'IniciarDeslocamentoTela',
@@ -1657,8 +1655,6 @@ class _SelecionarOSWidgetState extends State<SelecionarOSWidget>
                                                               );
                                                               _shouldSetState =
                                                                   true;
-                                                              Navigator.pop(
-                                                                  context);
 
                                                               context.goNamed(
                                                                 'IniciarDeslocamentoTela',
