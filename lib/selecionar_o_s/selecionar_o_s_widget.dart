@@ -1256,8 +1256,12 @@ class _SelecionarOSWidgetState extends State<SelecionarOSWidget>
                                                                         .temInternet();
                                                                 _shouldSetState =
                                                                     true;
-                                                                if (!_model
+                                                                if (_model
                                                                     .temNetNoServico!) {
+                                                                  FFAppState()
+                                                                      .update(
+                                                                          () {});
+                                                                } else {
                                                                   await showDialog(
                                                                     context:
                                                                         context,
@@ -1279,6 +1283,9 @@ class _SelecionarOSWidgetState extends State<SelecionarOSWidget>
                                                                       );
                                                                     },
                                                                   );
+                                                                  FFAppState()
+                                                                      .update(
+                                                                          () {});
                                                                   Navigator.pop(
                                                                       context);
 
@@ -1551,6 +1558,7 @@ class _SelecionarOSWidgetState extends State<SelecionarOSWidget>
                                                                         () {});
                                                                   return;
                                                                 }
+
                                                                 _model.polyline1 =
                                                                     await ApiRotasPolylinesCall
                                                                         .call(
