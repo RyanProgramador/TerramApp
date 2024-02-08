@@ -11,4 +11,4 @@ export 'maps_offline.dart' show MapsOffline;
 export 'rota_final_offline.dart' show RotaFinalOffline;
 export 'coleta.dart' show Coleta;
 export 'deseja_realmente_voltar.dart' show DesejaRealmenteVoltar;
-export 'areas_polygonos.dart' show AreasPolygonos;
+export 'start_location_service.dart' show StartLocationService;
