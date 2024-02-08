@@ -42,7 +42,7 @@ class _DesejaRealmenteVoltarState extends State<DesejaRealmenteVoltar> {
               TextButton(
                 onPressed: () {
                   // Permite sair da tela e redireciona
-                  Navigator.of(context).pop(true); // Primeiro, fecha o diálogo
+                  //Navigator.of(context).pop(true); // Primeiro, fecha o diálogo
                   // Substitua 'blankRedirecona' pelo nome da rota para a qual você deseja navegar
                   context.goNamed(
                     'blankRedirecona',
