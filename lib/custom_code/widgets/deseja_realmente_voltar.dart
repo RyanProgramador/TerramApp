@@ -40,9 +40,22 @@ class _DesejaRealmenteVoltarState extends State<DesejaRealmenteVoltar> {
                 child: Text('Não'),
               ),
               TextButton(
-                onPressed: () =>
-                    Navigator.of(context).pop(true), // Permite sair da tela
-                child: Text('Sim'),
+                onPressed: () {
+                  // Permite sair da tela e redireciona
+                  Navigator.of(context).pop(true); // Primeiro, fecha o diálogo
+                  // Substitua 'blankRedirecona' pelo nome da rota para a qual você deseja navegar
+                  context.goNamed(
+                    'blankRedirecona',
+                    extra: <String, dynamic>{
+                      kTransitionInfoKey: TransitionInfo(
+                        hasTransition: true,
+                        transitionType: PageTransitionType.fade,
+                        duration: const Duration(milliseconds: 0),
+                      ),
+                    },
+                  );
+                },
+                child: const Text('Sim'),
               ),
             ],
           ),
