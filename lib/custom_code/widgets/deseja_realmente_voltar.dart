@@ -31,8 +31,8 @@ class _DesejaRealmenteVoltarState extends State<DesejaRealmenteVoltar> {
         final shouldPop = await showDialog(
           context: context,
           builder: (context) => AlertDialog(
-            title: Text(''),
-            content: Text('Você quer sair do serviço e voltar à tela inicial?'),
+            title: Text('Você quer sair do serviço e voltar à tela inicial?'),
+            content: Text(''),
             actions: <Widget>[
               TextButton(
                 onPressed: () => Navigator.of(context)
