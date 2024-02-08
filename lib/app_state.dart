@@ -34,7 +34,7 @@ class FFAppState extends ChangeNotifier {
     });
     _safeInit(() {
       _Erro =
-          prefs.getStringList('ff_Erro')?.map(_latLngFromString).withoutNulls ??
+          prefs.getStringList('ff_Erro')?.map(latLngFromString).withoutNulls ??
               _Erro;
     });
     _safeInit(() {
@@ -236,7 +236,7 @@ class FFAppState extends ChangeNotifier {
     });
     _safeInit(() {
       _LocalAtual =
-          _latLngFromString(prefs.getString('ff_LocalAtual')) ?? _LocalAtual;
+          latLngFromString(prefs.getString('ff_LocalAtual')) ?? _LocalAtual;
     });
     _safeInit(() {
       _servicosFinalizadosComSucesso =
@@ -277,8 +277,8 @@ class FFAppState extends ChangeNotifier {
           prefs.getInt('ff_qualSwitchEstaAtivo') ?? _qualSwitchEstaAtivo;
     });
     _safeInit(() {
-      _excluirLocal = _latLngFromString(prefs.getString('ff_excluirLocal')) ??
-          _excluirLocal;
+      _excluirLocal =
+          latLngFromString(prefs.getString('ff_excluirLocal')) ?? _excluirLocal;
     });
     _safeInit(() {
       _tempoEmSegundosPadraoDeCapturaDeLocal =
@@ -2253,16 +2253,6 @@ class FFAppState extends ChangeNotifier {
     prefs.setStringList('ff_profundidadesPonto',
         _profundidadesPonto.map((x) => jsonEncode(x)).toList());
   }
-}
-
-LatLng? _latLngFromString(String? val) {
-  if (val == null) {
-    return null;
-  }
-  final split = val.split(',');
-  final lat = double.parse(split.first);
-  final lng = double.parse(split.last);
-  return LatLng(lat, lng);
 }
 
 void _safeInit(Function() initializeField) {
