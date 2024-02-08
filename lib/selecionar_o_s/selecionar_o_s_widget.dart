@@ -1279,6 +1279,8 @@ class _SelecionarOSWidgetState extends State<SelecionarOSWidget>
                                                                       );
                                                                     },
                                                                   );
+                                                                  Navigator.pop(
+                                                                      context);
 
                                                                   context
                                                                       .pushNamed(
@@ -1641,6 +1643,8 @@ class _SelecionarOSWidgetState extends State<SelecionarOSWidget>
                                                                 );
                                                                 _shouldSetState =
                                                                     true;
+                                                                Navigator.pop(
+                                                                    context);
 
                                                                 context
                                                                     .pushNamed(
