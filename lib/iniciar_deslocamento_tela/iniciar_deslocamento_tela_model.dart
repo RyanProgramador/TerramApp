@@ -1,3 +1,4 @@
+import '/components/iniciar_deslocamento_widget.dart';
 import '/flutter_flow/flutter_flow_theme.dart';
 import '/flutter_flow/flutter_flow_util.dart';
 import '/flutter_flow/flutter_flow_widgets.dart';
@@ -13,13 +14,19 @@ class IniciarDeslocamentoTelaModel
   ///  State fields for stateful widgets in this page.
 
   final unfocusNode = FocusNode();
+  // Model for IniciarDeslocamento component.
+  late IniciarDeslocamentoModel iniciarDeslocamentoModel;
 
   /// Initialization and disposal methods.
 
-  void initState(BuildContext context) {}
+  void initState(BuildContext context) {
+    iniciarDeslocamentoModel =
+        createModel(context, () => IniciarDeslocamentoModel());
+  }
 
   void dispose() {
     unfocusNode.dispose();
+    iniciarDeslocamentoModel.dispose();
   }
 
   /// Action blocks are added here.

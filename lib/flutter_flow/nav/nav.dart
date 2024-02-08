@@ -202,7 +202,27 @@ GoRouter createRouter(AppStateNotifier appStateNotifier) => GoRouter(
             FFRoute(
               name: 'IniciarDeslocamentoTela',
               path: 'iniciarDeslocamentoTela',
-              builder: (context, params) => IniciarDeslocamentoTelaWidget(),
+              builder: (context, params) => IniciarDeslocamentoTelaWidget(
+                etapade: params.getParam('etapade', ParamType.String),
+                fazendaNome: params.getParam('fazendaNome', ParamType.String),
+                latlngFaz: params.getParam('latlngFaz', ParamType.LatLng),
+                cidadeFaz: params.getParam('cidadeFaz', ParamType.String),
+                estadoFaz: params.getParam('estadoFaz', ParamType.String),
+                observacao: params.getParam('observacao', ParamType.String),
+                tecnicoid: params.getParam('tecnicoid', ParamType.String),
+                servicoid: params.getParam('servicoid', ParamType.String),
+                data: params.getParam('data', ParamType.String),
+                hora: params.getParam('hora', ParamType.String),
+                jsonServico: params.getParam('jsonServico', ParamType.JSON),
+                deslocamentoAtualFinalizado: params.getParam(
+                    'deslocamentoAtualFinalizado', ParamType.bool),
+                polylinhaQueVemDoMenuInicial: params.getParam(
+                    'polylinhaQueVemDoMenuInicial', ParamType.String),
+                fazid: params.getParam('fazid', ParamType.String),
+                autoAuditoria: params.getParam('autoAuditoria', ParamType.bool),
+                autoAuditoriaQuantidadePontos: params.getParam(
+                    'autoAuditoriaQuantidadePontos', ParamType.int),
+              ),
             )
           ].map((r) => r.toRoute(appStateNotifier)).toList(),
         ),
