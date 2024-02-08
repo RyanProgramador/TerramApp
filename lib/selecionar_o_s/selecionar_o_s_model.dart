@@ -41,6 +41,24 @@ class SelecionarOSModel extends FlutterFlowModel<SelecionarOSWidget> {
   ApiCallResponse? sincPontosMedicaoEPerfilEProfundidaAPI;
   // Stores action output result for [Backend Call - API (trSincronizaPontosMedicao)] action in SelecionarOS widget.
   ApiCallResponse? sincPontosMedicaoPontosAPI;
+  // Stores action output result for [Backend Call - API (trOsTecnico)] action in SelecionarOS widget.
+  ApiCallResponse? trOsTecnicosSincroniza;
+  // Stores action output result for [Backend Call - API (ordemDeServico)] action in SelecionarOS widget.
+  ApiCallResponse? sincOsRet;
+  // Stores action output result for [Backend Call - API (trFazendas)] action in SelecionarOS widget.
+  ApiCallResponse? trFazendasSinc;
+  // Stores action output result for [Backend Call - API (trSincronizaPontosMedicao)] action in SelecionarOS widget.
+  ApiCallResponse? sincPontosMedicaoEPerfilEProfundida2;
+  // Stores action output result for [Backend Call - API (trServicos)] action in SelecionarOS widget.
+  ApiCallResponse? trServicosSinc;
+  // Stores action output result for [Backend Call - API (trOsServicos)] action in SelecionarOS widget.
+  ApiCallResponse? trOsServicosSinc;
+  // Stores action output result for [Backend Call - API (trTecnicos)] action in SelecionarOS widget.
+  ApiCallResponse? trTecnicosSinc;
+  // Stores action output result for [Backend Call - API (trEmpresas)] action in SelecionarOS widget.
+  ApiCallResponse? trEmpresas;
+  // Stores action output result for [Backend Call - API (trCFG)] action in SelecionarOS widget.
+  ApiCallResponse? trCFG;
   // Stores action output result for [Custom Action - temInternet] action in SelecionarOS widget.
   bool? temInternetOsLoad01;
   // Stores action output result for [Backend Call - API (trOsTecnico)] action in SelecionarOS widget.
@@ -61,24 +79,6 @@ class SelecionarOSModel extends FlutterFlowModel<SelecionarOSWidget> {
   ApiCallResponse? trCFG2;
   // Stores action output result for [Backend Call - API (trSincronizaPontosMedicao)] action in SelecionarOS widget.
   ApiCallResponse? sincPontosMedicaoEPerfilEProfundida;
-  // Stores action output result for [Backend Call - API (trOsTecnico)] action in SelecionarOS widget.
-  ApiCallResponse? trOsTecnicosSincroniza;
-  // Stores action output result for [Backend Call - API (ordemDeServico)] action in SelecionarOS widget.
-  ApiCallResponse? sincOsRet;
-  // Stores action output result for [Backend Call - API (trFazendas)] action in SelecionarOS widget.
-  ApiCallResponse? trFazendasSinc;
-  // Stores action output result for [Backend Call - API (trSincronizaPontosMedicao)] action in SelecionarOS widget.
-  ApiCallResponse? sincPontosMedicaoEPerfilEProfundida2;
-  // Stores action output result for [Backend Call - API (trServicos)] action in SelecionarOS widget.
-  ApiCallResponse? trServicosSinc;
-  // Stores action output result for [Backend Call - API (trOsServicos)] action in SelecionarOS widget.
-  ApiCallResponse? trOsServicosSinc;
-  // Stores action output result for [Backend Call - API (trTecnicos)] action in SelecionarOS widget.
-  ApiCallResponse? trTecnicosSinc;
-  // Stores action output result for [Backend Call - API (trEmpresas)] action in SelecionarOS widget.
-  ApiCallResponse? trEmpresas;
-  // Stores action output result for [Backend Call - API (trCFG)] action in SelecionarOS widget.
-  ApiCallResponse? trCFG;
   // State field(s) for searchBar widget.
   FocusNode? searchBarFocusNode;
   TextEditingController? searchBarController;

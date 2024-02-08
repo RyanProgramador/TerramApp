@@ -305,187 +305,153 @@ class _SelecionarOSWidgetState extends State<SelecionarOSWidget>
         });
       }
 
-      setState(() {
-        FFAppState().AtualLocalizcao = currentUserLocationValue!.toString();
-      });
       await requestPermission(locationPermission);
       await requestPermission(notificationsPermission);
       setState(() {
         FFAppState().AtualLocalizcao = currentUserLocationValue!.toString();
       });
-      if (FFAppState().trOsServicos.length != 0) {
-        _model.temInternetOsLoad01 = await actions.temInternet();
-        if (!_model.temInternetOsLoad01!) {
-          return;
-        }
-        _model.trOsTecnicosSincroniza2 =
+      if (FFAppState().trOsServicos.length == 0) {
+        _model.trOsTecnicosSincroniza =
             await SincronizarGroup.trOsTecnicoCall.call(
           urlapicall: FFAppState().urlapicall,
         );
-        _model.sincOsRet2 = await SincronizarGroup.ordemDeServicoCall.call(
+        _model.sincOsRet = await SincronizarGroup.ordemDeServicoCall.call(
           urlapicall: FFAppState().urlapicall,
         );
-        _model.trFazendasSinc2 = await SincronizarGroup.trFazendasCall.call(
+        _model.trFazendasSinc = await SincronizarGroup.trFazendasCall.call(
           urlapicall: FFAppState().urlapicall,
         );
-        _model.trServicosSinc2 = await SincronizarGroup.trServicosCall.call(
-          urlapicall: FFAppState().urlapicall,
-        );
-        _model.trOsServicosSinc2 = await SincronizarGroup.trOsServicosCall.call(
-          urlapicall: FFAppState().urlapicall,
-          tecId: FFAppState().tecID,
-        );
-        _model.trTecnicosSinc2 = await SincronizarGroup.trTecnicosCall.call(
-          urlapicall: FFAppState().urlapicall,
-        );
-        _model.trEmpresas2 = await SincronizarGroup.trEmpresasCall.call(
-          urlapicall: FFAppState().urlapicall,
-        );
-        _model.trCFG2 = await SincronizarGroup.trCFGCall.call(
-          urlapicall: FFAppState().urlapicall,
-        );
-        _model.sincPontosMedicaoEPerfilEProfundida =
+        _model.sincPontosMedicaoEPerfilEProfundida2 =
             await SincronizarGroup.trSincronizaPontosMedicaoCall.call(
           urlapicall: FFAppState().urlapicall,
           pontosColetados:
               functions.jsonListToStr(FFAppState().PontosColetados.toList()),
         );
+        _model.trServicosSinc = await SincronizarGroup.trServicosCall.call(
+          urlapicall: FFAppState().urlapicall,
+        );
+        _model.trOsServicosSinc = await SincronizarGroup.trOsServicosCall.call(
+          urlapicall: FFAppState().urlapicall,
+          tecId: FFAppState().tecID,
+        );
+        _model.trTecnicosSinc = await SincronizarGroup.trTecnicosCall.call(
+          urlapicall: FFAppState().urlapicall,
+        );
+        _model.trEmpresas = await SincronizarGroup.trEmpresasCall.call(
+          urlapicall: FFAppState().urlapicall,
+        );
+        _model.trCFG = await SincronizarGroup.trCFGCall.call(
+          urlapicall: FFAppState().urlapicall,
+        );
         FFAppState().update(() {});
-        if ((_model.trTecnicosSinc2?.succeeded ?? true) &&
-            (_model.trOsServicosSinc2?.succeeded ?? true) &&
-            (_model.trServicosSinc2?.succeeded ?? true) &&
-            (_model.trFazendasSinc2?.succeeded ?? true) &&
-            (_model.sincOsRet2?.succeeded ?? true) &&
-            (_model.trOsTecnicosSincroniza2?.succeeded ?? true)) {
+        if ((_model.trTecnicosSinc?.succeeded ?? true) &&
+            (_model.trOsServicosSinc?.succeeded ?? true) &&
+            (_model.trServicosSinc?.succeeded ?? true) &&
+            (_model.trFazendasSinc?.succeeded ?? true) &&
+            (_model.sincOsRet?.succeeded ?? true) &&
+            (_model.trOsTecnicosSincroniza?.succeeded ?? true)) {
           FFAppState().update(() {
-            FFAppState().trOrdemServicos = functions
-                .juntarDuasListasJson(
-                    SincronizarGroup.ordemDeServicoCall
-                        .ordemServicoDados(
-                          (_model.sincOsRet2?.jsonBody ?? ''),
-                        )
-                        ?.toList(),
-                    FFAppState().trOrdemServicos.toList())!
+            FFAppState().trOrdemServicos = SincronizarGroup.ordemDeServicoCall
+                .ordemServicoDados(
+                  (_model.sincOsRet?.jsonBody ?? ''),
+                )!
                 .toList()
                 .cast<dynamic>();
-            FFAppState().trFazendas = functions
-                .juntarDuasListasJson(
-                    SincronizarGroup.trFazendasCall
-                        .dadosTrFazendas(
-                          (_model.trFazendasSinc2?.jsonBody ?? ''),
-                        )
-                        ?.toList(),
-                    FFAppState().trFazendas.toList())!
+            FFAppState().trFazendas = SincronizarGroup.trFazendasCall
+                .dadosTrFazendas(
+                  (_model.trFazendasSinc?.jsonBody ?? ''),
+                )!
                 .toList()
                 .cast<dynamic>();
-            FFAppState().trOsTecnicos = functions
-                .juntarDuasListasJson(
-                    SincronizarGroup.trOsTecnicoCall
-                        .dadosTrOsTecnico(
-                          (_model.trOsTecnicosSincroniza2?.jsonBody ?? ''),
-                        )
-                        ?.toList(),
-                    FFAppState().trOsTecnicos.toList())!
+            FFAppState().trOsTecnicos = SincronizarGroup.trOsTecnicoCall
+                .dadosTrOsTecnico(
+                  (_model.trOsTecnicosSincroniza?.jsonBody ?? ''),
+                )!
                 .toList()
                 .cast<dynamic>();
-            FFAppState().trOsServicos = functions
-                .juntarDuasListasJson(
-                    SincronizarGroup.trOsServicosCall
-                        .dadosTrOsServicos(
-                          (_model.trOsServicosSinc2?.jsonBody ?? ''),
-                        )
-                        ?.toList(),
-                    FFAppState().trOsServicos.toList())!
+            FFAppState().trOsServicos = SincronizarGroup.trOsServicosCall
+                .dadosTrOsServicos(
+                  (_model.trOsServicosSinc?.jsonBody ?? ''),
+                )!
                 .toList()
                 .cast<dynamic>();
-            FFAppState().trServicos = functions
-                .juntarDuasListasJson(
-                    SincronizarGroup.trServicosCall
-                        .dadosTrServicos(
-                          (_model.trServicosSinc2?.jsonBody ?? ''),
-                        )
-                        ?.toList(),
-                    FFAppState().trServicos.toList())!
+            FFAppState().trServicos = SincronizarGroup.trServicosCall
+                .dadosTrServicos(
+                  (_model.trServicosSinc?.jsonBody ?? ''),
+                )!
                 .toList()
                 .cast<dynamic>();
-            FFAppState().trTecnicos = functions
-                .juntarDuasListasJson(
-                    SincronizarGroup.trTecnicosCall
-                        .dadosTrTecnicos(
-                          (_model.trTecnicosSinc2?.jsonBody ?? ''),
-                        )
-                        ?.toList(),
-                    FFAppState().trTecnicos.toList())!
+            FFAppState().trTecnicos = SincronizarGroup.trTecnicosCall
+                .dadosTrTecnicos(
+                  (_model.trTecnicosSinc?.jsonBody ?? ''),
+                )!
                 .toList()
                 .cast<dynamic>();
-            FFAppState().trEmpresas = functions
-                .juntarDuasListasJson(
-                    SincronizarGroup.trEmpresasCall
-                        .dadosTrEmpresas(
-                          (_model.trEmpresas2?.jsonBody ?? ''),
-                        )
-                        ?.toList(),
-                    FFAppState().trEmpresas.toList())!
+            FFAppState().trEmpresas = SincronizarGroup.trEmpresasCall
+                .dadosTrEmpresas(
+                  (_model.trEmpresas?.jsonBody ?? ''),
+                )!
                 .toList()
                 .cast<dynamic>();
             FFAppState().tempoEmSegundosPadraoDeCapturaDeLocal =
                 SincronizarGroup.trCFGCall.dadosCFG(
-              (_model.trCFG2?.jsonBody ?? ''),
+              (_model.trCFG?.jsonBody ?? ''),
             );
             FFAppState().distanciaEmMetrosDeToleranciaEntreUmaCapturaEOutra =
                 SincronizarGroup.trCFGCall.geoTolerancia(
-              (_model.trCFG2?.jsonBody ?? ''),
+              (_model.trCFG?.jsonBody ?? ''),
             );
             FFAppState().pontosDeColeta = getJsonField(
-              (_model.sincPontosMedicaoEPerfilEProfundida?.jsonBody ?? ''),
+              (_model.sincPontosMedicaoEPerfilEProfundida2?.jsonBody ?? ''),
               r'''$.pontos_de_coleta[:]''',
               true,
             )!
                 .toList()
                 .cast<dynamic>();
             FFAppState().perfilprofundidades = getJsonField(
-              (_model.sincPontosMedicaoEPerfilEProfundida?.jsonBody ?? ''),
+              (_model.sincPontosMedicaoEPerfilEProfundida2?.jsonBody ?? ''),
               r'''$.perfil_profundidades[:]''',
               true,
             )!
                 .toList()
                 .cast<dynamic>();
             FFAppState().profundidades = getJsonField(
-              (_model.sincPontosMedicaoEPerfilEProfundida?.jsonBody ?? ''),
+              (_model.sincPontosMedicaoEPerfilEProfundida2?.jsonBody ?? ''),
               r'''$.profundidades[:]''',
               true,
             )!
                 .toList()
                 .cast<dynamic>();
             FFAppState().perfis = getJsonField(
-              (_model.sincPontosMedicaoEPerfilEProfundida?.jsonBody ?? ''),
+              (_model.sincPontosMedicaoEPerfilEProfundida2?.jsonBody ?? ''),
               r'''$.perfis[:]''',
               true,
             )!
                 .toList()
                 .cast<dynamic>();
             FFAppState().listaContornoColeta = getJsonField(
-              (_model.sincPontosMedicaoEPerfilEProfundida?.jsonBody ?? ''),
+              (_model.sincPontosMedicaoEPerfilEProfundida2?.jsonBody ?? ''),
               r'''$.contornos[:]''',
               true,
             )!
                 .toList()
                 .cast<dynamic>();
             FFAppState().profundidadesPonto = getJsonField(
-              (_model.sincPontosMedicaoEPerfilEProfundida?.jsonBody ?? ''),
+              (_model.sincPontosMedicaoEPerfilEProfundida2?.jsonBody ?? ''),
               r'''$.pontos_profundidades[:]''',
               true,
             )!
                 .toList()
                 .cast<dynamic>();
           });
+          FFAppState().update(() {});
+          return;
         } else {
           await showDialog(
             context: context,
             builder: (alertDialogContext) {
               return AlertDialog(
-                title: Text('Ops! Um erro inesperado aconteceu '),
-                content: Text('Codigo #02'),
+                title: Text('Ops!'),
                 actions: [
                   TextButton(
                     onPressed: () => Navigator.pop(alertDialogContext),
@@ -497,159 +463,194 @@ class _SelecionarOSWidgetState extends State<SelecionarOSWidget>
           );
           return;
         }
-
-        return;
-      }
-      _model.trOsTecnicosSincroniza =
-          await SincronizarGroup.trOsTecnicoCall.call(
-        urlapicall: FFAppState().urlapicall,
-      );
-      _model.sincOsRet = await SincronizarGroup.ordemDeServicoCall.call(
-        urlapicall: FFAppState().urlapicall,
-      );
-      _model.trFazendasSinc = await SincronizarGroup.trFazendasCall.call(
-        urlapicall: FFAppState().urlapicall,
-      );
-      _model.sincPontosMedicaoEPerfilEProfundida2 =
-          await SincronizarGroup.trSincronizaPontosMedicaoCall.call(
-        urlapicall: FFAppState().urlapicall,
-        pontosColetados:
-            functions.jsonListToStr(FFAppState().PontosColetados.toList()),
-      );
-      _model.trServicosSinc = await SincronizarGroup.trServicosCall.call(
-        urlapicall: FFAppState().urlapicall,
-      );
-      _model.trOsServicosSinc = await SincronizarGroup.trOsServicosCall.call(
-        urlapicall: FFAppState().urlapicall,
-        tecId: FFAppState().tecID,
-      );
-      _model.trTecnicosSinc = await SincronizarGroup.trTecnicosCall.call(
-        urlapicall: FFAppState().urlapicall,
-      );
-      _model.trEmpresas = await SincronizarGroup.trEmpresasCall.call(
-        urlapicall: FFAppState().urlapicall,
-      );
-      _model.trCFG = await SincronizarGroup.trCFGCall.call(
-        urlapicall: FFAppState().urlapicall,
-      );
-      FFAppState().update(() {});
-      if ((_model.trTecnicosSinc?.succeeded ?? true) &&
-          (_model.trOsServicosSinc?.succeeded ?? true) &&
-          (_model.trServicosSinc?.succeeded ?? true) &&
-          (_model.trFazendasSinc?.succeeded ?? true) &&
-          (_model.sincOsRet?.succeeded ?? true) &&
-          (_model.trOsTecnicosSincroniza?.succeeded ?? true)) {
-        FFAppState().update(() {
-          FFAppState().trOrdemServicos = SincronizarGroup.ordemDeServicoCall
-              .ordemServicoDados(
-                (_model.sincOsRet?.jsonBody ?? ''),
-              )!
-              .toList()
-              .cast<dynamic>();
-          FFAppState().trFazendas = SincronizarGroup.trFazendasCall
-              .dadosTrFazendas(
-                (_model.trFazendasSinc?.jsonBody ?? ''),
-              )!
-              .toList()
-              .cast<dynamic>();
-          FFAppState().trOsTecnicos = SincronizarGroup.trOsTecnicoCall
-              .dadosTrOsTecnico(
-                (_model.trOsTecnicosSincroniza?.jsonBody ?? ''),
-              )!
-              .toList()
-              .cast<dynamic>();
-          FFAppState().trOsServicos = SincronizarGroup.trOsServicosCall
-              .dadosTrOsServicos(
-                (_model.trOsServicosSinc?.jsonBody ?? ''),
-              )!
-              .toList()
-              .cast<dynamic>();
-          FFAppState().trServicos = SincronizarGroup.trServicosCall
-              .dadosTrServicos(
-                (_model.trServicosSinc?.jsonBody ?? ''),
-              )!
-              .toList()
-              .cast<dynamic>();
-          FFAppState().trTecnicos = SincronizarGroup.trTecnicosCall
-              .dadosTrTecnicos(
-                (_model.trTecnicosSinc?.jsonBody ?? ''),
-              )!
-              .toList()
-              .cast<dynamic>();
-          FFAppState().trEmpresas = SincronizarGroup.trEmpresasCall
-              .dadosTrEmpresas(
-                (_model.trEmpresas?.jsonBody ?? ''),
-              )!
-              .toList()
-              .cast<dynamic>();
-          FFAppState().tempoEmSegundosPadraoDeCapturaDeLocal =
-              SincronizarGroup.trCFGCall.dadosCFG(
-            (_model.trCFG?.jsonBody ?? ''),
-          );
-          FFAppState().distanciaEmMetrosDeToleranciaEntreUmaCapturaEOutra =
-              SincronizarGroup.trCFGCall.geoTolerancia(
-            (_model.trCFG?.jsonBody ?? ''),
-          );
-          FFAppState().pontosDeColeta = getJsonField(
-            (_model.sincPontosMedicaoEPerfilEProfundida2?.jsonBody ?? ''),
-            r'''$.pontos_de_coleta[:]''',
-            true,
-          )!
-              .toList()
-              .cast<dynamic>();
-          FFAppState().perfilprofundidades = getJsonField(
-            (_model.sincPontosMedicaoEPerfilEProfundida2?.jsonBody ?? ''),
-            r'''$.perfil_profundidades[:]''',
-            true,
-          )!
-              .toList()
-              .cast<dynamic>();
-          FFAppState().profundidades = getJsonField(
-            (_model.sincPontosMedicaoEPerfilEProfundida2?.jsonBody ?? ''),
-            r'''$.profundidades[:]''',
-            true,
-          )!
-              .toList()
-              .cast<dynamic>();
-          FFAppState().perfis = getJsonField(
-            (_model.sincPontosMedicaoEPerfilEProfundida2?.jsonBody ?? ''),
-            r'''$.perfis[:]''',
-            true,
-          )!
-              .toList()
-              .cast<dynamic>();
-          FFAppState().listaContornoColeta = getJsonField(
-            (_model.sincPontosMedicaoEPerfilEProfundida2?.jsonBody ?? ''),
-            r'''$.contornos[:]''',
-            true,
-          )!
-              .toList()
-              .cast<dynamic>();
-          FFAppState().profundidadesPonto = getJsonField(
-            (_model.sincPontosMedicaoEPerfilEProfundida2?.jsonBody ?? ''),
-            r'''$.pontos_profundidades[:]''',
-            true,
-          )!
-              .toList()
-              .cast<dynamic>();
-        });
-        FFAppState().update(() {});
       } else {
-        await showDialog(
-          context: context,
-          builder: (alertDialogContext) {
-            return AlertDialog(
-              title: Text('Ops!'),
-              actions: [
-                TextButton(
-                  onPressed: () => Navigator.pop(alertDialogContext),
-                  child: Text('Ok'),
-                ),
-              ],
+        _model.temInternetOsLoad01 = await actions.temInternet();
+        if (_model.temInternetOsLoad01!) {
+          _model.trOsTecnicosSincroniza2 =
+              await SincronizarGroup.trOsTecnicoCall.call(
+            urlapicall: FFAppState().urlapicall,
+          );
+          _model.sincOsRet2 = await SincronizarGroup.ordemDeServicoCall.call(
+            urlapicall: FFAppState().urlapicall,
+          );
+          _model.trFazendasSinc2 = await SincronizarGroup.trFazendasCall.call(
+            urlapicall: FFAppState().urlapicall,
+          );
+          _model.trServicosSinc2 = await SincronizarGroup.trServicosCall.call(
+            urlapicall: FFAppState().urlapicall,
+          );
+          _model.trOsServicosSinc2 =
+              await SincronizarGroup.trOsServicosCall.call(
+            urlapicall: FFAppState().urlapicall,
+            tecId: FFAppState().tecID,
+          );
+          _model.trTecnicosSinc2 = await SincronizarGroup.trTecnicosCall.call(
+            urlapicall: FFAppState().urlapicall,
+          );
+          _model.trEmpresas2 = await SincronizarGroup.trEmpresasCall.call(
+            urlapicall: FFAppState().urlapicall,
+          );
+          _model.trCFG2 = await SincronizarGroup.trCFGCall.call(
+            urlapicall: FFAppState().urlapicall,
+          );
+          _model.sincPontosMedicaoEPerfilEProfundida =
+              await SincronizarGroup.trSincronizaPontosMedicaoCall.call(
+            urlapicall: FFAppState().urlapicall,
+            pontosColetados:
+                functions.jsonListToStr(FFAppState().PontosColetados.toList()),
+          );
+          FFAppState().update(() {});
+          if ((_model.trTecnicosSinc2?.succeeded ?? true) &&
+              (_model.trOsServicosSinc2?.succeeded ?? true) &&
+              (_model.trServicosSinc2?.succeeded ?? true) &&
+              (_model.trFazendasSinc2?.succeeded ?? true) &&
+              (_model.sincOsRet2?.succeeded ?? true) &&
+              (_model.trOsTecnicosSincroniza2?.succeeded ?? true)) {
+            FFAppState().update(() {
+              FFAppState().trOrdemServicos = functions
+                  .juntarDuasListasJson(
+                      SincronizarGroup.ordemDeServicoCall
+                          .ordemServicoDados(
+                            (_model.sincOsRet2?.jsonBody ?? ''),
+                          )
+                          ?.toList(),
+                      FFAppState().trOrdemServicos.toList())!
+                  .toList()
+                  .cast<dynamic>();
+              FFAppState().trFazendas = functions
+                  .juntarDuasListasJson(
+                      SincronizarGroup.trFazendasCall
+                          .dadosTrFazendas(
+                            (_model.trFazendasSinc2?.jsonBody ?? ''),
+                          )
+                          ?.toList(),
+                      FFAppState().trFazendas.toList())!
+                  .toList()
+                  .cast<dynamic>();
+              FFAppState().trOsTecnicos = functions
+                  .juntarDuasListasJson(
+                      SincronizarGroup.trOsTecnicoCall
+                          .dadosTrOsTecnico(
+                            (_model.trOsTecnicosSincroniza2?.jsonBody ?? ''),
+                          )
+                          ?.toList(),
+                      FFAppState().trOsTecnicos.toList())!
+                  .toList()
+                  .cast<dynamic>();
+              FFAppState().trOsServicos = functions
+                  .juntarDuasListasJson(
+                      SincronizarGroup.trOsServicosCall
+                          .dadosTrOsServicos(
+                            (_model.trOsServicosSinc2?.jsonBody ?? ''),
+                          )
+                          ?.toList(),
+                      FFAppState().trOsServicos.toList())!
+                  .toList()
+                  .cast<dynamic>();
+              FFAppState().trServicos = functions
+                  .juntarDuasListasJson(
+                      SincronizarGroup.trServicosCall
+                          .dadosTrServicos(
+                            (_model.trServicosSinc2?.jsonBody ?? ''),
+                          )
+                          ?.toList(),
+                      FFAppState().trServicos.toList())!
+                  .toList()
+                  .cast<dynamic>();
+              FFAppState().trTecnicos = functions
+                  .juntarDuasListasJson(
+                      SincronizarGroup.trTecnicosCall
+                          .dadosTrTecnicos(
+                            (_model.trTecnicosSinc2?.jsonBody ?? ''),
+                          )
+                          ?.toList(),
+                      FFAppState().trTecnicos.toList())!
+                  .toList()
+                  .cast<dynamic>();
+              FFAppState().trEmpresas = functions
+                  .juntarDuasListasJson(
+                      SincronizarGroup.trEmpresasCall
+                          .dadosTrEmpresas(
+                            (_model.trEmpresas2?.jsonBody ?? ''),
+                          )
+                          ?.toList(),
+                      FFAppState().trEmpresas.toList())!
+                  .toList()
+                  .cast<dynamic>();
+              FFAppState().tempoEmSegundosPadraoDeCapturaDeLocal =
+                  SincronizarGroup.trCFGCall.dadosCFG(
+                (_model.trCFG2?.jsonBody ?? ''),
+              );
+              FFAppState().distanciaEmMetrosDeToleranciaEntreUmaCapturaEOutra =
+                  SincronizarGroup.trCFGCall.geoTolerancia(
+                (_model.trCFG2?.jsonBody ?? ''),
+              );
+              FFAppState().pontosDeColeta = getJsonField(
+                (_model.sincPontosMedicaoEPerfilEProfundida?.jsonBody ?? ''),
+                r'''$.pontos_de_coleta[:]''',
+                true,
+              )!
+                  .toList()
+                  .cast<dynamic>();
+              FFAppState().perfilprofundidades = getJsonField(
+                (_model.sincPontosMedicaoEPerfilEProfundida?.jsonBody ?? ''),
+                r'''$.perfil_profundidades[:]''',
+                true,
+              )!
+                  .toList()
+                  .cast<dynamic>();
+              FFAppState().profundidades = getJsonField(
+                (_model.sincPontosMedicaoEPerfilEProfundida?.jsonBody ?? ''),
+                r'''$.profundidades[:]''',
+                true,
+              )!
+                  .toList()
+                  .cast<dynamic>();
+              FFAppState().perfis = getJsonField(
+                (_model.sincPontosMedicaoEPerfilEProfundida?.jsonBody ?? ''),
+                r'''$.perfis[:]''',
+                true,
+              )!
+                  .toList()
+                  .cast<dynamic>();
+              FFAppState().listaContornoColeta = getJsonField(
+                (_model.sincPontosMedicaoEPerfilEProfundida?.jsonBody ?? ''),
+                r'''$.contornos[:]''',
+                true,
+              )!
+                  .toList()
+                  .cast<dynamic>();
+              FFAppState().profundidadesPonto = getJsonField(
+                (_model.sincPontosMedicaoEPerfilEProfundida?.jsonBody ?? ''),
+                r'''$.pontos_profundidades[:]''',
+                true,
+              )!
+                  .toList()
+                  .cast<dynamic>();
+            });
+          } else {
+            await showDialog(
+              context: context,
+              builder: (alertDialogContext) {
+                return AlertDialog(
+                  title: Text('Ops! Um erro inesperado aconteceu '),
+                  content: Text('Codigo #02'),
+                  actions: [
+                    TextButton(
+                      onPressed: () => Navigator.pop(alertDialogContext),
+                      child: Text('Ok'),
+                    ),
+                  ],
+                );
+              },
             );
-          },
-        );
-        return;
+            return;
+          }
+
+          return;
+        } else {
+          return;
+        }
       }
     });
 
