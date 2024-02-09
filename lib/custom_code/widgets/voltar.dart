@@ -10,17 +10,11 @@ import 'package:flutter/material.dart';
 // DO NOT REMOVE OR MODIFY THE CODE ABOVE!
 
 class Voltar extends StatefulWidget {
-  const Voltar({
-    super.key,
-    this.width,
-    this.height,
-  });
-
+  const Voltar({Key? key, this.width, this.height}) : super(key: key);
   final double? width;
   final double? height;
-
   @override
-  State<Voltar> createState() => _VoltarState();
+  _VoltarState createState() => _VoltarState();
 }
 
 class _VoltarState extends State<Voltar> {
@@ -28,9 +22,9 @@ class _VoltarState extends State<Voltar> {
   Widget build(BuildContext context) {
     return WillPopScope(
       onWillPop: () async {
-        // Substitua 'blankRedirecona' pelo nome da rota para a qual você deseja navegar.
+        // Redireciona diretamente para a tela desejada
         Navigator.of(context).pushReplacementNamed('blankRedirecona');
-        // Retorna false porque você está manipulando a navegação manualmente.
+        // Retorna false para indicar que a ação de voltar foi manipulada manualmente
         return false;
       },
       child: Scaffold(
