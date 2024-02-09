@@ -23,6 +23,7 @@ import 'package:background_location/background_location.dart'
     as background_location;
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:image/image.dart' as img;
+import 'package:wakelock/wakelock.dart';
 
 class Coleta extends StatefulWidget {
   final double? width;
@@ -179,6 +180,7 @@ class _ColetaState extends State<Coleta> {
 
   @override
   void initState() {
+    Wakelock.enable();
     super.initState();
 
     var pontosJaColetados = FFAppState().PontosColetados.toList();

@@ -5,6 +5,7 @@ import '/components/sem_contorno_no_momento_widget.dart';
 import '/flutter_flow/flutter_flow_theme.dart';
 import '/flutter_flow/flutter_flow_util.dart';
 import '/flutter_flow/flutter_flow_widgets.dart';
+import '/custom_code/widgets/index.dart' as custom_widgets;
 import '/flutter_flow/custom_functions.dart' as functions;
 import 'package:flutter/material.dart';
 import 'package:flutter/scheduler.dart';
@@ -1086,7 +1087,7 @@ class _ListaContornosWidgetState extends State<ListaContornosWidget> {
                                       alignment: AlignmentDirectional(0.0, 1.0),
                                       child: Padding(
                                         padding: EdgeInsetsDirectional.fromSTEB(
-                                            0.0, 0.0, 0.0, 25.0),
+                                            0.0, 0.0, 0.0, 22.0),
                                         child: FFButtonWidget(
                                           onPressed: () async {
                                             context.goNamed(
@@ -1168,6 +1169,14 @@ class _ListaContornosWidgetState extends State<ListaContornosWidget> {
                                       ),
                                     ),
                                   ],
+                                ),
+                              ),
+                              Container(
+                                width: 0.2,
+                                height: 0.2,
+                                child: custom_widgets.DesejaRealmenteVoltar(
+                                  width: 0.2,
+                                  height: 0.2,
                                 ),
                               ),
                             ],
