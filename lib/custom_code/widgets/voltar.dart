@@ -22,14 +22,23 @@ class _VoltarState extends State<Voltar> {
   Widget build(BuildContext context) {
     return WillPopScope(
       onWillPop: () async {
-        // Redireciona diretamente para a tela desejada
-        Navigator.of(context).pushReplacementNamed('blankRedirecona');
-        // Retorna false para indicar que a ação de voltar foi manipulada manualmente
+        // Redireciona diretamente sem mostrar um AlertDialog.
+        context.router.pushNamed(
+          'blankRedirecona',
+          extra: <String, dynamic>{
+            kTransitionInfoKey: TransitionInfo(
+              hasTransition: true,
+              transitionType: PageTransitionType.fade,
+              duration: const Duration(milliseconds: 0),
+            ),
+          },
+        );
+        // Retorna false para indicar que a ação de voltar foi manipulada manualmente.
         return false;
       },
       child: Scaffold(
         appBar: AppBar(
-          title: Text("Tela com WillPopScope"),
+          title: const Text("Tela com WillPopScope"),
         ),
         // O restante da estrutura da sua tela aqui.
         body: Center(
