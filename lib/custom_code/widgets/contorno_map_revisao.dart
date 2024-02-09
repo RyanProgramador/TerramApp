@@ -332,7 +332,7 @@ class _ContornoMapRevisaoState extends State<ContornoMapRevisao> {
 
     final listaLatLngString = widget.listaDeLatLng?.join(",") ?? '';
 
-    context.goNamed(
+    context.pushNamed(
       'ContornoRecorteDaFazenda',
       queryParameters: {
         'listaLatLngTalhao': serializeParam(
