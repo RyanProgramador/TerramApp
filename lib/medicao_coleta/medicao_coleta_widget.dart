@@ -133,7 +133,7 @@ class _MedicaoColetaWidgetState extends State<MedicaoColetaWidget> {
                                               builder: (alertDialogContext) {
                                                 return AlertDialog(
                                                   title: Text(
-                                                      'Você tem certeza que quer sair do deslocamento?'),
+                                                      'Você tem certeza que quer sair da coleta?'),
                                                   actions: [
                                                     TextButton(
                                                       onPressed: () =>
