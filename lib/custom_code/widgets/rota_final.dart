@@ -19,6 +19,7 @@ import 'package:flutter_polyline_points/flutter_polyline_points.dart' as poly;
 import 'package:google_maps_flutter/google_maps_flutter.dart' as google_maps;
 import 'package:custom_marker/marker_icon.dart' as cust;
 import 'dart:math';
+import 'package:wake_lock/wake_lock.dart';
 
 //NOTA MENTAL, ESSE CODIGO ESTA EM DESENVOLVIMENTO,
 //OS COMENTARIOS FEITOS NESSE CODIGO FORAM FEITOS APÓS ELE ESTAR SEMI-FINALIZADO,
@@ -335,6 +336,8 @@ class _MapsRoutesState extends State<RotaFinal> {
 
   @override
   void initState() {
+    WakeLock.enable();
+
     super.initState();
     _getCurrentLocation();
     addRoutePoints();

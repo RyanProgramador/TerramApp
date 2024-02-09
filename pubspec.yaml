@@ -86,6 +86,7 @@ dependencies:
   url_launcher_android: 6.0.27
   url_launcher_ios: 6.1.4
   url_launcher_platform_interface: 2.1.2
+  wakelock: ^0.6.2
   xml: 6.3.0
 
 
@@ -95,6 +96,7 @@ dependencies:
 
 dependency_overrides:
   intl: ^0.18.1
+  win32: 5.0.9
 
 dev_dependencies:
   flutter_launcher_icons: 0.13.1

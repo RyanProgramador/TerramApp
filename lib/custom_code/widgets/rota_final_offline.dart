@@ -13,7 +13,7 @@ import 'dart:ui' as ui;
 import 'package:flutter_svg/flutter_svg.dart';
 import 'dart:convert';
 import 'dart:typed_data';
-
+import 'package:wake_lock/wake_lock.dart';
 import 'package:geolocator/geolocator.dart';
 import 'package:http/http.dart' as http;
 import 'package:google_maps_flutter/google_maps_flutter.dart' as google_maps;
@@ -267,6 +267,7 @@ class _MapsRoutesState extends State<RotaFinalOffline> {
 
   @override
   void initState() {
+    WakeLock.enable();
     super.initState();
     _getCurrentLocation();
     addRoutePoints();
