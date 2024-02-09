@@ -629,144 +629,184 @@ class _ContornoMapCorteState extends State<ContornoMapCorte> {
     double topPosition = screenSize.height * 0.59; // 90% da altura da tela
     double rightPosition = screenSize.width * 0.05; // 5% da largura da tela
 
-    return Stack(
-      children: [
-        Container(
-          width: widget.width ?? 400.0,
-          height: widget.height ?? 400.0,
-          child: google_maps.GoogleMap(
-            initialCameraPosition: google_maps.CameraPosition(
-              target: google_maps.LatLng(
-                widget.localAtual?.latitude ?? 0.0,
-                widget.localAtual?.longitude ?? 0.0,
-              ),
-              zoom: 20,
+    return WillPopScope(
+        onWillPop: () async {
+          // Aqui você pode implementar qualquer lógica adicional necessária
+          // antes de permitir o comportamento padrão de voltar.
+          final shouldPop = await showDialog(
+            context: context,
+            builder: (context) => AlertDialog(
+              title: Text('Você tem certeza que quer sair do Recorte?'),
+              content: Text(''),
+              actions: <Widget>[
+                TextButton(
+                  onPressed: () => Navigator.of(context)
+                      .pop(false), // Não permite sair da tela
+                  child: Text('Não'),
+                ),
+                TextButton(
+                  onPressed: () {
+                    // Permite sair da tela e redireciona
+                    Navigator.of(context)
+                        .pop(true); // Primeiro, fecha o diálogo
+                    // Substitua 'blankRedirecona' pelo nome da rota para a qual você deseja navegar
+                    // return true;
+                    setState(() {
+                      FFAppState().update(() {
+                        FFAppState().latlngRecorteTalhao = FFAppState()
+                            .latlngRecorteTalhao
+                            .toList()
+                            .cast<dynamic>();
+                      });
+                    });
+                    setState(() {});
+                  },
+                  child: const Text('Sim'),
+                ),
+              ],
             ),
-            onMapCreated: _onMapCreated,
-            markers: {...markers}.toSet(),
-            polygons: {...polygons}.toSet(),
-            polylines: {...polylines}.toSet(),
-            mapType: google_maps.MapType.satellite,
-            mapToolbarEnabled: false,
-            zoomControlsEnabled: false,
-          ),
-        ),
-        Positioned(
-          top: 62,
-          right: 16,
-          child: ElevatedButton(
-            onPressed: _toggleLocationPause,
-            style: ElevatedButton.styleFrom(
-              shape: CircleBorder(),
-              backgroundColor: Color(0xFF00736D),
-            ),
-            child: Padding(
-              padding: const EdgeInsets.all(8.0),
-              child: isLocationPaused
-                  ? Icon(
-                      Icons.play_arrow,
-                      size: 25.0,
-                      color: Colors.white,
-                    )
-                  : Icon(
-                      Icons.pause,
-                      size: 25.0,
-                      color: Colors.white,
-                    ),
-            ),
-          ),
-        ),
-        Positioned(
-          top: 62,
-          left: MediaQuery.of(context).size.width / 2 - 44,
-          child: ElevatedButton(
-            style: ElevatedButton.styleFrom(
-              shape: CircleBorder(),
-              backgroundColor: Color(0xFF00736D),
-            ),
-            onPressed: _centerMap,
-            child: Padding(
-              padding: const EdgeInsets.all(8.0),
-              child: Icon(
-                Icons.center_focus_strong,
-                size: 25.0,
-                color: Colors.white,
+          ); // Permite o comportamento padrão de voltar.
+          return shouldPop ?? false;
+        },
+        child: Scaffold(
+            body: Stack(
+          children: [
+            Container(
+              width: widget.width ?? 400.0,
+              height: widget.height ?? 400.0,
+              child: google_maps.GoogleMap(
+                initialCameraPosition: google_maps.CameraPosition(
+                  target: google_maps.LatLng(
+                    widget.localAtual?.latitude ?? 0.0,
+                    widget.localAtual?.longitude ?? 0.0,
+                  ),
+                  zoom: 20,
+                ),
+                onMapCreated: _onMapCreated,
+                markers: {...markers}.toSet(),
+                polygons: {...polygons}.toSet(),
+                polylines: {...polylines}.toSet(),
+                mapType: google_maps.MapType.satellite,
+                mapToolbarEnabled: false,
+                zoomControlsEnabled: false,
               ),
             ),
-          ),
-        ),
-        Positioned(
-          top: 62,
-          left: 16,
-          child: ElevatedButton(
-            style: ElevatedButton.styleFrom(
-              shape: CircleBorder(),
-              backgroundColor: Color(0xFF00736D),
-            ),
-            onPressed: () {
-              _showDeletarContornoDialog(context);
-            },
-            child: Padding(
-              padding: const EdgeInsets.all(8.0),
-              child: Icon(
-                Icons.delete,
-                size: 25.0,
-                color: Colors.white,
-              ),
-            ),
-          ),
-        ),
-        Positioned(
-          top: topPosition,
-          right: -8,
-          child: Visibility(
-            visible: /* _distanceToStart() <= 50 && */ isVisivel == true,
-            child: ElevatedButton(
-              onPressed: () {
-                _mensagemDeConfimacaoDeFinalizacao(context);
-              },
-              style: ElevatedButton.styleFrom(
-                shape: CircleBorder(),
-                backgroundColor: Color(0xFFC13131),
-              ),
-              child: Padding(
-                padding: const EdgeInsets.all(8.0),
-                child: Icon(
-                  Icons.check,
-                  size: 62.0,
-                  color: Colors.white,
+            Positioned(
+              top: 62,
+              right: 16,
+              child: ElevatedButton(
+                onPressed: _toggleLocationPause,
+                style: ElevatedButton.styleFrom(
+                  shape: CircleBorder(),
+                  backgroundColor: Color(0xFF00736D),
+                ),
+                child: Padding(
+                  padding: const EdgeInsets.all(8.0),
+                  child: isLocationPaused
+                      ? Icon(
+                          Icons.play_arrow,
+                          size: 25.0,
+                          color: Colors.white,
+                        )
+                      : Icon(
+                          Icons.pause,
+                          size: 25.0,
+                          color: Colors.white,
+                        ),
                 ),
               ),
             ),
-          ),
-        ),
-        // Positioned(
-        //   bottom: 10,
-        //   left: 10,
-        //   right: 10,
-        //   child: Row(
-        //     mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-        //     children: [
-        //       ElevatedButton(
-        //         onPressed: () => _showVariablesAlert(context),
-        //         style: ElevatedButton.styleFrom(
-        //           shape: CircleBorder(),
-        //           backgroundColor: Color(0xFF00736D),
-        //         ),
-        //         child: Padding(
-        //           padding: const EdgeInsets.all(16.0),
-        //           child: Icon(
-        //             Icons.info_outline,
-        //             size: 35.0,
-        //             color: Colors.white,
-        //           ),
-        //         ),
-        //       ),
-        //     ],
-        //   ),
-        // ),
-      ],
-    );
+            Positioned(
+              top: 62,
+              left: MediaQuery.of(context).size.width / 2 - 44,
+              child: ElevatedButton(
+                style: ElevatedButton.styleFrom(
+                  shape: CircleBorder(),
+                  backgroundColor: Color(0xFF00736D),
+                ),
+                onPressed: _centerMap,
+                child: Padding(
+                  padding: const EdgeInsets.all(8.0),
+                  child: Icon(
+                    Icons.center_focus_strong,
+                    size: 25.0,
+                    color: Colors.white,
+                  ),
+                ),
+              ),
+            ),
+            Positioned(
+              top: 62,
+              left: 16,
+              child: ElevatedButton(
+                style: ElevatedButton.styleFrom(
+                  shape: CircleBorder(),
+                  backgroundColor: Color(0xFF00736D),
+                ),
+                onPressed: () {
+                  _showDeletarContornoDialog(context);
+                },
+                child: Padding(
+                  padding: const EdgeInsets.all(8.0),
+                  child: Icon(
+                    Icons.delete,
+                    size: 25.0,
+                    color: Colors.white,
+                  ),
+                ),
+              ),
+            ),
+            Positioned(
+              top: topPosition,
+              right: -8,
+              child: Visibility(
+                visible: /* _distanceToStart() <= 50 && */ isVisivel == true,
+                child: ElevatedButton(
+                  onPressed: () {
+                    _mensagemDeConfimacaoDeFinalizacao(context);
+                  },
+                  style: ElevatedButton.styleFrom(
+                    shape: CircleBorder(),
+                    backgroundColor: Color(0xFFC13131),
+                  ),
+                  child: Padding(
+                    padding: const EdgeInsets.all(8.0),
+                    child: Icon(
+                      Icons.check,
+                      size: 62.0,
+                      color: Colors.white,
+                    ),
+                  ),
+                ),
+              ),
+            ),
+            // Positioned(
+            //   bottom: 10,
+            //   left: 10,
+            //   right: 10,
+            //   child: Row(
+            //     mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+            //     children: [
+            //       ElevatedButton(
+            //         onPressed: () => _showVariablesAlert(context),
+            //         style: ElevatedButton.styleFrom(
+            //           shape: CircleBorder(),
+            //           backgroundColor: Color(0xFF00736D),
+            //         ),
+            //         child: Padding(
+            //           padding: const EdgeInsets.all(16.0),
+            //           child: Icon(
+            //             Icons.info_outline,
+            //             size: 35.0,
+            //             color: Colors.white,
+            //           ),
+            //         ),
+            //       ),
+            //     ],
+            //   ),
+            // ),
+          ],
+        )));
   }
 
   void _showVariablesAlert(BuildContext context) {

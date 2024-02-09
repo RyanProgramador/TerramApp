@@ -1612,69 +1612,107 @@ class _ColetaState extends State<Coleta> {
 
   @override
   Widget build(BuildContext context) {
-    return Stack(
-      children: [
-        Container(
-          width: widget.width ?? double.infinity,
-          height: widget.height ?? double.infinity,
-          child: google_maps.GoogleMap(
-            initialCameraPosition: google_maps.CameraPosition(
-              target: google_maps.LatLng(-29.913558, -51.195563),
-              zoom: _currentZoom,
+    return WillPopScope(
+        onWillPop: () async {
+          // Aqui você pode implementar qualquer lógica adicional necessária
+          // antes de permitir o comportamento padrão de voltar.
+          final shouldPop = await showDialog(
+            context: context,
+            builder: (context) => AlertDialog(
+              title: Text('Você tem certeza que quer sair da coleta?'),
+              content: Text(''),
+              actions: <Widget>[
+                TextButton(
+                  onPressed: () => Navigator.of(context)
+                      .pop(false), // Não permite sair da tela
+                  child: Text('Não'),
+                ),
+                TextButton(
+                  onPressed: () {
+                    // Permite sair da tela e redireciona
+                    Navigator.of(context)
+                        .pop(true); // Primeiro, fecha o diálogo
+                    // Substitua 'blankRedirecona' pelo nome da rota para a qual você deseja navegar
+                    // return true;
+                    // setState(() {
+                    //   FFAppState().contornoFazenda =
+                    //       FFAppState().contornoFazenda.toList().cast<dynamic>();
+                    //   FFAppState().grupoContornoFazendas =
+                    //       FFAppState().grupoContornoFazendas.toList().cast<dynamic>();
+                    // });
+                    setState(() {});
+                  },
+                  child: const Text('Sim'),
+                ),
+              ],
             ),
-            onMapCreated: (controller) {
-              _googleMapController = controller;
-              _onMapCreated(controller);
-            },
-            onTap: _onMapTap,
-            onCameraMove: _onCameraMove,
-            polygons: polygons,
-            markers: markers,
-            myLocationEnabled: true,
-            mapType: google_maps.MapType.satellite,
-            mapToolbarEnabled: false,
-            zoomControlsEnabled: false,
-          ),
-        ),
-        Positioned(
-          top: 202,
-          right: 16,
-          child: ElevatedButton(
-            onPressed: mudaFoco,
-            style: ElevatedButton.styleFrom(
-              shape: CircleBorder(),
-              backgroundColor: Color(0xFF00736D),
+          ); // Permite o comportamento padrão de voltar.
+          return shouldPop ?? false;
+        },
+        child: Scaffold(
+            body: Stack(
+          children: [
+            Container(
+              width: widget.width ?? double.infinity,
+              height: widget.height ?? double.infinity,
+              child: google_maps.GoogleMap(
+                initialCameraPosition: google_maps.CameraPosition(
+                  target: google_maps.LatLng(-29.913558, -51.195563),
+                  zoom: _currentZoom,
+                ),
+                onMapCreated: (controller) {
+                  _googleMapController = controller;
+                  _onMapCreated(controller);
+                },
+                onTap: _onMapTap,
+                onCameraMove: _onCameraMove,
+                polygons: polygons,
+                markers: markers,
+                myLocationEnabled: true,
+                mapType: google_maps.MapType.satellite,
+                mapToolbarEnabled: false,
+                zoomControlsEnabled: false,
+              ),
             ),
-            child: Padding(
-                padding: const EdgeInsets.all(8.0),
-                child: Icon(
-                  Icons.center_focus_strong_sharp,
-                  size: 25.0,
-                  color: Colors.white,
-                )),
-          ),
-        ),
-        Positioned(
-          bottom: 10,
-          left: 10,
-          right: 10,
-          child: ElevatedButton(
-            onPressed: _exibirDados,
-            style: ElevatedButton.styleFrom(
-              shape: CircleBorder(),
-              backgroundColor: Color(0xFF00736D),
+            Positioned(
+              top: 202,
+              right: 16,
+              child: ElevatedButton(
+                onPressed: mudaFoco,
+                style: ElevatedButton.styleFrom(
+                  shape: CircleBorder(),
+                  backgroundColor: Color(0xFF00736D),
+                ),
+                child: Padding(
+                    padding: const EdgeInsets.all(8.0),
+                    child: Icon(
+                      Icons.center_focus_strong_sharp,
+                      size: 25.0,
+                      color: Colors.white,
+                    )),
+              ),
             ),
-            child: Padding(
-                padding: const EdgeInsets.all(8.0),
-                child: Icon(
-                  Icons.info,
-                  size: 25.0,
-                  color: Colors.white,
-                )),
-          ),
-        )
-      ],
-    );
+            Positioned(
+              bottom: 10,
+              left: 10,
+              right: 10,
+              child: ElevatedButton(
+                onPressed: _exibirDados,
+                style: ElevatedButton.styleFrom(
+                  shape: CircleBorder(),
+                  backgroundColor: Color(0xFF00736D),
+                ),
+                child: Padding(
+                    padding: const EdgeInsets.all(8.0),
+                    child: Icon(
+                      Icons.info,
+                      size: 25.0,
+                      color: Colors.white,
+                    )),
+              ),
+            )
+          ],
+        )));
   }
 
   void _exibirDados() {
