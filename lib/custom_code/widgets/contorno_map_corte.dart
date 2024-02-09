@@ -14,7 +14,7 @@ import 'dart:math';
 
 import 'package:geolocator/geolocator.dart';
 import 'package:google_maps_flutter/google_maps_flutter.dart' as google_maps;
-import 'package:wake_lock/wake_lock.dart';
+import 'package:wakelock/wakelock.dart';
 import 'package:background_location/background_location.dart';
 import '../../contorno_da_fazenda/contorno_da_fazenda_model.dart';
 export 'package:terram_app/contorno_da_fazenda/contorno_da_fazenda_model.dart';
@@ -96,7 +96,7 @@ class _ContornoMapCorteState extends State<ContornoMapCorte> {
 
   @override
   void initState() {
-    WakeLock.enable();
+    Wakelock.enable();
     super.initState();
 
     // Filtra os dados com base no 'contorno_grupo'

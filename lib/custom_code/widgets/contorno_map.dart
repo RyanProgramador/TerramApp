@@ -18,7 +18,7 @@ import 'package:google_maps_flutter/google_maps_flutter.dart' as google_maps;
 import '../../contorno_da_fazenda/contorno_da_fazenda_model.dart';
 export 'package:terram_app/contorno_da_fazenda/contorno_da_fazenda_model.dart';
 import 'package:background_location/background_location.dart';
-import 'package:wake_lock/wake_lock.dart';
+import 'package:wakelock/wakelock.dart';
 
 class ContornoMap extends StatefulWidget {
   const ContornoMap({
@@ -89,7 +89,7 @@ class _ContornoMapState extends State<ContornoMap> {
 
   @override
   void initState() {
-    WakeLock.enable();
+    Wakelock.enable();
     super.initState();
     _model = createModel(context, () => ContornoDaFazendaModel());
     _getCurrentLocation();
