@@ -5,6 +5,7 @@ export 'contorno_map_corte.dart' show ContornoMapCorte;
 export 'contorno_map_revisao_todos.dart' show ContornoMapRevisaoTodos;
 export 'actual_position.dart' show ActualPosition;
 export 'maps_routes2.dart' show MapsRoutes2;
+export 'voltar.dart' show Voltar;
 export 'rota_final.dart' show RotaFinal;
 export 'loading_circle.dart' show LoadingCircle;
 export 'maps_offline.dart' show MapsOffline;

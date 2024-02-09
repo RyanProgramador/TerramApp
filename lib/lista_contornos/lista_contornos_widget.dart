@@ -1172,11 +1172,11 @@ class _ListaContornosWidgetState extends State<ListaContornosWidget> {
                                 ),
                               ),
                               Container(
-                                width: 0.2,
-                                height: 0.2,
-                                child: custom_widgets.DesejaRealmenteVoltar(
-                                  width: 0.2,
-                                  height: 0.2,
+                                width: 0.1,
+                                height: 0.1,
+                                child: custom_widgets.Voltar(
+                                  width: 0.1,
+                                  height: 0.1,
                                 ),
                               ),
                             ],
