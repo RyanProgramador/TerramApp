@@ -23,7 +23,7 @@ class _VoltarState extends State<Voltar> {
     return WillPopScope(
       onWillPop: () async {
         // Redireciona diretamente sem mostrar um AlertDialog.
-        context.router.pushNamed(
+        context.pushNamed(
           'blankRedirecona',
           extra: <String, dynamic>{
             kTransitionInfoKey: TransitionInfo(

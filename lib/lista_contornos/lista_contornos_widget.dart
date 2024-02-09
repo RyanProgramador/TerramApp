@@ -1090,7 +1090,7 @@ class _ListaContornosWidgetState extends State<ListaContornosWidget> {
                                             0.0, 0.0, 0.0, 22.0),
                                         child: FFButtonWidget(
                                           onPressed: () async {
-                                            context.goNamed(
+                                            context.pushNamed(
                                               'ContornoDaFazenda',
                                               queryParameters: {
                                                 'fazendaNome': serializeParam(
