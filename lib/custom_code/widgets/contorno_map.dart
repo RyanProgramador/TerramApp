@@ -17,6 +17,7 @@ import 'package:google_maps_flutter/google_maps_flutter.dart' as google_maps;
 
 import '../../contorno_da_fazenda/contorno_da_fazenda_model.dart';
 export 'package:terram_app/contorno_da_fazenda/contorno_da_fazenda_model.dart';
+import 'package:background_location/background_location.dart';
 
 class ContornoMap extends StatefulWidget {
   const ContornoMap({
@@ -80,6 +81,7 @@ class _ContornoMapState extends State<ContornoMap> {
   List<String> coresHex = [
     "#000000" //preto
   ];
+  bool _isLocationServiceRunning = false;
 
   //
   List<Map<String, dynamic>> dados = []; // Variável para armazenar dados
@@ -98,47 +100,137 @@ class _ContornoMapState extends State<ContornoMap> {
     _getCurrentLocation(); // Inicializar a posição atual ao criar o mapa
   }
 
-  void _getCurrentLocation() async {
+  void startLocationService() {
+    if (!_isLocationServiceRunning) {
+      BackgroundLocation.startLocationService(distanceFilter: 0);
+      _isLocationServiceRunning = true;
+    }
+  }
+  // void _getCurrentLocation() async {
+  //   BackgroundLocation.getLocationUpdates((location) {
+  //     print('Latitude: ${location.latitude}');
+  //     print('Longitude: ${location.longitude}');
+  //     // Aqui você pode adicionar a lógica para salvar as coordenadas ou o que precisar fazer com a localização
+  //   });
+  //   if (widget.ativoOuNao == true) {
+  //     isVisivel = true;
+  //     if (!isLocationPaused) {
+  //       // Position newLoc = await Geolocator.getCurrentPosition(
+  //       //     desiredAccuracy: LocationAccuracy.best);
+  //
+  //       BackgroundLocation.startLocationService();
+  //       BackgroundLocation.getLocationUpdates((location) {
+  //         print('Latitude: ${location.latitude}, Longitude: ${location.longitude}');
+  //         Position newLoc = Position(
+  //           latitude: location.latitude ?? 0.0,
+  //           longitude: location.longitude ?? 0.0,
+  //           timestamp: DateTime.now(),
+  //           accuracy: location.accuracy ?? 0.0,
+  //           altitude: location.altitude ?? 0.0,
+  //           heading: location.bearing ?? 0.0,
+  //           speed: location.speed ?? 0.0,
+  //           speedAccuracy: 1 ?? 0.0,
+  //         );
+  //
+  //
+  //         // Se for a primeira vez ou se a distância entre a última posição e a nova for >= 1m
+  //         if (lastPosition == null ||
+  //             Geolocator.distanceBetween(
+  //               lastPosition!.latitude,
+  //               lastPosition!.longitude,
+  //               newLoc.latitude,
+  //               newLoc.longitude,
+  //             ) >=
+  //                 (widget.toleranciaEmMetrosEntreUmaCapturaEOutra ?? 5)) {
+  //           // Atualiza a última posição conhecida
+  //           lastPosition = newLoc;
+  //           double currentZoomLevel = await _googleMapController!.getZoomLevel();
+  //           if (_googleMapController != null) {
+  //             _googleMapController!.animateCamera(
+  //               google_maps.CameraUpdate.newCameraPosition(
+  //                 google_maps.CameraPosition(
+  //                   target: google_maps.LatLng(
+  //                     newLoc.latitude,
+  //                     newLoc.longitude,
+  //                   ),
+  //                   zoom: currentZoomLevel,
+  //                 ),
+  //               ),
+  //             );
+  //           }
+  //           currentTarget = google_maps.LatLng(newLoc.latitude, newLoc.longitude);
+  //           currentZoom = 20;
+  //
+  //           setState(() {
+  //             position = newLoc;
+  //             _addUserMarker(
+  //                 google_maps.LatLng(newLoc.latitude, newLoc.longitude));
+  //             _updatePolyline();
+  //           });
+  //         }
+  //       }
+  //     }
+  //
+  //   }
+  // }
+
+  void _getCurrentLocation() {
+    startLocationService();
     if (widget.ativoOuNao == true) {
       isVisivel = true;
       if (!isLocationPaused) {
-        Position newLoc = await Geolocator.getCurrentPosition(
-            desiredAccuracy: LocationAccuracy.best);
-        // Se for a primeira vez ou se a distância entre a última posição e a nova for >= 1m
-        if (lastPosition == null ||
-            Geolocator.distanceBetween(
-                  lastPosition!.latitude,
-                  lastPosition!.longitude,
-                  newLoc.latitude,
-                  newLoc.longitude,
-                ) >=
-                (widget.toleranciaEmMetrosEntreUmaCapturaEOutra ?? 5)) {
-          // Atualiza a última posição conhecida
-          lastPosition = newLoc;
-          double currentZoomLevel = await _googleMapController!.getZoomLevel();
-          if (_googleMapController != null) {
-            _googleMapController!.animateCamera(
-              google_maps.CameraUpdate.newCameraPosition(
-                google_maps.CameraPosition(
-                  target: google_maps.LatLng(
-                    newLoc.latitude,
-                    newLoc.longitude,
-                  ),
-                  zoom: currentZoomLevel,
-                ),
-              ),
-            );
-          }
-          currentTarget = google_maps.LatLng(newLoc.latitude, newLoc.longitude);
-          currentZoom = 20;
+        BackgroundLocation.getLocationUpdates((location) async {
+          // Adicionado async aqui
+          Position newLoc = Position(
+            latitude: location.latitude ?? 0.0,
+            longitude: location.longitude ?? 0.0,
+            timestamp: DateTime.now(),
+            accuracy: location.accuracy ?? 0.0,
+            altitude: location.altitude ?? 0.0,
+            heading: location.bearing ?? 0.0,
+            speed: location.speed ?? 0.0,
+            speedAccuracy: 1 ?? 0.0,
+          );
 
-          setState(() {
-            position = newLoc;
-            _addUserMarker(
-                google_maps.LatLng(newLoc.latitude, newLoc.longitude));
-            _updatePolyline();
-          });
-        }
+          // Se for a primeira vez ou se a distância entre a última posição e a nova for >= 1m
+          if (lastPosition == null ||
+              Geolocator.distanceBetween(
+                    lastPosition!.latitude,
+                    lastPosition!.longitude,
+                    location.latitude ?? 0.0,
+                    location.longitude ?? 0.0,
+                  ) >=
+                  (widget.toleranciaEmMetrosEntreUmaCapturaEOutra ?? 3)) {
+            // Atualiza a última posição conhecida
+            lastPosition = newLoc;
+
+            if (_googleMapController != null) {
+              double currentZoomLevel = await _googleMapController!
+                  .getZoomLevel(); // Usando await aqui
+              _googleMapController!.animateCamera(
+                google_maps.CameraUpdate.newCameraPosition(
+                  google_maps.CameraPosition(
+                    target: google_maps.LatLng(
+                      location.latitude ?? 0.0,
+                      location.longitude ?? 0.0,
+                    ),
+                    zoom: currentZoomLevel,
+                  ),
+                ),
+              );
+            }
+            currentTarget =
+                google_maps.LatLng(newLoc.latitude, newLoc.longitude);
+            currentZoom = 20;
+            // Atualiza o estado com a nova localização
+            setState(() {
+              position = newLoc;
+              _addUserMarker(
+                  google_maps.LatLng(newLoc.latitude, newLoc.longitude));
+              _updatePolyline();
+            });
+          }
+        });
       }
     }
   }
@@ -237,7 +329,15 @@ class _ContornoMapState extends State<ContornoMap> {
         isLocationPaused = true;
       });
     }
+    stopLocationService();
     _updatePolyline();
+  }
+
+  void stopLocationService() {
+    if (_isLocationServiceRunning) {
+      BackgroundLocation.stopLocationService();
+      _isLocationServiceRunning = false;
+    }
   }
 
   double _calculaDistance(google_maps.LatLng start, google_maps.LatLng end) {
@@ -252,7 +352,7 @@ class _ContornoMapState extends State<ContornoMap> {
       FFAppState().grupoContornoFazendas =
           FFAppState().grupoContornoFazendas.toList().cast<dynamic>();
     });
-
+    stopLocationService();
     FFAppState().contornoFazenda =
         FFAppState().contornoFazenda.toList().cast<dynamic>();
     FFAppState().grupoContornoFazendas =

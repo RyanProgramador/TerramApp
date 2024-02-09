@@ -226,11 +226,6 @@ class _TestecontornoWidgetState extends State<TestecontornoWidget> {
                           color:
                               FlutterFlowTheme.of(context).secondaryBackground,
                         ),
-                        child: Container(
-                          width: double.infinity,
-                          height: double.infinity,
-                          child: custom_widgets.AreasPolygonos(),
-                        ),
                       ),
                     ),
                   Expanded(

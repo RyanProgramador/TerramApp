@@ -137,12 +137,6 @@ class _GpsTecToFazendaWidgetState extends State<GpsTecToFazendaWidget> {
                             stringDoRotas: widget.rotaInversa
                                 ? widget.rotaInversaString
                                 : widget.retornopolylines,
-                            toleranciaEmMetrosEntreUmaCapturaEOutra: FFAppState()
-                                        .distanciaEmMetrosDeToleranciaEntreUmaCapturaEOutra !=
-                                    null
-                                ? FFAppState()
-                                    .distanciaEmMetrosDeToleranciaEntreUmaCapturaEOutra
-                                : 1,
                           ),
                         ),
                       ),
@@ -198,7 +192,9 @@ class _GpsTecToFazendaWidgetState extends State<GpsTecToFazendaWidget> {
                                   hoverColor: Colors.transparent,
                                   highlightColor: Colors.transparent,
                                   onTap: () async {
+                                    FFAppState().update(() {});
                                     context.safePop();
+                                    FFAppState().update(() {});
                                   },
                                   child: Icon(
                                     Icons.keyboard_backspace_rounded,
@@ -435,6 +431,7 @@ class _GpsTecToFazendaWidgetState extends State<GpsTecToFazendaWidget> {
                                                 );
                                               },
                                             );
+                                            FFAppState().update(() {});
                                             Navigator.pop(context);
                                           },
                                           child: Icon(

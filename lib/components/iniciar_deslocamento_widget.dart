@@ -819,6 +819,7 @@ class _IniciarDeslocamentoWidgetState extends State<IniciarDeslocamentoWidget> {
                                             }.withoutNulls,
                                           );
 
+                                          FFAppState().update(() {});
                                           if (_shouldSetState) setState(() {});
                                           return;
                                         } else {
@@ -901,6 +902,7 @@ class _IniciarDeslocamentoWidgetState extends State<IniciarDeslocamentoWidget> {
                                             }.withoutNulls,
                                           );
 
+                                          FFAppState().update(() {});
                                           if (_shouldSetState) setState(() {});
                                           return;
                                         }
@@ -1054,6 +1056,7 @@ class _IniciarDeslocamentoWidgetState extends State<IniciarDeslocamentoWidget> {
                                             }.withoutNulls,
                                           );
 
+                                          FFAppState().update(() {});
                                           if (_shouldSetState) setState(() {});
                                           return;
                                         } else {
@@ -1104,6 +1107,7 @@ class _IniciarDeslocamentoWidgetState extends State<IniciarDeslocamentoWidget> {
                                             }.withoutNulls,
                                           );
 
+                                          FFAppState().update(() {});
                                           if (_shouldSetState) setState(() {});
                                           return;
                                         }
@@ -1204,6 +1208,7 @@ class _IniciarDeslocamentoWidgetState extends State<IniciarDeslocamentoWidget> {
                                             }.withoutNulls,
                                           );
 
+                                          FFAppState().update(() {});
                                           if (_shouldSetState) setState(() {});
                                           return;
                                         } else {
@@ -1254,6 +1259,7 @@ class _IniciarDeslocamentoWidgetState extends State<IniciarDeslocamentoWidget> {
                                             }.withoutNulls,
                                           );
 
+                                          FFAppState().update(() {});
                                           if (_shouldSetState) setState(() {});
                                           return;
                                         }
@@ -1304,6 +1310,7 @@ class _IniciarDeslocamentoWidgetState extends State<IniciarDeslocamentoWidget> {
                                           }.withoutNulls,
                                         );
 
+                                        FFAppState().update(() {});
                                         if (_shouldSetState) setState(() {});
                                         return;
                                       }
