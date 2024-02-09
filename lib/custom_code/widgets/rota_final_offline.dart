@@ -297,99 +297,138 @@ class _MapsRoutesState extends State<RotaFinalOffline> {
     Set<google_maps.Marker> allMarkers =
         routeMarkers.union(_createCustomMarker());
 
-    return Stack(
-      children: [
-        Container(
-          width: widget.width ?? 400.0,
-          height: widget.height ?? 400.0,
-          child: google_maps.GoogleMap(
-            zoomControlsEnabled: false,
-            initialCameraPosition: google_maps.CameraPosition(
-              target: google_maps.LatLng(
-                position?.latitude ?? widget.coordenadasFinais.latitude,
-                position?.longitude ?? widget.coordenadasFinais.latitude,
-              ),
-              zoom: 19,
-              tilt: 60,
-              bearing: 90,
+    return WillPopScope(
+        onWillPop: () async {
+          // Aqui você pode implementar qualquer lógica adicional necessária
+          // antes de permitir o comportamento padrão de voltar.
+          final shouldPop = await showDialog(
+            context: context,
+            builder: (context) => AlertDialog(
+              title: Text('Você tem certeza que quer sair do deslocamento?'),
+              content: Text(''),
+              actions: <Widget>[
+                TextButton(
+                  onPressed: () => Navigator.of(context)
+                      .pop(false), // Não permite sair da tela
+                  child: Text('Não'),
+                ),
+                TextButton(
+                  onPressed: () {
+                    // Permite sair da tela e redireciona
+                    Navigator.of(context)
+                        .pop(true); // Primeiro, fecha o diálogo
+                    // Substitua 'blankRedirecona' pelo nome da rota para a qual você deseja navegar
+                    // return true;
+                    //setState(() {
+                    //  FFAppState().contornoFazenda =
+                    //      FFAppState().contornoFazenda.toList().cast<dynamic>();
+                    //  FFAppState().grupoContornoFazendas =
+                    //      FFAppState().grupoContornoFazendas.toList().cast<dynamic>();
+                    //});
+                    setState(() {});
+                  },
+                  child: const Text('Sim'),
+                ),
+              ],
             ),
-            onMapCreated: _onMapCreated,
-            onCameraMove: (google_maps.CameraPosition position) {
-              // Atualize o bearing atual com o novo valor durante o movimento da câmera
-              currentBearing = position.bearing;
-            },
-            markers: allMarkers,
-            polylines: {
-              google_maps.Polyline(
-                polylineId: google_maps.PolylineId("RedPolyline"),
-                color: Colors.blue,
-                points: routePoints,
+          ); // Permite o comportamento padrão de voltar.
+          return shouldPop ?? false;
+        },
+        child: Scaffold(
+            body: Stack(
+          children: [
+            Container(
+              width: widget.width ?? 400.0,
+              height: widget.height ?? 400.0,
+              child: google_maps.GoogleMap(
+                zoomControlsEnabled: false,
+                initialCameraPosition: google_maps.CameraPosition(
+                  target: google_maps.LatLng(
+                    position?.latitude ?? widget.coordenadasFinais.latitude,
+                    position?.longitude ?? widget.coordenadasFinais.latitude,
+                  ),
+                  zoom: 19,
+                  tilt: 60,
+                  bearing: 90,
+                ),
+                onMapCreated: _onMapCreated,
+                onCameraMove: (google_maps.CameraPosition position) {
+                  // Atualize o bearing atual com o novo valor durante o movimento da câmera
+                  currentBearing = position.bearing;
+                },
+                markers: allMarkers,
+                polylines: {
+                  google_maps.Polyline(
+                    polylineId: google_maps.PolylineId("RedPolyline"),
+                    color: Colors.blue,
+                    points: routePoints,
+                  ),
+                },
               ),
-            },
-          ),
-        ),
-        Positioned(
-          top: MediaQuery.of(context).size.height / 3.2 -
-              28.0, // Adjust the top position as needed
-          right: 5, // Adjust the left position as needed
-          child: ElevatedButton(
-            onPressed: () {
-              retiraPosicaoAtualDeRodar();
+            ),
+            Positioned(
+              top: MediaQuery.of(context).size.height / 3.2 -
+                  28.0, // Adjust the top position as needed
+              right: 5, // Adjust the left position as needed
+              child: ElevatedButton(
+                onPressed: () {
+                  retiraPosicaoAtualDeRodar();
 
-              setState(() {
-                if (!estalivre) {
-                  icone = "center_focus_weak";
-                  ScaffoldMessenger.of(context).showSnackBar(
-                    SnackBar(
-                      content: Text("Centralizando..."),
-                      duration: Duration(seconds: 3),
-                    ),
-                  );
-                } else {
-                  icone = "crop_free";
-                  ScaffoldMessenger.of(context).showSnackBar(
-                    SnackBar(
-                      content: Text("Mapa fixado"),
-                      duration: Duration(seconds: 5),
-                    ),
-                  );
-                }
-              });
-            },
-            style: ElevatedButton.styleFrom(
-              shape: CircleBorder(),
-              backgroundColor: Color(0xFF00736D),
-            ),
-            child: Icon(
-              getIconData(), // or any other compass-related icon
-              size: 25.0,
-              color: Colors.white, // Adjust the size as needed
-            ),
-          ),
-        ),
-        Positioned(
-          top: MediaQuery.of(context).size.height / 4 -
-              28.0, // Adjust the top position as needed
-          right: 5, // Adjust the left position as needed
-          child: ElevatedButton(
-            onPressed: () {
-              modoCarro();
-            },
-            style: ElevatedButton.styleFrom(
-              shape: CircleBorder(),
-              backgroundColor: Color(0xFF00736D),
-            ),
-            child: Transform.rotate(
-              angle: 30, // Your rotation angle here based on compass direction,
-              child: Icon(
-                Icons.explore, // or any other compass-related icon
-                size: 25.0,
-                color: Colors.white, // Adjust the size as needed
+                  setState(() {
+                    if (!estalivre) {
+                      icone = "center_focus_weak";
+                      ScaffoldMessenger.of(context).showSnackBar(
+                        SnackBar(
+                          content: Text("Centralizando..."),
+                          duration: Duration(seconds: 3),
+                        ),
+                      );
+                    } else {
+                      icone = "crop_free";
+                      ScaffoldMessenger.of(context).showSnackBar(
+                        SnackBar(
+                          content: Text("Mapa fixado"),
+                          duration: Duration(seconds: 5),
+                        ),
+                      );
+                    }
+                  });
+                },
+                style: ElevatedButton.styleFrom(
+                  shape: CircleBorder(),
+                  backgroundColor: Color(0xFF00736D),
+                ),
+                child: Icon(
+                  getIconData(), // or any other compass-related icon
+                  size: 25.0,
+                  color: Colors.white, // Adjust the size as needed
+                ),
               ),
             ),
-          ),
-        ),
-      ],
-    );
+            Positioned(
+              top: MediaQuery.of(context).size.height / 4 -
+                  28.0, // Adjust the top position as needed
+              right: 5, // Adjust the left position as needed
+              child: ElevatedButton(
+                onPressed: () {
+                  modoCarro();
+                },
+                style: ElevatedButton.styleFrom(
+                  shape: CircleBorder(),
+                  backgroundColor: Color(0xFF00736D),
+                ),
+                child: Transform.rotate(
+                  angle:
+                      30, // Your rotation angle here based on compass direction,
+                  child: Icon(
+                    Icons.explore, // or any other compass-related icon
+                    size: 25.0,
+                    color: Colors.white, // Adjust the size as needed
+                  ),
+                ),
+              ),
+            ),
+          ],
+        )));
   }
 }
