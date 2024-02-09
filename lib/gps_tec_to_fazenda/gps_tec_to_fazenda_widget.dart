@@ -26,6 +26,15 @@ class GpsTecToFazendaWidget extends StatefulWidget {
     bool? comRota,
     bool? rotaInversa,
     this.rotaInversaString,
+    required this.cidadeFaz,
+    required this.estadoFaz,
+    required this.observacao,
+    required this.data,
+    required this.horar,
+    required this.fazid,
+    required this.autoAuditoria,
+    required this.autoAuditoriaQuantidadePontos,
+    required this.etapaDe,
   })  : this.comRota = comRota ?? false,
         this.rotaInversa = rotaInversa ?? false;
 
@@ -39,6 +48,15 @@ class GpsTecToFazendaWidget extends StatefulWidget {
   final bool comRota;
   final bool rotaInversa;
   final String? rotaInversaString;
+  final String? cidadeFaz;
+  final String? estadoFaz;
+  final String? observacao;
+  final String? data;
+  final String? horar;
+  final String? fazid;
+  final bool? autoAuditoria;
+  final int? autoAuditoriaQuantidadePontos;
+  final String? etapaDe;
 
   @override
   State<GpsTecToFazendaWidget> createState() => _GpsTecToFazendaWidgetState();
@@ -432,7 +450,90 @@ class _GpsTecToFazendaWidgetState extends State<GpsTecToFazendaWidget> {
                                               },
                                             );
                                             FFAppState().update(() {});
-                                            Navigator.pop(context);
+
+                                            context.goNamed(
+                                              'IniciarDeslocamentoTela',
+                                              queryParameters: {
+                                                'etapade': serializeParam(
+                                                  widget.etapaDe,
+                                                  ParamType.String,
+                                                ),
+                                                'fazendaNome': serializeParam(
+                                                  widget.fazNome,
+                                                  ParamType.String,
+                                                ),
+                                                'latlngFaz': serializeParam(
+                                                  widget.latlngFaz,
+                                                  ParamType.LatLng,
+                                                ),
+                                                'cidadeFaz': serializeParam(
+                                                  widget.cidadeFaz,
+                                                  ParamType.String,
+                                                ),
+                                                'estadoFaz': serializeParam(
+                                                  widget.estadoFaz,
+                                                  ParamType.String,
+                                                ),
+                                                'observacao': serializeParam(
+                                                  widget.observacao,
+                                                  ParamType.String,
+                                                ),
+                                                'tecnicoid': serializeParam(
+                                                  widget.tecnicoId,
+                                                  ParamType.String,
+                                                ),
+                                                'servicoid': serializeParam(
+                                                  widget.servicoId,
+                                                  ParamType.String,
+                                                ),
+                                                'data': serializeParam(
+                                                  widget.data,
+                                                  ParamType.String,
+                                                ),
+                                                'hora': serializeParam(
+                                                  widget.horar,
+                                                  ParamType.String,
+                                                ),
+                                                'jsonServico': serializeParam(
+                                                  widget.jsonServico,
+                                                  ParamType.JSON,
+                                                ),
+                                                'deslocamentoAtualFinalizado':
+                                                    serializeParam(
+                                                  true,
+                                                  ParamType.bool,
+                                                ),
+                                                'polylinhaQueVemDoMenuInicial':
+                                                    serializeParam(
+                                                  '',
+                                                  ParamType.String,
+                                                ),
+                                                'fazid': serializeParam(
+                                                  widget.fazid,
+                                                  ParamType.String,
+                                                ),
+                                                'autoAuditoria': serializeParam(
+                                                  widget.autoAuditoria,
+                                                  ParamType.bool,
+                                                ),
+                                                'autoAuditoriaQuantidadePontos':
+                                                    serializeParam(
+                                                  widget
+                                                      .autoAuditoriaQuantidadePontos,
+                                                  ParamType.int,
+                                                ),
+                                              }.withoutNulls,
+                                              extra: <String, dynamic>{
+                                                kTransitionInfoKey:
+                                                    TransitionInfo(
+                                                  hasTransition: true,
+                                                  transitionType:
+                                                      PageTransitionType.fade,
+                                                  duration:
+                                                      Duration(milliseconds: 0),
+                                                ),
+                                              },
+                                            );
                                           },
                                           child: Icon(
                                             Icons.stop,

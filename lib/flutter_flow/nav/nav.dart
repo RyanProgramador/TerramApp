@@ -130,6 +130,16 @@ GoRouter createRouter(AppStateNotifier appStateNotifier) => GoRouter(
                 rotaInversa: params.getParam('rotaInversa', ParamType.bool),
                 rotaInversaString:
                     params.getParam('rotaInversaString', ParamType.String),
+                cidadeFaz: params.getParam('cidadeFaz', ParamType.String),
+                estadoFaz: params.getParam('estadoFaz', ParamType.String),
+                observacao: params.getParam('observacao', ParamType.String),
+                data: params.getParam('data', ParamType.String),
+                horar: params.getParam('horar', ParamType.String),
+                fazid: params.getParam('fazid', ParamType.String),
+                autoAuditoria: params.getParam('autoAuditoria', ParamType.bool),
+                autoAuditoriaQuantidadePontos: params.getParam(
+                    'autoAuditoriaQuantidadePontos', ParamType.int),
+                etapaDe: params.getParam('etapaDe', ParamType.String),
               ),
             ),
             FFRoute(

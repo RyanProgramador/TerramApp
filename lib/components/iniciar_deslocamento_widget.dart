@@ -816,6 +816,44 @@ class _IniciarDeslocamentoWidgetState extends State<IniciarDeslocamentoWidget> {
                                                     widget.servicoId),
                                                 ParamType.String,
                                               ),
+                                              'cidadeFaz': serializeParam(
+                                                widget.cidadeFaz,
+                                                ParamType.String,
+                                              ),
+                                              'estadoFaz': serializeParam(
+                                                widget.estadoFaz,
+                                                ParamType.String,
+                                              ),
+                                              'observacao': serializeParam(
+                                                widget.observacao,
+                                                ParamType.String,
+                                              ),
+                                              'data': serializeParam(
+                                                widget.data,
+                                                ParamType.String,
+                                              ),
+                                              'horar': serializeParam(
+                                                widget.hora,
+                                                ParamType.String,
+                                              ),
+                                              'fazid': serializeParam(
+                                                widget.fazid,
+                                                ParamType.String,
+                                              ),
+                                              'autoAuditoria': serializeParam(
+                                                widget.autoAuditoria,
+                                                ParamType.bool,
+                                              ),
+                                              'autoAuditoriaQuantidadePontos':
+                                                  serializeParam(
+                                                widget
+                                                    .autoAuditoriaQuantidadePontos,
+                                                ParamType.int,
+                                              ),
+                                              'etapaDe': serializeParam(
+                                                widget.etapade,
+                                                ParamType.String,
+                                              ),
                                             }.withoutNulls,
                                           );
 
@@ -898,6 +936,49 @@ class _IniciarDeslocamentoWidgetState extends State<IniciarDeslocamentoWidget> {
                                               'rotaInversa': serializeParam(
                                                 true,
                                                 ParamType.bool,
+                                              ),
+                                              'rotaInversaString':
+                                                  serializeParam(
+                                                '',
+                                                ParamType.String,
+                                              ),
+                                              'cidadeFaz': serializeParam(
+                                                widget.cidadeFaz,
+                                                ParamType.String,
+                                              ),
+                                              'estadoFaz': serializeParam(
+                                                widget.estadoFaz,
+                                                ParamType.String,
+                                              ),
+                                              'observacao': serializeParam(
+                                                widget.observacao,
+                                                ParamType.String,
+                                              ),
+                                              'data': serializeParam(
+                                                widget.data,
+                                                ParamType.String,
+                                              ),
+                                              'horar': serializeParam(
+                                                widget.hora,
+                                                ParamType.String,
+                                              ),
+                                              'fazid': serializeParam(
+                                                widget.fazid,
+                                                ParamType.String,
+                                              ),
+                                              'autoAuditoria': serializeParam(
+                                                widget.autoAuditoria,
+                                                ParamType.bool,
+                                              ),
+                                              'autoAuditoriaQuantidadePontos':
+                                                  serializeParam(
+                                                widget
+                                                    .autoAuditoriaQuantidadePontos,
+                                                ParamType.int,
+                                              ),
+                                              'etapaDe': serializeParam(
+                                                widget.etapade,
+                                                ParamType.String,
                                               ),
                                             }.withoutNulls,
                                           );
@@ -1053,6 +1134,49 @@ class _IniciarDeslocamentoWidgetState extends State<IniciarDeslocamentoWidget> {
                                                 false,
                                                 ParamType.bool,
                                               ),
+                                              'rotaInversaString':
+                                                  serializeParam(
+                                                '',
+                                                ParamType.String,
+                                              ),
+                                              'cidadeFaz': serializeParam(
+                                                widget.cidadeFaz,
+                                                ParamType.String,
+                                              ),
+                                              'estadoFaz': serializeParam(
+                                                widget.estadoFaz,
+                                                ParamType.String,
+                                              ),
+                                              'observacao': serializeParam(
+                                                widget.observacao,
+                                                ParamType.String,
+                                              ),
+                                              'data': serializeParam(
+                                                widget.data,
+                                                ParamType.String,
+                                              ),
+                                              'horar': serializeParam(
+                                                widget.hora,
+                                                ParamType.String,
+                                              ),
+                                              'fazid': serializeParam(
+                                                widget.fazid,
+                                                ParamType.String,
+                                              ),
+                                              'autoAuditoria': serializeParam(
+                                                widget.autoAuditoria,
+                                                ParamType.bool,
+                                              ),
+                                              'autoAuditoriaQuantidadePontos':
+                                                  serializeParam(
+                                                widget
+                                                    .autoAuditoriaQuantidadePontos,
+                                                ParamType.int,
+                                              ),
+                                              'etapaDe': serializeParam(
+                                                widget.etapade,
+                                                ParamType.String,
+                                              ),
                                             }.withoutNulls,
                                           );
 
@@ -1103,6 +1227,49 @@ class _IniciarDeslocamentoWidgetState extends State<IniciarDeslocamentoWidget> {
                                               'rotaInversa': serializeParam(
                                                 false,
                                                 ParamType.bool,
+                                              ),
+                                              'rotaInversaString':
+                                                  serializeParam(
+                                                '',
+                                                ParamType.String,
+                                              ),
+                                              'cidadeFaz': serializeParam(
+                                                widget.cidadeFaz,
+                                                ParamType.String,
+                                              ),
+                                              'estadoFaz': serializeParam(
+                                                widget.estadoFaz,
+                                                ParamType.String,
+                                              ),
+                                              'observacao': serializeParam(
+                                                widget.observacao,
+                                                ParamType.String,
+                                              ),
+                                              'data': serializeParam(
+                                                widget.data,
+                                                ParamType.String,
+                                              ),
+                                              'horar': serializeParam(
+                                                widget.hora,
+                                                ParamType.String,
+                                              ),
+                                              'fazid': serializeParam(
+                                                widget.fazid,
+                                                ParamType.String,
+                                              ),
+                                              'autoAuditoria': serializeParam(
+                                                widget.autoAuditoria,
+                                                ParamType.bool,
+                                              ),
+                                              'autoAuditoriaQuantidadePontos':
+                                                  serializeParam(
+                                                widget
+                                                    .autoAuditoriaQuantidadePontos,
+                                                ParamType.int,
+                                              ),
+                                              'etapaDe': serializeParam(
+                                                widget.etapade,
+                                                ParamType.String,
                                               ),
                                             }.withoutNulls,
                                           );
@@ -1205,6 +1372,44 @@ class _IniciarDeslocamentoWidgetState extends State<IniciarDeslocamentoWidget> {
                                                     widget.servicoId),
                                                 ParamType.String,
                                               ),
+                                              'cidadeFaz': serializeParam(
+                                                widget.cidadeFaz,
+                                                ParamType.String,
+                                              ),
+                                              'estadoFaz': serializeParam(
+                                                widget.estadoFaz,
+                                                ParamType.String,
+                                              ),
+                                              'observacao': serializeParam(
+                                                widget.observacao,
+                                                ParamType.String,
+                                              ),
+                                              'data': serializeParam(
+                                                widget.data,
+                                                ParamType.String,
+                                              ),
+                                              'horar': serializeParam(
+                                                widget.hora,
+                                                ParamType.String,
+                                              ),
+                                              'fazid': serializeParam(
+                                                widget.fazid,
+                                                ParamType.String,
+                                              ),
+                                              'autoAuditoria': serializeParam(
+                                                widget.autoAuditoria,
+                                                ParamType.bool,
+                                              ),
+                                              'autoAuditoriaQuantidadePontos':
+                                                  serializeParam(
+                                                widget
+                                                    .autoAuditoriaQuantidadePontos,
+                                                ParamType.int,
+                                              ),
+                                              'etapaDe': serializeParam(
+                                                widget.etapade,
+                                                ParamType.String,
+                                              ),
                                             }.withoutNulls,
                                           );
 
@@ -1256,6 +1461,49 @@ class _IniciarDeslocamentoWidgetState extends State<IniciarDeslocamentoWidget> {
                                                 true,
                                                 ParamType.bool,
                                               ),
+                                              'rotaInversaString':
+                                                  serializeParam(
+                                                '',
+                                                ParamType.String,
+                                              ),
+                                              'cidadeFaz': serializeParam(
+                                                widget.cidadeFaz,
+                                                ParamType.String,
+                                              ),
+                                              'estadoFaz': serializeParam(
+                                                widget.estadoFaz,
+                                                ParamType.String,
+                                              ),
+                                              'observacao': serializeParam(
+                                                widget.observacao,
+                                                ParamType.String,
+                                              ),
+                                              'data': serializeParam(
+                                                widget.data,
+                                                ParamType.String,
+                                              ),
+                                              'horar': serializeParam(
+                                                widget.hora,
+                                                ParamType.String,
+                                              ),
+                                              'fazid': serializeParam(
+                                                widget.fazid,
+                                                ParamType.String,
+                                              ),
+                                              'autoAuditoria': serializeParam(
+                                                widget.autoAuditoria,
+                                                ParamType.bool,
+                                              ),
+                                              'autoAuditoriaQuantidadePontos':
+                                                  serializeParam(
+                                                widget
+                                                    .autoAuditoriaQuantidadePontos,
+                                                ParamType.int,
+                                              ),
+                                              'etapaDe': serializeParam(
+                                                widget.etapade,
+                                                ParamType.String,
+                                              ),
                                             }.withoutNulls,
                                           );
 
@@ -1306,6 +1554,48 @@ class _IniciarDeslocamentoWidgetState extends State<IniciarDeslocamentoWidget> {
                                             'rotaInversa': serializeParam(
                                               false,
                                               ParamType.bool,
+                                            ),
+                                            'rotaInversaString': serializeParam(
+                                              '',
+                                              ParamType.String,
+                                            ),
+                                            'cidadeFaz': serializeParam(
+                                              widget.cidadeFaz,
+                                              ParamType.String,
+                                            ),
+                                            'estadoFaz': serializeParam(
+                                              widget.estadoFaz,
+                                              ParamType.String,
+                                            ),
+                                            'observacao': serializeParam(
+                                              widget.observacao,
+                                              ParamType.String,
+                                            ),
+                                            'data': serializeParam(
+                                              widget.data,
+                                              ParamType.String,
+                                            ),
+                                            'horar': serializeParam(
+                                              widget.hora,
+                                              ParamType.String,
+                                            ),
+                                            'fazid': serializeParam(
+                                              widget.fazid,
+                                              ParamType.String,
+                                            ),
+                                            'autoAuditoria': serializeParam(
+                                              widget.autoAuditoria,
+                                              ParamType.bool,
+                                            ),
+                                            'autoAuditoriaQuantidadePontos':
+                                                serializeParam(
+                                              widget
+                                                  .autoAuditoriaQuantidadePontos,
+                                              ParamType.int,
+                                            ),
+                                            'etapaDe': serializeParam(
+                                              widget.etapade,
+                                              ParamType.String,
                                             ),
                                           }.withoutNulls,
                                         );
