@@ -528,7 +528,7 @@ class _ContornoMapState extends State<ContornoMap> {
           final shouldPop = await showDialog(
             context: context,
             builder: (context) => AlertDialog(
-              title: Text('Você tem certeza que quer sair do Contorno?'),
+              title: Text('Você tem certeza que quer sair do contorno?'),
               content: Text(''),
               actions: <Widget>[
                 TextButton(

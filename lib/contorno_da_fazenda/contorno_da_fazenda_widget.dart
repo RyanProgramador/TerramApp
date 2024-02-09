@@ -200,7 +200,7 @@ class _ContornoDaFazendaWidgetState extends State<ContornoDaFazendaWidget> {
                                               builder: (alertDialogContext) {
                                                 return AlertDialog(
                                                   title: Text(
-                                                      'Você tem certeza que quer sair do Contorno?'),
+                                                      'Você tem certeza que quer sair do contorno?'),
                                                   actions: [
                                                     TextButton(
                                                       onPressed: () =>

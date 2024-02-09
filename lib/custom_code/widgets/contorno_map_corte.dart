@@ -636,7 +636,7 @@ class _ContornoMapCorteState extends State<ContornoMapCorte> {
           final shouldPop = await showDialog(
             context: context,
             builder: (context) => AlertDialog(
-              title: Text('Você tem certeza que quer sair do Recorte?'),
+              title: Text('Você tem certeza que quer sair do recorte?'),
               content: Text(''),
               actions: <Widget>[
                 TextButton(
