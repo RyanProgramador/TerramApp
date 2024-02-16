@@ -10,8 +10,10 @@ class SemContornoNoMomentoModel
     extends FlutterFlowModel<SemContornoNoMomentoWidget> {
   /// Initialization and disposal methods.
 
+  @override
   void initState(BuildContext context) {}
 
+  @override
   void dispose() {}
 
   /// Action blocks are added here.

@@ -30,8 +30,10 @@ class LoadingCompModel extends FlutterFlowModel<LoadingCompWidget> {
 
   /// Initialization and disposal methods.
 
+  @override
   void initState(BuildContext context) {}
 
+  @override
   void dispose() {
     timerController.dispose();
   }

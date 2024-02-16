@@ -35,10 +35,12 @@ class LoginModel extends FlutterFlowModel<LoginWidget> {
 
   /// Initialization and disposal methods.
 
+  @override
   void initState(BuildContext context) {
     passwordLoginVisibility = false;
   }
 
+  @override
   void dispose() {
     emailAddressLoginFocusNode?.dispose();
     emailAddressLoginController?.dispose();

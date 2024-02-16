@@ -19,11 +19,13 @@ class IniciarDeslocamentoTelaModel
 
   /// Initialization and disposal methods.
 
+  @override
   void initState(BuildContext context) {
     iniciarDeslocamentoModel =
         createModel(context, () => IniciarDeslocamentoModel());
   }
 
+  @override
   void dispose() {
     unfocusNode.dispose();
     iniciarDeslocamentoModel.dispose();
