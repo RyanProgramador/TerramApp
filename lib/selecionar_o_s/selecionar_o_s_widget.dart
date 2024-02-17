@@ -105,6 +105,26 @@ class _SelecionarOSWidgetState extends State<SelecionarOSWidget>
           pontosColetados:
               functions.jsonListToStr(FFAppState().PontosColetados.toList()),
         );
+        _model.pontosDeColetaFormatados3 =
+            await SincronizarGroup.trSincronizaPontosCall.call(
+          urlapicall: FFAppState().urlapicall,
+        );
+        setState(() {
+          FFAppState().icones = getJsonField(
+            (_model.pontosDeColetaFormatados3?.jsonBody ?? ''),
+            r'''$.icones[:]''',
+            true,
+          )!
+              .toList()
+              .cast<dynamic>();
+          FFAppState().pontosDeColeta = getJsonField(
+            (_model.pontosDeColetaFormatados3?.jsonBody ?? ''),
+            r'''$.pontos_de_coleta[:]''',
+            true,
+          )!
+              .toList()
+              .cast<dynamic>();
+        });
         if (SincronizarGroup.trSincronizaCelularComBDCall.statusSincComCelular(
               (_model.apiResultxxdOnLoadPage?.jsonBody ?? ''),
             )! &&
@@ -203,26 +223,6 @@ class _SelecionarOSWidgetState extends State<SelecionarOSWidget>
             FFAppState().grupoContornoFazendas = [];
             FFAppState().contornoFazenda = [];
             FFAppState().PontosColetados = [];
-          });
-          _model.pontosDeColetaFormatados2 =
-              await SincronizarGroup.trSincronizaPontosCall.call(
-            urlapicall: FFAppState().urlapicall,
-          );
-          setState(() {
-            FFAppState().icones = getJsonField(
-              (_model.pontosDeColetaFormatados2?.jsonBody ?? ''),
-              r'''$.icones[:]''',
-              true,
-            )!
-                .toList()
-                .cast<dynamic>();
-            FFAppState().pontosDeColeta = getJsonField(
-              (_model.pontosDeColetaFormatados2?.jsonBody ?? ''),
-              r'''$.pontos_de_coleta[:]''',
-              true,
-            )!
-                .toList()
-                .cast<dynamic>();
           });
         } else {
           await showDialog(
