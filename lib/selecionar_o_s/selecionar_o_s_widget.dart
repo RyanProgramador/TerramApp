@@ -336,6 +336,24 @@ class _SelecionarOSWidgetState extends State<SelecionarOSWidget>
           urlapicall: FFAppState().urlapicall,
         );
         FFAppState().update(() {});
+        _model.pontosDeColetaFormatados5 =
+            await SincronizarGroup.trSincronizaPontosCall.call(
+          urlapicall: FFAppState().urlapicall,
+        );
+        setState(() {
+          FFAppState().icones = SincronizarGroup.trSincronizaPontosCall
+              .tabelaIcones(
+                (_model.pontosDeColetaFormatados5?.jsonBody ?? ''),
+              )!
+              .toList()
+              .cast<dynamic>();
+          FFAppState().pontosDeColeta = SincronizarGroup.trSincronizaPontosCall
+              .pontosDeColetaFormatados(
+                (_model.pontosDeColetaFormatados5?.jsonBody ?? ''),
+              )!
+              .toList()
+              .cast<dynamic>();
+        });
         if ((_model.trTecnicosSinc?.succeeded ?? true) &&
             (_model.trOsServicosSinc?.succeeded ?? true) &&
             (_model.trServicosSinc?.succeeded ?? true) &&
@@ -492,6 +510,25 @@ class _SelecionarOSWidgetState extends State<SelecionarOSWidget>
                 functions.jsonListToStr(FFAppState().PontosColetados.toList()),
           );
           FFAppState().update(() {});
+          _model.pontosDeColetaFormatados4 =
+              await SincronizarGroup.trSincronizaPontosCall.call(
+            urlapicall: FFAppState().urlapicall,
+          );
+          setState(() {
+            FFAppState().icones = SincronizarGroup.trSincronizaPontosCall
+                .tabelaIcones(
+                  (_model.pontosDeColetaFormatados4?.jsonBody ?? ''),
+                )!
+                .toList()
+                .cast<dynamic>();
+            FFAppState().pontosDeColeta =
+                SincronizarGroup.trSincronizaPontosCall
+                    .pontosDeColetaFormatados(
+                      (_model.pontosDeColetaFormatados4?.jsonBody ?? ''),
+                    )!
+                    .toList()
+                    .cast<dynamic>();
+          });
           if ((_model.trTecnicosSinc2?.succeeded ?? true) &&
               (_model.trOsServicosSinc2?.succeeded ?? true) &&
               (_model.trServicosSinc2?.succeeded ?? true) &&

@@ -61,6 +61,8 @@ class SelecionarOSModel extends FlutterFlowModel<SelecionarOSWidget> {
   ApiCallResponse? trEmpresas;
   // Stores action output result for [Backend Call - API (trCFG)] action in SelecionarOS widget.
   ApiCallResponse? trCFG;
+  // Stores action output result for [Backend Call - API (trSincronizaPontos)] action in SelecionarOS widget.
+  ApiCallResponse? pontosDeColetaFormatados5;
   // Stores action output result for [Custom Action - temInternet] action in SelecionarOS widget.
   bool? temInternetOsLoad01;
   // Stores action output result for [Backend Call - API (trOsTecnico)] action in SelecionarOS widget.
@@ -81,6 +83,8 @@ class SelecionarOSModel extends FlutterFlowModel<SelecionarOSWidget> {
   ApiCallResponse? trCFG2;
   // Stores action output result for [Backend Call - API (trSincronizaPontosMedicao)] action in SelecionarOS widget.
   ApiCallResponse? sincPontosMedicaoEPerfilEProfundida;
+  // Stores action output result for [Backend Call - API (trSincronizaPontos)] action in SelecionarOS widget.
+  ApiCallResponse? pontosDeColetaFormatados4;
   // State field(s) for searchBar widget.
   FocusNode? searchBarFocusNode;
   TextEditingController? searchBarController;
