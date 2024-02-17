@@ -1338,9 +1338,46 @@ class _MultiplePlacesPickerCopyWidgetState
                             mainAxisSize: MainAxisSize.max,
                             mainAxisAlignment: MainAxisAlignment.spaceBetween,
                             children: [
-                              Text(
-                                '...',
-                                style: FlutterFlowTheme.of(context).bodyMedium,
+                              InkWell(
+                                splashColor: Colors.transparent,
+                                focusColor: Colors.transparent,
+                                hoverColor: Colors.transparent,
+                                highlightColor: Colors.transparent,
+                                onTap: () async {
+                                  _model.apiResultdwz = await SincronizarGroup
+                                      .trSincronizaPontosMedicaoCall
+                                      .call(
+                                    urlapicall: FFAppState().urlapicall,
+                                  );
+                                  if ((_model.apiResultdwz?.succeeded ??
+                                      true)) {
+                                    await showDialog(
+                                      context: context,
+                                      builder: (alertDialogContext) {
+                                        return AlertDialog(
+                                          title: Text(
+                                              (_model.apiResultdwz?.jsonBody ??
+                                                      '')
+                                                  .toString()),
+                                          actions: [
+                                            TextButton(
+                                              onPressed: () => Navigator.pop(
+                                                  alertDialogContext),
+                                              child: Text('Ok'),
+                                            ),
+                                          ],
+                                        );
+                                      },
+                                    );
+                                  }
+
+                                  setState(() {});
+                                },
+                                child: Text(
+                                  '...',
+                                  style:
+                                      FlutterFlowTheme.of(context).bodyMedium,
+                                ),
                               ),
                               Text(
                                 'GrupoContornoFazendas',

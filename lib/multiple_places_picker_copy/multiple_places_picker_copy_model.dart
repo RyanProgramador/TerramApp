@@ -57,6 +57,8 @@ class MultiplePlacesPickerCopyModel
   String? Function(BuildContext, String?)? textControllerValidator;
   // Stores action output result for [Backend Call - API (trSincronizaTalhaoContorno)] action in Text widget.
   ApiCallResponse? recortes;
+  // Stores action output result for [Backend Call - API (trSincronizaPontosMedicao)] action in Text widget.
+  ApiCallResponse? apiResultdwz;
 
   /// Initialization and disposal methods.
 
