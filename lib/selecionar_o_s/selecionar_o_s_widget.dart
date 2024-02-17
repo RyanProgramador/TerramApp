@@ -204,6 +204,26 @@ class _SelecionarOSWidgetState extends State<SelecionarOSWidget>
             FFAppState().contornoFazenda = [];
             FFAppState().PontosColetados = [];
           });
+          _model.pontosDeColetaFormatados2 =
+              await SincronizarGroup.trSincronizaPontosCall.call(
+            urlapicall: FFAppState().urlapicall,
+          );
+          setState(() {
+            FFAppState().icones = getJsonField(
+              (_model.pontosDeColetaFormatados2?.jsonBody ?? ''),
+              r'''$.icones[:]''',
+              true,
+            )!
+                .toList()
+                .cast<dynamic>();
+            FFAppState().pontosDeColeta = getJsonField(
+              (_model.pontosDeColetaFormatados2?.jsonBody ?? ''),
+              r'''$.pontos_de_coleta[:]''',
+              true,
+            )!
+                .toList()
+                .cast<dynamic>();
+          });
         } else {
           await showDialog(
             context: context,
