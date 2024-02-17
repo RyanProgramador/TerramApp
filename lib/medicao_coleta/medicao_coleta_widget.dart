@@ -94,94 +94,97 @@ class _MedicaoColetaWidgetState extends State<MedicaoColetaWidget> {
                         ),
                       ),
                     ),
-                    ClipRRect(
-                      borderRadius: BorderRadius.only(
-                        bottomLeft: Radius.circular(60.0),
-                        bottomRight: Radius.circular(60.0),
-                        topLeft: Radius.circular(0.0),
-                        topRight: Radius.circular(0.0),
-                      ),
-                      child: Container(
-                        width: double.infinity,
-                        height: 150.0,
-                        decoration: BoxDecoration(
-                          color: Color(0xFF00736D),
-                          borderRadius: BorderRadius.only(
-                            bottomLeft: Radius.circular(60.0),
-                            bottomRight: Radius.circular(60.0),
-                            topLeft: Radius.circular(0.0),
-                            topRight: Radius.circular(0.0),
-                          ),
+                    Opacity(
+                      opacity: 0.1,
+                      child: ClipRRect(
+                        borderRadius: BorderRadius.only(
+                          bottomLeft: Radius.circular(60.0),
+                          bottomRight: Radius.circular(60.0),
+                          topLeft: Radius.circular(0.0),
+                          topRight: Radius.circular(0.0),
                         ),
-                        child: Column(
-                          mainAxisSize: MainAxisSize.max,
-                          children: [
-                            Align(
-                              alignment: AlignmentDirectional(-1.0, 0.0),
-                              child: Padding(
-                                padding: EdgeInsetsDirectional.fromSTEB(
-                                    16.0, 0.0, 0.0, 0.0),
-                                child: InkWell(
-                                  splashColor: Colors.transparent,
-                                  focusColor: Colors.transparent,
-                                  hoverColor: Colors.transparent,
-                                  highlightColor: Colors.transparent,
-                                  onTap: () async {
-                                    var confirmDialogResponse =
-                                        await showDialog<bool>(
-                                              context: context,
-                                              builder: (alertDialogContext) {
-                                                return AlertDialog(
-                                                  title: Text(
-                                                      'Você tem certeza que quer sair da coleta?'),
-                                                  actions: [
-                                                    TextButton(
-                                                      onPressed: () =>
-                                                          Navigator.pop(
-                                                              alertDialogContext,
-                                                              false),
-                                                      child: Text('Não'),
-                                                    ),
-                                                    TextButton(
-                                                      onPressed: () =>
-                                                          Navigator.pop(
-                                                              alertDialogContext,
-                                                              true),
-                                                      child: Text('Sim'),
-                                                    ),
-                                                  ],
-                                                );
-                                              },
-                                            ) ??
-                                            false;
-                                    if (!confirmDialogResponse) {
-                                      return;
-                                    }
-                                    context.safePop();
-                                  },
-                                  child: Icon(
-                                    Icons.keyboard_backspace_rounded,
-                                    color: Colors.white,
-                                    size: 50.0,
+                        child: Container(
+                          width: double.infinity,
+                          height: 150.0,
+                          decoration: BoxDecoration(
+                            color: Color(0xFF00736D),
+                            borderRadius: BorderRadius.only(
+                              bottomLeft: Radius.circular(60.0),
+                              bottomRight: Radius.circular(60.0),
+                              topLeft: Radius.circular(0.0),
+                              topRight: Radius.circular(0.0),
+                            ),
+                          ),
+                          child: Column(
+                            mainAxisSize: MainAxisSize.max,
+                            children: [
+                              Align(
+                                alignment: AlignmentDirectional(-1.0, 0.0),
+                                child: Padding(
+                                  padding: EdgeInsetsDirectional.fromSTEB(
+                                      16.0, 0.0, 0.0, 0.0),
+                                  child: InkWell(
+                                    splashColor: Colors.transparent,
+                                    focusColor: Colors.transparent,
+                                    hoverColor: Colors.transparent,
+                                    highlightColor: Colors.transparent,
+                                    onTap: () async {
+                                      var confirmDialogResponse =
+                                          await showDialog<bool>(
+                                                context: context,
+                                                builder: (alertDialogContext) {
+                                                  return AlertDialog(
+                                                    title: Text(
+                                                        'Você tem certeza que quer sair da coleta?'),
+                                                    actions: [
+                                                      TextButton(
+                                                        onPressed: () =>
+                                                            Navigator.pop(
+                                                                alertDialogContext,
+                                                                false),
+                                                        child: Text('Não'),
+                                                      ),
+                                                      TextButton(
+                                                        onPressed: () =>
+                                                            Navigator.pop(
+                                                                alertDialogContext,
+                                                                true),
+                                                        child: Text('Sim'),
+                                                      ),
+                                                    ],
+                                                  );
+                                                },
+                                              ) ??
+                                              false;
+                                      if (!confirmDialogResponse) {
+                                        return;
+                                      }
+                                      context.safePop();
+                                    },
+                                    child: Icon(
+                                      Icons.keyboard_backspace_rounded,
+                                      color: Colors.white,
+                                      size: 50.0,
+                                    ),
                                   ),
                                 ),
                               ),
-                            ),
-                            Text(
-                              valueOrDefault<String>(
-                                widget.fazNome,
-                                'Coleta',
+                              Text(
+                                valueOrDefault<String>(
+                                  widget.fazNome,
+                                  'Coleta',
+                                ),
+                                style: FlutterFlowTheme.of(context)
+                                    .bodyMedium
+                                    .override(
+                                      fontFamily: 'Readex Pro',
+                                      color: Color(0xFFF8F8F8),
+                                      fontSize: 24.0,
+                                      fontWeight: FontWeight.bold,
+                                    ),
                               ),
-                              style: FlutterFlowTheme.of(context)
-                                  .bodyMedium
-                                  .override(
-                                    fontFamily: 'Readex Pro',
-                                    color: Color(0xFFF8F8F8),
-                                    fontSize: 24.0,
-                                    fontWeight: FontWeight.bold,
-                                  ),
-                            ),
-                          ],
+                            ],
+                          ),
                         ),
                       ),
                     ),
