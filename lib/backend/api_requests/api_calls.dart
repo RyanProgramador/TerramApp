@@ -888,6 +888,12 @@ class TrSincronizaPontosMedicaoCall {
       alwaysAllowBody: false,
     );
   }
+
+  List? contornos(dynamic response) => getJsonField(
+        response,
+        r'''$.contornos''',
+        true,
+      ) as List?;
 }
 
 /// End Sincronizar Group Code
