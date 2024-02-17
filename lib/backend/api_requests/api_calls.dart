@@ -28,6 +28,8 @@ class SincronizarGroup {
       TrSincronizaTalhaoContornoCall();
   static TrSincronizaPontosMedicaoCall trSincronizaPontosMedicaoCall =
       TrSincronizaPontosMedicaoCall();
+  static TrSincronizaPontosCall trSincronizaPontosCall =
+      TrSincronizaPontosCall();
 }
 
 class OrdemDeServicoCall {
@@ -892,6 +894,43 @@ class TrSincronizaPontosMedicaoCall {
   List? contornos(dynamic response) => getJsonField(
         response,
         r'''$.contornos''',
+        true,
+      ) as List?;
+}
+
+class TrSincronizaPontosCall {
+  Future<ApiCallResponse> call({
+    String? pontosColetados = '',
+    String? urlapicall = '',
+  }) async {
+    final ffApiRequestBody = '''
+{
+  "tipo": "apk_sinc_pontos"
+}''';
+    return ApiManager.instance.makeApiCall(
+      callName: 'trSincronizaPontos',
+      apiUrl: '${SincronizarGroup.baseUrl}${urlapicall}',
+      callType: ApiCallType.POST,
+      headers: {},
+      params: {},
+      body: ffApiRequestBody,
+      bodyType: BodyType.JSON,
+      returnBody: true,
+      encodeBodyUtf8: false,
+      decodeUtf8: false,
+      cache: false,
+      alwaysAllowBody: false,
+    );
+  }
+
+  List? pontosDeColetaFormatados(dynamic response) => getJsonField(
+        response,
+        r'''$.pontos_de_coleta''',
+        true,
+      ) as List?;
+  List? tabelaIcones(dynamic response) => getJsonField(
+        response,
+        r'''$.icones''',
         true,
       ) as List?;
 }

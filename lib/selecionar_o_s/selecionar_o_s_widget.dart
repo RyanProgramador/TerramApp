@@ -255,20 +255,20 @@ class _SelecionarOSWidgetState extends State<SelecionarOSWidget>
       } else if ((FFAppState().trOrdemServicos.length <= 0) &&
           _model.foiAtualizado) {
       } else {
-        _model.sincPontosMedicaoPontosAPI =
-            await SincronizarGroup.trSincronizaPontosMedicaoCall.call(
+        _model.pontosDeColetaFormatados =
+            await SincronizarGroup.trSincronizaPontosCall.call(
           urlapicall: FFAppState().urlapicall,
         );
-        FFAppState().update(() {
-          FFAppState().listaContornoColeta = getJsonField(
-            (_model.sincPontosMedicaoPontosAPI?.jsonBody ?? ''),
-            r'''$.contornos[:]''',
+        setState(() {
+          FFAppState().icones = getJsonField(
+            (_model.pontosDeColetaFormatados?.jsonBody ?? ''),
+            r'''$.icones[:]''',
             true,
           )!
               .toList()
               .cast<dynamic>();
           FFAppState().pontosDeColeta = getJsonField(
-            (_model.sincPontosMedicaoPontosAPI?.jsonBody ?? ''),
+            (_model.pontosDeColetaFormatados?.jsonBody ?? ''),
             r'''$.pontos_de_coleta[:]''',
             true,
           )!
@@ -744,7 +744,7 @@ class _SelecionarOSWidgetState extends State<SelecionarOSWidget>
                                     padding: EdgeInsetsDirectional.fromSTEB(
                                         16.0, 16.0, 0.0, 0.0),
                                     child: Text(
-                                      'Ordens de serviço:',
+                                      'Serviços:',
                                       style: FlutterFlowTheme.of(context)
                                           .headlineSmall,
                                     ),
@@ -1457,12 +1457,7 @@ class _SelecionarOSWidgetState extends State<SelecionarOSWidget>
                                                                       ),
                                                                       'deslocamentoAtualFinalizado':
                                                                           serializeParam(
-                                                                        FFAppState()
-                                                                            .servicosFinalizadosComSucesso
-                                                                            .contains(getJsonField(
-                                                                              trOsServicosItem,
-                                                                              r'''$.oserv_id''',
-                                                                            ).toString()),
+                                                                        true,
                                                                         ParamType
                                                                             .bool,
                                                                       ),
@@ -1825,13 +1820,7 @@ class _SelecionarOSWidgetState extends State<SelecionarOSWidget>
                                                                     ),
                                                                     'deslocamentoAtualFinalizado':
                                                                         serializeParam(
-                                                                      FFAppState()
-                                                                          .servicosFinalizadosComSucesso
-                                                                          .contains(
-                                                                              getJsonField(
-                                                                            trOsServicosItem,
-                                                                            r'''$.oserv_id''',
-                                                                          ).toString()),
+                                                                      true,
                                                                       ParamType
                                                                           .bool,
                                                                     ),

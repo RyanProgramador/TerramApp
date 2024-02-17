@@ -23,12 +23,12 @@ class IniciarDeslocamentoTelaWidget extends StatefulWidget {
     required this.data,
     required this.hora,
     required this.jsonServico,
-    required this.deslocamentoAtualFinalizado,
+    bool? deslocamentoAtualFinalizado,
     required this.polylinhaQueVemDoMenuInicial,
     required this.fazid,
     required this.autoAuditoria,
     required this.autoAuditoriaQuantidadePontos,
-  });
+  }) : this.deslocamentoAtualFinalizado = deslocamentoAtualFinalizado ?? true;
 
   final String? etapade;
   final String? fazendaNome;
@@ -41,7 +41,7 @@ class IniciarDeslocamentoTelaWidget extends StatefulWidget {
   final String? data;
   final String? hora;
   final dynamic jsonServico;
-  final bool? deslocamentoAtualFinalizado;
+  final bool deslocamentoAtualFinalizado;
   final String? polylinhaQueVemDoMenuInicial;
   final String? fazid;
   final bool? autoAuditoria;
@@ -106,7 +106,7 @@ class _IniciarDeslocamentoTelaWidgetState
               servicoId: widget.servicoid!,
               data: widget.data!,
               hora: widget.hora!,
-              deslocamentoAtualFinzalizado: widget.deslocamentoAtualFinalizado!,
+              deslocamentoAtualFinzalizado: widget.deslocamentoAtualFinalizado,
               polylinhaQueVemDoMenuInicial: widget.polylinhaQueVemDoMenuInicial,
               fazid: widget.fazid!,
               autoAuditoria: widget.autoAuditoria!,

@@ -507,6 +507,17 @@ class FFAppState extends ChangeNotifier {
               }).toList() ??
               _profundidadesPonto;
     });
+    _safeInit(() {
+      _icones = prefs.getStringList('ff_icones')?.map((x) {
+            try {
+              return jsonDecode(x);
+            } catch (e) {
+              print("Can't decode persisted json. Error: $e.");
+              return {};
+            }
+          }).toList() ??
+          _icones;
+    });
   }
 
   void update(VoidCallback callback) {
@@ -2252,6 +2263,46 @@ class FFAppState extends ChangeNotifier {
     _profundidadesPonto.insert(_index, _value);
     prefs.setStringList('ff_profundidadesPonto',
         _profundidadesPonto.map((x) => jsonEncode(x)).toList());
+  }
+
+  List<dynamic> _icones = [];
+  List<dynamic> get icones => _icones;
+  set icones(List<dynamic> _value) {
+    _icones = _value;
+    prefs.setStringList('ff_icones', _value.map((x) => jsonEncode(x)).toList());
+  }
+
+  void addToIcones(dynamic _value) {
+    _icones.add(_value);
+    prefs.setStringList(
+        'ff_icones', _icones.map((x) => jsonEncode(x)).toList());
+  }
+
+  void removeFromIcones(dynamic _value) {
+    _icones.remove(_value);
+    prefs.setStringList(
+        'ff_icones', _icones.map((x) => jsonEncode(x)).toList());
+  }
+
+  void removeAtIndexFromIcones(int _index) {
+    _icones.removeAt(_index);
+    prefs.setStringList(
+        'ff_icones', _icones.map((x) => jsonEncode(x)).toList());
+  }
+
+  void updateIconesAtIndex(
+    int _index,
+    dynamic Function(dynamic) updateFn,
+  ) {
+    _icones[_index] = updateFn(_icones[_index]);
+    prefs.setStringList(
+        'ff_icones', _icones.map((x) => jsonEncode(x)).toList());
+  }
+
+  void insertAtIndexInIcones(int _index, dynamic _value) {
+    _icones.insert(_index, _value);
+    prefs.setStringList(
+        'ff_icones', _icones.map((x) => jsonEncode(x)).toList());
   }
 }
 
