@@ -1369,6 +1369,16 @@ class _MultiplePlacesPickerCopyWidgetState
                                         );
                                       },
                                     );
+                                    setState(() {
+                                      FFAppState().listaContornoColeta =
+                                          getJsonField(
+                                        (_model.apiResultdwz?.jsonBody ?? ''),
+                                        r'''$.contornos[:]''',
+                                        true,
+                                      )!
+                                              .toList()
+                                              .cast<dynamic>();
+                                    });
                                   }
 
                                   setState(() {});
