@@ -1374,30 +1374,39 @@ class _MultiplePlacesPickerCopyWidgetState
                                             color: FlutterFlowTheme.of(context)
                                                 .secondaryBackground,
                                           ),
-                                          child: SingleChildScrollView(
-                                            child: Column(
-                                              mainAxisSize: MainAxisSize.max,
-                                              children: [
-                                                SelectionArea(
-                                                    child: Text(
-                                                  valueOrDefault<String>(
-                                                    functions.jsonListToStr(
-                                                        FFAppState()
-                                                            .contornoFazenda
-                                                            .toList()),
-                                                    '123',
-                                                  ),
-                                                  style: FlutterFlowTheme.of(
-                                                          context)
-                                                      .bodyMedium
-                                                      .override(
-                                                        fontFamily:
-                                                            'Readex Pro',
-                                                        fontSize: 10.0,
-                                                      ),
-                                                )),
-                                              ],
-                                            ),
+                                          child: Builder(
+                                            builder: (context) {
+                                              final testeContorno = FFAppState()
+                                                  .listaContornoColeta
+                                                  .toList();
+                                              return SingleChildScrollView(
+                                                child: Column(
+                                                  mainAxisSize:
+                                                      MainAxisSize.max,
+                                                  children: List.generate(
+                                                      testeContorno.length,
+                                                      (testeContornoIndex) {
+                                                    final testeContornoItem =
+                                                        testeContorno[
+                                                            testeContornoIndex];
+                                                    return SelectionArea(
+                                                        child: Text(
+                                                      testeContornoItem
+                                                          .toString(),
+                                                      style:
+                                                          FlutterFlowTheme.of(
+                                                                  context)
+                                                              .bodyMedium
+                                                              .override(
+                                                                fontFamily:
+                                                                    'Readex Pro',
+                                                                fontSize: 10.0,
+                                                              ),
+                                                    ));
+                                                  }),
+                                                ),
+                                              );
+                                            },
                                           ),
                                         ),
                                       ),
