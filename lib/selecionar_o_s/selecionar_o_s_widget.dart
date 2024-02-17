@@ -260,6 +260,50 @@ class _SelecionarOSWidgetState extends State<SelecionarOSWidget>
           urlapicall: FFAppState().urlapicall,
         );
         FFAppState().update(() {
+          FFAppState().pontosDeColeta = getJsonField(
+            (_model.sincPontosMedicaoPontosAPI?.jsonBody ?? ''),
+            r'''$.pontos_de_coleta[:]''',
+            true,
+          )!
+              .toList()
+              .cast<dynamic>();
+          FFAppState().perfilprofundidades = getJsonField(
+            (_model.sincPontosMedicaoPontosAPI?.jsonBody ?? ''),
+            r'''$.perfil_profundidades[:]''',
+            true,
+          )!
+              .toList()
+              .cast<dynamic>();
+          FFAppState().profundidades = getJsonField(
+            (_model.sincPontosMedicaoPontosAPI?.jsonBody ?? ''),
+            r'''$.profundidades[:]''',
+            true,
+          )!
+              .toList()
+              .cast<dynamic>();
+          FFAppState().perfis = getJsonField(
+            (_model.sincPontosMedicaoPontosAPI?.jsonBody ?? ''),
+            r'''$.perfis[:]''',
+            true,
+          )!
+              .toList()
+              .cast<dynamic>();
+          FFAppState().profundidadesPonto = getJsonField(
+            (_model.sincPontosMedicaoPontosAPI?.jsonBody ?? ''),
+            r'''$.pontos_profundidades[:]''',
+            true,
+          )!
+              .toList()
+              .cast<dynamic>();
+          FFAppState().listaContornoColeta = getJsonField(
+            (_model.sincPontosMedicaoPontosAPI?.jsonBody ?? ''),
+            r'''$.contornos[:]''',
+            true,
+          )!
+              .toList()
+              .cast<dynamic>();
+        });
+        FFAppState().update(() {
           FFAppState().listaContornoColeta = getJsonField(
             (_model.sincPontosMedicaoPontosAPI?.jsonBody ?? ''),
             r'''$.contornos[:]''',
