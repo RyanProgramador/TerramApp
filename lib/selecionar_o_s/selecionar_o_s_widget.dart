@@ -253,7 +253,57 @@ class _SelecionarOSWidgetState extends State<SelecionarOSWidget>
       } else if ((FFAppState().sincronizcaoAutomatica == false) &&
           (FFAppState().servicosFinalizadosComSucesso.length != 0)) {
       } else if ((FFAppState().trOrdemServicos.length <= 0) &&
-          _model.foiAtualizado) {}
+          _model.foiAtualizado) {
+      } else {
+        _model.sincPontosMedicaoPontosAPI =
+            await SincronizarGroup.trSincronizaPontosMedicaoCall.call(
+          urlapicall: FFAppState().urlapicall,
+        );
+        FFAppState().update(() {
+          FFAppState().pontosDeColeta = getJsonField(
+            (_model.sincPontosMedicaoPontosAPI?.jsonBody ?? ''),
+            r'''$.pontos_de_coleta[:]''',
+            true,
+          )!
+              .toList()
+              .cast<dynamic>();
+          FFAppState().perfilprofundidades = getJsonField(
+            (_model.sincPontosMedicaoPontosAPI?.jsonBody ?? ''),
+            r'''$.perfil_profundidades[:]''',
+            true,
+          )!
+              .toList()
+              .cast<dynamic>();
+          FFAppState().profundidades = getJsonField(
+            (_model.sincPontosMedicaoPontosAPI?.jsonBody ?? ''),
+            r'''$.profundidades[:]''',
+            true,
+          )!
+              .toList()
+              .cast<dynamic>();
+          FFAppState().perfis = getJsonField(
+            (_model.sincPontosMedicaoPontosAPI?.jsonBody ?? ''),
+            r'''$.perfis[:]''',
+            true,
+          )!
+              .toList()
+              .cast<dynamic>();
+          FFAppState().profundidadesPonto = getJsonField(
+            (_model.sincPontosMedicaoPontosAPI?.jsonBody ?? ''),
+            r'''$.pontos_profundidades[:]''',
+            true,
+          )!
+              .toList()
+              .cast<dynamic>();
+          FFAppState().listaContornoColeta = getJsonField(
+            (_model.sincPontosMedicaoPontosAPI?.jsonBody ?? ''),
+            r'''$.contornos[:]''',
+            true,
+          )!
+              .toList()
+              .cast<dynamic>();
+        });
+      }
 
       await requestPermission(locationPermission);
       await requestPermission(notificationsPermission);
