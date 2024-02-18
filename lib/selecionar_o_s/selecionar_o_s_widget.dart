@@ -353,6 +353,8 @@ class _SelecionarOSWidgetState extends State<SelecionarOSWidget>
         _model.pontosDeColetaFormatados5 =
             await SincronizarGroup.trSincronizaPontosCall.call(
           urlapicall: FFAppState().urlapicall,
+          pontosColetados:
+              functions.jsonListToStr(FFAppState().PontosColetados.toList()),
         );
         setState(() {
           FFAppState().icones = SincronizarGroup.trSincronizaPontosCall
@@ -534,6 +536,8 @@ class _SelecionarOSWidgetState extends State<SelecionarOSWidget>
           _model.pontosDeColetaFormatados4 =
               await SincronizarGroup.trSincronizaPontosCall.call(
             urlapicall: FFAppState().urlapicall,
+            pontosColetados:
+                functions.jsonListToStr(FFAppState().PontosColetados.toList()),
           );
           setState(() {
             FFAppState().icones = SincronizarGroup.trSincronizaPontosCall

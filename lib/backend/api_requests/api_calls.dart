@@ -905,7 +905,8 @@ class TrSincronizaPontosCall {
   }) async {
     final ffApiRequestBody = '''
 {
-  "tipo": "apk_sinc_pontos"
+  "tipo": "apk_sinc_pontos",
+  "pontosColetados": "${pontosColetados}"
 }''';
     return ApiManager.instance.makeApiCall(
       callName: 'trSincronizaPontos',
