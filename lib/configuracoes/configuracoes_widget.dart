@@ -222,11 +222,11 @@ class _ConfiguracoesWidgetState extends State<ConfiguracoesWidget> {
 
                                   _model.sincPontosMedicaoEPerfilEProfundidaAPI =
                                       await SincronizarGroup
-                                          .trSincronizaPontosMedicaoCall
+                                          .trSincronizaPontosCall
                                           .call(
-                                    urlapicall: FFAppState().urlapicall,
                                     pontosColetados: functions.jsonListToStr(
                                         FFAppState().PontosColetados.toList()),
+                                    urlapicall: FFAppState().urlapicall,
                                   );
                                   _shouldSetState = true;
                                   setState(() {
@@ -335,6 +335,17 @@ class _ConfiguracoesWidgetState extends State<ConfiguracoesWidget> {
                                                       .toList())!
                                               .toList()
                                               .cast<dynamic>();
+                                    });
+                                    setState(() {
+                                      FFAppState().icones = getJsonField(
+                                        (_model.sincPontosMedicaoEPerfilEProfundidaAPI
+                                                ?.jsonBody ??
+                                            ''),
+                                        r'''$.icones[:]''',
+                                        true,
+                                      )!
+                                          .toList()
+                                          .cast<dynamic>();
                                       FFAppState().pontosDeColeta =
                                           getJsonField(
                                         (_model.sincPontosMedicaoEPerfilEProfundidaAPI
@@ -345,50 +356,12 @@ class _ConfiguracoesWidgetState extends State<ConfiguracoesWidget> {
                                       )!
                                               .toList()
                                               .cast<dynamic>();
-                                      FFAppState().perfilprofundidades =
-                                          getJsonField(
-                                        (_model.sincPontosMedicaoEPerfilEProfundidaAPI
-                                                ?.jsonBody ??
-                                            ''),
-                                        r'''$.perfil_profundidades[:]''',
-                                        true,
-                                      )!
-                                              .toList()
-                                              .cast<dynamic>();
-                                      FFAppState().profundidades = getJsonField(
-                                        (_model.sincPontosMedicaoEPerfilEProfundidaAPI
-                                                ?.jsonBody ??
-                                            ''),
-                                        r'''$.profundidades[:]''',
-                                        true,
-                                      )!
-                                          .toList()
-                                          .cast<dynamic>();
-                                      FFAppState().perfis = getJsonField(
-                                        (_model.sincPontosMedicaoEPerfilEProfundidaAPI
-                                                ?.jsonBody ??
-                                            ''),
-                                        r'''$.perfis[:]''',
-                                        true,
-                                      )!
-                                          .toList()
-                                          .cast<dynamic>();
                                       FFAppState().listaContornoColeta =
                                           getJsonField(
                                         (_model.sincPontosMedicaoEPerfilEProfundidaAPI
                                                 ?.jsonBody ??
                                             ''),
-                                        r'''$.contornos[:]''',
-                                        true,
-                                      )!
-                                              .toList()
-                                              .cast<dynamic>();
-                                      FFAppState().profundidadesPonto =
-                                          getJsonField(
-                                        (_model.sincPontosMedicaoEPerfilEProfundidaAPI
-                                                ?.jsonBody ??
-                                            ''),
-                                        r'''$.pontos_profundidades[:]''',
+                                        r'''$.contorno[:]''',
                                         true,
                                       )!
                                               .toList()

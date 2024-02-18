@@ -8,6 +8,7 @@ import '/flutter_flow/flutter_flow_icon_button.dart';
 import '/flutter_flow/flutter_flow_theme.dart';
 import '/flutter_flow/flutter_flow_util.dart';
 import '/flutter_flow/flutter_flow_widgets.dart';
+import 'dart:async';
 import '/custom_code/actions/index.dart' as actions;
 import '/flutter_flow/custom_functions.dart' as functions;
 import '/flutter_flow/permissions_util.dart';
@@ -179,13 +180,6 @@ class _SelecionarOSWidgetState extends State<SelecionarOSWidget>
                     FFAppState().latlngRecorteTalhaoPosSincronizado.toList())!
                 .toList()
                 .cast<dynamic>();
-            FFAppState().pontosDeColeta = getJsonField(
-              (_model.sincPontosMedicaoEPerfilEProfundidaAPI?.jsonBody ?? ''),
-              r'''$.pontos_de_coleta[:]''',
-              true,
-            )!
-                .toList()
-                .cast<dynamic>();
             FFAppState().perfilprofundidades = getJsonField(
               (_model.sincPontosMedicaoEPerfilEProfundidaAPI?.jsonBody ?? ''),
               r'''$.perfil_profundidades[:]''',
@@ -210,13 +204,6 @@ class _SelecionarOSWidgetState extends State<SelecionarOSWidget>
             FFAppState().profundidadesPonto = getJsonField(
               (_model.sincPontosMedicaoEPerfilEProfundidaAPI?.jsonBody ?? ''),
               r'''$.pontos_profundidades[:]''',
-              true,
-            )!
-                .toList()
-                .cast<dynamic>();
-            FFAppState().listaContornoColeta = getJsonField(
-              (_model.sincPontosMedicaoEPerfilEProfundidaAPI?.jsonBody ?? ''),
-              r'''$.contornos[:]''',
               true,
             )!
                 .toList()
@@ -313,8 +300,16 @@ class _SelecionarOSWidgetState extends State<SelecionarOSWidget>
         });
       }
 
-      await requestPermission(locationPermission);
-      await requestPermission(notificationsPermission);
+      unawaited(
+        () async {
+          await requestPermission(locationPermission);
+        }(),
+      );
+      unawaited(
+        () async {
+          await requestPermission(notificationsPermission);
+        }(),
+      );
       setState(() {
         FFAppState().AtualLocalizcao = currentUserLocationValue!.toString();
       });
