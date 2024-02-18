@@ -124,6 +124,13 @@ class _SelecionarOSWidgetState extends State<SelecionarOSWidget>
           )!
               .toList()
               .cast<dynamic>();
+          FFAppState().listaContornoColeta = getJsonField(
+            (_model.pontosDeColetaFormatados3?.jsonBody ?? ''),
+            r'''$.contorno[:]''',
+            true,
+          )!
+              .toList()
+              .cast<dynamic>();
         });
         if (SincronizarGroup.trSincronizaCelularComBDCall.statusSincComCelular(
               (_model.apiResultxxdOnLoadPage?.jsonBody ?? ''),
@@ -294,6 +301,13 @@ class _SelecionarOSWidgetState extends State<SelecionarOSWidget>
           )!
               .toList()
               .cast<dynamic>();
+          FFAppState().listaContornoColeta = getJsonField(
+            (_model.pontosDeColetaFormatados?.jsonBody ?? ''),
+            r'''$.contorno[:]''',
+            true,
+          )!
+              .toList()
+              .cast<dynamic>();
         });
       }
 
@@ -351,6 +365,13 @@ class _SelecionarOSWidgetState extends State<SelecionarOSWidget>
               .pontosDeColetaFormatados(
                 (_model.pontosDeColetaFormatados5?.jsonBody ?? ''),
               )!
+              .toList()
+              .cast<dynamic>();
+          FFAppState().listaContornoColeta = getJsonField(
+            (_model.pontosDeColetaFormatados5?.jsonBody ?? ''),
+            r'''$.contorno[:]''',
+            true,
+          )!
               .toList()
               .cast<dynamic>();
         });
@@ -528,6 +549,13 @@ class _SelecionarOSWidgetState extends State<SelecionarOSWidget>
                     )!
                     .toList()
                     .cast<dynamic>();
+            FFAppState().listaContornoColeta = getJsonField(
+              (_model.pontosDeColetaFormatados4?.jsonBody ?? ''),
+              r'''$.contorno[:]''',
+              true,
+            )!
+                .toList()
+                .cast<dynamic>();
           });
           if ((_model.trTecnicosSinc2?.succeeded ?? true) &&
               (_model.trOsServicosSinc2?.succeeded ?? true) &&

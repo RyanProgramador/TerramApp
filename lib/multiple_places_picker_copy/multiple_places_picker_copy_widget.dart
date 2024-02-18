@@ -1582,9 +1582,8 @@ class _MultiplePlacesPickerCopyWidgetState
                                           ),
                                           child: Builder(
                                             builder: (context) {
-                                              final testeContorno = FFAppState()
-                                                  .listaContornoColeta
-                                                  .toList();
+                                              final testeContorno =
+                                                  FFAppState().icones.toList();
                                               return SingleChildScrollView(
                                                 child: Column(
                                                   mainAxisSize:
