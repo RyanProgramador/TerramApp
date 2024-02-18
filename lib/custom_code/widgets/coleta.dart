@@ -106,7 +106,7 @@ class _ColetaState extends State<Coleta> {
   google_maps.LatLng? currentTarget;
 
   //
-  List<Map<String, dynamic>> listaDeLocais = [];
+  // List<Map<String, dynamic>> listaDeLocais = [];
 
   // Implementação de exemplo
   List<Map<String, dynamic>> latLngListMarcadores = [];
@@ -114,17 +114,20 @@ class _ColetaState extends State<Coleta> {
   // List<Map<String, dynamic>> latLngListMarcadores = [
   //   {
   //     "marcador_nome": "A",
-  //     "icone": "exemplo"
+  //     "icone": "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",
   //     "latlng_marcadores": "-29.914939224621914, -51.195420011983714",
   //     "profundidades": [
-  //       {"nome": "0-10", "icone": "location_dot", "cor": "#FFC0CB"},
-  //       {"nome": "0-20", "icone": "flag", "cor": "#FF4500"},
-  //       {"nome": "0-25", "icone": "map_pin", "cor": "#0000CD"}
+  // {               "nome": "teste",
+  //                 "icone": "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",
+  //                 "cor": "#FFFFFF" ?? "#FFFFFF",
+  //                 "prof_id": 1,
+  //               },
   //     ],
   //     "foto_de_cada_profundidade": [],
   //   },
   //   {
   //     "marcador_nome": "B",
+  //     "icone": "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",
   //     "latlng_marcadores": "-29.91495486428177, -51.19437347868409",
   //     "profundidades": [
   //       {"nome": "0-10", "icone": "location_dot", "cor": "#FFC0CB"},
@@ -135,6 +138,7 @@ class _ColetaState extends State<Coleta> {
   //   },
   //   {
   //     "marcador_nome": "C",
+  //     "icone": "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",
   //     "latlng_marcadores": "-29.914305816333297, -51.19483359246237",
   //     "profundidades": [
   //       {"nome": "0-10", "icone": "location_dot", "cor": "#FFC0CB"},
@@ -146,6 +150,7 @@ class _ColetaState extends State<Coleta> {
   //   },
   //   {
   //     "marcador_nome": "D",
+  //     "icone": "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",
   //     "latlng_marcadores": "-29.91391738877275, -51.19420634010805",
   //     "profundidades": [
   //       {"nome": "0-10", "icone": "location_dot", "cor": "#FFC0CB"},
@@ -157,9 +162,10 @@ class _ColetaState extends State<Coleta> {
   // ];
 
   // void _inicializaDados() {
-  //   var filtroPontosColeta = FFAppState().pontosDeColeta
+  //   var latLngListMarcadores = FFAppState().pontosDeColeta
   //       .where((item) => item['oserv_id'] == 38)
   //       .toList();
+  // latLngListMarcadores = filtroPontosColeta;
   //
   //
   //   // Transforma os itens filtrados em uma lista de mapas com a estrutura desejada
@@ -251,61 +257,104 @@ class _ColetaState extends State<Coleta> {
   }
 
   void _inicializaDados() {
+    // var filtroPontosColeta = FFAppState()
+    //     .pontosDeColeta
+    //     .where((item) => item['oserv_id'] == int.parse(widget.idContorno!))
+    //     .toList();
     var filtroPontosColeta = FFAppState()
         .pontosDeColeta
         .where((item) => item['oserv_id'] == int.parse(widget.idContorno!))
+        .map((item) => item as Map<String, dynamic>) // Adiciona esta linha
         .toList();
 
-    latLngListMarcadores = filtroPontosColeta.map((item) {
-      // Busca por profundidadesPontos relacionadas ao ponto de coleta atual
-      var profundidadesPontosProfIds = FFAppState()
-          .profundidadesPonto
-          .where((coleta) => coleta['trpp_artp_id'] == item['artp_id'])
-          .map((e) => e['trpp_prof_id']);
+    List<Map<String, dynamic>> substituirIcone(
+        List<Map<String, dynamic>> pontosColeta) {
+      return pontosColeta.map((ponto) {
+        // Substituir o icone do marcador
+        var iconeMarcador = FFAppState().icones.firstWhere(
+              (icone) =>
+                  icone['ico_id'].toString() == ponto['icone'].toString(),
+              orElse: () => {
+                'ico_base64': ''
+              }, // Fornecer um valor padrão caso não encontre
+            )['ico_base64'];
 
-      // Para cada profundidadePontosProfId, encontra as informações correspondentes em profundidades
-      var profundidadesLista = profundidadesPontosProfIds
-          .map((profId) {
-            var profundidade = FFAppState().profundidades.firstWhere(
-                (prof) => prof['prof_id'] == profId,
-                orElse: () => null);
+        // Substituir o icone de cada profundidade
+        var profundidadesAtualizadas =
+            (ponto['profundidades'] as List<dynamic>).map((profundidade) {
+          var iconeProfundidade = FFAppState().icones.firstWhere(
+                (icone) =>
+                    icone['ico_id'].toString() ==
+                    profundidade['icone'].toString(),
+                orElse: () => {
+                  'ico_base64': ''
+                }, // Fornecer um valor padrão caso não encontre
+              )['ico_base64'];
 
-            return profundidade != null
-                ? {
-                    "nome": profundidade['prof_nome'],
-                    "icone": profundidade['prof_imagem'],
-                    "cor": profundidade['prof_cor'] ?? "#FFFFFF",
-                    "prof_id": profId,
-                  }
-                : null;
-          })
-          .where((element) => element != null)
-          .toList();
+          return {
+            ...profundidade,
+            'icone': iconeProfundidade,
+          };
+        }).toList();
 
-      var perfilProfundidade = FFAppState().perfilprofundidades.firstWhere(
-          (perfil) => perfil['pprof_id'] == item['artp_id_perfil_prof'],
-          orElse: () => null);
+        return {
+          ...ponto,
+          'icone': iconeMarcador,
+          'profundidades': profundidadesAtualizadas,
+        };
+      }).toList();
+    }
 
-      var imagemProfundidade = '';
-      if (perfilProfundidade != null) {
-        var profundidade = FFAppState().profundidades.firstWhere(
-            (prof) => prof['prof_id'] == perfilProfundidade['pprof_prof_id'],
-            orElse: () => null);
-
-        if (profundidade != null) {
-          imagemProfundidade = profundidade['prof_imagem'];
-        }
-      }
-
-      // Retorna o mapa com as informações do ponto de coleta e as profundidades associadas
-      return {
-        "marcador_nome": "${item['artp_id']}",
-        "icone": imagemProfundidade, // A imagem de profundidade
-        "latlng_marcadores": "${item['artp_latitude_longitude']}",
-        "profundidades": profundidadesLista, // Lista de profundidades
-        "foto_de_cada_profundidade": [],
-      };
-    }).toList();
+    latLngListMarcadores = substituirIcone(filtroPontosColeta);
+    //   // Busca por profundidadesPontos relacionadas ao ponto de coleta atual
+    //   var profundidadesPontosProfIds = FFAppState()
+    //       .profundidadesPonto
+    //       .where((coleta) => coleta['trpp_artp_id'] == item['artp_id'])
+    //       .map((e) => e['trpp_prof_id']);
+    //
+    //   // Para cada profundidadePontosProfId, encontra as informações correspondentes em profundidades
+    //   var profundidadesLista = profundidadesPontosProfIds
+    //       .map((profId) {
+    //         var profundidade = FFAppState().profundidades.firstWhere(
+    //             (prof) => prof['prof_id'] == profId,
+    //             orElse: () => null);
+    //
+    //         return profundidade != null
+    //             ? {
+    //                 "nome": profundidade['prof_nome'],
+    //                 "icone": profundidade['prof_imagem'],
+    //                 "cor": profundidade['prof_cor'] ?? "#FFFFFF",
+    //                 "prof_id": profId,
+    //               }
+    //             : null;
+    //       })
+    //       .where((element) => element != null)
+    //       .toList();
+    //
+    //   var perfilProfundidade = FFAppState().perfilprofundidades.firstWhere(
+    //       (perfil) => perfil['pprof_id'] == item['artp_id_perfil_prof'],
+    //       orElse: () => null);
+    //
+    //   var imagemProfundidade = '';
+    //   if (perfilProfundidade != null) {
+    //     var profundidade = FFAppState().profundidades.firstWhere(
+    //         (prof) => prof['prof_id'] == perfilProfundidade['pprof_prof_id'],
+    //         orElse: () => null);
+    //
+    //     if (profundidade != null) {
+    //       imagemProfundidade = profundidade['prof_imagem'];
+    //     }
+    //   }
+    //
+    //   // Retorna o mapa com as informações do ponto de coleta e as profundidades associadas
+    //   return {
+    //     "marcador_nome": "${item['artp_id']}",
+    //     "icone": imagemProfundidade, // A imagem de profundidade
+    //     "latlng_marcadores": "${item['artp_latitude_longitude']}",
+    //     "profundidades": profundidadesLista, // Lista de profundidades
+    //     "foto_de_cada_profundidade": [],
+    //   };
+    // }).toList();
 
     setState(() {});
   }
@@ -597,7 +646,7 @@ class _ColetaState extends State<Coleta> {
     //     now.difference(lastTapTimestamps[markerIdValue]!).inMilliseconds <
     //         1800) {
     // Check if the distance is greater than 30 meters
-    if (distance > 3500) {
+    if (distance > 35000000) {
       //metros de distancia para coletar
       // Show alert
 
@@ -1716,66 +1765,66 @@ class _ColetaState extends State<Coleta> {
   }
 
   void _exibirDados() {
-    var filtroPontosLatLngDeContorno = FFAppState()
-        .listaContornoColeta
-        .where((item) => item['oserv_id'] == 38)
-        .map((item) => item['talcot_latitude_longitude'])
-        .toList();
-    var filtroPontosColeta = FFAppState()
-        .pontosDeColeta
-        .where((item) => item['oserv_id'] == int.parse(widget.idContorno!))
-        .toList();
+    // var filtroPontosLatLngDeContorno = FFAppState()
+    //     .listaContornoColeta
+    //     .where((item) => item['oserv_id'] == 38)
+    //     .map((item) => item['talcot_latitude_longitude'])
+    //     .toList();
+    // var filtroPontosColeta = FFAppState()
+    //     .pontosDeColeta
+    //     .where((item) => item['oserv_id'] == int.parse(widget.idContorno!))
+    //     .toList();
 
-    latLngListMarcadores = filtroPontosColeta.map((item) {
-      // Busca por profundidadesPontos relacionadas ao ponto de coleta atual
-      var profundidadesPontosProfIds = FFAppState()
-          .profundidadesPonto
-          .where((coleta) => coleta['trpp_artp_id'] == item['artp_id'])
-          .map((e) => e['trpp_prof_id']);
-
-      // Para cada profundidadePontosProfId, encontra as informações correspondentes em profundidades
-      var profundidadesLista = profundidadesPontosProfIds
-          .map((profId) {
-            var profundidade = FFAppState().profundidades.firstWhere(
-                (prof) => prof['prof_id'] == profId,
-                orElse: () => null);
-
-            return profundidade != null
-                ? {
-                    "nome": profundidade['prof_nome'],
-                    "icone": profundidade['prof_imagem'],
-                    "cor": profundidade['prof_cor'] ?? "#FFFFFF",
-                    "prof_id": profId,
-                  }
-                : null;
-          })
-          .where((element) => element != null)
-          .toList();
-
-      var perfilProfundidade = FFAppState().perfilprofundidades.firstWhere(
-          (perfil) => perfil['pprof_id'] == item['artp_id_perfil_prof'],
-          orElse: () => null);
-
-      var imagemProfundidade = '';
-      if (perfilProfundidade != null) {
-        var profundidade = FFAppState().profundidades.firstWhere(
-            (prof) => prof['prof_id'] == perfilProfundidade['pprof_prof_id'],
-            orElse: () => null);
-
-        if (profundidade != null) {
-          imagemProfundidade = profundidade['prof_imagem'];
-        }
-      }
-
-      // Retorna o mapa com as informações do ponto de coleta e as profundidades associadas
-      return {
-        "marcador_nome": "${item['artp_id']}",
-        "icone": imagemProfundidade, // A imagem de profundidade
-        "latlng_marcadores": "${item['artp_latitude_longitude']}",
-        "profundidades": profundidadesLista, // Lista de profundidades
-        "foto_de_cada_profundidade": [],
-      };
-    }).toList();
+    // latLngListMarcadores = filtroPontosColeta.map((item) {
+    //   // Busca por profundidadesPontos relacionadas ao ponto de coleta atual
+    //   var profundidadesPontosProfIds = FFAppState()
+    //       .profundidadesPonto
+    //       .where((coleta) => coleta['trpp_artp_id'] == item['artp_id'])
+    //       .map((e) => e['trpp_prof_id']);
+    //
+    //   // Para cada profundidadePontosProfId, encontra as informações correspondentes em profundidades
+    //   var profundidadesLista = profundidadesPontosProfIds
+    //       .map((profId) {
+    //         var profundidade = FFAppState().profundidades.firstWhere(
+    //             (prof) => prof['prof_id'] == profId,
+    //             orElse: () => null);
+    //
+    //         return profundidade != null
+    //             ? {
+    //                 "nome": profundidade['prof_nome'],
+    //                 "icone": profundidade['prof_imagem'],
+    //                 "cor": profundidade['prof_cor'] ?? "#FFFFFF",
+    //                 "prof_id": profId,
+    //               }
+    //             : null;
+    //       })
+    //       .where((element) => element != null)
+    //       .toList();
+    //
+    //   var perfilProfundidade = FFAppState().perfilprofundidades.firstWhere(
+    //       (perfil) => perfil['pprof_id'] == item['artp_id_perfil_prof'],
+    //       orElse: () => null);
+    //
+    //   var imagemProfundidade = '';
+    //   if (perfilProfundidade != null) {
+    //     var profundidade = FFAppState().profundidades.firstWhere(
+    //         (prof) => prof['prof_id'] == perfilProfundidade['pprof_prof_id'],
+    //         orElse: () => null);
+    //
+    //     if (profundidade != null) {
+    //       imagemProfundidade = profundidade['prof_imagem'];
+    //     }
+    //   }
+    //
+    //   // Retorna o mapa com as informações do ponto de coleta e as profundidades associadas
+    //   return {
+    //     "marcador_nome": "${item['artp_id']}",
+    //     "icone": imagemProfundidade, // A imagem de profundidade
+    //     "latlng_marcadores": "${item['artp_latitude_longitude']}",
+    //     "profundidades": profundidadesLista, // Lista de profundidades
+    //     "foto_de_cada_profundidade": [],
+    //   };
+    // }).toList();
 
     //
     // var lat = latLngListMarcadores.where((e) => e['marcador_nome'] == 4120)
@@ -1784,36 +1833,85 @@ class _ColetaState extends State<Coleta> {
     //   var lng = FFAppState().pontosDeColeta.where((e) => e['artp_id'] == 4120)
     //       .map((e) => e['artp_latitude_longitude'] = '-29.91494505823483, -51.19616432043194');
     //       // .toList();
-
-    var profundidadesPontos = FFAppState()
-        .profundidadesPonto
-        .where((coleta) => coleta['trpp_artp_id'] == 7365)
-        .map((e) => e['trpp_prof_id']);
-
-    var perfilProfundidade = FFAppState()
-        .perfilprofundidades
-        .where((perfil) => perfil['pprof_id'] == 7);
-
-    var profundidadesInfo = profundidadesPontos
-        .map((profId) {
-          var profundidade = FFAppState().profundidades.firstWhere(
-              (prof) => prof['prof_id'] == profId,
-              orElse: () =>
-                  null); // Retorna null se não encontrar correspondência
-
-          // Se encontrou a profundidade, retorna um mapa com as informações necessárias
-          // Caso contrário, retorna null (que será filtrado depois)
-          return profundidade != null
-              ? {
-                  "nome": profundidade['prof_nome'],
-                  "icone": profundidade['prof_icone'],
-                  "cor": "#FFFFFF", // Usa get com valor padrão para 'prof_cor'
-                }
-              : null;
-        })
-        .where((element) => element != null) // Filtra elementos nulos
+    var filtroPontosColeta = FFAppState()
+        .pontosDeColeta
+        .where((item) => item['oserv_id'] == 4)
+        .map((item) => item as Map<String, dynamic>) // Adiciona esta linha
         .toList();
-    var img = FFAppState().PontosColetados.toList().map((e) => e['obs']);
+
+    // latLngListMarcadores = filtroPontosColeta;
+
+    List<Map<String, dynamic>> substituirIcone(
+        List<Map<String, dynamic>> pontosColeta) {
+      return pontosColeta.map((ponto) {
+        // Substituir o icone do marcador
+        var iconeMarcador = FFAppState().icones.firstWhere(
+              (icone) =>
+                  icone['ico_id'].toString() == ponto['icone'].toString(),
+              orElse: () => {
+                'ico_base64': ''
+              }, // Fornecer um valor padrão caso não encontre
+            )['ico_base64'];
+
+        // Substituir o icone de cada profundidade
+        var profundidadesAtualizadas =
+            (ponto['profundidades'] as List<dynamic>).map((profundidade) {
+          var iconeProfundidade = FFAppState().icones.firstWhere(
+                (icone) =>
+                    icone['ico_id'].toString() ==
+                    profundidade['icone'].toString(),
+                orElse: () => {
+                  'ico_base64': ''
+                }, // Fornecer um valor padrão caso não encontre
+              )['ico_base64'];
+
+          return {
+            ...profundidade,
+            'icone': iconeProfundidade,
+          };
+        }).toList();
+
+        return {
+          ...ponto,
+          'icone': iconeMarcador,
+          'profundidades': profundidadesAtualizadas,
+        };
+      }).toList();
+    }
+
+// Uso
+    latLngListMarcadores = substituirIcone(filtroPontosColeta);
+
+    //
+    // var profundidadesPontos = FFAppState()
+    //     .profundidadesPonto
+    //     .where((coleta) => coleta['trpp_artp_id'] == 7365)
+    //     .map((e) => e['trpp_prof_id']);
+    //
+    // var perfilProfundidade = FFAppState()
+    //     .perfilprofundidades
+    //     .where((perfil) => perfil['pprof_id'] == 7);
+    //
+    // var profundidadesInfo = profundidadesPontos
+    //     .map((profId) {
+    //       var profundidade = FFAppState().profundidades.firstWhere(
+    //           (prof) => prof['prof_id'] == profId,
+    //           orElse: () =>
+    //               null); // Retorna null se não encontrar correspondência
+    //
+    //       // Se encontrou a profundidade, retorna um mapa com as informações necessárias
+    //       // Caso contrário, retorna null (que será filtrado depois)
+    //       return profundidade != null
+    //           ? {
+    //               "nome": profundidade['prof_nome'],
+    //               "icone": profundidade['prof_icone'],
+    //               "cor": "#FFFFFF", // Usa get com valor padrão para 'prof_cor'
+    //             }
+    //           : null;
+    //     })
+    //     .where((element) => element != null) // Filtra elementos nulos
+    //     .toList();
+    // var img = FFAppState().PontosColetados.toList().map((e) => e['obs']);
     // var img = FFAppState()
     //     .profundidadesPonto
     //     .where((coleta) => coleta['trpp_artp_id'] != 7377)
@@ -1842,7 +1940,7 @@ class _ColetaState extends State<Coleta> {
                 //   style: TextStyle(color: Colors.black, fontSize: 12.0),
                 // ),
                 Text(
-                  "Pontos: $img",
+                  "Pontos: $latLngListMarcadores",
                   style: TextStyle(color: Colors.black, fontSize: 12.0),
                 ),
                 // Text(
