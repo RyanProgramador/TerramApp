@@ -268,6 +268,44 @@ class _SelecionarOSWidgetState extends State<SelecionarOSWidget>
         }
       } else if ((FFAppState().sincronizcaoAutomatica == false) &&
           (FFAppState().servicosFinalizadosComSucesso.length != 0)) {
+        _model.preLoadingTrOsServicos3 =
+            await SincronizarGroup.trOsServicosCall.call();
+        _model.preLoadingTrFazendas3 =
+            await SincronizarGroup.trFazendasCall.call();
+        _model.preLoadingTrServicos3 =
+            await SincronizarGroup.trServicosCall.call();
+        setState(() {
+          FFAppState().trOsServicos = functions
+              .juntarDuasListasJson(
+                  SincronizarGroup.trOsServicosCall
+                      .dadosTrOsServicos(
+                        (_model.preLoadingTrOsServicos3?.jsonBody ?? ''),
+                      )
+                      ?.toList(),
+                  FFAppState().trOsServicos.toList())!
+              .toList()
+              .cast<dynamic>();
+          FFAppState().trServicos = functions
+              .juntarDuasListasJson(
+                  SincronizarGroup.trServicosCall
+                      .dadosTrServicos(
+                        (_model.preLoadingTrServicos3?.jsonBody ?? ''),
+                      )
+                      ?.toList(),
+                  FFAppState().trServicos.toList())!
+              .toList()
+              .cast<dynamic>();
+          FFAppState().trFazendas = functions
+              .juntarDuasListasJson(
+                  SincronizarGroup.trFazendasCall
+                      .dadosTrFazendas(
+                        (_model.preLoadingTrFazendas3?.jsonBody ?? ''),
+                      )
+                      ?.toList(),
+                  FFAppState().trFazendas.toList())!
+              .toList()
+              .cast<dynamic>();
+        });
       } else if ((FFAppState().trOrdemServicos.length <= 0) &&
           _model.foiAtualizado) {
       } else {
