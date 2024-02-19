@@ -678,7 +678,7 @@ class _ColetaState extends State<Coleta> {
     //     now.difference(lastTapTimestamps[markerIdValue]!).inMilliseconds <
     //         1800) {
     // Check if the distance is greater than 30 meters
-    if (distance > 35000000) {
+    if (distance > 35) {
       //metros de distancia para coletar
       // Show alert
 
@@ -852,75 +852,76 @@ class _ColetaState extends State<Coleta> {
       // final bytes = await image.readAsBytes();
       Uint8List bytes = await image.readAsBytes();
 
-      // Decodifica a imagem
-      img.Image imagem = img.decodeImage(bytes)!;
+      // Utiliza a biblioteca 'image' para decodificar a imagem
+      img.Image? originalImage = img.decodeImage(bytes);
 
-      // Ajusta a qualidade da imagem (50% neste exemplo)
-      img.Image imagemComQualidadeReduzida = img.copyResize(imagem,
-          width: (imagem.width ~/ 3), height: (imagem.height ~/ 3));
+      if (originalImage != null) {
+        // Redimensiona a imagem para 33% da sua qualidade original
+        img.Image resizedImage = img.copyResize(originalImage,
+            width: (originalImage.width * 0.23).round(),
+            height: (originalImage.height * 0.23).round());
 
-      // Recodifica a imagem para PNG com qualidade reduzida
-      List<int> bytesComQualidadeReduzida =
-          img.encodePng(imagemComQualidadeReduzida, level: 6); // level: 0-9
+        // Converte a imagem redimensionada de volta para bytes como PNG
+        List<int> resizedBytes = img.encodePng(resizedImage);
 
-      // Converte os bytes modificados para base64
-      String base64Image =
-          base64Encode(Uint8List.fromList(bytesComQualidadeReduzida));
+        // Converte os bytes da imagem redimensionada para uma string base64
+        String base64Image = base64Encode(Uint8List.fromList(resizedBytes));
 
-      setState(() {
-        // Encontra o marcador pelo nome
-        int indexMarcador = latLngListMarcadores.indexWhere(
-            (marcador) => marcador['marcador_nome'] == nomeMarcadorAtual);
+        setState(() {
+          // Encontra o marcador pelo nome
+          int indexMarcador = latLngListMarcadores.indexWhere(
+              (marcador) => marcador['marcador_nome'] == nomeMarcadorAtual);
 
-        if (indexMarcador != -1) {
-          latLngListMarcadores[indexMarcador]['foto_de_cada_profundidade'].add({
-            'nome': nomeProfundidade,
-            'foto': 'data:image/png;base64,base64Image',
-            // 'foto': 'data:image/png;base64,$base64Image',
-          });
-          pontosColetados.add({
-            "marcador_nome": nomeMarcadorAtual,
-            "profundidade": nomeProfundidade,
-            "foto": 'base64Image',
-            "latlng": '$latlng',
-            "id_ref": referencialProfundidadePontoId,
-            "obs": ""
-          });
-          FFAppState().PontosColetados.add({
-            "marcador_nome": nomeMarcadorAtual,
-            "profundidade": nomeProfundidade,
-            "foto": 'base64Image',
-            "foto": '$base64Image',
-            "latlng": '$latlng',
-            "id_ref": referencialProfundidadePontoId,
-            "obs": ""
-          });
-
-          coletasPorMarcador.putIfAbsent(nomeMarcadorAtual, () => {});
-          coletasPorMarcador[nomeMarcadorAtual]!.add(nomeProfundidade);
-
-          // Verifica se todas as profundidades foram coletadas
-          var todasProfundidades = latLngListMarcadores
-              .firstWhere((m) => m["marcador_nome"] == nomeMarcadorAtual)[
-                  "profundidades"]
-              .map((p) => p["nome"])
-              .toSet();
-
-          if (coletasPorMarcador[nomeMarcadorAtual]!
-              .containsAll(todasProfundidades)) {
-            // Todas as profundidades coletadas, mude a cor do marcador para verde
-            _updateMarkerColor(nomeMarcadorAtual, true);
-            setState(() {
-              vezAtualDoIntervaloDeColeta += 1;
+          if (indexMarcador != -1) {
+            latLngListMarcadores[indexMarcador]['foto_de_cada_profundidade']
+                .add({
+              'nome': nomeProfundidade,
+              'foto': 'data:image/png;base64,base64Image',
+              // 'foto': 'data:image/png;base64,$base64Image',
             });
+            pontosColetados.add({
+              "marcador_nome": nomeMarcadorAtual,
+              "profundidade": nomeProfundidade,
+              "foto": 'base64Image',
+              "latlng": '$latlng',
+              "id_ref": referencialProfundidadePontoId,
+              "obs": ""
+            });
+            FFAppState().PontosColetados.add({
+              "marcador_nome": nomeMarcadorAtual,
+              "profundidade": nomeProfundidade,
+              "foto": 'base64Image',
+              "foto": '$base64Image',
+              "latlng": '$latlng',
+              "id_ref": referencialProfundidadePontoId,
+              "obs": ""
+            });
+
+            coletasPorMarcador.putIfAbsent(nomeMarcadorAtual, () => {});
+            coletasPorMarcador[nomeMarcadorAtual]!.add(nomeProfundidade);
+
+            // Verifica se todas as profundidades foram coletadas
+            var todasProfundidades = latLngListMarcadores
+                .firstWhere((m) => m["marcador_nome"] == nomeMarcadorAtual)[
+                    "profundidades"]
+                .map((p) => p["nome"])
+                .toSet();
+
+            if (coletasPorMarcador[nomeMarcadorAtual]!
+                .containsAll(todasProfundidades)) {
+              // Todas as profundidades coletadas, mude a cor do marcador para verde
+              _updateMarkerColor(nomeMarcadorAtual, true);
+              setState(() {
+                vezAtualDoIntervaloDeColeta += 1;
+              });
+            }
+            ;
+
+            // Navigator.of(context).pop(); // Fecha o modal atual
+            // _mostrarModalSucesso(context, nomeMarcadorAtual);
           }
-          ;
-
-          // Navigator.of(context).pop(); // Fecha o modal atual
-          // _mostrarModalSucesso(context, nomeMarcadorAtual);
-        }
-      });
-
+        });
+      }
       // setState(() {
       //   pontosColetados.add({
       //     "marcador_nome": nomeMarcadorAtual,
@@ -1779,25 +1780,25 @@ class _ColetaState extends State<Coleta> {
                     )),
               ),
             ),
-            Positioned(
-              bottom: 10,
-              left: 10,
-              right: 10,
-              child: ElevatedButton(
-                onPressed: _exibirDados,
-                style: ElevatedButton.styleFrom(
-                  shape: CircleBorder(),
-                  backgroundColor: Color(0xFF00736D),
-                ),
-                child: Padding(
-                    padding: const EdgeInsets.all(8.0),
-                    child: Icon(
-                      Icons.info,
-                      size: 25.0,
-                      color: Colors.white,
-                    )),
-              ),
-            )
+            // Positioned(
+            //   bottom: 10,
+            //   left: 10,
+            //   right: 10,
+            //   child: ElevatedButton(
+            //     onPressed: _exibirDados,
+            //     style: ElevatedButton.styleFrom(
+            //       shape: CircleBorder(),
+            //       backgroundColor: Color(0xFF00736D),
+            //     ),
+            //     child: Padding(
+            //         padding: const EdgeInsets.all(8.0),
+            //         child: Icon(
+            //           Icons.info,
+            //           size: 25.0,
+            //           color: Colors.white,
+            //         )),
+            //   ),
+            // )
           ],
         )));
   }

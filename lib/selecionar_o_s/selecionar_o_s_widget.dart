@@ -100,12 +100,6 @@ class _SelecionarOSWidgetState extends State<SelecionarOSWidget>
           recorte: functions
               .jsonListToStr(FFAppState().latlngRecorteTalhao.toList()),
         );
-        _model.sincPontosMedicaoEPerfilEProfundidaAPI =
-            await SincronizarGroup.trSincronizaPontosMedicaoCall.call(
-          urlapicall: FFAppState().urlapicall,
-          pontosColetados:
-              functions.jsonListToStr(FFAppState().PontosColetados.toList()),
-        );
         _model.pontosDeColetaFormatados3 =
             await SincronizarGroup.trSincronizaPontosCall.call(
           urlapicall: FFAppState().urlapicall,
@@ -178,34 +172,6 @@ class _SelecionarOSWidgetState extends State<SelecionarOSWidget>
                 .juntarDuasListasJsonignoraDuplicados(
                     FFAppState().latlngRecorteTalhao.toList(),
                     FFAppState().latlngRecorteTalhaoPosSincronizado.toList())!
-                .toList()
-                .cast<dynamic>();
-            FFAppState().perfilprofundidades = getJsonField(
-              (_model.sincPontosMedicaoEPerfilEProfundidaAPI?.jsonBody ?? ''),
-              r'''$.perfil_profundidades[:]''',
-              true,
-            )!
-                .toList()
-                .cast<dynamic>();
-            FFAppState().profundidades = getJsonField(
-              (_model.sincPontosMedicaoEPerfilEProfundidaAPI?.jsonBody ?? ''),
-              r'''$.profundidades[:]''',
-              true,
-            )!
-                .toList()
-                .cast<dynamic>();
-            FFAppState().perfis = getJsonField(
-              (_model.sincPontosMedicaoEPerfilEProfundidaAPI?.jsonBody ?? ''),
-              r'''$.perfis[:]''',
-              true,
-            )!
-                .toList()
-                .cast<dynamic>();
-            FFAppState().profundidadesPonto = getJsonField(
-              (_model.sincPontosMedicaoEPerfilEProfundidaAPI?.jsonBody ?? ''),
-              r'''$.pontos_profundidades[:]''',
-              true,
-            )!
                 .toList()
                 .cast<dynamic>();
           });
@@ -333,7 +299,6 @@ class _SelecionarOSWidgetState extends State<SelecionarOSWidget>
         _model.trCFG = await SincronizarGroup.trCFGCall.call(
           urlapicall: FFAppState().urlapicall,
         );
-        FFAppState().update(() {});
         _model.pontosDeColetaFormatados5 =
             await SincronizarGroup.trSincronizaPontosCall.call(
           urlapicall: FFAppState().urlapicall,
@@ -529,7 +494,6 @@ class _SelecionarOSWidgetState extends State<SelecionarOSWidget>
             pontosColetados:
                 functions.jsonListToStr(FFAppState().PontosColetados.toList()),
           );
-          FFAppState().update(() {});
           _model.pontosDeColetaFormatados4 =
               await SincronizarGroup.trSincronizaPontosCall.call(
             urlapicall: FFAppState().urlapicall,
