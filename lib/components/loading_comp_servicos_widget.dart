@@ -110,7 +110,8 @@ class _LoadingCompServicosWidgetState extends State<LoadingCompServicosWidget>
                           width: double.infinity,
                           height: 78.0,
                           decoration: BoxDecoration(
-                            color: Color(0xFFA1A1A1),
+                            color:
+                                FlutterFlowTheme.of(context).primaryBackground,
                             borderRadius: BorderRadius.circular(12.0),
                           ),
                           child: Padding(
@@ -133,7 +134,7 @@ class _LoadingCompServicosWidgetState extends State<LoadingCompServicosWidget>
                                           width: 30.0,
                                           height: 30.0,
                                           decoration: BoxDecoration(
-                                            color: Color(0xFF7A7A7A),
+                                            color: Color(0xFFB0B0B0),
                                             borderRadius:
                                                 BorderRadius.circular(6.0),
                                           ),
@@ -157,7 +158,7 @@ class _LoadingCompServicosWidgetState extends State<LoadingCompServicosWidget>
                                               width: 200.0,
                                               height: 20.0,
                                               decoration: BoxDecoration(
-                                                color: Color(0xFF818181),
+                                                color: Color(0xFFB0B0B0),
                                                 borderRadius:
                                                     BorderRadius.circular(20.0),
                                               ),
@@ -170,7 +171,7 @@ class _LoadingCompServicosWidgetState extends State<LoadingCompServicosWidget>
                                               width: 90.0,
                                               height: 20.0,
                                               decoration: BoxDecoration(
-                                                color: Color(0xFF818181),
+                                                color: Color(0xFFB0B0B0),
                                                 borderRadius:
                                                     BorderRadius.circular(20.0),
                                               ),
@@ -183,7 +184,7 @@ class _LoadingCompServicosWidgetState extends State<LoadingCompServicosWidget>
                                               width: 98.0,
                                               height: 20.0,
                                               decoration: BoxDecoration(
-                                                color: Color(0xFF818181),
+                                                color: Color(0xFFB0B0B0),
                                                 borderRadius:
                                                     BorderRadius.circular(20.0),
                                               ),
