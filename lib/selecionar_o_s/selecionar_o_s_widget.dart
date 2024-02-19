@@ -1305,137 +1305,505 @@ class _SelecionarOSWidgetState extends State<SelecionarOSWidget>
                                                     final trOsServicosItem =
                                                         trOsServicos[
                                                             trOsServicosIndex];
-                                                    return Padding(
-                                                      padding:
-                                                          EdgeInsetsDirectional
-                                                              .fromSTEB(
-                                                                  16.0,
-                                                                  8.0,
-                                                                  16.0,
-                                                                  0.0),
-                                                      child: Container(
-                                                        width: double.infinity,
-                                                        height: 78.0,
-                                                        decoration:
-                                                            BoxDecoration(
-                                                          color: FlutterFlowTheme
-                                                                  .of(context)
-                                                              .primaryBackground,
-                                                          borderRadius:
-                                                              BorderRadius
-                                                                  .circular(
-                                                                      12.0),
-                                                          border: Border.all(
-                                                            color: trOsServicosItem ==
-                                                                    FFAppState()
-                                                                        .trOsServicoEmAndamento
-                                                                ? FlutterFlowTheme.of(
-                                                                        context)
-                                                                    .customColor1
-                                                                : FlutterFlowTheme.of(
-                                                                        context)
-                                                                    .lineColor,
+                                                    return Visibility(
+                                                      visible:
+                                                          functions.ligaoDeNome(
+                                                                  FFAppState()
+                                                                      .trServicos
+                                                                      .toList(),
+                                                                  'serv_id',
+                                                                  'serv_nome',
+                                                                  getJsonField(
+                                                                    trOsServicosItem,
+                                                                    r'''$.oserv_id_serv''',
+                                                                  ).toString()) ==
+                                                              'Coleta',
+                                                      child: Padding(
+                                                        padding:
+                                                            EdgeInsetsDirectional
+                                                                .fromSTEB(
+                                                                    16.0,
+                                                                    8.0,
+                                                                    16.0,
+                                                                    0.0),
+                                                        child: Container(
+                                                          width:
+                                                              double.infinity,
+                                                          height: 78.0,
+                                                          decoration:
+                                                              BoxDecoration(
+                                                            color: FlutterFlowTheme
+                                                                    .of(context)
+                                                                .primaryBackground,
+                                                            borderRadius:
+                                                                BorderRadius
+                                                                    .circular(
+                                                                        12.0),
+                                                            border: Border.all(
+                                                              color: trOsServicosItem ==
+                                                                      FFAppState()
+                                                                          .trOsServicoEmAndamento
+                                                                  ? FlutterFlowTheme.of(
+                                                                          context)
+                                                                      .customColor1
+                                                                  : FlutterFlowTheme.of(
+                                                                          context)
+                                                                      .lineColor,
+                                                            ),
                                                           ),
-                                                        ),
-                                                        child: Padding(
-                                                          padding:
-                                                              EdgeInsetsDirectional
-                                                                  .fromSTEB(
-                                                                      8.0,
-                                                                      8.0,
-                                                                      12.0,
-                                                                      8.0),
-                                                          child: InkWell(
-                                                            splashColor: Colors
-                                                                .transparent,
-                                                            focusColor: Colors
-                                                                .transparent,
-                                                            hoverColor: Colors
-                                                                .transparent,
-                                                            highlightColor:
-                                                                Colors
-                                                                    .transparent,
-                                                            onTap: () async {
-                                                              currentUserLocationValue =
-                                                                  await getCurrentUserLocation(
-                                                                      defaultLocation:
-                                                                          LatLng(
-                                                                              0.0,
-                                                                              0.0));
-                                                              var _shouldSetState =
-                                                                  false;
-                                                              showModalBottomSheet(
-                                                                isScrollControlled:
-                                                                    true,
-                                                                backgroundColor:
-                                                                    Colors
-                                                                        .transparent,
-                                                                isDismissible:
-                                                                    false,
-                                                                enableDrag:
-                                                                    false,
-                                                                context:
-                                                                    context,
-                                                                builder:
-                                                                    (context) {
-                                                                  return GestureDetector(
-                                                                    onTap: () => _model
-                                                                            .unfocusNode
-                                                                            .canRequestFocus
-                                                                        ? FocusScope.of(context).requestFocus(_model
-                                                                            .unfocusNode)
-                                                                        : FocusScope.of(context)
-                                                                            .unfocus(),
-                                                                    child:
-                                                                        Padding(
-                                                                      padding: MediaQuery
-                                                                          .viewInsetsOf(
-                                                                              context),
+                                                          child: Padding(
+                                                            padding:
+                                                                EdgeInsetsDirectional
+                                                                    .fromSTEB(
+                                                                        8.0,
+                                                                        8.0,
+                                                                        12.0,
+                                                                        8.0),
+                                                            child: InkWell(
+                                                              splashColor: Colors
+                                                                  .transparent,
+                                                              focusColor: Colors
+                                                                  .transparent,
+                                                              hoverColor: Colors
+                                                                  .transparent,
+                                                              highlightColor:
+                                                                  Colors
+                                                                      .transparent,
+                                                              onTap: () async {
+                                                                currentUserLocationValue =
+                                                                    await getCurrentUserLocation(
+                                                                        defaultLocation: LatLng(
+                                                                            0.0,
+                                                                            0.0));
+                                                                var _shouldSetState =
+                                                                    false;
+                                                                showModalBottomSheet(
+                                                                  isScrollControlled:
+                                                                      true,
+                                                                  backgroundColor:
+                                                                      Colors
+                                                                          .transparent,
+                                                                  isDismissible:
+                                                                      false,
+                                                                  enableDrag:
+                                                                      false,
+                                                                  context:
+                                                                      context,
+                                                                  builder:
+                                                                      (context) {
+                                                                    return GestureDetector(
+                                                                      onTap: () => _model
+                                                                              .unfocusNode
+                                                                              .canRequestFocus
+                                                                          ? FocusScope.of(context).requestFocus(_model
+                                                                              .unfocusNode)
+                                                                          : FocusScope.of(context)
+                                                                              .unfocus(),
                                                                       child:
-                                                                          CarregandoOsWidget(),
-                                                                    ),
-                                                                  );
-                                                                },
-                                                              ).then((value) =>
-                                                                  safeSetState(
-                                                                      () {}));
+                                                                          Padding(
+                                                                        padding:
+                                                                            MediaQuery.viewInsetsOf(context),
+                                                                        child:
+                                                                            CarregandoOsWidget(),
+                                                                      ),
+                                                                    );
+                                                                  },
+                                                                ).then((value) =>
+                                                                    safeSetState(
+                                                                        () {}));
 
-                                                              if (true) {
-                                                                _model.temNetNoServico =
-                                                                    await actions
-                                                                        .temInternet();
-                                                                _shouldSetState =
-                                                                    true;
-                                                                if (_model
-                                                                    .temNetNoServico!) {
-                                                                  FFAppState()
-                                                                      .update(
-                                                                          () {});
-                                                                } else {
-                                                                  await showDialog(
-                                                                    context:
-                                                                        context,
-                                                                    builder:
-                                                                        (alertDialogContext) {
-                                                                      return AlertDialog(
-                                                                        title: Text(
-                                                                            'Ops!'),
-                                                                        content:
-                                                                            Text('Você não tem internet, você poderá usar o serviço de localização, entretanto, nenhuma rota será sugerida no momento.'),
-                                                                        actions: [
-                                                                          TextButton(
-                                                                            onPressed: () =>
-                                                                                Navigator.pop(alertDialogContext),
-                                                                            child:
-                                                                                Text('Ok'),
+                                                                if (true) {
+                                                                  _model.temNetNoServico =
+                                                                      await actions
+                                                                          .temInternet();
+                                                                  _shouldSetState =
+                                                                      true;
+                                                                  if (_model
+                                                                      .temNetNoServico!) {
+                                                                    FFAppState()
+                                                                        .update(
+                                                                            () {});
+                                                                  } else {
+                                                                    await showDialog(
+                                                                      context:
+                                                                          context,
+                                                                      builder:
+                                                                          (alertDialogContext) {
+                                                                        return AlertDialog(
+                                                                          title:
+                                                                              Text('Ops!'),
+                                                                          content:
+                                                                              Text('Você não tem internet, você poderá usar o serviço de localização, entretanto, nenhuma rota será sugerida no momento.'),
+                                                                          actions: [
+                                                                            TextButton(
+                                                                              onPressed: () => Navigator.pop(alertDialogContext),
+                                                                              child: Text('Ok'),
+                                                                            ),
+                                                                          ],
+                                                                        );
+                                                                      },
+                                                                    );
+                                                                    FFAppState()
+                                                                        .update(
+                                                                            () {});
+                                                                    Navigator.pop(
+                                                                        context);
+
+                                                                    context
+                                                                        .pushNamed(
+                                                                      'IniciarDeslocamentoTela',
+                                                                      queryParameters:
+                                                                          {
+                                                                        'etapade':
+                                                                            serializeParam(
+                                                                          functions.ligaoDeNome(
+                                                                              FFAppState().trServicos.toList(),
+                                                                              'serv_id',
+                                                                              'serv_nome',
+                                                                              getJsonField(
+                                                                                trOsServicosItem,
+                                                                                r'''$.oserv_id_serv''',
+                                                                              ).toString()),
+                                                                          ParamType
+                                                                              .String,
+                                                                        ),
+                                                                        'fazendaNome':
+                                                                            serializeParam(
+                                                                          functions.ligaoDeNome(
+                                                                              FFAppState().trFazendas.toList(),
+                                                                              'faz_id',
+                                                                              'faz_nome',
+                                                                              valueOrDefault<String>(
+                                                                                functions.ligacaoEntreListas(
+                                                                                    getJsonField(
+                                                                                      trOsServicosItem,
+                                                                                      r'''$''',
+                                                                                      true,
+                                                                                    ),
+                                                                                    FFAppState().trOrdemServicos.toList(),
+                                                                                    'oserv_id_os',
+                                                                                    'os_id',
+                                                                                    'os_id_faz'),
+                                                                                '404',
+                                                                              )),
+                                                                          ParamType
+                                                                              .String,
+                                                                        ),
+                                                                        'latlngFaz':
+                                                                            serializeParam(
+                                                                          functions.strToLatLng(
+                                                                              functions.ligaoDeNome(
+                                                                                  FFAppState().trFazendas.toList(),
+                                                                                  'faz_id',
+                                                                                  'faz_latitude',
+                                                                                  valueOrDefault<String>(
+                                                                                    functions.ligacaoEntreListas(
+                                                                                        getJsonField(
+                                                                                          trOsServicosItem,
+                                                                                          r'''$''',
+                                                                                          true,
+                                                                                        ),
+                                                                                        FFAppState().trOrdemServicos.toList(),
+                                                                                        'oserv_id_os',
+                                                                                        'os_id',
+                                                                                        'os_id_faz'),
+                                                                                    '404',
+                                                                                  )),
+                                                                              functions.ligaoDeNome(
+                                                                                  FFAppState().trFazendas.toList(),
+                                                                                  'faz_id',
+                                                                                  'faz_longitude',
+                                                                                  valueOrDefault<String>(
+                                                                                    functions.ligacaoEntreListas(
+                                                                                        getJsonField(
+                                                                                          trOsServicosItem,
+                                                                                          r'''$''',
+                                                                                          true,
+                                                                                        ),
+                                                                                        FFAppState().trOrdemServicos.toList(),
+                                                                                        'oserv_id_os',
+                                                                                        'os_id',
+                                                                                        'os_id_faz'),
+                                                                                    '404',
+                                                                                  ))),
+                                                                          ParamType
+                                                                              .LatLng,
+                                                                        ),
+                                                                        'cidadeFaz':
+                                                                            serializeParam(
+                                                                          functions.ligaoDeNome(
+                                                                              FFAppState().trFazendas.toList(),
+                                                                              'faz_id',
+                                                                              'faz_cidade',
+                                                                              valueOrDefault<String>(
+                                                                                functions.ligacaoEntreListas(
+                                                                                    getJsonField(
+                                                                                      trOsServicosItem,
+                                                                                      r'''$''',
+                                                                                      true,
+                                                                                    ),
+                                                                                    FFAppState().trOrdemServicos.toList(),
+                                                                                    'oserv_id_os',
+                                                                                    'os_id',
+                                                                                    'os_id_faz'),
+                                                                                '404',
+                                                                              )),
+                                                                          ParamType
+                                                                              .String,
+                                                                        ),
+                                                                        'estadoFaz':
+                                                                            serializeParam(
+                                                                          functions.ligaoDeNome(
+                                                                              FFAppState().trFazendas.toList(),
+                                                                              'faz_id',
+                                                                              'faz_estado',
+                                                                              valueOrDefault<String>(
+                                                                                functions.ligacaoEntreListas(
+                                                                                    getJsonField(
+                                                                                      trOsServicosItem,
+                                                                                      r'''$''',
+                                                                                      true,
+                                                                                    ),
+                                                                                    FFAppState().trOrdemServicos.toList(),
+                                                                                    'oserv_id_os',
+                                                                                    'os_id',
+                                                                                    'os_id_faz'),
+                                                                                '404',
+                                                                              )),
+                                                                          ParamType
+                                                                              .String,
+                                                                        ),
+                                                                        'observacao':
+                                                                            serializeParam(
+                                                                          getJsonField(
+                                                                            trOsServicosItem,
+                                                                            r'''$.oserv_observacao''',
+                                                                          ).toString(),
+                                                                          ParamType
+                                                                              .String,
+                                                                        ),
+                                                                        'tecnicoid':
+                                                                            serializeParam(
+                                                                          valueOrDefault<
+                                                                              String>(
+                                                                            functions.ligacaoEntreListas(
+                                                                                getJsonField(
+                                                                                  trOsServicosItem,
+                                                                                  r'''$''',
+                                                                                  true,
+                                                                                ),
+                                                                                FFAppState().trOsTecnicos.toList(),
+                                                                                'oserv_id',
+                                                                                'ostec_id_serv',
+                                                                                'ostec_id_tec'),
+                                                                            '404',
                                                                           ),
-                                                                        ],
-                                                                      );
-                                                                    },
-                                                                  );
-                                                                  FFAppState()
-                                                                      .update(
+                                                                          ParamType
+                                                                              .String,
+                                                                        ),
+                                                                        'servicoid':
+                                                                            serializeParam(
+                                                                          functions
+                                                                              .intToSring(getJsonField(
+                                                                            trOsServicosItem,
+                                                                            r'''$.oserv_id''',
+                                                                          )),
+                                                                          ParamType
+                                                                              .String,
+                                                                        ),
+                                                                        'data':
+                                                                            serializeParam(
+                                                                          functions
+                                                                              .strToData(valueOrDefault<String>(
+                                                                            getJsonField(
+                                                                              trOsServicosItem,
+                                                                              r'''$.oserv_dthr_agendamento''',
+                                                                            )?.toString(),
+                                                                            '2099-01-01 00:00:00',
+                                                                          )),
+                                                                          ParamType
+                                                                              .String,
+                                                                        ),
+                                                                        'hora':
+                                                                            serializeParam(
+                                                                          functions
+                                                                              .strToHORA(valueOrDefault<String>(
+                                                                            getJsonField(
+                                                                              trOsServicosItem,
+                                                                              r'''$.oserv_dthr_agendamento''',
+                                                                            )?.toString(),
+                                                                            '2099-01-01 00:00:00',
+                                                                          )),
+                                                                          ParamType
+                                                                              .String,
+                                                                        ),
+                                                                        'jsonServico':
+                                                                            serializeParam(
+                                                                          trOsServicosItem,
+                                                                          ParamType
+                                                                              .JSON,
+                                                                        ),
+                                                                        'deslocamentoAtualFinalizado':
+                                                                            serializeParam(
+                                                                          true,
+                                                                          ParamType
+                                                                              .bool,
+                                                                        ),
+                                                                        'polylinhaQueVemDoMenuInicial':
+                                                                            serializeParam(
+                                                                          null,
+                                                                          ParamType
+                                                                              .String,
+                                                                        ),
+                                                                        'fazid':
+                                                                            serializeParam(
+                                                                          valueOrDefault<
+                                                                              String>(
+                                                                            functions.ligacaoEntreListas(
+                                                                                getJsonField(
+                                                                                  trOsServicosItem,
+                                                                                  r'''$''',
+                                                                                  true,
+                                                                                ),
+                                                                                FFAppState().trOrdemServicos.toList(),
+                                                                                'oserv_id_os',
+                                                                                'os_id',
+                                                                                'os_id_faz'),
+                                                                            '404',
+                                                                          ),
+                                                                          ParamType
+                                                                              .String,
+                                                                        ),
+                                                                        'autoAuditoria':
+                                                                            serializeParam(
+                                                                          functions
+                                                                              .strToBool(getJsonField(
+                                                                            trOsServicosItem,
+                                                                            r'''$.oserv_auto_auditoria ''',
+                                                                          ).toString()),
+                                                                          ParamType
+                                                                              .bool,
+                                                                        ),
+                                                                        'autoAuditoriaQuantidadePontos':
+                                                                            serializeParam(
+                                                                          getJsonField(
+                                                                            trOsServicosItem,
+                                                                            r'''$.oserv_quantos_pontos ''',
+                                                                          ),
+                                                                          ParamType
+                                                                              .int,
+                                                                        ),
+                                                                      }.withoutNulls,
+                                                                      extra: <String,
+                                                                          dynamic>{
+                                                                        kTransitionInfoKey:
+                                                                            TransitionInfo(
+                                                                          hasTransition:
+                                                                              true,
+                                                                          transitionType:
+                                                                              PageTransitionType.fade,
+                                                                          duration:
+                                                                              Duration(milliseconds: 0),
+                                                                        ),
+                                                                      },
+                                                                    );
+
+                                                                    if (_shouldSetState)
+                                                                      setState(
                                                                           () {});
+                                                                    return;
+                                                                  }
+
+                                                                  _model.polyline1 =
+                                                                      await ApiRotasPolylinesCall
+                                                                          .call(
+                                                                    latitudeOrigem:
+                                                                        functions.separadorLatDeLng(
+                                                                            true,
+                                                                            functions.latLngToStr(currentUserLocationValue)),
+                                                                    longitudeOrigem: functions.separadorLatDeLng(
+                                                                        false,
+                                                                        functions
+                                                                            .latLngToStr(currentUserLocationValue)),
+                                                                    latitudeDestino: functions.separadorLatDeLng(
+                                                                        true,
+                                                                        functions.latLngToStr(functions.strToLatLng(
+                                                                            functions.ligaoDeNome(
+                                                                                FFAppState().trFazendas.toList(),
+                                                                                'faz_id',
+                                                                                'faz_latitude',
+                                                                                valueOrDefault<String>(
+                                                                                  functions.ligacaoEntreListas(
+                                                                                      getJsonField(
+                                                                                        trOsServicosItem,
+                                                                                        r'''$''',
+                                                                                        true,
+                                                                                      ),
+                                                                                      FFAppState().trOrdemServicos.toList(),
+                                                                                      'oserv_id_os',
+                                                                                      'os_id',
+                                                                                      'os_id_faz'),
+                                                                                  '404',
+                                                                                )),
+                                                                            functions.ligaoDeNome(
+                                                                                FFAppState().trFazendas.toList(),
+                                                                                'faz_id',
+                                                                                'faz_longitude',
+                                                                                valueOrDefault<String>(
+                                                                                  functions.ligacaoEntreListas(
+                                                                                      getJsonField(
+                                                                                        trOsServicosItem,
+                                                                                        r'''$''',
+                                                                                        true,
+                                                                                      ),
+                                                                                      FFAppState().trOrdemServicos.toList(),
+                                                                                      'oserv_id_os',
+                                                                                      'os_id',
+                                                                                      'os_id_faz'),
+                                                                                  '404',
+                                                                                ))))),
+                                                                    longitudeDestonp: functions.separadorLatDeLng(
+                                                                        false,
+                                                                        functions.latLngToStr(functions.strToLatLng(
+                                                                            functions.ligaoDeNome(
+                                                                                FFAppState().trFazendas.toList(),
+                                                                                'faz_id',
+                                                                                'faz_latitude',
+                                                                                valueOrDefault<String>(
+                                                                                  functions.ligacaoEntreListas(
+                                                                                      getJsonField(
+                                                                                        trOsServicosItem,
+                                                                                        r'''$''',
+                                                                                        true,
+                                                                                      ),
+                                                                                      FFAppState().trOrdemServicos.toList(),
+                                                                                      'oserv_id_os',
+                                                                                      'os_id',
+                                                                                      'os_id_faz'),
+                                                                                  '404',
+                                                                                )),
+                                                                            functions.ligaoDeNome(
+                                                                                FFAppState().trFazendas.toList(),
+                                                                                'faz_id',
+                                                                                'faz_longitude',
+                                                                                valueOrDefault<String>(
+                                                                                  functions.ligacaoEntreListas(
+                                                                                      getJsonField(
+                                                                                        trOsServicosItem,
+                                                                                        r'''$''',
+                                                                                        true,
+                                                                                      ),
+                                                                                      FFAppState().trOrdemServicos.toList(),
+                                                                                      'oserv_id_os',
+                                                                                      'os_id',
+                                                                                      'os_id_faz'),
+                                                                                  '404',
+                                                                                ))))),
+                                                                    key:
+                                                                        'AIzaSyDpk1wIZmA1OTS57D_cB13BD01zqrTiQNI',
+                                                                  );
+                                                                  _shouldSetState =
+                                                                      true;
                                                                   Navigator.pop(
                                                                       context);
 
@@ -1641,7 +2009,11 @@ class _SelecionarOSWidgetState extends State<SelecionarOSWidget>
                                                                       ),
                                                                       'polylinhaQueVemDoMenuInicial':
                                                                           serializeParam(
-                                                                        null,
+                                                                        ApiRotasPolylinesCall
+                                                                            .criptografadapolyline(
+                                                                          (_model.polyline1?.jsonBody ??
+                                                                              ''),
+                                                                        ),
                                                                         ParamType
                                                                             .String,
                                                                       ),
@@ -1697,644 +2069,267 @@ class _SelecionarOSWidgetState extends State<SelecionarOSWidget>
                                                                       ),
                                                                     },
                                                                   );
-
-                                                                  if (_shouldSetState)
-                                                                    setState(
-                                                                        () {});
-                                                                  return;
                                                                 }
-
-                                                                _model.polyline1 =
-                                                                    await ApiRotasPolylinesCall
-                                                                        .call(
-                                                                  latitudeOrigem:
-                                                                      functions.separadorLatDeLng(
-                                                                          true,
-                                                                          functions
-                                                                              .latLngToStr(currentUserLocationValue)),
-                                                                  longitudeOrigem:
-                                                                      functions.separadorLatDeLng(
-                                                                          false,
-                                                                          functions
-                                                                              .latLngToStr(currentUserLocationValue)),
-                                                                  latitudeDestino: functions.separadorLatDeLng(
-                                                                      true,
-                                                                      functions.latLngToStr(functions.strToLatLng(
-                                                                          functions.ligaoDeNome(
-                                                                              FFAppState().trFazendas.toList(),
-                                                                              'faz_id',
-                                                                              'faz_latitude',
-                                                                              valueOrDefault<String>(
-                                                                                functions.ligacaoEntreListas(
-                                                                                    getJsonField(
-                                                                                      trOsServicosItem,
-                                                                                      r'''$''',
-                                                                                      true,
-                                                                                    ),
-                                                                                    FFAppState().trOrdemServicos.toList(),
-                                                                                    'oserv_id_os',
-                                                                                    'os_id',
-                                                                                    'os_id_faz'),
-                                                                                '404',
-                                                                              )),
-                                                                          functions.ligaoDeNome(
-                                                                              FFAppState().trFazendas.toList(),
-                                                                              'faz_id',
-                                                                              'faz_longitude',
-                                                                              valueOrDefault<String>(
-                                                                                functions.ligacaoEntreListas(
-                                                                                    getJsonField(
-                                                                                      trOsServicosItem,
-                                                                                      r'''$''',
-                                                                                      true,
-                                                                                    ),
-                                                                                    FFAppState().trOrdemServicos.toList(),
-                                                                                    'oserv_id_os',
-                                                                                    'os_id',
-                                                                                    'os_id_faz'),
-                                                                                '404',
-                                                                              ))))),
-                                                                  longitudeDestonp: functions.separadorLatDeLng(
-                                                                      false,
-                                                                      functions.latLngToStr(functions.strToLatLng(
-                                                                          functions.ligaoDeNome(
-                                                                              FFAppState().trFazendas.toList(),
-                                                                              'faz_id',
-                                                                              'faz_latitude',
-                                                                              valueOrDefault<String>(
-                                                                                functions.ligacaoEntreListas(
-                                                                                    getJsonField(
-                                                                                      trOsServicosItem,
-                                                                                      r'''$''',
-                                                                                      true,
-                                                                                    ),
-                                                                                    FFAppState().trOrdemServicos.toList(),
-                                                                                    'oserv_id_os',
-                                                                                    'os_id',
-                                                                                    'os_id_faz'),
-                                                                                '404',
-                                                                              )),
-                                                                          functions.ligaoDeNome(
-                                                                              FFAppState().trFazendas.toList(),
-                                                                              'faz_id',
-                                                                              'faz_longitude',
-                                                                              valueOrDefault<String>(
-                                                                                functions.ligacaoEntreListas(
-                                                                                    getJsonField(
-                                                                                      trOsServicosItem,
-                                                                                      r'''$''',
-                                                                                      true,
-                                                                                    ),
-                                                                                    FFAppState().trOrdemServicos.toList(),
-                                                                                    'oserv_id_os',
-                                                                                    'os_id',
-                                                                                    'os_id_faz'),
-                                                                                '404',
-                                                                              ))))),
-                                                                  key:
-                                                                      'AIzaSyDpk1wIZmA1OTS57D_cB13BD01zqrTiQNI',
-                                                                );
-                                                                _shouldSetState =
-                                                                    true;
-                                                                Navigator.pop(
-                                                                    context);
-
-                                                                context
-                                                                    .pushNamed(
-                                                                  'IniciarDeslocamentoTela',
-                                                                  queryParameters:
-                                                                      {
-                                                                    'etapade':
-                                                                        serializeParam(
-                                                                      functions.ligaoDeNome(
-                                                                          FFAppState().trServicos.toList(),
-                                                                          'serv_id',
-                                                                          'serv_nome',
-                                                                          getJsonField(
-                                                                            trOsServicosItem,
-                                                                            r'''$.oserv_id_serv''',
-                                                                          ).toString()),
-                                                                      ParamType
-                                                                          .String,
-                                                                    ),
-                                                                    'fazendaNome':
-                                                                        serializeParam(
-                                                                      functions.ligaoDeNome(
-                                                                          FFAppState().trFazendas.toList(),
-                                                                          'faz_id',
-                                                                          'faz_nome',
-                                                                          valueOrDefault<String>(
-                                                                            functions.ligacaoEntreListas(
-                                                                                getJsonField(
-                                                                                  trOsServicosItem,
-                                                                                  r'''$''',
-                                                                                  true,
-                                                                                ),
-                                                                                FFAppState().trOrdemServicos.toList(),
-                                                                                'oserv_id_os',
-                                                                                'os_id',
-                                                                                'os_id_faz'),
-                                                                            '404',
-                                                                          )),
-                                                                      ParamType
-                                                                          .String,
-                                                                    ),
-                                                                    'latlngFaz':
-                                                                        serializeParam(
-                                                                      functions.strToLatLng(
-                                                                          functions.ligaoDeNome(
-                                                                              FFAppState().trFazendas.toList(),
-                                                                              'faz_id',
-                                                                              'faz_latitude',
-                                                                              valueOrDefault<String>(
-                                                                                functions.ligacaoEntreListas(
-                                                                                    getJsonField(
-                                                                                      trOsServicosItem,
-                                                                                      r'''$''',
-                                                                                      true,
-                                                                                    ),
-                                                                                    FFAppState().trOrdemServicos.toList(),
-                                                                                    'oserv_id_os',
-                                                                                    'os_id',
-                                                                                    'os_id_faz'),
-                                                                                '404',
-                                                                              )),
-                                                                          functions.ligaoDeNome(
-                                                                              FFAppState().trFazendas.toList(),
-                                                                              'faz_id',
-                                                                              'faz_longitude',
-                                                                              valueOrDefault<String>(
-                                                                                functions.ligacaoEntreListas(
-                                                                                    getJsonField(
-                                                                                      trOsServicosItem,
-                                                                                      r'''$''',
-                                                                                      true,
-                                                                                    ),
-                                                                                    FFAppState().trOrdemServicos.toList(),
-                                                                                    'oserv_id_os',
-                                                                                    'os_id',
-                                                                                    'os_id_faz'),
-                                                                                '404',
-                                                                              ))),
-                                                                      ParamType
-                                                                          .LatLng,
-                                                                    ),
-                                                                    'cidadeFaz':
-                                                                        serializeParam(
-                                                                      functions.ligaoDeNome(
-                                                                          FFAppState().trFazendas.toList(),
-                                                                          'faz_id',
-                                                                          'faz_cidade',
-                                                                          valueOrDefault<String>(
-                                                                            functions.ligacaoEntreListas(
-                                                                                getJsonField(
-                                                                                  trOsServicosItem,
-                                                                                  r'''$''',
-                                                                                  true,
-                                                                                ),
-                                                                                FFAppState().trOrdemServicos.toList(),
-                                                                                'oserv_id_os',
-                                                                                'os_id',
-                                                                                'os_id_faz'),
-                                                                            '404',
-                                                                          )),
-                                                                      ParamType
-                                                                          .String,
-                                                                    ),
-                                                                    'estadoFaz':
-                                                                        serializeParam(
-                                                                      functions.ligaoDeNome(
-                                                                          FFAppState().trFazendas.toList(),
-                                                                          'faz_id',
-                                                                          'faz_estado',
-                                                                          valueOrDefault<String>(
-                                                                            functions.ligacaoEntreListas(
-                                                                                getJsonField(
-                                                                                  trOsServicosItem,
-                                                                                  r'''$''',
-                                                                                  true,
-                                                                                ),
-                                                                                FFAppState().trOrdemServicos.toList(),
-                                                                                'oserv_id_os',
-                                                                                'os_id',
-                                                                                'os_id_faz'),
-                                                                            '404',
-                                                                          )),
-                                                                      ParamType
-                                                                          .String,
-                                                                    ),
-                                                                    'observacao':
-                                                                        serializeParam(
-                                                                      getJsonField(
-                                                                        trOsServicosItem,
-                                                                        r'''$.oserv_observacao''',
-                                                                      ).toString(),
-                                                                      ParamType
-                                                                          .String,
-                                                                    ),
-                                                                    'tecnicoid':
-                                                                        serializeParam(
-                                                                      valueOrDefault<
-                                                                          String>(
-                                                                        functions.ligacaoEntreListas(
-                                                                            getJsonField(
-                                                                              trOsServicosItem,
-                                                                              r'''$''',
-                                                                              true,
-                                                                            ),
-                                                                            FFAppState().trOsTecnicos.toList(),
-                                                                            'oserv_id',
-                                                                            'ostec_id_serv',
-                                                                            'ostec_id_tec'),
-                                                                        '404',
-                                                                      ),
-                                                                      ParamType
-                                                                          .String,
-                                                                    ),
-                                                                    'servicoid':
-                                                                        serializeParam(
-                                                                      functions
-                                                                          .intToSring(
-                                                                              getJsonField(
-                                                                        trOsServicosItem,
-                                                                        r'''$.oserv_id''',
-                                                                      )),
-                                                                      ParamType
-                                                                          .String,
-                                                                    ),
-                                                                    'data':
-                                                                        serializeParam(
-                                                                      functions.strToData(
-                                                                          valueOrDefault<
-                                                                              String>(
-                                                                        getJsonField(
-                                                                          trOsServicosItem,
-                                                                          r'''$.oserv_dthr_agendamento''',
-                                                                        )?.toString(),
-                                                                        '2099-01-01 00:00:00',
-                                                                      )),
-                                                                      ParamType
-                                                                          .String,
-                                                                    ),
-                                                                    'hora':
-                                                                        serializeParam(
-                                                                      functions.strToHORA(
-                                                                          valueOrDefault<
-                                                                              String>(
-                                                                        getJsonField(
-                                                                          trOsServicosItem,
-                                                                          r'''$.oserv_dthr_agendamento''',
-                                                                        )?.toString(),
-                                                                        '2099-01-01 00:00:00',
-                                                                      )),
-                                                                      ParamType
-                                                                          .String,
-                                                                    ),
-                                                                    'jsonServico':
-                                                                        serializeParam(
-                                                                      trOsServicosItem,
-                                                                      ParamType
-                                                                          .JSON,
-                                                                    ),
-                                                                    'deslocamentoAtualFinalizado':
-                                                                        serializeParam(
-                                                                      true,
-                                                                      ParamType
-                                                                          .bool,
-                                                                    ),
-                                                                    'polylinhaQueVemDoMenuInicial':
-                                                                        serializeParam(
-                                                                      ApiRotasPolylinesCall
-                                                                          .criptografadapolyline(
-                                                                        (_model.polyline1?.jsonBody ??
-                                                                            ''),
-                                                                      ),
-                                                                      ParamType
-                                                                          .String,
-                                                                    ),
-                                                                    'fazid':
-                                                                        serializeParam(
-                                                                      valueOrDefault<
-                                                                          String>(
-                                                                        functions.ligacaoEntreListas(
-                                                                            getJsonField(
-                                                                              trOsServicosItem,
-                                                                              r'''$''',
-                                                                              true,
-                                                                            ),
-                                                                            FFAppState().trOrdemServicos.toList(),
-                                                                            'oserv_id_os',
-                                                                            'os_id',
-                                                                            'os_id_faz'),
-                                                                        '404',
-                                                                      ),
-                                                                      ParamType
-                                                                          .String,
-                                                                    ),
-                                                                    'autoAuditoria':
-                                                                        serializeParam(
-                                                                      functions
-                                                                          .strToBool(
-                                                                              getJsonField(
-                                                                        trOsServicosItem,
-                                                                        r'''$.oserv_auto_auditoria ''',
-                                                                      ).toString()),
-                                                                      ParamType
-                                                                          .bool,
-                                                                    ),
-                                                                    'autoAuditoriaQuantidadePontos':
-                                                                        serializeParam(
-                                                                      getJsonField(
-                                                                        trOsServicosItem,
-                                                                        r'''$.oserv_quantos_pontos ''',
-                                                                      ),
-                                                                      ParamType
-                                                                          .int,
-                                                                    ),
-                                                                  }.withoutNulls,
-                                                                  extra: <String,
-                                                                      dynamic>{
-                                                                    kTransitionInfoKey:
-                                                                        TransitionInfo(
-                                                                      hasTransition:
-                                                                          true,
-                                                                      transitionType:
-                                                                          PageTransitionType
-                                                                              .fade,
-                                                                      duration: Duration(
-                                                                          milliseconds:
-                                                                              0),
-                                                                    ),
-                                                                  },
-                                                                );
-                                                              }
-                                                              if (_shouldSetState)
-                                                                setState(() {});
-                                                            },
-                                                            child: Row(
-                                                              mainAxisSize:
-                                                                  MainAxisSize
-                                                                      .max,
-                                                              crossAxisAlignment:
-                                                                  CrossAxisAlignment
-                                                                      .center,
-                                                              children: [
-                                                                Expanded(
-                                                                  flex: 2,
-                                                                  child:
-                                                                      Container(
-                                                                    decoration:
-                                                                        BoxDecoration(),
-                                                                    child: Row(
-                                                                      mainAxisSize:
-                                                                          MainAxisSize
-                                                                              .max,
-                                                                      mainAxisAlignment:
-                                                                          MainAxisAlignment
-                                                                              .center,
-                                                                      children: [
-                                                                        if (functions.ligaoDeNome(
-                                                                                FFAppState().trServicos.toList(),
-                                                                                'serv_id',
-                                                                                'serv_nome',
-                                                                                getJsonField(
-                                                                                  trOsServicosItem,
-                                                                                  r'''$.oserv_id_serv''',
-                                                                                ).toString()) ==
-                                                                            'Coleta')
-                                                                          FaIcon(
-                                                                            FontAwesomeIcons.vials,
-                                                                            color:
-                                                                                FlutterFlowTheme.of(context).secondaryText,
-                                                                            size:
-                                                                                24.0,
-                                                                          ),
-                                                                        if (() {
-                                                                          if (functions.ligaoDeNome(
-                                                                                  FFAppState().trServicos.toList(),
-                                                                                  'serv_id',
-                                                                                  'serv_nome',
-                                                                                  getJsonField(
-                                                                                    trOsServicosItem,
-                                                                                    r'''$.oserv_id_serv''',
-                                                                                  ).toString()) ==
-                                                                              'Contorno') {
-                                                                            return true;
-                                                                          } else if (functions.ligaoDeNome(
-                                                                                  FFAppState().trServicos.toList(),
-                                                                                  'serv_id',
-                                                                                  'serv_nome',
-                                                                                  getJsonField(
-                                                                                    trOsServicosItem,
-                                                                                    r'''$.oserv_id_serv''',
-                                                                                  ).toString()) ==
-                                                                              'Atualização de contorno') {
-                                                                            return false;
-                                                                          } else {
-                                                                            return false;
-                                                                          }
-                                                                        }())
-                                                                          FaIcon(
-                                                                            FontAwesomeIcons.motorcycle,
-                                                                            color:
-                                                                                FlutterFlowTheme.of(context).secondaryText,
-                                                                            size:
-                                                                                24.0,
-                                                                          ),
-                                                                        if (() {
-                                                                          if (functions.ligaoDeNome(
-                                                                                  FFAppState().trServicos.toList(),
-                                                                                  'serv_id',
-                                                                                  'serv_nome',
-                                                                                  getJsonField(
-                                                                                    trOsServicosItem,
-                                                                                    r'''$.oserv_id_serv''',
-                                                                                  ).toString()) ==
-                                                                              'Contorno') {
-                                                                            return false;
-                                                                          } else if (functions.ligaoDeNome(
-                                                                                  FFAppState().trServicos.toList(),
-                                                                                  'serv_id',
-                                                                                  'serv_nome',
-                                                                                  getJsonField(
-                                                                                    trOsServicosItem,
-                                                                                    r'''$.oserv_id_serv''',
-                                                                                  ).toString()) ==
-                                                                              'Atualização de contorno') {
-                                                                            return true;
-                                                                          } else {
-                                                                            return false;
-                                                                          }
-                                                                        }())
-                                                                          FaIcon(
-                                                                            FontAwesomeIcons.route,
-                                                                            color:
-                                                                                FlutterFlowTheme.of(context).secondaryText,
-                                                                            size:
-                                                                                24.0,
-                                                                          ),
-                                                                      ],
-                                                                    ),
-                                                                  ),
-                                                                ),
-                                                                Expanded(
-                                                                  flex: 7,
-                                                                  child:
-                                                                      ClipRRect(
+                                                                if (_shouldSetState)
+                                                                  setState(
+                                                                      () {});
+                                                              },
+                                                              child: Row(
+                                                                mainAxisSize:
+                                                                    MainAxisSize
+                                                                        .max,
+                                                                crossAxisAlignment:
+                                                                    CrossAxisAlignment
+                                                                        .center,
+                                                                children: [
+                                                                  Expanded(
+                                                                    flex: 2,
                                                                     child:
                                                                         Container(
                                                                       decoration:
                                                                           BoxDecoration(),
                                                                       child:
-                                                                          Column(
+                                                                          Row(
                                                                         mainAxisSize:
                                                                             MainAxisSize.max,
                                                                         mainAxisAlignment:
                                                                             MainAxisAlignment.center,
-                                                                        crossAxisAlignment:
-                                                                            CrossAxisAlignment.start,
                                                                         children: [
-                                                                          Text(
-                                                                            '#${getJsonField(
-                                                                              trOsServicosItem,
-                                                                              r'''$.oserv_id_os''',
-                                                                            ).toString()}',
-                                                                            style: FlutterFlowTheme.of(context).bodyLarge.override(
-                                                                                  fontFamily: 'Readex Pro',
-                                                                                  fontSize: 12.0,
-                                                                                ),
-                                                                          ),
-                                                                          Text(
-                                                                            'Fazenda: ${functions.ligaoDeNome(FFAppState().trFazendas.toList(), 'faz_id', 'faz_nome', valueOrDefault<String>(
-                                                                                      functions.ligacaoEntreListas(
-                                                                                          getJsonField(
-                                                                                            trOsServicosItem,
-                                                                                            r'''$''',
-                                                                                            true,
-                                                                                          ),
-                                                                                          FFAppState().trOrdemServicos.toList(),
-                                                                                          'oserv_id_os',
-                                                                                          'os_id',
-                                                                                          'os_id_faz'),
-                                                                                      '404',
-                                                                                    ))}'
-                                                                                .maybeHandleOverflow(
-                                                                              maxChars: 20,
-                                                                              replacement: '…',
+                                                                          if (functions.ligaoDeNome(
+                                                                                  FFAppState().trServicos.toList(),
+                                                                                  'serv_id',
+                                                                                  'serv_nome',
+                                                                                  getJsonField(
+                                                                                    trOsServicosItem,
+                                                                                    r'''$.oserv_id_serv''',
+                                                                                  ).toString()) ==
+                                                                              'Coleta')
+                                                                            FaIcon(
+                                                                              FontAwesomeIcons.vials,
+                                                                              color: FlutterFlowTheme.of(context).secondaryText,
+                                                                              size: 24.0,
                                                                             ),
-                                                                            style: FlutterFlowTheme.of(context).bodyLarge.override(
-                                                                                  fontFamily: 'Readex Pro',
-                                                                                  fontWeight: FontWeight.w500,
-                                                                                ),
-                                                                          ),
-                                                                          Text(
-                                                                            '${functions.ligaoDeNome(FFAppState().trFazendas.toList(), 'faz_id', 'faz_cidade', valueOrDefault<String>(
-                                                                                  functions.ligacaoEntreListas(
-                                                                                      getJsonField(
-                                                                                        trOsServicosItem,
-                                                                                        r'''$''',
-                                                                                        true,
-                                                                                      ),
-                                                                                      FFAppState().trOrdemServicos.toList(),
-                                                                                      'oserv_id_os',
-                                                                                      'os_id',
-                                                                                      'os_id_faz'),
-                                                                                  '404',
-                                                                                ))}, ${functions.ligaoDeNome(FFAppState().trFazendas.toList(), 'faz_id', 'faz_estado', valueOrDefault<String>(
-                                                                                  functions.ligacaoEntreListas(
-                                                                                      getJsonField(
-                                                                                        trOsServicosItem,
-                                                                                        r'''$''',
-                                                                                        true,
-                                                                                      ),
-                                                                                      FFAppState().trOrdemServicos.toList(),
-                                                                                      'oserv_id_os',
-                                                                                      'os_id',
-                                                                                      'os_id_faz'),
-                                                                                  '404',
-                                                                                ))}',
-                                                                            style: FlutterFlowTheme.of(context).bodyLarge.override(
-                                                                                  fontFamily: 'Readex Pro',
-                                                                                  fontSize: 12.0,
-                                                                                ),
-                                                                          ),
+                                                                          if (() {
+                                                                            if (functions.ligaoDeNome(
+                                                                                    FFAppState().trServicos.toList(),
+                                                                                    'serv_id',
+                                                                                    'serv_nome',
+                                                                                    getJsonField(
+                                                                                      trOsServicosItem,
+                                                                                      r'''$.oserv_id_serv''',
+                                                                                    ).toString()) ==
+                                                                                'Contorno') {
+                                                                              return true;
+                                                                            } else if (functions.ligaoDeNome(
+                                                                                    FFAppState().trServicos.toList(),
+                                                                                    'serv_id',
+                                                                                    'serv_nome',
+                                                                                    getJsonField(
+                                                                                      trOsServicosItem,
+                                                                                      r'''$.oserv_id_serv''',
+                                                                                    ).toString()) ==
+                                                                                'Atualização de contorno') {
+                                                                              return false;
+                                                                            } else {
+                                                                              return false;
+                                                                            }
+                                                                          }())
+                                                                            FaIcon(
+                                                                              FontAwesomeIcons.motorcycle,
+                                                                              color: FlutterFlowTheme.of(context).secondaryText,
+                                                                              size: 24.0,
+                                                                            ),
+                                                                          if (() {
+                                                                            if (functions.ligaoDeNome(
+                                                                                    FFAppState().trServicos.toList(),
+                                                                                    'serv_id',
+                                                                                    'serv_nome',
+                                                                                    getJsonField(
+                                                                                      trOsServicosItem,
+                                                                                      r'''$.oserv_id_serv''',
+                                                                                    ).toString()) ==
+                                                                                'Contorno') {
+                                                                              return false;
+                                                                            } else if (functions.ligaoDeNome(
+                                                                                    FFAppState().trServicos.toList(),
+                                                                                    'serv_id',
+                                                                                    'serv_nome',
+                                                                                    getJsonField(
+                                                                                      trOsServicosItem,
+                                                                                      r'''$.oserv_id_serv''',
+                                                                                    ).toString()) ==
+                                                                                'Atualização de contorno') {
+                                                                              return true;
+                                                                            } else {
+                                                                              return false;
+                                                                            }
+                                                                          }())
+                                                                            FaIcon(
+                                                                              FontAwesomeIcons.route,
+                                                                              color: FlutterFlowTheme.of(context).secondaryText,
+                                                                              size: 24.0,
+                                                                            ),
                                                                         ],
                                                                       ),
                                                                     ),
                                                                   ),
-                                                                ),
-                                                                if (!FFAppState()
-                                                                    .servicosFinalizadosComSucesso
-                                                                    .contains(
-                                                                        getJsonField(
-                                                                      trOsServicosItem,
-                                                                      r'''$.oserv_id''',
-                                                                    ).toString()))
                                                                   Expanded(
-                                                                    flex: 1,
+                                                                    flex: 7,
                                                                     child:
-                                                                        Align(
-                                                                      alignment:
-                                                                          AlignmentDirectional(
-                                                                              1.0,
-                                                                              0.0),
+                                                                        ClipRRect(
                                                                       child:
-                                                                          Icon(
-                                                                        Icons
-                                                                            .arrow_forward,
-                                                                        color:
-                                                                            () {
-                                                                          if ((getJsonField(
-                                                                                    trOsServicosItem,
-                                                                                    r'''$.oserv_id''',
-                                                                                  ) ==
-                                                                                  FFAppState().trOsServicoEmAndamento) &&
-                                                                              (FFAppState().trDesloacamentoIniciado == true) &&
-                                                                              (FFAppState().DeslocamentoPausado == false)) {
-                                                                            return FlutterFlowTheme.of(context).secondary;
-                                                                          } else if ((getJsonField(
-                                                                                    trOsServicosItem,
-                                                                                    r'''$.oserv_id''',
-                                                                                  ) ==
-                                                                                  FFAppState().trOsServicoEmAndamento) &&
-                                                                              (FFAppState().DeslocamentoPausado == true)) {
-                                                                            return FlutterFlowTheme.of(context).error;
-                                                                          } else {
-                                                                            return FlutterFlowTheme.of(context).lineColor;
-                                                                          }
-                                                                        }(),
-                                                                        size:
-                                                                            34.0,
+                                                                          Container(
+                                                                        decoration:
+                                                                            BoxDecoration(),
+                                                                        child:
+                                                                            Column(
+                                                                          mainAxisSize:
+                                                                              MainAxisSize.max,
+                                                                          mainAxisAlignment:
+                                                                              MainAxisAlignment.center,
+                                                                          crossAxisAlignment:
+                                                                              CrossAxisAlignment.start,
+                                                                          children: [
+                                                                            Text(
+                                                                              '#${getJsonField(
+                                                                                trOsServicosItem,
+                                                                                r'''$.oserv_id_os''',
+                                                                              ).toString()}',
+                                                                              style: FlutterFlowTheme.of(context).bodyLarge.override(
+                                                                                    fontFamily: 'Readex Pro',
+                                                                                    fontSize: 12.0,
+                                                                                  ),
+                                                                            ),
+                                                                            Text(
+                                                                              'Fazenda: ${functions.ligaoDeNome(FFAppState().trFazendas.toList(), 'faz_id', 'faz_nome', valueOrDefault<String>(
+                                                                                        functions.ligacaoEntreListas(
+                                                                                            getJsonField(
+                                                                                              trOsServicosItem,
+                                                                                              r'''$''',
+                                                                                              true,
+                                                                                            ),
+                                                                                            FFAppState().trOrdemServicos.toList(),
+                                                                                            'oserv_id_os',
+                                                                                            'os_id',
+                                                                                            'os_id_faz'),
+                                                                                        '404',
+                                                                                      ))}'
+                                                                                  .maybeHandleOverflow(
+                                                                                maxChars: 20,
+                                                                                replacement: '…',
+                                                                              ),
+                                                                              style: FlutterFlowTheme.of(context).bodyLarge.override(
+                                                                                    fontFamily: 'Readex Pro',
+                                                                                    fontWeight: FontWeight.w500,
+                                                                                  ),
+                                                                            ),
+                                                                            Text(
+                                                                              '${functions.ligaoDeNome(FFAppState().trFazendas.toList(), 'faz_id', 'faz_cidade', valueOrDefault<String>(
+                                                                                    functions.ligacaoEntreListas(
+                                                                                        getJsonField(
+                                                                                          trOsServicosItem,
+                                                                                          r'''$''',
+                                                                                          true,
+                                                                                        ),
+                                                                                        FFAppState().trOrdemServicos.toList(),
+                                                                                        'oserv_id_os',
+                                                                                        'os_id',
+                                                                                        'os_id_faz'),
+                                                                                    '404',
+                                                                                  ))}, ${functions.ligaoDeNome(FFAppState().trFazendas.toList(), 'faz_id', 'faz_estado', valueOrDefault<String>(
+                                                                                    functions.ligacaoEntreListas(
+                                                                                        getJsonField(
+                                                                                          trOsServicosItem,
+                                                                                          r'''$''',
+                                                                                          true,
+                                                                                        ),
+                                                                                        FFAppState().trOrdemServicos.toList(),
+                                                                                        'oserv_id_os',
+                                                                                        'os_id',
+                                                                                        'os_id_faz'),
+                                                                                    '404',
+                                                                                  ))}',
+                                                                              style: FlutterFlowTheme.of(context).bodyLarge.override(
+                                                                                    fontFamily: 'Readex Pro',
+                                                                                    fontSize: 12.0,
+                                                                                  ),
+                                                                            ),
+                                                                          ],
+                                                                        ),
                                                                       ),
                                                                     ),
                                                                   ),
-                                                                if (FFAppState()
-                                                                    .servicosFinalizadosComSucesso
-                                                                    .contains(
-                                                                        getJsonField(
-                                                                      trOsServicosItem,
-                                                                      r'''$.oserv_id''',
-                                                                    ).toString()))
-                                                                  Expanded(
-                                                                    flex: 1,
-                                                                    child:
-                                                                        Align(
-                                                                      alignment:
-                                                                          AlignmentDirectional(
-                                                                              1.0,
-                                                                              0.0),
+                                                                  if (!FFAppState()
+                                                                      .servicosFinalizadosComSucesso
+                                                                      .contains(
+                                                                          getJsonField(
+                                                                        trOsServicosItem,
+                                                                        r'''$.oserv_id''',
+                                                                      ).toString()))
+                                                                    Expanded(
+                                                                      flex: 1,
                                                                       child:
-                                                                          Icon(
-                                                                        Icons
-                                                                            .task_alt,
-                                                                        color: Color(
-                                                                            0xFF249677),
-                                                                        size:
-                                                                            34.0,
+                                                                          Align(
+                                                                        alignment: AlignmentDirectional(
+                                                                            1.0,
+                                                                            0.0),
+                                                                        child:
+                                                                            Icon(
+                                                                          Icons
+                                                                              .arrow_forward,
+                                                                          color:
+                                                                              () {
+                                                                            if ((getJsonField(
+                                                                                      trOsServicosItem,
+                                                                                      r'''$.oserv_id''',
+                                                                                    ) ==
+                                                                                    FFAppState().trOsServicoEmAndamento) &&
+                                                                                (FFAppState().trDesloacamentoIniciado == true) &&
+                                                                                (FFAppState().DeslocamentoPausado == false)) {
+                                                                              return FlutterFlowTheme.of(context).secondary;
+                                                                            } else if ((getJsonField(
+                                                                                      trOsServicosItem,
+                                                                                      r'''$.oserv_id''',
+                                                                                    ) ==
+                                                                                    FFAppState().trOsServicoEmAndamento) &&
+                                                                                (FFAppState().DeslocamentoPausado == true)) {
+                                                                              return FlutterFlowTheme.of(context).error;
+                                                                            } else {
+                                                                              return FlutterFlowTheme.of(context).lineColor;
+                                                                            }
+                                                                          }(),
+                                                                          size:
+                                                                              34.0,
+                                                                        ),
                                                                       ),
                                                                     ),
-                                                                  ),
-                                                              ],
+                                                                  if (FFAppState()
+                                                                      .servicosFinalizadosComSucesso
+                                                                      .contains(
+                                                                          getJsonField(
+                                                                        trOsServicosItem,
+                                                                        r'''$.oserv_id''',
+                                                                      ).toString()))
+                                                                    Expanded(
+                                                                      flex: 1,
+                                                                      child:
+                                                                          Align(
+                                                                        alignment: AlignmentDirectional(
+                                                                            1.0,
+                                                                            0.0),
+                                                                        child:
+                                                                            Icon(
+                                                                          Icons
+                                                                              .task_alt,
+                                                                          color:
+                                                                              Color(0xFF249677),
+                                                                          size:
+                                                                              34.0,
+                                                                        ),
+                                                                      ),
+                                                                    ),
+                                                                ],
+                                                              ),
                                                             ),
                                                           ),
                                                         ),
@@ -2477,164 +2472,544 @@ class _SelecionarOSWidgetState extends State<SelecionarOSWidget>
                                                   final trOsServicosItem =
                                                       trOsServicos[
                                                           trOsServicosIndex];
-                                                  return Padding(
-                                                    padding:
-                                                        EdgeInsetsDirectional
-                                                            .fromSTEB(16.0, 8.0,
-                                                                16.0, 0.0),
-                                                    child: InkWell(
-                                                      splashColor:
-                                                          Colors.transparent,
-                                                      focusColor:
-                                                          Colors.transparent,
-                                                      hoverColor:
-                                                          Colors.transparent,
-                                                      highlightColor:
-                                                          Colors.transparent,
-                                                      onTap: () async {
-                                                        ScaffoldMessenger.of(
-                                                                context)
-                                                            .showSnackBar(
-                                                          SnackBar(
-                                                            content: Text(
-                                                              'Aguarde...',
-                                                              style: TextStyle(
-                                                                color: Colors
-                                                                    .white,
+                                                  return Visibility(
+                                                    visible:
+                                                        functions.ligaoDeNome(
+                                                                FFAppState()
+                                                                    .trServicos
+                                                                    .toList(),
+                                                                'serv_id',
+                                                                'serv_nome',
+                                                                getJsonField(
+                                                                  trOsServicosItem,
+                                                                  r'''$.oserv_id_serv''',
+                                                                ).toString()) ==
+                                                            'Coleta',
+                                                    child: Padding(
+                                                      padding:
+                                                          EdgeInsetsDirectional
+                                                              .fromSTEB(
+                                                                  16.0,
+                                                                  8.0,
+                                                                  16.0,
+                                                                  0.0),
+                                                      child: InkWell(
+                                                        splashColor:
+                                                            Colors.transparent,
+                                                        focusColor:
+                                                            Colors.transparent,
+                                                        hoverColor:
+                                                            Colors.transparent,
+                                                        highlightColor:
+                                                            Colors.transparent,
+                                                        onTap: () async {
+                                                          ScaffoldMessenger.of(
+                                                                  context)
+                                                              .showSnackBar(
+                                                            SnackBar(
+                                                              content: Text(
+                                                                'Aguarde...',
+                                                                style:
+                                                                    TextStyle(
+                                                                  color: Colors
+                                                                      .white,
+                                                                ),
                                                               ),
+                                                              duration: Duration(
+                                                                  milliseconds:
+                                                                      950),
+                                                              backgroundColor:
+                                                                  FlutterFlowTheme.of(
+                                                                          context)
+                                                                      .primary,
                                                             ),
-                                                            duration: Duration(
-                                                                milliseconds:
-                                                                    950),
-                                                            backgroundColor:
-                                                                FlutterFlowTheme.of(
-                                                                        context)
-                                                                    .primary,
+                                                          );
+                                                        },
+                                                        child:
+                                                            AnimatedContainer(
+                                                          duration: Duration(
+                                                              milliseconds:
+                                                                  100),
+                                                          curve:
+                                                              Curves.easeInOut,
+                                                          width:
+                                                              double.infinity,
+                                                          height: 78.0,
+                                                          decoration:
+                                                              BoxDecoration(
+                                                            color: FlutterFlowTheme
+                                                                    .of(context)
+                                                                .primaryBackground,
+                                                            borderRadius:
+                                                                BorderRadius
+                                                                    .circular(
+                                                                        12.0),
+                                                            border: Border.all(
+                                                              color: trOsServicosItem ==
+                                                                      FFAppState()
+                                                                          .trOsServicoEmAndamento
+                                                                  ? FlutterFlowTheme.of(
+                                                                          context)
+                                                                      .customColor1
+                                                                  : FlutterFlowTheme.of(
+                                                                          context)
+                                                                      .lineColor,
+                                                            ),
                                                           ),
-                                                        );
-                                                      },
-                                                      child: AnimatedContainer(
-                                                        duration: Duration(
-                                                            milliseconds: 100),
-                                                        curve: Curves.easeInOut,
-                                                        width: double.infinity,
-                                                        height: 78.0,
-                                                        decoration:
-                                                            BoxDecoration(
-                                                          color: FlutterFlowTheme
-                                                                  .of(context)
-                                                              .primaryBackground,
-                                                          borderRadius:
-                                                              BorderRadius
-                                                                  .circular(
-                                                                      12.0),
-                                                          border: Border.all(
-                                                            color: trOsServicosItem ==
-                                                                    FFAppState()
-                                                                        .trOsServicoEmAndamento
-                                                                ? FlutterFlowTheme.of(
-                                                                        context)
-                                                                    .customColor1
-                                                                : FlutterFlowTheme.of(
-                                                                        context)
-                                                                    .lineColor,
-                                                          ),
-                                                        ),
-                                                        child: Padding(
-                                                          padding:
-                                                              EdgeInsetsDirectional
-                                                                  .fromSTEB(
-                                                                      8.0,
-                                                                      8.0,
-                                                                      12.0,
-                                                                      8.0),
-                                                          child: InkWell(
-                                                            splashColor: Colors
-                                                                .transparent,
-                                                            focusColor: Colors
-                                                                .transparent,
-                                                            hoverColor: Colors
-                                                                .transparent,
-                                                            highlightColor:
-                                                                Colors
-                                                                    .transparent,
-                                                            onTap: () async {
-                                                              currentUserLocationValue =
-                                                                  await getCurrentUserLocation(
-                                                                      defaultLocation:
-                                                                          LatLng(
-                                                                              0.0,
-                                                                              0.0));
-                                                              var _shouldSetState =
-                                                                  false;
-                                                              showModalBottomSheet(
-                                                                isScrollControlled:
-                                                                    true,
-                                                                backgroundColor:
-                                                                    Colors
-                                                                        .transparent,
-                                                                isDismissible:
-                                                                    false,
-                                                                enableDrag:
-                                                                    false,
-                                                                useSafeArea:
-                                                                    true,
-                                                                context:
-                                                                    context,
-                                                                builder:
-                                                                    (context) {
-                                                                  return GestureDetector(
-                                                                    onTap: () => _model
-                                                                            .unfocusNode
-                                                                            .canRequestFocus
-                                                                        ? FocusScope.of(context).requestFocus(_model
-                                                                            .unfocusNode)
-                                                                        : FocusScope.of(context)
-                                                                            .unfocus(),
-                                                                    child:
-                                                                        Padding(
-                                                                      padding: MediaQuery
-                                                                          .viewInsetsOf(
-                                                                              context),
+                                                          child: Padding(
+                                                            padding:
+                                                                EdgeInsetsDirectional
+                                                                    .fromSTEB(
+                                                                        8.0,
+                                                                        8.0,
+                                                                        12.0,
+                                                                        8.0),
+                                                            child: InkWell(
+                                                              splashColor: Colors
+                                                                  .transparent,
+                                                              focusColor: Colors
+                                                                  .transparent,
+                                                              hoverColor: Colors
+                                                                  .transparent,
+                                                              highlightColor:
+                                                                  Colors
+                                                                      .transparent,
+                                                              onTap: () async {
+                                                                currentUserLocationValue =
+                                                                    await getCurrentUserLocation(
+                                                                        defaultLocation: LatLng(
+                                                                            0.0,
+                                                                            0.0));
+                                                                var _shouldSetState =
+                                                                    false;
+                                                                showModalBottomSheet(
+                                                                  isScrollControlled:
+                                                                      true,
+                                                                  backgroundColor:
+                                                                      Colors
+                                                                          .transparent,
+                                                                  isDismissible:
+                                                                      false,
+                                                                  enableDrag:
+                                                                      false,
+                                                                  useSafeArea:
+                                                                      true,
+                                                                  context:
+                                                                      context,
+                                                                  builder:
+                                                                      (context) {
+                                                                    return GestureDetector(
+                                                                      onTap: () => _model
+                                                                              .unfocusNode
+                                                                              .canRequestFocus
+                                                                          ? FocusScope.of(context).requestFocus(_model
+                                                                              .unfocusNode)
+                                                                          : FocusScope.of(context)
+                                                                              .unfocus(),
                                                                       child:
-                                                                          CarregandoOsWidget(),
-                                                                    ),
-                                                                  );
-                                                                },
-                                                              ).then((value) =>
-                                                                  safeSetState(
-                                                                      () {}));
+                                                                          Padding(
+                                                                        padding:
+                                                                            MediaQuery.viewInsetsOf(context),
+                                                                        child:
+                                                                            CarregandoOsWidget(),
+                                                                      ),
+                                                                    );
+                                                                  },
+                                                                ).then((value) =>
+                                                                    safeSetState(
+                                                                        () {}));
 
-                                                              if (true ==
-                                                                  false) {
-                                                                _model.temInternetOsInicia =
-                                                                    await actions
-                                                                        .temInternet();
-                                                                _shouldSetState =
-                                                                    true;
-                                                                if (!_model
-                                                                    .temInternetOsInicia!) {
-                                                                  await showDialog(
-                                                                    context:
-                                                                        context,
-                                                                    builder:
-                                                                        (alertDialogContext) {
-                                                                      return AlertDialog(
-                                                                        title: Text(
-                                                                            'Ops!'),
-                                                                        content:
-                                                                            Text('Você não tem internet, você poderá usar o serviço de localização, entretanto, nenhuma rota será sugerida no momento.'),
-                                                                        actions: [
-                                                                          TextButton(
-                                                                            onPressed: () =>
-                                                                                Navigator.pop(alertDialogContext),
-                                                                            child:
-                                                                                Text('Ok'),
+                                                                if (true ==
+                                                                    false) {
+                                                                  _model.temInternetOsInicia =
+                                                                      await actions
+                                                                          .temInternet();
+                                                                  _shouldSetState =
+                                                                      true;
+                                                                  if (!_model
+                                                                      .temInternetOsInicia!) {
+                                                                    await showDialog(
+                                                                      context:
+                                                                          context,
+                                                                      builder:
+                                                                          (alertDialogContext) {
+                                                                        return AlertDialog(
+                                                                          title:
+                                                                              Text('Ops!'),
+                                                                          content:
+                                                                              Text('Você não tem internet, você poderá usar o serviço de localização, entretanto, nenhuma rota será sugerida no momento.'),
+                                                                          actions: [
+                                                                            TextButton(
+                                                                              onPressed: () => Navigator.pop(alertDialogContext),
+                                                                              child: Text('Ok'),
+                                                                            ),
+                                                                          ],
+                                                                        );
+                                                                      },
+                                                                    );
+
+                                                                    context
+                                                                        .pushNamed(
+                                                                      'IniciarDeslocamentoTela',
+                                                                      queryParameters:
+                                                                          {
+                                                                        'etapade':
+                                                                            serializeParam(
+                                                                          functions.ligaoDeNome(
+                                                                              FFAppState().trServicos.toList(),
+                                                                              'serv_id',
+                                                                              'serv_nome',
+                                                                              getJsonField(
+                                                                                trOsServicosItem,
+                                                                                r'''$.oserv_id_serv''',
+                                                                              ).toString()),
+                                                                          ParamType
+                                                                              .String,
+                                                                        ),
+                                                                        'fazendaNome':
+                                                                            serializeParam(
+                                                                          functions.ligaoDeNome(
+                                                                              FFAppState().trFazendas.toList(),
+                                                                              'faz_id',
+                                                                              'faz_nome',
+                                                                              valueOrDefault<String>(
+                                                                                functions.ligacaoEntreListas(
+                                                                                    getJsonField(
+                                                                                      trOsServicosItem,
+                                                                                      r'''$''',
+                                                                                      true,
+                                                                                    ),
+                                                                                    FFAppState().trOrdemServicos.toList(),
+                                                                                    'oserv_id_os',
+                                                                                    'os_id',
+                                                                                    'os_id_faz'),
+                                                                                '404',
+                                                                              )),
+                                                                          ParamType
+                                                                              .String,
+                                                                        ),
+                                                                        'latlngFaz':
+                                                                            serializeParam(
+                                                                          functions.strToLatLng(
+                                                                              functions.ligaoDeNome(
+                                                                                  FFAppState().trFazendas.toList(),
+                                                                                  'faz_id',
+                                                                                  'faz_latitude',
+                                                                                  valueOrDefault<String>(
+                                                                                    functions.ligacaoEntreListas(
+                                                                                        getJsonField(
+                                                                                          trOsServicosItem,
+                                                                                          r'''$''',
+                                                                                          true,
+                                                                                        ),
+                                                                                        FFAppState().trOrdemServicos.toList(),
+                                                                                        'oserv_id_os',
+                                                                                        'os_id',
+                                                                                        'os_id_faz'),
+                                                                                    '404',
+                                                                                  )),
+                                                                              functions.ligaoDeNome(
+                                                                                  FFAppState().trFazendas.toList(),
+                                                                                  'faz_id',
+                                                                                  'faz_longitude',
+                                                                                  valueOrDefault<String>(
+                                                                                    functions.ligacaoEntreListas(
+                                                                                        getJsonField(
+                                                                                          trOsServicosItem,
+                                                                                          r'''$''',
+                                                                                          true,
+                                                                                        ),
+                                                                                        FFAppState().trOrdemServicos.toList(),
+                                                                                        'oserv_id_os',
+                                                                                        'os_id',
+                                                                                        'os_id_faz'),
+                                                                                    '404',
+                                                                                  ))),
+                                                                          ParamType
+                                                                              .LatLng,
+                                                                        ),
+                                                                        'cidadeFaz':
+                                                                            serializeParam(
+                                                                          functions.ligaoDeNome(
+                                                                              FFAppState().trFazendas.toList(),
+                                                                              'faz_id',
+                                                                              'faz_cidade',
+                                                                              valueOrDefault<String>(
+                                                                                functions.ligacaoEntreListas(
+                                                                                    getJsonField(
+                                                                                      trOsServicosItem,
+                                                                                      r'''$''',
+                                                                                      true,
+                                                                                    ),
+                                                                                    FFAppState().trOrdemServicos.toList(),
+                                                                                    'oserv_id_os',
+                                                                                    'os_id',
+                                                                                    'os_id_faz'),
+                                                                                '404',
+                                                                              )),
+                                                                          ParamType
+                                                                              .String,
+                                                                        ),
+                                                                        'estadoFaz':
+                                                                            serializeParam(
+                                                                          functions.ligaoDeNome(
+                                                                              FFAppState().trFazendas.toList(),
+                                                                              'faz_id',
+                                                                              'faz_estado',
+                                                                              valueOrDefault<String>(
+                                                                                functions.ligacaoEntreListas(
+                                                                                    getJsonField(
+                                                                                      trOsServicosItem,
+                                                                                      r'''$''',
+                                                                                      true,
+                                                                                    ),
+                                                                                    FFAppState().trOrdemServicos.toList(),
+                                                                                    'oserv_id_os',
+                                                                                    'os_id',
+                                                                                    'os_id_faz'),
+                                                                                '404',
+                                                                              )),
+                                                                          ParamType
+                                                                              .String,
+                                                                        ),
+                                                                        'observacao':
+                                                                            serializeParam(
+                                                                          getJsonField(
+                                                                            trOsServicosItem,
+                                                                            r'''$.oserv_observacao''',
+                                                                          ).toString(),
+                                                                          ParamType
+                                                                              .String,
+                                                                        ),
+                                                                        'tecnicoid':
+                                                                            serializeParam(
+                                                                          valueOrDefault<
+                                                                              String>(
+                                                                            functions.ligacaoEntreListas(
+                                                                                getJsonField(
+                                                                                  trOsServicosItem,
+                                                                                  r'''$''',
+                                                                                  true,
+                                                                                ),
+                                                                                FFAppState().trOsTecnicos.toList(),
+                                                                                'oserv_id',
+                                                                                'ostec_id_serv',
+                                                                                'ostec_id_tec'),
+                                                                            '404',
                                                                           ),
-                                                                        ],
-                                                                      );
-                                                                    },
+                                                                          ParamType
+                                                                              .String,
+                                                                        ),
+                                                                        'servicoid':
+                                                                            serializeParam(
+                                                                          functions
+                                                                              .intToSring(getJsonField(
+                                                                            trOsServicosItem,
+                                                                            r'''$.oserv_id''',
+                                                                          )),
+                                                                          ParamType
+                                                                              .String,
+                                                                        ),
+                                                                        'data':
+                                                                            serializeParam(
+                                                                          functions
+                                                                              .strToData(valueOrDefault<String>(
+                                                                            getJsonField(
+                                                                              trOsServicosItem,
+                                                                              r'''$.oserv_dthr_agendamento''',
+                                                                            )?.toString(),
+                                                                            '2099-01-01 00:00:00',
+                                                                          )),
+                                                                          ParamType
+                                                                              .String,
+                                                                        ),
+                                                                        'hora':
+                                                                            serializeParam(
+                                                                          functions
+                                                                              .strToHORA(valueOrDefault<String>(
+                                                                            getJsonField(
+                                                                              trOsServicosItem,
+                                                                              r'''$.oserv_dthr_agendamento''',
+                                                                            )?.toString(),
+                                                                            '2099-01-01 00:00:00',
+                                                                          )),
+                                                                          ParamType
+                                                                              .String,
+                                                                        ),
+                                                                        'jsonServico':
+                                                                            serializeParam(
+                                                                          trOsServicosItem,
+                                                                          ParamType
+                                                                              .JSON,
+                                                                        ),
+                                                                        'deslocamentoAtualFinalizado':
+                                                                            serializeParam(
+                                                                          FFAppState()
+                                                                              .servicosFinalizadosComSucesso
+                                                                              .contains(getJsonField(
+                                                                                trOsServicosItem,
+                                                                                r'''$.oserv_id''',
+                                                                              ).toString()),
+                                                                          ParamType
+                                                                              .bool,
+                                                                        ),
+                                                                        'polylinhaQueVemDoMenuInicial':
+                                                                            serializeParam(
+                                                                          null,
+                                                                          ParamType
+                                                                              .String,
+                                                                        ),
+                                                                        'fazid':
+                                                                            serializeParam(
+                                                                          functions.ligaoDeNome(
+                                                                              FFAppState().trFazendas.toList(),
+                                                                              'faz_id',
+                                                                              'faz_id',
+                                                                              valueOrDefault<String>(
+                                                                                functions.ligacaoEntreListas(
+                                                                                    getJsonField(
+                                                                                      trOsServicosItem,
+                                                                                      r'''$''',
+                                                                                      true,
+                                                                                    ),
+                                                                                    FFAppState().trOrdemServicos.toList(),
+                                                                                    'oserv_id_os',
+                                                                                    'os_id',
+                                                                                    'os_id_faz'),
+                                                                                '404',
+                                                                              )),
+                                                                          ParamType
+                                                                              .String,
+                                                                        ),
+                                                                        'autoAuditoria':
+                                                                            serializeParam(
+                                                                          functions
+                                                                              .strToBool(getJsonField(
+                                                                            trOsServicosItem,
+                                                                            r'''$.oserv_auto_auditoria''',
+                                                                          ).toString()),
+                                                                          ParamType
+                                                                              .bool,
+                                                                        ),
+                                                                        'autoAuditoriaQuantidadePontos':
+                                                                            serializeParam(
+                                                                          getJsonField(
+                                                                            trOsServicosItem,
+                                                                            r'''$.oserv_quantos_pontos''',
+                                                                          ),
+                                                                          ParamType
+                                                                              .int,
+                                                                        ),
+                                                                      }.withoutNulls,
+                                                                      extra: <String,
+                                                                          dynamic>{
+                                                                        kTransitionInfoKey:
+                                                                            TransitionInfo(
+                                                                          hasTransition:
+                                                                              true,
+                                                                          transitionType:
+                                                                              PageTransitionType.fade,
+                                                                          duration:
+                                                                              Duration(milliseconds: 0),
+                                                                        ),
+                                                                      },
+                                                                    );
+
+                                                                    if (_shouldSetState)
+                                                                      setState(
+                                                                          () {});
+                                                                    return;
+                                                                  }
+                                                                  _model.polyline2 =
+                                                                      await ApiRotasPolylinesCall
+                                                                          .call(
+                                                                    latitudeOrigem:
+                                                                        functions.separadorLatDeLng(
+                                                                            true,
+                                                                            functions.latLngToStr(currentUserLocationValue)),
+                                                                    longitudeOrigem: functions.separadorLatDeLng(
+                                                                        false,
+                                                                        functions
+                                                                            .latLngToStr(currentUserLocationValue)),
+                                                                    latitudeDestino: functions.separadorLatDeLng(
+                                                                        true,
+                                                                        functions.latLngToStr(functions.strToLatLng(
+                                                                            functions.ligaoDeNome(
+                                                                                FFAppState().trFazendas.toList(),
+                                                                                'faz_id',
+                                                                                'faz_latitude',
+                                                                                valueOrDefault<String>(
+                                                                                  functions.ligacaoEntreListas(
+                                                                                      getJsonField(
+                                                                                        trOsServicosItem,
+                                                                                        r'''$''',
+                                                                                        true,
+                                                                                      ),
+                                                                                      FFAppState().trOrdemServicos.toList(),
+                                                                                      'oserv_id_os',
+                                                                                      'os_id',
+                                                                                      'os_id_faz'),
+                                                                                  '404',
+                                                                                )),
+                                                                            functions.ligaoDeNome(
+                                                                                FFAppState().trFazendas.toList(),
+                                                                                'faz_id',
+                                                                                'faz_longitude',
+                                                                                valueOrDefault<String>(
+                                                                                  functions.ligacaoEntreListas(
+                                                                                      getJsonField(
+                                                                                        trOsServicosItem,
+                                                                                        r'''$''',
+                                                                                        true,
+                                                                                      ),
+                                                                                      FFAppState().trOrdemServicos.toList(),
+                                                                                      'oserv_id_os',
+                                                                                      'os_id',
+                                                                                      'os_id_faz'),
+                                                                                  '404',
+                                                                                ))))),
+                                                                    longitudeDestonp: functions.separadorLatDeLng(
+                                                                        false,
+                                                                        functions.latLngToStr(functions.strToLatLng(
+                                                                            functions.ligaoDeNome(
+                                                                                FFAppState().trFazendas.toList(),
+                                                                                'faz_id',
+                                                                                'faz_latitude',
+                                                                                valueOrDefault<String>(
+                                                                                  functions.ligacaoEntreListas(
+                                                                                      getJsonField(
+                                                                                        trOsServicosItem,
+                                                                                        r'''$''',
+                                                                                        true,
+                                                                                      ),
+                                                                                      FFAppState().trOrdemServicos.toList(),
+                                                                                      'oserv_id_os',
+                                                                                      'os_id',
+                                                                                      'os_id_faz'),
+                                                                                  '404',
+                                                                                )),
+                                                                            functions.ligaoDeNome(
+                                                                                FFAppState().trFazendas.toList(),
+                                                                                'faz_id',
+                                                                                'faz_longitude',
+                                                                                valueOrDefault<String>(
+                                                                                  functions.ligacaoEntreListas(
+                                                                                      getJsonField(
+                                                                                        trOsServicosItem,
+                                                                                        r'''$''',
+                                                                                        true,
+                                                                                      ),
+                                                                                      FFAppState().trOrdemServicos.toList(),
+                                                                                      'oserv_id_os',
+                                                                                      'os_id',
+                                                                                      'os_id_faz'),
+                                                                                  '404',
+                                                                                ))))),
+                                                                    key:
+                                                                        'AIzaSyDpk1wIZmA1OTS57D_cB13BD01zqrTiQNI',
                                                                   );
+                                                                  _shouldSetState =
+                                                                      true;
 
                                                                   context
                                                                       .pushNamed(
@@ -2843,7 +3218,11 @@ class _SelecionarOSWidgetState extends State<SelecionarOSWidget>
                                                                       ),
                                                                       'polylinhaQueVemDoMenuInicial':
                                                                           serializeParam(
-                                                                        null,
+                                                                        ApiRotasPolylinesCall
+                                                                            .criptografadapolyline(
+                                                                          (_model.polyline2?.jsonBody ??
+                                                                              ''),
+                                                                        ),
                                                                         ParamType
                                                                             .String,
                                                                       ),
@@ -2907,656 +3286,273 @@ class _SelecionarOSWidgetState extends State<SelecionarOSWidget>
                                                                     setState(
                                                                         () {});
                                                                   return;
+                                                                } else {
+                                                                  if (_shouldSetState)
+                                                                    setState(
+                                                                        () {});
+                                                                  return;
                                                                 }
-                                                                _model.polyline2 =
-                                                                    await ApiRotasPolylinesCall
-                                                                        .call(
-                                                                  latitudeOrigem:
-                                                                      functions.separadorLatDeLng(
-                                                                          true,
-                                                                          functions
-                                                                              .latLngToStr(currentUserLocationValue)),
-                                                                  longitudeOrigem:
-                                                                      functions.separadorLatDeLng(
-                                                                          false,
-                                                                          functions
-                                                                              .latLngToStr(currentUserLocationValue)),
-                                                                  latitudeDestino: functions.separadorLatDeLng(
-                                                                      true,
-                                                                      functions.latLngToStr(functions.strToLatLng(
-                                                                          functions.ligaoDeNome(
-                                                                              FFAppState().trFazendas.toList(),
-                                                                              'faz_id',
-                                                                              'faz_latitude',
-                                                                              valueOrDefault<String>(
-                                                                                functions.ligacaoEntreListas(
-                                                                                    getJsonField(
-                                                                                      trOsServicosItem,
-                                                                                      r'''$''',
-                                                                                      true,
-                                                                                    ),
-                                                                                    FFAppState().trOrdemServicos.toList(),
-                                                                                    'oserv_id_os',
-                                                                                    'os_id',
-                                                                                    'os_id_faz'),
-                                                                                '404',
-                                                                              )),
-                                                                          functions.ligaoDeNome(
-                                                                              FFAppState().trFazendas.toList(),
-                                                                              'faz_id',
-                                                                              'faz_longitude',
-                                                                              valueOrDefault<String>(
-                                                                                functions.ligacaoEntreListas(
-                                                                                    getJsonField(
-                                                                                      trOsServicosItem,
-                                                                                      r'''$''',
-                                                                                      true,
-                                                                                    ),
-                                                                                    FFAppState().trOrdemServicos.toList(),
-                                                                                    'oserv_id_os',
-                                                                                    'os_id',
-                                                                                    'os_id_faz'),
-                                                                                '404',
-                                                                              ))))),
-                                                                  longitudeDestonp: functions.separadorLatDeLng(
-                                                                      false,
-                                                                      functions.latLngToStr(functions.strToLatLng(
-                                                                          functions.ligaoDeNome(
-                                                                              FFAppState().trFazendas.toList(),
-                                                                              'faz_id',
-                                                                              'faz_latitude',
-                                                                              valueOrDefault<String>(
-                                                                                functions.ligacaoEntreListas(
-                                                                                    getJsonField(
-                                                                                      trOsServicosItem,
-                                                                                      r'''$''',
-                                                                                      true,
-                                                                                    ),
-                                                                                    FFAppState().trOrdemServicos.toList(),
-                                                                                    'oserv_id_os',
-                                                                                    'os_id',
-                                                                                    'os_id_faz'),
-                                                                                '404',
-                                                                              )),
-                                                                          functions.ligaoDeNome(
-                                                                              FFAppState().trFazendas.toList(),
-                                                                              'faz_id',
-                                                                              'faz_longitude',
-                                                                              valueOrDefault<String>(
-                                                                                functions.ligacaoEntreListas(
-                                                                                    getJsonField(
-                                                                                      trOsServicosItem,
-                                                                                      r'''$''',
-                                                                                      true,
-                                                                                    ),
-                                                                                    FFAppState().trOrdemServicos.toList(),
-                                                                                    'oserv_id_os',
-                                                                                    'os_id',
-                                                                                    'os_id_faz'),
-                                                                                '404',
-                                                                              ))))),
-                                                                  key:
-                                                                      'AIzaSyDpk1wIZmA1OTS57D_cB13BD01zqrTiQNI',
-                                                                );
-                                                                _shouldSetState =
-                                                                    true;
-
-                                                                context
-                                                                    .pushNamed(
-                                                                  'IniciarDeslocamentoTela',
-                                                                  queryParameters:
-                                                                      {
-                                                                    'etapade':
-                                                                        serializeParam(
-                                                                      functions.ligaoDeNome(
-                                                                          FFAppState().trServicos.toList(),
-                                                                          'serv_id',
-                                                                          'serv_nome',
-                                                                          getJsonField(
-                                                                            trOsServicosItem,
-                                                                            r'''$.oserv_id_serv''',
-                                                                          ).toString()),
-                                                                      ParamType
-                                                                          .String,
-                                                                    ),
-                                                                    'fazendaNome':
-                                                                        serializeParam(
-                                                                      functions.ligaoDeNome(
-                                                                          FFAppState().trFazendas.toList(),
-                                                                          'faz_id',
-                                                                          'faz_nome',
-                                                                          valueOrDefault<String>(
-                                                                            functions.ligacaoEntreListas(
-                                                                                getJsonField(
-                                                                                  trOsServicosItem,
-                                                                                  r'''$''',
-                                                                                  true,
-                                                                                ),
-                                                                                FFAppState().trOrdemServicos.toList(),
-                                                                                'oserv_id_os',
-                                                                                'os_id',
-                                                                                'os_id_faz'),
-                                                                            '404',
-                                                                          )),
-                                                                      ParamType
-                                                                          .String,
-                                                                    ),
-                                                                    'latlngFaz':
-                                                                        serializeParam(
-                                                                      functions.strToLatLng(
-                                                                          functions.ligaoDeNome(
-                                                                              FFAppState().trFazendas.toList(),
-                                                                              'faz_id',
-                                                                              'faz_latitude',
-                                                                              valueOrDefault<String>(
-                                                                                functions.ligacaoEntreListas(
-                                                                                    getJsonField(
-                                                                                      trOsServicosItem,
-                                                                                      r'''$''',
-                                                                                      true,
-                                                                                    ),
-                                                                                    FFAppState().trOrdemServicos.toList(),
-                                                                                    'oserv_id_os',
-                                                                                    'os_id',
-                                                                                    'os_id_faz'),
-                                                                                '404',
-                                                                              )),
-                                                                          functions.ligaoDeNome(
-                                                                              FFAppState().trFazendas.toList(),
-                                                                              'faz_id',
-                                                                              'faz_longitude',
-                                                                              valueOrDefault<String>(
-                                                                                functions.ligacaoEntreListas(
-                                                                                    getJsonField(
-                                                                                      trOsServicosItem,
-                                                                                      r'''$''',
-                                                                                      true,
-                                                                                    ),
-                                                                                    FFAppState().trOrdemServicos.toList(),
-                                                                                    'oserv_id_os',
-                                                                                    'os_id',
-                                                                                    'os_id_faz'),
-                                                                                '404',
-                                                                              ))),
-                                                                      ParamType
-                                                                          .LatLng,
-                                                                    ),
-                                                                    'cidadeFaz':
-                                                                        serializeParam(
-                                                                      functions.ligaoDeNome(
-                                                                          FFAppState().trFazendas.toList(),
-                                                                          'faz_id',
-                                                                          'faz_cidade',
-                                                                          valueOrDefault<String>(
-                                                                            functions.ligacaoEntreListas(
-                                                                                getJsonField(
-                                                                                  trOsServicosItem,
-                                                                                  r'''$''',
-                                                                                  true,
-                                                                                ),
-                                                                                FFAppState().trOrdemServicos.toList(),
-                                                                                'oserv_id_os',
-                                                                                'os_id',
-                                                                                'os_id_faz'),
-                                                                            '404',
-                                                                          )),
-                                                                      ParamType
-                                                                          .String,
-                                                                    ),
-                                                                    'estadoFaz':
-                                                                        serializeParam(
-                                                                      functions.ligaoDeNome(
-                                                                          FFAppState().trFazendas.toList(),
-                                                                          'faz_id',
-                                                                          'faz_estado',
-                                                                          valueOrDefault<String>(
-                                                                            functions.ligacaoEntreListas(
-                                                                                getJsonField(
-                                                                                  trOsServicosItem,
-                                                                                  r'''$''',
-                                                                                  true,
-                                                                                ),
-                                                                                FFAppState().trOrdemServicos.toList(),
-                                                                                'oserv_id_os',
-                                                                                'os_id',
-                                                                                'os_id_faz'),
-                                                                            '404',
-                                                                          )),
-                                                                      ParamType
-                                                                          .String,
-                                                                    ),
-                                                                    'observacao':
-                                                                        serializeParam(
-                                                                      getJsonField(
-                                                                        trOsServicosItem,
-                                                                        r'''$.oserv_observacao''',
-                                                                      ).toString(),
-                                                                      ParamType
-                                                                          .String,
-                                                                    ),
-                                                                    'tecnicoid':
-                                                                        serializeParam(
-                                                                      valueOrDefault<
-                                                                          String>(
-                                                                        functions.ligacaoEntreListas(
-                                                                            getJsonField(
-                                                                              trOsServicosItem,
-                                                                              r'''$''',
-                                                                              true,
-                                                                            ),
-                                                                            FFAppState().trOsTecnicos.toList(),
-                                                                            'oserv_id',
-                                                                            'ostec_id_serv',
-                                                                            'ostec_id_tec'),
-                                                                        '404',
-                                                                      ),
-                                                                      ParamType
-                                                                          .String,
-                                                                    ),
-                                                                    'servicoid':
-                                                                        serializeParam(
-                                                                      functions
-                                                                          .intToSring(
-                                                                              getJsonField(
-                                                                        trOsServicosItem,
-                                                                        r'''$.oserv_id''',
-                                                                      )),
-                                                                      ParamType
-                                                                          .String,
-                                                                    ),
-                                                                    'data':
-                                                                        serializeParam(
-                                                                      functions.strToData(
-                                                                          valueOrDefault<
-                                                                              String>(
-                                                                        getJsonField(
-                                                                          trOsServicosItem,
-                                                                          r'''$.oserv_dthr_agendamento''',
-                                                                        )?.toString(),
-                                                                        '2099-01-01 00:00:00',
-                                                                      )),
-                                                                      ParamType
-                                                                          .String,
-                                                                    ),
-                                                                    'hora':
-                                                                        serializeParam(
-                                                                      functions.strToHORA(
-                                                                          valueOrDefault<
-                                                                              String>(
-                                                                        getJsonField(
-                                                                          trOsServicosItem,
-                                                                          r'''$.oserv_dthr_agendamento''',
-                                                                        )?.toString(),
-                                                                        '2099-01-01 00:00:00',
-                                                                      )),
-                                                                      ParamType
-                                                                          .String,
-                                                                    ),
-                                                                    'jsonServico':
-                                                                        serializeParam(
-                                                                      trOsServicosItem,
-                                                                      ParamType
-                                                                          .JSON,
-                                                                    ),
-                                                                    'deslocamentoAtualFinalizado':
-                                                                        serializeParam(
-                                                                      FFAppState()
-                                                                          .servicosFinalizadosComSucesso
-                                                                          .contains(
-                                                                              getJsonField(
-                                                                            trOsServicosItem,
-                                                                            r'''$.oserv_id''',
-                                                                          ).toString()),
-                                                                      ParamType
-                                                                          .bool,
-                                                                    ),
-                                                                    'polylinhaQueVemDoMenuInicial':
-                                                                        serializeParam(
-                                                                      ApiRotasPolylinesCall
-                                                                          .criptografadapolyline(
-                                                                        (_model.polyline2?.jsonBody ??
-                                                                            ''),
-                                                                      ),
-                                                                      ParamType
-                                                                          .String,
-                                                                    ),
-                                                                    'fazid':
-                                                                        serializeParam(
-                                                                      functions.ligaoDeNome(
-                                                                          FFAppState().trFazendas.toList(),
-                                                                          'faz_id',
-                                                                          'faz_id',
-                                                                          valueOrDefault<String>(
-                                                                            functions.ligacaoEntreListas(
-                                                                                getJsonField(
-                                                                                  trOsServicosItem,
-                                                                                  r'''$''',
-                                                                                  true,
-                                                                                ),
-                                                                                FFAppState().trOrdemServicos.toList(),
-                                                                                'oserv_id_os',
-                                                                                'os_id',
-                                                                                'os_id_faz'),
-                                                                            '404',
-                                                                          )),
-                                                                      ParamType
-                                                                          .String,
-                                                                    ),
-                                                                    'autoAuditoria':
-                                                                        serializeParam(
-                                                                      functions
-                                                                          .strToBool(
-                                                                              getJsonField(
-                                                                        trOsServicosItem,
-                                                                        r'''$.oserv_auto_auditoria''',
-                                                                      ).toString()),
-                                                                      ParamType
-                                                                          .bool,
-                                                                    ),
-                                                                    'autoAuditoriaQuantidadePontos':
-                                                                        serializeParam(
-                                                                      getJsonField(
-                                                                        trOsServicosItem,
-                                                                        r'''$.oserv_quantos_pontos''',
-                                                                      ),
-                                                                      ParamType
-                                                                          .int,
-                                                                    ),
-                                                                  }.withoutNulls,
-                                                                  extra: <String,
-                                                                      dynamic>{
-                                                                    kTransitionInfoKey:
-                                                                        TransitionInfo(
-                                                                      hasTransition:
-                                                                          true,
-                                                                      transitionType:
-                                                                          PageTransitionType
-                                                                              .fade,
-                                                                      duration: Duration(
-                                                                          milliseconds:
-                                                                              0),
-                                                                    ),
-                                                                  },
-                                                                );
 
                                                                 if (_shouldSetState)
                                                                   setState(
                                                                       () {});
-                                                                return;
-                                                              } else {
-                                                                if (_shouldSetState)
-                                                                  setState(
-                                                                      () {});
-                                                                return;
-                                                              }
-
-                                                              if (_shouldSetState)
-                                                                setState(() {});
-                                                            },
-                                                            child: Row(
-                                                              mainAxisSize:
-                                                                  MainAxisSize
-                                                                      .max,
-                                                              crossAxisAlignment:
-                                                                  CrossAxisAlignment
-                                                                      .center,
-                                                              children: [
-                                                                Expanded(
-                                                                  flex: 2,
-                                                                  child:
-                                                                      Container(
-                                                                    decoration:
-                                                                        BoxDecoration(),
-                                                                    child: Row(
-                                                                      mainAxisSize:
-                                                                          MainAxisSize
-                                                                              .max,
-                                                                      mainAxisAlignment:
-                                                                          MainAxisAlignment
-                                                                              .center,
-                                                                      children: [
-                                                                        if (functions.ligaoDeNome(
-                                                                                FFAppState().trServicos.toList(),
-                                                                                'serv_id',
-                                                                                'serv_nome',
-                                                                                getJsonField(
-                                                                                  trOsServicosItem,
-                                                                                  r'''$.oserv_id_serv''',
-                                                                                ).toString()) ==
-                                                                            'Coleta')
-                                                                          FaIcon(
-                                                                            FontAwesomeIcons.vials,
-                                                                            color:
-                                                                                FlutterFlowTheme.of(context).secondaryText,
-                                                                            size:
-                                                                                24.0,
-                                                                          ),
-                                                                        if (() {
-                                                                          if (functions.ligaoDeNome(
-                                                                                  FFAppState().trServicos.toList(),
-                                                                                  'serv_id',
-                                                                                  'serv_nome',
-                                                                                  getJsonField(
-                                                                                    trOsServicosItem,
-                                                                                    r'''$.oserv_id_serv''',
-                                                                                  ).toString()) ==
-                                                                              'Contorno') {
-                                                                            return true;
-                                                                          } else if (functions.ligaoDeNome(
-                                                                                  FFAppState().trServicos.toList(),
-                                                                                  'serv_id',
-                                                                                  'serv_nome',
-                                                                                  getJsonField(
-                                                                                    trOsServicosItem,
-                                                                                    r'''$.oserv_id_serv''',
-                                                                                  ).toString()) ==
-                                                                              'Atualização de contorno') {
-                                                                            return false;
-                                                                          } else {
-                                                                            return false;
-                                                                          }
-                                                                        }())
-                                                                          FaIcon(
-                                                                            FontAwesomeIcons.motorcycle,
-                                                                            color:
-                                                                                FlutterFlowTheme.of(context).secondaryText,
-                                                                            size:
-                                                                                24.0,
-                                                                          ),
-                                                                        if (() {
-                                                                          if (functions.ligaoDeNome(
-                                                                                  FFAppState().trServicos.toList(),
-                                                                                  'serv_id',
-                                                                                  'serv_nome',
-                                                                                  getJsonField(
-                                                                                    trOsServicosItem,
-                                                                                    r'''$.oserv_id_serv''',
-                                                                                  ).toString()) ==
-                                                                              'Contorno') {
-                                                                            return false;
-                                                                          } else if (functions.ligaoDeNome(
-                                                                                  FFAppState().trServicos.toList(),
-                                                                                  'serv_id',
-                                                                                  'serv_nome',
-                                                                                  getJsonField(
-                                                                                    trOsServicosItem,
-                                                                                    r'''$.oserv_id_serv''',
-                                                                                  ).toString()) ==
-                                                                              'Atualização de contorno') {
-                                                                            return true;
-                                                                          } else {
-                                                                            return false;
-                                                                          }
-                                                                        }())
-                                                                          FaIcon(
-                                                                            FontAwesomeIcons.route,
-                                                                            color:
-                                                                                FlutterFlowTheme.of(context).secondaryText,
-                                                                            size:
-                                                                                24.0,
-                                                                          ),
-                                                                      ],
-                                                                    ),
-                                                                  ),
-                                                                ),
-                                                                Expanded(
-                                                                  flex: 7,
-                                                                  child:
-                                                                      ClipRRect(
+                                                              },
+                                                              child: Row(
+                                                                mainAxisSize:
+                                                                    MainAxisSize
+                                                                        .max,
+                                                                crossAxisAlignment:
+                                                                    CrossAxisAlignment
+                                                                        .center,
+                                                                children: [
+                                                                  Expanded(
+                                                                    flex: 2,
                                                                     child:
                                                                         Container(
                                                                       decoration:
                                                                           BoxDecoration(),
                                                                       child:
-                                                                          Column(
+                                                                          Row(
                                                                         mainAxisSize:
                                                                             MainAxisSize.max,
                                                                         mainAxisAlignment:
                                                                             MainAxisAlignment.center,
-                                                                        crossAxisAlignment:
-                                                                            CrossAxisAlignment.start,
                                                                         children: [
-                                                                          Text(
-                                                                            '#${getJsonField(
-                                                                              trOsServicosItem,
-                                                                              r'''$.oserv_id_os''',
-                                                                            ).toString()}',
-                                                                            style: FlutterFlowTheme.of(context).bodyLarge.override(
-                                                                                  fontFamily: 'Readex Pro',
-                                                                                  fontSize: 12.0,
-                                                                                ),
-                                                                          ),
-                                                                          Text(
-                                                                            'Fazenda: ${functions.ligaoDeNome(FFAppState().trFazendas.toList(), 'faz_id', 'faz_nome', valueOrDefault<String>(
-                                                                                      functions.ligacaoEntreListas(
-                                                                                          getJsonField(
-                                                                                            trOsServicosItem,
-                                                                                            r'''$''',
-                                                                                            true,
-                                                                                          ),
-                                                                                          FFAppState().trOrdemServicos.toList(),
-                                                                                          'oserv_id_os',
-                                                                                          'os_id',
-                                                                                          'os_id_faz'),
-                                                                                      '404',
-                                                                                    ))}'
-                                                                                .maybeHandleOverflow(
-                                                                              maxChars: 20,
-                                                                              replacement: '…',
+                                                                          if (functions.ligaoDeNome(
+                                                                                  FFAppState().trServicos.toList(),
+                                                                                  'serv_id',
+                                                                                  'serv_nome',
+                                                                                  getJsonField(
+                                                                                    trOsServicosItem,
+                                                                                    r'''$.oserv_id_serv''',
+                                                                                  ).toString()) ==
+                                                                              'Coleta')
+                                                                            FaIcon(
+                                                                              FontAwesomeIcons.vials,
+                                                                              color: FlutterFlowTheme.of(context).secondaryText,
+                                                                              size: 24.0,
                                                                             ),
-                                                                            style: FlutterFlowTheme.of(context).bodyLarge.override(
-                                                                                  fontFamily: 'Readex Pro',
-                                                                                  fontWeight: FontWeight.w500,
-                                                                                ),
-                                                                          ),
-                                                                          Text(
-                                                                            '${functions.ligaoDeNome(FFAppState().trFazendas.toList(), 'faz_id', 'faz_cidade', valueOrDefault<String>(
-                                                                                  functions.ligacaoEntreListas(
-                                                                                      getJsonField(
-                                                                                        trOsServicosItem,
-                                                                                        r'''$''',
-                                                                                        true,
-                                                                                      ),
-                                                                                      FFAppState().trOrdemServicos.toList(),
-                                                                                      'oserv_id_os',
-                                                                                      'os_id',
-                                                                                      'os_id_faz'),
-                                                                                  '404',
-                                                                                ))}, ${functions.ligaoDeNome(FFAppState().trFazendas.toList(), 'faz_id', 'faz_estado', valueOrDefault<String>(
-                                                                                  functions.ligacaoEntreListas(
-                                                                                      getJsonField(
-                                                                                        trOsServicosItem,
-                                                                                        r'''$''',
-                                                                                        true,
-                                                                                      ),
-                                                                                      FFAppState().trOrdemServicos.toList(),
-                                                                                      'oserv_id_os',
-                                                                                      'os_id',
-                                                                                      'os_id_faz'),
-                                                                                  '404',
-                                                                                ))}',
-                                                                            style: FlutterFlowTheme.of(context).bodyLarge.override(
-                                                                                  fontFamily: 'Readex Pro',
-                                                                                  fontSize: 12.0,
-                                                                                ),
-                                                                          ),
+                                                                          if (() {
+                                                                            if (functions.ligaoDeNome(
+                                                                                    FFAppState().trServicos.toList(),
+                                                                                    'serv_id',
+                                                                                    'serv_nome',
+                                                                                    getJsonField(
+                                                                                      trOsServicosItem,
+                                                                                      r'''$.oserv_id_serv''',
+                                                                                    ).toString()) ==
+                                                                                'Contorno') {
+                                                                              return true;
+                                                                            } else if (functions.ligaoDeNome(
+                                                                                    FFAppState().trServicos.toList(),
+                                                                                    'serv_id',
+                                                                                    'serv_nome',
+                                                                                    getJsonField(
+                                                                                      trOsServicosItem,
+                                                                                      r'''$.oserv_id_serv''',
+                                                                                    ).toString()) ==
+                                                                                'Atualização de contorno') {
+                                                                              return false;
+                                                                            } else {
+                                                                              return false;
+                                                                            }
+                                                                          }())
+                                                                            FaIcon(
+                                                                              FontAwesomeIcons.motorcycle,
+                                                                              color: FlutterFlowTheme.of(context).secondaryText,
+                                                                              size: 24.0,
+                                                                            ),
+                                                                          if (() {
+                                                                            if (functions.ligaoDeNome(
+                                                                                    FFAppState().trServicos.toList(),
+                                                                                    'serv_id',
+                                                                                    'serv_nome',
+                                                                                    getJsonField(
+                                                                                      trOsServicosItem,
+                                                                                      r'''$.oserv_id_serv''',
+                                                                                    ).toString()) ==
+                                                                                'Contorno') {
+                                                                              return false;
+                                                                            } else if (functions.ligaoDeNome(
+                                                                                    FFAppState().trServicos.toList(),
+                                                                                    'serv_id',
+                                                                                    'serv_nome',
+                                                                                    getJsonField(
+                                                                                      trOsServicosItem,
+                                                                                      r'''$.oserv_id_serv''',
+                                                                                    ).toString()) ==
+                                                                                'Atualização de contorno') {
+                                                                              return true;
+                                                                            } else {
+                                                                              return false;
+                                                                            }
+                                                                          }())
+                                                                            FaIcon(
+                                                                              FontAwesomeIcons.route,
+                                                                              color: FlutterFlowTheme.of(context).secondaryText,
+                                                                              size: 24.0,
+                                                                            ),
                                                                         ],
                                                                       ),
                                                                     ),
                                                                   ),
-                                                                ),
-                                                                if (!FFAppState()
-                                                                    .servicosFinalizadosComSucesso
-                                                                    .contains(
-                                                                        getJsonField(
-                                                                      trOsServicosItem,
-                                                                      r'''$.oserv_id''',
-                                                                    ).toString()))
                                                                   Expanded(
-                                                                    flex: 1,
+                                                                    flex: 7,
                                                                     child:
-                                                                        Align(
-                                                                      alignment:
-                                                                          AlignmentDirectional(
-                                                                              1.0,
-                                                                              0.0),
+                                                                        ClipRRect(
                                                                       child:
-                                                                          Icon(
-                                                                        Icons
-                                                                            .arrow_forward,
-                                                                        color:
-                                                                            () {
-                                                                          if ((getJsonField(
-                                                                                    trOsServicosItem,
-                                                                                    r'''$.oserv_id''',
-                                                                                  ) ==
-                                                                                  FFAppState().trOsServicoEmAndamento) &&
-                                                                              (FFAppState().trDesloacamentoIniciado == true) &&
-                                                                              (FFAppState().DeslocamentoPausado == false)) {
-                                                                            return FlutterFlowTheme.of(context).secondary;
-                                                                          } else if ((getJsonField(
-                                                                                    trOsServicosItem,
-                                                                                    r'''$.oserv_id''',
-                                                                                  ) ==
-                                                                                  FFAppState().trOsServicoEmAndamento) &&
-                                                                              (FFAppState().DeslocamentoPausado == true)) {
-                                                                            return FlutterFlowTheme.of(context).error;
-                                                                          } else {
-                                                                            return FlutterFlowTheme.of(context).lineColor;
-                                                                          }
-                                                                        }(),
-                                                                        size:
-                                                                            34.0,
+                                                                          Container(
+                                                                        decoration:
+                                                                            BoxDecoration(),
+                                                                        child:
+                                                                            Column(
+                                                                          mainAxisSize:
+                                                                              MainAxisSize.max,
+                                                                          mainAxisAlignment:
+                                                                              MainAxisAlignment.center,
+                                                                          crossAxisAlignment:
+                                                                              CrossAxisAlignment.start,
+                                                                          children: [
+                                                                            Text(
+                                                                              '#${getJsonField(
+                                                                                trOsServicosItem,
+                                                                                r'''$.oserv_id_os''',
+                                                                              ).toString()}',
+                                                                              style: FlutterFlowTheme.of(context).bodyLarge.override(
+                                                                                    fontFamily: 'Readex Pro',
+                                                                                    fontSize: 12.0,
+                                                                                  ),
+                                                                            ),
+                                                                            Text(
+                                                                              'Fazenda: ${functions.ligaoDeNome(FFAppState().trFazendas.toList(), 'faz_id', 'faz_nome', valueOrDefault<String>(
+                                                                                        functions.ligacaoEntreListas(
+                                                                                            getJsonField(
+                                                                                              trOsServicosItem,
+                                                                                              r'''$''',
+                                                                                              true,
+                                                                                            ),
+                                                                                            FFAppState().trOrdemServicos.toList(),
+                                                                                            'oserv_id_os',
+                                                                                            'os_id',
+                                                                                            'os_id_faz'),
+                                                                                        '404',
+                                                                                      ))}'
+                                                                                  .maybeHandleOverflow(
+                                                                                maxChars: 20,
+                                                                                replacement: '…',
+                                                                              ),
+                                                                              style: FlutterFlowTheme.of(context).bodyLarge.override(
+                                                                                    fontFamily: 'Readex Pro',
+                                                                                    fontWeight: FontWeight.w500,
+                                                                                  ),
+                                                                            ),
+                                                                            Text(
+                                                                              '${functions.ligaoDeNome(FFAppState().trFazendas.toList(), 'faz_id', 'faz_cidade', valueOrDefault<String>(
+                                                                                    functions.ligacaoEntreListas(
+                                                                                        getJsonField(
+                                                                                          trOsServicosItem,
+                                                                                          r'''$''',
+                                                                                          true,
+                                                                                        ),
+                                                                                        FFAppState().trOrdemServicos.toList(),
+                                                                                        'oserv_id_os',
+                                                                                        'os_id',
+                                                                                        'os_id_faz'),
+                                                                                    '404',
+                                                                                  ))}, ${functions.ligaoDeNome(FFAppState().trFazendas.toList(), 'faz_id', 'faz_estado', valueOrDefault<String>(
+                                                                                    functions.ligacaoEntreListas(
+                                                                                        getJsonField(
+                                                                                          trOsServicosItem,
+                                                                                          r'''$''',
+                                                                                          true,
+                                                                                        ),
+                                                                                        FFAppState().trOrdemServicos.toList(),
+                                                                                        'oserv_id_os',
+                                                                                        'os_id',
+                                                                                        'os_id_faz'),
+                                                                                    '404',
+                                                                                  ))}',
+                                                                              style: FlutterFlowTheme.of(context).bodyLarge.override(
+                                                                                    fontFamily: 'Readex Pro',
+                                                                                    fontSize: 12.0,
+                                                                                  ),
+                                                                            ),
+                                                                          ],
+                                                                        ),
                                                                       ),
                                                                     ),
                                                                   ),
-                                                                if (FFAppState()
-                                                                    .servicosFinalizadosComSucesso
-                                                                    .contains(
-                                                                        getJsonField(
-                                                                      trOsServicosItem,
-                                                                      r'''$.oserv_id''',
-                                                                    ).toString()))
-                                                                  Expanded(
-                                                                    flex: 1,
-                                                                    child:
-                                                                        Align(
-                                                                      alignment:
-                                                                          AlignmentDirectional(
-                                                                              1.0,
-                                                                              0.0),
+                                                                  if (!FFAppState()
+                                                                      .servicosFinalizadosComSucesso
+                                                                      .contains(
+                                                                          getJsonField(
+                                                                        trOsServicosItem,
+                                                                        r'''$.oserv_id''',
+                                                                      ).toString()))
+                                                                    Expanded(
+                                                                      flex: 1,
                                                                       child:
-                                                                          Icon(
-                                                                        Icons
-                                                                            .task_alt,
-                                                                        color: Color(
-                                                                            0xFF249677),
-                                                                        size:
-                                                                            34.0,
+                                                                          Align(
+                                                                        alignment: AlignmentDirectional(
+                                                                            1.0,
+                                                                            0.0),
+                                                                        child:
+                                                                            Icon(
+                                                                          Icons
+                                                                              .arrow_forward,
+                                                                          color:
+                                                                              () {
+                                                                            if ((getJsonField(
+                                                                                      trOsServicosItem,
+                                                                                      r'''$.oserv_id''',
+                                                                                    ) ==
+                                                                                    FFAppState().trOsServicoEmAndamento) &&
+                                                                                (FFAppState().trDesloacamentoIniciado == true) &&
+                                                                                (FFAppState().DeslocamentoPausado == false)) {
+                                                                              return FlutterFlowTheme.of(context).secondary;
+                                                                            } else if ((getJsonField(
+                                                                                      trOsServicosItem,
+                                                                                      r'''$.oserv_id''',
+                                                                                    ) ==
+                                                                                    FFAppState().trOsServicoEmAndamento) &&
+                                                                                (FFAppState().DeslocamentoPausado == true)) {
+                                                                              return FlutterFlowTheme.of(context).error;
+                                                                            } else {
+                                                                              return FlutterFlowTheme.of(context).lineColor;
+                                                                            }
+                                                                          }(),
+                                                                          size:
+                                                                              34.0,
+                                                                        ),
                                                                       ),
                                                                     ),
-                                                                  ),
-                                                              ],
+                                                                  if (FFAppState()
+                                                                      .servicosFinalizadosComSucesso
+                                                                      .contains(
+                                                                          getJsonField(
+                                                                        trOsServicosItem,
+                                                                        r'''$.oserv_id''',
+                                                                      ).toString()))
+                                                                    Expanded(
+                                                                      flex: 1,
+                                                                      child:
+                                                                          Align(
+                                                                        alignment: AlignmentDirectional(
+                                                                            1.0,
+                                                                            0.0),
+                                                                        child:
+                                                                            Icon(
+                                                                          Icons
+                                                                              .task_alt,
+                                                                          color:
+                                                                              Color(0xFF249677),
+                                                                          size:
+                                                                              34.0,
+                                                                        ),
+                                                                      ),
+                                                                    ),
+                                                                ],
+                                                              ),
                                                             ),
                                                           ),
                                                         ),
