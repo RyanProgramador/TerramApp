@@ -109,11 +109,18 @@ class _SelecionarOSWidgetState extends State<SelecionarOSWidget>
           urlapicall: FFAppState().urlapicall,
         );
         _model.preLoadingTrOsServicos2 =
-            await SincronizarGroup.trOsServicosCall.call();
+            await SincronizarGroup.trOsServicosCall.call(
+          tecId: FFAppState().tecID,
+          urlapicall: FFAppState().urlapicall,
+        );
         _model.preLoadingTrFazendas2 =
-            await SincronizarGroup.trFazendasCall.call();
+            await SincronizarGroup.trFazendasCall.call(
+          urlapicall: FFAppState().urlapicall,
+        );
         _model.preLoadingTrServicos2 =
-            await SincronizarGroup.trServicosCall.call();
+            await SincronizarGroup.trServicosCall.call(
+          urlapicall: FFAppState().urlapicall,
+        );
         setState(() {
           FFAppState().icones = getJsonField(
             (_model.pontosDeColetaFormatados3?.jsonBody ?? ''),
@@ -287,11 +294,18 @@ class _SelecionarOSWidgetState extends State<SelecionarOSWidget>
           },
         );
         _model.preLoadingTrOsServicos3 =
-            await SincronizarGroup.trOsServicosCall.call();
+            await SincronizarGroup.trOsServicosCall.call(
+          urlapicall: FFAppState().urlapicall,
+          tecId: FFAppState().tecID,
+        );
         _model.preLoadingTrFazendas3 =
-            await SincronizarGroup.trFazendasCall.call();
+            await SincronizarGroup.trFazendasCall.call(
+          urlapicall: FFAppState().urlapicall,
+        );
         _model.preLoadingTrServicos3 =
-            await SincronizarGroup.trServicosCall.call();
+            await SincronizarGroup.trServicosCall.call(
+          urlapicall: FFAppState().urlapicall,
+        );
         FFAppState().update(() {
           FFAppState().trOsServicos = functions
               .juntarDuasListasJson(
