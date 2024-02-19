@@ -118,7 +118,7 @@ class _LoadingCompWidgetState extends State<LoadingCompWidget>
                     children: [
                       Padding(
                         padding: EdgeInsetsDirectional.fromSTEB(
-                            16.0, 24.0, 16.0, 24.0),
+                            16.0, 0.0, 16.0, 24.0),
                         child: Row(
                           mainAxisSize: MainAxisSize.max,
                           mainAxisAlignment: MainAxisAlignment.center,
@@ -193,9 +193,7 @@ class _LoadingCompWidgetState extends State<LoadingCompWidget>
                                                     width: double.infinity,
                                                     height: 78.0,
                                                     decoration: BoxDecoration(
-                                                      color: FlutterFlowTheme
-                                                              .of(context)
-                                                          .primaryBackground,
+                                                      color: Color(0xFFF1F4F8),
                                                       borderRadius:
                                                           BorderRadius.circular(
                                                               12.0),
@@ -203,7 +201,7 @@ class _LoadingCompWidgetState extends State<LoadingCompWidget>
                                                         color:
                                                             FlutterFlowTheme.of(
                                                                     context)
-                                                                .primary,
+                                                                .lineColor,
                                                       ),
                                                     ),
                                                     child: Padding(
