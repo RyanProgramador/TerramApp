@@ -235,9 +235,9 @@ class _LoadingCompWidgetState extends State<LoadingCompWidget>
                                                                         .center,
                                                                 children: [
                                                                   Container(
-                                                                    width: 30.0,
+                                                                    width: 35.0,
                                                                     height:
-                                                                        30.0,
+                                                                        35.0,
                                                                     decoration:
                                                                         BoxDecoration(
                                                                       color: Color(
