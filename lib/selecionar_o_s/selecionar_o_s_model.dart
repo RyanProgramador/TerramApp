@@ -1,6 +1,6 @@
 import '/backend/api_requests/api_calls.dart';
 import '/components/carregando_os_widget.dart';
-import '/components/loading_comp_widget.dart';
+import '/components/loading_comp_servicos_widget.dart';
 import '/components/pesquisa_avanadabtn_widget.dart';
 import '/components/vazio_widget.dart';
 import '/flutter_flow/flutter_flow_animations.dart';
