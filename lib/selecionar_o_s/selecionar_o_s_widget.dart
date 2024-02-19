@@ -300,19 +300,6 @@ class _SelecionarOSWidgetState extends State<SelecionarOSWidget>
         });
       }
 
-      unawaited(
-        () async {
-          await requestPermission(locationPermission);
-        }(),
-      );
-      unawaited(
-        () async {
-          await requestPermission(notificationsPermission);
-        }(),
-      );
-      setState(() {
-        FFAppState().AtualLocalizcao = currentUserLocationValue!.toString();
-      });
       if (FFAppState().trOsServicos.length == 0) {
         _model.trOsTecnicosSincroniza =
             await SincronizarGroup.trOsTecnicoCall.call(
@@ -475,6 +462,19 @@ class _SelecionarOSWidgetState extends State<SelecionarOSWidget>
                 .cast<dynamic>();
           });
           FFAppState().update(() {});
+          setState(() {
+            FFAppState().AtualLocalizcao = currentUserLocationValue!.toString();
+          });
+          unawaited(
+            () async {
+              await requestPermission(notificationsPermission);
+            }(),
+          );
+          unawaited(
+            () async {
+              await requestPermission(locationPermission);
+            }(),
+          );
           return;
         } else {
           await showDialog(
@@ -686,6 +686,20 @@ class _SelecionarOSWidgetState extends State<SelecionarOSWidget>
                   .toList()
                   .cast<dynamic>();
             });
+            setState(() {
+              FFAppState().AtualLocalizcao =
+                  currentUserLocationValue!.toString();
+            });
+            unawaited(
+              () async {
+                await requestPermission(notificationsPermission);
+              }(),
+            );
+            unawaited(
+              () async {
+                await requestPermission(locationPermission);
+              }(),
+            );
           } else {
             await showDialog(
               context: context,
