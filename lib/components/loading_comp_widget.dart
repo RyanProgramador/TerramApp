@@ -261,7 +261,7 @@ class _LoadingCompWidgetState extends State<LoadingCompWidget>
                                                                           .max,
                                                                   mainAxisAlignment:
                                                                       MainAxisAlignment
-                                                                          .center,
+                                                                          .spaceBetween,
                                                                   children: [
                                                                     Align(
                                                                       alignment:

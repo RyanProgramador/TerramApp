@@ -62,7 +62,11 @@ class _SelecionarOSWidgetState extends State<SelecionarOSWidget>
       currentUserLocationValue =
           await getCurrentUserLocation(defaultLocation: LatLng(0.0, 0.0));
       _model.checkgps = await actions.checkGps();
-      _model.temInternetOsLoad = await actions.temInternet();
+      unawaited(
+        () async {
+          _model.temInternetOsLoad = await actions.temInternet();
+        }(),
+      );
       if (!_model.checkgps!) {
         await showDialog(
           context: context,
@@ -274,7 +278,7 @@ class _SelecionarOSWidgetState extends State<SelecionarOSWidget>
             await SincronizarGroup.trFazendasCall.call();
         _model.preLoadingTrServicos3 =
             await SincronizarGroup.trServicosCall.call();
-        setState(() {
+        FFAppState().update(() {
           FFAppState().trOsServicos = functions
               .juntarDuasListasJson(
                   SincronizarGroup.trOsServicosCall
@@ -321,7 +325,7 @@ class _SelecionarOSWidgetState extends State<SelecionarOSWidget>
             await SincronizarGroup.trFazendasCall.call();
         _model.preLoadingTrServicos =
             await SincronizarGroup.trServicosCall.call();
-        setState(() {
+        FFAppState().update(() {
           FFAppState().icones = getJsonField(
             (_model.pontosDeColetaFormatados?.jsonBody ?? ''),
             r'''$.icones[:]''',
