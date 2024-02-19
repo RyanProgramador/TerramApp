@@ -362,11 +362,18 @@ class _SelecionarOSWidgetState extends State<SelecionarOSWidget>
               functions.jsonListToStr(FFAppState().PontosColetados.toList()),
         );
         _model.preLoadingTrOsServicos =
-            await SincronizarGroup.trOsServicosCall.call();
+            await SincronizarGroup.trOsServicosCall.call(
+          tecId: FFAppState().tecID,
+          urlapicall: FFAppState().urlapicall,
+        );
         _model.preLoadingTrFazendas =
-            await SincronizarGroup.trFazendasCall.call();
+            await SincronizarGroup.trFazendasCall.call(
+          urlapicall: FFAppState().urlapicall,
+        );
         _model.preLoadingTrServicos =
-            await SincronizarGroup.trServicosCall.call();
+            await SincronizarGroup.trServicosCall.call(
+          urlapicall: FFAppState().urlapicall,
+        );
         FFAppState().update(() {
           FFAppState().icones = getJsonField(
             (_model.pontosDeColetaFormatados?.jsonBody ?? ''),
