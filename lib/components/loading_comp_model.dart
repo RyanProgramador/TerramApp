@@ -22,9 +22,9 @@ class LoadingCompModel extends FlutterFlowModel<LoadingCompWidget> {
   ///  State fields for stateful widgets in this component.
 
   // State field(s) for Timer widget.
-  int timerMilliseconds = 21000;
+  int timerMilliseconds = 25000;
   String timerValue = StopWatchTimer.getDisplayTime(
-    21000,
+    25000,
     hours: false,
     milliSecond: false,
   );

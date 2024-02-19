@@ -188,7 +188,7 @@ class _LoadingCompWidgetState extends State<LoadingCompWidget>
                                                 return Padding(
                                                   padding: EdgeInsetsDirectional
                                                       .fromSTEB(
-                                                          16.0, 8.0, 16.0, 0.0),
+                                                          0.0, 8.0, 0.0, 0.0),
                                                   child: Container(
                                                     width: double.infinity,
                                                     height: 78.0,
@@ -199,6 +199,12 @@ class _LoadingCompWidgetState extends State<LoadingCompWidget>
                                                       borderRadius:
                                                           BorderRadius.circular(
                                                               12.0),
+                                                      border: Border.all(
+                                                        color:
+                                                            FlutterFlowTheme.of(
+                                                                    context)
+                                                                .primary,
+                                                      ),
                                                     ),
                                                     child: Padding(
                                                       padding:
@@ -235,7 +241,7 @@ class _LoadingCompWidgetState extends State<LoadingCompWidget>
                                                                     decoration:
                                                                         BoxDecoration(
                                                                       color: Color(
-                                                                          0xFFB0B0B0),
+                                                                          0xFFD9D9D9),
                                                                       borderRadius:
                                                                           BorderRadius.circular(
                                                                               6.0),
@@ -255,6 +261,9 @@ class _LoadingCompWidgetState extends State<LoadingCompWidget>
                                                                   mainAxisSize:
                                                                       MainAxisSize
                                                                           .max,
+                                                                  mainAxisAlignment:
+                                                                      MainAxisAlignment
+                                                                          .center,
                                                                   children: [
                                                                     Align(
                                                                       alignment:
@@ -264,13 +273,13 @@ class _LoadingCompWidgetState extends State<LoadingCompWidget>
                                                                       child:
                                                                           Container(
                                                                         width:
-                                                                            200.0,
+                                                                            25.0,
                                                                         height:
-                                                                            20.0,
+                                                                            16.0,
                                                                         decoration:
                                                                             BoxDecoration(
                                                                           color:
-                                                                              Color(0xFFB0B0B0),
+                                                                              Color(0xFFD9D9D9),
                                                                           borderRadius:
                                                                               BorderRadius.circular(20.0),
                                                                         ),
@@ -284,13 +293,13 @@ class _LoadingCompWidgetState extends State<LoadingCompWidget>
                                                                       child:
                                                                           Container(
                                                                         width:
-                                                                            90.0,
+                                                                            230.0,
                                                                         height:
                                                                             20.0,
                                                                         decoration:
                                                                             BoxDecoration(
                                                                           color:
-                                                                              Color(0xFFB0B0B0),
+                                                                              Color(0xFFD9D9D9),
                                                                           borderRadius:
                                                                               BorderRadius.circular(20.0),
                                                                         ),
@@ -306,11 +315,11 @@ class _LoadingCompWidgetState extends State<LoadingCompWidget>
                                                                         width:
                                                                             98.0,
                                                                         height:
-                                                                            20.0,
+                                                                            16.0,
                                                                         decoration:
                                                                             BoxDecoration(
                                                                           color:
-                                                                              Color(0xFFB0B0B0),
+                                                                              Color(0xFFD9D9D9),
                                                                           borderRadius:
                                                                               BorderRadius.circular(20.0),
                                                                         ),
