@@ -277,10 +277,6 @@ class _ConfiguracoesWidgetState extends State<ConfiguracoesWidget> {
                                           .statusSincComCelular(
                                         (_model.sincCelComBD?.jsonBody ?? ''),
                                       )! &&
-                                      getJsonField(
-                                        (_model.trSincTalhao?.jsonBody ?? ''),
-                                        r'''$.status''',
-                                      ) &&
                                       (_model.sincPontosMedicaoEPerfilEProfundidaAPI
                                               ?.succeeded ??
                                           true)) {
@@ -370,10 +366,6 @@ class _ConfiguracoesWidgetState extends State<ConfiguracoesWidget> {
                                           .statusSincComCelular(
                                         (_model.sincCelComBD?.jsonBody ?? ''),
                                       )! &&
-                                      !getJsonField(
-                                        (_model.trSincTalhao?.jsonBody ?? ''),
-                                        r'''$.status''',
-                                      ) &&
                                       !(_model.sincPontosMedicaoEPerfilEProfundidaAPI
                                               ?.succeeded ??
                                           true)) {
