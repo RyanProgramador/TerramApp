@@ -817,30 +817,9 @@ class _SelecionarOSWidgetState extends State<SelecionarOSWidget>
                                                 }
                                                 return RefreshIndicator(
                                                   onRefresh: () async {
-                                                    context.goNamed(
-                                                      'blankRedirecona',
-                                                      extra: <String, dynamic>{
-                                                        kTransitionInfoKey:
-                                                            TransitionInfo(
-                                                          hasTransition: true,
-                                                          transitionType:
-                                                              PageTransitionType
-                                                                  .fade,
-                                                          duration: Duration(
-                                                              milliseconds: 0),
-                                                        ),
-                                                      },
-                                                    );
-
-                                                    setState(() {
-                                                      _model.foiAtualizado =
-                                                          true;
-                                                    });
                                                     setState(() => _model
                                                             .apiRequestCompleter =
                                                         null);
-                                                    await _model
-                                                        .waitForApiRequestCompleted();
                                                   },
                                                   child: SingleChildScrollView(
                                                     physics:
