@@ -1,5 +1,6 @@
 import '/backend/api_requests/api_calls.dart';
 import '/components/loading_comp_copy_widget.dart';
+import '/components/loading_medicao_coleta_widget.dart';
 import '/components/motivo_pausa_widget.dart';
 import '/flutter_flow/flutter_flow_google_map.dart';
 import '/flutter_flow/flutter_flow_theme.dart';

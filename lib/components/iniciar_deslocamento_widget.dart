@@ -1,5 +1,6 @@
 import '/backend/api_requests/api_calls.dart';
 import '/components/loading_comp_copy_widget.dart';
+import '/components/loading_medicao_coleta_widget.dart';
 import '/components/motivo_pausa_widget.dart';
 import '/flutter_flow/flutter_flow_google_map.dart';
 import '/flutter_flow/flutter_flow_theme.dart';
@@ -1748,39 +1749,26 @@ class _IniciarDeslocamentoWidgetState extends State<IniciarDeslocamentoWidget> {
                                         },
                                       ).then((value) => safeSetState(() {}));
 
-                                      context.pushNamed(
-                                        'MedicaoColeta',
-                                        queryParameters: {
-                                          'fazNome': serializeParam(
-                                            widget.fazendaNome,
-                                            ParamType.String,
-                                          ),
-                                          'idContorno': serializeParam(
-                                            widget.servicoId,
-                                            ParamType.String,
-                                          ),
-                                          'autoAuditoria': serializeParam(
-                                            widget.autoAuditoria,
-                                            ParamType.bool,
-                                          ),
-                                          'quantosPontosAutoAuditoria':
-                                              serializeParam(
-                                            widget
-                                                .autoAuditoriaQuantidadePontos,
-                                            ParamType.int,
-                                          ),
-                                        }.withoutNulls,
-                                        extra: <String, dynamic>{
-                                          kTransitionInfoKey: TransitionInfo(
-                                            hasTransition: true,
-                                            transitionType:
-                                                PageTransitionType.fade,
-                                            duration: Duration(milliseconds: 0),
-                                          ),
+                                      await showModalBottomSheet(
+                                        isScrollControlled: true,
+                                        backgroundColor: Colors.transparent,
+                                        enableDrag: false,
+                                        context: context,
+                                        builder: (context) {
+                                          return Padding(
+                                            padding: MediaQuery.viewInsetsOf(
+                                                context),
+                                            child: LoadingMedicaoColetaWidget(
+                                              faznome: widget.fazendaNome!,
+                                              idcontorno: widget.servicoId!,
+                                              autoauditoria:
+                                                  widget.autoAuditoria,
+                                              quantosPontos: widget
+                                                  .autoAuditoriaQuantidadePontos!,
+                                            ),
+                                          );
                                         },
-                                      );
-
-                                      Navigator.pop(context);
+                                      ).then((value) => safeSetState(() {}));
                                     },
                                     text:
                                         widget.deslocamentoAtualFinzalizado! &&
