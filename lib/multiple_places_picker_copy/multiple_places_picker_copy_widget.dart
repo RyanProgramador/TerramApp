@@ -1089,9 +1089,9 @@ class _MultiplePlacesPickerCopyWidgetState
                                                   valueOrDefault<String>(
                                                     functions.jsonListToStr(
                                                         FFAppState()
-                                                            .latlngRecorteTalhao
+                                                            .trDeslocGeo2
                                                             .toList()),
-                                                    '123',
+                                                    '5',
                                                   ),
                                                   style: FlutterFlowTheme.of(
                                                           context)
