@@ -860,7 +860,7 @@ class _MultiplePlacesPickerCopyWidgetState
                             mainAxisAlignment: MainAxisAlignment.spaceBetween,
                             children: [
                               Text(
-                                'desloc rout invertidas',
+                                'Deslocamento',
                                 style: FlutterFlowTheme.of(context).bodyMedium,
                               ),
                               Text(
@@ -1004,7 +1004,7 @@ class _MultiplePlacesPickerCopyWidgetState
                             mainAxisAlignment: MainAxisAlignment.spaceBetween,
                             children: [
                               Text(
-                                '.....',
+                                'Deslocamento',
                                 style: FlutterFlowTheme.of(context).bodyMedium,
                               ),
                               InkWell(
