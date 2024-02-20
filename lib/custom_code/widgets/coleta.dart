@@ -764,15 +764,15 @@ class _ColetaState extends State<Coleta> {
     //     now.difference(lastTapTimestamps[markerIdValue]!).inMilliseconds <
     //         1800) {
     // Check if the distance is greater than 30 meters
-    if (distance > 350000) {
-      //metros de distancia para coletar
-      // Show alert
+    //if (distance > 35000) {
+    //metros de distancia para coletar
+    // Show alert
 
-      _showDistanceAlert();
-    } else {
-      // Continue with the normal double tap logic
-      _showModalOptions(markerName);
-    }
+    // _showDistanceAlert();
+    //} else {
+    // Continue with the normal double tap logic
+    _showModalOptions(markerName);
+    //}
     // }
 
     // Update the timestamp of the last tap
