@@ -3085,7 +3085,7 @@ class _SelecionarOSWidgetState extends State<SelecionarOSWidget>
                                 ),
                               if ((_model.searchBarController.text == null ||
                                       _model.searchBarController.text == '') &&
-                                  (FFAppState().trOsServicos.length != 0))
+                                  (FFAppState().trOsServicos.length == 0))
                                 Expanded(
                                   flex: 10,
                                   child: Container(
