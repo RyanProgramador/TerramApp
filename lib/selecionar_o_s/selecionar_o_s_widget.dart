@@ -1677,84 +1677,32 @@ class _SelecionarOSWidgetState extends State<SelecionarOSWidget>
                                                                     'latlngFaz':
                                                                         serializeParam(
                                                                       functions.strToLatLng(
-                                                                          functions.ligaoDeNome(
-                                                                              FFAppState().trFazendas.toList(),
-                                                                              'faz_id',
-                                                                              'faz_latitude',
-                                                                              valueOrDefault<String>(
-                                                                                functions.ligacaoEntreListas(
-                                                                                    getJsonField(
-                                                                                      trOsServicosItem,
-                                                                                      r'''$''',
-                                                                                      true,
-                                                                                    ),
-                                                                                    FFAppState().trOrdemServicos.toList(),
-                                                                                    'oserv_id_os',
-                                                                                    'os_id',
-                                                                                    'os_id_faz'),
-                                                                                '404',
-                                                                              )),
-                                                                          functions.ligaoDeNome(
-                                                                              FFAppState().trFazendas.toList(),
-                                                                              'faz_id',
-                                                                              'faz_longitude',
-                                                                              valueOrDefault<String>(
-                                                                                functions.ligacaoEntreListas(
-                                                                                    getJsonField(
-                                                                                      trOsServicosItem,
-                                                                                      r'''$''',
-                                                                                      true,
-                                                                                    ),
-                                                                                    FFAppState().trOrdemServicos.toList(),
-                                                                                    'oserv_id_os',
-                                                                                    'os_id',
-                                                                                    'os_id_faz'),
-                                                                                '404',
-                                                                              ))),
+                                                                          getJsonField(
+                                                                            trOsServicosItem,
+                                                                            r'''$.faz_latitude''',
+                                                                          ).toString(),
+                                                                          getJsonField(
+                                                                            trOsServicosItem,
+                                                                            r'''$.faz_longitude''',
+                                                                          ).toString()),
                                                                       ParamType
                                                                           .LatLng,
                                                                     ),
                                                                     'cidadeFaz':
                                                                         serializeParam(
-                                                                      functions.ligaoDeNome(
-                                                                          FFAppState().trFazendas.toList(),
-                                                                          'faz_id',
-                                                                          'faz_cidade',
-                                                                          valueOrDefault<String>(
-                                                                            functions.ligacaoEntreListas(
-                                                                                getJsonField(
-                                                                                  trOsServicosItem,
-                                                                                  r'''$''',
-                                                                                  true,
-                                                                                ),
-                                                                                FFAppState().trOrdemServicos.toList(),
-                                                                                'oserv_id_os',
-                                                                                'os_id',
-                                                                                'os_id_faz'),
-                                                                            '404',
-                                                                          )),
+                                                                      getJsonField(
+                                                                        trOsServicosItem,
+                                                                        r'''$.faz_cidade''',
+                                                                      ).toString(),
                                                                       ParamType
                                                                           .String,
                                                                     ),
                                                                     'estadoFaz':
                                                                         serializeParam(
-                                                                      functions.ligaoDeNome(
-                                                                          FFAppState().trFazendas.toList(),
-                                                                          'faz_id',
-                                                                          'faz_estado',
-                                                                          valueOrDefault<String>(
-                                                                            functions.ligacaoEntreListas(
-                                                                                getJsonField(
-                                                                                  trOsServicosItem,
-                                                                                  r'''$''',
-                                                                                  true,
-                                                                                ),
-                                                                                FFAppState().trOrdemServicos.toList(),
-                                                                                'oserv_id_os',
-                                                                                'os_id',
-                                                                                'os_id_faz'),
-                                                                            '404',
-                                                                          )),
+                                                                      getJsonField(
+                                                                        trOsServicosItem,
+                                                                        r'''$.faz_estado''',
+                                                                      ).toString(),
                                                                       ParamType
                                                                           .String,
                                                                     ),
@@ -1839,30 +1787,16 @@ class _SelecionarOSWidgetState extends State<SelecionarOSWidget>
                                                                     ),
                                                                     'polylinhaQueVemDoMenuInicial':
                                                                         serializeParam(
-                                                                      ApiRotasPolylinesCall
-                                                                          .criptografadapolyline(
-                                                                        (_model.polyline1?.jsonBody ??
-                                                                            ''),
-                                                                      ),
+                                                                      null,
                                                                       ParamType
                                                                           .String,
                                                                     ),
                                                                     'fazid':
                                                                         serializeParam(
-                                                                      valueOrDefault<
-                                                                          String>(
-                                                                        functions.ligacaoEntreListas(
-                                                                            getJsonField(
-                                                                              trOsServicosItem,
-                                                                              r'''$''',
-                                                                              true,
-                                                                            ),
-                                                                            FFAppState().trOrdemServicos.toList(),
-                                                                            'oserv_id_os',
-                                                                            'os_id',
-                                                                            'os_id_faz'),
-                                                                        '404',
-                                                                      ),
+                                                                      getJsonField(
+                                                                        trOsServicosItem,
+                                                                        r'''$.faz_id''',
+                                                                      ).toString(),
                                                                       ParamType
                                                                           .String,
                                                                     ),
@@ -2464,107 +2398,42 @@ class _SelecionarOSWidgetState extends State<SelecionarOSWidget>
                                                                       ),
                                                                       'fazendaNome':
                                                                           serializeParam(
-                                                                        functions.ligaoDeNome(
-                                                                            FFAppState().trFazendas.toList(),
-                                                                            'faz_id',
-                                                                            'faz_nome',
-                                                                            valueOrDefault<String>(
-                                                                              functions.ligacaoEntreListas(
-                                                                                  getJsonField(
-                                                                                    trOsServicosItem,
-                                                                                    r'''$''',
-                                                                                    true,
-                                                                                  ),
-                                                                                  FFAppState().trOrdemServicos.toList(),
-                                                                                  'oserv_id_os',
-                                                                                  'os_id',
-                                                                                  'os_id_faz'),
-                                                                              '404',
-                                                                            )),
+                                                                        getJsonField(
+                                                                          trOsServicosItem,
+                                                                          r'''$.faz_nome''',
+                                                                        ).toString(),
                                                                         ParamType
                                                                             .String,
                                                                       ),
                                                                       'latlngFaz':
                                                                           serializeParam(
                                                                         functions.strToLatLng(
-                                                                            functions.ligaoDeNome(
-                                                                                FFAppState().trFazendas.toList(),
-                                                                                'faz_id',
-                                                                                'faz_latitude',
-                                                                                valueOrDefault<String>(
-                                                                                  functions.ligacaoEntreListas(
-                                                                                      getJsonField(
-                                                                                        trOsServicosItem,
-                                                                                        r'''$''',
-                                                                                        true,
-                                                                                      ),
-                                                                                      FFAppState().trOrdemServicos.toList(),
-                                                                                      'oserv_id_os',
-                                                                                      'os_id',
-                                                                                      'os_id_faz'),
-                                                                                  '404',
-                                                                                )),
-                                                                            functions.ligaoDeNome(
-                                                                                FFAppState().trFazendas.toList(),
-                                                                                'faz_id',
-                                                                                'faz_longitude',
-                                                                                valueOrDefault<String>(
-                                                                                  functions.ligacaoEntreListas(
-                                                                                      getJsonField(
-                                                                                        trOsServicosItem,
-                                                                                        r'''$''',
-                                                                                        true,
-                                                                                      ),
-                                                                                      FFAppState().trOrdemServicos.toList(),
-                                                                                      'oserv_id_os',
-                                                                                      'os_id',
-                                                                                      'os_id_faz'),
-                                                                                  '404',
-                                                                                ))),
+                                                                            getJsonField(
+                                                                              trOsServicosItem,
+                                                                              r'''$.faz_latitude''',
+                                                                            ).toString(),
+                                                                            getJsonField(
+                                                                              trOsServicosItem,
+                                                                              r'''$.faz_latitude''',
+                                                                            ).toString()),
                                                                         ParamType
                                                                             .LatLng,
                                                                       ),
                                                                       'cidadeFaz':
                                                                           serializeParam(
-                                                                        functions.ligaoDeNome(
-                                                                            FFAppState().trFazendas.toList(),
-                                                                            'faz_id',
-                                                                            'faz_cidade',
-                                                                            valueOrDefault<String>(
-                                                                              functions.ligacaoEntreListas(
-                                                                                  getJsonField(
-                                                                                    trOsServicosItem,
-                                                                                    r'''$''',
-                                                                                    true,
-                                                                                  ),
-                                                                                  FFAppState().trOrdemServicos.toList(),
-                                                                                  'oserv_id_os',
-                                                                                  'os_id',
-                                                                                  'os_id_faz'),
-                                                                              '404',
-                                                                            )),
+                                                                        getJsonField(
+                                                                          trOsServicosItem,
+                                                                          r'''$.faz_cidade''',
+                                                                        ).toString(),
                                                                         ParamType
                                                                             .String,
                                                                       ),
                                                                       'estadoFaz':
                                                                           serializeParam(
-                                                                        functions.ligaoDeNome(
-                                                                            FFAppState().trFazendas.toList(),
-                                                                            'faz_id',
-                                                                            'faz_estado',
-                                                                            valueOrDefault<String>(
-                                                                              functions.ligacaoEntreListas(
-                                                                                  getJsonField(
-                                                                                    trOsServicosItem,
-                                                                                    r'''$''',
-                                                                                    true,
-                                                                                  ),
-                                                                                  FFAppState().trOrdemServicos.toList(),
-                                                                                  'oserv_id_os',
-                                                                                  'os_id',
-                                                                                  'os_id_faz'),
-                                                                              '404',
-                                                                            )),
+                                                                        getJsonField(
+                                                                          trOsServicosItem,
+                                                                          r'''$.faz_estado''',
+                                                                        ).toString(),
                                                                         ParamType
                                                                             .String,
                                                                       ),
@@ -2829,107 +2698,42 @@ class _SelecionarOSWidgetState extends State<SelecionarOSWidget>
                                                                     ),
                                                                     'fazendaNome':
                                                                         serializeParam(
-                                                                      functions.ligaoDeNome(
-                                                                          FFAppState().trFazendas.toList(),
-                                                                          'faz_id',
-                                                                          'faz_nome',
-                                                                          valueOrDefault<String>(
-                                                                            functions.ligacaoEntreListas(
-                                                                                getJsonField(
-                                                                                  trOsServicosItem,
-                                                                                  r'''$''',
-                                                                                  true,
-                                                                                ),
-                                                                                FFAppState().trOrdemServicos.toList(),
-                                                                                'oserv_id_os',
-                                                                                'os_id',
-                                                                                'os_id_faz'),
-                                                                            '404',
-                                                                          )),
+                                                                      getJsonField(
+                                                                        trOsServicosItem,
+                                                                        r'''$.faz_nome''',
+                                                                      ).toString(),
                                                                       ParamType
                                                                           .String,
                                                                     ),
                                                                     'latlngFaz':
                                                                         serializeParam(
                                                                       functions.strToLatLng(
-                                                                          functions.ligaoDeNome(
-                                                                              FFAppState().trFazendas.toList(),
-                                                                              'faz_id',
-                                                                              'faz_latitude',
-                                                                              valueOrDefault<String>(
-                                                                                functions.ligacaoEntreListas(
-                                                                                    getJsonField(
-                                                                                      trOsServicosItem,
-                                                                                      r'''$''',
-                                                                                      true,
-                                                                                    ),
-                                                                                    FFAppState().trOrdemServicos.toList(),
-                                                                                    'oserv_id_os',
-                                                                                    'os_id',
-                                                                                    'os_id_faz'),
-                                                                                '404',
-                                                                              )),
-                                                                          functions.ligaoDeNome(
-                                                                              FFAppState().trFazendas.toList(),
-                                                                              'faz_id',
-                                                                              'faz_longitude',
-                                                                              valueOrDefault<String>(
-                                                                                functions.ligacaoEntreListas(
-                                                                                    getJsonField(
-                                                                                      trOsServicosItem,
-                                                                                      r'''$''',
-                                                                                      true,
-                                                                                    ),
-                                                                                    FFAppState().trOrdemServicos.toList(),
-                                                                                    'oserv_id_os',
-                                                                                    'os_id',
-                                                                                    'os_id_faz'),
-                                                                                '404',
-                                                                              ))),
+                                                                          getJsonField(
+                                                                            trOsServicosItem,
+                                                                            r'''$.faz_latitude''',
+                                                                          ).toString(),
+                                                                          getJsonField(
+                                                                            trOsServicosItem,
+                                                                            r'''$.faz_latitude''',
+                                                                          ).toString()),
                                                                       ParamType
                                                                           .LatLng,
                                                                     ),
                                                                     'cidadeFaz':
                                                                         serializeParam(
-                                                                      functions.ligaoDeNome(
-                                                                          FFAppState().trFazendas.toList(),
-                                                                          'faz_id',
-                                                                          'faz_cidade',
-                                                                          valueOrDefault<String>(
-                                                                            functions.ligacaoEntreListas(
-                                                                                getJsonField(
-                                                                                  trOsServicosItem,
-                                                                                  r'''$''',
-                                                                                  true,
-                                                                                ),
-                                                                                FFAppState().trOrdemServicos.toList(),
-                                                                                'oserv_id_os',
-                                                                                'os_id',
-                                                                                'os_id_faz'),
-                                                                            '404',
-                                                                          )),
+                                                                      getJsonField(
+                                                                        trOsServicosItem,
+                                                                        r'''$.faz_cidade''',
+                                                                      ).toString(),
                                                                       ParamType
                                                                           .String,
                                                                     ),
                                                                     'estadoFaz':
                                                                         serializeParam(
-                                                                      functions.ligaoDeNome(
-                                                                          FFAppState().trFazendas.toList(),
-                                                                          'faz_id',
-                                                                          'faz_estado',
-                                                                          valueOrDefault<String>(
-                                                                            functions.ligacaoEntreListas(
-                                                                                getJsonField(
-                                                                                  trOsServicosItem,
-                                                                                  r'''$''',
-                                                                                  true,
-                                                                                ),
-                                                                                FFAppState().trOrdemServicos.toList(),
-                                                                                'oserv_id_os',
-                                                                                'os_id',
-                                                                                'os_id_faz'),
-                                                                            '404',
-                                                                          )),
+                                                                      getJsonField(
+                                                                        trOsServicosItem,
+                                                                        r'''$.faz_estado''',
+                                                                      ).toString(),
                                                                       ParamType
                                                                           .String,
                                                                     ),
@@ -3020,11 +2824,7 @@ class _SelecionarOSWidgetState extends State<SelecionarOSWidget>
                                                                     ),
                                                                     'polylinhaQueVemDoMenuInicial':
                                                                         serializeParam(
-                                                                      ApiRotasPolylinesCall
-                                                                          .criptografadapolyline(
-                                                                        (_model.polyline2?.jsonBody ??
-                                                                            ''),
-                                                                      ),
+                                                                      null,
                                                                       ParamType
                                                                           .String,
                                                                     ),
@@ -3235,19 +3035,10 @@ class _SelecionarOSWidgetState extends State<SelecionarOSWidget>
                                                                                 ),
                                                                           ),
                                                                           Text(
-                                                                            'Fazenda: ${functions.ligaoDeNome(FFAppState().trFazendas.toList(), 'faz_id', 'faz_nome', valueOrDefault<String>(
-                                                                                      functions.ligacaoEntreListas(
-                                                                                          getJsonField(
-                                                                                            trOsServicosItem,
-                                                                                            r'''$''',
-                                                                                            true,
-                                                                                          ),
-                                                                                          FFAppState().trOrdemServicos.toList(),
-                                                                                          'oserv_id_os',
-                                                                                          'os_id',
-                                                                                          'os_id_faz'),
-                                                                                      '404',
-                                                                                    ))}'
+                                                                            'Fazenda: ${getJsonField(
+                                                                              trOsServicosItem,
+                                                                              r'''$.faz_nome''',
+                                                                            ).toString()}'
                                                                                 .maybeHandleOverflow(
                                                                               maxChars: 20,
                                                                               replacement: '…',
@@ -3258,31 +3049,13 @@ class _SelecionarOSWidgetState extends State<SelecionarOSWidget>
                                                                                 ),
                                                                           ),
                                                                           Text(
-                                                                            '${functions.ligaoDeNome(FFAppState().trFazendas.toList(), 'faz_id', 'faz_cidade', valueOrDefault<String>(
-                                                                                  functions.ligacaoEntreListas(
-                                                                                      getJsonField(
-                                                                                        trOsServicosItem,
-                                                                                        r'''$''',
-                                                                                        true,
-                                                                                      ),
-                                                                                      FFAppState().trOrdemServicos.toList(),
-                                                                                      'oserv_id_os',
-                                                                                      'os_id',
-                                                                                      'os_id_faz'),
-                                                                                  '404',
-                                                                                ))}, ${functions.ligaoDeNome(FFAppState().trFazendas.toList(), 'faz_id', 'faz_estado', valueOrDefault<String>(
-                                                                                  functions.ligacaoEntreListas(
-                                                                                      getJsonField(
-                                                                                        trOsServicosItem,
-                                                                                        r'''$''',
-                                                                                        true,
-                                                                                      ),
-                                                                                      FFAppState().trOrdemServicos.toList(),
-                                                                                      'oserv_id_os',
-                                                                                      'os_id',
-                                                                                      'os_id_faz'),
-                                                                                  '404',
-                                                                                ))}',
+                                                                            '${getJsonField(
+                                                                              trOsServicosItem,
+                                                                              r'''$.faz_cidade''',
+                                                                            ).toString()}, ${getJsonField(
+                                                                              trOsServicosItem,
+                                                                              r'''$.faz_estado''',
+                                                                            ).toString()}',
                                                                             style: FlutterFlowTheme.of(context).bodyLarge.override(
                                                                                   fontFamily: 'Readex Pro',
                                                                                   fontSize: 12.0,
