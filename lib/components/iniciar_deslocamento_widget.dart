@@ -1749,6 +1749,7 @@ class _IniciarDeslocamentoWidgetState extends State<IniciarDeslocamentoWidget> {
                                         },
                                       ).then((value) => safeSetState(() {}));
 
+                                      Navigator.pop(context);
                                       await showModalBottomSheet(
                                         isScrollControlled: true,
                                         backgroundColor: Colors.transparent,

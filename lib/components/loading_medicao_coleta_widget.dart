@@ -52,6 +52,7 @@ class _LoadingMedicaoColetaWidgetState
         () async {}(),
       );
       _model.timerController.onStartTimer();
+      await Future.delayed(const Duration(milliseconds: 2000));
 
       context.pushNamed(
         'MedicaoColeta',
@@ -81,6 +82,8 @@ class _LoadingMedicaoColetaWidgetState
           ),
         },
       );
+
+      Navigator.pop(context);
     });
 
     WidgetsBinding.instance.addPostFrameCallback((_) => setState(() {}));
