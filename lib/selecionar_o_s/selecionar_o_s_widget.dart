@@ -62,11 +62,7 @@ class _SelecionarOSWidgetState extends State<SelecionarOSWidget>
       currentUserLocationValue =
           await getCurrentUserLocation(defaultLocation: LatLng(0.0, 0.0));
       _model.checkgps = await actions.checkGps();
-      unawaited(
-        () async {
-          _model.temInternetOsLoad = await actions.temInternet();
-        }(),
-      );
+      _model.temInternetOsLoad = await actions.temInternet();
       if (!_model.checkgps!) {
         await showDialog(
           context: context,
