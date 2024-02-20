@@ -323,24 +323,11 @@ class _SelecionarOSWidgetState extends State<SelecionarOSWidget>
       } else if ((FFAppState().trOrdemServicos.length <= 0) &&
           _model.foiAtualizado) {
       } else {
-        _model.preLoadingTrFazendas =
-            await SincronizarGroup.trFazendasCall.call(
-          urlapicall: FFAppState().urlapicall,
-        );
         _model.pontosDeColetaFormatados =
             await SincronizarGroup.trSincronizaPontosCall.call(
           urlapicall: FFAppState().urlapicall,
           pontosColetados:
               functions.jsonListToStr(FFAppState().PontosColetados.toList()),
-        );
-        _model.preLoadingTrServicos =
-            await SincronizarGroup.trServicosCall.call(
-          urlapicall: FFAppState().urlapicall,
-        );
-        _model.preLoadingTrOsServicos =
-            await SincronizarGroup.trOsServicosCall.call(
-          tecId: FFAppState().tecID,
-          urlapicall: FFAppState().urlapicall,
         );
         FFAppState().update(() {
           FFAppState().icones = getJsonField(
@@ -362,36 +349,6 @@ class _SelecionarOSWidgetState extends State<SelecionarOSWidget>
             r'''$.contorno[:]''',
             true,
           )!
-              .toList()
-              .cast<dynamic>();
-          FFAppState().trOsServicos = functions
-              .juntarDuasListasJson(
-                  SincronizarGroup.trOsServicosCall
-                      .dadosTrOsServicos(
-                        (_model.preLoadingTrOsServicos?.jsonBody ?? ''),
-                      )
-                      ?.toList(),
-                  FFAppState().trOsServicos.toList())!
-              .toList()
-              .cast<dynamic>();
-          FFAppState().trServicos = functions
-              .juntarDuasListasJson(
-                  SincronizarGroup.trServicosCall
-                      .dadosTrServicos(
-                        (_model.preLoadingTrServicos?.jsonBody ?? ''),
-                      )
-                      ?.toList(),
-                  FFAppState().trServicos.toList())!
-              .toList()
-              .cast<dynamic>();
-          FFAppState().trFazendas = functions
-              .juntarDuasListasJson(
-                  SincronizarGroup.trFazendasCall
-                      .dadosTrFazendas(
-                        (_model.preLoadingTrFazendas?.jsonBody ?? ''),
-                      )
-                      ?.toList(),
-                  FFAppState().trFazendas.toList())!
               .toList()
               .cast<dynamic>();
         });
