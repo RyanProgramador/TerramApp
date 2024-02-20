@@ -1175,9 +1175,14 @@ class _SelecionarOSWidgetState extends State<SelecionarOSWidget>
                                             return Builder(
                                               builder: (context) {
                                                 final trOsServicos =
-                                                    FFAppState()
-                                                        .trOsServicos
-                                                        .toList();
+                                                    SincronizarGroup
+                                                            .trOsServicosCall
+                                                            .dadosTrOsServicos(
+                                                              columnTrOsServicosResponse
+                                                                  .jsonBody,
+                                                            )
+                                                            ?.toList() ??
+                                                        [];
                                                 if (trOsServicos.isEmpty) {
                                                   return Center(
                                                     child: Container(
