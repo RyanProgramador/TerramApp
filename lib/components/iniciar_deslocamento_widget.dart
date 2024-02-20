@@ -1759,16 +1759,13 @@ class _IniciarDeslocamentoWidgetState extends State<IniciarDeslocamentoWidget> {
                                           return Padding(
                                             padding: MediaQuery.viewInsetsOf(
                                                 context),
-                                            child: Container(
-                                              height: 40.0,
-                                              child: LoadingMedicaoColetaWidget(
-                                                faznome: widget.fazendaNome!,
-                                                idcontorno: widget.servicoId!,
-                                                autoauditoria:
-                                                    widget.autoAuditoria,
-                                                quantosPontos: widget
-                                                    .autoAuditoriaQuantidadePontos!,
-                                              ),
+                                            child: LoadingMedicaoColetaWidget(
+                                              faznome: widget.fazendaNome!,
+                                              idcontorno: widget.servicoId!,
+                                              autoauditoria:
+                                                  widget.autoAuditoria,
+                                              quantosPontos: widget
+                                                  .autoAuditoriaQuantidadePontos!,
                                             ),
                                           );
                                         },
