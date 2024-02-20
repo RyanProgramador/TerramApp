@@ -323,8 +323,8 @@ class _SelecionarOSWidgetState extends State<SelecionarOSWidget>
       } else if ((FFAppState().trOrdemServicos.length <= 0) &&
           _model.foiAtualizado) {
       } else {
-        _model.preLoadingTrServicos =
-            await SincronizarGroup.trServicosCall.call(
+        _model.preLoadingTrFazendas =
+            await SincronizarGroup.trFazendasCall.call(
           urlapicall: FFAppState().urlapicall,
         );
         _model.pontosDeColetaFormatados =
@@ -333,13 +333,13 @@ class _SelecionarOSWidgetState extends State<SelecionarOSWidget>
           pontosColetados:
               functions.jsonListToStr(FFAppState().PontosColetados.toList()),
         );
+        _model.preLoadingTrServicos =
+            await SincronizarGroup.trServicosCall.call(
+          urlapicall: FFAppState().urlapicall,
+        );
         _model.preLoadingTrOsServicos =
             await SincronizarGroup.trOsServicosCall.call(
           tecId: FFAppState().tecID,
-          urlapicall: FFAppState().urlapicall,
-        );
-        _model.preLoadingTrFazendas =
-            await SincronizarGroup.trFazendasCall.call(
           urlapicall: FFAppState().urlapicall,
         );
         FFAppState().update(() {
