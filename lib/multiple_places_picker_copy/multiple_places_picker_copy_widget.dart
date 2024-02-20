@@ -895,37 +895,30 @@ class _MultiplePlacesPickerCopyWidgetState
                                             color: FlutterFlowTheme.of(context)
                                                 .secondaryBackground,
                                           ),
-                                          child: Builder(
-                                            builder: (context) {
-                                              final rotas = FFAppState()
-                                                  .rotainversa
-                                                  .toList();
-                                              return SingleChildScrollView(
-                                                child: Column(
-                                                  mainAxisSize:
-                                                      MainAxisSize.max,
-                                                  children: List.generate(
-                                                      rotas.length,
-                                                      (rotasIndex) {
-                                                    final rotasItem =
-                                                        rotas[rotasIndex];
-                                                    return SelectionArea(
-                                                        child: Text(
-                                                      rotasItem.toString(),
-                                                      style:
-                                                          FlutterFlowTheme.of(
-                                                                  context)
-                                                              .bodyMedium
-                                                              .override(
-                                                                fontFamily:
-                                                                    'Readex Pro',
-                                                                fontSize: 10.0,
-                                                              ),
-                                                    ));
-                                                  }),
-                                                ),
-                                              );
-                                            },
+                                          child: SingleChildScrollView(
+                                            child: Column(
+                                              mainAxisSize: MainAxisSize.max,
+                                              children: [
+                                                SelectionArea(
+                                                    child: Text(
+                                                  valueOrDefault<String>(
+                                                    functions.jsonListToStr(
+                                                        FFAppState()
+                                                            .trOsDeslocamentosJsonFinalizados
+                                                            .toList()),
+                                                    '5',
+                                                  ),
+                                                  style: FlutterFlowTheme.of(
+                                                          context)
+                                                      .bodyMedium
+                                                      .override(
+                                                        fontFamily:
+                                                            'Readex Pro',
+                                                        fontSize: 10.0,
+                                                      ),
+                                                )),
+                                              ],
+                                            ),
                                           ),
                                         ),
                                       ),
