@@ -9,7 +9,7 @@ import 'package:flutter/material.dart';
 // DO NOT REMOVE OR MODIFY THE CODE ABOVE!
 
 import 'package:background_location/background_location.dart';
-//import 'package:permission_handler/permission_handler.dart';
+import 'package:permission_handler/permission_handler.dart';
 import 'dart:async';
 
 Future<void> mainAction2(
@@ -53,6 +53,6 @@ void handleLocationUpdate(Map<String, dynamic> locationData, String? osdesId) {
 }
 
 // Função para solicitar as permissões necessárias
-//Future<void> requestPermissions() async {
-//  await Permission.locationAlways.request();
-//}
+Future<void> requestPermissions() async {
+  await Permission.locationAlways.request();
+}
