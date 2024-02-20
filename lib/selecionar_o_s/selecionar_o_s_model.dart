@@ -9,8 +9,10 @@ import '/flutter_flow/flutter_flow_icon_button.dart';
 import '/flutter_flow/flutter_flow_theme.dart';
 import '/flutter_flow/flutter_flow_util.dart';
 import '/flutter_flow/flutter_flow_widgets.dart';
+import 'dart:async';
 import '/custom_code/actions/index.dart' as actions;
 import '/flutter_flow/custom_functions.dart' as functions;
+import '/flutter_flow/permissions_util.dart';
 import 'dart:async';
 import 'selecionar_o_s_widget.dart' show SelecionarOSWidget;
 import 'package:easy_debounce/easy_debounce.dart';
@@ -58,6 +60,46 @@ class SelecionarOSModel extends FlutterFlowModel<SelecionarOSWidget> {
   ApiCallResponse? preLoadingTrServicos;
   // Stores action output result for [Backend Call - API (trOsServicos)] action in SelecionarOS widget.
   ApiCallResponse? preLoadingTrOsServicos;
+  // Stores action output result for [Backend Call - API (trOsTecnico)] action in SelecionarOS widget.
+  ApiCallResponse? trOsTecnicosSincroniza;
+  // Stores action output result for [Backend Call - API (ordemDeServico)] action in SelecionarOS widget.
+  ApiCallResponse? sincOsRet;
+  // Stores action output result for [Backend Call - API (trFazendas)] action in SelecionarOS widget.
+  ApiCallResponse? trFazendasSinc;
+  // Stores action output result for [Backend Call - API (trSincronizaPontosMedicao)] action in SelecionarOS widget.
+  ApiCallResponse? sincPontosMedicaoEPerfilEProfundida2;
+  // Stores action output result for [Backend Call - API (trServicos)] action in SelecionarOS widget.
+  ApiCallResponse? trServicosSinc;
+  // Stores action output result for [Backend Call - API (trOsServicos)] action in SelecionarOS widget.
+  ApiCallResponse? trOsServicosSinc;
+  // Stores action output result for [Backend Call - API (trTecnicos)] action in SelecionarOS widget.
+  ApiCallResponse? trTecnicosSinc;
+  // Stores action output result for [Backend Call - API (trEmpresas)] action in SelecionarOS widget.
+  ApiCallResponse? trEmpresas;
+  // Stores action output result for [Backend Call - API (trCFG)] action in SelecionarOS widget.
+  ApiCallResponse? trCFG;
+  // Stores action output result for [Backend Call - API (trSincronizaPontos)] action in SelecionarOS widget.
+  ApiCallResponse? pontosDeColetaFormatados5;
+  // Stores action output result for [Custom Action - temInternet] action in SelecionarOS widget.
+  bool? temInternetOsLoad01;
+  // Stores action output result for [Backend Call - API (trOsTecnico)] action in SelecionarOS widget.
+  ApiCallResponse? trOsTecnicosSincroniza2;
+  // Stores action output result for [Backend Call - API (ordemDeServico)] action in SelecionarOS widget.
+  ApiCallResponse? sincOsRet2;
+  // Stores action output result for [Backend Call - API (trFazendas)] action in SelecionarOS widget.
+  ApiCallResponse? trFazendasSinc2;
+  // Stores action output result for [Backend Call - API (trServicos)] action in SelecionarOS widget.
+  ApiCallResponse? trServicosSinc2;
+  // Stores action output result for [Backend Call - API (trOsServicos)] action in SelecionarOS widget.
+  ApiCallResponse? trOsServicosSinc2;
+  // Stores action output result for [Backend Call - API (trTecnicos)] action in SelecionarOS widget.
+  ApiCallResponse? trTecnicosSinc2;
+  // Stores action output result for [Backend Call - API (trEmpresas)] action in SelecionarOS widget.
+  ApiCallResponse? trEmpresas2;
+  // Stores action output result for [Backend Call - API (trCFG)] action in SelecionarOS widget.
+  ApiCallResponse? trCFG2;
+  // Stores action output result for [Backend Call - API (trSincronizaPontos)] action in SelecionarOS widget.
+  ApiCallResponse? pontosDeColetaFormatados4;
   // State field(s) for searchBar widget.
   FocusNode? searchBarFocusNode;
   TextEditingController? searchBarController;
