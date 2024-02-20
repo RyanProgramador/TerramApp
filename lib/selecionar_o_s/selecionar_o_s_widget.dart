@@ -612,14 +612,10 @@ class _SelecionarOSWidgetState extends State<SelecionarOSWidget>
                       FFAppState().trOsTecnicos.toList())!
                   .toList()
                   .cast<dynamic>();
-              FFAppState().trOsServicos = functions
-                  .juntarDuasListasJson(
-                      SincronizarGroup.trOsServicosCall
-                          .dadosTrOsServicos(
-                            (_model.trOsServicosSinc2?.jsonBody ?? ''),
-                          )
-                          ?.toList(),
-                      FFAppState().trOsServicos.toList())!
+              FFAppState().trOsServicos = SincronizarGroup.trOsServicosCall
+                  .dadosTrOsServicos(
+                    (_model.trOsServicosSinc2?.jsonBody ?? ''),
+                  )!
                   .toList()
                   .cast<dynamic>();
               FFAppState().trServicos = functions
