@@ -1,5 +1,6 @@
 import '/backend/api_requests/api_calls.dart';
 import '/components/carregando_os_widget.dart';
+import '/components/loading_comp_servicos_widget.dart';
 import '/components/loading_comp_widget.dart';
 import '/components/pesquisa_avanadabtn_widget.dart';
 import '/components/vazio_widget.dart';
@@ -10,6 +11,7 @@ import '/flutter_flow/flutter_flow_util.dart';
 import '/flutter_flow/flutter_flow_widgets.dart';
 import '/custom_code/actions/index.dart' as actions;
 import '/flutter_flow/custom_functions.dart' as functions;
+import 'dart:async';
 import 'selecionar_o_s_widget.dart' show SelecionarOSWidget;
 import 'package:easy_debounce/easy_debounce.dart';
 import 'package:flutter/material.dart';
@@ -62,6 +64,7 @@ class SelecionarOSModel extends FlutterFlowModel<SelecionarOSWidget> {
   String? Function(BuildContext, String?)? searchBarControllerValidator;
   // Stores action output result for [Custom Action - calendarRangerAction] action in Container widget.
   List<DateTime>? calendarRange;
+  Completer<ApiCallResponse>? apiRequestCompleter;
   // Stores action output result for [Custom Action - temInternet] action in Row widget.
   bool? temNetNoServico;
   // Stores action output result for [Backend Call - API (apiRotasPolylines)] action in Row widget.
@@ -86,4 +89,19 @@ class SelecionarOSModel extends FlutterFlowModel<SelecionarOSWidget> {
   /// Action blocks are added here.
 
   /// Additional helper methods are added here.
+
+  Future waitForApiRequestCompleted({
+    double minWait = 0,
+    double maxWait = double.infinity,
+  }) async {
+    final stopwatch = Stopwatch()..start();
+    while (true) {
+      await Future.delayed(Duration(milliseconds: 50));
+      final timeElapsed = stopwatch.elapsedMilliseconds;
+      final requestComplete = apiRequestCompleter?.isCompleted ?? false;
+      if (timeElapsed > maxWait || (requestComplete && timeElapsed > minWait)) {
+        break;
+      }
+    }
+  }
 }
