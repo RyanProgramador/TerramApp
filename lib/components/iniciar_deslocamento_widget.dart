@@ -1,4 +1,5 @@
 import '/backend/api_requests/api_calls.dart';
+import '/components/loading_comp_copy_widget.dart';
 import '/components/motivo_pausa_widget.dart';
 import '/flutter_flow/flutter_flow_google_map.dart';
 import '/flutter_flow/flutter_flow_theme.dart';
@@ -1710,6 +1711,20 @@ class _IniciarDeslocamentoWidgetState extends State<IniciarDeslocamentoWidget> {
                                     (widget.etapade == 'Coleta'))
                                   FFButtonWidget(
                                     onPressed: () async {
+                                      showModalBottomSheet(
+                                        isScrollControlled: true,
+                                        backgroundColor: Colors.transparent,
+                                        enableDrag: false,
+                                        context: context,
+                                        builder: (context) {
+                                          return Padding(
+                                            padding: MediaQuery.viewInsetsOf(
+                                                context),
+                                            child: LoadingCompCopyWidget(),
+                                          );
+                                        },
+                                      ).then((value) => safeSetState(() {}));
+
                                       context.pushNamed(
                                         'MedicaoColeta',
                                         queryParameters: {
