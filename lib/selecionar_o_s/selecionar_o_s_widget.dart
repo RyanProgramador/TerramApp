@@ -348,13 +348,13 @@ class _SelecionarOSWidgetState extends State<SelecionarOSWidget>
           )!
               .toList()
               .cast<dynamic>();
-          FFAppState().listaContornoColeta = getJsonField(
-            (_model.pontosDeColetaFormatados?.jsonBody ?? ''),
-            r'''$.contorno[:]''',
-            true,
-          )!
-              .toList()
-              .cast<dynamic>();
+          FFAppState().listaContornoColeta =
+              SincronizarGroup.trSincronizaPontosCall
+                  .pontosDeColetaFormatados(
+                    (_model.pontosDeColetaFormatados?.jsonBody ?? ''),
+                  )!
+                  .toList()
+                  .cast<dynamic>();
           FFAppState().trOsServicos = functions
               .juntarDuasListasJson(
                   SincronizarGroup.trOsServicosCall
