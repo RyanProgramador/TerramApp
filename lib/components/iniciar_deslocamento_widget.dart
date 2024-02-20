@@ -1,10 +1,10 @@
 import '/backend/api_requests/api_calls.dart';
+import '/components/loading_comp_copy_widget.dart';
 import '/components/motivo_pausa_widget.dart';
 import '/flutter_flow/flutter_flow_google_map.dart';
 import '/flutter_flow/flutter_flow_theme.dart';
 import '/flutter_flow/flutter_flow_util.dart';
 import '/flutter_flow/flutter_flow_widgets.dart';
-import 'dart:async';
 import '/custom_code/actions/index.dart' as actions;
 import '/custom_code/widgets/index.dart' as custom_widgets;
 import '/flutter_flow/custom_functions.dart' as functions;
@@ -687,966 +687,989 @@ class _IniciarDeslocamentoWidgetState extends State<IniciarDeslocamentoWidget> {
                                       ),
                                     ),
                                   ),
-                                FFButtonWidget(
-                                  onPressed: () async {
-                                    currentUserLocationValue =
-                                        await getCurrentUserLocation(
-                                            defaultLocation: LatLng(0.0, 0.0));
-                                    var _shouldSetState = false;
-                                    _model.temInternetAntesDoDeslocamento =
-                                        await actions.temInternet();
-                                    _shouldSetState = true;
-                                    if (_model
-                                        .temInternetAntesDoDeslocamento!) {
-                                      if (widget
-                                          .deslocamentoAtualFinzalizado!) {
-                                        var confirmDialogResponse =
-                                            await showDialog<bool>(
-                                                  context: context,
-                                                  builder:
-                                                      (alertDialogContext) {
-                                                    return AlertDialog(
-                                                      content: Text(
-                                                          'Você deseja retornar ao ponto de origem?'),
-                                                      actions: [
-                                                        TextButton(
-                                                          onPressed: () =>
-                                                              Navigator.pop(
-                                                                  alertDialogContext,
-                                                                  false),
-                                                          child: Text('Não'),
-                                                        ),
-                                                        TextButton(
-                                                          onPressed: () =>
-                                                              Navigator.pop(
-                                                                  alertDialogContext,
-                                                                  true),
-                                                          child: Text('Sim'),
-                                                        ),
-                                                      ],
-                                                    );
-                                                  },
-                                                ) ??
-                                                false;
-                                        if (confirmDialogResponse) {
-                                          _model.porfavorFuncioneComRotaInvertida =
-                                              await ApiRotasPolylinesCall.call(
-                                            latitudeOrigem:
-                                                functions.separadorLatDeLng(
-                                                    true,
-                                                    functions.latLngToStr(
-                                                        widget.latlngFaz)),
-                                            longitudeOrigem:
-                                                functions.separadorLatDeLng(
-                                                    false,
-                                                    functions.latLngToStr(
-                                                        widget.latlngFaz)),
-                                            latitudeDestino:
-                                                functions.separadorLatDeLng(
-                                                    true,
-                                                    functions.latLngToStr(
-                                                        currentUserLocationValue)),
-                                            longitudeDestonp:
-                                                functions.separadorLatDeLng(
-                                                    false,
-                                                    functions.latLngToStr(
-                                                        currentUserLocationValue)),
-                                            key:
-                                                'AIzaSyDpk1wIZmA1OTS57D_cB13BD01zqrTiQNI',
-                                          );
-                                          _shouldSetState = true;
+                                if (true == false)
+                                  FFButtonWidget(
+                                    onPressed: () async {
+                                      currentUserLocationValue =
+                                          await getCurrentUserLocation(
+                                              defaultLocation:
+                                                  LatLng(0.0, 0.0));
+                                      var _shouldSetState = false;
+                                      _model.temInternetAntesDoDeslocamento =
+                                          await actions.temInternet();
+                                      _shouldSetState = true;
+                                      if (_model
+                                          .temInternetAntesDoDeslocamento!) {
+                                        if (widget
+                                            .deslocamentoAtualFinzalizado!) {
+                                          var confirmDialogResponse =
+                                              await showDialog<bool>(
+                                                    context: context,
+                                                    builder:
+                                                        (alertDialogContext) {
+                                                      return AlertDialog(
+                                                        content: Text(
+                                                            'Você deseja retornar ao ponto de origem?'),
+                                                        actions: [
+                                                          TextButton(
+                                                            onPressed: () =>
+                                                                Navigator.pop(
+                                                                    alertDialogContext,
+                                                                    false),
+                                                            child: Text('Não'),
+                                                          ),
+                                                          TextButton(
+                                                            onPressed: () =>
+                                                                Navigator.pop(
+                                                                    alertDialogContext,
+                                                                    true),
+                                                            child: Text('Sim'),
+                                                          ),
+                                                        ],
+                                                      );
+                                                    },
+                                                  ) ??
+                                                  false;
+                                          if (confirmDialogResponse) {
+                                            _model.porfavorFuncioneComRotaInvertida =
+                                                await ApiRotasPolylinesCall
+                                                    .call(
+                                              latitudeOrigem:
+                                                  functions.separadorLatDeLng(
+                                                      true,
+                                                      functions.latLngToStr(
+                                                          widget.latlngFaz)),
+                                              longitudeOrigem:
+                                                  functions.separadorLatDeLng(
+                                                      false,
+                                                      functions.latLngToStr(
+                                                          widget.latlngFaz)),
+                                              latitudeDestino:
+                                                  functions.separadorLatDeLng(
+                                                      true,
+                                                      functions.latLngToStr(
+                                                          currentUserLocationValue)),
+                                              longitudeDestonp:
+                                                  functions.separadorLatDeLng(
+                                                      false,
+                                                      functions.latLngToStr(
+                                                          currentUserLocationValue)),
+                                              key:
+                                                  'AIzaSyDpk1wIZmA1OTS57D_cB13BD01zqrTiQNI',
+                                            );
+                                            _shouldSetState = true;
 
-                                          context.pushNamed(
-                                            'GpsTecToFazenda',
-                                            queryParameters: {
-                                              'jsonServico': serializeParam(
-                                                widget.jsonServico,
-                                                ParamType.JSON,
-                                              ),
-                                              'tecnicoId': serializeParam(
-                                                widget.tecnicoId,
-                                                ParamType.String,
-                                              ),
-                                              'servicoId': serializeParam(
-                                                widget.servicoId,
-                                                ParamType.String,
-                                              ),
-                                              'fazNome': serializeParam(
-                                                widget.fazendaNome,
-                                                ParamType.String,
-                                              ),
-                                              'latlngFaz': serializeParam(
-                                                widget.latlngFaz,
-                                                ParamType.LatLng,
-                                              ),
-                                              'retornoAPI': serializeParam(
-                                                functions.jsonToStr(
-                                                    ApiRotasDirectionsCall.tudo(
-                                                  cardActionsApiRotasDirectionsResponse
-                                                      .jsonBody,
-                                                )),
-                                                ParamType.String,
-                                              ),
-                                              'retornopolylines':
-                                                  serializeParam(
-                                                functions.ligaoDeNome(
-                                                    FFAppState()
-                                                        .rotainversa
-                                                        .toList(),
-                                                    'osserv_id',
-                                                    'rota_inversa',
-                                                    widget.servicoId),
-                                                ParamType.String,
-                                              ),
-                                              'comRota': serializeParam(
-                                                true,
-                                                ParamType.bool,
-                                              ),
-                                              'rotaInversa': serializeParam(
-                                                true,
-                                                ParamType.bool,
-                                              ),
-                                              'rotaInversaString':
-                                                  serializeParam(
-                                                functions.ligaoDeNome(
-                                                    FFAppState()
-                                                        .rotainversa
-                                                        .toList(),
-                                                    'osserv_id',
-                                                    'rota_inversa',
-                                                    widget.servicoId),
-                                                ParamType.String,
-                                              ),
-                                              'cidadeFaz': serializeParam(
-                                                widget.cidadeFaz,
-                                                ParamType.String,
-                                              ),
-                                              'estadoFaz': serializeParam(
-                                                widget.estadoFaz,
-                                                ParamType.String,
-                                              ),
-                                              'observacao': serializeParam(
-                                                widget.observacao,
-                                                ParamType.String,
-                                              ),
-                                              'data': serializeParam(
-                                                widget.data,
-                                                ParamType.String,
-                                              ),
-                                              'horar': serializeParam(
-                                                widget.hora,
-                                                ParamType.String,
-                                              ),
-                                              'fazid': serializeParam(
-                                                widget.fazid,
-                                                ParamType.String,
-                                              ),
-                                              'autoAuditoria': serializeParam(
-                                                widget.autoAuditoria,
-                                                ParamType.bool,
-                                              ),
-                                              'autoAuditoriaQuantidadePontos':
-                                                  serializeParam(
-                                                widget
-                                                    .autoAuditoriaQuantidadePontos,
-                                                ParamType.int,
-                                              ),
-                                              'etapaDe': serializeParam(
-                                                widget.etapade,
-                                                ParamType.String,
-                                              ),
-                                            }.withoutNulls,
-                                          );
-
-                                          FFAppState().update(() {});
-                                          if (_shouldSetState) setState(() {});
-                                          return;
-                                        } else {
-                                          _model.porfavorFuncioneSemRota =
-                                              await ApiRotasPolylinesCall.call(
-                                            latitudeOrigem:
-                                                functions.separadorLatDeLng(
-                                                    true,
-                                                    functions.latLngToStr(
-                                                        currentUserLocationValue)),
-                                            longitudeOrigem:
-                                                functions.separadorLatDeLng(
-                                                    false,
-                                                    functions.latLngToStr(
-                                                        currentUserLocationValue)),
-                                            latitudeDestino:
-                                                functions.separadorLatDeLng(
-                                                    true,
-                                                    functions.latLngToStr(
-                                                        widget.latlngFaz)),
-                                            longitudeDestonp:
-                                                functions.separadorLatDeLng(
-                                                    false,
-                                                    functions.latLngToStr(
-                                                        widget.latlngFaz)),
-                                            key:
-                                                'AIzaSyDpk1wIZmA1OTS57D_cB13BD01zqrTiQNI',
-                                          );
-                                          _shouldSetState = true;
-
-                                          context.pushNamed(
-                                            'GpsTecToFazenda',
-                                            queryParameters: {
-                                              'jsonServico': serializeParam(
-                                                widget.jsonServico,
-                                                ParamType.JSON,
-                                              ),
-                                              'tecnicoId': serializeParam(
-                                                widget.tecnicoId,
-                                                ParamType.String,
-                                              ),
-                                              'servicoId': serializeParam(
-                                                widget.servicoId,
-                                                ParamType.String,
-                                              ),
-                                              'fazNome': serializeParam(
-                                                widget.fazendaNome,
-                                                ParamType.String,
-                                              ),
-                                              'latlngFaz': serializeParam(
-                                                widget.latlngFaz,
-                                                ParamType.LatLng,
-                                              ),
-                                              'retornoAPI': serializeParam(
-                                                functions.jsonToStr(
-                                                    ApiRotasDirectionsCall.tudo(
-                                                  cardActionsApiRotasDirectionsResponse
-                                                      .jsonBody,
-                                                )),
-                                                ParamType.String,
-                                              ),
-                                              'retornopolylines':
-                                                  serializeParam(
-                                                ApiRotasPolylinesCall
-                                                    .criptografadapolyline(
-                                                  (_model.porfavorFuncioneSemRota
-                                                          ?.jsonBody ??
-                                                      ''),
+                                            context.pushNamed(
+                                              'GpsTecToFazenda',
+                                              queryParameters: {
+                                                'jsonServico': serializeParam(
+                                                  widget.jsonServico,
+                                                  ParamType.JSON,
                                                 ),
-                                                ParamType.String,
-                                              ),
-                                              'comRota': serializeParam(
-                                                false,
-                                                ParamType.bool,
-                                              ),
-                                              'rotaInversa': serializeParam(
-                                                true,
-                                                ParamType.bool,
-                                              ),
-                                              'rotaInversaString':
-                                                  serializeParam(
-                                                '',
-                                                ParamType.String,
-                                              ),
-                                              'cidadeFaz': serializeParam(
-                                                widget.cidadeFaz,
-                                                ParamType.String,
-                                              ),
-                                              'estadoFaz': serializeParam(
-                                                widget.estadoFaz,
-                                                ParamType.String,
-                                              ),
-                                              'observacao': serializeParam(
-                                                widget.observacao,
-                                                ParamType.String,
-                                              ),
-                                              'data': serializeParam(
-                                                widget.data,
-                                                ParamType.String,
-                                              ),
-                                              'horar': serializeParam(
-                                                widget.hora,
-                                                ParamType.String,
-                                              ),
-                                              'fazid': serializeParam(
-                                                widget.fazid,
-                                                ParamType.String,
-                                              ),
-                                              'autoAuditoria': serializeParam(
-                                                widget.autoAuditoria,
-                                                ParamType.bool,
-                                              ),
-                                              'autoAuditoriaQuantidadePontos':
-                                                  serializeParam(
-                                                widget
-                                                    .autoAuditoriaQuantidadePontos,
-                                                ParamType.int,
-                                              ),
-                                              'etapaDe': serializeParam(
-                                                widget.etapade,
-                                                ParamType.String,
-                                              ),
-                                            }.withoutNulls,
-                                          );
-
-                                          FFAppState().update(() {});
-                                          if (_shouldSetState) setState(() {});
-                                          return;
-                                        }
-                                      } else {
-                                        var confirmDialogResponse =
-                                            await showDialog<bool>(
-                                                  context: context,
-                                                  builder:
-                                                      (alertDialogContext) {
-                                                    return AlertDialog(
-                                                      content: Text(
-                                                          'Você se deslocará direto para a fazenda?'),
-                                                      actions: [
-                                                        TextButton(
-                                                          onPressed: () =>
-                                                              Navigator.pop(
-                                                                  alertDialogContext,
-                                                                  false),
-                                                          child: Text('Não'),
-                                                        ),
-                                                        TextButton(
-                                                          onPressed: () =>
-                                                              Navigator.pop(
-                                                                  alertDialogContext,
-                                                                  true),
-                                                          child: Text('Sim'),
-                                                        ),
-                                                      ],
-                                                    );
-                                                  },
-                                                ) ??
-                                                false;
-                                        if (confirmDialogResponse) {
-                                          _model.rotaInvertida =
-                                              await ApiRotasPolylinesCall.call(
-                                            latitudeOrigem:
-                                                functions.separadorLatDeLng(
-                                                    true,
-                                                    functions.latLngToStr(
-                                                        widget.latlngFaz)),
-                                            longitudeOrigem:
-                                                functions.separadorLatDeLng(
-                                                    false,
-                                                    functions.latLngToStr(
-                                                        widget.latlngFaz)),
-                                            latitudeDestino:
-                                                functions.separadorLatDeLng(
-                                                    true,
-                                                    functions.latLngToStr(
-                                                        currentUserLocationValue)),
-                                            longitudeDestonp:
-                                                functions.separadorLatDeLng(
-                                                    false,
-                                                    functions.latLngToStr(
-                                                        currentUserLocationValue)),
-                                            key:
-                                                'AIzaSyDpk1wIZmA1OTS57D_cB13BD01zqrTiQNI',
-                                          );
-                                          _shouldSetState = true;
-                                          await actions.gravaRotaInversa(
-                                            widget.servicoId,
-                                            ApiRotasPolylinesCall
-                                                .criptografadapolyline(
-                                              (_model.rotaInvertida?.jsonBody ??
-                                                  ''),
-                                            ),
-                                          );
-                                          _model.porfavorFuncioneTecAteFaz =
-                                              await ApiRotasPolylinesCall.call(
-                                            latitudeOrigem:
-                                                functions.separadorLatDeLng(
-                                                    true,
-                                                    functions.latLngToStr(
-                                                        currentUserLocationValue)),
-                                            longitudeOrigem:
-                                                functions.separadorLatDeLng(
-                                                    false,
-                                                    functions.latLngToStr(
-                                                        currentUserLocationValue)),
-                                            latitudeDestino:
-                                                functions.separadorLatDeLng(
-                                                    true,
-                                                    functions.latLngToStr(
-                                                        widget.latlngFaz)),
-                                            longitudeDestonp:
-                                                functions.separadorLatDeLng(
-                                                    false,
-                                                    functions.latLngToStr(
-                                                        widget.latlngFaz)),
-                                            key:
-                                                'AIzaSyDpk1wIZmA1OTS57D_cB13BD01zqrTiQNI',
-                                          );
-                                          _shouldSetState = true;
-                                          setState(() {
-                                            FFAppState().rotainversa =
-                                                FFAppState()
-                                                    .rotainversa
-                                                    .toList()
-                                                    .cast<dynamic>();
-                                          });
-
-                                          context.pushNamed(
-                                            'GpsTecToFazenda',
-                                            queryParameters: {
-                                              'jsonServico': serializeParam(
-                                                widget.jsonServico,
-                                                ParamType.JSON,
-                                              ),
-                                              'tecnicoId': serializeParam(
-                                                widget.tecnicoId,
-                                                ParamType.String,
-                                              ),
-                                              'servicoId': serializeParam(
-                                                widget.servicoId,
-                                                ParamType.String,
-                                              ),
-                                              'fazNome': serializeParam(
-                                                widget.fazendaNome,
-                                                ParamType.String,
-                                              ),
-                                              'latlngFaz': serializeParam(
-                                                widget.latlngFaz,
-                                                ParamType.LatLng,
-                                              ),
-                                              'retornoAPI': serializeParam(
-                                                functions.jsonToStr(
-                                                    ApiRotasDirectionsCall.tudo(
-                                                  cardActionsApiRotasDirectionsResponse
-                                                      .jsonBody,
-                                                )),
-                                                ParamType.String,
-                                              ),
-                                              'retornopolylines':
-                                                  serializeParam(
-                                                ApiRotasPolylinesCall
-                                                    .criptografadapolyline(
-                                                  (_model.porfavorFuncioneTecAteFaz
-                                                          ?.jsonBody ??
-                                                      ''),
+                                                'tecnicoId': serializeParam(
+                                                  widget.tecnicoId,
+                                                  ParamType.String,
                                                 ),
-                                                ParamType.String,
-                                              ),
-                                              'comRota': serializeParam(
-                                                true,
-                                                ParamType.bool,
-                                              ),
-                                              'rotaInversa': serializeParam(
-                                                false,
-                                                ParamType.bool,
-                                              ),
-                                              'rotaInversaString':
-                                                  serializeParam(
-                                                '',
-                                                ParamType.String,
-                                              ),
-                                              'cidadeFaz': serializeParam(
-                                                widget.cidadeFaz,
-                                                ParamType.String,
-                                              ),
-                                              'estadoFaz': serializeParam(
-                                                widget.estadoFaz,
-                                                ParamType.String,
-                                              ),
-                                              'observacao': serializeParam(
-                                                widget.observacao,
-                                                ParamType.String,
-                                              ),
-                                              'data': serializeParam(
-                                                widget.data,
-                                                ParamType.String,
-                                              ),
-                                              'horar': serializeParam(
-                                                widget.hora,
-                                                ParamType.String,
-                                              ),
-                                              'fazid': serializeParam(
-                                                widget.fazid,
-                                                ParamType.String,
-                                              ),
-                                              'autoAuditoria': serializeParam(
-                                                widget.autoAuditoria,
-                                                ParamType.bool,
-                                              ),
-                                              'autoAuditoriaQuantidadePontos':
-                                                  serializeParam(
-                                                widget
-                                                    .autoAuditoriaQuantidadePontos,
-                                                ParamType.int,
-                                              ),
-                                              'etapaDe': serializeParam(
-                                                widget.etapade,
-                                                ParamType.String,
-                                              ),
-                                            }.withoutNulls,
-                                          );
+                                                'servicoId': serializeParam(
+                                                  widget.servicoId,
+                                                  ParamType.String,
+                                                ),
+                                                'fazNome': serializeParam(
+                                                  widget.fazendaNome,
+                                                  ParamType.String,
+                                                ),
+                                                'latlngFaz': serializeParam(
+                                                  widget.latlngFaz,
+                                                  ParamType.LatLng,
+                                                ),
+                                                'retornoAPI': serializeParam(
+                                                  functions.jsonToStr(
+                                                      ApiRotasDirectionsCall
+                                                          .tudo(
+                                                    cardActionsApiRotasDirectionsResponse
+                                                        .jsonBody,
+                                                  )),
+                                                  ParamType.String,
+                                                ),
+                                                'retornopolylines':
+                                                    serializeParam(
+                                                  functions.ligaoDeNome(
+                                                      FFAppState()
+                                                          .rotainversa
+                                                          .toList(),
+                                                      'osserv_id',
+                                                      'rota_inversa',
+                                                      widget.servicoId),
+                                                  ParamType.String,
+                                                ),
+                                                'comRota': serializeParam(
+                                                  true,
+                                                  ParamType.bool,
+                                                ),
+                                                'rotaInversa': serializeParam(
+                                                  true,
+                                                  ParamType.bool,
+                                                ),
+                                                'rotaInversaString':
+                                                    serializeParam(
+                                                  functions.ligaoDeNome(
+                                                      FFAppState()
+                                                          .rotainversa
+                                                          .toList(),
+                                                      'osserv_id',
+                                                      'rota_inversa',
+                                                      widget.servicoId),
+                                                  ParamType.String,
+                                                ),
+                                                'cidadeFaz': serializeParam(
+                                                  widget.cidadeFaz,
+                                                  ParamType.String,
+                                                ),
+                                                'estadoFaz': serializeParam(
+                                                  widget.estadoFaz,
+                                                  ParamType.String,
+                                                ),
+                                                'observacao': serializeParam(
+                                                  widget.observacao,
+                                                  ParamType.String,
+                                                ),
+                                                'data': serializeParam(
+                                                  widget.data,
+                                                  ParamType.String,
+                                                ),
+                                                'horar': serializeParam(
+                                                  widget.hora,
+                                                  ParamType.String,
+                                                ),
+                                                'fazid': serializeParam(
+                                                  widget.fazid,
+                                                  ParamType.String,
+                                                ),
+                                                'autoAuditoria': serializeParam(
+                                                  widget.autoAuditoria,
+                                                  ParamType.bool,
+                                                ),
+                                                'autoAuditoriaQuantidadePontos':
+                                                    serializeParam(
+                                                  widget
+                                                      .autoAuditoriaQuantidadePontos,
+                                                  ParamType.int,
+                                                ),
+                                                'etapaDe': serializeParam(
+                                                  widget.etapade,
+                                                  ParamType.String,
+                                                ),
+                                              }.withoutNulls,
+                                            );
 
-                                          FFAppState().update(() {});
-                                          if (_shouldSetState) setState(() {});
-                                          return;
+                                            FFAppState().update(() {});
+                                            if (_shouldSetState)
+                                              setState(() {});
+                                            return;
+                                          } else {
+                                            _model.porfavorFuncioneSemRota =
+                                                await ApiRotasPolylinesCall
+                                                    .call(
+                                              latitudeOrigem:
+                                                  functions.separadorLatDeLng(
+                                                      true,
+                                                      functions.latLngToStr(
+                                                          currentUserLocationValue)),
+                                              longitudeOrigem:
+                                                  functions.separadorLatDeLng(
+                                                      false,
+                                                      functions.latLngToStr(
+                                                          currentUserLocationValue)),
+                                              latitudeDestino:
+                                                  functions.separadorLatDeLng(
+                                                      true,
+                                                      functions.latLngToStr(
+                                                          widget.latlngFaz)),
+                                              longitudeDestonp:
+                                                  functions.separadorLatDeLng(
+                                                      false,
+                                                      functions.latLngToStr(
+                                                          widget.latlngFaz)),
+                                              key:
+                                                  'AIzaSyDpk1wIZmA1OTS57D_cB13BD01zqrTiQNI',
+                                            );
+                                            _shouldSetState = true;
+
+                                            context.pushNamed(
+                                              'GpsTecToFazenda',
+                                              queryParameters: {
+                                                'jsonServico': serializeParam(
+                                                  widget.jsonServico,
+                                                  ParamType.JSON,
+                                                ),
+                                                'tecnicoId': serializeParam(
+                                                  widget.tecnicoId,
+                                                  ParamType.String,
+                                                ),
+                                                'servicoId': serializeParam(
+                                                  widget.servicoId,
+                                                  ParamType.String,
+                                                ),
+                                                'fazNome': serializeParam(
+                                                  widget.fazendaNome,
+                                                  ParamType.String,
+                                                ),
+                                                'latlngFaz': serializeParam(
+                                                  widget.latlngFaz,
+                                                  ParamType.LatLng,
+                                                ),
+                                                'retornoAPI': serializeParam(
+                                                  functions.jsonToStr(
+                                                      ApiRotasDirectionsCall
+                                                          .tudo(
+                                                    cardActionsApiRotasDirectionsResponse
+                                                        .jsonBody,
+                                                  )),
+                                                  ParamType.String,
+                                                ),
+                                                'retornopolylines':
+                                                    serializeParam(
+                                                  ApiRotasPolylinesCall
+                                                      .criptografadapolyline(
+                                                    (_model.porfavorFuncioneSemRota
+                                                            ?.jsonBody ??
+                                                        ''),
+                                                  ),
+                                                  ParamType.String,
+                                                ),
+                                                'comRota': serializeParam(
+                                                  false,
+                                                  ParamType.bool,
+                                                ),
+                                                'rotaInversa': serializeParam(
+                                                  true,
+                                                  ParamType.bool,
+                                                ),
+                                                'rotaInversaString':
+                                                    serializeParam(
+                                                  '',
+                                                  ParamType.String,
+                                                ),
+                                                'cidadeFaz': serializeParam(
+                                                  widget.cidadeFaz,
+                                                  ParamType.String,
+                                                ),
+                                                'estadoFaz': serializeParam(
+                                                  widget.estadoFaz,
+                                                  ParamType.String,
+                                                ),
+                                                'observacao': serializeParam(
+                                                  widget.observacao,
+                                                  ParamType.String,
+                                                ),
+                                                'data': serializeParam(
+                                                  widget.data,
+                                                  ParamType.String,
+                                                ),
+                                                'horar': serializeParam(
+                                                  widget.hora,
+                                                  ParamType.String,
+                                                ),
+                                                'fazid': serializeParam(
+                                                  widget.fazid,
+                                                  ParamType.String,
+                                                ),
+                                                'autoAuditoria': serializeParam(
+                                                  widget.autoAuditoria,
+                                                  ParamType.bool,
+                                                ),
+                                                'autoAuditoriaQuantidadePontos':
+                                                    serializeParam(
+                                                  widget
+                                                      .autoAuditoriaQuantidadePontos,
+                                                  ParamType.int,
+                                                ),
+                                                'etapaDe': serializeParam(
+                                                  widget.etapade,
+                                                  ParamType.String,
+                                                ),
+                                              }.withoutNulls,
+                                            );
+
+                                            FFAppState().update(() {});
+                                            if (_shouldSetState)
+                                              setState(() {});
+                                            return;
+                                          }
                                         } else {
-                                          context.pushNamed(
-                                            'GpsTecToFazenda',
-                                            queryParameters: {
-                                              'jsonServico': serializeParam(
-                                                widget.jsonServico,
-                                                ParamType.JSON,
-                                              ),
-                                              'tecnicoId': serializeParam(
-                                                widget.tecnicoId,
-                                                ParamType.String,
-                                              ),
-                                              'servicoId': serializeParam(
-                                                widget.servicoId,
-                                                ParamType.String,
-                                              ),
-                                              'fazNome': serializeParam(
-                                                widget.fazendaNome,
-                                                ParamType.String,
-                                              ),
-                                              'latlngFaz': serializeParam(
-                                                widget.latlngFaz,
-                                                ParamType.LatLng,
-                                              ),
-                                              'retornoAPI': serializeParam(
-                                                functions.jsonToStr(
-                                                    ApiRotasDirectionsCall.tudo(
-                                                  cardActionsApiRotasDirectionsResponse
-                                                      .jsonBody,
-                                                )),
-                                                ParamType.String,
-                                              ),
-                                              'retornopolylines':
-                                                  serializeParam(
-                                                '',
-                                                ParamType.String,
-                                              ),
-                                              'comRota': serializeParam(
-                                                false,
-                                                ParamType.bool,
-                                              ),
-                                              'rotaInversa': serializeParam(
-                                                false,
-                                                ParamType.bool,
-                                              ),
-                                              'rotaInversaString':
-                                                  serializeParam(
-                                                '',
-                                                ParamType.String,
-                                              ),
-                                              'cidadeFaz': serializeParam(
-                                                widget.cidadeFaz,
-                                                ParamType.String,
-                                              ),
-                                              'estadoFaz': serializeParam(
-                                                widget.estadoFaz,
-                                                ParamType.String,
-                                              ),
-                                              'observacao': serializeParam(
-                                                widget.observacao,
-                                                ParamType.String,
-                                              ),
-                                              'data': serializeParam(
-                                                widget.data,
-                                                ParamType.String,
-                                              ),
-                                              'horar': serializeParam(
-                                                widget.hora,
-                                                ParamType.String,
-                                              ),
-                                              'fazid': serializeParam(
-                                                widget.fazid,
-                                                ParamType.String,
-                                              ),
-                                              'autoAuditoria': serializeParam(
-                                                widget.autoAuditoria,
-                                                ParamType.bool,
-                                              ),
-                                              'autoAuditoriaQuantidadePontos':
-                                                  serializeParam(
-                                                widget
-                                                    .autoAuditoriaQuantidadePontos,
-                                                ParamType.int,
-                                              ),
-                                              'etapaDe': serializeParam(
-                                                widget.etapade,
-                                                ParamType.String,
-                                              ),
-                                            }.withoutNulls,
-                                          );
-
-                                          FFAppState().update(() {});
-                                          if (_shouldSetState) setState(() {});
-                                          return;
-                                        }
-                                      }
-                                    } else {
-                                      if (widget
-                                          .deslocamentoAtualFinzalizado!) {
-                                        var confirmDialogResponse =
-                                            await showDialog<bool>(
-                                                  context: context,
-                                                  builder:
-                                                      (alertDialogContext) {
-                                                    return AlertDialog(
-                                                      content: Text(
-                                                          'Você deseja retornar ao ponto de origem?'),
-                                                      actions: [
-                                                        TextButton(
-                                                          onPressed: () =>
-                                                              Navigator.pop(
-                                                                  alertDialogContext,
-                                                                  false),
-                                                          child: Text('Não'),
-                                                        ),
-                                                        TextButton(
-                                                          onPressed: () =>
-                                                              Navigator.pop(
-                                                                  alertDialogContext,
-                                                                  true),
-                                                          child: Text('Sim'),
-                                                        ),
-                                                      ],
-                                                    );
-                                                  },
-                                                ) ??
-                                                false;
-                                        if (confirmDialogResponse) {
-                                          context.pushNamed(
-                                            'GpsTecToFazenda',
-                                            queryParameters: {
-                                              'jsonServico': serializeParam(
-                                                widget.jsonServico,
-                                                ParamType.JSON,
-                                              ),
-                                              'tecnicoId': serializeParam(
-                                                widget.tecnicoId,
-                                                ParamType.String,
-                                              ),
-                                              'servicoId': serializeParam(
-                                                widget.servicoId,
-                                                ParamType.String,
-                                              ),
-                                              'fazNome': serializeParam(
-                                                widget.fazendaNome,
-                                                ParamType.String,
-                                              ),
-                                              'latlngFaz': serializeParam(
-                                                widget.latlngFaz,
-                                                ParamType.LatLng,
-                                              ),
-                                              'retornoAPI': serializeParam(
-                                                functions.jsonToStr(
-                                                    ApiRotasDirectionsCall.tudo(
-                                                  cardActionsApiRotasDirectionsResponse
-                                                      .jsonBody,
-                                                )),
-                                                ParamType.String,
-                                              ),
-                                              'retornopolylines':
-                                                  serializeParam(
-                                                functions.ligaoDeNome(
-                                                    FFAppState()
-                                                        .rotainversa
-                                                        .toList(),
-                                                    'osserv_id',
-                                                    'rota_inversa',
-                                                    widget.servicoId),
-                                                ParamType.String,
-                                              ),
-                                              'comRota': serializeParam(
-                                                true,
-                                                ParamType.bool,
-                                              ),
-                                              'rotaInversa': serializeParam(
-                                                true,
-                                                ParamType.bool,
-                                              ),
-                                              'rotaInversaString':
-                                                  serializeParam(
-                                                functions.ligaoDeNome(
-                                                    FFAppState()
-                                                        .rotainversa
-                                                        .toList(),
-                                                    'osserv_id',
-                                                    'rota_inversa',
-                                                    widget.servicoId),
-                                                ParamType.String,
-                                              ),
-                                              'cidadeFaz': serializeParam(
-                                                widget.cidadeFaz,
-                                                ParamType.String,
-                                              ),
-                                              'estadoFaz': serializeParam(
-                                                widget.estadoFaz,
-                                                ParamType.String,
-                                              ),
-                                              'observacao': serializeParam(
-                                                widget.observacao,
-                                                ParamType.String,
-                                              ),
-                                              'data': serializeParam(
-                                                widget.data,
-                                                ParamType.String,
-                                              ),
-                                              'horar': serializeParam(
-                                                widget.hora,
-                                                ParamType.String,
-                                              ),
-                                              'fazid': serializeParam(
-                                                widget.fazid,
-                                                ParamType.String,
-                                              ),
-                                              'autoAuditoria': serializeParam(
-                                                widget.autoAuditoria,
-                                                ParamType.bool,
-                                              ),
-                                              'autoAuditoriaQuantidadePontos':
-                                                  serializeParam(
-                                                widget
-                                                    .autoAuditoriaQuantidadePontos,
-                                                ParamType.int,
-                                              ),
-                                              'etapaDe': serializeParam(
-                                                widget.etapade,
-                                                ParamType.String,
-                                              ),
-                                            }.withoutNulls,
-                                          );
-
-                                          FFAppState().update(() {});
-                                          if (_shouldSetState) setState(() {});
-                                          return;
-                                        } else {
-                                          context.pushNamed(
-                                            'GpsTecToFazenda',
-                                            queryParameters: {
-                                              'jsonServico': serializeParam(
-                                                widget.jsonServico,
-                                                ParamType.JSON,
-                                              ),
-                                              'tecnicoId': serializeParam(
-                                                widget.tecnicoId,
-                                                ParamType.String,
-                                              ),
-                                              'servicoId': serializeParam(
-                                                widget.servicoId,
-                                                ParamType.String,
-                                              ),
-                                              'fazNome': serializeParam(
-                                                widget.fazendaNome,
-                                                ParamType.String,
-                                              ),
-                                              'latlngFaz': serializeParam(
-                                                widget.latlngFaz,
-                                                ParamType.LatLng,
-                                              ),
-                                              'retornoAPI': serializeParam(
-                                                functions.jsonToStr(
-                                                    ApiRotasDirectionsCall.tudo(
-                                                  cardActionsApiRotasDirectionsResponse
-                                                      .jsonBody,
-                                                )),
-                                                ParamType.String,
-                                              ),
-                                              'retornopolylines':
-                                                  serializeParam(
-                                                '',
-                                                ParamType.String,
-                                              ),
-                                              'comRota': serializeParam(
-                                                false,
-                                                ParamType.bool,
-                                              ),
-                                              'rotaInversa': serializeParam(
-                                                true,
-                                                ParamType.bool,
-                                              ),
-                                              'rotaInversaString':
-                                                  serializeParam(
-                                                '',
-                                                ParamType.String,
-                                              ),
-                                              'cidadeFaz': serializeParam(
-                                                widget.cidadeFaz,
-                                                ParamType.String,
-                                              ),
-                                              'estadoFaz': serializeParam(
-                                                widget.estadoFaz,
-                                                ParamType.String,
-                                              ),
-                                              'observacao': serializeParam(
-                                                widget.observacao,
-                                                ParamType.String,
-                                              ),
-                                              'data': serializeParam(
-                                                widget.data,
-                                                ParamType.String,
-                                              ),
-                                              'horar': serializeParam(
-                                                widget.hora,
-                                                ParamType.String,
-                                              ),
-                                              'fazid': serializeParam(
-                                                widget.fazid,
-                                                ParamType.String,
-                                              ),
-                                              'autoAuditoria': serializeParam(
-                                                widget.autoAuditoria,
-                                                ParamType.bool,
-                                              ),
-                                              'autoAuditoriaQuantidadePontos':
-                                                  serializeParam(
-                                                widget
-                                                    .autoAuditoriaQuantidadePontos,
-                                                ParamType.int,
-                                              ),
-                                              'etapaDe': serializeParam(
-                                                widget.etapade,
-                                                ParamType.String,
-                                              ),
-                                            }.withoutNulls,
-                                          );
-
-                                          FFAppState().update(() {});
-                                          if (_shouldSetState) setState(() {});
-                                          return;
-                                        }
-                                      } else {
-                                        context.pushNamed(
-                                          'GpsTecToFazenda',
-                                          queryParameters: {
-                                            'jsonServico': serializeParam(
-                                              widget.jsonServico,
-                                              ParamType.JSON,
-                                            ),
-                                            'tecnicoId': serializeParam(
-                                              widget.tecnicoId,
-                                              ParamType.String,
-                                            ),
-                                            'servicoId': serializeParam(
+                                          var confirmDialogResponse =
+                                              await showDialog<bool>(
+                                                    context: context,
+                                                    builder:
+                                                        (alertDialogContext) {
+                                                      return AlertDialog(
+                                                        content: Text(
+                                                            'Você se deslocará direto para a fazenda?'),
+                                                        actions: [
+                                                          TextButton(
+                                                            onPressed: () =>
+                                                                Navigator.pop(
+                                                                    alertDialogContext,
+                                                                    false),
+                                                            child: Text('Não'),
+                                                          ),
+                                                          TextButton(
+                                                            onPressed: () =>
+                                                                Navigator.pop(
+                                                                    alertDialogContext,
+                                                                    true),
+                                                            child: Text('Sim'),
+                                                          ),
+                                                        ],
+                                                      );
+                                                    },
+                                                  ) ??
+                                                  false;
+                                          if (confirmDialogResponse) {
+                                            _model.rotaInvertida =
+                                                await ApiRotasPolylinesCall
+                                                    .call(
+                                              latitudeOrigem:
+                                                  functions.separadorLatDeLng(
+                                                      true,
+                                                      functions.latLngToStr(
+                                                          widget.latlngFaz)),
+                                              longitudeOrigem:
+                                                  functions.separadorLatDeLng(
+                                                      false,
+                                                      functions.latLngToStr(
+                                                          widget.latlngFaz)),
+                                              latitudeDestino:
+                                                  functions.separadorLatDeLng(
+                                                      true,
+                                                      functions.latLngToStr(
+                                                          currentUserLocationValue)),
+                                              longitudeDestonp:
+                                                  functions.separadorLatDeLng(
+                                                      false,
+                                                      functions.latLngToStr(
+                                                          currentUserLocationValue)),
+                                              key:
+                                                  'AIzaSyDpk1wIZmA1OTS57D_cB13BD01zqrTiQNI',
+                                            );
+                                            _shouldSetState = true;
+                                            await actions.gravaRotaInversa(
                                               widget.servicoId,
-                                              ParamType.String,
-                                            ),
-                                            'fazNome': serializeParam(
-                                              widget.fazendaNome,
-                                              ParamType.String,
-                                            ),
-                                            'latlngFaz': serializeParam(
-                                              widget.latlngFaz,
-                                              ParamType.LatLng,
-                                            ),
-                                            'retornoAPI': serializeParam(
-                                              functions.jsonToStr(
-                                                  ApiRotasDirectionsCall.tudo(
-                                                cardActionsApiRotasDirectionsResponse
-                                                    .jsonBody,
-                                              )),
-                                              ParamType.String,
-                                            ),
-                                            'retornopolylines': serializeParam(
-                                              '',
-                                              ParamType.String,
-                                            ),
-                                            'comRota': serializeParam(
-                                              false,
-                                              ParamType.bool,
-                                            ),
-                                            'rotaInversa': serializeParam(
-                                              false,
-                                              ParamType.bool,
-                                            ),
-                                            'rotaInversaString': serializeParam(
-                                              '',
-                                              ParamType.String,
-                                            ),
-                                            'cidadeFaz': serializeParam(
-                                              widget.cidadeFaz,
-                                              ParamType.String,
-                                            ),
-                                            'estadoFaz': serializeParam(
-                                              widget.estadoFaz,
-                                              ParamType.String,
-                                            ),
-                                            'observacao': serializeParam(
-                                              widget.observacao,
-                                              ParamType.String,
-                                            ),
-                                            'data': serializeParam(
-                                              widget.data,
-                                              ParamType.String,
-                                            ),
-                                            'horar': serializeParam(
-                                              widget.hora,
-                                              ParamType.String,
-                                            ),
-                                            'fazid': serializeParam(
-                                              widget.fazid,
-                                              ParamType.String,
-                                            ),
-                                            'autoAuditoria': serializeParam(
-                                              widget.autoAuditoria,
-                                              ParamType.bool,
-                                            ),
-                                            'autoAuditoriaQuantidadePontos':
-                                                serializeParam(
-                                              widget
-                                                  .autoAuditoriaQuantidadePontos,
-                                              ParamType.int,
-                                            ),
-                                            'etapaDe': serializeParam(
-                                              widget.etapade,
-                                              ParamType.String,
-                                            ),
-                                          }.withoutNulls,
-                                        );
+                                              ApiRotasPolylinesCall
+                                                  .criptografadapolyline(
+                                                (_model.rotaInvertida
+                                                        ?.jsonBody ??
+                                                    ''),
+                                              ),
+                                            );
+                                            _model.porfavorFuncioneTecAteFaz =
+                                                await ApiRotasPolylinesCall
+                                                    .call(
+                                              latitudeOrigem:
+                                                  functions.separadorLatDeLng(
+                                                      true,
+                                                      functions.latLngToStr(
+                                                          currentUserLocationValue)),
+                                              longitudeOrigem:
+                                                  functions.separadorLatDeLng(
+                                                      false,
+                                                      functions.latLngToStr(
+                                                          currentUserLocationValue)),
+                                              latitudeDestino:
+                                                  functions.separadorLatDeLng(
+                                                      true,
+                                                      functions.latLngToStr(
+                                                          widget.latlngFaz)),
+                                              longitudeDestonp:
+                                                  functions.separadorLatDeLng(
+                                                      false,
+                                                      functions.latLngToStr(
+                                                          widget.latlngFaz)),
+                                              key:
+                                                  'AIzaSyDpk1wIZmA1OTS57D_cB13BD01zqrTiQNI',
+                                            );
+                                            _shouldSetState = true;
+                                            setState(() {
+                                              FFAppState().rotainversa =
+                                                  FFAppState()
+                                                      .rotainversa
+                                                      .toList()
+                                                      .cast<dynamic>();
+                                            });
 
-                                        FFAppState().update(() {});
-                                        if (_shouldSetState) setState(() {});
-                                        return;
-                                      }
-                                    }
+                                            context.pushNamed(
+                                              'GpsTecToFazenda',
+                                              queryParameters: {
+                                                'jsonServico': serializeParam(
+                                                  widget.jsonServico,
+                                                  ParamType.JSON,
+                                                ),
+                                                'tecnicoId': serializeParam(
+                                                  widget.tecnicoId,
+                                                  ParamType.String,
+                                                ),
+                                                'servicoId': serializeParam(
+                                                  widget.servicoId,
+                                                  ParamType.String,
+                                                ),
+                                                'fazNome': serializeParam(
+                                                  widget.fazendaNome,
+                                                  ParamType.String,
+                                                ),
+                                                'latlngFaz': serializeParam(
+                                                  widget.latlngFaz,
+                                                  ParamType.LatLng,
+                                                ),
+                                                'retornoAPI': serializeParam(
+                                                  functions.jsonToStr(
+                                                      ApiRotasDirectionsCall
+                                                          .tudo(
+                                                    cardActionsApiRotasDirectionsResponse
+                                                        .jsonBody,
+                                                  )),
+                                                  ParamType.String,
+                                                ),
+                                                'retornopolylines':
+                                                    serializeParam(
+                                                  ApiRotasPolylinesCall
+                                                      .criptografadapolyline(
+                                                    (_model.porfavorFuncioneTecAteFaz
+                                                            ?.jsonBody ??
+                                                        ''),
+                                                  ),
+                                                  ParamType.String,
+                                                ),
+                                                'comRota': serializeParam(
+                                                  true,
+                                                  ParamType.bool,
+                                                ),
+                                                'rotaInversa': serializeParam(
+                                                  false,
+                                                  ParamType.bool,
+                                                ),
+                                                'rotaInversaString':
+                                                    serializeParam(
+                                                  '',
+                                                  ParamType.String,
+                                                ),
+                                                'cidadeFaz': serializeParam(
+                                                  widget.cidadeFaz,
+                                                  ParamType.String,
+                                                ),
+                                                'estadoFaz': serializeParam(
+                                                  widget.estadoFaz,
+                                                  ParamType.String,
+                                                ),
+                                                'observacao': serializeParam(
+                                                  widget.observacao,
+                                                  ParamType.String,
+                                                ),
+                                                'data': serializeParam(
+                                                  widget.data,
+                                                  ParamType.String,
+                                                ),
+                                                'horar': serializeParam(
+                                                  widget.hora,
+                                                  ParamType.String,
+                                                ),
+                                                'fazid': serializeParam(
+                                                  widget.fazid,
+                                                  ParamType.String,
+                                                ),
+                                                'autoAuditoria': serializeParam(
+                                                  widget.autoAuditoria,
+                                                  ParamType.bool,
+                                                ),
+                                                'autoAuditoriaQuantidadePontos':
+                                                    serializeParam(
+                                                  widget
+                                                      .autoAuditoriaQuantidadePontos,
+                                                  ParamType.int,
+                                                ),
+                                                'etapaDe': serializeParam(
+                                                  widget.etapade,
+                                                  ParamType.String,
+                                                ),
+                                              }.withoutNulls,
+                                            );
 
-                                    if (_shouldSetState) setState(() {});
-                                  },
-                                  text: FFAppState().DeslocamentoPausado &&
-                                          FFAppState()
-                                              .trDesloacamentoIniciado &&
-                                          (getJsonField(
+                                            FFAppState().update(() {});
+                                            if (_shouldSetState)
+                                              setState(() {});
+                                            return;
+                                          } else {
+                                            context.pushNamed(
+                                              'GpsTecToFazenda',
+                                              queryParameters: {
+                                                'jsonServico': serializeParam(
+                                                  widget.jsonServico,
+                                                  ParamType.JSON,
+                                                ),
+                                                'tecnicoId': serializeParam(
+                                                  widget.tecnicoId,
+                                                  ParamType.String,
+                                                ),
+                                                'servicoId': serializeParam(
+                                                  widget.servicoId,
+                                                  ParamType.String,
+                                                ),
+                                                'fazNome': serializeParam(
+                                                  widget.fazendaNome,
+                                                  ParamType.String,
+                                                ),
+                                                'latlngFaz': serializeParam(
+                                                  widget.latlngFaz,
+                                                  ParamType.LatLng,
+                                                ),
+                                                'retornoAPI': serializeParam(
+                                                  functions.jsonToStr(
+                                                      ApiRotasDirectionsCall
+                                                          .tudo(
+                                                    cardActionsApiRotasDirectionsResponse
+                                                        .jsonBody,
+                                                  )),
+                                                  ParamType.String,
+                                                ),
+                                                'retornopolylines':
+                                                    serializeParam(
+                                                  '',
+                                                  ParamType.String,
+                                                ),
+                                                'comRota': serializeParam(
+                                                  false,
+                                                  ParamType.bool,
+                                                ),
+                                                'rotaInversa': serializeParam(
+                                                  false,
+                                                  ParamType.bool,
+                                                ),
+                                                'rotaInversaString':
+                                                    serializeParam(
+                                                  '',
+                                                  ParamType.String,
+                                                ),
+                                                'cidadeFaz': serializeParam(
+                                                  widget.cidadeFaz,
+                                                  ParamType.String,
+                                                ),
+                                                'estadoFaz': serializeParam(
+                                                  widget.estadoFaz,
+                                                  ParamType.String,
+                                                ),
+                                                'observacao': serializeParam(
+                                                  widget.observacao,
+                                                  ParamType.String,
+                                                ),
+                                                'data': serializeParam(
+                                                  widget.data,
+                                                  ParamType.String,
+                                                ),
+                                                'horar': serializeParam(
+                                                  widget.hora,
+                                                  ParamType.String,
+                                                ),
+                                                'fazid': serializeParam(
+                                                  widget.fazid,
+                                                  ParamType.String,
+                                                ),
+                                                'autoAuditoria': serializeParam(
+                                                  widget.autoAuditoria,
+                                                  ParamType.bool,
+                                                ),
+                                                'autoAuditoriaQuantidadePontos':
+                                                    serializeParam(
+                                                  widget
+                                                      .autoAuditoriaQuantidadePontos,
+                                                  ParamType.int,
+                                                ),
+                                                'etapaDe': serializeParam(
+                                                  widget.etapade,
+                                                  ParamType.String,
+                                                ),
+                                              }.withoutNulls,
+                                            );
+
+                                            FFAppState().update(() {});
+                                            if (_shouldSetState)
+                                              setState(() {});
+                                            return;
+                                          }
+                                        }
+                                      } else {
+                                        if (widget
+                                            .deslocamentoAtualFinzalizado!) {
+                                          var confirmDialogResponse =
+                                              await showDialog<bool>(
+                                                    context: context,
+                                                    builder:
+                                                        (alertDialogContext) {
+                                                      return AlertDialog(
+                                                        content: Text(
+                                                            'Você deseja retornar ao ponto de origem?'),
+                                                        actions: [
+                                                          TextButton(
+                                                            onPressed: () =>
+                                                                Navigator.pop(
+                                                                    alertDialogContext,
+                                                                    false),
+                                                            child: Text('Não'),
+                                                          ),
+                                                          TextButton(
+                                                            onPressed: () =>
+                                                                Navigator.pop(
+                                                                    alertDialogContext,
+                                                                    true),
+                                                            child: Text('Sim'),
+                                                          ),
+                                                        ],
+                                                      );
+                                                    },
+                                                  ) ??
+                                                  false;
+                                          if (confirmDialogResponse) {
+                                            context.pushNamed(
+                                              'GpsTecToFazenda',
+                                              queryParameters: {
+                                                'jsonServico': serializeParam(
+                                                  widget.jsonServico,
+                                                  ParamType.JSON,
+                                                ),
+                                                'tecnicoId': serializeParam(
+                                                  widget.tecnicoId,
+                                                  ParamType.String,
+                                                ),
+                                                'servicoId': serializeParam(
+                                                  widget.servicoId,
+                                                  ParamType.String,
+                                                ),
+                                                'fazNome': serializeParam(
+                                                  widget.fazendaNome,
+                                                  ParamType.String,
+                                                ),
+                                                'latlngFaz': serializeParam(
+                                                  widget.latlngFaz,
+                                                  ParamType.LatLng,
+                                                ),
+                                                'retornoAPI': serializeParam(
+                                                  functions.jsonToStr(
+                                                      ApiRotasDirectionsCall
+                                                          .tudo(
+                                                    cardActionsApiRotasDirectionsResponse
+                                                        .jsonBody,
+                                                  )),
+                                                  ParamType.String,
+                                                ),
+                                                'retornopolylines':
+                                                    serializeParam(
+                                                  functions.ligaoDeNome(
+                                                      FFAppState()
+                                                          .rotainversa
+                                                          .toList(),
+                                                      'osserv_id',
+                                                      'rota_inversa',
+                                                      widget.servicoId),
+                                                  ParamType.String,
+                                                ),
+                                                'comRota': serializeParam(
+                                                  true,
+                                                  ParamType.bool,
+                                                ),
+                                                'rotaInversa': serializeParam(
+                                                  true,
+                                                  ParamType.bool,
+                                                ),
+                                                'rotaInversaString':
+                                                    serializeParam(
+                                                  functions.ligaoDeNome(
+                                                      FFAppState()
+                                                          .rotainversa
+                                                          .toList(),
+                                                      'osserv_id',
+                                                      'rota_inversa',
+                                                      widget.servicoId),
+                                                  ParamType.String,
+                                                ),
+                                                'cidadeFaz': serializeParam(
+                                                  widget.cidadeFaz,
+                                                  ParamType.String,
+                                                ),
+                                                'estadoFaz': serializeParam(
+                                                  widget.estadoFaz,
+                                                  ParamType.String,
+                                                ),
+                                                'observacao': serializeParam(
+                                                  widget.observacao,
+                                                  ParamType.String,
+                                                ),
+                                                'data': serializeParam(
+                                                  widget.data,
+                                                  ParamType.String,
+                                                ),
+                                                'horar': serializeParam(
+                                                  widget.hora,
+                                                  ParamType.String,
+                                                ),
+                                                'fazid': serializeParam(
+                                                  widget.fazid,
+                                                  ParamType.String,
+                                                ),
+                                                'autoAuditoria': serializeParam(
+                                                  widget.autoAuditoria,
+                                                  ParamType.bool,
+                                                ),
+                                                'autoAuditoriaQuantidadePontos':
+                                                    serializeParam(
+                                                  widget
+                                                      .autoAuditoriaQuantidadePontos,
+                                                  ParamType.int,
+                                                ),
+                                                'etapaDe': serializeParam(
+                                                  widget.etapade,
+                                                  ParamType.String,
+                                                ),
+                                              }.withoutNulls,
+                                            );
+
+                                            FFAppState().update(() {});
+                                            if (_shouldSetState)
+                                              setState(() {});
+                                            return;
+                                          } else {
+                                            context.pushNamed(
+                                              'GpsTecToFazenda',
+                                              queryParameters: {
+                                                'jsonServico': serializeParam(
+                                                  widget.jsonServico,
+                                                  ParamType.JSON,
+                                                ),
+                                                'tecnicoId': serializeParam(
+                                                  widget.tecnicoId,
+                                                  ParamType.String,
+                                                ),
+                                                'servicoId': serializeParam(
+                                                  widget.servicoId,
+                                                  ParamType.String,
+                                                ),
+                                                'fazNome': serializeParam(
+                                                  widget.fazendaNome,
+                                                  ParamType.String,
+                                                ),
+                                                'latlngFaz': serializeParam(
+                                                  widget.latlngFaz,
+                                                  ParamType.LatLng,
+                                                ),
+                                                'retornoAPI': serializeParam(
+                                                  functions.jsonToStr(
+                                                      ApiRotasDirectionsCall
+                                                          .tudo(
+                                                    cardActionsApiRotasDirectionsResponse
+                                                        .jsonBody,
+                                                  )),
+                                                  ParamType.String,
+                                                ),
+                                                'retornopolylines':
+                                                    serializeParam(
+                                                  '',
+                                                  ParamType.String,
+                                                ),
+                                                'comRota': serializeParam(
+                                                  false,
+                                                  ParamType.bool,
+                                                ),
+                                                'rotaInversa': serializeParam(
+                                                  true,
+                                                  ParamType.bool,
+                                                ),
+                                                'rotaInversaString':
+                                                    serializeParam(
+                                                  '',
+                                                  ParamType.String,
+                                                ),
+                                                'cidadeFaz': serializeParam(
+                                                  widget.cidadeFaz,
+                                                  ParamType.String,
+                                                ),
+                                                'estadoFaz': serializeParam(
+                                                  widget.estadoFaz,
+                                                  ParamType.String,
+                                                ),
+                                                'observacao': serializeParam(
+                                                  widget.observacao,
+                                                  ParamType.String,
+                                                ),
+                                                'data': serializeParam(
+                                                  widget.data,
+                                                  ParamType.String,
+                                                ),
+                                                'horar': serializeParam(
+                                                  widget.hora,
+                                                  ParamType.String,
+                                                ),
+                                                'fazid': serializeParam(
+                                                  widget.fazid,
+                                                  ParamType.String,
+                                                ),
+                                                'autoAuditoria': serializeParam(
+                                                  widget.autoAuditoria,
+                                                  ParamType.bool,
+                                                ),
+                                                'autoAuditoriaQuantidadePontos':
+                                                    serializeParam(
+                                                  widget
+                                                      .autoAuditoriaQuantidadePontos,
+                                                  ParamType.int,
+                                                ),
+                                                'etapaDe': serializeParam(
+                                                  widget.etapade,
+                                                  ParamType.String,
+                                                ),
+                                              }.withoutNulls,
+                                            );
+
+                                            FFAppState().update(() {});
+                                            if (_shouldSetState)
+                                              setState(() {});
+                                            return;
+                                          }
+                                        } else {
+                                          context.pushNamed(
+                                            'GpsTecToFazenda',
+                                            queryParameters: {
+                                              'jsonServico': serializeParam(
                                                 widget.jsonServico,
-                                                r'''$.oserv_id''',
-                                              ) ==
-                                              FFAppState()
-                                                  .trOsServicoEmAndamento)
-                                      ? 'Continuar'
-                                      : 'Deslocamento',
-                                  icon: FaIcon(
-                                    FontAwesomeIcons.route,
-                                    size: 18.0,
-                                  ),
-                                  options: FFButtonOptions(
-                                    width: 160.0,
-                                    height: 52.0,
-                                    padding: EdgeInsetsDirectional.fromSTEB(
-                                        17.0, 0.0, 17.0, 0.0),
-                                    iconPadding: EdgeInsetsDirectional.fromSTEB(
-                                        0.0, 0.0, 0.0, 0.0),
-                                    color: FlutterFlowTheme.of(context).primary,
-                                    textStyle: FlutterFlowTheme.of(context)
-                                        .bodyLarge
-                                        .override(
-                                          fontFamily: 'Readex Pro',
-                                          color: FlutterFlowTheme.of(context)
-                                              .alternate,
-                                        ),
-                                    elevation: 0.0,
-                                    borderSide: BorderSide(
-                                      color: Colors.transparent,
-                                      width: 1.0,
+                                                ParamType.JSON,
+                                              ),
+                                              'tecnicoId': serializeParam(
+                                                widget.tecnicoId,
+                                                ParamType.String,
+                                              ),
+                                              'servicoId': serializeParam(
+                                                widget.servicoId,
+                                                ParamType.String,
+                                              ),
+                                              'fazNome': serializeParam(
+                                                widget.fazendaNome,
+                                                ParamType.String,
+                                              ),
+                                              'latlngFaz': serializeParam(
+                                                widget.latlngFaz,
+                                                ParamType.LatLng,
+                                              ),
+                                              'retornoAPI': serializeParam(
+                                                functions.jsonToStr(
+                                                    ApiRotasDirectionsCall.tudo(
+                                                  cardActionsApiRotasDirectionsResponse
+                                                      .jsonBody,
+                                                )),
+                                                ParamType.String,
+                                              ),
+                                              'retornopolylines':
+                                                  serializeParam(
+                                                '',
+                                                ParamType.String,
+                                              ),
+                                              'comRota': serializeParam(
+                                                false,
+                                                ParamType.bool,
+                                              ),
+                                              'rotaInversa': serializeParam(
+                                                false,
+                                                ParamType.bool,
+                                              ),
+                                              'rotaInversaString':
+                                                  serializeParam(
+                                                '',
+                                                ParamType.String,
+                                              ),
+                                              'cidadeFaz': serializeParam(
+                                                widget.cidadeFaz,
+                                                ParamType.String,
+                                              ),
+                                              'estadoFaz': serializeParam(
+                                                widget.estadoFaz,
+                                                ParamType.String,
+                                              ),
+                                              'observacao': serializeParam(
+                                                widget.observacao,
+                                                ParamType.String,
+                                              ),
+                                              'data': serializeParam(
+                                                widget.data,
+                                                ParamType.String,
+                                              ),
+                                              'horar': serializeParam(
+                                                widget.hora,
+                                                ParamType.String,
+                                              ),
+                                              'fazid': serializeParam(
+                                                widget.fazid,
+                                                ParamType.String,
+                                              ),
+                                              'autoAuditoria': serializeParam(
+                                                widget.autoAuditoria,
+                                                ParamType.bool,
+                                              ),
+                                              'autoAuditoriaQuantidadePontos':
+                                                  serializeParam(
+                                                widget
+                                                    .autoAuditoriaQuantidadePontos,
+                                                ParamType.int,
+                                              ),
+                                              'etapaDe': serializeParam(
+                                                widget.etapade,
+                                                ParamType.String,
+                                              ),
+                                            }.withoutNulls,
+                                          );
+
+                                          FFAppState().update(() {});
+                                          if (_shouldSetState) setState(() {});
+                                          return;
+                                        }
+                                      }
+
+                                      if (_shouldSetState) setState(() {});
+                                    },
+                                    text: FFAppState().DeslocamentoPausado &&
+                                            FFAppState()
+                                                .trDesloacamentoIniciado &&
+                                            (getJsonField(
+                                                  widget.jsonServico,
+                                                  r'''$.oserv_id''',
+                                                ) ==
+                                                FFAppState()
+                                                    .trOsServicoEmAndamento)
+                                        ? 'Continuar'
+                                        : 'Deslocamento',
+                                    icon: FaIcon(
+                                      FontAwesomeIcons.route,
+                                      size: 18.0,
                                     ),
-                                    borderRadius: BorderRadius.circular(50.0),
+                                    options: FFButtonOptions(
+                                      width: 160.0,
+                                      height: 52.0,
+                                      padding: EdgeInsetsDirectional.fromSTEB(
+                                          17.0, 0.0, 17.0, 0.0),
+                                      iconPadding:
+                                          EdgeInsetsDirectional.fromSTEB(
+                                              0.0, 0.0, 0.0, 0.0),
+                                      color:
+                                          FlutterFlowTheme.of(context).primary,
+                                      textStyle: FlutterFlowTheme.of(context)
+                                          .bodyLarge
+                                          .override(
+                                            fontFamily: 'Readex Pro',
+                                            color: FlutterFlowTheme.of(context)
+                                                .alternate,
+                                          ),
+                                      elevation: 0.0,
+                                      borderSide: BorderSide(
+                                        color: Colors.transparent,
+                                        width: 1.0,
+                                      ),
+                                      borderRadius: BorderRadius.circular(50.0),
+                                    ),
                                   ),
-                                ),
                                 if (widget.deslocamentoAtualFinzalizado! &&
                                     (widget.etapade == 'Contorno'))
                                   FFButtonWidget(
@@ -1711,9 +1734,19 @@ class _IniciarDeslocamentoWidgetState extends State<IniciarDeslocamentoWidget> {
                                     (widget.etapade == 'Coleta'))
                                   FFButtonWidget(
                                     onPressed: () async {
-                                      unawaited(
-                                        () async {}(),
-                                      );
+                                      showModalBottomSheet(
+                                        isScrollControlled: true,
+                                        backgroundColor: Colors.transparent,
+                                        enableDrag: false,
+                                        context: context,
+                                        builder: (context) {
+                                          return Padding(
+                                            padding: MediaQuery.viewInsetsOf(
+                                                context),
+                                            child: LoadingCompCopyWidget(),
+                                          );
+                                        },
+                                      ).then((value) => safeSetState(() {}));
 
                                       context.pushNamed(
                                         'MedicaoColeta',
@@ -1737,7 +1770,17 @@ class _IniciarDeslocamentoWidgetState extends State<IniciarDeslocamentoWidget> {
                                             ParamType.int,
                                           ),
                                         }.withoutNulls,
+                                        extra: <String, dynamic>{
+                                          kTransitionInfoKey: TransitionInfo(
+                                            hasTransition: true,
+                                            transitionType:
+                                                PageTransitionType.fade,
+                                            duration: Duration(milliseconds: 0),
+                                          ),
+                                        },
                                       );
+
+                                      Navigator.pop(context);
                                     },
                                     text:
                                         widget.deslocamentoAtualFinzalizado! &&
