@@ -181,6 +181,17 @@ class _ListaContornosParaColetaWidgetState
                                   fontWeight: FontWeight.bold,
                                 ),
                           ),
+                          Text(
+                            widget.fazid,
+                            style: FlutterFlowTheme.of(context)
+                                .bodyMedium
+                                .override(
+                                  fontFamily: 'Readex Pro',
+                                  color: Color(0xFFF8F8F8),
+                                  fontSize: 24.0,
+                                  fontWeight: FontWeight.bold,
+                                ),
+                          ),
                         ],
                       ),
                     ),
@@ -341,299 +352,304 @@ class _ListaContornosParaColetaWidgetState
                                               .bodyMedium,
                                         ),
                                       ),
-                                    Builder(
-                                      builder: (context) {
-                                        final trColetas = functions
-                                                .sortListJson(
-                                                    'oserv_id',
-                                                    true,
-                                                    FFAppState()
-                                                        .pontosDeColeta
-                                                        .toList(),
-                                                    functions
-                                                        .strToInt(
-                                                            widget.oservID)
-                                                        ?.toString())
-                                                ?.toList() ??
-                                            [];
-                                        if (trColetas.isEmpty) {
-                                          return Center(
-                                            child: Container(
-                                              width: double.infinity,
-                                              height: 150.0,
-                                              child:
-                                                  SemContornoNoMomentoWidget(),
-                                            ),
-                                          );
-                                        }
-                                        return Column(
-                                          mainAxisSize: MainAxisSize.max,
-                                          children:
-                                              List.generate(trColetas.length,
-                                                  (trColetasIndex) {
-                                            final trColetasItem =
-                                                trColetas[trColetasIndex];
-                                            return Padding(
-                                              padding: EdgeInsetsDirectional
-                                                  .fromSTEB(
-                                                      16.0, 8.0, 16.0, 0.0),
+                                    if (true == false)
+                                      Builder(
+                                        builder: (context) {
+                                          final trColetas = functions
+                                                  .sortListJson(
+                                                      'oserv_id',
+                                                      true,
+                                                      FFAppState()
+                                                          .pontosDeColeta
+                                                          .toList(),
+                                                      functions
+                                                          .strToInt(
+                                                              widget.oservID)
+                                                          ?.toString())
+                                                  ?.toList() ??
+                                              [];
+                                          if (trColetas.isEmpty) {
+                                            return Center(
                                               child: Container(
                                                 width: double.infinity,
-                                                height: 78.0,
-                                                decoration: BoxDecoration(
-                                                  color: FlutterFlowTheme.of(
-                                                          context)
-                                                      .primaryBackground,
-                                                  borderRadius:
-                                                      BorderRadius.circular(
-                                                          12.0),
-                                                  border: Border.all(
-                                                    color: trColetasItem ==
-                                                            FFAppState()
-                                                                .trOsServicoEmAndamento
-                                                        ? FlutterFlowTheme.of(
-                                                                context)
-                                                            .customColor1
-                                                        : FlutterFlowTheme.of(
-                                                                context)
-                                                            .lineColor,
+                                                height: 150.0,
+                                                child:
+                                                    SemContornoNoMomentoWidget(),
+                                              ),
+                                            );
+                                          }
+                                          return Column(
+                                            mainAxisSize: MainAxisSize.max,
+                                            children:
+                                                List.generate(trColetas.length,
+                                                    (trColetasIndex) {
+                                              final trColetasItem =
+                                                  trColetas[trColetasIndex];
+                                              return Padding(
+                                                padding: EdgeInsetsDirectional
+                                                    .fromSTEB(
+                                                        16.0, 8.0, 16.0, 0.0),
+                                                child: Container(
+                                                  width: double.infinity,
+                                                  height: 78.0,
+                                                  decoration: BoxDecoration(
+                                                    color: FlutterFlowTheme.of(
+                                                            context)
+                                                        .primaryBackground,
+                                                    borderRadius:
+                                                        BorderRadius.circular(
+                                                            12.0),
+                                                    border: Border.all(
+                                                      color: trColetasItem ==
+                                                              FFAppState()
+                                                                  .trOsServicoEmAndamento
+                                                          ? FlutterFlowTheme.of(
+                                                                  context)
+                                                              .customColor1
+                                                          : FlutterFlowTheme.of(
+                                                                  context)
+                                                              .lineColor,
+                                                    ),
                                                   ),
-                                                ),
-                                                child: Padding(
-                                                  padding: EdgeInsetsDirectional
-                                                      .fromSTEB(
-                                                          8.0, 8.0, 12.0, 8.0),
-                                                  child: InkWell(
-                                                    splashColor:
-                                                        Colors.transparent,
-                                                    focusColor:
-                                                        Colors.transparent,
-                                                    hoverColor:
-                                                        Colors.transparent,
-                                                    highlightColor:
-                                                        Colors.transparent,
-                                                    onTap: () async {
-                                                      await showModalBottomSheet(
-                                                        isScrollControlled:
-                                                            true,
-                                                        backgroundColor:
-                                                            Colors.transparent,
-                                                        enableDrag: false,
-                                                        context: context,
-                                                        builder: (context) {
-                                                          return GestureDetector(
-                                                            onTap: () => _model
-                                                                    .unfocusNode
-                                                                    .canRequestFocus
-                                                                ? FocusScope.of(
-                                                                        context)
-                                                                    .requestFocus(
-                                                                        _model
-                                                                            .unfocusNode)
-                                                                : FocusScope.of(
-                                                                        context)
-                                                                    .unfocus(),
-                                                            child: Padding(
-                                                              padding: MediaQuery
-                                                                  .viewInsetsOf(
-                                                                      context),
-                                                              child: Container(
-                                                                height: 600.0,
+                                                  child: Padding(
+                                                    padding:
+                                                        EdgeInsetsDirectional
+                                                            .fromSTEB(8.0, 8.0,
+                                                                12.0, 8.0),
+                                                    child: InkWell(
+                                                      splashColor:
+                                                          Colors.transparent,
+                                                      focusColor:
+                                                          Colors.transparent,
+                                                      hoverColor:
+                                                          Colors.transparent,
+                                                      highlightColor:
+                                                          Colors.transparent,
+                                                      onTap: () async {
+                                                        await showModalBottomSheet(
+                                                          isScrollControlled:
+                                                              true,
+                                                          backgroundColor:
+                                                              Colors
+                                                                  .transparent,
+                                                          enableDrag: false,
+                                                          context: context,
+                                                          builder: (context) {
+                                                            return GestureDetector(
+                                                              onTap: () => _model
+                                                                      .unfocusNode
+                                                                      .canRequestFocus
+                                                                  ? FocusScope.of(
+                                                                          context)
+                                                                      .requestFocus(
+                                                                          _model
+                                                                              .unfocusNode)
+                                                                  : FocusScope.of(
+                                                                          context)
+                                                                      .unfocus(),
+                                                              child: Padding(
+                                                                padding: MediaQuery
+                                                                    .viewInsetsOf(
+                                                                        context),
                                                                 child:
-                                                                    MapsRevisaoWidget(
-                                                                  listaLatLngEmString: functions.acessarJsonListaDeterminadoValor(
-                                                                      functions
-                                                                          .sortListJson(
-                                                                              'contorno_grupo',
-                                                                              false,
-                                                                              FFAppState().contornoFazenda.toList(),
-                                                                              getJsonField(
-                                                                                trColetasItem,
-                                                                                r'''$.contorno_grupo''',
-                                                                              ).toString())
-                                                                          ?.toList(),
-                                                                      'latlng')!,
-                                                                  cor:
-                                                                      getJsonField(
-                                                                    trColetasItem,
-                                                                    r'''$.cor''',
-                                                                  ).toString(),
-                                                                  fazendaNome:
-                                                                      valueOrDefault<
-                                                                          String>(
-                                                                    widget
-                                                                        .nomeFazenda,
-                                                                    'Fazenda Sem Nome',
-                                                                  ),
-                                                                  oservID: widget
-                                                                      .oservID!,
-                                                                  idDoContorno:
-                                                                      valueOrDefault<
-                                                                          String>(
-                                                                    getJsonField(
+                                                                    Container(
+                                                                  height: 600.0,
+                                                                  child:
+                                                                      MapsRevisaoWidget(
+                                                                    listaLatLngEmString: functions.acessarJsonListaDeterminadoValor(
+                                                                        functions
+                                                                            .sortListJson(
+                                                                                'contorno_grupo',
+                                                                                false,
+                                                                                FFAppState().contornoFazenda.toList(),
+                                                                                getJsonField(
+                                                                                  trColetasItem,
+                                                                                  r'''$.contorno_grupo''',
+                                                                                ).toString())
+                                                                            ?.toList(),
+                                                                        'latlng')!,
+                                                                    cor:
+                                                                        getJsonField(
                                                                       trColetasItem,
-                                                                      r'''$.contorno_grupo''',
-                                                                    )?.toString(),
-                                                                    '44',
+                                                                      r'''$.cor''',
+                                                                    ).toString(),
+                                                                    fazendaNome:
+                                                                        valueOrDefault<
+                                                                            String>(
+                                                                      widget
+                                                                          .nomeFazenda,
+                                                                      'Fazenda Sem Nome',
+                                                                    ),
+                                                                    oservID: widget
+                                                                        .oservID!,
+                                                                    idDoContorno:
+                                                                        valueOrDefault<
+                                                                            String>(
+                                                                      getJsonField(
+                                                                        trColetasItem,
+                                                                        r'''$.contorno_grupo''',
+                                                                      )?.toString(),
+                                                                      '44',
+                                                                    ),
+                                                                    fazid: widget
+                                                                        .fazid,
+                                                                    fazlatlng:
+                                                                        widget
+                                                                            .fazlatlng!,
                                                                   ),
-                                                                  fazid: widget
-                                                                      .fazid,
-                                                                  fazlatlng: widget
-                                                                      .fazlatlng!,
                                                                 ),
                                                               ),
+                                                            );
+                                                          },
+                                                        ).then((value) =>
+                                                            safeSetState(
+                                                                () {}));
+                                                      },
+                                                      child: Row(
+                                                        mainAxisSize:
+                                                            MainAxisSize.max,
+                                                        crossAxisAlignment:
+                                                            CrossAxisAlignment
+                                                                .center,
+                                                        children: [
+                                                          Expanded(
+                                                            flex: 2,
+                                                            child: Container(
+                                                              decoration:
+                                                                  BoxDecoration(),
+                                                              child: Row(
+                                                                mainAxisSize:
+                                                                    MainAxisSize
+                                                                        .max,
+                                                                mainAxisAlignment:
+                                                                    MainAxisAlignment
+                                                                        .center,
+                                                                children: [
+                                                                  FaIcon(
+                                                                    FontAwesomeIcons
+                                                                        .route,
+                                                                    color: Colors
+                                                                        .black,
+                                                                    size: 32.0,
+                                                                  ),
+                                                                ],
+                                                              ),
                                                             ),
-                                                          );
-                                                        },
-                                                      ).then((value) =>
-                                                          safeSetState(() {}));
-                                                    },
-                                                    child: Row(
-                                                      mainAxisSize:
-                                                          MainAxisSize.max,
-                                                      crossAxisAlignment:
-                                                          CrossAxisAlignment
-                                                              .center,
-                                                      children: [
-                                                        Expanded(
-                                                          flex: 2,
-                                                          child: Container(
-                                                            decoration:
-                                                                BoxDecoration(),
-                                                            child: Row(
-                                                              mainAxisSize:
-                                                                  MainAxisSize
-                                                                      .max,
-                                                              mainAxisAlignment:
-                                                                  MainAxisAlignment
-                                                                      .center,
+                                                          ),
+                                                          Expanded(
+                                                            flex: 7,
+                                                            child: Stack(
                                                               children: [
-                                                                FaIcon(
-                                                                  FontAwesomeIcons
-                                                                      .route,
-                                                                  color: Colors
-                                                                      .black,
-                                                                  size: 32.0,
+                                                                ClipRRect(
+                                                                  child:
+                                                                      Container(
+                                                                    decoration:
+                                                                        BoxDecoration(),
+                                                                    child: Row(
+                                                                      mainAxisSize:
+                                                                          MainAxisSize
+                                                                              .max,
+                                                                      children: [
+                                                                        Column(
+                                                                          mainAxisSize:
+                                                                              MainAxisSize.max,
+                                                                          mainAxisAlignment:
+                                                                              MainAxisAlignment.center,
+                                                                          crossAxisAlignment:
+                                                                              CrossAxisAlignment.start,
+                                                                          children: [
+                                                                            Text(
+                                                                              '# ',
+                                                                              style: FlutterFlowTheme.of(context).bodyLarge.override(
+                                                                                    fontFamily: 'Readex Pro',
+                                                                                    fontSize: 12.0,
+                                                                                  ),
+                                                                            ),
+                                                                            Row(
+                                                                              mainAxisSize: MainAxisSize.max,
+                                                                              children: [
+                                                                                Text(
+                                                                                  'Nome'.maybeHandleOverflow(
+                                                                                    maxChars: 20,
+                                                                                    replacement: '…',
+                                                                                  ),
+                                                                                  style: FlutterFlowTheme.of(context).bodyLarge.override(
+                                                                                        fontFamily: 'Readex Pro',
+                                                                                        fontWeight: FontWeight.w500,
+                                                                                      ),
+                                                                                ),
+                                                                              ],
+                                                                            ),
+                                                                            Text(
+                                                                              ' ás ',
+                                                                              style: FlutterFlowTheme.of(context).bodyLarge.override(
+                                                                                    fontFamily: 'Readex Pro',
+                                                                                    fontSize: 12.0,
+                                                                                  ),
+                                                                            ),
+                                                                          ],
+                                                                        ),
+                                                                      ],
+                                                                    ),
+                                                                  ),
+                                                                ),
+                                                                Align(
+                                                                  alignment:
+                                                                      AlignmentDirectional(
+                                                                          1.0,
+                                                                          -1.0),
+                                                                  child:
+                                                                      Padding(
+                                                                    padding: EdgeInsetsDirectional
+                                                                        .fromSTEB(
+                                                                            0.0,
+                                                                            4.0,
+                                                                            8.0,
+                                                                            0.0),
+                                                                    child:
+                                                                        InkWell(
+                                                                      splashColor:
+                                                                          Colors
+                                                                              .transparent,
+                                                                      focusColor:
+                                                                          Colors
+                                                                              .transparent,
+                                                                      hoverColor:
+                                                                          Colors
+                                                                              .transparent,
+                                                                      highlightColor:
+                                                                          Colors
+                                                                              .transparent,
+                                                                      onTap:
+                                                                          () async {
+                                                                        FFAppState()
+                                                                            .update(() {});
+                                                                      },
+                                                                      child:
+                                                                          Icon(
+                                                                        Icons
+                                                                            .clear,
+                                                                        color: FlutterFlowTheme.of(context)
+                                                                            .error,
+                                                                        size:
+                                                                            24.0,
+                                                                      ),
+                                                                    ),
+                                                                  ),
                                                                 ),
                                                               ],
                                                             ),
                                                           ),
-                                                        ),
-                                                        Expanded(
-                                                          flex: 7,
-                                                          child: Stack(
-                                                            children: [
-                                                              ClipRRect(
-                                                                child:
-                                                                    Container(
-                                                                  decoration:
-                                                                      BoxDecoration(),
-                                                                  child: Row(
-                                                                    mainAxisSize:
-                                                                        MainAxisSize
-                                                                            .max,
-                                                                    children: [
-                                                                      Column(
-                                                                        mainAxisSize:
-                                                                            MainAxisSize.max,
-                                                                        mainAxisAlignment:
-                                                                            MainAxisAlignment.center,
-                                                                        crossAxisAlignment:
-                                                                            CrossAxisAlignment.start,
-                                                                        children: [
-                                                                          Text(
-                                                                            '# ',
-                                                                            style: FlutterFlowTheme.of(context).bodyLarge.override(
-                                                                                  fontFamily: 'Readex Pro',
-                                                                                  fontSize: 12.0,
-                                                                                ),
-                                                                          ),
-                                                                          Row(
-                                                                            mainAxisSize:
-                                                                                MainAxisSize.max,
-                                                                            children: [
-                                                                              Text(
-                                                                                'Nome'.maybeHandleOverflow(
-                                                                                  maxChars: 20,
-                                                                                  replacement: '…',
-                                                                                ),
-                                                                                style: FlutterFlowTheme.of(context).bodyLarge.override(
-                                                                                      fontFamily: 'Readex Pro',
-                                                                                      fontWeight: FontWeight.w500,
-                                                                                    ),
-                                                                              ),
-                                                                            ],
-                                                                          ),
-                                                                          Text(
-                                                                            ' ás ',
-                                                                            style: FlutterFlowTheme.of(context).bodyLarge.override(
-                                                                                  fontFamily: 'Readex Pro',
-                                                                                  fontSize: 12.0,
-                                                                                ),
-                                                                          ),
-                                                                        ],
-                                                                      ),
-                                                                    ],
-                                                                  ),
-                                                                ),
-                                                              ),
-                                                              Align(
-                                                                alignment:
-                                                                    AlignmentDirectional(
-                                                                        1.0,
-                                                                        -1.0),
-                                                                child: Padding(
-                                                                  padding: EdgeInsetsDirectional
-                                                                      .fromSTEB(
-                                                                          0.0,
-                                                                          4.0,
-                                                                          8.0,
-                                                                          0.0),
-                                                                  child:
-                                                                      InkWell(
-                                                                    splashColor:
-                                                                        Colors
-                                                                            .transparent,
-                                                                    focusColor:
-                                                                        Colors
-                                                                            .transparent,
-                                                                    hoverColor:
-                                                                        Colors
-                                                                            .transparent,
-                                                                    highlightColor:
-                                                                        Colors
-                                                                            .transparent,
-                                                                    onTap:
-                                                                        () async {
-                                                                      FFAppState()
-                                                                          .update(
-                                                                              () {});
-                                                                    },
-                                                                    child: Icon(
-                                                                      Icons
-                                                                          .clear,
-                                                                      color: FlutterFlowTheme.of(
-                                                                              context)
-                                                                          .error,
-                                                                      size:
-                                                                          24.0,
-                                                                    ),
-                                                                  ),
-                                                                ),
-                                                              ),
-                                                            ],
-                                                          ),
-                                                        ),
-                                                      ],
+                                                        ],
+                                                      ),
                                                     ),
                                                   ),
                                                 ),
-                                              ),
-                                            );
-                                          }),
-                                        );
-                                      },
-                                    ),
+                                              );
+                                            }),
+                                          );
+                                        },
+                                      ),
                                   ],
                                 ),
                               ),
