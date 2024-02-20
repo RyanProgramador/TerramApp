@@ -100,139 +100,146 @@ class _LoadingMedicaoColetaWidgetState
   Widget build(BuildContext context) {
     context.watch<FFAppState>();
 
-    return Container(
-      width: double.infinity,
-      height: double.infinity,
-      decoration: BoxDecoration(
-        color: Color(0x00F1F4F8),
-      ),
-      child: RefreshIndicator(
-        onRefresh: () async {
-          context.goNamed(
-            'blankRedirecona',
-            extra: <String, dynamic>{
-              kTransitionInfoKey: TransitionInfo(
-                hasTransition: true,
-                transitionType: PageTransitionType.fade,
-                duration: Duration(milliseconds: 0),
-              ),
-            },
-          );
-        },
-        child: SingleChildScrollView(
-          physics: const AlwaysScrollableScrollPhysics(),
-          child: Column(
-            mainAxisSize: MainAxisSize.max,
-            children: [
-              RefreshIndicator(
-                onRefresh: () async {
-                  context.goNamed(
-                    'blankRedirecona',
-                    extra: <String, dynamic>{
-                      kTransitionInfoKey: TransitionInfo(
-                        hasTransition: true,
-                        transitionType: PageTransitionType.fade,
-                        duration: Duration(milliseconds: 0),
-                      ),
-                    },
-                  );
-                },
-                child: SingleChildScrollView(
-                  physics: const AlwaysScrollableScrollPhysics(),
-                  child: Column(
-                    mainAxisSize: MainAxisSize.max,
-                    children: [
-                      Padding(
-                        padding: EdgeInsetsDirectional.fromSTEB(
-                            16.0, 0.0, 16.0, 24.0),
-                        child: Row(
-                          mainAxisSize: MainAxisSize.max,
-                          mainAxisAlignment: MainAxisAlignment.center,
-                          children: [
-                            if (!_model.mostraNaTela)
-                              Expanded(
-                                child: Column(
-                                  mainAxisSize: MainAxisSize.min,
-                                  mainAxisAlignment: MainAxisAlignment.center,
-                                  crossAxisAlignment: CrossAxisAlignment.center,
-                                  children: [
-                                    Container(
-                                      width: 140.0,
-                                      height: 140.0,
-                                      child: custom_widgets.LoadingCircle(
-                                        width: 140.0,
-                                        height: 140.0,
-                                        color: FlutterFlowTheme.of(context)
-                                            .primary,
-                                        circleRadius: 30.0,
-                                      ),
-                                    ),
-                                    Padding(
-                                      padding: EdgeInsetsDirectional.fromSTEB(
-                                          0.0, 22.0, 0.0, 0.0),
-                                      child: Text(
-                                        'Por favor, aguarde.',
-                                        style: FlutterFlowTheme.of(context)
-                                            .headlineLarge
-                                            .override(
-                                              fontFamily: 'Readex Pro',
-                                              color: Colors.black,
-                                              fontSize: 16.0,
-                                              fontWeight: FontWeight.w300,
-                                            ),
-                                      ),
-                                    ),
-                                  ],
-                                ),
-                              ),
-                          ],
+    return Align(
+      alignment: AlignmentDirectional(0.0, 0.0),
+      child: Container(
+        width: double.infinity,
+        height: double.infinity,
+        decoration: BoxDecoration(
+          color: Color(0x00F1F4F8),
+        ),
+        alignment: AlignmentDirectional(0.0, 0.0),
+        child: RefreshIndicator(
+          onRefresh: () async {
+            context.goNamed(
+              'blankRedirecona',
+              extra: <String, dynamic>{
+                kTransitionInfoKey: TransitionInfo(
+                  hasTransition: true,
+                  transitionType: PageTransitionType.fade,
+                  duration: Duration(milliseconds: 0),
+                ),
+              },
+            );
+          },
+          child: SingleChildScrollView(
+            physics: const AlwaysScrollableScrollPhysics(),
+            child: Column(
+              mainAxisSize: MainAxisSize.max,
+              mainAxisAlignment: MainAxisAlignment.center,
+              children: [
+                RefreshIndicator(
+                  onRefresh: () async {
+                    context.goNamed(
+                      'blankRedirecona',
+                      extra: <String, dynamic>{
+                        kTransitionInfoKey: TransitionInfo(
+                          hasTransition: true,
+                          transitionType: PageTransitionType.fade,
+                          duration: Duration(milliseconds: 0),
                         ),
-                      ),
-                      Opacity(
-                        opacity: 0.9,
-                        child: Padding(
+                      },
+                    );
+                  },
+                  child: SingleChildScrollView(
+                    physics: const AlwaysScrollableScrollPhysics(),
+                    child: Column(
+                      mainAxisSize: MainAxisSize.max,
+                      mainAxisAlignment: MainAxisAlignment.center,
+                      children: [
+                        Padding(
                           padding: EdgeInsetsDirectional.fromSTEB(
-                              16.0, 24.0, 16.0, 24.0),
+                              16.0, 0.0, 16.0, 24.0),
                           child: Row(
                             mainAxisSize: MainAxisSize.max,
                             mainAxisAlignment: MainAxisAlignment.center,
                             children: [
-                              Opacity(
-                                opacity: 0.0,
-                                child: FlutterFlowTimer(
-                                  initialTime: _model.timerMilliseconds,
-                                  getDisplayTime: (value) =>
-                                      StopWatchTimer.getDisplayTime(
-                                    value,
-                                    hours: false,
-                                    milliSecond: false,
+                              if (!_model.mostraNaTela)
+                                Expanded(
+                                  child: Column(
+                                    mainAxisSize: MainAxisSize.min,
+                                    mainAxisAlignment: MainAxisAlignment.center,
+                                    crossAxisAlignment:
+                                        CrossAxisAlignment.center,
+                                    children: [
+                                      Container(
+                                        width: 140.0,
+                                        height: 140.0,
+                                        child: custom_widgets.LoadingCircle(
+                                          width: 140.0,
+                                          height: 140.0,
+                                          color: FlutterFlowTheme.of(context)
+                                              .primary,
+                                          circleRadius: 30.0,
+                                        ),
+                                      ),
+                                      Padding(
+                                        padding: EdgeInsetsDirectional.fromSTEB(
+                                            0.0, 22.0, 0.0, 0.0),
+                                        child: Text(
+                                          'Por favor, aguarde.',
+                                          style: FlutterFlowTheme.of(context)
+                                              .headlineLarge
+                                              .override(
+                                                fontFamily: 'Readex Pro',
+                                                color: Colors.black,
+                                                fontSize: 16.0,
+                                                fontWeight: FontWeight.w300,
+                                              ),
+                                        ),
+                                      ),
+                                    ],
                                   ),
-                                  controller: _model.timerController,
-                                  updateStateInterval:
-                                      Duration(milliseconds: 1000),
-                                  onChanged:
-                                      (value, displayTime, shouldUpdate) {
-                                    _model.timerMilliseconds = value;
-                                    _model.timerValue = displayTime;
-                                    if (shouldUpdate) setState(() {});
-                                  },
-                                  onEnded: () async {
-                                    Navigator.pop(context);
-                                  },
-                                  textAlign: TextAlign.start,
-                                  style: FlutterFlowTheme.of(context)
-                                      .headlineSmall,
                                 ),
-                              ),
                             ],
                           ),
                         ),
-                      ),
-                    ],
+                        Opacity(
+                          opacity: 0.9,
+                          child: Padding(
+                            padding: EdgeInsetsDirectional.fromSTEB(
+                                16.0, 24.0, 16.0, 24.0),
+                            child: Row(
+                              mainAxisSize: MainAxisSize.max,
+                              mainAxisAlignment: MainAxisAlignment.center,
+                              children: [
+                                Opacity(
+                                  opacity: 0.0,
+                                  child: FlutterFlowTimer(
+                                    initialTime: _model.timerMilliseconds,
+                                    getDisplayTime: (value) =>
+                                        StopWatchTimer.getDisplayTime(
+                                      value,
+                                      hours: false,
+                                      milliSecond: false,
+                                    ),
+                                    controller: _model.timerController,
+                                    updateStateInterval:
+                                        Duration(milliseconds: 1000),
+                                    onChanged:
+                                        (value, displayTime, shouldUpdate) {
+                                      _model.timerMilliseconds = value;
+                                      _model.timerValue = displayTime;
+                                      if (shouldUpdate) setState(() {});
+                                    },
+                                    onEnded: () async {
+                                      Navigator.pop(context);
+                                    },
+                                    textAlign: TextAlign.start,
+                                    style: FlutterFlowTheme.of(context)
+                                        .headlineSmall,
+                                  ),
+                                ),
+                              ],
+                            ),
+                          ),
+                        ),
+                      ],
+                    ),
                   ),
                 ),
-              ),
-            ],
+              ],
+            ),
           ),
         ),
       ),
