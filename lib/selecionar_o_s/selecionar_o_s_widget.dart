@@ -104,13 +104,13 @@ class _SelecionarOSWidgetState extends State<SelecionarOSWidget>
             await SincronizarGroup.trSincronizaPontosCall.call(
           urlapicall: FFAppState().urlapicall,
         );
+        _model.preLoadingTrFazendas2 =
+            await SincronizarGroup.trFazendasCall.call(
+          urlapicall: FFAppState().urlapicall,
+        );
         _model.preLoadingTrOsServicos2 =
             await SincronizarGroup.trOsServicosCall.call(
           tecId: FFAppState().tecID,
-          urlapicall: FFAppState().urlapicall,
-        );
-        _model.preLoadingTrFazendas2 =
-            await SincronizarGroup.trFazendasCall.call(
           urlapicall: FFAppState().urlapicall,
         );
         _model.preLoadingTrServicos2 =
@@ -275,14 +275,14 @@ class _SelecionarOSWidgetState extends State<SelecionarOSWidget>
         }
       } else if ((FFAppState().sincronizcaoAutomatica == false) &&
           (FFAppState().servicosFinalizadosComSucesso.length != 0)) {
+        _model.preLoadingTrFazendas3 =
+            await SincronizarGroup.trFazendasCall.call(
+          urlapicall: FFAppState().urlapicall,
+        );
         _model.preLoadingTrOsServicos3 =
             await SincronizarGroup.trOsServicosCall.call(
           urlapicall: FFAppState().urlapicall,
           tecId: FFAppState().tecID,
-        );
-        _model.preLoadingTrFazendas3 =
-            await SincronizarGroup.trFazendasCall.call(
-          urlapicall: FFAppState().urlapicall,
         );
         _model.preLoadingTrServicos3 =
             await SincronizarGroup.trServicosCall.call(
