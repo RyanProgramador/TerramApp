@@ -134,13 +134,6 @@ class _SelecionarOSWidgetState extends State<SelecionarOSWidget>
           )!
               .toList()
               .cast<dynamic>();
-          FFAppState().listaContornoColeta = getJsonField(
-            (_model.pontosDeColetaFormatados3?.jsonBody ?? ''),
-            r'''$.contorno[:]''',
-            true,
-          )!
-              .toList()
-              .cast<dynamic>();
           FFAppState().trOsServicos = SincronizarGroup.trOsServicosCall
               .dadosTrOsServicos(
                 (_model.preLoadingTrOsServicos2?.jsonBody ?? ''),
