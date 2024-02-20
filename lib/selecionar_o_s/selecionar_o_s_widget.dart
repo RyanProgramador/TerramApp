@@ -51,6 +51,19 @@ class _SelecionarOSWidgetState extends State<SelecionarOSWidget>
         ),
       ],
     ),
+    'containerOnPageLoadAnimation': AnimationInfo(
+      loop: true,
+      trigger: AnimationTrigger.onPageLoad,
+      effects: [
+        ShimmerEffect(
+          curve: Curves.easeInOut,
+          delay: 0.ms,
+          duration: 600.ms,
+          color: Color(0x80FFFFFF),
+          angle: 0.524,
+        ),
+      ],
+    ),
   };
 
   @override
@@ -3063,6 +3076,199 @@ class _SelecionarOSWidgetState extends State<SelecionarOSWidget>
                                                   );
                                                 }),
                                               ),
+                                            ),
+                                          );
+                                        },
+                                      ),
+                                    ),
+                                  ),
+                                ),
+                              if ((_model.searchBarController.text == null ||
+                                      _model.searchBarController.text == '') &&
+                                  (FFAppState().trOsServicos.length != 0))
+                                Expanded(
+                                  flex: 10,
+                                  child: Container(
+                                    width: double.infinity,
+                                    height: double.infinity,
+                                    decoration: BoxDecoration(),
+                                    child: Padding(
+                                      padding: EdgeInsetsDirectional.fromSTEB(
+                                          10.0, 0.0, 10.0, 50.0),
+                                      child: Builder(
+                                        builder: (context) {
+                                          final trerros = FFAppState()
+                                              .Erro
+                                              .toList()
+                                              .take(3)
+                                              .toList();
+                                          if (trerros.isEmpty) {
+                                            return Center(
+                                              child: Container(
+                                                width: double.infinity,
+                                                height: double.infinity,
+                                                child: LoadingCompWidget(),
+                                              ),
+                                            );
+                                          }
+                                          return SingleChildScrollView(
+                                            child: Column(
+                                              mainAxisSize: MainAxisSize.max,
+                                              children:
+                                                  List.generate(trerros.length,
+                                                      (trerrosIndex) {
+                                                final trerrosItem =
+                                                    trerros[trerrosIndex];
+                                                return Padding(
+                                                  padding: EdgeInsetsDirectional
+                                                      .fromSTEB(
+                                                          0.0, 8.0, 0.0, 0.0),
+                                                  child: Container(
+                                                    width: double.infinity,
+                                                    height: 78.0,
+                                                    decoration: BoxDecoration(
+                                                      color: Color(0xFFF1F4F8),
+                                                      borderRadius:
+                                                          BorderRadius.circular(
+                                                              12.0),
+                                                      border: Border.all(
+                                                        color:
+                                                            FlutterFlowTheme.of(
+                                                                    context)
+                                                                .lineColor,
+                                                      ),
+                                                    ),
+                                                    child: Padding(
+                                                      padding:
+                                                          EdgeInsetsDirectional
+                                                              .fromSTEB(
+                                                                  8.0,
+                                                                  8.0,
+                                                                  12.0,
+                                                                  8.0),
+                                                      child: Row(
+                                                        mainAxisSize:
+                                                            MainAxisSize.max,
+                                                        crossAxisAlignment:
+                                                            CrossAxisAlignment
+                                                                .center,
+                                                        children: [
+                                                          Expanded(
+                                                            flex: 2,
+                                                            child: Container(
+                                                              decoration:
+                                                                  BoxDecoration(),
+                                                              child: Row(
+                                                                mainAxisSize:
+                                                                    MainAxisSize
+                                                                        .max,
+                                                                mainAxisAlignment:
+                                                                    MainAxisAlignment
+                                                                        .center,
+                                                                children: [
+                                                                  Container(
+                                                                    width: 35.0,
+                                                                    height:
+                                                                        35.0,
+                                                                    decoration:
+                                                                        BoxDecoration(
+                                                                      color: Color(
+                                                                          0xFFD9D9D9),
+                                                                      borderRadius:
+                                                                          BorderRadius.circular(
+                                                                              6.0),
+                                                                    ),
+                                                                  ),
+                                                                ],
+                                                              ),
+                                                            ),
+                                                          ),
+                                                          Expanded(
+                                                            flex: 7,
+                                                            child: ClipRRect(
+                                                              child: Container(
+                                                                decoration:
+                                                                    BoxDecoration(),
+                                                                child: Column(
+                                                                  mainAxisSize:
+                                                                      MainAxisSize
+                                                                          .max,
+                                                                  mainAxisAlignment:
+                                                                      MainAxisAlignment
+                                                                          .spaceBetween,
+                                                                  children: [
+                                                                    Align(
+                                                                      alignment:
+                                                                          AlignmentDirectional(
+                                                                              -1.0,
+                                                                              0.0),
+                                                                      child:
+                                                                          Container(
+                                                                        width:
+                                                                            25.0,
+                                                                        height:
+                                                                            16.0,
+                                                                        decoration:
+                                                                            BoxDecoration(
+                                                                          color:
+                                                                              Color(0xFFD9D9D9),
+                                                                          borderRadius:
+                                                                              BorderRadius.circular(20.0),
+                                                                        ),
+                                                                      ),
+                                                                    ),
+                                                                    Align(
+                                                                      alignment:
+                                                                          AlignmentDirectional(
+                                                                              -1.0,
+                                                                              0.0),
+                                                                      child:
+                                                                          Container(
+                                                                        width:
+                                                                            230.0,
+                                                                        height:
+                                                                            20.0,
+                                                                        decoration:
+                                                                            BoxDecoration(
+                                                                          color:
+                                                                              Color(0xFFD9D9D9),
+                                                                          borderRadius:
+                                                                              BorderRadius.circular(20.0),
+                                                                        ),
+                                                                      ),
+                                                                    ),
+                                                                    Align(
+                                                                      alignment:
+                                                                          AlignmentDirectional(
+                                                                              -1.0,
+                                                                              0.0),
+                                                                      child:
+                                                                          Container(
+                                                                        width:
+                                                                            98.0,
+                                                                        height:
+                                                                            16.0,
+                                                                        decoration:
+                                                                            BoxDecoration(
+                                                                          color:
+                                                                              Color(0xFFD9D9D9),
+                                                                          borderRadius:
+                                                                              BorderRadius.circular(20.0),
+                                                                        ),
+                                                                      ),
+                                                                    ),
+                                                                  ],
+                                                                ),
+                                                              ),
+                                                            ),
+                                                          ),
+                                                        ],
+                                                      ),
+                                                    ),
+                                                  ).animateOnPageLoad(animationsMap[
+                                                      'containerOnPageLoadAnimation']!),
+                                                );
+                                              }),
                                             ),
                                           );
                                         },
