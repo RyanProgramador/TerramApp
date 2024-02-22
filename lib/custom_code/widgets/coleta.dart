@@ -489,44 +489,44 @@ class _ColetaState extends State<Coleta> {
   void _initializePolygons() {
     var pontosDeContorno = FFAppState()
         .listaContornoColeta
-        .where((item) => item['oserv_id'] != int.parse(widget.idContorno!))
+        .where((item) => item['oserv_id'] == int.parse(widget.idContorno!))
         .toList();
 
     var gruposDeContorno = <String, List<dynamic>>{};
 
     for (var item in pontosDeContorno) {
-      String talcotTalhId = item['talcot_talh_id'].toString();
-      String oservId = item['oserv_id'].toString();
-      String chave =
-          '$talcotTalhId-$oservId'; // Combina talcot_talh_id e oserv_id para criar uma chave única
-      String cor = item['talh_cor'].toString();
-
-      gruposDeContorno.putIfAbsent(chave, () => []);
-      gruposDeContorno[chave]!.add(item);
+      // String talcotTalhId = item['talcot_talh_id'].toString();
+      // String oservId = item['oserv_id'].toString();
+      // String chave =
+      //     '$talcotTalhId-$oservId'; // Combina talcot_talh_id e oserv_id para criar uma chave única
+      // String cor = item['talh_cor'].toString();
+      //
+      // gruposDeContorno.putIfAbsent(chave, () => []);
+      // gruposDeContorno[chave]!.add(item);
     }
 
     // Itera sobre os grupos para criar polígonos
     gruposDeContorno.forEach((chave, grupo) {
       // Assumindo que `toLatLng` é uma função que converte uma string ou um objeto
       // no formato 'latitude,longitude' para um objeto LatLng.
-      List<google_maps.LatLng> pontosLatLng =
-          grupo.map<google_maps.LatLng>((item) {
-        return toLatLng(item['talcot_latitude_longitude']);
-      }).toList();
+      // List<google_maps.LatLng> pontosLatLng =
+      //     grupo.map<google_maps.LatLng>((item) {
+      //   return toLatLng(item['talcot_latitude_longitude']!);
+      // }).toList();
 
       // Cria um polígono para cada grupo
-      final polygon = google_maps.Polygon(
-        polygonId: google_maps.PolygonId(
-            'AreaPolygon_$chave'), // Usa a chave para criar um ID único
-        points: pontosLatLng,
-        fillColor: Colors.black.withOpacity(0.2),
-        strokeColor: Colors.black,
-        strokeWidth: 3,
-      );
-
-      setState(() {
-        polygons.add(polygon);
-      });
+      // final polygon = google_maps.Polygon(
+      //   polygonId: google_maps.PolygonId(
+      //       'AreaPolygon_$chave'), // Usa a chave para criar um ID único
+      //   points: pontosLatLng,
+      //   fillColor: Colors.black.withOpacity(0.2),
+      //   strokeColor: Colors.black,
+      //   strokeWidth: 3,
+      // );
+      //
+      // setState(() {
+      //   polygons.add(polygon);
+      // });
     });
   }
 
