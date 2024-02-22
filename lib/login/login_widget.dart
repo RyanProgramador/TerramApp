@@ -38,13 +38,7 @@ class _LoginWidgetState extends State<LoginWidget> {
           FFAppState().urlapicall =
               's://dev.conceittosistemas.com.br/scriptcase/app/GestaoColetas/ws_flutterflow/index.php';
         });
-      } else {
-        FFAppState().update(() {
-          FFAppState().urlapicall =
-              '://170.238.54.36:8090/terram/ws_flutterflow/index.php';
-        });
       }
-
       _model.temOuNao = await actions.temInternet();
       if (!(FFAppState().psdwLogin != null && FFAppState().psdwLogin != '')) {
         return;

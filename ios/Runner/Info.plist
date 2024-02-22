@@ -13,7 +13,7 @@
 	<key>CFBundleInfoDictionaryVersion</key>
 	<string>6.0</string>
 	<key>CFBundleName</key>
-	<string>TerramApp</string>
+	<string>TerramAppV2</string>
 	<key>CFBundlePackageType</key>
 	<string>APPL</string>
 
@@ -26,10 +26,10 @@
         <key>CFBundleTypeRole</key>
         <string>Editor</string>
         <key>CFBundleURLName</key>
-        <string>terramapp.com</string>
+        <string>terramappv2.com</string>
         <key>CFBundleURLSchemes</key>
         <array>
-        <string>terramapp</string>
+        <string>terramappv2</string>
         </array>
         </dict>
     </array>
