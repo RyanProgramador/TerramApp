@@ -40,7 +40,8 @@ class _LoginWidgetState extends State<LoginWidget> {
         });
       }
       _model.temOuNao = await actions.temInternet();
-      if (!(FFAppState().psdwLogin != null && FFAppState().psdwLogin != '')) {
+      if (!((FFAppState().psdwLogin != null && FFAppState().psdwLogin != '') &&
+          (FFAppState().userLogin != null && FFAppState().userLogin != ''))) {
         return;
       }
       if (!_model.temOuNao!) {
