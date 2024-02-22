@@ -1,4 +1,4 @@
-# TerramAppV2
+# terramappv2
 
 A new Flutter project.
 

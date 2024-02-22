@@ -16,7 +16,7 @@ import 'package:geolocator/geolocator.dart';
 import 'package:google_maps_flutter/google_maps_flutter.dart' as google_maps;
 
 import '../../contorno_da_fazenda/contorno_da_fazenda_model.dart';
-export 'package:terram_app/contorno_da_fazenda/contorno_da_fazenda_model.dart';
+export 'package:terramappv2/contorno_da_fazenda/contorno_da_fazenda_model.dart';
 import 'package:background_location/background_location.dart';
 import 'package:wakelock/wakelock.dart';
 

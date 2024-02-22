@@ -1,7 +1,7 @@
 cmake_minimum_required(VERSION 3.15)
-project(terram_app_v2 LANGUAGES CXX)
+project(terramappv2 LANGUAGES CXX)
 
-set(BINARY_NAME "terram_app_v2")
+set(BINARY_NAME "terramappv2")
 
 cmake_policy(SET CMP0063 NEW)
 

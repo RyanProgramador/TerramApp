@@ -89,13 +89,13 @@ BEGIN
     BEGIN
         BLOCK "040904e4"
         BEGIN
-            VALUE "CompanyName", "TerramAppV2" "\0"
+            VALUE "CompanyName", "terramappv2" "\0"
             VALUE "FileDescription", "A new Flutter project." "\0"
             VALUE "FileVersion", VERSION_AS_STRING "\0"
-            VALUE "InternalName", "TerramAppV2" "\0"
-            VALUE "LegalCopyright", "Copyright (C) 2022 TerramAppV2. All rights reserved." "\0"
-            VALUE "OriginalFilename", "terram_app_v2.exe" "\0"
-            VALUE "ProductName", "TerramAppV2" "\0"
+            VALUE "InternalName", "terramappv2" "\0"
+            VALUE "LegalCopyright", "Copyright (C) 2022 terramappv2. All rights reserved." "\0"
+            VALUE "OriginalFilename", "terramappv2.exe" "\0"
+            VALUE "ProductName", "terramappv2" "\0"
             VALUE "ProductVersion", VERSION_AS_STRING "\0"
         END
     END

@@ -11,7 +11,7 @@ import 'package:flutter/material.dart';
 
 import 'package:google_maps_flutter/google_maps_flutter.dart' as google_maps;
 
-import 'package:terram_app/flutter_flow/lat_lng.dart'
+import 'package:terramappv2/flutter_flow/lat_lng.dart'
     as ff_lat_lng; // Importe seu próprio pacote de LatLng
 
 class ContornoMapRevisaoTodos extends StatefulWidget {
