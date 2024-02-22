@@ -306,14 +306,23 @@ class _ConfiguracoesWidgetState extends State<ConfiguracoesWidget> {
                                               .cast<dynamic>();
                                       FFAppState().listaContornoColeta =
                                           getJsonField(
-                                        (_model.sincPontosMedicaoEPerfilEProfundidaAPI
-                                                ?.jsonBody ??
-                                            ''),
-                                        r'''$.contorno[:]''',
-                                        true,
-                                      )!
-                                              .toList()
-                                              .cast<dynamic>();
+                                                    (_model.sincPontosMedicaoEPerfilEProfundidaAPI
+                                                            ?.jsonBody ??
+                                                        ''),
+                                                    r'''$.contorno[:]''',
+                                                  ) !=
+                                                  null
+                                              ? getJsonField(
+                                                  (_model.sincPontosMedicaoEPerfilEProfundidaAPI
+                                                          ?.jsonBody ??
+                                                      ''),
+                                                  r'''$.contorno[:]''',
+                                                  true,
+                                                )!
+                                              : FFAppState()
+                                                  .latlngRecorteTalhao
+                                                  .toList()
+                                                  .cast<dynamic>();
                                     });
                                     await showDialog(
                                       context: context,

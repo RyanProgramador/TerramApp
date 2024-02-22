@@ -489,7 +489,7 @@ class _ColetaState extends State<Coleta> {
   void _initializePolygons() {
     var pontosDeContorno = FFAppState()
         .listaContornoColeta
-        .where((item) => item['oserv_id'] == int.parse(widget.idContorno!))
+        .where((item) => item['oserv_id'] != int.parse(widget.idContorno!))
         .toList();
 
     var gruposDeContorno = <String, List<dynamic>>{};
@@ -764,15 +764,15 @@ class _ColetaState extends State<Coleta> {
     //     now.difference(lastTapTimestamps[markerIdValue]!).inMilliseconds <
     //         1800) {
     // Check if the distance is greater than 30 meters
-    //if (distance > 35000) {
-    //metros de distancia para coletar
-    // Show alert
+    if (distance > 35) {
+      //metros de distancia para coletar
+      // Show alert
 
-    // _showDistanceAlert();
-    //} else {
-    // Continue with the normal double tap logic
-    _showModalOptions(markerName);
-    //}
+      _showDistanceAlert();
+    } else {
+      // Continue with the normal double tap logic
+      _showModalOptions(markerName);
+    }
     // }
 
     // Update the timestamp of the last tap
@@ -971,7 +971,8 @@ class _ColetaState extends State<Coleta> {
               "foto": 'base64Image',
               "latlng": '$latlng',
               "id_ref": referencialProfundidadePontoId,
-              "obs": ""
+              "obs": "",
+              "data_hora": DateTime.now().toString()
             });
             FFAppState().PontosColetados.add({
               "marcador_nome": nomeMarcadorAtual,
@@ -980,7 +981,8 @@ class _ColetaState extends State<Coleta> {
               "foto": '$base64Image',
               "latlng": '$latlng',
               "id_ref": referencialProfundidadePontoId,
-              "obs": ""
+              "obs": "",
+              "data_hora": DateTime.now().toString()
             });
 
             coletasPorMarcador.putIfAbsent(nomeMarcadorAtual, () => {});
@@ -1518,7 +1520,8 @@ class _ColetaState extends State<Coleta> {
         "foto": '',
         "latlng": latlng,
         "id_ref": '$referencialProfundidadePontoId',
-        "obs": ""
+        "obs": "",
+        "data_hora": DateTime.now().toString()
       });
       FFAppState().PontosColetados.add({
         "marcador_nome": marcadorNome,
@@ -1527,7 +1530,8 @@ class _ColetaState extends State<Coleta> {
         "foto": '',
         "latlng": latlng,
         "id_ref": '$referencialProfundidadePontoId',
-        "obs": ""
+        "obs": "",
+        "data_hora": DateTime.now().toString()
       });
 
       coletasPorMarcador.putIfAbsent(marcadorNome, () => {});
