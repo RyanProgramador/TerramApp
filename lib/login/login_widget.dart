@@ -36,7 +36,7 @@ class _LoginWidgetState extends State<LoginWidget> {
       if (FFAppState().Desenvolvimento == true) {
         FFAppState().update(() {
           FFAppState().urlapicall =
-              's://dev.conceittosistemas.com.br/scriptcase/app/GestaoColetas/ws_flutterflow/index.php';
+              's://dev.conceittosistemas.com.br/scriptcase/app/Terram/ws_flutterflow/index.php';
         });
       }
       _model.temOuNao = await actions.temInternet();
