@@ -8,7 +8,6 @@ import '/flutter_flow/custom_functions.dart' as functions;
 import 'gps_tec_to_fazenda_widget.dart' show GpsTecToFazendaWidget;
 import 'package:flutter/material.dart';
 import 'package:flutter/scheduler.dart';
-import 'package:flutter/services.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:provider/provider.dart';
 

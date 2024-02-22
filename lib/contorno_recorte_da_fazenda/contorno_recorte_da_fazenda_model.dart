@@ -6,7 +6,6 @@ import 'contorno_recorte_da_fazenda_widget.dart'
     show ContornoRecorteDaFazendaWidget;
 import 'package:flutter/material.dart';
 import 'package:flutter/scheduler.dart';
-import 'package:flutter/services.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:provider/provider.dart';
 
